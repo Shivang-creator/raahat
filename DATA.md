@@ -9,10 +9,13 @@ makes the product feel real is **public fact and tagged**.
 
 **Hospital names and their department lists.** Use real government hospitals and the departments they
 genuinely run — AIIMS Delhi, Safdarjung, Lady Hardinge, a few large state hospitals, and at least two
-district-level hospitals so it is not all metro. These are public facts. Tag them `Observed`.
+district-level hospitals so it is not all metro. These are public facts. Tag them **`Verified`**, and carry the source URL and check date with each
+one. (They are not `Observed` — that tag means the citizen entered it in this session.)
 
-Include, per hospital: name, city, state, the department list, and whether it has an emergency
-department.
+Include, per hospital: name, city, state, locality, the department list, whether it has an emergency
+department, **the source URL the department list came from, and the date you checked it**. Department
+offerings change; an undated claim is an unverifiable one. These fields are what let the interface
+tag hospital facts **Verified** rather than Simulated.
 
 **Do not** use any hospital's logo, emblem or crest. The name in plain text only.
 

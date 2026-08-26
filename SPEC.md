@@ -50,13 +50,18 @@ The read-back. Nothing is decided until the citizen confirms it.
 - Tags: the typed or spoken text is `Observed`, the summary is `Generated`, any flag is `Rule`
 - If the model is unavailable this screen still appears, built from the body map, and says so
 
+**If the model is unavailable and the citizen typed rather than tapped:** keep their typed words on
+screen, verbatim, above the picker. Say plainly *"I can't read this right now. Point to where it
+hurts and I'll carry on."* Then show the body map and the two follow-ups. Never discard what they
+wrote and never guess a region from it.
+
 ## Screen 3 — Where to go
 
 Two outcomes only, and no third.
 
 **If a red flag fired** — a full-screen result, no other options competing for attention:
 > **Go to the Emergency department now. Do not book an appointment.**
-The nearest hospital with an emergency department, its address, and one line naming the rule that
+The nearest hospital with an emergency department **in the locality the citizen selected**, its address, and one line naming the rule that
 fired (`RF-02 · weakness on one side`). A visible line: *this is not a diagnosis.*
 
 **Otherwise** — the department, in plain words, with the reason:
@@ -67,7 +72,16 @@ our answer.
 
 ## Screen 4 — Where, honestly
 
+**Location is chosen, never taken.** A city/locality picker sits at the top of this screen, preset to
+a demo locality so a judge sees results immediately. Device geolocation is never read silently; if
+offered at all it is an explicit button the citizen presses. This is both a privacy rule and an
+accessibility one — nothing surprising happens.
+
 Three hospitals that **actually have that department**, sorted by **seen soonest**, not by distance.
+
+**"Seen soonest" is a defined, deterministic order:** estimated seen-time = slot start + simulated
+wait. Ties break on shorter travel time, then on hospital name alphabetically, so the list is stable
+across reloads. Both inputs are tagged `Simulated`, and the sort key is shown on the card.
 Each card shows:
 
 - travel time and distance `Simulated`
@@ -77,6 +91,20 @@ Each card shows:
 
 The honest wait is the differentiator. ORS gives a slot time that is not a time, because the doctor
 still sees patients in order. Say the true thing.
+
+## Screen 3b — When there is no clean answer
+
+Three dead ends must never be dead. Each gets a real screen with a real next action:
+
+| Situation | What the screen does |
+|---|---|
+| **Nothing understood** | keeps the citizen's words on screen, offers the body map, and offers *"choose a department yourself"* |
+| **No hospital here has that department** | says which department is needed, widens to the next locality, and offers the nearest hospital that does have it |
+| **No slots for two weeks** | shows the honest wait anyway, names when the calendar next opens, and says plainly that walk-in OPD registration still exists at the counter |
+
+Every one of the three, and every screen in the product, carries a visible **"Talk to a person"**
+route: the hospital's public helpline and the national grievance route. `AGENTS.md` §3 requires this.
+No screen may end without a way forward.
 
 ## Screen 5 — What to carry
 

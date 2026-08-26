@@ -32,8 +32,10 @@ speak   ·   type   ·   tap the body map
         the same structured complaint
 ```
 
-**No feature may be reachable by only one route.** If speaking is the only way to do something, it is
-not finished. This single rule covers most of the audience at once: a non-literate user taps, a Deaf
+**Scoped to describing the complaint.** Any one of speak, type or body map must complete the journey
+on its own. Ordinary controls — language toggle, caregiver relationship, age band, locality picker,
+sign-in, the human check — are normal form controls: 56px, keyboard reachable, screen-reader
+labelled, but they need no voice or body-map route. This single rule covers most of the audience at once: a non-literate user taps, a Deaf
 user types, a user with a tremor taps large targets, a blind user speaks and listens, and someone in
 a noisy corridor types.
 

@@ -45,9 +45,13 @@ not have.
 | Tag | Meaning |
 |---|---|
 | **Observed** | the citizen entered it in this session |
+| **Verified** | a published public fact — carries a source URL and the date it was checked |
 | **Rule** | computed by code from the rule file — the rule id is shown next to it |
 | **Simulated** | mock data we generated |
 | **Generated** | written by the model, prose only, never a decision |
+
+Hospital names and department lists are **Verified**, not Observed. Their availability, waits and
+slots are **Simulated**.
 
 No unlabelled number appears anywhere in the interface.
 
@@ -64,6 +68,12 @@ health record is ever collected or stored. The mock login credentials are printe
 screen. A complaint the visitor types is held in their browser for the session and never persisted
 server-side.
 
+**The model call is a disclosure, not a silence.** Reading free text means sending that text to a
+model provider. Before the first such call, the screen says so in one plain line — *"To read this in
+your own words we send this sentence to an AI service. Tap the body map instead if you would rather
+not."* — and the body map path never sends anything. This is repeated on the honesty screen. Do not
+transmit anything the citizen has not seen and confirmed.
+
 ## 7. What this prototype does not do
 
 It does not connect to ORS or any government system. It does not book a real appointment. It cannot
@@ -72,5 +82,10 @@ to a hospital. It covers a limited set of departments at a limited set of hospit
 
 ## 8. Accessibility is a hard requirement, not a polish pass
 
-Every input has three routes and none is ever required: **speak · type · tap the body map**. If a
-feature can only be reached by one of the three, it is not finished. Details in `DESIGN.md`.
+**Describing the complaint** always has three routes and none is ever required: **speak · type ·
+tap the body map**. Any one of them alone must complete the journey.
+
+This rule is scoped to complaint entry. Controls like the language toggle, the caregiver
+relationship, the age band, sign-in and the human check are ordinary form controls — they must be
+keyboard reachable, screen-reader labelled and 56px, but they do not need a voice or body-map route.
+Details in `DESIGN.md`.
