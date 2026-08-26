@@ -84,5 +84,9 @@ A third language. Saving a person you book for often. A shareable link for the s
 >
 > After I confirm, build **Slice 0** and stop. Do not start Slice 1 in the same turn.
 
+Before Slice 2 read `craft/design.md`, before Slice 3 read `craft/engineering.md`, before every
+deploy read `craft/deploy.md`, and at the end of each slice read `craft/verification.md` and check
+your own work against it.
+
 Insist on that read-back before any code. It is the cheapest way to catch a misread spec, and it
 costs one minute.

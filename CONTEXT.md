@@ -89,3 +89,5 @@ triage knowledge as its entry condition.
 4. `DESIGN.md` — how it looks and how it stays accessible.
 5. `DATA.md` — every piece of data to create, and how it must be labelled.
 6. `BUILD-ORDER.md` — the order to build in, and what "done" means for each slice.
+7. `craft/` — patterns distilled from several thousand winning hackathon submissions. Judgement, not
+   instructions. `SPEC.md` and `AGENTS.md` win wherever they disagree.
