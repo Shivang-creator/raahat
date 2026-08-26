@@ -52,7 +52,7 @@
 
       .complaint-box { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.75rem; align-items: stretch; padding: 0.75rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
       .complaint-box:focus-within { border-color: var(--accent); }
-      .voice-button { width: 3.5rem; min-height: 3.5rem; align-self: start; border: 0; border-radius: 0.8rem; background: var(--accent-soft); color: var(--accent-dark); font-size: 1.65rem; }
+      .voice-button { min-width: 5.75rem; min-height: 3.5rem; align-self: start; padding: 0.5rem 0.65rem; border: 0; border-radius: 0.8rem; background: var(--accent-soft); color: var(--accent-dark); font-size: 1rem; font-weight: 750; }
       .voice-button[aria-pressed="true"] { background: var(--accent); color: #fff; }
       textarea { width: 100%; min-height: 7rem; resize: vertical; border: 0; background: transparent; color: var(--ink); font-size: 1.125rem; line-height: 1.55; }
       textarea::placeholder { color: #64736c; opacity: 1; }
@@ -90,8 +90,8 @@
   <body>
     <div class="app-shell">
       <div class="topline">
-        <div class="wordmark" aria-label="Raahat">राहत · Raahat</div>
-        <div class="language-toggle" aria-label="Language">
+        <div class="wordmark">राहत · Raahat</div>
+        <div class="language-toggle" role="group" aria-label="Language">
           <button type="button" data-language="en" aria-pressed="true">English</button>
           <button type="button" data-language="hi" aria-pressed="false">हिंदी</button>
         </div>
@@ -129,11 +129,11 @@
         <section class="field-group" aria-labelledby="complaint-label">
           <span class="field-label" id="complaint-label" data-copy="complaintLabel">What is bothering you?</span>
           <div class="complaint-box">
-            <button class="voice-button" type="button" id="voice-button" aria-label="Speak your complaint" aria-pressed="false">⌕</button>
+            <button class="voice-button" type="button" id="voice-button" aria-label="Speak your complaint" aria-pressed="false"><span aria-hidden="true">🎙</span> <span id="voice-label">Speak</span></button>
             <textarea id="complaint" rows="3" data-copy-placeholder="placeholder" placeholder="seene mein dard, kal raat se"></textarea>
           </div>
           <p class="field-help" data-copy="inputHelp">Your words stay in this browser for this session.</p>
-          <div class="examples" aria-label="Examples">
+          <div class="examples" role="group" aria-label="Examples">
             <button class="example-chip" type="button" data-example="chest pain" data-copy="exampleChest">chest pain</button>
             <button class="example-chip" type="button" data-example="fever" data-copy="exampleFever">fever</button>
             <button class="example-chip" type="button" data-example="weakness on one side" data-copy="exampleWeakness">weakness on one side</button>
@@ -169,7 +169,7 @@
           exampleChest: "chest pain", exampleFever: "fever", exampleWeakness: "weakness on one side", continue: "Continue",
           captured: "Your words are ready for the next step. Nothing has been sent or booked.", needHelp: "Need a person?",
           talkToPerson: "Talk to a person", prototype: "independent prototype · mock data · not affiliated with any government body.",
-          voiceStart: "Speak your complaint", voiceStop: "Stop listening", voiceUnsupported: "Voice input is not available here. You can type or use the body map.",
+          voiceStart: "Speak your complaint", voiceStop: "Stop listening", voiceLabel: "Speak", voiceLabelStop: "Stop", voiceUnsupported: "Voice input is not available here. You can type or use the body map.",
           voiceListening: "Listening… say it in your own words.", voiceDone: "I heard your words. You can edit them before continuing.",
           continueHint: "Add a few words, or choose an example, so we can carry on.", someoneHint: "Choose who this is for and an age band.",
         },
@@ -183,7 +183,7 @@
           exampleChest: "सीने में दर्द", exampleFever: "बुखार", exampleWeakness: "एक तरफ़ कमज़ोरी", continue: "आगे बढ़ें",
           captured: "आपके शब्द अगले कदम के लिए तैयार हैं। कुछ भेजा या बुक नहीं हुआ है।", needHelp: "किसी व्यक्ति से बात करें?",
           talkToPerson: "किसी व्यक्ति से बात करें", prototype: "स्वतंत्र प्रोटोटाइप · नकली डेटा · किसी सरकारी संस्था से जुड़ा नहीं।",
-          voiceStart: "अपनी परेशानी बोलें", voiceStop: "सुनना रोकें", voiceUnsupported: "यहाँ आवाज़ से लिखना उपलब्ध नहीं है। आप लिख सकते हैं या शरीर का नक्शा चुन सकते हैं।",
+          voiceStart: "अपनी परेशानी बोलें", voiceStop: "सुनना रोकें", voiceLabel: "बोलें", voiceLabelStop: "रोकें", voiceUnsupported: "यहाँ आवाज़ से लिखना उपलब्ध नहीं है। आप लिख सकते हैं या शरीर का नक्शा चुन सकते हैं।",
           voiceListening: "सुन रहे हैं… अपने शब्दों में बोलें।", voiceDone: "आपके शब्द मिल गए। आगे बढ़ने से पहले उन्हें बदल सकते हैं।",
           continueHint: "कुछ शब्द लिखें या कोई उदाहरण चुनें ताकि हम आगे बढ़ सकें।", someoneHint: "किसके लिए है और उम्र का समूह चुनें।",
         },
@@ -205,6 +205,7 @@
         document.querySelectorAll("[data-copy-placeholder]").forEach((element) => { element.placeholder = text(element.dataset.copyPlaceholder); });
         document.querySelectorAll("[data-language]").forEach((button) => { button.setAttribute("aria-pressed", String(button.dataset.language === state.language)); });
         voiceButton.setAttribute("aria-label", state.listening ? text("voiceStop") : text("voiceStart"));
+        document.querySelector("#voice-label").textContent = state.listening ? text("voiceLabelStop") : text("voiceLabel");
         if (!status.dataset.persistent) status.textContent = "";
       }
 
@@ -256,12 +257,13 @@
         recognizer.interimResults = false;
         recognizer.maxAlternatives = 1;
         state.listening = true;
-        voiceButton.setAttribute("aria-pressed", "true");
-        voiceButton.setAttribute("aria-label", text("voiceStop"));
+          voiceButton.setAttribute("aria-pressed", "true");
+          voiceButton.setAttribute("aria-label", text("voiceStop"));
+          document.querySelector("#voice-label").textContent = text("voiceLabelStop");
         showStatus(text("voiceListening"));
         recognizer.onresult = (event) => { complaint.value = event.results[0][0].transcript; showStatus(text("voiceDone")); };
         recognizer.onerror = () => showStatus(text("voiceUnsupported"), true);
-        recognizer.onend = () => { state.listening = false; voiceButton.setAttribute("aria-pressed", "false"); voiceButton.setAttribute("aria-label", text("voiceStart")); };
+        recognizer.onend = () => { state.listening = false; voiceButton.setAttribute("aria-pressed", "false"); voiceButton.setAttribute("aria-label", text("voiceStart")); document.querySelector("#voice-label").textContent = text("voiceLabel"); };
         recognizer.start();
       });
 
