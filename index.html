@@ -52,6 +52,7 @@
 
       .complaint-box { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.75rem; align-items: stretch; padding: 0.75rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
       .complaint-box:focus-within { border-color: var(--accent); }
+      .complaint-box #body-map-button { grid-column: 1 / -1; }
       .voice-button { min-width: 5.75rem; min-height: 3.5rem; align-self: start; padding: 0.5rem 0.65rem; border: 0; border-radius: 0.8rem; background: var(--accent-soft); color: var(--accent-dark); font-size: 1rem; font-weight: 750; }
       .voice-button[aria-pressed="true"] { background: var(--accent); color: #fff; }
       textarea { width: 100%; min-height: 7rem; resize: vertical; border: 0; background: transparent; color: var(--ink); font-size: 1.125rem; line-height: 1.55; }
@@ -66,6 +67,37 @@
       .status[role="alert"] { color: #6d3c00; }
       .session-note { display: none; margin-top: 1.25rem; padding: 1rem; border: 1px solid #a9c8ba; border-radius: 1rem; background: #edf8f2; color: #183f31; font-size: 1.05rem; line-height: 1.55; }
       .session-note.is-visible { display: block; }
+      .body-map-screen { padding: 0.5rem 0 1rem; }
+      .body-map-screen h1 { max-width: 22ch; }
+      .map-note { max-width: 38rem; margin: 1rem 0 0; color: var(--muted); font-size: 1.08rem; line-height: 1.55; }
+      .observed-words { margin: 1rem 0 0; padding: 0.75rem 1rem; border: 1px solid var(--line); border-radius: 0.8rem; background: var(--paper); font-size: 1.05rem; line-height: 1.5; overflow-wrap: anywhere; }
+      .model-free-note { margin: 1rem 0 0; padding: 0.8rem 1rem; border-radius: 0.8rem; background: var(--accent-soft); color: var(--accent-dark); font-size: 1rem; line-height: 1.5; }
+      .body-map-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; margin-top: 1.5rem; }
+      .map-side { padding: 0.85rem; border: 1px solid var(--line); border-radius: 1rem; background: rgba(255, 253, 249, 0.7); }
+      .map-side h2 { margin: 0; color: var(--accent-dark); font-size: 1.15rem; }
+      .silhouette { display: grid; place-items: center; min-height: 7.5rem; margin: 0.5rem 0 0.75rem; border-radius: 0.75rem; background: #e9eee9; }
+      .silhouette svg { width: 6rem; height: 7rem; fill: #7ca393; }
+      .region-list { display: grid; gap: 0.5rem; }
+      .region-button { display: flex; align-items: center; gap: 0.5rem; min-height: 3.5rem; padding: 0.65rem 0.7rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 1rem; font-weight: 700; text-align: left; }
+      .region-button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
+      .region-glyph { display: inline-grid; flex: 0 0 1.55rem; place-items: center; width: 1.55rem; height: 1.55rem; border: 2px solid currentColor; border-radius: 50%; font-size: 0.7rem; }
+      .general-region { margin-top: 0.85rem; }
+      .followups { margin-top: 1.5rem; padding: 1rem; border-radius: 1rem; background: var(--paper); box-shadow: 0 0 0 2px var(--line); }
+      .followups h2 { margin: 0; font-size: 1.3rem; }
+      .followup-group { margin-top: 1.25rem; }
+      .followup-group .field-label { margin-bottom: 0.55rem; font-size: 1rem; }
+      .followup-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem; }
+      .followup-button { min-height: 3.5rem; padding: 0.55rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 1rem; font-weight: 680; }
+      .followup-button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
+      .map-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.25rem; }
+      .map-actions .large-button { flex: 1 1 12rem; }
+      .map-ready { display: none; margin-top: 1.25rem; padding: 1rem; border: 1px solid #a9c8ba; border-radius: 1rem; background: #edf8f2; color: #183f31; font-size: 1.05rem; line-height: 1.55; }
+      .map-ready.is-visible { display: block; }
+      .map-ready p { margin: 0.65rem 0 0; }
+      .map-ready dl { display: grid; grid-template-columns: minmax(0, 9rem) 1fr; gap: 0.45rem 0.75rem; margin: 1rem 0 0; }
+      .map-ready dt { color: var(--muted); font-weight: 700; }
+      .map-ready dd { margin: 0; font-weight: 750; }
+      .back-button { min-height: 3.5rem; padding: 0.7rem 1rem; border: 2px solid var(--line); border-radius: 1rem; background: transparent; color: var(--accent-dark); font-size: 1rem; font-weight: 750; }
       .tag { display: inline-flex; align-items: center; min-height: 1.8rem; margin-right: 0.35rem; padding: 0.2rem 0.55rem; border: 1px solid currentColor; border-radius: 999px; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.02em; line-height: 1; vertical-align: middle; }
       .support { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin: 0 0 1.25rem; color: var(--muted); font-size: 0.98rem; line-height: 1.5; }
       .support a { color: var(--accent-dark); font-weight: 750; text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
@@ -80,6 +112,9 @@
         .language-toggle button { min-height: 2.5rem; padding-inline: 0.7rem; }
         .choice-grid { grid-template-columns: 1fr; }
         .question-note { font-size: 1.05rem; }
+        .body-map-grid { grid-template-columns: 1fr; }
+        .followup-grid { grid-template-columns: 1fr; }
+        .map-ready dl { grid-template-columns: 1fr; gap: 0.15rem; }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -98,9 +133,10 @@
       </div>
 
       <main>
+        <div id="question-content">
         <p class="eyebrow" data-copy="eyebrow">A simpler way to reach the right OPD counter</p>
         <h1 data-copy="title">What's wrong?</h1>
-        <p class="question-note" data-copy="note">Tell us in your own words. You can speak or type.</p>
+        <p class="question-note" data-copy="note">Tell us in your own words. You can speak, type, or point to the body map.</p>
 
         <section class="field-group" aria-labelledby="booking-label">
           <span class="field-label" id="booking-label" data-copy="bookingFor">Booking for:</span>
@@ -131,6 +167,7 @@
           <div class="complaint-box">
             <button class="voice-button" type="button" id="voice-button" aria-label="Speak your complaint" aria-pressed="false"><span aria-hidden="true">🎙</span> <span id="voice-label">Speak</span></button>
             <textarea id="complaint" rows="3" data-copy-placeholder="placeholder" placeholder="seene mein dard, kal raat se"></textarea>
+            <button class="large-button" type="button" id="body-map-button"><span data-copy="bodyMapButton">Point at the body map</span></button>
           </div>
           <p class="field-help" data-copy="inputHelp">Your words stay in this browser for this session.</p>
           <div class="examples" role="group" aria-label="Examples">
@@ -148,6 +185,83 @@
           <span class="tag">Observed</span>
           <span data-copy="captured">Your words are ready for the next step. Nothing has been sent or booked.</span>
         </div>
+        </div>
+
+        <section class="body-map-screen" id="body-map-screen" aria-labelledby="body-map-title" hidden>
+          <button class="back-button" type="button" id="body-map-back" data-copy="backToQuestion">← Back</button>
+          <p class="eyebrow" data-copy="mapEyebrow">No reading needed</p>
+          <h1 id="body-map-title" tabindex="-1" data-copy="mapTitle">Point to where it hurts</h1>
+          <p class="map-note" data-copy="mapNote">Choose the place that feels wrong. You can do this without typing or speaking.</p>
+          <p class="observed-words" id="typed-handoff" hidden><span class="tag">Observed</span> <span data-copy="mapWordsLabel">Your words:</span> <q id="typed-words"></q></p>
+          <p class="model-free-note"><span data-copy="modelFree">This body-map route sends nothing to an AI service.</span></p>
+
+          <div class="body-map-grid" role="group" aria-label="Body regions">
+            <div class="map-side">
+              <h2 data-copy="front">Front</h2>
+              <div class="silhouette" aria-hidden="true">
+                <svg viewBox="0 0 80 130" role="img"><circle cx="40" cy="13" r="10" /><path d="M27 29c5-5 21-5 26 0l7 31-10 3-3-17v33l10 36H43l-3-25-3 25H23l10-36V46l-3 17-10-3 7-31Z" /></svg>
+              </div>
+              <div class="region-list">
+                <button class="region-button" type="button" data-region="head" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionHead">Head</span></button>
+                <button class="region-button" type="button" data-region="face" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionFace">Face / jaw</span></button>
+                <button class="region-button" type="button" data-region="neck" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionNeck">Neck</span></button>
+                <button class="region-button" type="button" data-region="chest" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionChest">Chest</span></button>
+                <button class="region-button" type="button" data-region="upper-abdomen" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionUpperAbdomen">Upper abdomen</span></button>
+                <button class="region-button" type="button" data-region="lower-abdomen" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionLowerAbdomen">Lower abdomen</span></button>
+                <button class="region-button" type="button" data-region="arm" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionArm">Arm</span></button>
+                <button class="region-button" type="button" data-region="hand" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionHand">Hand</span></button>
+                <button class="region-button" type="button" data-region="leg" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionLeg">Leg</span></button>
+                <button class="region-button" type="button" data-region="foot" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionFoot">Foot</span></button>
+              </div>
+            </div>
+            <div class="map-side">
+              <h2 data-copy="back">Back</h2>
+              <div class="silhouette" aria-hidden="true">
+                <svg viewBox="0 0 80 130" role="img"><circle cx="40" cy="13" r="10" /><path d="M27 29c5-5 21-5 26 0l7 31-10 3-3-17v33l10 36H43l-3-25-3 25H23l10-36V46l-3 17-10-3 7-31Z" /></svg>
+              </div>
+              <div class="region-list">
+                <button class="region-button" type="button" data-region="back" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionBack">Back — upper or lower</span></button>
+              </div>
+            </div>
+          </div>
+
+          <button class="region-button general-region" type="button" data-region="general" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionGeneral">Whole body / general</span></button>
+
+          <div class="followups" id="followups" hidden>
+            <h2 data-copy="followupTitle">A little more</h2>
+            <div class="followup-group">
+              <span class="field-label" data-copy="durationLabel">How long?</span>
+              <div class="followup-grid" role="group" aria-label="How long">
+                <button class="followup-button" type="button" data-duration="now" aria-pressed="false" data-copy="durationNow">Just now</button>
+                <button class="followup-button" type="button" data-duration="today" aria-pressed="false" data-copy="durationToday">Today</button>
+                <button class="followup-button" type="button" data-duration="days" aria-pressed="false" data-copy="durationDays">A few days</button>
+                <button class="followup-button" type="button" data-duration="longer" aria-pressed="false" data-copy="durationLonger">A while</button>
+                <button class="followup-button" type="button" data-duration="unsure" aria-pressed="false" data-copy="durationUnsure">Not sure</button>
+              </div>
+            </div>
+            <div class="followup-group">
+              <span class="field-label" data-copy="severityLabel">Is it severe right now?</span>
+              <div class="followup-grid" role="group" aria-label="Is it severe right now">
+                <button class="followup-button" type="button" data-severity="no" aria-pressed="false" data-copy="severityNo">No</button>
+                <button class="followup-button" type="button" data-severity="yes" aria-pressed="false" data-copy="severityYes">Yes</button>
+                <button class="followup-button" type="button" data-severity="unsure" aria-pressed="false" data-copy="severityUnsure">Not sure</button>
+              </div>
+            </div>
+            <div class="map-actions">
+              <button class="large-button primary" type="button" id="map-continue" data-copy="mapContinue">Continue</button>
+            </div>
+            <p class="status" id="map-status" aria-live="polite"></p>
+            <div class="map-ready" id="map-ready">
+              <span class="tag">Observed</span><span data-copy="mapReady">Your description is ready for the next step.</span>
+              <dl>
+                <dt data-copy="mapReadyRegion">Place</dt><dd id="map-ready-region"><span class="tag">Observed</span></dd>
+                <dt data-copy="mapReadyDuration">How long</dt><dd id="map-ready-duration"><span class="tag">Observed</span></dd>
+                <dt data-copy="mapReadySeverity">Severe now</dt><dd id="map-ready-severity"><span class="tag">Observed</span></dd>
+              </dl>
+              <p data-copy="mapReadyNote">Nothing has been sent or booked.</p>
+            </div>
+          </div>
+        </section>
       </main>
 
       <div class="support">
@@ -161,13 +275,17 @@
       const copy = {
         en: {
           eyebrow: "A simpler way to reach the right OPD counter", title: "What's wrong?",
-          note: "Tell us in your own words. You can speak or type.",
+          note: "Tell us in your own words. You can speak, type, or point to the body map.",
           bookingFor: "Booking for:", myself: "Myself", someoneElse: "Someone else", whoLabel: "Who is it for?",
           parent: "My parent", child: "My child", someoneElseShort: "Someone else", ageLabel: "Age band",
           baby: "Baby", childAge: "Child", adult: "Adult", olderAdult: "Older adult", complaintLabel: "What is bothering you?",
           placeholder: "seene mein dard, kal raat se", inputHelp: "Your words stay in this browser for this session.",
           exampleChest: "chest pain", exampleFever: "fever", exampleWeakness: "weakness on one side", continue: "Continue",
-          captured: "Your words are ready for the next step. Nothing has been sent or booked.", needHelp: "Need a person?",
+          bodyMapButton: "Point at the body map", captured: "Your words are ready for the next step. Nothing has been sent or booked.", needHelp: "Need a person?",
+          backToQuestion: "← Back", mapEyebrow: "No reading needed", mapTitle: "Point to where it hurts",
+          mapNote: "Choose the place that feels wrong. You can do this without typing or speaking.", mapWordsLabel: "Your words:", modelFree: "This body-map route sends nothing to an AI service.", front: "Front", back: "Back",
+          regionHead: "Head", regionFace: "Face / jaw", regionNeck: "Neck", regionChest: "Chest", regionUpperAbdomen: "Upper abdomen", regionLowerAbdomen: "Lower abdomen", regionBack: "Back — upper or lower", regionArm: "Arm", regionHand: "Hand", regionLeg: "Leg", regionFoot: "Foot", regionGeneral: "Whole body / general",
+          followupTitle: "A little more", durationLabel: "How long?", durationNow: "Just now", durationToday: "Today", durationDays: "A few days", durationLonger: "A while", durationUnsure: "Not sure", severityLabel: "Is it severe right now?", severityNo: "No", severityYes: "Yes", severityUnsure: "Not sure", mapContinue: "Continue", mapIncomplete: "Choose a place, how long, and whether it is severe right now.", mapReady: "Your description is ready for the next step.", mapReadyRegion: "Place", mapReadyDuration: "How long", mapReadySeverity: "Severe now", mapReadyNote: "Nothing has been sent or booked.",
           talkToPerson: "Talk to a person", prototype: "independent prototype · mock data · not affiliated with any government body.",
           voiceStart: "Speak your complaint", voiceStop: "Stop listening", voiceLabel: "Speak", voiceLabelStop: "Stop", voiceUnsupported: "Voice input is not available here. You can type or use the body map.",
           voiceListening: "Listening… say it in your own words.", voiceDone: "I heard your words. You can edit them before continuing.",
@@ -175,13 +293,17 @@
         },
         hi: {
           eyebrow: "सही ओपीडी काउंटर तक पहुँचने का आसान तरीका", title: "क्या तकलीफ़ है?",
-          note: "अपने शब्दों में बताइए। बोलें या लिखें।",
+          note: "अपने शब्दों में बताइए। बोलें, लिखें या शरीर के नक्शे पर चुनें।",
           bookingFor: "किसके लिए बुकिंग है:", myself: "मेरे लिए", someoneElse: "किसी और के लिए", whoLabel: "किसके लिए है?",
           parent: "मेरे माता-पिता", child: "मेरे बच्चे", someoneElseShort: "कोई और", ageLabel: "उम्र का समूह",
           baby: "नन्हा बच्चा", childAge: "बच्चा", adult: "वयस्क", olderAdult: "बुज़ुर्ग", complaintLabel: "क्या परेशानी है?",
           placeholder: "सीने में दर्द, कल रात से", inputHelp: "आपके शब्द इस ब्राउज़र में इसी सत्र तक रहेंगे।",
           exampleChest: "सीने में दर्द", exampleFever: "बुखार", exampleWeakness: "एक तरफ़ कमज़ोरी", continue: "आगे बढ़ें",
-          captured: "आपके शब्द अगले कदम के लिए तैयार हैं। कुछ भेजा या बुक नहीं हुआ है।", needHelp: "किसी व्यक्ति से बात करें?",
+          bodyMapButton: "शरीर के नक्शे पर चुनें", captured: "आपके शब्द अगले कदम के लिए तैयार हैं। कुछ भेजा या बुक नहीं हुआ है।", needHelp: "किसी व्यक्ति से बात करें?",
+          backToQuestion: "← वापस", mapEyebrow: "पढ़ने की ज़रूरत नहीं", mapTitle: "जहाँ तकलीफ़ है वहाँ चुनें",
+          mapNote: "जहाँ परेशानी लगती है वहाँ चुनें। इसके लिए लिखना या बोलना ज़रूरी नहीं है।", mapWordsLabel: "आपके शब्द:", modelFree: "शरीर के नक्शे वाला रास्ता किसी एआई सेवा को कुछ नहीं भेजता।", front: "सामने", back: "पीछे",
+          regionHead: "सिर", regionFace: "चेहरा / जबड़ा", regionNeck: "गर्दन", regionChest: "सीना", regionUpperAbdomen: "पेट का ऊपरी हिस्सा", regionLowerAbdomen: "पेट का निचला हिस्सा", regionBack: "पीठ — ऊपर या नीचे", regionArm: "बाँह", regionHand: "हाथ", regionLeg: "टाँग", regionFoot: "पैर", regionGeneral: "पूरा शरीर / सामान्य",
+          followupTitle: "थोड़ा और बताइए", durationLabel: "कब से?", durationNow: "अभी", durationToday: "आज", durationDays: "कुछ दिन", durationLonger: "काफ़ी समय", durationUnsure: "पता नहीं", severityLabel: "क्या अभी बहुत तेज़ है?", severityNo: "नहीं", severityYes: "हाँ", severityUnsure: "पता नहीं", mapContinue: "आगे बढ़ें", mapIncomplete: "जगह, कब से और अभी बहुत तेज़ है या नहीं चुनें।", mapReady: "आपका विवरण अगले कदम के लिए तैयार है।", mapReadyRegion: "जगह", mapReadyDuration: "कब से", mapReadySeverity: "अभी बहुत तेज़", mapReadyNote: "कुछ भेजा या बुक नहीं हुआ है।",
           talkToPerson: "किसी व्यक्ति से बात करें", prototype: "स्वतंत्र प्रोटोटाइप · नकली डेटा · किसी सरकारी संस्था से जुड़ा नहीं।",
           voiceStart: "अपनी परेशानी बोलें", voiceStop: "सुनना रोकें", voiceLabel: "बोलें", voiceLabelStop: "रोकें", voiceUnsupported: "यहाँ आवाज़ से लिखना उपलब्ध नहीं है। आप लिख सकते हैं या शरीर का नक्शा चुन सकते हैं।",
           voiceListening: "सुन रहे हैं… अपने शब्दों में बोलें।", voiceDone: "आपके शब्द मिल गए। आगे बढ़ने से पहले उन्हें बदल सकते हैं।",
@@ -189,12 +311,17 @@
         },
       };
 
-      const state = { language: "en", booking: "myself", who: null, age: null, listening: false };
+      const state = { language: "en", booking: "myself", who: null, age: null, listening: false, region: null, duration: null, severity: null };
       const text = (key) => copy[state.language][key];
       const status = document.querySelector("#status");
       const complaint = document.querySelector("#complaint");
       const voiceButton = document.querySelector("#voice-button");
       const sessionNote = document.querySelector("#session-note");
+      const questionContent = document.querySelector("#question-content");
+      const bodyMapScreen = document.querySelector("#body-map-screen");
+      const followups = document.querySelector("#followups");
+      const mapStatus = document.querySelector("#map-status");
+      const mapReady = document.querySelector("#map-ready");
 
       function renderLanguage() {
         document.documentElement.lang = state.language === "hi" ? "hi" : "en";
@@ -244,6 +371,83 @@
 
       document.querySelectorAll("[data-example]").forEach((button) => {
         button.addEventListener("click", () => { complaint.value = button.dataset.example; complaint.focus(); sessionNote.classList.remove("is-visible"); status.dataset.persistent = ""; status.textContent = ""; });
+      });
+
+      function moveTo(element) {
+        element.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+      }
+
+      function showBodyMap() {
+        questionContent.hidden = true;
+        bodyMapScreen.hidden = false;
+        const words = complaint.value.trim();
+        document.querySelector("#typed-handoff").hidden = !words;
+        document.querySelector("#typed-words").textContent = words;
+        document.querySelector("#body-map-title").focus();
+      }
+
+      document.querySelector("#body-map-button").addEventListener("click", showBodyMap);
+      document.querySelector("#body-map-back").addEventListener("click", () => {
+        bodyMapScreen.hidden = true;
+        questionContent.hidden = false;
+        document.querySelector("#body-map-button").focus();
+      });
+
+      document.querySelectorAll("[data-region]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.region = button.dataset.region;
+          document.querySelectorAll("[data-region]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+          followups.hidden = false;
+          mapReady.classList.remove("is-visible");
+          mapStatus.textContent = "";
+          mapStatus.removeAttribute("role");
+        });
+      });
+
+      document.querySelectorAll("[data-duration]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.duration = button.dataset.duration;
+          document.querySelectorAll("[data-duration]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        });
+      });
+
+      document.querySelectorAll("[data-severity]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.severity = button.dataset.severity;
+          document.querySelectorAll("[data-severity]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        });
+      });
+
+      function selectedLabel(selector) {
+        const selected = document.querySelector(`${selector}[aria-pressed="true"]`);
+        return selected ? selected.textContent.trim().replace(/^•\s*/, "") : "";
+      }
+
+      function setObservedValue(id, value) {
+        const element = document.querySelector(id);
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = "Observed";
+        element.replaceChildren(tag, document.createTextNode(` ${value}`));
+      }
+
+      function updateMapSummary() {
+        setObservedValue("#map-ready-region", selectedLabel("[data-region]"));
+        setObservedValue("#map-ready-duration", selectedLabel("[data-duration]"));
+        setObservedValue("#map-ready-severity", selectedLabel("[data-severity]"));
+      }
+
+      document.querySelector("#map-continue").addEventListener("click", () => {
+        if (!state.region || !state.duration || !state.severity) {
+          mapStatus.textContent = text("mapIncomplete");
+          mapStatus.setAttribute("role", "alert");
+          return;
+        }
+        updateMapSummary();
+        mapStatus.textContent = "";
+        mapStatus.removeAttribute("role");
+        mapReady.classList.add("is-visible");
+        moveTo(mapReady);
       });
 
       function speechRecognition() { return window.SpeechRecognition || window.webkitSpeechRecognition || null; }
