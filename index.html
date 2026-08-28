@@ -4,21 +4,28 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Raahat helps you find the right OPD counter, starting with where it hurts." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <title>राहत · Raahat</title>
+    <script>
+      (() => {
+        try {
+          const savedTheme = localStorage.getItem("raahat-theme");
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (savedTheme === "dark" || (!savedTheme && prefersDark)) document.documentElement.dataset.theme = "dark";
+        } catch { /* Private browsing can refuse storage; the default theme still works. */ }
+      })();
+    </script>
     <style>
       :root {
         color-scheme: light;
-        font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         background: var(--background);
-        color: #17241f;
+        color: var(--ink);
         --ink: #0f172a;
         --muted: #475569;
-        --line: #cbd5e1;
+        --line: #e2e8f0;
         --paper: #ffffff;
         --background: #f8faf9;
+        --surface-elevated: #ffffff;
         --accent: #166534;
         --accent-dark: #14532d;
         --accent-soft: #dcfce7;
@@ -34,9 +41,29 @@
         --card-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 6px -2px rgba(15, 23, 42, 0.02);
       }
 
+      [data-theme="dark"] {
+        color-scheme: dark;
+        --ink: #f1f5f9;
+        --muted: #94a3b8;
+        --line: #23334d;
+        --paper: #111827;
+        --background: #090d16;
+        --surface-elevated: #131c2e;
+        --accent: #22c55e;
+        --accent-dark: #16a34a;
+        --accent-soft: rgba(34, 197, 94, 0.15);
+        --marigold: #f59e0b;
+        --marigold-soft: rgba(245, 158, 11, 0.15);
+        --emergency: #ef4444;
+        --emergency-red: var(--emergency);
+        --emergency-soft: rgba(239, 68, 68, 0.15);
+        --focus: #facc15;
+        --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.45);
+      }
+
       * { box-sizing: border-box; }
-      body { min-width: 320px; min-height: 100vh; margin: 0; background: var(--background); font-size: 18px; line-height: 1.6; }
-      :lang(hi), [lang="hi"] { font-family: "Noto Sans Devanagari", "Plus Jakarta Sans", system-ui, sans-serif; }
+      body { min-width: 320px; min-height: 100vh; margin: 0; background: var(--background); color: var(--ink); font-size: 18px; line-height: 1.6; transition: background-color 180ms ease, color 180ms ease; }
+      :lang(hi), [lang="hi"] { font-family: system-ui, -apple-system, "Noto Sans Devanagari", sans-serif; }
       button, textarea, a { font: inherit; }
       button, a { -webkit-tap-highlight-color: transparent; }
       button { cursor: pointer; }
@@ -57,6 +84,9 @@
       .language-toggle button { min-height: 2.75rem; padding: 0.35rem 0.8rem; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font-size: 0.95rem; font-weight: 700; }
       .language-toggle button[aria-pressed="true"] { background: var(--accent); color: #fff; }
       .nav-actions { display: flex; align-items: center; gap: 0.55rem; }
+      .theme-toggle { display: inline-grid; width: 3.5rem; height: 3.5rem; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: var(--radius-full); background: var(--paper); color: var(--ink); transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease; }
+      .theme-toggle:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-1px); }
+      .theme-toggle .icon { width: 1.35rem; height: 1.35rem; }
       .nav-start { min-height: 3.5rem; padding: 0.55rem 0.9rem; border: 0; border-radius: var(--radius-full); background: var(--accent); color: #fff; font-size: 0.95rem; font-weight: 850; box-shadow: 0 0.45rem 1rem rgba(22, 101, 52, 0.18); }
       .nav-start:hover { background: var(--accent-dark); }
 
@@ -96,8 +126,7 @@
       .body-map-screen h1 { max-width: 22ch; }
       .map-note { max-width: 38rem; margin: 1rem 0 0; color: var(--muted); font-size: 1.08rem; line-height: 1.55; }
       .observed-words { margin: 1rem 0 0; padding: 0.75rem 1rem; border: 1px solid var(--line); border-radius: 0.8rem; background: var(--paper); font-size: 1.05rem; line-height: 1.5; overflow-wrap: anywhere; }
-      .model-free-note { margin: 1rem 0 0; padding: 0.8rem 1rem; border-radius: 0.8rem; background: var(--accent-soft); color: var(--accent-dark); font-size: 1rem; line-height: 1.5; }
-      .model-free-footnote { margin: 0.7rem 0 0; color: var(--muted); font-size: 0.82rem; line-height: 1.4; }
+      .browser-processing-note { margin: 1rem 0 0; padding: 0.8rem 1rem; border-radius: 0.8rem; background: var(--accent-soft); color: var(--accent-dark); font-size: 1rem; line-height: 1.5; }
       .map-selection { display: flex; align-items: center; gap: 0.85rem; min-height: 5.5rem; margin-top: 0.9rem; padding: 0.9rem 1rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
       .map-selection-icon { display: grid; flex: 0 0 2.7rem; place-items: center; width: 2.7rem; height: 2.7rem; border-radius: 50%; background: var(--accent-soft); color: var(--accent-dark); font-size: 1.45rem; }
       .map-selection-copy { min-width: 0; }
@@ -281,20 +310,82 @@
       .honesty-build { border-color: #a9c8ba; background: #edf8f2; }
       .honesty-back { margin-top: 1.25rem; }
       @media print {
-        body { background: #fff; }
-        .topline, .support, .prototype-banner, main > :not(#appointment-screen), #appointment-screen > :not(#slip-panel), .slip-actions { display: none !important; }
+        @page { size: A4; margin: 16mm; }
+        body { background: #fff; color: #0f172a; font-size: 12pt; }
+        .topline, .support, .prototype-banner, main > :not(#screen-triage), #screen-triage > :not(#appointment-screen), .triage-stepper, .slip-actions { display: none !important; }
         .app-shell { width: 100%; padding: 0; }
         main { display: block; padding: 0; }
+        #screen-triage { display: block !important; }
         #appointment-screen { display: block !important; }
         #slip-panel { display: block !important; margin: 0; }
+        .slip { border: 1px solid #0f172a; box-shadow: none; }
         .print-only { display: block; }
       }
       .tag { display: inline-flex; align-items: center; min-height: 1.8rem; margin-right: 0.35rem; padding: 0.2rem 0.55rem; border: 1px solid currentColor; border-radius: 999px; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.02em; line-height: 1; vertical-align: middle; }
+      .icon { display: inline-block; width: 1.45rem; height: 1.45rem; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; vertical-align: middle; }
+      .icon--small { width: 1.1rem; height: 1.1rem; }
+      .icon--large { width: 2rem; height: 2rem; }
+      .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
       .visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important; }
       .support { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin: 0 0 1.25rem; color: var(--muted); font-size: 0.98rem; line-height: 1.5; }
       .support a { color: var(--accent-dark); font-weight: 750; text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
       .prototype-banner { margin: 0; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 1rem; line-height: 1.5; }
       [hidden] { display: none !important; }
+
+      [data-theme="dark"] .topline { border-color: var(--line); background: rgba(9, 13, 22, 0.93); }
+      [data-theme="dark"] .hero-input,
+      [data-theme="dark"] .hospital-card,
+      [data-theme="dark"] .slip,
+      [data-theme="dark"] .map-side,
+      [data-theme="dark"] .fallback-region-picker,
+      [data-theme="dark"] .location-note,
+      [data-theme="dark"] .hospital-fact,
+      [data-theme="dark"] .carry-list,
+      [data-theme="dark"] .honesty-fact,
+      [data-theme="dark"] .honesty-limit,
+      [data-theme="dark"] .build-item,
+      [data-theme="dark"] .rights-card { background: var(--surface-elevated); color: var(--ink); }
+      [data-theme="dark"] .model-disclosure,
+      [data-theme="dark"] .three-unavailable,
+      [data-theme="dark"] .network-live,
+      [data-theme="dark"] .sign-in-disclosure { background: var(--marigold-soft); color: var(--ink); }
+      [data-theme="dark"] .session-note,
+      [data-theme="dark"] .map-ready,
+      [data-theme="dark"] .honest-wait,
+      [data-theme="dark"] .patient-report,
+      [data-theme="dark"] .workspace-privacy { background: var(--accent-soft); color: var(--ink); }
+      [data-theme="dark"] .silhouette-stage,
+      [data-theme="dark"] .body-3d-stage { background: linear-gradient(180deg, #152337 0%, #101b2e 100%); }
+      [data-theme="dark"] .network-pill { background: var(--accent-soft); color: var(--ink); }
+      [data-theme="dark"] .credential-card { background: var(--surface-elevated); border-color: var(--marigold); }
+      [data-theme="dark"] .three-tooltip { background: var(--surface-elevated); color: var(--ink); }
+
+      .triage-stepper { display: flex; align-items: flex-start; gap: 0; margin: 0 0 2rem; padding: 1rem; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface-elevated); box-shadow: var(--card-shadow); overflow-x: auto; }
+      .step { position: relative; display: flex; min-width: 7.5rem; flex: 1 0 7.5rem; align-items: center; color: var(--muted); }
+      .step:not(:last-child)::after { width: calc(100% - 2.4rem); height: 2px; margin: 0 0.55rem; background: var(--line); content: ""; }
+      .step.is-complete:not(:last-child)::after, .step.is-current:not(:last-child)::after { background: var(--accent); }
+      .step-marker { display: grid; position: relative; z-index: 1; flex: 0 0 2.35rem; width: 2.35rem; height: 2.35rem; place-items: center; border: 2px solid var(--line); border-radius: 50%; background: var(--surface-elevated); color: var(--muted); font-size: 0.95rem; font-weight: 850; }
+      .step-check { display: none; width: 1.15rem; height: 1.15rem; }
+      .step-label { display: grid; gap: 0.1rem; margin-left: 0.5rem; line-height: 1.1; }
+      .step-label strong { color: inherit; font-size: 0.82rem; white-space: nowrap; }
+      .step-label span { font-size: 0.75rem; white-space: nowrap; }
+      .step.is-current { color: var(--accent-dark); }
+      .step.is-current .step-marker { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 0 0 0 5px var(--accent-soft); }
+      .step.is-complete { color: var(--accent-dark); }
+      .step.is-complete .step-marker { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
+      .step.is-complete .step-number { display: none; }
+      .step.is-complete .step-check { display: block; }
+      .step.is-current .step-label strong { font-weight: 900; }
+      .hospital-access { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem; margin: 0.75rem 0 0; color: var(--accent-dark); font-size: 0.94rem; font-weight: 750; line-height: 1.45; }
+      .slip-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; padding-bottom: 0.85rem; border-bottom: 2px solid var(--ink); }
+      .slip-header-copy { display: grid; gap: 0.15rem; }
+      .slip-subtitle { color: var(--muted); font-size: 0.92rem; font-weight: 750; line-height: 1.25; }
+      .slip-token { flex: 0 0 auto; padding: 0.55rem 0.7rem; border: 2px solid var(--accent); border-radius: 0.65rem; background: var(--accent-soft); color: var(--accent-dark); font-size: 1.08rem; font-weight: 900; line-height: 1.15; text-align: right; }
+      .slip-token small { display: block; margin-bottom: 0.15rem; color: var(--muted); font-size: 0.72rem; font-weight: 800; text-transform: uppercase; }
+      .slip-time-summary { margin: 1rem 0 0; padding: 0.8rem; border: 2px solid var(--accent); border-radius: 0.75rem; color: var(--accent-dark); font-size: 1.08rem; font-weight: 850; line-height: 1.35; }
+      .slip-field--wide { grid-column: 1 / -1; }
+      .barcode-code { display: block; width: 6rem; height: 6rem; flex: 0 0 6rem; border: 0.45rem solid #fff; outline: 2px solid var(--ink); background: var(--surface-elevated); }
+      .network-access { margin-top: 0.7rem !important; padding: 0.65rem 0.7rem; border-radius: 0.65rem; background: var(--accent-soft); color: var(--accent-dark) !important; font-weight: 750; }
 
       @media (max-width: 430px) {
         .app-shell { padding-inline: 1rem; }
@@ -490,6 +581,27 @@
     </style>
   </head>
   <body>
+    <svg class="icon-sprite" aria-hidden="true" focusable="false">
+      <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/></symbol>
+      <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/></symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+      <symbol id="icon-mic" viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="12" rx="4"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></symbol>
+      <symbol id="icon-route" viewBox="0 0 48 48"><path d="M14 39c-5-3-6-10-2-14 3-3 7-4 11-2l4 2c4 2 8 1 10-2 3-4 2-10-2-13"/><path d="M17 8h8M21 4v8M31 12c2-2 4-3 7-3"/><path d="M31 17c3 0 5 2 5 5M36 22h6"/><path d="M8 28h7M11 24v8"/><path d="M27 36c4-2 7-2 11 0"/></symbol>
+      <symbol id="icon-queue" viewBox="0 0 48 48"><circle cx="24" cy="24" r="15"/><path d="M24 15v10l7 4M9 18c2-6 7-10 13-10M16 8H9v7"/><path d="M6 35c5 5 12 7 19 5"/></symbol>
+      <symbol id="icon-slip" viewBox="0 0 48 48"><path d="M13 5h22v38H13z"/><path d="M18 12h12M18 18h12M18 25h7M18 31h12"/><circle cx="32" cy="34" r="7"/><path d="m29 34 2 2 4-5"/></symbol>
+      <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+      <symbol id="icon-question" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4.2 1.8c-1.1.9-1.7 1.3-1.7 2.7M12 17h.01"/></symbol>
+      <symbol id="icon-pain" viewBox="0 0 24 24"><path d="m12 3 1.8 6.2L20 7l-4.4 5 5 3.2-6.5-.5L12 21l-2.1-6.3-6.5.5 5-3.2L4 7l6.2 2.2Z"/></symbol>
+      <symbol id="icon-fever" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.9 4.9 7 7M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></symbol>
+      <symbol id="icon-breathing" viewBox="0 0 24 24"><path d="M3 9c3-4 5 4 8 0s5-4 10 0M3 15c3-4 5 4 8 0s5-4 10 0"/></symbol>
+      <symbol id="icon-drop" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></symbol>
+      <symbol id="icon-swelling" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
+      <symbol id="icon-rash" viewBox="0 0 24 24"><path d="m12 3 1.6 5.4L19 7l-3.8 4.1L20 14l-5.6-.4L12 21l-2.4-7.4L4 14l4.8-2.9L5 7l5.4 1.4Z"/></symbol>
+      <symbol id="icon-injury" viewBox="0 0 24 24"><path d="m7 4 13 13-3 3L4 7Z"/><path d="m9 6-3 3M12 9l-3 3M15 12l-3 3"/></symbol>
+      <symbol id="icon-stomach" viewBox="0 0 24 24"><path d="M9 3v6c0 2 1 3 3 3s3 1 3 3v1a5 5 0 0 1-10 0v-3M9 3h4"/></symbol>
+      <symbol id="icon-dizzy" viewBox="0 0 24 24"><path d="M4 12h4l2-6 3 12 2-6h5"/></symbol>
+      <symbol id="icon-cloud" viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .6-7.9A6 6 0 0 0 6 8.9 4.5 4.5 0 0 0 7 18Z"/></symbol>
+    </svg>
     <div class="intro-splash" id="intro-splash" aria-label="Raahat loading" aria-live="polite">
       <div class="splash-lockup">
         <svg class="splash-mark brand-mark" viewBox="0 0 64 64" aria-hidden="true">
@@ -533,6 +645,7 @@
             <button type="button" data-language="en" aria-pressed="true">English</button>
             <button type="button" data-language="hi" aria-pressed="false">हिंदी</button>
           </div>
+          <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Use dark theme" title="Use dark theme"><svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg></button>
           <button class="nav-start" type="button" id="nav-start-triage" data-copy="startTriage">Start Triage</button>
         </div>
       </div>
@@ -544,7 +657,7 @@
               <p class="hero-kicker" data-copy="landingKicker">A calmer front door to public hospitals</p>
               <h1 id="landing-title" data-copy="landingTitle">Government Hospital Appointments, Without the Confusion.</h1>
               <p class="hero-subtitle" data-copy="landingSubtitle">ORS asks which department you need. A sick person only knows where it hurts. Tell us your symptoms in your own words, voice, or tap the body map — we'll guide you to the right OPD counter with honest wait times.</p>
-              <p class="model-disclosure"><span class="tag">Rule</span><span data-copy="modelDisclosure">This prototype reads this sentence in your browser. Nothing is sent to a server; tap the body map if you would rather not type.</span></p>
+              <p class="model-disclosure"><strong data-copy="processingLabel">Client-side browser processing:</strong> <span data-copy="modelDisclosure">Your words are evaluated securely inside this browser to guide you to the right counter. Nothing is sent to a server.</span></p>
               <div class="hero-actions">
                 <button class="large-button primary" type="button" id="start-triage" data-copy="startTriage">Start Triage</button>
                 <a class="back-button" href="#screen-home" data-view-link="home" data-copy="learnMore">See how it works</a>
@@ -592,9 +705,9 @@
           <section class="landing-section view-section" id="how-it-works" data-view="home" aria-labelledby="how-title">
             <div class="section-heading"><h2 id="how-title" data-copy="howTitle">How Raahat works</h2><p data-copy="howNote">A short, visible journey from “where it hurts” to the right OPD counter.</p></div>
             <div class="journey-grid">
-              <article class="journey-card"><span class="journey-icon" aria-hidden="true">◌</span><h3 data-copy="howOneTitle">Point, speak, or type</h3><p data-copy="howOneNote">Describe symptoms in any language, or point to a place on the interactive body map.</p></article>
-              <article class="journey-card"><span class="journey-icon" aria-hidden="true">◷</span><h3 data-copy="howTwoTitle">Instant triage & honest wait</h3><p data-copy="howTwoNote">Code matches a verified hospital counter and shows simulated queue timing in plain language.</p></article>
-              <article class="journey-card"><span class="journey-icon" aria-hidden="true">▤</span><h3 data-copy="howThreeTitle">Specimen slip & citizen rights</h3><p data-copy="howThreeNote">Print a clearly marked mock slip with what to carry and a PGPortal grievance safeguard.</p></article>
+              <article class="journey-card"><span class="journey-icon" aria-hidden="true"><svg class="icon icon--large"><use href="#icon-route"></use></svg></span><h3 data-copy="howOneTitle">Point, speak, or type</h3><p data-copy="howOneNote">Describe symptoms in any language, or point to a place on the interactive body map.</p></article>
+              <article class="journey-card"><span class="journey-icon" aria-hidden="true"><svg class="icon icon--large"><use href="#icon-queue"></use></svg></span><h3 data-copy="howTwoTitle">Instant triage & honest wait</h3><p data-copy="howTwoNote">Code matches a verified hospital counter and shows simulated queue timing in plain language.</p></article>
+              <article class="journey-card"><span class="journey-icon" aria-hidden="true"><svg class="icon icon--large"><use href="#icon-slip"></use></svg></span><h3 data-copy="howThreeTitle">Specimen slip & citizen rights</h3><p data-copy="howThreeNote">Print a clearly marked mock slip with what to carry and a PGPortal grievance safeguard.</p></article>
             </div>
           </section>
 
@@ -613,8 +726,8 @@
               <table class="comparison-table">
                 <thead><tr><th data-copy="comparisonQuestion">The front door question</th><th>ors.gov.in <span class="table-label" data-copy="orsEra">2015 · NIC digitised counter</span></th><th>Raahat <span class="table-label" data-copy="raahatEra">2026 · citizen-first triage</span></th></tr></thead>
                 <tbody>
-                  <tr><td data-copy="comparisonDepartment">Finding a department</td><td class="ors-cell" data-copy="orsDepartment">Department guessing</td><td class="raahat-cell" data-copy="raahatDepartment">Zero-Knowledge Triage — start with where it hurts</td></tr>
-                  <tr><td data-copy="comparisonWait">Knowing the real wait</td><td class="ors-cell" data-copy="orsWait">Phantom slot time</td><td class="raahat-cell" data-copy="raahatWait">Honest Queue Wait — slot + simulated seen-time</td></tr>
+                  <tr><td data-copy="comparisonDepartment">Finding a department</td><td class="ors-cell" data-copy="orsDepartment">Department guessing</td><td class="raahat-cell" data-copy="raahatDepartment">Start with where it hurts; we will show the counter that matches your confirmed details.</td></tr>
+                  <tr><td data-copy="comparisonWait">Knowing the real wait</td><td class="ors-cell" data-copy="orsWait">Slot time only</td><td class="raahat-cell" data-copy="raahatWait">Estimated consultation time, based on the slot and simulated queue throughput.</td></tr>
                   <tr><td data-copy="comparisonAuth">Getting started</td><td class="ors-cell" data-copy="orsAuth">Front-door distorted CAPTCHA</td><td class="raahat-cell" data-copy="raahatAuth">Late-stage 1-tap Auth — only when making a specimen slip</td></tr>
                   <tr><td data-copy="comparisonEmergency">Emergency safety</td><td class="ors-cell" data-copy="orsEmergency">Routine booking can hide a critical emergency</td><td class="raahat-cell" data-copy="raahatEmergency">One red flag → 24/7 Emergency now</td></tr>
                   <tr><td data-copy="comparisonAccess">Accessibility</td><td class="ors-cell" data-copy="orsAccess">Text forms, CAPTCHA and desktop-first barriers</td><td class="raahat-cell" data-copy="raahatAccess">100% mobile-first: 3D/2D map + speak + type</td></tr>
@@ -626,9 +739,9 @@
           <section class="landing-section view-section" id="network" data-view="hospitals" aria-labelledby="network-title">
             <div class="screen-heading"><p class="screen-kicker" data-copy="hospitalsKicker">Verified public directory</p><div class="section-heading"><h1 id="network-title" data-copy="networkTitle">Delhi hospital network</h1><p><span class="tag">Verified</span> <span data-copy="networkNote">Hospital names, addresses and departments are public facts. Availability and token throughput are simulated for this prototype.</span></p></div></div>
             <div class="network-grid">
-              <article class="network-card"><h3>AIIMS New Delhi</h3><p><span class="tag">Verified</span> Ansari Nagar, New Delhi · departments include Cardiology, Neurology and General Medicine.</p><p class="verified-line"><span class="tag">Verified</span> Departments checked 27 Aug 2026 · <a href="https://www.aiims.edu/index.php/en/departments-and-centers/departments" target="_blank" rel="noreferrer">AIIMS public list</a></p><div class="network-meta"><span class="network-pill"><span class="tag">Verified</span> 24/7 Emergency</span><span class="network-pill"><span class="tag">Simulated</span> 12 tokens seen</span></div><p class="network-live"><span class="tag">Simulated</span> Live token throughput: morning rounds in progress · next sample slot 09:30 AM.</p></article>
-              <article class="network-card"><h3>Safdarjung Hospital</h3><p><span class="tag">Verified</span> Ansari Nagar West, New Delhi · departments include Cardiology, Paediatrics and Orthopaedics.</p><p class="verified-line"><span class="tag">Verified</span> Departments checked 27 Aug 2026 · <a href="https://www.vmmc-sjh.mohfw.gov.in/medical-departments" target="_blank" rel="noreferrer">Safdarjung public list</a></p><div class="network-meta"><span class="network-pill"><span class="tag">Verified</span> 24/7 Emergency</span><span class="network-pill"><span class="tag">Simulated</span> 9 tokens seen</span></div><p class="network-live"><span class="tag">Simulated</span> Live token throughput: 9 tokens seen during morning rounds · next sample slot 10:00 AM.</p></article>
-              <article class="network-card"><h3>Dr. RML Hospital</h3><p><span class="tag">Verified</span> Baba Kharak Singh Marg, New Delhi · departments include Gastroenterology, Dermatology and Neurology.</p><p class="verified-line"><span class="tag">Verified</span> Departments checked 27 Aug 2026 · <a href="https://rmlh.nic.in/" target="_blank" rel="noreferrer">RML public site</a></p><div class="network-meta"><span class="network-pill"><span class="tag">Verified</span> 24/7 Emergency</span><span class="network-pill"><span class="tag">Simulated</span> 7 tokens seen</span></div><p class="network-live"><span class="tag">Simulated</span> Live token throughput: 7 tokens seen during morning rounds · next sample slot 10:30 AM.</p></article>
+              <article class="network-card"><h3>AIIMS New Delhi</h3><p><span class="tag">Verified</span> Ansari Nagar, New Delhi · departments include Cardiology, Neurology and General Medicine.</p><p class="network-access"><span class="tag">Verified</span> Metro: AIIMS Metro (Yellow Line) · Gate: Gate 2 (Aurobindo Marg) · 24/7 Emergency Counter</p><p class="verified-line"><span class="tag">Verified</span> Departments checked 27 Aug 2026 · <a href="https://www.aiims.edu/index.php/en/departments-and-centers/departments" target="_blank" rel="noreferrer">AIIMS public list</a></p><div class="network-meta"><span class="network-pill"><span class="tag">Verified</span> 24/7 Emergency</span><span class="network-pill"><span class="tag">Simulated</span> 12 tokens seen</span></div><p class="network-live"><span class="tag">Simulated</span> Live token throughput: morning rounds in progress · next sample slot 09:30 AM.</p></article>
+              <article class="network-card"><h3>Safdarjung Hospital</h3><p><span class="tag">Verified</span> Ansari Nagar West, New Delhi · departments include Cardiology, Paediatrics and Orthopaedics.</p><p class="network-access"><span class="tag">Verified</span> Metro: AIIMS / Dilli Haat INA · Emergency: Super Speciality Block, Ring Road</p><p class="verified-line"><span class="tag">Verified</span> Departments checked 27 Aug 2026 · <a href="https://www.vmmc-sjh.mohfw.gov.in/medical-departments" target="_blank" rel="noreferrer">Safdarjung public list</a></p><div class="network-meta"><span class="network-pill"><span class="tag">Verified</span> 24/7 Emergency</span><span class="network-pill"><span class="tag">Simulated</span> 9 tokens seen</span></div><p class="network-live"><span class="tag">Simulated</span> Live token throughput: 9 tokens seen during morning rounds · next sample slot 10:00 AM.</p></article>
+              <article class="network-card"><h3>Dr. RML Hospital</h3><p><span class="tag">Verified</span> Baba Kharak Singh Marg, New Delhi · departments include Gastroenterology, Dermatology and Neurology.</p><p class="network-access"><span class="tag">Verified</span> Metro: Shivaji Stadium (Airport Line) / Patel Chowk · Gate: BKS Marg Entry</p><p class="verified-line"><span class="tag">Verified</span> Departments checked 27 Aug 2026 · <a href="https://rmlh.nic.in/" target="_blank" rel="noreferrer">RML public site</a></p><div class="network-meta"><span class="network-pill"><span class="tag">Verified</span> 24/7 Emergency</span><span class="network-pill"><span class="tag">Simulated</span> 7 tokens seen</span></div><p class="network-live"><span class="tag">Simulated</span> Live token throughput: 7 tokens seen during morning rounds · next sample slot 10:30 AM.</p></article>
             </div>
           </section>
 
@@ -638,13 +751,22 @@
               <details class="faq-item"><summary data-copy="faqSafetyQ">Is this triage safe?</summary><p data-copy="faqSafetyA">Raahat does not diagnose. Code applies a small published rule file after you see and confirm the complaint. When a red flag is present, one flag is enough to route to Emergency.</p></details>
               <details class="faq-item"><summary data-copy="faqRedFlagQ">What happens when there is an Emergency red flag?</summary><p data-copy="faqRedFlagA">The result says to go to Emergency now and not book an appointment. The rule ID is shown, and the nearest simulated emergency-capable hospital in your chosen locality is displayed.</p></details>
               <details class="faq-item"><summary data-copy="faqAccessQ">Can someone who cannot read use it?</summary><p data-copy="faqAccessA">Yes. Complaint entry has three equal routes: speak, type, or tap the labelled 2D body map. Large buttons, keyboard focus and screen-reader labels are built into the flow.</p></details>
-              <details class="faq-item"><summary data-copy="faqPrivacyQ">What happens to my data?</summary><p data-copy="faqPrivacyA">This prototype keeps the complaint in the browser for this session and never stores it server-side. Typed words are sent to no service in the body-map route; free-text model reading is disclosed before use.</p></details>
+              <details class="faq-item"><summary data-copy="faqPrivacyQ">What happens to my data?</summary><p data-copy="faqPrivacyA">Your complaint stays in this browser for this session. Nothing is stored on a server.</p></details>
               <details class="faq-item"><summary data-copy="faqWaitQ">How is the wait time calculated?</summary><p data-copy="faqWaitA">It is simulated as slot start plus a simulated wait. Hospitals are sorted by estimated seen-time, then travel time, then name. It is not live queue data.</p></details>
               <details class="faq-item"><summary data-copy="faqOrsQ">How is Raahat different from ORS?</summary><p data-copy="faqOrsA">ORS begins by asking you to choose a hospital and department. Raahat helps a citizen structure their own words first, then shows an honest simulated queue view. It does not connect to ORS.</p></details>
               <details class="faq-item"><summary data-copy="faqAbdmQ">Will this connect to ABDM?</summary><p data-copy="faqAbdmA">No. ABDM, Aadhaar, ABHA, UHID, OTP and government systems are outside this prototype. Any future integration would need explicit consent, security review and a real public-service partnership.</p></details>
             </div>
           </section>
         </section>
+
+        <section id="screen-triage" hidden aria-label="Triage journey">
+          <nav class="triage-stepper" aria-label="Triage progress">
+            <div class="step" data-step="1"><span class="step-marker"><span class="step-number">1</span><svg class="icon step-check" aria-hidden="true"><use href="#icon-check"></use></svg></span><span class="step-label"><strong data-copy="stepPatient">Patient</strong><span data-copy="stepPatientHi">Who is this for?</span></span></div>
+            <div class="step" data-step="2"><span class="step-marker"><span class="step-number">2</span><svg class="icon step-check" aria-hidden="true"><use href="#icon-check"></use></svg></span><span class="step-label"><strong data-copy="stepBody">Body map</strong><span data-copy="stepBodyHi">Point to a place</span></span></div>
+            <div class="step" data-step="3"><span class="step-marker"><span class="step-number">3</span><svg class="icon step-check" aria-hidden="true"><use href="#icon-check"></use></svg></span><span class="step-label"><strong data-copy="stepCounter">Matched counter</strong><span data-copy="stepCounterHi">Where to go</span></span></div>
+            <div class="step" data-step="4"><span class="step-marker"><span class="step-number">4</span><svg class="icon step-check" aria-hidden="true"><use href="#icon-check"></use></svg></span><span class="step-label"><strong data-copy="stepHospital">Hospital & wait</strong><span data-copy="stepHospitalHi">Choose honestly</span></span></div>
+            <div class="step" data-step="5"><span class="step-marker"><span class="step-number">5</span><svg class="icon step-check" aria-hidden="true"><use href="#icon-check"></use></svg></span><span class="step-label"><strong data-copy="stepSlip">Specimen slip</strong><span data-copy="stepSlipHi">Keep your copy</span></span></div>
+          </nav>
 
         <div id="question-content" hidden>
         <p class="eyebrow" data-copy="eyebrow">A simpler way to reach the right OPD counter</p>
@@ -678,7 +800,7 @@
         <section class="field-group" aria-labelledby="complaint-label">
           <span class="field-label" id="complaint-label" data-copy="complaintLabel">What is bothering you?</span>
           <div class="complaint-box">
-            <button class="voice-button" type="button" id="voice-button" aria-label="Speak your complaint" aria-pressed="false"><span aria-hidden="true">🎙</span> <span id="voice-label">Speak</span></button>
+            <button class="voice-button" type="button" id="voice-button" aria-label="Speak your complaint" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#icon-mic"></use></svg> <span id="voice-label">Speak</span></button>
             <textarea id="complaint" rows="3" aria-labelledby="complaint-label" data-copy-placeholder="placeholder" placeholder="seene mein dard, kal raat se"></textarea>
             <button class="large-button" type="button" id="body-map-button"><span data-copy="bodyMapButton">Point at the body map</span></button>
           </div>
@@ -695,7 +817,6 @@
         </div>
         <p class="status" id="status" aria-live="polite"></p>
         <div class="session-note" id="session-note">
-          <span class="tag">Observed</span>
           <span data-copy="captured">Your words are ready for the next step. Nothing has been sent or booked.</span>
         </div>
         </div>
@@ -705,11 +826,11 @@
           <p class="eyebrow" data-copy="mapEyebrow">No reading needed</p>
           <h1 id="body-map-title" tabindex="-1" data-copy="mapTitle">Point to where it hurts</h1>
           <p class="map-note" data-copy="mapNote">Tap the place that feels wrong.</p>
-          <p class="observed-words" id="typed-handoff" hidden><span class="tag">Observed</span> <span data-copy="mapWordsLabel">Your words:</span> <q id="typed-words"></q></p>
+          <p class="observed-words" id="typed-handoff" hidden><span data-copy="mapWordsLabel">Your words:</span> <q id="typed-words"></q></p>
 
           <div class="triage-workspace" aria-label="Interactive triage workspace">
             <section class="three-panel" aria-labelledby="triage-3d-title">
-              <p class="workspace-eyebrow"><span class="tag">Generated</span><span data-copy="triage3dEyebrow">3D body map</span></p>
+              <p class="workspace-eyebrow"><span data-copy="triage3dEyebrow">3D body map</span></p>
               <h2 id="triage-3d-title" data-copy="triage3dTitle">Point at a place</h2>
               <p class="workspace-note" data-copy="triage3dNote">Drag to rotate. Tap a glowing point. Nothing is decided here.</p>
               <div class="body-3d-stage" id="body-3d-stage">
@@ -730,7 +851,7 @@
               <p class="workspace-eyebrow"><span class="tag">Observed</span><span data-copy="workspaceEyebrow">Read-back workspace</span></p>
               <h2 data-copy="workspaceTitle">Your choices stay visible</h2>
               <div class="workspace-summary" id="workspace-summary"><strong data-copy="workspaceEmpty">Choose a glowing point or use the 2D map.</strong><span data-copy="workspaceAwaiting">The department result appears only after you see and confirm the read-back.</span></div>
-              <p class="workspace-privacy"><span class="tag">Rule</span><span data-copy="workspacePrivacy">One red flag is enough for Emergency. The model cannot clear a flag.</span></p>
+              <p class="workspace-privacy" data-copy="workspacePrivacy">One red flag is enough for Emergency. The route always keeps that safety signal.</p>
             </aside>
           </div>
 
@@ -739,14 +860,14 @@
               <summary id="no-location-title" data-copy="noLocationTitle">Nothing in one place?</summary>
               <p data-copy="noLocationNote">Choose this for a whole-body feeling or if you are not sure where it is.</p>
               <div class="no-location-grid" role="group" aria-labelledby="no-location-title">
-                <button class="no-location-button" type="button" data-no-location="fever" data-no-location-copy="noLocationFever" aria-label="Fever" aria-pressed="false"><span class="pictogram" aria-hidden="true">☀</span><span data-copy="noLocationFever">Fever</span></button>
-                <button class="no-location-button" type="button" data-no-location="weak" data-no-location-copy="noLocationWeak" aria-label="Weak all over" aria-pressed="false"><span class="pictogram" aria-hidden="true">〰</span><span data-copy="noLocationWeak">Weak all over</span></button>
-                <button class="no-location-button" type="button" data-no-location="unsure" data-no-location-copy="noLocationUnsure" aria-label="Not sure" aria-pressed="false"><span class="pictogram" aria-hidden="true">?</span><span data-copy="noLocationUnsure">Not sure</span></button>
+                <button class="no-location-button" type="button" data-no-location="fever" data-no-location-copy="noLocationFever" aria-label="Fever" aria-pressed="false"><svg class="icon icon--large pictogram" aria-hidden="true"><use href="#icon-fever"></use></svg><span data-copy="noLocationFever">Fever</span></button>
+                <button class="no-location-button" type="button" data-no-location="weak" data-no-location-copy="noLocationWeak" aria-label="Weak all over" aria-pressed="false"><svg class="icon icon--large pictogram" aria-hidden="true"><use href="#icon-breathing"></use></svg><span data-copy="noLocationWeak">Weak all over</span></button>
+                <button class="no-location-button" type="button" data-no-location="unsure" data-no-location-copy="noLocationUnsure" aria-label="Not sure" aria-pressed="false"><svg class="icon icon--large pictogram" aria-hidden="true"><use href="#icon-question"></use></svg><span data-copy="noLocationUnsure">Not sure</span></button>
               </div>
             </details>
 
             <div class="map-selection" id="map-selection" role="status" aria-live="polite" aria-atomic="true">
-              <span class="map-selection-icon" aria-hidden="true">⌖</span>
+          <span class="map-selection-icon" aria-hidden="true"><svg class="icon"><use href="#icon-pin"></use></svg></span>
               <span class="map-selection-copy">
                 <span class="map-selection-kicker" data-copy="selectionKicker">Selected place</span>
                 <strong class="map-selection-name" id="selected-region-name" data-copy="selectionEmpty">Point at a place</strong>
@@ -786,24 +907,24 @@
             </div>
             </div>
 
-            <p class="model-free-footnote"><span class="tag">Verified</span><span data-copy="modelFree">This body-map route sends nothing to an AI service.</span></p>
+            <p class="browser-processing-note" data-copy="browserProcessing">This body map stays in your browser. Nothing is sent to a server.</p>
 
             <div class="fallback-region-picker" aria-labelledby="fallback-region-title">
             <h2 id="fallback-region-title" data-copy="fallbackTitle">Or choose from a list</h2>
             <p data-copy="fallbackNote">Use this only if pointing is difficult.</p>
             <div class="region-list">
-              <button class="region-button" type="button" data-region="head" data-region-copy="regionHead" aria-label="Head" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionHead">Head</span></button>
-              <button class="region-button" type="button" data-region="face" data-region-copy="regionFace" aria-label="Face / jaw" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionFace">Face / jaw</span></button>
-              <button class="region-button" type="button" data-region="neck" data-region-copy="regionNeck" aria-label="Neck" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionNeck">Neck</span></button>
-              <button class="region-button" type="button" data-region="chest" data-region-copy="regionChest" aria-label="Chest" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionChest">Chest</span></button>
-              <button class="region-button" type="button" data-region="upper-abdomen" data-region-copy="regionUpperAbdomen" aria-label="Upper abdomen" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionUpperAbdomen">Upper abdomen</span></button>
-              <button class="region-button" type="button" data-region="lower-abdomen" data-region-copy="regionLowerAbdomen" aria-label="Lower abdomen" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionLowerAbdomen">Lower abdomen</span></button>
-              <button class="region-button" type="button" data-region="back" data-region-copy="regionBack" aria-label="Back — upper or lower" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionBack">Back — upper or lower</span></button>
-              <button class="region-button" type="button" data-region="arm" data-region-copy="regionArm" aria-label="Arm" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionArm">Arm</span></button>
-              <button class="region-button" type="button" data-region="hand" data-region-copy="regionHand" aria-label="Hand" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionHand">Hand</span></button>
-              <button class="region-button" type="button" data-region="leg" data-region-copy="regionLeg" aria-label="Leg" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionLeg">Leg</span></button>
-              <button class="region-button" type="button" data-region="foot" data-region-copy="regionFoot" aria-label="Foot" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionFoot">Foot</span></button>
-              <button class="region-button" type="button" data-region="general" data-region-copy="regionGeneral" aria-label="Whole body / general" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionGeneral">Whole body / general</span></button>
+              <button class="region-button" type="button" data-region="head" data-region-copy="regionHead" aria-label="Head" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionHead">Head</span></button>
+              <button class="region-button" type="button" data-region="face" data-region-copy="regionFace" aria-label="Face / jaw" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionFace">Face / jaw</span></button>
+              <button class="region-button" type="button" data-region="neck" data-region-copy="regionNeck" aria-label="Neck" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionNeck">Neck</span></button>
+              <button class="region-button" type="button" data-region="chest" data-region-copy="regionChest" aria-label="Chest" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionChest">Chest</span></button>
+              <button class="region-button" type="button" data-region="upper-abdomen" data-region-copy="regionUpperAbdomen" aria-label="Upper abdomen" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionUpperAbdomen">Upper abdomen</span></button>
+              <button class="region-button" type="button" data-region="lower-abdomen" data-region-copy="regionLowerAbdomen" aria-label="Lower abdomen" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionLowerAbdomen">Lower abdomen</span></button>
+              <button class="region-button" type="button" data-region="back" data-region-copy="regionBack" aria-label="Back — upper or lower" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionBack">Back — upper or lower</span></button>
+              <button class="region-button" type="button" data-region="arm" data-region-copy="regionArm" aria-label="Arm" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionArm">Arm</span></button>
+              <button class="region-button" type="button" data-region="hand" data-region-copy="regionHand" aria-label="Hand" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionHand">Hand</span></button>
+              <button class="region-button" type="button" data-region="leg" data-region-copy="regionLeg" aria-label="Leg" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionLeg">Leg</span></button>
+              <button class="region-button" type="button" data-region="foot" data-region-copy="regionFoot" aria-label="Foot" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionFoot">Foot</span></button>
+              <button class="region-button" type="button" data-region="general" data-region-copy="regionGeneral" aria-label="Whole body / general" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionGeneral">Whole body / general</span></button>
             </div>
             </div>
           </div>
@@ -812,23 +933,23 @@
             <h2 id="kind-title" tabindex="-1" data-copy="kindTitle">What kind of trouble?</h2>
             <p class="kind-question-note" data-copy="kindNote">Choose the picture that feels closest. You can change it.</p>
             <div class="kind-selection" id="kind-selection" role="status" aria-live="polite" aria-atomic="true">
-              <span class="map-selection-icon" aria-hidden="true">✦</span>
+              <span class="map-selection-icon" aria-hidden="true"><svg class="icon"><use href="#icon-pain"></use></svg></span>
               <span>
                 <strong class="kind-selection-name" id="selected-kind-name" data-copy="kindEmpty">Choose a kind</strong>
                 <span class="kind-selection-message" id="kind-selection-message" data-copy="kindHint">Your choice will appear here.</span>
               </span>
             </div>
             <div class="kind-grid" role="group" aria-labelledby="kind-title">
-              <button class="kind-button" type="button" data-kind="pain" data-kind-copy="kindPain" aria-label="Pain" aria-pressed="false"><span class="pictogram" aria-hidden="true">✦</span><span data-copy="kindPain">Pain</span></button>
-              <button class="kind-button" type="button" data-kind="fever" data-kind-copy="kindFever" aria-label="Fever or heat" aria-pressed="false"><span class="pictogram" aria-hidden="true">☀</span><span data-copy="kindFever">Fever or heat</span></button>
-              <button class="kind-button" type="button" data-kind="breathing" data-kind-copy="kindBreathing" aria-label="Breathing" aria-pressed="false"><span class="pictogram" aria-hidden="true">≋</span><span data-copy="kindBreathing">Breathing</span></button>
-              <button class="kind-button" type="button" data-kind="bleeding" data-kind-copy="kindBleeding" aria-label="Bleeding" aria-pressed="false"><span class="pictogram" aria-hidden="true">●</span><span data-copy="kindBleeding">Bleeding</span></button>
-              <button class="kind-button" type="button" data-kind="swelling" data-kind-copy="kindSwelling" aria-label="Swelling" aria-pressed="false"><span class="pictogram" aria-hidden="true">◉</span><span data-copy="kindSwelling">Swelling</span></button>
-              <button class="kind-button" type="button" data-kind="rash" data-kind-copy="kindRash" aria-label="Rash" aria-pressed="false"><span class="pictogram" aria-hidden="true">✣</span><span data-copy="kindRash">Rash</span></button>
-              <button class="kind-button" type="button" data-kind="injury" data-kind-copy="kindInjury" aria-label="Injury" aria-pressed="false"><span class="pictogram" aria-hidden="true">▰</span><span data-copy="kindInjury">Injury</span></button>
-              <button class="kind-button" type="button" data-kind="vomiting" data-kind-copy="kindVomiting" aria-label="Vomiting or stomach" aria-pressed="false"><span class="pictogram" aria-hidden="true">◌</span><span data-copy="kindVomiting">Vomiting or stomach</span></button>
-              <button class="kind-button" type="button" data-kind="dizziness" data-kind-copy="kindDizziness" aria-label="Dizziness" aria-pressed="false"><span class="pictogram" aria-hidden="true">⟳</span><span data-copy="kindDizziness">Dizziness</span></button>
-              <button class="kind-button" type="button" data-kind="low" data-kind-copy="kindLow" aria-label="Feeling low" aria-pressed="false"><span class="pictogram" aria-hidden="true">☁</span><span data-copy="kindLow">Feeling low</span></button>
+              <button class="kind-button" type="button" data-kind="pain" data-kind-copy="kindPain" aria-label="Pain" aria-pressed="false"><svg class="icon icon--large pictogram" aria-hidden="true"><use href="#icon-pain"></use></svg><span data-copy="kindPain">Pain</span></button>
+              <button class="kind-button" type="button" data-kind="fever" data-kind-copy="kindFever" aria-label="Fever or heat" aria-pressed="false"><svg class="icon icon--large pictogram" aria-hidden="true"><use href="#icon-fever"></use></svg><span data-copy="kindFever">Fever or heat</span></button>
+              <button class="kind-button" type="button" data-kind="breathing" data-kind-copy="kindBreathing" aria-label="Breathing" aria-pressed="false"><svg class="icon icon--large pictogram" aria-hidden="true"><use href="#icon-breathing"></use></svg><span data-copy="kindBreathing">Breathing</span></button>
+              <button class="kind-button" type="button" data-kind="bleeding" data-kind-copy="kindBleeding" aria-label="Bleeding" aria-pressed="false"><svg class="icon icon--large pictogram" aria-hidden="true"><use href="#icon-drop"></use></svg><span data-copy="kindBleeding">Bleeding</span></button>
+              <button class="kind-button" type="button" data-kind="swelling" data-kind-copy="kindSwelling" aria-label="Swelling" aria-pressed="false"><svg class="icon icon--large pictogram" aria-hidden="true"><use href="#icon-swelling"></use></svg><span data-copy="kindSwelling">Swelling</span></button>
+              <button class="kind-button" type="button" data-kind="rash" data-kind-copy="kindRash" aria-label="Rash" aria-pressed="false"><svg class="icon icon--large pictogram" aria-hidden="true"><use href="#icon-rash"></use></svg><span data-copy="kindRash">Rash</span></button>
+              <button class="kind-button" type="button" data-kind="injury" data-kind-copy="kindInjury" aria-label="Injury" aria-pressed="false"><svg class="icon icon--large pictogram" aria-hidden="true"><use href="#icon-injury"></use></svg><span data-copy="kindInjury">Injury</span></button>
+              <button class="kind-button" type="button" data-kind="vomiting" data-kind-copy="kindVomiting" aria-label="Vomiting or stomach" aria-pressed="false"><svg class="icon icon--large pictogram" aria-hidden="true"><use href="#icon-stomach"></use></svg><span data-copy="kindVomiting">Vomiting or stomach</span></button>
+              <button class="kind-button" type="button" data-kind="dizziness" data-kind-copy="kindDizziness" aria-label="Dizziness" aria-pressed="false"><svg class="icon icon--large pictogram" aria-hidden="true"><use href="#icon-dizzy"></use></svg><span data-copy="kindDizziness">Dizziness</span></button>
+              <button class="kind-button" type="button" data-kind="low" data-kind-copy="kindLow" aria-label="Feeling low" aria-pressed="false"><svg class="icon icon--large pictogram" aria-hidden="true"><use href="#icon-cloud"></use></svg><span data-copy="kindLow">Feeling low</span></button>
             </div>
             <p class="status" id="kind-status" aria-live="polite"></p>
           </section>
@@ -870,7 +991,7 @@
           <p class="eyebrow" data-copy="reviewEyebrow">Screen 2 · Read-back</p>
           <h1 id="review-title" tabindex="-1" data-copy="reviewTitle">This is what I understood</h1>
           <p class="screen-note" data-copy="reviewNote">Check these details. Nothing is decided until you confirm.</p>
-          <p class="model-free-note"><span data-copy="sliceNoModel">No model was used in this slice. These details come from your selections.</span></p>
+          <p class="browser-processing-note" data-copy="browserProcessingReview">These details were prepared in this browser from the choices you can see below.</p>
 
           <div class="observed-words-card" id="readback-words" hidden>
             <span class="tag">Observed</span><span data-copy="readbackWordsLabel">Your words:</span>
@@ -878,12 +999,12 @@
           </div>
 
           <div class="chip-grid" id="complaint-chips" aria-label="Editable complaint details">
-            <button class="readback-chip" type="button" data-edit-field="region"><span class="tag">Observed</span><span class="chip-label" data-copy="chipRegion">Place</span><strong class="chip-value" id="chip-region"></strong></button>
-            <button class="readback-chip" type="button" data-edit-field="kind"><span class="tag">Observed</span><span class="chip-label" data-copy="chipKind">Kind of trouble</span><strong class="chip-value" id="chip-kind"></strong></button>
-            <button class="readback-chip" type="button" data-edit-field="duration"><span class="tag">Observed</span><span class="chip-label" data-copy="chipDuration">How long</span><strong class="chip-value" id="chip-duration"></strong></button>
-            <button class="readback-chip" type="button" data-edit-field="severity"><span class="tag">Observed</span><span class="chip-label" data-copy="chipSeverity">Severe now</span><strong class="chip-value" id="chip-severity"></strong></button>
-            <button class="readback-chip" type="button" data-edit-field="who_for"><span class="tag">Observed</span><span class="chip-label" data-copy="chipWho">For</span><strong class="chip-value" id="chip-who"></strong></button>
-            <button class="readback-chip" type="button" data-edit-field="age_band"><span class="tag">Observed</span><span class="chip-label" data-copy="chipAge">Age band</span><strong class="chip-value" id="chip-age"></strong></button>
+            <button class="readback-chip" type="button" data-edit-field="region"><span class="chip-label" data-copy="chipRegion">Place</span><strong class="chip-value" id="chip-region"></strong></button>
+            <button class="readback-chip" type="button" data-edit-field="kind"><span class="chip-label" data-copy="chipKind">Kind of trouble</span><strong class="chip-value" id="chip-kind"></strong></button>
+            <button class="readback-chip" type="button" data-edit-field="duration"><span class="chip-label" data-copy="chipDuration">How long</span><strong class="chip-value" id="chip-duration"></strong></button>
+            <button class="readback-chip" type="button" data-edit-field="severity"><span class="chip-label" data-copy="chipSeverity">Severe now</span><strong class="chip-value" id="chip-severity"></strong></button>
+            <button class="readback-chip" type="button" data-edit-field="who_for"><span class="chip-label" data-copy="chipWho">For</span><strong class="chip-value" id="chip-who"></strong></button>
+            <button class="readback-chip" type="button" data-edit-field="age_band"><span class="chip-label" data-copy="chipAge">Age band</span><strong class="chip-value" id="chip-age"></strong></button>
           </div>
 
           <div class="readback-editor" id="readback-editor" hidden>
@@ -892,7 +1013,7 @@
             <div class="editor-controls" id="editor-controls"></div>
           </div>
 
-          <div class="unclear-note" id="unclear-note" hidden><span class="tag">Observed</span><span data-copy="unclearLabel">I did not understand:</span> <span id="unclear-value"></span></div>
+          <div class="unclear-note" id="unclear-note" hidden><span data-copy="unclearLabel">I did not understand:</span> <span id="unclear-value"></span></div>
           <p class="confirm-note" data-copy="confirmNote">Your answers stay in this browser for this session. Confirm only when they look right.</p>
           <div class="review-actions">
             <button class="large-button primary" type="button" id="confirm-button" data-copy="confirm">Confirm</button>
@@ -904,16 +1025,16 @@
         <section class="result-screen" id="result-screen" aria-labelledby="result-title" hidden>
           <div id="ordinary-result" hidden>
             <p class="result-kicker" data-copy="resultEyebrow">Screen 3 · Where to go</p>
-            <h1 id="result-title"><span data-copy="startAt">Start at</span> <span class="tag">Rule</span> <span id="result-department"></span></h1>
-            <p class="result-reason"><span class="tag">Rule</span><span id="result-reason"></span></p>
-            <p class="rule-line"><span class="tag">Rule</span><span data-copy="ruleFired">Routing rule:</span> <span class="rule-id" id="result-rule-id"></span></p>
+            <h1 id="result-title"><span data-copy="matchedCounter">Matched Counter:</span> <span id="result-department"></span></h1>
+            <p class="result-reason"><span id="result-reason"></span></p>
+            <p class="rule-line"><span data-copy="routeReference">Route reference:</span> <span class="rule-id" id="result-rule-id"></span></p>
             <a class="quiet-choice" href="#" id="choose-department" data-copy="chooseDepartment">Not right? Choose a department yourself.</a>
           </div>
           <div class="result-screen emergency-result" id="emergency-result" hidden>
             <p class="result-kicker" data-copy="emergencyEyebrow">Emergency guidance</p>
-            <h1 id="emergency-title"><span class="tag">Rule</span> <span data-copy="emergencyTitle">Go to the Emergency department now. Do not book an appointment.</span></h1>
-            <p class="result-reason"><span class="tag">Rule</span><span id="emergency-reason"></span></p>
-            <p class="rule-line"><span class="tag">Rule</span><span data-copy="ruleFired">Routing rule:</span> <span class="rule-id" id="emergency-rule-id"></span></p>
+            <h1 id="emergency-title"><span data-copy="emergencyTitle">Go to the Emergency department now. Do not book an appointment.</span></h1>
+            <p class="result-reason"><span id="emergency-reason"></span></p>
+            <p class="rule-line"><span data-copy="routeReference">Route reference:</span> <span class="rule-id" id="emergency-rule-id"></span></p>
             <p class="not-diagnosis" data-copy="notDiagnosis">This is not a diagnosis.</p>
             <div class="emergency-hospital" id="emergency-hospital" aria-live="polite"></div>
           </div>
@@ -943,7 +1064,7 @@
               </select>
             </div>
             <p class="location-note" id="location-note"><span class="tag">Observed</span><span data-copy="locationChosenNote">Location is chosen by you, never taken from the phone. Travel figures below are simulated.</span></p>
-            <p class="sort-note"><span class="tag">Rule</span><span data-copy="sortNote">Sorted by seen soonest: slot start + simulated wait. Ties use travel time, then hospital name.</span></p>
+            <p class="sort-note"><span data-copy="sortNote">Sorted by earliest estimated consultation time, then travel time, then hospital name.</span></p>
             <div class="hospital-list" id="hospital-list" aria-live="polite"></div>
           </section>
 
@@ -980,20 +1101,26 @@
             <h2 id="slip-heading" data-copy="slipTitle">Your specimen slip</h2>
             <p class="booking-panel-note" data-copy="slipNote">Keep this for the counter. It is a mock slip, not a booking.</p>
             <article class="slip" id="slip-card" aria-label="Specimen appointment slip">
-              <h3 class="slip-title">राहत · Raahat</h3>
+              <div class="slip-header">
+                <div class="slip-header-copy"><h3 class="slip-title">राहत · Raahat</h3><span class="slip-subtitle" data-copy="slipSubtitle">Public Hospital OPD Specimen Slip</span></div>
+                <div class="slip-token"><small><span class="tag">Simulated</span><span data-copy="slipTokenLabel">Mock token</span></small><span id="slip-token">#OPD-2026-4802</span></div>
+              </div>
               <p class="slip-watermark">SPECIMEN — NOT A REAL APPOINTMENT</p>
+              <p class="slip-time-summary"><span data-copy="slipTimeSummary">Slot</span> <span id="slip-time-summary"></span></p>
               <dl class="slip-grid">
                 <div class="slip-field"><dt data-copy="slipPatient">Patient</dt><dd id="slip-patient"></dd></div>
                 <div class="slip-field"><dt data-copy="slipDepartment">Department</dt><dd id="slip-department"></dd></div>
                 <div class="slip-field"><dt data-copy="slipHospital">Hospital</dt><dd id="slip-hospital"></dd></div>
+                <div class="slip-field slip-field--wide"><dt data-copy="slipAddress">Hospital address</dt><dd id="slip-address"></dd></div>
                 <div class="slip-field"><dt data-copy="slipSlot">Slot</dt><dd id="slip-slot"></dd></div>
-                <div class="slip-field"><dt data-copy="slipSeenBy">Honest wait</dt><dd id="slip-seen-by"></dd></div>
+                <div class="slip-field"><dt data-copy="slipSeenBy">Estimated consultation</dt><dd id="slip-seen-by"></dd></div>
+                <div class="slip-field"><dt data-copy="slipToken">Token</dt><dd id="slip-token-detail"></dd></div>
                 <div class="slip-field"><dt data-copy="slipAppointmentId">Appointment ID</dt><dd id="slip-appointment-id"></dd></div>
                 <div class="slip-field"><dt data-copy="slipUhid">UHID</dt><dd id="slip-uhid"></dd></div>
               </dl>
               <p class="patient-report"><span class="tag">Observed</span><span data-copy="patientSaid">Patient reports:</span> <span id="slip-report"></span></p>
               <p class="rights-card"><span class="tag">Verified</span><span data-copy="rightsCard">If you are turned away with this slip — note the appointment ID, raise a grievance at pgportal.gov.in, or file an RTI asking why a valid online appointment was not honoured.</span></p>
-              <div class="qr-wrap"><div class="qr-code" role="img" aria-label="Simulated sample QR code"></div><p class="qr-copy"><strong><span class="tag">Simulated</span><span data-copy="qrTitle">Sample QR container</span></strong><span data-copy="qrNote">This pattern is decorative. It does not open a real appointment.</span></p></div>
+              <div class="qr-wrap"><svg class="barcode-code" viewBox="0 0 64 64" role="img" aria-label="Simulated security barcode"><defs><pattern id="security-grid" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 0h3v3H0zM5 5h3v3H5z" fill="currentColor"/><path d="M5 0h1v3H5zM0 5h1v3H0z" fill="currentColor" opacity=".45"/></pattern></defs><rect width="64" height="64" fill="url(#security-grid)"/><path d="M8 8h16v16H8zM12 12h8v8h-8zM40 8h16v16H40zM44 12h8v8h-8zM8 40h16v16H8zM12 44h8v8h-8zM38 38h5v5h-5zM48 38h8v8h-8zM38 49h5v7h-5zM48 49h8v7h-8z" fill="currentColor"/></svg><p class="qr-copy"><strong><span class="tag">Simulated</span><span data-copy="qrTitle">Sample security pattern</span></strong><span data-copy="qrNote">This pattern is decorative. It does not open a real appointment.</span></p></div>
             </article>
             <div class="slip-actions">
               <button class="large-button primary" type="button" id="print-slip" data-copy="printSlip">Print slip</button>
@@ -1001,6 +1128,7 @@
             </div>
             <p class="print-only" data-copy="printFooter">SPECIMEN — NOT A REAL APPOINTMENT · independent prototype · mock data.</p>
           </section>
+        </section>
         </section>
 
         <section class="honesty-screen" id="honesty-screen" aria-labelledby="honesty-title" hidden>
@@ -1028,7 +1156,7 @@
               <li class="honesty-limit"><span class="tag">Simulated</span><span data-copy="limitMock">Every hospital, slot, wait, queue position, appointment ID and UHID is mock.</span></li>
               <li class="honesty-limit"><span class="tag">Rule</span><span data-copy="limitRules">The department mapping is a small hand-written rule file, not a clinical protocol reviewed by any medical body.</span></li>
               <li class="honesty-limit"><span class="tag">Rule</span><span data-copy="limitAdvice">This is not medical advice.</span></li>
-              <li class="honesty-limit"><span class="tag">Rule</span><span data-copy="limitModel">To read this in your own words we send this sentence to an AI service. Tap the body map instead if you would rather not.</span></li>
+              <li class="honesty-limit"><span class="tag">Rule</span><span data-copy="modelBoundary">Your words are handled in this browser for this prototype. The body-map route keeps the complaint on this device.</span></li>
             </ul>
           </section>
 
@@ -1065,7 +1193,7 @@
 
       const copy = {
         en: {
-          landingKicker: "A calmer front door to public hospitals", landingTitle: "Government Hospital Appointments, Without the Confusion.", landingSubtitle: "ORS asks which department you need. A sick person only knows where it hurts. Tell us your symptoms in your own words, voice, or tap the body map — we'll guide you to the right OPD counter with honest wait times.", modelDisclosure: "To read this in your own words we send this sentence to an AI service. Tap the body map instead if you would rather not.", startTriage: "Start Triage", learnMore: "See how it works", privacyBadge: "100% Client-Side Privacy", noIdBadge: "No Aadhaar/OTP Required to Explore", accessBadge: "Accessible for Non-Literate Citizens", quickStartTitle: "Start with what you know", quickStartNote: "No account. No department guessing. Try a sample or type one sentence.", entryRouteLabel: "How would you like to describe it?", entrySpeak: "Speak", entryType: "Type", entryMap: "Body map", landingPlaceholder: "e.g. chest pain, since this morning", exampleBreathing: "chest pain + breathlessness", continueFromCard: "Continue to read-back", whyLink: "Why Raahat?", orsLink: "ORS vs Raahat", faqLink: "FAQs", whyTitle: "A little more dignity at the counter.", whyNote: "Raahat starts with the citizen's words, not a medical vocabulary test. The person stays in control before anything is routed.", journeyOneTitle: "Describe in your voice or tap the map", journeyOneNote: "Speak, type, or use a flat body map. Every route creates the same reviewable complaint.", journeyTwoTitle: "Verified hospital & honest queue wait", journeyTwoNote: "See public hospital facts, then see simulated token throughput and when people are usually seen.", journeyThreeTitle: "Print specimen slip with citizen rights", journeyThreeNote: "A clearly marked mock slip keeps the next step legible and carries a grievance route.", comparisonTitle: "How Raahat rethinks ORS", comparisonNote: "ORS is a useful appointment system. Raahat addresses the moment before it: when a citizen does not know the right counter.", comparisonQuestion: "The front door question", orsEra: "2015 · NIC digitised counter", raahatEra: "2026 · citizen-first triage", comparisonDepartment: "Finding a department", orsDepartment: "Department guessing", raahatDepartment: "Zero-Knowledge Triage — start with where it hurts", comparisonWait: "Knowing the real wait", orsWait: "Phantom slot time", raahatWait: "Honest Queue Wait — slot + simulated seen-time", comparisonAuth: "Getting started", orsAuth: "Front-door distorted CAPTCHA", raahatAuth: "Late-stage 1-tap Auth — only when making a specimen slip", comparisonAccess: "Describing the problem", orsAccess: "Text Forms", raahatAccess: "2D Visual Body Map + speak + type", networkTitle: "Delhi hospital network live status", networkNote: "Hospital names, addresses and departments are public facts. Availability and token throughput are simulated for this prototype.", faqTitle: "Questions citizens and judges ask", faqNote: "Plain answers about safety, access, privacy and what this prototype can really do.", faqSafetyQ: "Is this triage safe?", faqSafetyA: "Raahat does not diagnose. Code applies a small published rule file after you see and confirm the complaint. When a red flag is present, one flag is enough to route to Emergency.", faqRedFlagQ: "What happens when there is an Emergency red flag?", faqRedFlagA: "The result says to go to Emergency now and not book an appointment. The rule ID is shown, and the nearest simulated emergency-capable hospital in your chosen locality is displayed.", faqAccessQ: "Can someone who cannot read use it?", faqAccessA: "Yes. Complaint entry has three equal routes: speak, type, or tap the labelled 2D body map. Large buttons, keyboard focus and screen-reader labels are built into the flow.", faqPrivacyQ: "What happens to my data?", faqPrivacyA: "This prototype keeps the complaint in the browser for this session and never stores it server-side. Typed words are sent to no service in the body-map route; free-text model reading is disclosed before use.", faqWaitQ: "How is the wait time calculated?", faqWaitA: "It is simulated as slot start plus a simulated wait. Hospitals are sorted by estimated seen-time, then travel time, then name. It is not live queue data.", faqOrsQ: "How is Raahat different from ORS?", faqOrsA: "ORS begins by asking you to choose a hospital and department. Raahat helps a citizen structure their own words first, then shows an honest simulated queue view. It does not connect to ORS.", faqAbdmQ: "Will this connect to ABDM?", faqAbdmA: "No. ABDM, Aadhaar, ABHA, UHID, OTP and government systems are outside this prototype. Any future integration would need explicit consent, security review and a real public-service partnership.", qrTitle: "Sample QR container", qrNote: "This pattern is decorative. It does not open a real appointment.", emergencyHospitalTitle: "Nearest Emergency-capable hospital in your chosen locality", emergencyHospitalNote: "Go now. This hospital fact is verified; travel is simulated.",
+          landingKicker: "A calmer front door to public hospitals", landingTitle: "Government Hospital Appointments, Without the Confusion.", landingSubtitle: "ORS asks which department you need. A sick person only knows where it hurts. Tell us your symptoms in your own words, voice, or tap the body map — we'll guide you to the right OPD counter with honest wait times.", modelDisclosure: "Your words are evaluated securely inside this browser to guide you to the right counter. Nothing is sent to a server.", startTriage: "Start Triage", learnMore: "See how it works", privacyBadge: "100% Client-Side Privacy", noIdBadge: "No Aadhaar/OTP Required to Explore", accessBadge: "Accessible for Non-Literate Citizens", quickStartTitle: "Start with what you know", quickStartNote: "No account. No department guessing. Try a sample or type one sentence.", entryRouteLabel: "How would you like to describe it?", entrySpeak: "Speak", entryType: "Type", entryMap: "Body map", landingPlaceholder: "e.g. chest pain, since this morning", exampleBreathing: "chest pain + breathlessness", continueFromCard: "Continue to read-back", whyLink: "Why Raahat?", orsLink: "ORS vs Raahat", faqLink: "FAQs", whyTitle: "A little more dignity at the counter.", whyNote: "Raahat starts with the citizen's words, not a medical vocabulary test. The person stays in control before anything is routed.", journeyOneTitle: "Describe in your voice or tap the map", journeyOneNote: "Speak, type, or use a flat body map. Every route creates the same reviewable complaint.", journeyTwoTitle: "Verified hospital & honest queue wait", journeyTwoNote: "See public hospital facts, then see simulated token throughput and when people are usually seen.", journeyThreeTitle: "Print specimen slip with citizen rights", journeyThreeNote: "A clearly marked mock slip keeps the next step legible and carries a grievance route.", comparisonTitle: "How Raahat rethinks ORS", comparisonNote: "ORS is a useful appointment system. Raahat addresses the moment before it: when a citizen does not know the right counter.", comparisonQuestion: "The front door question", orsEra: "2015 · NIC digitised counter", raahatEra: "2026 · citizen-first triage", comparisonDepartment: "Finding a department", orsDepartment: "Department guessing", raahatDepartment: "Start with where it hurts, not a department name", comparisonWait: "Knowing the real wait", orsWait: "Slot time without a seen-time estimate", raahatWait: "Estimated seen-time from slot + simulated throughput", comparisonAuth: "Getting started", orsAuth: "Front-door distorted CAPTCHA", raahatAuth: "Late-stage 1-tap Auth — only when making a specimen slip", comparisonAccess: "Describing the problem", orsAccess: "Text Forms", raahatAccess: "2D Visual Body Map + speak + type", networkTitle: "Delhi hospital network live status", networkNote: "Hospital names, addresses and departments are public facts. Availability and token throughput are simulated for this prototype.", faqTitle: "Questions citizens and judges ask", faqNote: "Plain answers about safety, access, privacy and what this prototype can really do.", faqSafetyQ: "Is this triage safe?", faqSafetyA: "Raahat does not diagnose. Code applies a small published rule file after you see and confirm the complaint. When a red flag is present, one flag is enough to route to Emergency.", faqRedFlagQ: "What happens when there is an Emergency red flag?", faqRedFlagA: "The result says to go to Emergency now and not book an appointment. The rule ID is shown, and the nearest simulated emergency-capable hospital in your chosen locality is displayed.", faqAccessQ: "Can someone who cannot read use it?", faqAccessA: "Yes. Complaint entry has three equal routes: speak, type, or tap the labelled 2D body map. Large buttons, keyboard focus and screen-reader labels are built into the flow.", faqPrivacyQ: "What happens to my data?", faqPrivacyA: "This prototype keeps the complaint in the browser for this session and never stores it server-side. Typed words are sent to no service in the body-map route; typed words stay in this browser for this session.", faqWaitQ: "How is the wait time calculated?", faqWaitA: "It is simulated as slot start plus a simulated wait. Hospitals are sorted by estimated seen-time, then travel time, then name. It is not live queue data.", faqOrsQ: "How is Raahat different from ORS?", faqOrsA: "ORS begins by asking you to choose a hospital and department. Raahat helps a citizen structure their own words first, then shows an honest simulated queue view. It does not connect to ORS.", faqAbdmQ: "Will this connect to ABDM?", faqAbdmA: "No. ABDM, Aadhaar, ABHA, UHID, OTP and government systems are outside this prototype. Any future integration would need explicit consent, security review and a real public-service partnership.", qrTitle: "Sample QR container", qrNote: "This pattern is decorative. It does not open a real appointment.", emergencyHospitalTitle: "Nearest Emergency-capable hospital in your chosen locality", emergencyHospitalNote: "Go now. This hospital fact is verified; travel is simulated.",
           eyebrow: "A simpler way to reach the right OPD counter", title: "What's wrong?",
           note: "Tell us in your own words. You can speak, type, or point to the body map.",
           bookingFor: "Booking for:", myself: "Myself", someoneElse: "Someone else", whoLabel: "Who is it for?",
@@ -1075,12 +1203,12 @@
           exampleChest: "chest pain", exampleFever: "fever", exampleWeakness: "weakness on one side", continue: "Continue",
           bodyMapButton: "Point at the body map", captured: "Your words are ready for the next step. Nothing has been sent or booked.", needHelp: "Need a person?",
           backToQuestion: "← Back", mapEyebrow: "No reading needed", mapTitle: "Point to where it hurts",
-          mapNote: "Tap the place that feels wrong.", mapWordsLabel: "Your words:", modelFree: "This body-map route sends nothing to an AI service.", noLocationTitle: "Nothing in one place?", noLocationNote: "Choose this for a whole-body feeling or if you are not sure where it is.", noLocationFever: "Fever", noLocationWeak: "Weak all over", noLocationUnsure: "Not sure", selectionKicker: "Selected place", selectionEmpty: "Point at a place", selectionHint: "The place you point to will appear here.", selectionChosen: "Selected. Now choose the kind of trouble.", selectionNone: "No one place", figureHint: "Tap the part that feels wrong.", backHint: "Tap anywhere on the upper or lower back.", fallbackTitle: "Or choose from a list", fallbackNote: "Use this only if pointing is difficult.", front: "Front", back: "Back",
+          mapNote: "Tap the place that feels wrong.", mapWordsLabel: "Your words:", browserProcessing: "This body map stays in your browser. Nothing is sent to a server.", noLocationTitle: "Nothing in one place?", noLocationNote: "Choose this for a whole-body feeling or if you are not sure where it is.", noLocationFever: "Fever", noLocationWeak: "Weak all over", noLocationUnsure: "Not sure", selectionKicker: "Selected place", selectionEmpty: "Point at a place", selectionHint: "The place you point to will appear here.", selectionChosen: "Selected. Now choose the kind of trouble.", selectionNone: "No one place", figureHint: "Tap the part that feels wrong.", backHint: "Tap anywhere on the upper or lower back.", fallbackTitle: "Or choose from a list", fallbackNote: "Use this only if pointing is difficult.", front: "Front", back: "Back",
           regionHead: "Head", regionFace: "Face / jaw", regionNeck: "Neck", regionChest: "Chest", regionUpperAbdomen: "Upper abdomen", regionLowerAbdomen: "Lower abdomen", regionBack: "Back — upper or lower", regionArm: "Arm", regionHand: "Hand", regionLeg: "Leg", regionFoot: "Foot", regionGeneral: "Whole body / general", frontView: "Front view", backView: "Back view", resetView: "Reset view",
           kindTitle: "What kind of trouble?", kindNote: "Choose the picture that feels closest. You can change it.", kindEmpty: "Choose a kind", kindHint: "Your choice will appear here.", kindChosen: "Selected. Now add the two quick details.", kindPain: "Pain", kindFever: "Fever or heat", kindBreathing: "Breathing", kindBleeding: "Bleeding", kindSwelling: "Swelling", kindRash: "Rash", kindInjury: "Injury", kindVomiting: "Vomiting or stomach", kindDizziness: "Dizziness", kindLow: "Feeling low", followupTitle: "A little more", durationLabel: "How long?", durationNow: "Just now", durationToday: "Today", durationDays: "A few days", durationLonger: "A while", durationUnsure: "Not sure", severityLabel: "Is it severe right now?", severityNo: "No", severityYes: "Yes", severityUnsure: "Not sure", mapContinue: "Continue", mapIncomplete: "Choose a kind, how long, and whether it is severe right now.", mapReady: "Your description is ready to review.", mapReadyNote: "Nothing has been sent, decided, or booked.", reviewMap: "Review this",
-          reviewEyebrow: "Screen 2 · Read-back", reviewTitle: "This is what I understood", reviewNote: "Check these details. Nothing is decided until you confirm.", sliceNoModel: "This small browser reader used your selections. Nothing was sent to a service.", readbackWordsLabel: "Your words:", chipRegion: "Place", chipKind: "Kind of trouble", chipDuration: "How long", chipSeverity: "Severe now", chipWho: "For", chipAge: "Age band", editTitle: "Change a detail", editNote: "Choose a new answer below. Your read-back will update.", unclearLabel: "I did not understand:", confirmNote: "Your answers stay in this browser for this session. Confirm only when they look right.", confirm: "Confirm", changeSomething: "Change something", resultEyebrow: "Screen 3 · Where to go", startAt: "Start at", ruleFired: "Routing rule:", chooseDepartment: "Not right? Choose a department yourself.", emergencyEyebrow: "Emergency guidance", emergencyTitle: "Go to the Emergency department now. Do not book an appointment.", notDiagnosis: "This is not a diagnosis.", deptPaediatrics: "Paediatrics", deptCardiology: "Cardiology", deptNeurology: "Neurology", deptGastroenterology: "Gastroenterology", deptOrthopaedics: "Orthopaedics", deptDermatology: "Dermatology", deptDental: "Dental", deptGeneralMedicine: "General Medicine", deptChoose: "Choose a department yourself",
+          reviewEyebrow: "Screen 2 · Read-back", reviewTitle: "This is what I understood", reviewNote: "Check these details. Nothing is decided until you confirm.", browserProcessingReview: "These details were prepared in this browser from the choices you can see below.", readbackWordsLabel: "Your words:", chipRegion: "Place", chipKind: "Kind of trouble", chipDuration: "How long", chipSeverity: "Severe now", chipWho: "For", chipAge: "Age band", editTitle: "Change a detail", editNote: "Choose a new answer below. Your read-back will update.", unclearLabel: "I did not understand:", confirmNote: "Your answers stay in this browser for this session. Confirm only when they look right.", confirm: "Confirm", changeSomething: "Change something", resultEyebrow: "Screen 3 · Where to go", matchedCounter: "Matched Counter:", routeReference: "Route reference:", chooseDepartment: "Not right? Choose a department yourself.", emergencyEyebrow: "Emergency guidance", emergencyTitle: "Go to the Emergency department now. Do not book an appointment.", notDiagnosis: "This is not a diagnosis.", deptPaediatrics: "Paediatrics", deptCardiology: "Cardiology", deptNeurology: "Neurology", deptGastroenterology: "Gastroenterology", deptOrthopaedics: "Orthopaedics", deptDermatology: "Dermatology", deptDental: "Dental", deptGeneralMedicine: "General Medicine", deptChoose: "Choose a department yourself",
           backToDepartment: "← Back to department", bookingEyebrow: "Your result · choose what happens next", bookingTitle: "Find a hospital, honestly", bookingNote: "This is one clear result: choose a locality, choose a hospital, then decide whether to make a specimen slip.", findHospital: "See hospitals and slots", whereTitle: "Where would you like to go?", whereNote: "Choose a locality. We do not read your device location.", localityLabel: "Your chosen locality", locationChosenNote: "Location is chosen by you, never taken from the phone. Travel figures below are simulated.", sortNote: "Sorted by seen soonest: slot start + simulated wait. Ties use travel time, then hospital name.", verifiedSource: "Hospital name and department", checked: "Checked", distance: "Travel", nextSlot: "Next open slot", seenBy: "Usually seen by", calendarOpens: "Calendar opens", chooseHospital: "Choose this hospital", chosenHospital: "Hospital chosen", chosenHospitalNote: "Now choose the visit type below.", noHospitals: "No verified hospital is listed for this department in this demo locality.", carryTitle: "What to carry", carryNote: "Choose the list that matches this visit.", firstVisit: "First visit", returningVisit: "Returning", firstId: "a photo ID", phoneOtp: "the phone that receives the one-time passcode", returningUhid: "your UHID from an earlier visit", previousSlip: "your previous appointment slip", feeLine: "OPD registration fee", toSignIn: "Continue to sign in", signInTitle: "Sign in to hold this slot", signInNote: "Identity is needed only now, when making the specimen slip. Nothing real is submitted.", credentialsNote: "These demo credentials are printed here so you never have to use a real account.", usernameLabel: "Username", passwordLabel: "Password", usernameInputLabel: "Demo username", passwordInputLabel: "Demo password", humanCheck: "Tap once: I am a person", signInButton: "Sign in and show the slip", humanCheckNeeded: "Tap the human check first.", slipTitle: "Your specimen slip", slipNote: "Keep this for the counter. It is a mock slip, not a booking.", slipPatient: "Patient", slipDepartment: "Department", slipHospital: "Hospital", slipSlot: "Slot", slipSeenBy: "Honest wait", slipAppointmentId: "Appointment ID", slipUhid: "UHID", patientSaid: "Patient reports:", rightsCard: "If you are turned away with this slip — note the appointment ID, raise a grievance at pgportal.gov.in, or file an RTI asking why a valid online appointment was not honoured.", printSlip: "Print slip", downloadSlip: "Download slip", printFooter: "SPECIMEN — NOT A REAL APPOINTMENT · independent prototype · mock data.", signedIn: "Mock sign-in complete. Your specimen slip is below.", credentialsMismatch: "Use the printed demo credentials above.", feeAmount: "₹10",
-          honestyBack: "← Back", honestyEyebrow: "Screen 7 · Honesty", honestyTitle: "What is real and what is not", honestyIntro: "Start with what ORS already does well. Then see exactly what this independent prototype does — and does not — claim.", honestyLink: "What is real?", orsCreditTitle: "What ORS already does well", orsCreditNote: "These are ORS features we are crediting, not claiming to have invented.", honestySourceLabel: "Source · checked 26 Aug 2026:", orsLabReports: "Lab reports", orsBlood: "Blood availability", orsCancellation: "Cancellation by appointment ID", orsAbha: "ABHA integration", orsApp: "An official mobile app · Nextgen ORS", limitsTitle: "What this prototype does not claim", limitNoOrs: "Nothing here connects to ORS. No appointment is real.", limitMock: "Every hospital, slot, wait, queue position, appointment ID and UHID is mock.", limitRules: "The department mapping is a small hand-written rule file, not a clinical protocol reviewed by any medical body.", limitAdvice: "This is not medical advice.", limitModel: "To read this in your own words we send this sentence to an AI service. Tap the body map instead if you would rather not.", buildTitle: "What built this prototype", buildInterfaceTitle: "HTML and CSS", buildInterface: "the mobile-first screens, large controls, focus states and print view.", buildRoutingTitle: "JavaScript + routing-rules.js", buildRouting: "structured complaint to department and urgency, with the rule ID shown.", buildHospitalTitle: "hospital-data.js", buildHospital: "verified hospital names and mock slots, waits, travel figures and identifiers.", buildCodexTitle: "Codex", buildCodex: "wrote the application code, tests and verification pass.", talkToPerson: "Talk to a person", prototype: "independent prototype · mock data · not affiliated with any government body.",
+          honestyBack: "← Back", honestyEyebrow: "Screen 7 · Honesty", honestyTitle: "What is real and what is not", honestyIntro: "Start with what ORS already does well. Then see exactly what this independent prototype does — and does not — claim.", honestyLink: "What is real?", orsCreditTitle: "What ORS already does well", orsCreditNote: "These are ORS features we are crediting, not claiming to have invented.", honestySourceLabel: "Source · checked 26 Aug 2026:", orsLabReports: "Lab reports", orsBlood: "Blood availability", orsCancellation: "Cancellation by appointment ID", orsAbha: "ABHA integration", orsApp: "An official mobile app · Nextgen ORS", limitsTitle: "What this prototype does not claim", limitNoOrs: "Nothing here connects to ORS. No appointment is real.", limitMock: "Every hospital, slot, wait, queue position, appointment ID and UHID is mock.", limitRules: "The department mapping is a small hand-written rule file, not a clinical protocol reviewed by any medical body.", limitAdvice: "This is not medical advice.", limitModel: "Your words are handled in this browser for this prototype. Nothing is sent to a server.", buildTitle: "What built this prototype", buildInterfaceTitle: "HTML and CSS", buildInterface: "the mobile-first screens, large controls, focus states and print view.", buildRoutingTitle: "JavaScript + routing-rules.js", buildRouting: "structured complaint to department and urgency, with the rule ID shown.", buildHospitalTitle: "hospital-data.js", buildHospital: "verified hospital names and mock slots, waits, travel figures and identifiers.", buildCodexTitle: "Codex", buildCodex: "wrote the application code, tests and verification pass.", talkToPerson: "Talk to a person", prototype: "independent prototype · mock data · not affiliated with any government body.",
           voiceStart: "Speak your complaint", voiceStop: "Stop listening", voiceLabel: "Speak", voiceLabelStop: "Stop", voiceUnsupported: "Voice input is not available here. You can type or use the body map.",
           voiceListening: "Listening… say it in your own words.", voiceDone: "I heard your words. You can edit them before continuing.",
           continueHint: "Add a few words, or choose an example, so we can carry on.", someoneHint: "Choose who this is for and an age band.", notChosen: "Not chosen", notAsked: "Not asked", chooseDepartmentScreen: "Choose a department yourself",
@@ -1096,10 +1224,10 @@
           exampleChest: "सीने में दर्द", exampleFever: "बुखार", exampleWeakness: "एक तरफ़ कमज़ोरी", continue: "आगे बढ़ें",
           bodyMapButton: "शरीर के नक्शे पर चुनें", captured: "आपके शब्द अगले कदम के लिए तैयार हैं। कुछ भेजा या बुक नहीं हुआ है।", needHelp: "किसी व्यक्ति से बात करें?",
           backToQuestion: "← वापस", mapEyebrow: "पढ़ने की ज़रूरत नहीं", mapTitle: "जहाँ तकलीफ़ है वहाँ चुनें",
-          mapNote: "जहाँ परेशानी है वहाँ चुनें।", mapWordsLabel: "आपके शब्द:", modelFree: "शरीर के नक्शे वाला रास्ता किसी एआई सेवा को कुछ नहीं भेजता।", noLocationTitle: "एक जगह पर परेशानी नहीं?", noLocationNote: "पूरे शरीर में परेशानी हो या जगह पता न हो तो इसे चुनें।", noLocationFever: "बुखार", noLocationWeak: "पूरे शरीर में कमज़ोरी", noLocationUnsure: "पता नहीं", selectionKicker: "चुनी हुई जगह", selectionEmpty: "किसी जगह पर चुनें", selectionHint: "आप जहाँ चुनेंगे, वह जगह यहाँ दिखेगी।", selectionChosen: "चुन लिया। अब परेशानी की किस्म चुनें।", selectionNone: "कोई एक जगह नहीं", figureHint: "जहाँ परेशानी है वहाँ चुनें।", backHint: "ऊपरी या निचली पीठ पर कहीं भी चुनें।", fallbackTitle: "या सूची में से चुनें", fallbackNote: "अगर नक्शे पर चुनना मुश्किल हो तभी इसका इस्तेमाल करें।", front: "सामने", back: "पीछे",
+          mapNote: "जहाँ परेशानी है वहाँ चुनें।", mapWordsLabel: "आपके शब्द:", browserProcessing: "शरीर का यह नक्शा इसी ब्राउज़र में चलता है। कुछ भी सर्वर पर नहीं भेजा जाता।", noLocationTitle: "एक जगह पर परेशानी नहीं?", noLocationNote: "पूरे शरीर में परेशानी हो या जगह पता न हो तो इसे चुनें।", noLocationFever: "बुखार", noLocationWeak: "पूरे शरीर में कमज़ोरी", noLocationUnsure: "पता नहीं", selectionKicker: "चुनी हुई जगह", selectionEmpty: "किसी जगह पर चुनें", selectionHint: "आप जहाँ चुनेंगे, वह जगह यहाँ दिखेगी।", selectionChosen: "चुन लिया। अब परेशानी की किस्म चुनें।", selectionNone: "कोई एक जगह नहीं", figureHint: "जहाँ परेशानी है वहाँ चुनें।", backHint: "ऊपरी या निचली पीठ पर कहीं भी चुनें।", fallbackTitle: "या सूची में से चुनें", fallbackNote: "अगर नक्शे पर चुनना मुश्किल हो तभी इसका इस्तेमाल करें।", front: "सामने", back: "पीछे",
           regionHead: "सिर", regionFace: "चेहरा / जबड़ा", regionNeck: "गर्दन", regionChest: "सीना", regionUpperAbdomen: "पेट का ऊपरी हिस्सा", regionLowerAbdomen: "पेट का निचला हिस्सा", regionBack: "पीठ — ऊपर या नीचे", regionArm: "बाँह", regionHand: "हाथ", regionLeg: "टाँग", regionFoot: "पैर", regionGeneral: "पूरा शरीर / सामान्य", frontView: "सामने से", backView: "पीछे से", resetView: "दृश्य रीसेट करें",
           kindTitle: "परेशानी किस तरह की है?", kindNote: "जो तस्वीर सबसे करीब लगे उसे चुनें। इसे बदल सकते हैं।", kindEmpty: "किस्म चुनें", kindHint: "आपकी पसंद यहाँ दिखेगी।", kindChosen: "चुन लिया। अब दो छोटी बातें बताइए।", kindPain: "दर्द", kindFever: "बुखार या गर्मी", kindBreathing: "साँस", kindBleeding: "खून आना", kindSwelling: "सूजन", kindRash: "दाने", kindInjury: "चोट", kindVomiting: "उल्टी या पेट", kindDizziness: "चक्कर", kindLow: "कमज़ोरी या मन उदास", followupTitle: "थोड़ा और बताइए", durationLabel: "कब से?", durationNow: "अभी", durationToday: "आज", durationDays: "कुछ दिन", durationLonger: "काफ़ी समय", durationUnsure: "पता नहीं", severityLabel: "क्या अभी बहुत तेज़ है?", severityNo: "नहीं", severityYes: "हाँ", severityUnsure: "पता नहीं", mapContinue: "आगे बढ़ें", mapIncomplete: "परेशानी की किस्म, कब से और अभी बहुत तेज़ है या नहीं चुनें।", mapReady: "आपका विवरण देखने के लिए तैयार है।", mapReadyNote: "कुछ भेजा, तय या बुक नहीं हुआ है।", reviewMap: "इसे देखें",
-          reviewEyebrow: "स्क्रीन 2 · दोबारा पढ़ें", reviewTitle: "हमने यह समझा", reviewNote: "इन जानकारियों को जाँचें। आपकी पुष्टि से पहले कुछ तय नहीं होगा।", sliceNoModel: "ब्राउज़र ने आपकी पसंद से यह विवरण बनाया। कुछ भी किसी सेवा को नहीं भेजा गया।", readbackWordsLabel: "आपके शब्द:", chipRegion: "जगह", chipKind: "परेशानी की किस्म", chipDuration: "कब से", chipSeverity: "अभी बहुत तेज़", chipWho: "किसके लिए", chipAge: "उम्र का समूह", editTitle: "एक जानकारी बदलें", editNote: "नीचे नया जवाब चुनें। दोबारा पढ़ा गया विवरण बदल जाएगा।", unclearLabel: "समझ नहीं आया:", confirmNote: "आपके जवाब इस ब्राउज़र में इसी सत्र तक रहेंगे। सही लगे तभी पुष्टि करें।", confirm: "पुष्टि करें", changeSomething: "कुछ बदलें", resultEyebrow: "स्क्रीन 3 · कहाँ जाएँ", startAt: "यहाँ जाएँ:", ruleFired: "रूटिंग नियम:", chooseDepartment: "सही नहीं? विभाग खुद चुनें।", emergencyEyebrow: "इमरजेंसी की सलाह", emergencyTitle: "अभी इमरजेंसी विभाग जाएँ। अपॉइंटमेंट बुक न करें।", notDiagnosis: "यह बीमारी का पता नहीं है।", deptPaediatrics: "बाल रोग विभाग", deptCardiology: "कार्डियोलॉजी", deptNeurology: "न्यूरोलॉजी", deptGastroenterology: "गैस्ट्रोएंटेरोलॉजी", deptOrthopaedics: "ऑर्थोपेडिक्स", deptDermatology: "त्वचा रोग विभाग", deptDental: "डेंटल", deptGeneralMedicine: "जनरल मेडिसिन", deptChoose: "विभाग खुद चुनें",
+          reviewEyebrow: "स्क्रीन 2 · दोबारा पढ़ें", reviewTitle: "हमने यह समझा", reviewNote: "इन जानकारियों को जाँचें। आपकी पुष्टि से पहले कुछ तय नहीं होगा।", browserProcessingReview: "नीचे दिख रहे आपके जवाबों से यह विवरण इसी ब्राउज़र में तैयार हुआ है।", readbackWordsLabel: "आपके शब्द:", chipRegion: "जगह", chipKind: "परेशानी की किस्म", chipDuration: "कब से", chipSeverity: "अभी बहुत तेज़", chipWho: "किसके लिए", chipAge: "उम्र का समूह", editTitle: "एक जानकारी बदलें", editNote: "नीचे नया जवाब चुनें। दोबारा पढ़ा गया विवरण बदल जाएगा।", unclearLabel: "समझ नहीं आया:", confirmNote: "आपके जवाब इस ब्राउज़र में इसी सत्र तक रहेंगे। सही लगे तभी पुष्टि करें।", confirm: "पुष्टि करें", changeSomething: "कुछ बदलें", resultEyebrow: "स्क्रीन 3 · कहाँ जाएँ", matchedCounter: "मिलान हुआ काउंटर:", routeReference: "रूट संदर्भ:", chooseDepartment: "सही नहीं? विभाग खुद चुनें।", emergencyEyebrow: "इमरजेंसी की सलाह", emergencyTitle: "अभी इमरजेंसी विभाग जाएँ। अपॉइंटमेंट बुक न करें।", notDiagnosis: "यह बीमारी का पता नहीं है।", deptPaediatrics: "बाल रोग विभाग", deptCardiology: "कार्डियोलॉजी", deptNeurology: "न्यूरोलॉजी", deptGastroenterology: "गैस्ट्रोएंटेरोलॉजी", deptOrthopaedics: "ऑर्थोपेडिक्स", deptDermatology: "त्वचा रोग विभाग", deptDental: "डेंटल", deptGeneralMedicine: "जनरल मेडिसिन", deptChoose: "विभाग खुद चुनें",
           backToDepartment: "← विभाग पर वापस जाएँ", bookingEyebrow: "आपका नतीजा · अगला कदम चुनें", bookingTitle: "ईमानदारी से अस्पताल चुनें", bookingNote: "एक ही साफ़ नतीजा: इलाका चुनें, अस्पताल चुनें, फिर नकली स्लिप बनाने का फैसला करें।", findHospital: "अस्पताल और स्लॉट देखें", whereTitle: "आप कहाँ जाना चाहेंगे?", whereNote: "इलाका चुनें। हम आपके फ़ोन की जगह नहीं पढ़ते।", localityLabel: "आपका चुना हुआ इलाका", locationChosenNote: "जगह आपने चुनी है, फ़ोन से नहीं ली गई। नीचे आने-जाने का समय नकली है।", sortNote: "जल्दी दिखने के हिसाब से क्रम: स्लॉट का समय + नकली इंतज़ार। बराबरी पर आने-जाने का समय, फिर अस्पताल का नाम।", verifiedSource: "अस्पताल का नाम और विभाग", checked: "जाँच की तारीख", distance: "यात्रा", nextSlot: "अगला खुला स्लॉट", seenBy: "आमतौर पर दिखेंगे", calendarOpens: "कैलेंडर खुलेगा", chooseHospital: "यह अस्पताल चुनें", chosenHospital: "अस्पताल चुना गया", chosenHospitalNote: "अब नीचे इस यात्रा का प्रकार चुनें।", noHospitals: "इस डेमो इलाके में इस विभाग के लिए कोई सत्यापित अस्पताल सूची में नहीं है।", carryTitle: "क्या साथ ले जाएँ", carryNote: "इस यात्रा के अनुसार सूची चुनें।", firstVisit: "पहली यात्रा", returningVisit: "फिर से आना", firstId: "फोटो पहचान पत्र", phoneOtp: "वह फ़ोन जिस पर वन-टाइम पासकोड आएगा", returningUhid: "पहले का यूएचआईडी", previousSlip: "पहली अपॉइंटमेंट की स्लिप", feeLine: "ओपीडी पंजीकरण शुल्क", toSignIn: "साइन इन करने के लिए आगे बढ़ें", signInTitle: "स्लॉट रखने के लिए साइन इन करें", signInNote: "पहचान की ज़रूरत सिर्फ़ अब है, नकली स्लिप बनाते समय। कुछ असली जमा नहीं होता।", credentialsNote: "डेमो क्रेडेंशियल यहाँ बड़े अक्षरों में हैं; असली खाता इस्तेमाल न करें।", usernameLabel: "यूज़रनेम", passwordLabel: "पासवर्ड", usernameInputLabel: "डेमो यूज़रनेम", passwordInputLabel: "डेमो पासवर्ड", humanCheck: "एक बार चुनें: मैं इंसान हूँ", signInButton: "साइन इन करें और स्लिप दिखाएँ", humanCheckNeeded: "पहले मानव-जाँच चुनें।", slipTitle: "आपकी नकली स्लिप", slipNote: "इसे काउंटर पर दिखाने के लिए रखें। यह नकली स्लिप है, बुकिंग नहीं।", slipPatient: "मरीज़", slipDepartment: "विभाग", slipHospital: "अस्पताल", slipSlot: "स्लॉट", slipSeenBy: "ईमानदार इंतज़ार", slipAppointmentId: "अपॉइंटमेंट आईडी", slipUhid: "यूएचआईडी", patientSaid: "मरीज़ ने बताया:", rightsCard: "अगर इस स्लिप के साथ आपको लौटा दिया जाए — अपॉइंटमेंट आईडी लिखें, pgportal.gov.in पर शिकायत करें, या पूछें कि मान्य ऑनलाइन अपॉइंटमेंट क्यों नहीं माना गया।", printSlip: "स्लिप प्रिंट करें", downloadSlip: "स्लिप डाउनलोड करें", printFooter: "नमूना — असली अपॉइंटमेंट नहीं · स्वतंत्र प्रोटोटाइप · नकली डेटा।", signedIn: "नकली साइन-इन पूरा हुआ। आपकी नकली स्लिप नीचे है।", credentialsMismatch: "ऊपर दिए डेमो क्रेडेंशियल इस्तेमाल करें।", feeAmount: "₹10",
           honestyBack: "← वापस", honestyEyebrow: "स्क्रीन 7 · ईमानदारी", honestyTitle: "क्या असली है और क्या नहीं", honestyIntro: "पहले जानिए कि ओआरएस क्या अच्छा करता है। फिर देखें कि यह स्वतंत्र प्रोटोटाइप क्या दावा करता है — और क्या नहीं।", honestyLink: "क्या असली है?", orsCreditTitle: "ओआरएस पहले से क्या अच्छा करता है", orsCreditNote: "ये ओआरएस की सुविधाएँ हैं; हम इन्हें अपना बनाया हुआ नहीं बता रहे हैं।", honestySourceLabel: "स्रोत · 26 अगस्त 2026 को जाँचा:", orsLabReports: "लैब रिपोर्ट", orsBlood: "खून की उपलब्धता", orsCancellation: "अपॉइंटमेंट आईडी से रद्द करना", orsAbha: "आभा एकीकरण", orsApp: "आधिकारिक मोबाइल ऐप · नेक्स्टजेन ओआरएस", limitsTitle: "यह प्रोटोटाइप क्या दावा नहीं करता", limitNoOrs: "यहाँ कुछ भी ओआरएस से नहीं जुड़ा है। कोई अपॉइंटमेंट असली नहीं है।", limitMock: "हर अस्पताल, स्लॉट, इंतज़ार, कतार की जगह, अपॉइंटमेंट आईडी और यूएचआईडी नकली है।", limitRules: "विभाग चुनने का तरीका एक छोटी, हाथ से लिखी नियम फ़ाइल है; यह क्लिनिकल प्रोटोकॉल नहीं है और किसी मेडिकल संस्था ने इसकी समीक्षा नहीं की है।", limitAdvice: "यह मेडिकल सलाह नहीं है।", limitModel: "आपकी बात अपने शब्दों में पढ़ने के लिए हम यह वाक्य एक एआई सेवा को भेजते हैं। अगर आप ऐसा नहीं चाहते तो शरीर का नक्शा चुनें।", buildTitle: "यह प्रोटोटाइप किससे बना", buildInterfaceTitle: "एचटीएमएल और सीएसएस", buildInterface: "मोबाइल स्क्रीन, बड़े कंट्रोल, फ़ोकस स्थिति और प्रिंट व्यू।", buildRoutingTitle: "जावास्क्रिप्ट + routing-rules.js", buildRouting: "आपकी संरचित शिकायत से विभाग और ज़रूरत की तात्कालिकता; नियम आईडी भी दिखती है।", buildHospitalTitle: "hospital-data.js", buildHospital: "सत्यापित अस्पताल नाम और नकली स्लॉट, इंतज़ार, यात्रा आँकड़े और आईडी।", buildCodexTitle: "Codex", buildCodex: "एप्लिकेशन कोड, टेस्ट और जाँच लिखने में मदद की।", talkToPerson: "किसी व्यक्ति से बात करें", prototype: "स्वतंत्र प्रोटोटाइप · नकली डेटा · किसी सरकारी संस्था से जुड़ा नहीं।",
           voiceStart: "अपनी परेशानी बोलें", voiceStop: "सुनना रोकें", voiceLabel: "बोलें", voiceLabelStop: "रोकें", voiceUnsupported: "यहाँ आवाज़ से लिखना उपलब्ध नहीं है। आप लिख सकते हैं या शरीर का नक्शा चुन सकते हैं।",
@@ -1119,7 +1247,7 @@
         helplinesLabel: "इमरजेंसी के लिए जल्दी डायल करें:", comparisonEmergency: "इमरजेंसी सुरक्षा", orsEmergency: "साधारण बुकिंग गंभीर इमरजेंसी छिपा सकती है", raahatEmergency: "एक रेड फ्लैग → अभी 24/7 इमरजेंसी", triageSpine: "रीढ़", triage3dEyebrow: "3D शरीर का नक्शा", triage3dTitle: "किसी जगह पर चुनें", triage3dNote: "घुमाने के लिए खींचें। चमकती जगह चुनें। यहाँ कुछ तय नहीं होता।", use2d: "आसान 2D नक्शा चुनें", use3d: "3D नक्शा दिखाएँ", workspaceUnsure: "जगह पता नहीं", workspaceEyebrow: "दोबारा पढ़ने की जगह", workspaceTitle: "आपकी पसंद सामने रहेगी", workspaceEmpty: "चमकती जगह या 2D नक्शा चुनें।", workspaceAwaiting: "विभाग का नतीजा आपकी पुष्टि के बाद ही दिखेगा।", workspacePrivacy: "एक रेड फ्लैग इमरजेंसी के लिए काफ़ी है। मॉडल फ्लैग हटा नहीं सकता।", map3dUnavailable: "इस डिवाइस पर 3D उपलब्ध नहीं है। आसान 2D नक्शा नीचे तैयार है।",
       });
       Object.assign(copy.en, {
-        faqSafetyQ: "Does Raahat give medical advice or clinical diagnoses?", faqSafetyA: "No. Raahat is administrative triage only. It structures your words and points you to an OPD counter; it does not diagnose or say that you are fine.", faqRedFlagQ: "How do deterministic Red Flags work?", faqRedFlagA: "Red Flags are code-level rules isolated from AI models. One marker is enough to route to Emergency now, and the model can never clear a flag.", faqAccessQ: "Can someone who cannot read use this platform?", faqAccessA: "Yes. Complaint entry has three equal routes: speak, type, or tap the labelled 3D/2D body map. Large buttons, keyboard focus and screen-reader labels are built into the flow.", faqPrivacyQ: "Is personal health data stored on a server?", faqPrivacyA: "No. This prototype keeps the complaint in the browser for this session and never stores it server-side. The body-map route sends nothing to an AI service.", faqWaitQ: "How are the honest wait times calculated?", faqWaitA: "They are simulated from historical OPD throughput plus a morning-rounds delay: slot start plus estimated wait. This is not live queue data.", faqOrsQ: "How is Raahat different from the government's ORS portal?", faqOrsA: "ORS begins by asking you to choose a hospital and department. Raahat helps a citizen structure their own words first, then shows an honest simulated queue view. It does not connect to ORS.", faqAbdmQ: "How can Raahat integrate with real government infrastructure?", faqAbdmA: "This prototype does not connect to government systems. A future production gateway could integrate with ABDM and e-Hospital HMIS APIs only with explicit consent, security review and a public-service partnership."
+        faqSafetyQ: "Does Raahat give medical advice or clinical diagnoses?", faqSafetyA: "No. Raahat is administrative triage only. It structures your words and points you to an OPD counter; it does not diagnose or say that you are fine.", faqRedFlagQ: "How do deterministic Red Flags work?", faqRedFlagA: "Red Flags are code-level safeguards. One marker is enough to route to Emergency now, and nothing can remove that safeguard.", faqAccessQ: "Can someone who cannot read use this platform?", faqAccessA: "Yes. Complaint entry has three equal routes: speak, type, or tap the labelled 3D/2D body map. Large buttons, keyboard focus and screen-reader labels are built into the flow.", faqPrivacyQ: "Is personal health data stored on a server?", faqPrivacyA: "No. This prototype keeps the complaint in the browser for this session and never stores it server-side. The body-map route keeps the complaint in this browser and sends nothing anywhere.", faqWaitQ: "How are the honest wait times calculated?", faqWaitA: "They are simulated from historical OPD throughput plus a morning-rounds delay: slot start plus estimated wait. This is not live queue data.", faqOrsQ: "How is Raahat different from the government's ORS portal?", faqOrsA: "ORS begins by asking you to choose a hospital and department. Raahat helps a citizen structure their own words first, then shows an honest simulated queue view. It does not connect to ORS.", faqAbdmQ: "How can Raahat integrate with real government infrastructure?", faqAbdmA: "This prototype does not connect to government systems. A future production gateway could integrate with ABDM and e-Hospital HMIS APIs only with explicit consent, security review and a public-service partnership."
       });
       Object.assign(copy.hi, {
         faqSafetyQ: "क्या राहत मेडिकल सलाह या बीमारी की पहचान करता है?", faqSafetyA: "नहीं। राहत केवल प्रशासनिक ट्रायेज है। यह आपकी बात को व्यवस्थित कर ओपीडी काउंटर तक पहुँचाता है; बीमारी की पहचान नहीं करता और यह नहीं कहता कि आप ठीक हैं।", faqRedFlagQ: "नियम से चलने वाले रेड फ्लैग कैसे काम करते हैं?", faqRedFlagA: "रेड फ्लैग एआई से अलग कोड के नियम हैं। एक निशान भी अभी इमरजेंसी भेजने के लिए काफ़ी है और मॉडल फ्लैग हटा नहीं सकता।", faqAccessQ: "क्या बिना पढ़े कोई इस प्लेटफ़ॉर्म का इस्तेमाल कर सकता है?", faqAccessA: "हाँ। परेशानी बताने के तीन बराबर रास्ते हैं: बोलना, लिखना या नाम वाले 3D/2D शरीर के नक्शे पर टैप करना।", faqPrivacyQ: "क्या मेरी निजी स्वास्थ्य जानकारी सर्वर पर सेव होती है?", faqPrivacyA: "नहीं। इस प्रोटोटाइप में परेशानी इसी ब्राउज़र में सत्र तक रहती है और सर्वर पर सेव नहीं होती। शरीर के नक्शे वाला रास्ता एआई सेवा को कुछ नहीं भेजता।", faqWaitQ: "ईमानदार इंतज़ार का समय कैसे निकाला जाता है?", faqWaitA: "यह नकली समय ओपीडी की पुरानी गति और सुबह के डॉक्टर राउंड से बनाया गया है: स्लॉट शुरू होने का समय और अनुमानित इंतज़ार। यह लाइव कतार नहीं है।", faqOrsQ: "राहत सरकारी ORS पोर्टल से कैसे अलग है?", faqOrsA: "ORS पहले अस्पताल और विभाग चुनने को कहता है। राहत पहले आपकी बात को व्यवस्थित करता है और फिर नकली कतार दिखाता है। यह ORS से जुड़ा नहीं है।", faqAbdmQ: "राहत असली सरकारी सिस्टम से कैसे जुड़ सकता है?", faqAbdmA: "यह प्रोटोटाइप सरकारी सिस्टम से नहीं जुड़ा है। भविष्य का प्रोडक्शन गेटवे साफ़ सहमति, सुरक्षा जाँच और सार्वजनिक सेवा साझेदारी के साथ ABDM और e-Hospital HMIS API से जुड़ सकता है।"
@@ -1134,8 +1262,22 @@
         comparisonKicker: "एक साफ़ शुरुआत", hospitalsKicker: "सत्यापित सार्वजनिक सूची", faqKicker: "सीधे सवालों के जवाब",
         ctaKicker: "अगला कदम आपका है", ctaTitle: "सही ओपीडी काउंटर ढूँढने के लिए तैयार?", ctaNote: "एक वाक्य, अपनी आवाज़ या शरीर के नक्शे पर एक जगह से शुरू करें। किसी भी रास्ते से पहले आप दोबारा पढ़ा गया विवरण देखकर पुष्टि करेंगे।",
       });
+      Object.assign(copy.en, {
+        processingLabel: "Client-side browser processing:", modelDisclosure: "Your words are evaluated securely inside this browser to guide you to the right counter. Nothing is sent to a server.", browserProcessing: "This body map stays in your browser. Nothing is sent to a server.", browserProcessingReview: "These details were prepared in this browser from the choices you can see below.", modelBoundary: "Your words are handled in this browser for this prototype. The body-map route keeps the complaint on this device.", faqPrivacyA: "Your complaint stays in this browser for this session. Nothing is stored on a server.", raahatDepartment: "Start with where it hurts; we will show the counter that matches your confirmed details.", raahatWait: "Estimated consultation time, based on the slot and simulated queue throughput.", orsWait: "Slot time only",
+        matchedCounter: "Matched Counter:", routeReference: "Route reference:", workspacePrivacy: "One red flag is enough for Emergency. The route always keeps that safety signal.", sortNote: "Sorted by earliest estimated consultation time, then travel time, then hospital name.",
+        slipSubtitle: "Public Hospital OPD Specimen Slip", slipTokenLabel: "Mock token", slipTimeSummary: "Appointment timing:", slipAddress: "Hospital address", slipToken: "Token", slipSeenBy: "Estimated consultation", rightsCard: "If a hospital registration counter refuses to honor this valid online token: note your Appointment ID, file a grievance at pgportal.gov.in, or cite the Citizen's Charter.", qrTitle: "Sample security pattern", themeDark: "Use dark theme", themeLight: "Use light theme",
+        stepPatient: "Patient", stepPatientHi: "Who is this for?", stepBody: "Body map", stepBodyHi: "Point to a place", stepCounter: "Matched counter", stepCounterHi: "Where to go?", stepHospital: "Hospital & wait", stepHospitalHi: "Choose honestly", stepSlip: "Specimen slip", stepSlipHi: "Keep your copy",
+      });
+      Object.assign(copy.hi, {
+        processingLabel: "ब्राउज़र में सुरक्षित स्थानीय प्रक्रिया:", modelDisclosure: "आपकी बात इसी ब्राउज़र में समझी जाती है ताकि आपको सही काउंटर तक पहुँचाया जा सके। कुछ भी सर्वर पर नहीं भेजा जाता।", browserProcessing: "शरीर का यह नक्शा इसी ब्राउज़र में चलता है। कुछ भी सर्वर पर नहीं भेजा जाता।", browserProcessingReview: "नीचे दिख रहे आपके जवाबों से यह विवरण इसी ब्राउज़र में तैयार हुआ है।", modelBoundary: "आपकी बात इस प्रोटोटाइप में इसी ब्राउज़र में संभाली जाती है। शरीर के नक्शे वाला रास्ता इसे इसी डिवाइस पर रखता है।", faqPrivacyA: "आपकी परेशानी इस सत्र में इसी ब्राउज़र में रहती है। सर्वर पर कुछ भी सेव नहीं होता।", raahatDepartment: "जहाँ परेशानी है वहाँ से शुरू करें; आपकी पुष्टि के बाद उसी से मेल खाता काउंटर दिखेगा।", raahatWait: "स्लॉट और नकली कतार की गति के आधार पर अनुमानित दिखने का समय।", orsWait: "सिर्फ स्लॉट का समय",
+        matchedCounter: "मिलान हुआ काउंटर:", routeReference: "रूट संदर्भ:", workspacePrivacy: "एक रेड फ्लैग इमरजेंसी के लिए काफ़ी है। यह सुरक्षा संकेत हमेशा साथ रहता है।", sortNote: "पहले अनुमानित दिखने के समय, फिर यात्रा के समय और फिर अस्पताल के नाम से क्रम।",
+        slipSubtitle: "सरकारी अस्पताल ओपीडी की नमूना स्लिप", slipTokenLabel: "नमूना टोकन", slipTimeSummary: "अपॉइंटमेंट का समय:", slipAddress: "अस्पताल का पता", slipToken: "टोकन", slipSeenBy: "अनुमानित दिखने का समय", rightsCard: "अगर अस्पताल का पंजीकरण काउंटर इस मान्य ऑनलाइन टोकन को मानने से इनकार करे: अपनी अपॉइंटमेंट आईडी लिखें, pgportal.gov.in पर शिकायत करें या सिटिज़न्स चार्टर का हवाला दें।", qrTitle: "नमूना सुरक्षा पैटर्न", themeDark: "डार्क थीम चुनें", themeLight: "लाइट थीम चुनें",
+        stepPatient: "मरीज़", stepPatientHi: "किसके लिए?", stepBody: "शरीर का नक्शा", stepBodyHi: "जगह चुनें", stepCounter: "मिलान हुआ काउंटर", stepCounterHi: "कहाँ जाएँ?", stepHospital: "अस्पताल और इंतज़ार", stepHospitalHi: "ईमानदारी से चुनें", stepSlip: "नमूना स्लिप", stepSlipHi: "अपनी प्रति रखें",
+      });
       const state = { language: "en", screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, listening: false, region: null, noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
       const text = (key) => copy[state.language][key];
+      const themeToggle = document.querySelector("#theme-toggle");
+      const triageScreen = document.querySelector("#screen-triage");
       const status = document.querySelector("#status");
       const complaint = document.querySelector("#complaint");
       const voiceButton = document.querySelector("#voice-button");
@@ -1268,7 +1410,7 @@
         }
         workspaceSummary.replaceChildren();
         const strong = document.createElement("strong");
-        strong.append(makeTag("Observed"), document.createTextNode(` ${state.region ? text(regionCopyKeys[state.region]) : text("selectionNone")}`));
+        strong.textContent = state.region ? text(regionCopyKeys[state.region]) : text("selectionNone");
         const note = document.createElement("span");
         note.textContent = state.kind ? text("kindChosen") : text("workspaceAwaiting");
         workspaceSummary.append(strong, note);
@@ -1293,17 +1435,9 @@
 
       function renderLanguage() {
         document.documentElement.lang = state.language === "hi" ? "hi" : "en";
-        const truthfulPrivacyCopy = state.language === "hi"
-          ? "यह प्रोटोटाइप आपकी बात को ब्राउज़र में स्थानीय नियमों से पढ़ता है। कुछ भी सर्वर पर नहीं भेजा जाता; अगर लिखना न चाहें तो शरीर का नक्शा चुनें।"
-          : "This prototype reads your words with local browser rules. Nothing is sent to a server; tap the body map if you would rather not type.";
-        const truthfulPrivacyNote = state.language === "hi"
-          ? "ब्राउज़र की छोटी नियम-सूची आपकी बात पढ़ती है; कोई वाक्य सर्वर पर नहीं भेजा जाता।"
-          : "A small browser rule reader handles this sentence; no sentence is sent to a server.";
         document.querySelectorAll("[data-copy]").forEach((element) => {
           const key = element.dataset.copy;
-          if (key === "modelDisclosure") element.textContent = truthfulPrivacyCopy;
-          else if (key === "limitModel" || key === "faqPrivacyA") element.textContent = truthfulPrivacyNote;
-          else if (copy[state.language][key]) element.textContent = text(key);
+          if (copy[state.language][key]) element.textContent = text(key);
         });
         document.querySelectorAll("[data-copy-placeholder]").forEach((element) => { element.placeholder = text(element.dataset.copyPlaceholder); });
         document.querySelectorAll("[data-language]").forEach((button) => { button.setAttribute("aria-pressed", String(button.dataset.language === state.language)); });
@@ -1315,6 +1449,7 @@
         renderKindSelection();
         renderMapMode();
         renderWorkspace();
+        renderTheme();
         bodyMap3d?.setLanguage?.(state.language);
         if (!reviewScreen.hidden && state.complaint) {
           renderReadback();
@@ -1325,6 +1460,23 @@
         if (!status.dataset.persistent) status.textContent = "";
       }
 
+      function renderTheme() {
+        const dark = document.documentElement.dataset.theme === "dark";
+        themeToggle?.setAttribute("aria-label", text(dark ? "themeLight" : "themeDark"));
+        themeToggle?.setAttribute("title", text(dark ? "themeLight" : "themeDark"));
+        if (themeToggle) themeToggle.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#icon-${dark ? "sun" : "moon"}"></use></svg>`;
+      }
+
+      function renderStepper(activeStep = 1) {
+        document.querySelectorAll("[data-step]").forEach((step) => {
+          const stepNumber = Number(step.dataset.step);
+          step.classList.toggle("is-current", stepNumber === activeStep);
+          step.classList.toggle("is-complete", stepNumber < activeStep);
+          if (stepNumber === activeStep) step.setAttribute("aria-current", "step");
+          else step.removeAttribute("aria-current");
+        });
+      }
+
       function showStatus(message, alert = false) {
         status.textContent = message;
         status.dataset.persistent = "true";
@@ -1333,6 +1485,13 @@
 
       document.querySelectorAll("[data-language]").forEach((button) => {
         button.addEventListener("click", () => { state.language = button.dataset.language; status.dataset.persistent = ""; renderLanguage(); });
+      });
+      themeToggle?.addEventListener("click", () => {
+        const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        if (nextTheme === "dark") document.documentElement.dataset.theme = "dark";
+        else document.documentElement.removeAttribute("data-theme");
+        try { localStorage.setItem("raahat-theme", nextTheme); } catch { /* Keep working when storage is unavailable. */ }
+        renderTheme();
       });
 
       document.querySelectorAll("[data-booking]").forEach((button) => {
@@ -1410,7 +1569,9 @@
 
       function showBodyMap() {
         hideAllScreens();
+        triageScreen.hidden = false;
         state.screen = "body-map";
+        renderStepper(2);
         questionContent.hidden = true;
         bodyMapScreen.hidden = false;
         renderMapMode();
@@ -1560,6 +1721,8 @@
       function showReadback(complaintData = null) {
         state.complaint = complaintData || makeComplaint(false);
         state.screen = "review";
+        triageScreen.hidden = false;
+        renderStepper(2);
         bodyMapScreen.hidden = true;
         questionContent.hidden = true;
         resultScreen.hidden = true;
@@ -1623,7 +1786,7 @@
       }
 
       function honestWaitText(availability) {
-        return `Slot ${formatClock(availability.slot)} · Estimated doctor consultation: ${formatClock(availability.seenAt)} (Avg. ${availability.waitMinutes} min wait). Tokens ${availability.tokenRange} seen during morning rounds.`;
+        return `Estimated Doctor Consultation Time: ~${formatClock(availability.seenAt)} (Accounting for morning doctor rounds and token throughput)`;
       }
 
       function labelledValue(tagLabel, value) {
@@ -1673,6 +1836,9 @@
           const address = document.createElement("p");
           address.className = "hospital-address";
           address.append(makeTag("Verified"), document.createTextNode(hospital.address));
+          const access = document.createElement("p");
+          access.className = "hospital-access";
+          access.append(makeTag("Verified"), document.createTextNode(hospital.transit));
 
           const facts = document.createElement("dl");
           facts.className = "hospital-facts";
@@ -1702,7 +1868,7 @@
             renderAppointment();
             moveTo(carryPanel);
           });
-          card.append(title, address, verified, facts, honestWait, sortKey, choose);
+          card.append(title, address, access, verified, facts, honestWait, sortKey, choose);
           hospitalList.append(card);
         });
       }
@@ -1738,8 +1904,11 @@
         document.querySelector("#slip-patient").replaceChildren(makeTag("Observed"), document.createTextNode(` ${labelFor("who_for", current.who_for)}`));
         document.querySelector("#slip-department").replaceChildren(makeTag("Rule"), document.createTextNode(` ${departmentCopyKeys[department] ? text(departmentCopyKeys[department]) : department}`));
         document.querySelector("#slip-hospital").replaceChildren(makeTag("Verified"), document.createTextNode(` ${hospital.shortName}`));
-        document.querySelector("#slip-slot").replaceChildren(makeTag("Simulated"), document.createTextNode(` Slot ${formatClock(availability.slot)}`));
-        document.querySelector("#slip-seen-by").replaceChildren(makeTag("Simulated"), document.createTextNode(honestWaitText(availability)));
+        document.querySelector("#slip-address").replaceChildren(makeTag("Verified"), document.createTextNode(` ${hospital.address}`));
+        document.querySelector("#slip-slot").replaceChildren(makeTag("Simulated"), document.createTextNode(` ${formatClock(availability.slot)}`));
+        document.querySelector("#slip-seen-by").replaceChildren(makeTag("Simulated"), document.createTextNode(` ~${formatClock(availability.seenAt)}`));
+        document.querySelector("#slip-token-detail").replaceChildren(makeTag("Simulated"), document.createTextNode(" #OPD-2026-4802"));
+        document.querySelector("#slip-time-summary").replaceChildren(makeTag("Simulated"), document.createTextNode(` ${formatClock(availability.slot)} · Seen ~${formatClock(availability.seenAt)}`));
         document.querySelector("#slip-appointment-id").replaceChildren(makeTag("Simulated"), document.createTextNode(" APPT-DEMO-4802"));
         document.querySelector("#slip-uhid").replaceChildren(makeTag("Simulated"), document.createTextNode(" UHID-MOCK-7281"));
         document.querySelector("#slip-report").textContent = report;
@@ -1757,6 +1926,7 @@
         humanCheck.setAttribute("aria-pressed", String(state.humanChecked));
         signInButton.disabled = !state.humanChecked;
         slipPanel.hidden = !state.signedIn;
+        if (state.signedIn) renderStepper(5);
         if (state.signedIn) renderSlip();
       }
 
@@ -1788,6 +1958,7 @@
 
       function hideAllScreens() {
         landingScreen.hidden = true;
+        triageScreen.hidden = true;
         questionContent.hidden = true;
         bodyMapScreen.hidden = true;
         reviewScreen.hidden = true;
@@ -1800,14 +1971,18 @@
 
       function showQuestion() {
         hideAllScreens();
+        triageScreen.hidden = false;
         state.screen = "question";
+        renderStepper(1);
         questionContent.hidden = false;
         setActiveNav("triage");
         complaint.focus({ preventScroll: true });
+        window.scrollTo({ top: Math.max(0, triageScreen.offsetTop - 8), behavior: "auto" });
       }
 
       function showLanding(targetId = "front-door", viewId = "home") {
         hideAllScreens();
+        triageScreen.hidden = true;
         state.screen = "landing";
         landingScreen.hidden = false;
         setLandingView(viewId);
@@ -1820,6 +1995,7 @@
       function showHonesty() {
         if (state.screen !== "honesty") state.previousScreen = state.screen;
         hideAllScreens();
+        triageScreen.hidden = true;
         state.screen = "honesty";
         honestyScreen.hidden = false;
         setActiveNav("honesty");
@@ -1868,7 +2044,9 @@
         }
         if (previousScreen === "appointment") {
           hideAllScreens();
+          triageScreen.hidden = false;
           state.screen = "appointment";
+          renderStepper(state.signedIn ? 5 : 4);
           questionContent.hidden = true;
           bodyMapScreen.hidden = true;
           appointmentScreen.hidden = false;
@@ -1905,6 +2083,8 @@
         const result = routeComplaint(state.complaint);
         state.routeResult = result;
         state.screen = "result";
+        triageScreen.hidden = false;
+        renderStepper(3);
         reviewScreen.hidden = true;
         appointmentScreen.hidden = true;
         honestyScreen.hidden = true;
@@ -1932,6 +2112,8 @@
         if (result.urgency === "emergency") return;
         state.routeResult = result;
         state.screen = "appointment";
+        triageScreen.hidden = false;
+        renderStepper(state.signedIn ? 5 : 4);
         resultScreen.hidden = true;
         appointmentScreen.hidden = false;
         renderAppointment();
@@ -1980,6 +2162,7 @@
           return;
         }
         state.signedIn = true;
+        renderStepper(5);
         signInStatus.textContent = text("signedIn");
         signInStatus.removeAttribute("role");
         renderAppointment();

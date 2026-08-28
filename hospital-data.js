@@ -34,6 +34,7 @@ export const HOSPITALS = Object.freeze([
     sourceUrl: "https://www.aiims.edu/index.php/en/departments-and-centers/departments",
     sourceLabel: "AIIMS departments list",
     hasEmergency: true,
+    transit: "Metro: AIIMS Metro (Yellow Line) · Gate: Gate 2 (Aurobindo Marg) · 24/7 Emergency Counter",
   },
   {
     id: "safdarjung-new-delhi",
@@ -47,6 +48,7 @@ export const HOSPITALS = Object.freeze([
     sourceUrl: "https://www.vmmc-sjh.mohfw.gov.in/medical-departments",
     sourceLabel: "Safdarjung medical departments",
     hasEmergency: true,
+    transit: "Metro: AIIMS / Dilli Haat INA · Emergency: Super Speciality Block Ring Road",
   },
   {
     id: "rml-new-delhi",
@@ -60,6 +62,7 @@ export const HOSPITALS = Object.freeze([
     sourceUrl: "https://rmlh.nic.in/",
     sourceLabel: "RML Hospital public department map",
     hasEmergency: true,
+    transit: "Metro: Shivaji Stadium (Airport Line) / Patel Chowk · Gate: BKS Marg Entry",
   },
 ]);
 

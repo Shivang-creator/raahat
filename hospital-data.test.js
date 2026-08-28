@@ -8,6 +8,7 @@ test("the demo has three verified hospitals for Cardiology", () => {
   assert.ok(hospitals.every((hospital) => hospital.departments.includes("Cardiology")));
   assert.ok(hospitals.every((hospital) => hospital.sourceUrl.startsWith("https://")));
   assert.ok(hospitals.every((hospital) => hospital.name && hospital.address));
+  assert.ok(hospitals.every((hospital) => hospital.transit && hospital.transit.includes("Metro:")));
 });
 
 test("hospitals are sorted by seen time, then travel time, then name", () => {
