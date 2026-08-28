@@ -4,30 +4,34 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Raahat helps you find the right OPD counter, starting with where it hurts." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <title>राहत · Raahat</title>
     <style>
       :root {
         color-scheme: light;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         background: var(--background);
         color: #17241f;
-        --ink: #17241f;
-        --muted: #52635b;
-        --line: #d2dbd5;
+        --ink: #0f172a;
+        --muted: #475569;
+        --line: #d7e1da;
         --paper: #ffffff;
-        --background: #fbf9f4;
-        --accent: #17634f;
-        --accent-dark: #0f4335;
-        --accent-soft: #e3efe8;
+        --background: #f8faf9;
+        --accent: #166534;
+        --accent-dark: #14532d;
+        --accent-soft: #dcfce7;
         --marigold: #d97706;
-        --emergency: #b42318;
+        --emergency: #dc2626;
         --emergency-red: var(--emergency);
-        --emergency-soft: #fef3f2;
-        --focus: #e49b27;
+        --emergency-soft: #fef2f2;
+        --focus: #eab308;
       }
 
       * { box-sizing: border-box; }
-      body { min-width: 320px; min-height: 100vh; margin: 0; background: var(--background); font-size: 18px; }
+      body { min-width: 320px; min-height: 100vh; margin: 0; background: var(--background); font-size: 18px; line-height: 1.6; }
+      :lang(hi), [lang="hi"] { font-family: "Noto Sans Devanagari", "Plus Jakarta Sans", system-ui, sans-serif; }
       button, textarea, a { font: inherit; }
       button, a { -webkit-tap-highlight-color: transparent; }
       button { cursor: pointer; }
@@ -49,7 +53,7 @@
 
       main { flex: 1; display: flex; flex-direction: column; padding: 2rem 0 2.5rem; }
       .eyebrow { margin: 0 0 0.65rem; color: var(--muted); font-size: 1rem; font-weight: 750; letter-spacing: 0.02em; }
-      h1 { max-width: 18ch; margin: 0; color: var(--ink); font-size: clamp(2rem, 8.5vw, 3.25rem); font-weight: 780; letter-spacing: -0.055em; line-height: 1.08; }
+      h1 { max-width: 18ch; margin: 0; color: var(--ink); font-size: 3.25rem; font-weight: 780; letter-spacing: -0.03em; line-height: 1.08; }
       .question-note { max-width: 36rem; margin: 1rem 0 0; color: var(--muted); font-size: 1.125rem; line-height: 1.55; }
       .field-group { margin-top: 2rem; }
       .field-label { display: block; margin-bottom: 0.75rem; color: var(--ink); font-size: 1.125rem; font-weight: 750; }
@@ -310,7 +314,7 @@
       .hero-copy { max-width: 45rem; }
       .hero-kicker { display: inline-flex; align-items: center; gap: 0.45rem; margin: 0 0 1rem; color: var(--accent-dark); font-size: 1rem; font-weight: 850; letter-spacing: 0.04em; text-transform: uppercase; }
       .hero-kicker::before { display: inline-block; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--marigold); content: ""; }
-      .landing-hero h1 { max-width: 14ch; font-size: clamp(2.65rem, 7vw, 5.2rem); line-height: 0.98; }
+      .landing-hero h1 { max-width: 14ch; font-size: 4.2rem; line-height: 0.98; }
       .hero-subtitle { max-width: 43rem; margin: 1.4rem 0 0; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.55; }
       .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
       .hero-actions .large-button { flex: 0 1 auto; }
@@ -335,7 +339,7 @@
       .hero-card .large-button { width: 100%; margin-top: 0.8rem; }
       .landing-section { scroll-margin-top: 6rem; }
       .section-heading { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem; }
-      .section-heading h2 { max-width: 20ch; margin: 0; color: var(--ink); font-size: clamp(2rem, 5vw, 3.45rem); letter-spacing: -0.055em; line-height: 1; }
+      .section-heading h2 { max-width: 20ch; margin: 0; color: var(--ink); font-size: 2.75rem; letter-spacing: -0.03em; line-height: 1.08; }
       .section-heading p { max-width: 34rem; margin: 0; color: var(--muted); font-size: 1.05rem; line-height: 1.5; }
       .comparison-wrap { margin-top: 1.5rem; overflow-x: auto; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
       .comparison-table { width: 100%; min-width: 42rem; border-collapse: collapse; }
@@ -387,15 +391,10 @@
       #body-3d-canvas { display: block; width: 100%; height: 30rem; touch-action: none; cursor: grab; }
       #body-3d-canvas:active { cursor: grabbing; }
       .body-3d-stage::after { position: absolute; right: 1rem; bottom: 0.75rem; padding: 0.35rem 0.55rem; border-radius: 999px; background: rgba(255,255,255,0.78); color: var(--muted); content: "360°"; font-size: 0.8rem; font-weight: 850; pointer-events: none; }
-      .anatomy-node { position: absolute; z-index: 2; transform: translate(-50%, -50%); }
-      .anatomy-node button { min-height: 3.5rem; padding: 0.35rem 0.65rem 0.35rem 1.55rem; border: 2px solid var(--marigold); border-radius: 999px; background: rgba(255,255,255,0.94); color: var(--ink); font-size: 0.92rem; font-weight: 850; box-shadow: 0 0 0 0.3rem rgba(217,119,6,0.14); }
-      .anatomy-node button::before { position: absolute; left: 0.55rem; top: 50%; width: 0.58rem; height: 0.58rem; border-radius: 50%; background: var(--marigold); box-shadow: 0 0 0 0.28rem rgba(217,119,6,0.2); content: ""; transform: translateY(-50%); }
-      .anatomy-node button:hover, .anatomy-node button:focus-visible { background: var(--marigold); color: #fff; }
-      .node-head { top: 13%; left: 73%; }
-      .node-chest { top: 35%; left: 82%; }
-      .node-abdomen { top: 49%; left: 79%; }
-      .node-back { top: 27%; left: 20%; }
-      .node-limbs { top: 69%; left: 77%; }
+      .three-tooltip { position: absolute; z-index: 4; max-width: 13rem; min-height: 2.75rem; padding: 0.55rem 0.75rem; border: 2px solid var(--marigold); border-radius: 0.75rem; background: rgba(255,255,255,0.96); color: var(--ink); font-size: 0.95rem; font-weight: 800; line-height: 1.25; box-shadow: 0 0.5rem 1.25rem rgba(15,23,42,0.14); pointer-events: none; }
+      .view-controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem; margin-top: 0.8rem; }
+      .view-control { min-height: 3.5rem; padding: 0.5rem 0.4rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 0.95rem; font-weight: 800; }
+      .view-control:hover { border-color: var(--marigold); }
       .workspace-controls { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 0.8rem; }
       .workspace-controls .large-button { flex: 1 1 14rem; min-height: 3.5rem; }
       .workspace-unsure { display: inline-flex; min-height: 3.5rem; align-items: center; gap: 0.5rem; padding: 0.65rem 0.85rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 1rem; font-weight: 750; }
@@ -426,14 +425,14 @@
         .site-nav a { white-space: nowrap; }
       }
       @media (max-width: 640px) {
+        h1 { font-size: 2.45rem; }
+        .landing-hero h1 { font-size: 3rem; }
+        .section-heading h2 { font-size: 2.25rem; }
         .body-3d-stage, #body-3d-canvas { min-height: 25rem; height: 25rem; }
-        .node-head { left: 76%; }
-        .node-chest, .node-abdomen, .node-limbs { left: 83%; }
-        .node-back { left: 17%; }
         .map-actions { position: sticky; bottom: 0.35rem; z-index: 4; padding: 0.55rem; border-radius: 0.9rem; background: rgba(251,249,244,0.94); box-shadow: 0 0.3rem 1rem rgba(23,36,31,0.12); }
       }
       /* Keep citizen-facing copy and ordinary controls above the accessibility floor. */
-      p, li, label, summary, th, td, input, select, textarea, button { font-size: 1rem; }
+      p, li, label, summary, th, td, input, select, textarea, button { font-size: 1.0625rem; }
       .tag, .table-label { font-size: 0.82rem; }
       .language-toggle button, .site-nav a { min-height: 3.5rem; }
       .example-chip, .hero-example { min-height: 3.5rem; }
@@ -635,11 +634,11 @@
               <p class="workspace-note" data-copy="triage3dNote">Drag to rotate. Tap a glowing point. Nothing is decided here.</p>
               <div class="body-3d-stage" id="body-3d-stage">
                 <canvas id="body-3d-canvas" aria-label="Rotatable 3D human body model"></canvas>
-                <div class="anatomy-node node-head"><button type="button" data-region="head" data-region-copy="regionHead" aria-label="Head"><span data-copy="regionHead">Head</span></button></div>
-                <div class="anatomy-node node-chest"><button type="button" data-region="chest" data-region-copy="regionChest" aria-label="Chest"><span data-copy="regionChest">Chest</span></button></div>
-                <div class="anatomy-node node-abdomen"><button type="button" data-region="upper-abdomen" data-region-copy="regionUpperAbdomen" aria-label="Upper abdomen"><span data-copy="regionUpperAbdomen">Abdomen</span></button></div>
-                <div class="anatomy-node node-back"><button type="button" data-region="back" aria-label="Spine"><span data-copy="triageSpine">Spine</span></button></div>
-                <div class="anatomy-node node-limbs"><button type="button" data-region="leg" data-region-copy="regionLeg" aria-label="Limbs"><span data-copy="regionLeg">Limbs</span></button></div>
+              </div>
+              <div class="view-controls" aria-label="Body model views">
+                <button class="view-control" type="button" data-view="front" data-copy="frontView">Front view</button>
+                <button class="view-control" type="button" data-view="back" data-copy="backView">Back view</button>
+                <button class="view-control" type="button" data-view="reset" data-copy="resetView">Reset view</button>
               </div>
               <div class="workspace-controls">
                 <button class="large-button" type="button" id="toggle-map-mode" aria-pressed="false" data-copy="use2d">Use accessible 2D map</button>
@@ -997,9 +996,9 @@
           bodyMapButton: "Point at the body map", captured: "Your words are ready for the next step. Nothing has been sent or booked.", needHelp: "Need a person?",
           backToQuestion: "← Back", mapEyebrow: "No reading needed", mapTitle: "Point to where it hurts",
           mapNote: "Tap the place that feels wrong.", mapWordsLabel: "Your words:", modelFree: "This body-map route sends nothing to an AI service.", noLocationTitle: "Nothing in one place?", noLocationNote: "Choose this for a whole-body feeling or if you are not sure where it is.", noLocationFever: "Fever", noLocationWeak: "Weak all over", noLocationUnsure: "Not sure", selectionKicker: "Selected place", selectionEmpty: "Point at a place", selectionHint: "The place you point to will appear here.", selectionChosen: "Selected. Now choose the kind of trouble.", selectionNone: "No one place", figureHint: "Tap the part that feels wrong.", backHint: "Tap anywhere on the upper or lower back.", fallbackTitle: "Or choose from a list", fallbackNote: "Use this only if pointing is difficult.", front: "Front", back: "Back",
-          regionHead: "Head", regionFace: "Face / jaw", regionNeck: "Neck", regionChest: "Chest", regionUpperAbdomen: "Upper abdomen", regionLowerAbdomen: "Lower abdomen", regionBack: "Back — upper or lower", regionArm: "Arm", regionHand: "Hand", regionLeg: "Leg", regionFoot: "Foot", regionGeneral: "Whole body / general",
+          regionHead: "Head", regionFace: "Face / jaw", regionNeck: "Neck", regionChest: "Chest", regionUpperAbdomen: "Upper abdomen", regionLowerAbdomen: "Lower abdomen", regionBack: "Back — upper or lower", regionArm: "Arm", regionHand: "Hand", regionLeg: "Leg", regionFoot: "Foot", regionGeneral: "Whole body / general", frontView: "Front view", backView: "Back view", resetView: "Reset view",
           kindTitle: "What kind of trouble?", kindNote: "Choose the picture that feels closest. You can change it.", kindEmpty: "Choose a kind", kindHint: "Your choice will appear here.", kindChosen: "Selected. Now add the two quick details.", kindPain: "Pain", kindFever: "Fever or heat", kindBreathing: "Breathing", kindBleeding: "Bleeding", kindSwelling: "Swelling", kindRash: "Rash", kindInjury: "Injury", kindVomiting: "Vomiting or stomach", kindDizziness: "Dizziness", kindLow: "Feeling low", followupTitle: "A little more", durationLabel: "How long?", durationNow: "Just now", durationToday: "Today", durationDays: "A few days", durationLonger: "A while", durationUnsure: "Not sure", severityLabel: "Is it severe right now?", severityNo: "No", severityYes: "Yes", severityUnsure: "Not sure", mapContinue: "Continue", mapIncomplete: "Choose a kind, how long, and whether it is severe right now.", mapReady: "Your description is ready to review.", mapReadyNote: "Nothing has been sent, decided, or booked.", reviewMap: "Review this",
-          reviewEyebrow: "Screen 2 · Read-back", reviewTitle: "This is what I understood", reviewNote: "Check these details. Nothing is decided until you confirm.", sliceNoModel: "No model was used in this slice. These details come from your selections.", readbackWordsLabel: "Your words:", chipRegion: "Place", chipKind: "Kind of trouble", chipDuration: "How long", chipSeverity: "Severe now", chipWho: "For", chipAge: "Age band", editTitle: "Change a detail", editNote: "Choose a new answer below. Your read-back will update.", unclearLabel: "I did not understand:", confirmNote: "Your answers stay in this browser for this session. Confirm only when they look right.", confirm: "Confirm", changeSomething: "Change something", resultEyebrow: "Screen 3 · Where to go", startAt: "Start at", ruleFired: "Routing rule:", chooseDepartment: "Not right? Choose a department yourself.", emergencyEyebrow: "Emergency guidance", emergencyTitle: "Go to the Emergency department now. Do not book an appointment.", notDiagnosis: "This is not a diagnosis.", deptPaediatrics: "Paediatrics", deptCardiology: "Cardiology", deptNeurology: "Neurology", deptGastroenterology: "Gastroenterology", deptOrthopaedics: "Orthopaedics", deptDermatology: "Dermatology", deptDental: "Dental", deptGeneralMedicine: "General Medicine", deptChoose: "Choose a department yourself",
+          reviewEyebrow: "Screen 2 · Read-back", reviewTitle: "This is what I understood", reviewNote: "Check these details. Nothing is decided until you confirm.", sliceNoModel: "This small browser reader used your selections. Nothing was sent to a service.", readbackWordsLabel: "Your words:", chipRegion: "Place", chipKind: "Kind of trouble", chipDuration: "How long", chipSeverity: "Severe now", chipWho: "For", chipAge: "Age band", editTitle: "Change a detail", editNote: "Choose a new answer below. Your read-back will update.", unclearLabel: "I did not understand:", confirmNote: "Your answers stay in this browser for this session. Confirm only when they look right.", confirm: "Confirm", changeSomething: "Change something", resultEyebrow: "Screen 3 · Where to go", startAt: "Start at", ruleFired: "Routing rule:", chooseDepartment: "Not right? Choose a department yourself.", emergencyEyebrow: "Emergency guidance", emergencyTitle: "Go to the Emergency department now. Do not book an appointment.", notDiagnosis: "This is not a diagnosis.", deptPaediatrics: "Paediatrics", deptCardiology: "Cardiology", deptNeurology: "Neurology", deptGastroenterology: "Gastroenterology", deptOrthopaedics: "Orthopaedics", deptDermatology: "Dermatology", deptDental: "Dental", deptGeneralMedicine: "General Medicine", deptChoose: "Choose a department yourself",
           backToDepartment: "← Back to department", bookingEyebrow: "Your result · choose what happens next", bookingTitle: "Find a hospital, honestly", bookingNote: "This is one clear result: choose a locality, choose a hospital, then decide whether to make a specimen slip.", findHospital: "See hospitals and slots", whereTitle: "Where would you like to go?", whereNote: "Choose a locality. We do not read your device location.", localityLabel: "Your chosen locality", locationChosenNote: "Location is chosen by you, never taken from the phone. Travel figures below are simulated.", sortNote: "Sorted by seen soonest: slot start + simulated wait. Ties use travel time, then hospital name.", verifiedSource: "Hospital name and department", checked: "Checked", distance: "Travel", nextSlot: "Next open slot", seenBy: "Usually seen by", calendarOpens: "Calendar opens", chooseHospital: "Choose this hospital", chosenHospital: "Hospital chosen", chosenHospitalNote: "Now choose the visit type below.", noHospitals: "No verified hospital is listed for this department in this demo locality.", carryTitle: "What to carry", carryNote: "Choose the list that matches this visit.", firstVisit: "First visit", returningVisit: "Returning", firstId: "a photo ID", phoneOtp: "the phone that receives the one-time passcode", returningUhid: "your UHID from an earlier visit", previousSlip: "your previous appointment slip", feeLine: "OPD registration fee", toSignIn: "Continue to sign in", signInTitle: "Sign in to hold this slot", signInNote: "Identity is needed only now, when making the specimen slip. Nothing real is submitted.", credentialsNote: "These demo credentials are printed here so you never have to use a real account.", usernameLabel: "Username", passwordLabel: "Password", usernameInputLabel: "Demo username", passwordInputLabel: "Demo password", humanCheck: "Tap once: I am a person", signInButton: "Sign in and show the slip", humanCheckNeeded: "Tap the human check first.", slipTitle: "Your specimen slip", slipNote: "Keep this for the counter. It is a mock slip, not a booking.", slipPatient: "Patient", slipDepartment: "Department", slipHospital: "Hospital", slipSlot: "Slot", slipSeenBy: "Honest wait", slipAppointmentId: "Appointment ID", slipUhid: "UHID", patientSaid: "Patient reports:", rightsCard: "If you are turned away with this slip — note the appointment ID, raise a grievance at pgportal.gov.in, or file an RTI asking why a valid online appointment was not honoured.", printSlip: "Print slip", downloadSlip: "Download slip", printFooter: "SPECIMEN — NOT A REAL APPOINTMENT · independent prototype · mock data.", signedIn: "Mock sign-in complete. Your specimen slip is below.", credentialsMismatch: "Use the printed demo credentials above.", feeAmount: "₹10",
           honestyBack: "← Back", honestyEyebrow: "Screen 7 · Honesty", honestyTitle: "What is real and what is not", honestyIntro: "Start with what ORS already does well. Then see exactly what this independent prototype does — and does not — claim.", honestyLink: "What is real?", orsCreditTitle: "What ORS already does well", orsCreditNote: "These are ORS features we are crediting, not claiming to have invented.", honestySourceLabel: "Source · checked 26 Aug 2026:", orsLabReports: "Lab reports", orsBlood: "Blood availability", orsCancellation: "Cancellation by appointment ID", orsAbha: "ABHA integration", orsApp: "An official mobile app · Nextgen ORS", limitsTitle: "What this prototype does not claim", limitNoOrs: "Nothing here connects to ORS. No appointment is real.", limitMock: "Every hospital, slot, wait, queue position, appointment ID and UHID is mock.", limitRules: "The department mapping is a small hand-written rule file, not a clinical protocol reviewed by any medical body.", limitAdvice: "This is not medical advice.", limitModel: "To read this in your own words we send this sentence to an AI service. Tap the body map instead if you would rather not.", buildTitle: "What built this prototype", buildInterfaceTitle: "HTML and CSS", buildInterface: "the mobile-first screens, large controls, focus states and print view.", buildRoutingTitle: "JavaScript + routing-rules.js", buildRouting: "structured complaint to department and urgency, with the rule ID shown.", buildHospitalTitle: "hospital-data.js", buildHospital: "verified hospital names and mock slots, waits, travel figures and identifiers.", buildCodexTitle: "Codex", buildCodex: "wrote the application code, tests and verification pass.", talkToPerson: "Talk to a person", prototype: "independent prototype · mock data · not affiliated with any government body.",
           voiceStart: "Speak your complaint", voiceStop: "Stop listening", voiceLabel: "Speak", voiceLabelStop: "Stop", voiceUnsupported: "Voice input is not available here. You can type or use the body map.",
@@ -1018,9 +1017,9 @@
           bodyMapButton: "शरीर के नक्शे पर चुनें", captured: "आपके शब्द अगले कदम के लिए तैयार हैं। कुछ भेजा या बुक नहीं हुआ है।", needHelp: "किसी व्यक्ति से बात करें?",
           backToQuestion: "← वापस", mapEyebrow: "पढ़ने की ज़रूरत नहीं", mapTitle: "जहाँ तकलीफ़ है वहाँ चुनें",
           mapNote: "जहाँ परेशानी है वहाँ चुनें।", mapWordsLabel: "आपके शब्द:", modelFree: "शरीर के नक्शे वाला रास्ता किसी एआई सेवा को कुछ नहीं भेजता।", noLocationTitle: "एक जगह पर परेशानी नहीं?", noLocationNote: "पूरे शरीर में परेशानी हो या जगह पता न हो तो इसे चुनें।", noLocationFever: "बुखार", noLocationWeak: "पूरे शरीर में कमज़ोरी", noLocationUnsure: "पता नहीं", selectionKicker: "चुनी हुई जगह", selectionEmpty: "किसी जगह पर चुनें", selectionHint: "आप जहाँ चुनेंगे, वह जगह यहाँ दिखेगी।", selectionChosen: "चुन लिया। अब परेशानी की किस्म चुनें।", selectionNone: "कोई एक जगह नहीं", figureHint: "जहाँ परेशानी है वहाँ चुनें।", backHint: "ऊपरी या निचली पीठ पर कहीं भी चुनें।", fallbackTitle: "या सूची में से चुनें", fallbackNote: "अगर नक्शे पर चुनना मुश्किल हो तभी इसका इस्तेमाल करें।", front: "सामने", back: "पीछे",
-          regionHead: "सिर", regionFace: "चेहरा / जबड़ा", regionNeck: "गर्दन", regionChest: "सीना", regionUpperAbdomen: "पेट का ऊपरी हिस्सा", regionLowerAbdomen: "पेट का निचला हिस्सा", regionBack: "पीठ — ऊपर या नीचे", regionArm: "बाँह", regionHand: "हाथ", regionLeg: "टाँग", regionFoot: "पैर", regionGeneral: "पूरा शरीर / सामान्य",
+          regionHead: "सिर", regionFace: "चेहरा / जबड़ा", regionNeck: "गर्दन", regionChest: "सीना", regionUpperAbdomen: "पेट का ऊपरी हिस्सा", regionLowerAbdomen: "पेट का निचला हिस्सा", regionBack: "पीठ — ऊपर या नीचे", regionArm: "बाँह", regionHand: "हाथ", regionLeg: "टाँग", regionFoot: "पैर", regionGeneral: "पूरा शरीर / सामान्य", frontView: "सामने से", backView: "पीछे से", resetView: "दृश्य रीसेट करें",
           kindTitle: "परेशानी किस तरह की है?", kindNote: "जो तस्वीर सबसे करीब लगे उसे चुनें। इसे बदल सकते हैं।", kindEmpty: "किस्म चुनें", kindHint: "आपकी पसंद यहाँ दिखेगी।", kindChosen: "चुन लिया। अब दो छोटी बातें बताइए।", kindPain: "दर्द", kindFever: "बुखार या गर्मी", kindBreathing: "साँस", kindBleeding: "खून आना", kindSwelling: "सूजन", kindRash: "दाने", kindInjury: "चोट", kindVomiting: "उल्टी या पेट", kindDizziness: "चक्कर", kindLow: "कमज़ोरी या मन उदास", followupTitle: "थोड़ा और बताइए", durationLabel: "कब से?", durationNow: "अभी", durationToday: "आज", durationDays: "कुछ दिन", durationLonger: "काफ़ी समय", durationUnsure: "पता नहीं", severityLabel: "क्या अभी बहुत तेज़ है?", severityNo: "नहीं", severityYes: "हाँ", severityUnsure: "पता नहीं", mapContinue: "आगे बढ़ें", mapIncomplete: "परेशानी की किस्म, कब से और अभी बहुत तेज़ है या नहीं चुनें।", mapReady: "आपका विवरण देखने के लिए तैयार है।", mapReadyNote: "कुछ भेजा, तय या बुक नहीं हुआ है।", reviewMap: "इसे देखें",
-          reviewEyebrow: "स्क्रीन 2 · दोबारा पढ़ें", reviewTitle: "हमने यह समझा", reviewNote: "इन जानकारियों को जाँचें। आपकी पुष्टि से पहले कुछ तय नहीं होगा।", sliceNoModel: "इस हिस्से में कोई मॉडल इस्तेमाल नहीं हुआ। ये जानकारियाँ आपकी पसंद से आई हैं।", readbackWordsLabel: "आपके शब्द:", chipRegion: "जगह", chipKind: "परेशानी की किस्म", chipDuration: "कब से", chipSeverity: "अभी बहुत तेज़", chipWho: "किसके लिए", chipAge: "उम्र का समूह", editTitle: "एक जानकारी बदलें", editNote: "नीचे नया जवाब चुनें। दोबारा पढ़ा गया विवरण बदल जाएगा।", unclearLabel: "समझ नहीं आया:", confirmNote: "आपके जवाब इस ब्राउज़र में इसी सत्र तक रहेंगे। सही लगे तभी पुष्टि करें।", confirm: "पुष्टि करें", changeSomething: "कुछ बदलें", resultEyebrow: "स्क्रीन 3 · कहाँ जाएँ", startAt: "यहाँ जाएँ:", ruleFired: "रूटिंग नियम:", chooseDepartment: "सही नहीं? विभाग खुद चुनें।", emergencyEyebrow: "इमरजेंसी की सलाह", emergencyTitle: "अभी इमरजेंसी विभाग जाएँ। अपॉइंटमेंट बुक न करें।", notDiagnosis: "यह बीमारी का पता नहीं है।", deptPaediatrics: "बाल रोग विभाग", deptCardiology: "कार्डियोलॉजी", deptNeurology: "न्यूरोलॉजी", deptGastroenterology: "गैस्ट्रोएंटेरोलॉजी", deptOrthopaedics: "ऑर्थोपेडिक्स", deptDermatology: "त्वचा रोग विभाग", deptDental: "डेंटल", deptGeneralMedicine: "जनरल मेडिसिन", deptChoose: "विभाग खुद चुनें",
+          reviewEyebrow: "स्क्रीन 2 · दोबारा पढ़ें", reviewTitle: "हमने यह समझा", reviewNote: "इन जानकारियों को जाँचें। आपकी पुष्टि से पहले कुछ तय नहीं होगा।", sliceNoModel: "ब्राउज़र ने आपकी पसंद से यह विवरण बनाया। कुछ भी किसी सेवा को नहीं भेजा गया।", readbackWordsLabel: "आपके शब्द:", chipRegion: "जगह", chipKind: "परेशानी की किस्म", chipDuration: "कब से", chipSeverity: "अभी बहुत तेज़", chipWho: "किसके लिए", chipAge: "उम्र का समूह", editTitle: "एक जानकारी बदलें", editNote: "नीचे नया जवाब चुनें। दोबारा पढ़ा गया विवरण बदल जाएगा।", unclearLabel: "समझ नहीं आया:", confirmNote: "आपके जवाब इस ब्राउज़र में इसी सत्र तक रहेंगे। सही लगे तभी पुष्टि करें।", confirm: "पुष्टि करें", changeSomething: "कुछ बदलें", resultEyebrow: "स्क्रीन 3 · कहाँ जाएँ", startAt: "यहाँ जाएँ:", ruleFired: "रूटिंग नियम:", chooseDepartment: "सही नहीं? विभाग खुद चुनें।", emergencyEyebrow: "इमरजेंसी की सलाह", emergencyTitle: "अभी इमरजेंसी विभाग जाएँ। अपॉइंटमेंट बुक न करें।", notDiagnosis: "यह बीमारी का पता नहीं है।", deptPaediatrics: "बाल रोग विभाग", deptCardiology: "कार्डियोलॉजी", deptNeurology: "न्यूरोलॉजी", deptGastroenterology: "गैस्ट्रोएंटेरोलॉजी", deptOrthopaedics: "ऑर्थोपेडिक्स", deptDermatology: "त्वचा रोग विभाग", deptDental: "डेंटल", deptGeneralMedicine: "जनरल मेडिसिन", deptChoose: "विभाग खुद चुनें",
           backToDepartment: "← विभाग पर वापस जाएँ", bookingEyebrow: "आपका नतीजा · अगला कदम चुनें", bookingTitle: "ईमानदारी से अस्पताल चुनें", bookingNote: "एक ही साफ़ नतीजा: इलाका चुनें, अस्पताल चुनें, फिर नकली स्लिप बनाने का फैसला करें।", findHospital: "अस्पताल और स्लॉट देखें", whereTitle: "आप कहाँ जाना चाहेंगे?", whereNote: "इलाका चुनें। हम आपके फ़ोन की जगह नहीं पढ़ते।", localityLabel: "आपका चुना हुआ इलाका", locationChosenNote: "जगह आपने चुनी है, फ़ोन से नहीं ली गई। नीचे आने-जाने का समय नकली है।", sortNote: "जल्दी दिखने के हिसाब से क्रम: स्लॉट का समय + नकली इंतज़ार। बराबरी पर आने-जाने का समय, फिर अस्पताल का नाम।", verifiedSource: "अस्पताल का नाम और विभाग", checked: "जाँच की तारीख", distance: "यात्रा", nextSlot: "अगला खुला स्लॉट", seenBy: "आमतौर पर दिखेंगे", calendarOpens: "कैलेंडर खुलेगा", chooseHospital: "यह अस्पताल चुनें", chosenHospital: "अस्पताल चुना गया", chosenHospitalNote: "अब नीचे इस यात्रा का प्रकार चुनें।", noHospitals: "इस डेमो इलाके में इस विभाग के लिए कोई सत्यापित अस्पताल सूची में नहीं है।", carryTitle: "क्या साथ ले जाएँ", carryNote: "इस यात्रा के अनुसार सूची चुनें।", firstVisit: "पहली यात्रा", returningVisit: "फिर से आना", firstId: "फोटो पहचान पत्र", phoneOtp: "वह फ़ोन जिस पर वन-टाइम पासकोड आएगा", returningUhid: "पहले का यूएचआईडी", previousSlip: "पहली अपॉइंटमेंट की स्लिप", feeLine: "ओपीडी पंजीकरण शुल्क", toSignIn: "साइन इन करने के लिए आगे बढ़ें", signInTitle: "स्लॉट रखने के लिए साइन इन करें", signInNote: "पहचान की ज़रूरत सिर्फ़ अब है, नकली स्लिप बनाते समय। कुछ असली जमा नहीं होता।", credentialsNote: "डेमो क्रेडेंशियल यहाँ बड़े अक्षरों में हैं; असली खाता इस्तेमाल न करें।", usernameLabel: "यूज़रनेम", passwordLabel: "पासवर्ड", usernameInputLabel: "डेमो यूज़रनेम", passwordInputLabel: "डेमो पासवर्ड", humanCheck: "एक बार चुनें: मैं इंसान हूँ", signInButton: "साइन इन करें और स्लिप दिखाएँ", humanCheckNeeded: "पहले मानव-जाँच चुनें।", slipTitle: "आपकी नकली स्लिप", slipNote: "इसे काउंटर पर दिखाने के लिए रखें। यह नकली स्लिप है, बुकिंग नहीं।", slipPatient: "मरीज़", slipDepartment: "विभाग", slipHospital: "अस्पताल", slipSlot: "स्लॉट", slipSeenBy: "ईमानदार इंतज़ार", slipAppointmentId: "अपॉइंटमेंट आईडी", slipUhid: "यूएचआईडी", patientSaid: "मरीज़ ने बताया:", rightsCard: "अगर इस स्लिप के साथ आपको लौटा दिया जाए — अपॉइंटमेंट आईडी लिखें, pgportal.gov.in पर शिकायत करें, या पूछें कि मान्य ऑनलाइन अपॉइंटमेंट क्यों नहीं माना गया।", printSlip: "स्लिप प्रिंट करें", downloadSlip: "स्लिप डाउनलोड करें", printFooter: "नमूना — असली अपॉइंटमेंट नहीं · स्वतंत्र प्रोटोटाइप · नकली डेटा।", signedIn: "नकली साइन-इन पूरा हुआ। आपकी नकली स्लिप नीचे है।", credentialsMismatch: "ऊपर दिए डेमो क्रेडेंशियल इस्तेमाल करें।", feeAmount: "₹10",
           honestyBack: "← वापस", honestyEyebrow: "स्क्रीन 7 · ईमानदारी", honestyTitle: "क्या असली है और क्या नहीं", honestyIntro: "पहले जानिए कि ओआरएस क्या अच्छा करता है। फिर देखें कि यह स्वतंत्र प्रोटोटाइप क्या दावा करता है — और क्या नहीं।", honestyLink: "क्या असली है?", orsCreditTitle: "ओआरएस पहले से क्या अच्छा करता है", orsCreditNote: "ये ओआरएस की सुविधाएँ हैं; हम इन्हें अपना बनाया हुआ नहीं बता रहे हैं।", honestySourceLabel: "स्रोत · 26 अगस्त 2026 को जाँचा:", orsLabReports: "लैब रिपोर्ट", orsBlood: "खून की उपलब्धता", orsCancellation: "अपॉइंटमेंट आईडी से रद्द करना", orsAbha: "आभा एकीकरण", orsApp: "आधिकारिक मोबाइल ऐप · नेक्स्टजेन ओआरएस", limitsTitle: "यह प्रोटोटाइप क्या दावा नहीं करता", limitNoOrs: "यहाँ कुछ भी ओआरएस से नहीं जुड़ा है। कोई अपॉइंटमेंट असली नहीं है।", limitMock: "हर अस्पताल, स्लॉट, इंतज़ार, कतार की जगह, अपॉइंटमेंट आईडी और यूएचआईडी नकली है।", limitRules: "विभाग चुनने का तरीका एक छोटी, हाथ से लिखी नियम फ़ाइल है; यह क्लिनिकल प्रोटोकॉल नहीं है और किसी मेडिकल संस्था ने इसकी समीक्षा नहीं की है।", limitAdvice: "यह मेडिकल सलाह नहीं है।", limitModel: "आपकी बात अपने शब्दों में पढ़ने के लिए हम यह वाक्य एक एआई सेवा को भेजते हैं। अगर आप ऐसा नहीं चाहते तो शरीर का नक्शा चुनें।", buildTitle: "यह प्रोटोटाइप किससे बना", buildInterfaceTitle: "एचटीएमएल और सीएसएस", buildInterface: "मोबाइल स्क्रीन, बड़े कंट्रोल, फ़ोकस स्थिति और प्रिंट व्यू।", buildRoutingTitle: "जावास्क्रिप्ट + routing-rules.js", buildRouting: "आपकी संरचित शिकायत से विभाग और ज़रूरत की तात्कालिकता; नियम आईडी भी दिखती है।", buildHospitalTitle: "hospital-data.js", buildHospital: "सत्यापित अस्पताल नाम और नकली स्लॉट, इंतज़ार, यात्रा आँकड़े और आईडी।", buildCodexTitle: "Codex", buildCodex: "एप्लिकेशन कोड, टेस्ट और जाँच लिखने में मदद की।", talkToPerson: "किसी व्यक्ति से बात करें", prototype: "स्वतंत्र प्रोटोटाइप · नकली डेटा · किसी सरकारी संस्था से जुड़ा नहीं।",
           voiceStart: "अपनी परेशानी बोलें", voiceStop: "सुनना रोकें", voiceLabel: "बोलें", voiceLabelStop: "रोकें", voiceUnsupported: "यहाँ आवाज़ से लिखना उपलब्ध नहीं है। आप लिख सकते हैं या शरीर का नक्शा चुन सकते हैं।",
@@ -1157,11 +1156,13 @@
       }
 
       function renderMapMode() {
+        if (!state.threeAvailable) state.mapMode = "2d";
         const using3d = state.mapMode === "3d";
         bodyLocationPicker.hidden = using3d;
         map3dStage.hidden = !using3d;
         toggleMapMode.textContent = text(using3d ? "use2d" : "use3d");
         toggleMapMode.setAttribute("aria-pressed", String(!using3d));
+        toggleMapMode.disabled = !state.threeAvailable;
         threeUnavailable.hidden = using3d || state.threeAvailable;
       }
 
@@ -1203,11 +1204,11 @@
       function renderLanguage() {
         document.documentElement.lang = state.language === "hi" ? "hi" : "en";
         const truthfulPrivacyCopy = state.language === "hi"
-          ? "यह प्रोटोटाइप इस वाक्य को आपके ब्राउज़र में पढ़ता है। कुछ भी सर्वर पर नहीं भेजा जाता; अगर लिखना न चाहें तो शरीर का नक्शा चुनें।"
-          : "This prototype reads this sentence in your browser. Nothing is sent to a server; tap the body map if you would rather not type.";
+          ? "यह प्रोटोटाइप आपकी बात को ब्राउज़र में स्थानीय नियमों से पढ़ता है। कुछ भी सर्वर पर नहीं भेजा जाता; अगर लिखना न चाहें तो शरीर का नक्शा चुनें।"
+          : "This prototype reads your words with local browser rules. Nothing is sent to a server; tap the body map if you would rather not type.";
         const truthfulPrivacyNote = state.language === "hi"
-          ? "इस हिस्से में छोटी ब्राउज़र नियम-सूची आपकी बात पढ़ती है; कोई वाक्य सर्वर पर नहीं भेजा जाता।"
-          : "This slice uses a small browser rule reader; no sentence is sent to a server.";
+          ? "ब्राउज़र की छोटी नियम-सूची आपकी बात पढ़ती है; कोई वाक्य सर्वर पर नहीं भेजा जाता।"
+          : "A small browser rule reader handles this sentence; no sentence is sent to a server.";
         document.querySelectorAll("[data-copy]").forEach((element) => {
           const key = element.dataset.copy;
           if (key === "modelDisclosure") element.textContent = truthfulPrivacyCopy;
@@ -1224,6 +1225,7 @@
         renderKindSelection();
         renderMapMode();
         renderWorkspace();
+        bodyMap3d?.setLanguage?.(state.language);
         if (!reviewScreen.hidden && state.complaint) {
           renderReadback();
           if (state.editingField) renderEditor(state.editingField);
@@ -1341,9 +1343,9 @@
         document.querySelector("#body-map-button").focus();
       });
 
-      document.querySelectorAll("[data-region]").forEach((button) => {
-        button.addEventListener("click", () => {
-          state.region = button.dataset.region;
+      function selectRegion(region, focusKind = true) {
+          state.region = region;
+          bodyMap3d?.select?.(region);
           state.noLocation = null;
           document.querySelectorAll("[data-no-location]").forEach((item) => item.setAttribute("aria-pressed", "false"));
           document.querySelectorAll("[data-region]").forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.region === state.region)));
@@ -1352,9 +1354,10 @@
           renderWorkspace();
           mapStatus.textContent = "";
           mapStatus.removeAttribute("role");
-          showKindQuestion();
-        });
-      });
+          if (focusKind) showKindQuestion();
+      }
+
+      document.querySelectorAll("[data-region]").forEach((button) => button.addEventListener("click", () => selectRegion(button.dataset.region)));
 
       document.querySelectorAll("[data-no-location]").forEach((button) => {
         button.addEventListener("click", () => {
@@ -1928,13 +1931,22 @@
         showReadback(makeComplaint(false));
       });
 
-      const bodyMap3d = createBodyMap3D({
-        canvas: map3dCanvas,
-        onUnavailable: () => {
-          state.threeAvailable = false;
-          state.mapMode = "2d";
-        },
-      });
+      const bodyMap3d = await createBodyMap3D({
+          canvas: map3dCanvas,
+          stage: map3dStage,
+          language: state.language,
+          onSelect: (region) => selectRegion(region),
+          onHover: (hit) => {
+            if (hit) workspaceSummary.dataset.hoveredRegion = hit.region;
+            else delete workspaceSummary.dataset.hoveredRegion;
+          },
+          onUnavailable: () => {
+            state.threeAvailable = false;
+            state.mapMode = "2d";
+            renderMapMode();
+          },
+        });
+      document.querySelectorAll("[data-view]").forEach((button) => button.addEventListener("click", () => bodyMap3d.setView?.(button.dataset.view)));
       state.threeAvailable = bodyMap3d.available;
       if (!state.threeAvailable) state.mapMode = "2d";
       renderLocalities();

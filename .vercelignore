@@ -1,5 +1,5 @@
-# Keep the static site, ES modules, tests and design assets in the deployment.
-# Vercel does not need local dependency folders or repository metadata.
+# Keep the static site, ES modules, tests and assets in the deployment.
+# Internal planning notes and local metadata are not part of the public site.
 node_modules
 .git
 .DS_Store
@@ -7,5 +7,4 @@ node_modules
 .env.*
 .vercel
 *.md
-*.test.js
 craft

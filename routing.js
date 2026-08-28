@@ -62,7 +62,10 @@ export function parseFreeTextComplaint(input, language = "en") {
     "not feeding", "not drinking milk", "won't feed", "doesn't feed", "doodh nahi pee", "doodh nahin pee",
     "दूध नहीं पी", "दूध नहीं पी रहा", "दूध नहीं पी रही", "दूध न पीना",
   ]);
-  const heavyBleeding = hasAny(text, ["heavy bleeding", "bleeding heavily", "बहुत ज्यादा खून", "बहुत ज़्यादा खून", "खून बहुत बह"]);
+  const heavyBleeding = hasAny(text, [
+    "heavy bleeding", "bleeding heavily", "uncontrolled bleeding", "bleeding won't stop", "bleeding will not stop",
+    "bleeding not stopping", "बहुत ज्यादा खून", "बहुत ज़्यादा खून", "खून बहुत बह", "खून रुक नहीं रहा", "खून नहीं रुक",
+  ]);
   const stiffNeck = hasAny(text, ["stiff neck", "neck is stiff", "gardan akad", "गर्दन अकड़", "गर्दन अकड़"]);
   const suddenSevereHeadache = hasAny(text, ["sudden severe headache", "worst headache", "अचानक बहुत तेज सिरदर्द", "अचानक बहुत तेज़ सिरदर्द"]);
   const seizure = hasAny(text, ["seizure", "fit", " दौरा", "दौरा", "mirgi ka daura"]);

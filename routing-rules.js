@@ -1,7 +1,7 @@
 // Raahat's hand-written routing table.
 // This is data only: the evaluator in routing.js is deliberately generic.
 export const ROUTING_RULES = Object.freeze({
-  version: "slice-3.1",
+  version: "1.0",
   rules: [
     {
       id: "R-01",
@@ -108,8 +108,8 @@ export const ROUTING_RULES = Object.freeze({
       matches: { all: [{ field: "parsed", equals: false }] },
       department: "Choose a department yourself",
       reason: {
-        en: "I could not structure those words in this slice; choose a department or talk to a person.",
-        hi: "इस हिस्से में इन शब्दों को व्यवस्थित नहीं कर पाए; विभाग चुनें या किसी व्यक्ति से बात करें।",
+        en: "I could not yet understand those words. You can choose a department or talk to a person.",
+        hi: "इन शब्दों को अभी समझ नहीं पाए। आप विभाग चुन सकते हैं या किसी व्यक्ति से बात कर सकते हैं।",
       },
       severity: "routine",
     },
