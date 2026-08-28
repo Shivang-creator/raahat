@@ -355,7 +355,7 @@
       [data-theme="dark"] .patient-report,
       [data-theme="dark"] .workspace-privacy { background: var(--accent-soft); color: var(--ink); }
       [data-theme="dark"] .silhouette-stage,
-      [data-theme="dark"] .body-3d-stage { background: linear-gradient(180deg, #152337 0%, #101b2e 100%); }
+      [data-theme="dark"] .body-3d-stage { background: radial-gradient(circle at 50% 35%, #131c2e 0%, #090d16 100%); }
       [data-theme="dark"] .network-pill { background: var(--accent-soft); color: var(--ink); }
       [data-theme="dark"] .credential-card { background: var(--surface-elevated); border-color: var(--marigold); }
       [data-theme="dark"] .three-tooltip { background: var(--surface-elevated); color: var(--ink); }
@@ -524,12 +524,12 @@
       .workspace-eyebrow { display: flex; align-items: center; gap: 0.45rem; margin: 0; color: var(--muted); font-size: 0.92rem; font-weight: 800; letter-spacing: 0.02em; }
       .three-panel h2, .workspace-side h2 { margin: 0.75rem 0 0; color: var(--accent-dark); font-size: clamp(1.45rem, 4vw, 2.1rem); letter-spacing: -0.04em; line-height: 1.08; }
       .workspace-note { margin: 0.45rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.45; }
-      .body-3d-stage { position: relative; min-height: 30rem; margin-top: 0.9rem; overflow: hidden; border-radius: 0.9rem; background: radial-gradient(circle at 50% 35%, #f4fbf5 0%, #e5efe9 62%, #d8e9e0 100%); }
+      .body-3d-stage { position: relative; min-height: 30rem; margin-top: 0.9rem; overflow: hidden; border-radius: 0.9rem; background: radial-gradient(circle at 50% 35%, #f4fbf5 0%, #d8e9e0 100%); }
       #body-3d-canvas { display: block; width: 100%; height: 30rem; touch-action: none; cursor: grab; }
       #body-3d-canvas:active { cursor: grabbing; }
       .body-3d-stage::after { position: absolute; right: 1rem; bottom: 0.75rem; padding: 0.35rem 0.55rem; border-radius: 999px; background: rgba(255,255,255,0.78); color: var(--muted); content: "360°"; font-size: 0.8rem; font-weight: 850; pointer-events: none; }
       .three-tooltip { position: absolute; z-index: 4; max-width: 13rem; min-height: 2.75rem; padding: 0.55rem 0.75rem; border: 2px solid var(--marigold); border-radius: 0.75rem; background: rgba(255,255,255,0.96); color: var(--ink); font-size: 0.95rem; font-weight: 800; line-height: 1.25; box-shadow: 0 0.5rem 1.25rem rgba(15,23,42,0.14); pointer-events: none; }
-      .view-controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem; margin-top: 0.8rem; }
+      .view-controls { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.55rem; margin-top: 0.8rem; }
       .view-control { min-height: 3.5rem; padding: 0.5rem 0.4rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 0.95rem; font-weight: 800; }
       .view-control:hover { border-color: var(--marigold); }
       .workspace-controls { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 0.8rem; }
@@ -569,6 +569,7 @@
         .landing-hero h1 { font-size: 3rem; }
         .section-heading h2 { font-size: 2.25rem; }
         .body-3d-stage, #body-3d-canvas { min-height: 25rem; height: 25rem; }
+        .view-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .map-actions { position: sticky; bottom: 0.35rem; z-index: 4; padding: 0.55rem; border-radius: 0.9rem; background: rgba(251,249,244,0.94); box-shadow: 0 0.3rem 1rem rgba(23,36,31,0.12); }
         .home-cta { align-items: stretch; flex-direction: column; }
         .home-cta .large-button { width: 100%; }
@@ -839,6 +840,8 @@
               <div class="view-controls" aria-label="Body model views">
                 <button class="view-control" type="button" data-view="front" data-copy="frontView">Front view</button>
                 <button class="view-control" type="button" data-view="back" data-copy="backView">Back view</button>
+                <button class="view-control" type="button" data-view="upper" data-copy="upperView">Upper body</button>
+                <button class="view-control" type="button" data-view="lower" data-copy="lowerView">Lower body</button>
                 <button class="view-control" type="button" data-view="reset" data-copy="resetView">Reset view</button>
               </div>
               <div class="workspace-controls">
@@ -1266,13 +1269,13 @@
         processingLabel: "Client-side browser processing:", modelDisclosure: "Your words are evaluated securely inside this browser to guide you to the right counter. Nothing is sent to a server.", browserProcessing: "This body map stays in your browser. Nothing is sent to a server.", browserProcessingReview: "These details were prepared in this browser from the choices you can see below.", modelBoundary: "Your words are handled in this browser for this prototype. The body-map route keeps the complaint on this device.", faqPrivacyA: "Your complaint stays in this browser for this session. Nothing is stored on a server.", raahatDepartment: "Start with where it hurts; we will show the counter that matches your confirmed details.", raahatWait: "Estimated consultation time, based on the slot and simulated queue throughput.", orsWait: "Slot time only",
         matchedCounter: "Matched Counter:", routeReference: "Route reference:", workspacePrivacy: "One red flag is enough for Emergency. The route always keeps that safety signal.", sortNote: "Sorted by earliest estimated consultation time, then travel time, then hospital name.",
         slipSubtitle: "Public Hospital OPD Specimen Slip", slipTokenLabel: "Mock token", slipTimeSummary: "Appointment timing:", slipAddress: "Hospital address", slipToken: "Token", slipSeenBy: "Estimated consultation", rightsCard: "If a hospital registration counter refuses to honor this valid online token: note your Appointment ID, file a grievance at pgportal.gov.in, or cite the Citizen's Charter.", qrTitle: "Sample security pattern", themeDark: "Use dark theme", themeLight: "Use light theme",
-        stepPatient: "Patient", stepPatientHi: "Who is this for?", stepBody: "Body map", stepBodyHi: "Point to a place", stepCounter: "Matched counter", stepCounterHi: "Where to go?", stepHospital: "Hospital & wait", stepHospitalHi: "Choose honestly", stepSlip: "Specimen slip", stepSlipHi: "Keep your copy",
+        stepPatient: "Patient", stepPatientHi: "Who is this for?", stepBody: "Body map", stepBodyHi: "Point to a place", stepCounter: "Matched counter", stepCounterHi: "Where to go?", stepHospital: "Hospital & wait", stepHospitalHi: "Choose honestly", stepSlip: "Specimen slip", stepSlipHi: "Keep your copy", upperView: "Upper body", lowerView: "Lower body",
       });
       Object.assign(copy.hi, {
         processingLabel: "ब्राउज़र में सुरक्षित स्थानीय प्रक्रिया:", modelDisclosure: "आपकी बात इसी ब्राउज़र में समझी जाती है ताकि आपको सही काउंटर तक पहुँचाया जा सके। कुछ भी सर्वर पर नहीं भेजा जाता।", browserProcessing: "शरीर का यह नक्शा इसी ब्राउज़र में चलता है। कुछ भी सर्वर पर नहीं भेजा जाता।", browserProcessingReview: "नीचे दिख रहे आपके जवाबों से यह विवरण इसी ब्राउज़र में तैयार हुआ है।", modelBoundary: "आपकी बात इस प्रोटोटाइप में इसी ब्राउज़र में संभाली जाती है। शरीर के नक्शे वाला रास्ता इसे इसी डिवाइस पर रखता है।", faqPrivacyA: "आपकी परेशानी इस सत्र में इसी ब्राउज़र में रहती है। सर्वर पर कुछ भी सेव नहीं होता।", raahatDepartment: "जहाँ परेशानी है वहाँ से शुरू करें; आपकी पुष्टि के बाद उसी से मेल खाता काउंटर दिखेगा।", raahatWait: "स्लॉट और नकली कतार की गति के आधार पर अनुमानित दिखने का समय।", orsWait: "सिर्फ स्लॉट का समय",
         matchedCounter: "मिलान हुआ काउंटर:", routeReference: "रूट संदर्भ:", workspacePrivacy: "एक रेड फ्लैग इमरजेंसी के लिए काफ़ी है। यह सुरक्षा संकेत हमेशा साथ रहता है।", sortNote: "पहले अनुमानित दिखने के समय, फिर यात्रा के समय और फिर अस्पताल के नाम से क्रम।",
         slipSubtitle: "सरकारी अस्पताल ओपीडी की नमूना स्लिप", slipTokenLabel: "नमूना टोकन", slipTimeSummary: "अपॉइंटमेंट का समय:", slipAddress: "अस्पताल का पता", slipToken: "टोकन", slipSeenBy: "अनुमानित दिखने का समय", rightsCard: "अगर अस्पताल का पंजीकरण काउंटर इस मान्य ऑनलाइन टोकन को मानने से इनकार करे: अपनी अपॉइंटमेंट आईडी लिखें, pgportal.gov.in पर शिकायत करें या सिटिज़न्स चार्टर का हवाला दें।", qrTitle: "नमूना सुरक्षा पैटर्न", themeDark: "डार्क थीम चुनें", themeLight: "लाइट थीम चुनें",
-        stepPatient: "मरीज़", stepPatientHi: "किसके लिए?", stepBody: "शरीर का नक्शा", stepBodyHi: "जगह चुनें", stepCounter: "मिलान हुआ काउंटर", stepCounterHi: "कहाँ जाएँ?", stepHospital: "अस्पताल और इंतज़ार", stepHospitalHi: "ईमानदारी से चुनें", stepSlip: "नमूना स्लिप", stepSlipHi: "अपनी प्रति रखें",
+        stepPatient: "मरीज़", stepPatientHi: "किसके लिए?", stepBody: "शरीर का नक्शा", stepBodyHi: "जगह चुनें", stepCounter: "मिलान हुआ काउंटर", stepCounterHi: "कहाँ जाएँ?", stepHospital: "अस्पताल और इंतज़ार", stepHospitalHi: "ईमानदारी से चुनें", stepSlip: "नमूना स्लिप", stepSlipHi: "अपनी प्रति रखें", upperView: "ऊपरी हिस्सा", lowerView: "निचला हिस्सा",
       });
       const state = { language: "en", screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, listening: false, region: null, noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
       const text = (key) => copy[state.language][key];
