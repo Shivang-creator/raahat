@@ -1,0 +1,8 @@
+{
+  "name": "raahat",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test routing.test.js hospital-data.test.js"
+  }
+}

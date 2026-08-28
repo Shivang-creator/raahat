@@ -1,2 +1,7 @@
-*
-!index.html
+# Keep the static site, ES modules, tests and design assets in the deployment.
+# Vercel does not need local dependency folders or repository metadata.
+node_modules
+.git
+.DS_Store
+.env
+.env.*

@@ -1,0 +1,37 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { HOSPITALS, hospitalsForDepartment } from "./hospital-data.js";
+
+test("the demo has three verified hospitals for Cardiology", () => {
+  const hospitals = hospitalsForDepartment("Cardiology");
+  assert.equal(hospitals.length, 3);
+  assert.ok(hospitals.every((hospital) => hospital.departments.includes("Cardiology")));
+  assert.ok(hospitals.every((hospital) => hospital.sourceUrl.startsWith("https://")));
+  assert.ok(hospitals.every((hospital) => hospital.name && hospital.address));
+});
+
+test("hospitals are sorted by seen time, then travel time, then name", () => {
+  const hospitals = hospitalsForDepartment("Cardiology", "central-delhi");
+  assert.deepEqual(hospitals.map((hospital) => hospital.id), [
+    "aiims-new-delhi",
+    "safdarjung-new-delhi",
+    "rml-new-delhi",
+  ]);
+  assert.deepEqual(hospitals.map((hospital) => hospital.availability.seenAt), ["12:15", "12:30", "12:40"]);
+});
+
+test("all simulated waits are at least two hours", () => {
+  for (const hospital of HOSPITALS) {
+    const availability = hospitalsForDepartment("Cardiology").find((entry) => entry.id === hospital.id).availability;
+    assert.ok(availability.waitMinutes >= 120);
+  }
+});
+
+test("seen-time sorting is deterministic across repeated reads and localities", () => {
+  for (const locality of ["central-delhi", "south-delhi", "north-delhi"]) {
+    const first = hospitalsForDepartment("Neurology", locality);
+    const second = hospitalsForDepartment("Neurology", locality);
+    assert.deepEqual(first.map((hospital) => [hospital.id, hospital.availability.seenAt]), second.map((hospital) => [hospital.id, hospital.availability.seenAt]));
+    assert.ok(first.every((hospital) => hospital.availability.tokenRange === "1–12"));
+  }
+});

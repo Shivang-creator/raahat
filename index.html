@@ -9,33 +9,45 @@
       :root {
         color-scheme: light;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: #f6f4ef;
+        background: var(--background);
         color: #17241f;
         --ink: #17241f;
-        --muted: #53635c;
-        --line: #cbd4ce;
-        --paper: #fffdf9;
+        --muted: #52635b;
+        --line: #d2dbd5;
+        --paper: #ffffff;
+        --background: #fbf9f4;
         --accent: #17634f;
-        --accent-dark: #104b3c;
-        --accent-soft: #e1f0e9;
+        --accent-dark: #0f4335;
+        --accent-soft: #e3efe8;
+        --marigold: #d97706;
+        --emergency: #b42318;
+        --emergency-red: var(--emergency);
+        --emergency-soft: #fef3f2;
         --focus: #e49b27;
       }
 
       * { box-sizing: border-box; }
-      body { min-width: 320px; min-height: 100vh; margin: 0; background: #f6f4ef; }
+      body { min-width: 320px; min-height: 100vh; margin: 0; background: var(--background); font-size: 18px; }
       button, textarea, a { font: inherit; }
       button, a { -webkit-tap-highlight-color: transparent; }
       button { cursor: pointer; }
       :focus-visible { outline: 4px solid var(--focus); outline-offset: 3px; }
 
-      .app-shell { width: min(100%, 48rem); min-height: 100vh; margin: 0 auto; padding: 1.25rem 1.25rem 1rem; display: flex; flex-direction: column; }
-      .topline { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3rem; }
-      .wordmark { color: var(--accent-dark); font-size: 1.15rem; font-weight: 800; letter-spacing: -0.03em; }
+      .app-shell { width: min(100%, 86rem); min-height: 100vh; margin: 0 auto; padding: 1rem clamp(1rem, 3vw, 2.5rem) 1.5rem; display: flex; flex-direction: column; }
+      .topline { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.5rem; padding: 0.55rem 0; background: rgba(247, 245, 240, 0.96); backdrop-filter: blur(12px); }
+      .brand-lockup { display: flex; align-items: center; gap: 0.75rem; min-width: 0; color: var(--accent-dark); text-decoration: none; }
+      .brand-mark { flex: 0 0 3.25rem; width: 3.25rem; height: 3.25rem; }
+      .brand-copy { display: grid; gap: 0.1rem; min-width: 0; }
+      .wordmark { color: var(--accent-dark); font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 850; letter-spacing: -0.03em; }
+      .tagline { color: var(--muted); font-size: 0.9rem; line-height: 1.2; }
+      .site-nav { display: none; align-items: center; gap: 0.15rem; }
+      .site-nav a { min-height: 3.25rem; display: inline-flex; align-items: center; padding: 0.5rem 0.7rem; border-radius: 0.65rem; color: var(--accent-dark); font-size: 0.92rem; font-weight: 750; text-decoration: none; }
+      .site-nav a:hover { background: var(--accent-soft); }
       .language-toggle { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.25rem; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); }
       .language-toggle button { min-height: 2.75rem; padding: 0.35rem 0.8rem; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font-size: 0.95rem; font-weight: 700; }
       .language-toggle button[aria-pressed="true"] { background: var(--accent); color: #fff; }
 
-      main { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 2rem 0 2.5rem; }
+      main { flex: 1; display: flex; flex-direction: column; padding: 2rem 0 2.5rem; }
       .eyebrow { margin: 0 0 0.65rem; color: var(--muted); font-size: 1rem; font-weight: 750; letter-spacing: 0.02em; }
       h1 { max-width: 18ch; margin: 0; color: var(--ink); font-size: clamp(2rem, 8.5vw, 3.25rem); font-weight: 780; letter-spacing: -0.055em; line-height: 1.08; }
       .question-note { max-width: 36rem; margin: 1rem 0 0; color: var(--muted); font-size: 1.125rem; line-height: 1.55; }
@@ -72,12 +84,64 @@
       .map-note { max-width: 38rem; margin: 1rem 0 0; color: var(--muted); font-size: 1.08rem; line-height: 1.55; }
       .observed-words { margin: 1rem 0 0; padding: 0.75rem 1rem; border: 1px solid var(--line); border-radius: 0.8rem; background: var(--paper); font-size: 1.05rem; line-height: 1.5; overflow-wrap: anywhere; }
       .model-free-note { margin: 1rem 0 0; padding: 0.8rem 1rem; border-radius: 0.8rem; background: var(--accent-soft); color: var(--accent-dark); font-size: 1rem; line-height: 1.5; }
-      .body-map-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; margin-top: 1.5rem; }
-      .map-side { padding: 0.85rem; border: 1px solid var(--line); border-radius: 1rem; background: rgba(255, 253, 249, 0.7); }
-      .map-side h2 { margin: 0; color: var(--accent-dark); font-size: 1.15rem; }
-      .silhouette { display: grid; place-items: center; min-height: 7.5rem; margin: 0.5rem 0 0.75rem; border-radius: 0.75rem; background: #e9eee9; }
-      .silhouette svg { width: 6rem; height: 7rem; fill: #7ca393; }
-      .region-list { display: grid; gap: 0.5rem; }
+      .model-free-footnote { margin: 0.7rem 0 0; color: var(--muted); font-size: 0.82rem; line-height: 1.4; }
+      .map-selection { display: flex; align-items: center; gap: 0.85rem; min-height: 5.5rem; margin-top: 0.9rem; padding: 0.9rem 1rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
+      .map-selection-icon { display: grid; flex: 0 0 2.7rem; place-items: center; width: 2.7rem; height: 2.7rem; border-radius: 50%; background: var(--accent-soft); color: var(--accent-dark); font-size: 1.45rem; }
+      .map-selection-copy { min-width: 0; }
+      .map-selection-kicker { display: block; color: var(--muted); font-size: 0.95rem; font-weight: 750; }
+      .map-selection-name { display: block; margin-top: 0.15rem; color: var(--accent-dark); font-size: clamp(1.65rem, 7vw, 2.35rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
+      .map-selection-message { display: block; margin-top: 0.15rem; color: var(--muted); font-size: 0.95rem; line-height: 1.35; }
+      .body-map-grid { display: grid; grid-template-columns: 1fr; gap: 0.9rem; margin-top: 1rem; }
+      .map-side { min-width: 0; padding: 0.65rem 0.45rem 0.85rem; border: 1px solid var(--line); border-radius: 1rem; background: rgba(255, 253, 249, 0.7); }
+      .map-side h2 { margin: 0 0.35rem; color: var(--accent-dark); font-size: 1.15rem; }
+      .silhouette-stage { position: relative; width: 100%; height: 34rem; margin: 0.4rem auto 0; overflow: hidden; border-radius: 0.85rem; background: linear-gradient(180deg, #f0f4ef 0%, #e5eee8 100%); }
+      .silhouette-stage svg { position: absolute; inset: 3% 4%; width: 92%; height: 94%; fill: #cbded4; stroke: #94b8a7; stroke-width: 1.4; }
+      .map-region { position: absolute; z-index: 1; min-width: 56px; min-height: 56px; margin: 0; padding: 0; border: 2px dashed rgba(16, 75, 60, 0.28); border-radius: 0.7rem; background: rgba(255, 255, 255, 0.13); color: var(--ink); transition: background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease; }
+      .map-region:hover { background: rgba(225, 240, 233, 0.65); border-color: var(--accent); }
+      .map-region[aria-pressed="true"] { border: 3px solid var(--accent-dark); background: var(--accent); box-shadow: inset 0 0 0 2px rgba(255,255,255,0.38), 0 0 0 2px rgba(23,99,79,0.18); opacity: 0.94; }
+      .map-region:focus-visible { z-index: 5; outline: 4px solid var(--focus); outline-offset: 3px; }
+      .map-region-head { top: 2%; left: 31%; width: 38%; height: 12%; border-radius: 50%; }
+      .map-region-face { z-index: 2; top: 15%; left: 36%; width: 28%; height: 8%; border-radius: 50%; }
+      .map-region-neck { top: 25%; left: 40%; width: 20%; height: 8%; }
+      .map-region-chest { top: 35%; left: 24%; width: 52%; height: 18%; clip-path: polygon(19% 0, 81% 0, 100% 22%, 92% 100%, 8% 100%, 0 22%); }
+      .map-region-upper-abdomen { top: 53%; left: 29%; width: 42%; height: 14%; }
+      .map-region-lower-abdomen { top: 69%; left: 30%; width: 40%; height: 16%; border-radius: 0.65rem 0.65rem 1.2rem 1.2rem; }
+      .map-region-arm-left, .map-region-arm-right { top: 34%; width: 20%; height: 42%; clip-path: polygon(28% 0, 78% 0, 100% 14%, 82% 100%, 18% 100%, 0 14%); }
+      .map-region-arm-left { left: 5%; }
+      .map-region-arm-right { right: 5%; }
+      .map-region-hand-left, .map-region-hand-right { top: 74%; width: 18%; height: 10%; border-radius: 50%; }
+      .map-region-hand-left { left: 4%; }
+      .map-region-hand-right { right: 4%; }
+      .map-region-leg-left, .map-region-leg-right { top: 68%; width: 19%; height: 27%; clip-path: polygon(14% 0, 86% 0, 100% 100%, 0 100%); }
+      .map-region-leg-left { left: 30%; }
+      .map-region-leg-right { right: 30%; }
+      .map-region-foot-left, .map-region-foot-right { top: 91%; width: 23%; height: 8%; border-radius: 0.45rem 0.45rem 0.85rem 0.85rem; }
+      .map-region-foot-left { left: 25%; }
+      .map-region-foot-right { right: 25%; }
+      .map-region-back { top: 25%; left: 20%; width: 60%; height: 58%; clip-path: polygon(14% 0, 86% 0, 100% 12%, 86% 100%, 14% 100%, 0 12%); }
+      .map-side-hint { margin: 0.35rem 0.35rem 0; color: var(--muted); font-size: 0.9rem; line-height: 1.35; text-align: center; }
+      .no-location-picker { margin-top: 0.8rem; padding: 0.1rem 0.9rem 0.1rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
+      .no-location-picker summary { min-height: 3.25rem; padding: 0.8rem 0.1rem; color: var(--ink); cursor: pointer; font-size: 1.08rem; font-weight: 800; }
+      .no-location-picker summary::marker { color: var(--accent); }
+      .no-location-picker p { margin: 0.4rem 0 0.85rem; color: var(--muted); font-size: 1rem; line-height: 1.45; }
+      .no-location-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem; }
+      .no-location-button { display: grid; min-width: 0; min-height: 5.5rem; place-items: center; gap: 0.25rem; padding: 0.55rem 0.35rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 0.98rem; font-weight: 750; line-height: 1.15; text-align: center; }
+      .no-location-button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
+      .pictogram { display: block; font-size: 1.9rem; line-height: 1; }
+      .kind-question { margin-top: 1.4rem; padding: 1rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
+      .kind-question h2 { margin: 0; font-size: clamp(1.55rem, 7vw, 2rem); letter-spacing: -0.04em; }
+      .kind-question-note { margin: 0.4rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.45; }
+      .kind-selection { display: flex; align-items: center; gap: 0.7rem; min-height: 4.1rem; margin-top: 1rem; padding: 0.65rem 0.75rem; border-radius: 0.8rem; background: var(--accent-soft); color: var(--accent-dark); }
+      .kind-selection-name { display: block; font-size: 1.35rem; font-weight: 800; line-height: 1.1; }
+      .kind-selection-message { display: block; margin-top: 0.1rem; font-size: 0.9rem; line-height: 1.3; }
+      .kind-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; margin-top: 0.9rem; }
+      .kind-button { display: grid; min-width: 0; min-height: 7rem; place-items: center; gap: 0.35rem; padding: 0.65rem 0.45rem; border: 2px solid var(--line); border-radius: 0.9rem; background: var(--paper); color: var(--ink); font-size: 1.05rem; font-weight: 750; line-height: 1.2; text-align: center; }
+      .kind-button .pictogram { font-size: 2.35rem; }
+      .kind-button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
+      .fallback-region-picker { margin-top: 1.15rem; padding: 1rem; border: 1px solid var(--line); border-radius: 1rem; background: rgba(255,253,249,0.58); }
+      .fallback-region-picker h2 { margin: 0; color: var(--ink); font-size: 1.15rem; }
+      .fallback-region-picker p { margin: 0.35rem 0 0.85rem; color: var(--muted); font-size: 0.98rem; line-height: 1.45; }
+      .region-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
       .region-button { display: flex; align-items: center; gap: 0.5rem; min-height: 3.5rem; padding: 0.65rem 0.7rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 1rem; font-weight: 700; text-align: left; }
       .region-button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
       .region-glyph { display: inline-grid; flex: 0 0 1.55rem; place-items: center; width: 1.55rem; height: 1.55rem; border: 2px solid currentColor; border-radius: 50%; font-size: 0.7rem; }
@@ -97,8 +161,123 @@
       .map-ready dl { display: grid; grid-template-columns: minmax(0, 9rem) 1fr; gap: 0.45rem 0.75rem; margin: 1rem 0 0; }
       .map-ready dt { color: var(--muted); font-weight: 700; }
       .map-ready dd { margin: 0; font-weight: 750; }
+      .review-screen, .result-screen { padding: 0.5rem 0 1rem; }
+      .review-screen h1, .result-screen h1 { max-width: 22ch; }
+      .screen-note { max-width: 38rem; margin: 1rem 0 0; color: var(--muted); font-size: 1.08rem; line-height: 1.55; }
+      .observed-words-card { margin-top: 1.25rem; padding: 1rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--paper); }
+      .observed-words-card p { margin: 0.6rem 0 0; font-size: 1.1rem; line-height: 1.55; overflow-wrap: anywhere; }
+      .chip-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem; margin-top: 1.25rem; }
+      .readback-chip { display: flex; min-width: 0; min-height: 5.2rem; flex-direction: column; align-items: flex-start; gap: 0.3rem; padding: 0.7rem 0.8rem; border: 2px solid var(--line); border-radius: 0.9rem; background: var(--paper); color: var(--ink); text-align: left; }
+      .readback-chip:hover { border-color: var(--accent); }
+      .readback-chip .tag { margin-right: 0; }
+      .chip-label { color: var(--muted); font-size: 0.9rem; font-weight: 750; }
+      .chip-value { font-size: 1.08rem; font-weight: 800; line-height: 1.2; overflow-wrap: anywhere; }
+      .readback-editor { margin-top: 1rem; padding: 1rem; border-left: 4px solid var(--accent); border-radius: 0.25rem 1rem 1rem 0.25rem; background: var(--accent-soft); }
+      .readback-editor h2 { margin: 0; font-size: 1.25rem; }
+      .readback-editor p { margin: 0.45rem 0 0; color: var(--muted); line-height: 1.45; }
+      .editor-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; margin-top: 0.85rem; }
+      .editor-control { min-height: 3.5rem; padding: 0.55rem 0.65rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 1rem; font-weight: 700; text-align: left; }
+      .editor-control[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
+      .unclear-note { margin-top: 1rem; padding: 1rem; border: 2px solid #b48d54; border-radius: 1rem; background: #fff8e9; color: #583a08; font-size: 1rem; line-height: 1.5; }
+      .confirm-note { margin: 1rem 0 0; color: var(--muted); font-size: 0.98rem; line-height: 1.45; }
+      .review-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; margin-top: 1.35rem; }
+      .review-actions .large-button { min-width: 0; }
+      .result-screen { min-height: 52vh; }
+      .result-screen.emergency-result { margin-inline: -1.25rem; padding: 1.5rem 1.25rem 2rem; background: #fff1f0; border-top: 8px solid #b42318; }
+      .result-kicker { margin: 0; color: var(--muted); font-size: 1rem; font-weight: 800; letter-spacing: 0.02em; }
+      .result-screen h1 { margin-top: 0.7rem; font-size: clamp(2rem, 9vw, 3.25rem); }
+      .emergency-result h1 { color: #8f1d16; }
+      .result-reason { max-width: 38rem; margin: 1.1rem 0 0; font-size: 1.18rem; line-height: 1.55; }
+      .rule-line { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin-top: 1.35rem; color: var(--muted); font-size: 1rem; line-height: 1.4; }
+      .rule-id { display: inline-flex; min-height: 2rem; align-items: center; padding: 0.25rem 0.65rem; border: 1px solid currentColor; border-radius: 999px; font-weight: 850; }
+      .not-diagnosis { margin-top: 1.35rem; font-weight: 800; }
+      .quiet-choice { display: inline-flex; min-height: 3.5rem; align-items: center; margin-top: 1.5rem; color: var(--accent-dark); font-weight: 750; text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
+      .result-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.5rem; }
+      .result-actions .large-button { flex: 1 1 12rem; }
       .back-button { min-height: 3.5rem; padding: 0.7rem 1rem; border: 2px solid var(--line); border-radius: 1rem; background: transparent; color: var(--accent-dark); font-size: 1rem; font-weight: 750; }
+      .appointment-screen { padding: 0.5rem 0 1rem; }
+      .appointment-screen h1 { max-width: 23ch; }
+      .appointment-intro { max-width: 40rem; margin: 1rem 0 0; color: var(--muted); font-size: 1.08rem; line-height: 1.55; }
+      .department-banner { display: flex; align-items: center; gap: 0.65rem; margin-top: 1.25rem; padding: 0.85rem 1rem; border-radius: 1rem; background: var(--accent-soft); color: var(--accent-dark); }
+      .department-banner strong { font-size: 1.25rem; }
+      .booking-panel { margin-top: 1.2rem; padding: 1rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
+      .booking-panel h2 { margin: 0; font-size: clamp(1.45rem, 6vw, 2rem); letter-spacing: -0.04em; }
+      .booking-panel-note { margin: 0.45rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+      .locality-field { display: grid; gap: 0.55rem; margin-top: 1rem; }
+      .locality-field label { font-weight: 780; }
+      .select-control, .sign-in-input { width: 100%; min-height: 3.5rem; padding: 0.65rem 0.75rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 1.08rem; }
+      .select-control:focus, .sign-in-input:focus { border-color: var(--accent); outline: 0; }
+      .location-note { margin: 0.65rem 0 0; padding: 0.75rem; border-radius: 0.75rem; background: #f3f6f1; color: var(--muted); font-size: 0.98rem; line-height: 1.45; }
+      .hospital-list { display: grid; gap: 0.8rem; margin-top: 1rem; }
+      .hospital-card { padding: 1rem; border: 2px solid var(--line); border-radius: 1rem; background: #fffefb; }
+      .hospital-card.is-selected { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(23, 99, 79, 0.12); }
+      .hospital-card h3 { margin: 0; color: var(--ink); font-size: 1.28rem; line-height: 1.2; letter-spacing: -0.02em; }
+      .hospital-address { margin: 0.4rem 0 0; color: var(--muted); font-size: 0.98rem; line-height: 1.4; }
+      .verified-line { margin: 0.7rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.4; }
+      .verified-line a { color: var(--accent-dark); font-weight: 750; }
+      .hospital-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem; margin: 0.9rem 0 0; }
+      .hospital-fact { min-width: 0; padding: 0.7rem; border-radius: 0.75rem; background: #f5f7f3; }
+      .hospital-fact dt { color: var(--muted); font-size: 0.88rem; font-weight: 750; line-height: 1.25; }
+      .hospital-fact dd { margin: 0.25rem 0 0; color: var(--ink); font-size: 1.12rem; font-weight: 800; line-height: 1.25; overflow-wrap: anywhere; }
+      .honest-wait { margin: 0.8rem 0 0; padding: 0.8rem; border-left: 4px solid var(--accent); border-radius: 0.25rem 0.7rem 0.7rem 0.25rem; background: #edf8f2; color: #183f31; font-size: 1rem; line-height: 1.5; }
+      .sort-note { margin: 0.9rem 0 0; color: var(--muted); font-size: 0.95rem; line-height: 1.45; }
+      .hospital-card .large-button { width: 100%; margin-top: 0.85rem; }
+      .carry-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; margin-top: 1rem; }
+      .carry-option { min-height: 4.2rem; padding: 0.7rem; border: 2px solid var(--line); border-radius: 0.85rem; background: var(--paper); color: var(--ink); font-size: 1.05rem; font-weight: 750; text-align: left; }
+      .carry-option[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
+      .carry-list { margin: 1rem 0 0; padding: 0.9rem 1rem 0.9rem 2rem; border-radius: 0.8rem; background: #f5f7f3; }
+      .carry-list li { margin: 0.45rem 0; padding-left: 0.2rem; line-height: 1.4; }
+      .fee-line { margin: 0.85rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.45; }
+      .booking-panel .large-button { margin-top: 1rem; }
+      .sign-in-disclosure { margin-top: 1rem; padding: 0.9rem; border-radius: 0.8rem; background: #fff8e9; color: #583a08; font-size: 1rem; line-height: 1.5; }
+      .credential-card { display: grid; gap: 0.8rem; margin-top: 1rem; padding: 1rem; border: 2px dashed #b48d54; border-radius: 0.85rem; background: #fffdf6; }
+      .credential-value { display: block; margin-top: 0.2rem; color: var(--ink); font-size: 1.38rem; font-weight: 850; letter-spacing: 0.02em; overflow-wrap: anywhere; }
+      .human-check { display: flex; width: 100%; min-height: 3.75rem; align-items: center; gap: 0.7rem; margin-top: 1rem; padding: 0.7rem 0.8rem; border: 2px solid var(--line); border-radius: 0.85rem; background: var(--paper); color: var(--ink); font-size: 1rem; font-weight: 750; text-align: left; }
+      .human-check::before { display: grid; flex: 0 0 1.7rem; place-items: center; width: 1.7rem; height: 1.7rem; border: 2px solid currentColor; border-radius: 0.35rem; content: ""; }
+      .human-check[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
+      .human-check[aria-pressed="true"]::before { background: var(--accent); color: #fff; content: "✓"; }
+      .sign-in-fields { display: grid; gap: 0.8rem; margin-top: 1rem; }
+      .sign-in-field { display: grid; gap: 0.4rem; }
+      .sign-in-field label { color: var(--muted); font-size: 0.95rem; font-weight: 750; }
+      .slip { position: relative; overflow: hidden; margin-top: 1rem; padding: 1.15rem; border: 2px solid var(--ink); background: #fffefb; }
+      .slip::before { position: absolute; top: 45%; left: 50%; z-index: 0; color: rgba(23, 36, 31, 0.08); content: "SPECIMEN"; font-size: clamp(2.4rem, 11vw, 5rem); font-weight: 900; letter-spacing: 0.08em; transform: translate(-50%, -50%) rotate(-22deg); white-space: nowrap; }
+      .slip > * { position: relative; z-index: 1; }
+      .slip-title { margin: 0; font-size: 1.55rem; letter-spacing: -0.03em; }
+      .slip-watermark { margin: 0.4rem 0 0; color: #8f1d16; font-size: 0.98rem; font-weight: 900; letter-spacing: 0.04em; line-height: 1.35; }
+      .slip-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-top: 1.1rem; }
+      .slip-field { min-width: 0; }
+      .slip-field dt { color: var(--muted); font-size: 0.87rem; font-weight: 750; line-height: 1.25; }
+      .slip-field dd { margin: 0.22rem 0 0; font-size: 1.08rem; font-weight: 800; line-height: 1.28; overflow-wrap: anywhere; }
+      .patient-report { margin: 1rem 0 0; padding: 0.8rem; border-radius: 0.75rem; background: #edf8f2; font-size: 1rem; line-height: 1.5; }
+      .rights-card { margin-top: 1rem; padding: 0.9rem; border: 2px solid var(--accent); border-radius: 0.8rem; background: #f5fbf7; color: #183f31; font-size: 1rem; font-weight: 700; line-height: 1.55; }
+      .rights-card a { color: var(--accent-dark); }
+      .slip-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; margin-top: 1rem; }
+      .print-only { display: none; }
+      .honesty-screen { padding: 0.5rem 0 1rem; }
+      .honesty-screen h1 { max-width: 20ch; }
+      .honesty-intro { max-width: 38rem; margin: 0.8rem 0 0; color: var(--muted); font-size: 1.08rem; line-height: 1.5; }
+      .honesty-section { margin-top: 1.25rem; padding: 1rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
+      .honesty-section h2 { margin: 0; font-size: clamp(1.45rem, 6vw, 2rem); letter-spacing: -0.04em; line-height: 1.12; }
+      .honesty-section > p { margin: 0.55rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.45; }
+      .honesty-facts, .honesty-limits, .build-ledger { display: grid; gap: 0.7rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+      .honesty-fact, .honesty-limit, .build-item { min-width: 0; padding: 0.8rem; border-radius: 0.8rem; background: #f5f7f3; font-size: 1rem; line-height: 1.45; }
+      .honesty-fact a, .honesty-limit a { color: var(--accent-dark); font-weight: 750; }
+      .honesty-source { display: block; margin-top: 0.35rem; color: var(--muted); font-size: 0.86rem; }
+      .honesty-source a { font-weight: 650; }
+      .honesty-limit strong, .build-item strong { color: var(--ink); }
+      .honesty-build { border-color: #a9c8ba; background: #edf8f2; }
+      .honesty-back { margin-top: 1.25rem; }
+      @media print {
+        body { background: #fff; }
+        .topline, .support, .prototype-banner, main > :not(#appointment-screen), #appointment-screen > :not(#slip-panel), .slip-actions { display: none !important; }
+        .app-shell { width: 100%; padding: 0; }
+        main { display: block; padding: 0; }
+        #appointment-screen { display: block !important; }
+        #slip-panel { display: block !important; margin: 0; }
+        .print-only { display: block; }
+      }
       .tag { display: inline-flex; align-items: center; min-height: 1.8rem; margin-right: 0.35rem; padding: 0.2rem 0.55rem; border: 1px solid currentColor; border-radius: 999px; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.02em; line-height: 1; vertical-align: middle; }
+      .visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important; }
       .support { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin: 0 0 1.25rem; color: var(--muted); font-size: 0.98rem; line-height: 1.5; }
       .support a { color: var(--accent-dark); font-weight: 750; text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
       .prototype-banner { margin: 0; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 1rem; line-height: 1.5; }
@@ -113,19 +292,175 @@
         .choice-grid { grid-template-columns: 1fr; }
         .question-note { font-size: 1.05rem; }
         .body-map-grid { grid-template-columns: 1fr; }
-        .followup-grid { grid-template-columns: 1fr; }
+        .silhouette-stage { height: 32rem; }
+        .region-list { grid-template-columns: 1fr; }
         .map-ready dl { grid-template-columns: 1fr; gap: 0.15rem; }
+        .chip-grid, .editor-controls, .review-actions { grid-template-columns: 1fr; }
+        .result-screen.emergency-result { margin-inline: -1rem; padding-inline: 1rem; }
+        .hospital-facts, .carry-options, .slip-grid, .slip-actions { grid-template-columns: 1fr; }
       }
 
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after { transition-duration: 0.001ms !important; scroll-behavior: auto; }
       }
+
+      /* Front door: a spacious civic welcome that still hands off to the tested flow. */
+      .landing-screen { display: grid; gap: 4.5rem; }
+      .landing-hero { display: grid; gap: 2rem; align-items: center; padding: clamp(1.5rem, 4vw, 4rem) 0 0; }
+      .hero-copy { max-width: 45rem; }
+      .hero-kicker { display: inline-flex; align-items: center; gap: 0.45rem; margin: 0 0 1rem; color: var(--accent-dark); font-size: 1rem; font-weight: 850; letter-spacing: 0.04em; text-transform: uppercase; }
+      .hero-kicker::before { display: inline-block; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--marigold); content: ""; }
+      .landing-hero h1 { max-width: 14ch; font-size: clamp(2.65rem, 7vw, 5.2rem); line-height: 0.98; }
+      .hero-subtitle { max-width: 43rem; margin: 1.4rem 0 0; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.55; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+      .hero-actions .large-button { flex: 0 1 auto; }
+      .trust-badges { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 1.3rem 0 0; padding: 0; list-style: none; }
+      .trust-badge { display: inline-flex; min-height: 2.8rem; align-items: center; padding: 0.45rem 0.7rem; border: 1px solid #9ec4b3; border-radius: 999px; background: var(--accent-soft); color: var(--accent-dark); font-size: 0.92rem; font-weight: 800; line-height: 1.2; }
+      .hero-card { position: relative; overflow: hidden; padding: clamp(1rem, 3vw, 1.5rem); border: 2px solid var(--accent); border-radius: 1.35rem; background: var(--paper); box-shadow: 0 1.25rem 3rem rgba(23, 99, 79, 0.13); }
+      .hero-card::after { position: absolute; right: -3rem; top: -3rem; width: 9rem; height: 9rem; border-radius: 50%; background: rgba(217, 119, 6, 0.14); content: ""; }
+      .hero-card > * { position: relative; z-index: 1; }
+      .hero-card h2 { max-width: 14ch; margin: 0; color: var(--accent-dark); font-size: clamp(1.55rem, 4vw, 2.1rem); letter-spacing: -0.04em; line-height: 1.05; }
+      .hero-card-note { margin: 0.55rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.45; }
+      .hero-card .field-label { margin-top: 1.25rem; }
+      .hero-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; margin-top: 0.6rem; }
+      .hero-choice { min-height: 3.5rem; padding: 0.55rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 1rem; font-weight: 780; }
+      .hero-choice[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
+      .hero-entry-routes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem; margin-top: 0.65rem; }
+      .entry-route { min-height: 3.5rem; padding: 0.45rem 0.35rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 0.92rem; font-weight: 780; }
+      .entry-route[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
+      .hero-input { width: 100%; min-height: 5.5rem; margin-top: 0.65rem; padding: 0.8rem; border: 2px solid var(--line); border-radius: 0.8rem; background: #fff; color: var(--ink); font-size: 1.05rem; line-height: 1.45; resize: vertical; }
+      .hero-input:focus { border-color: var(--accent); outline: 0; }
+      .hero-examples { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.65rem; }
+      .hero-example { min-height: 2.8rem; padding: 0.4rem 0.7rem; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--accent-dark); font-size: 0.9rem; font-weight: 750; }
+      .hero-card .large-button { width: 100%; margin-top: 0.8rem; }
+      .landing-section { scroll-margin-top: 6rem; }
+      .section-heading { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem; }
+      .section-heading h2 { max-width: 20ch; margin: 0; color: var(--ink); font-size: clamp(2rem, 5vw, 3.45rem); letter-spacing: -0.055em; line-height: 1; }
+      .section-heading p { max-width: 34rem; margin: 0; color: var(--muted); font-size: 1.05rem; line-height: 1.5; }
+      .comparison-wrap { margin-top: 1.5rem; overflow-x: auto; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
+      .comparison-table { width: 100%; min-width: 42rem; border-collapse: collapse; }
+      .comparison-table th, .comparison-table td { padding: 1rem; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; font-size: 1rem; line-height: 1.4; }
+      .comparison-table th { color: var(--accent-dark); background: var(--accent-soft); font-size: 1.05rem; }
+      .comparison-table tr:last-child td { border-bottom: 0; }
+      .comparison-table td:first-child { width: 24%; color: var(--muted); font-weight: 800; }
+      .comparison-table .raahat-cell { color: var(--accent-dark); font-weight: 750; }
+      .comparison-table .ors-cell { color: var(--ink); }
+      .table-label { display: block; margin-bottom: 0.35rem; color: var(--muted); font-size: 0.85rem; font-weight: 800; text-transform: uppercase; }
+      .journey-grid { display: grid; gap: 0.8rem; margin-top: 1.5rem; counter-reset: journey; }
+      .journey-card { position: relative; min-height: 11rem; padding: 1.2rem 1.1rem 1.1rem 4.6rem; border-radius: 1rem; background: var(--paper); box-shadow: 0 0 0 2px var(--line); }
+      .journey-card::before { position: absolute; left: 1.1rem; top: 1.1rem; display: grid; width: 2.6rem; height: 2.6rem; place-items: center; border-radius: 50%; background: var(--marigold); color: #fff; content: counter(journey); counter-increment: journey; font-size: 1.25rem; font-weight: 900; }
+      .journey-card h3 { margin: 0; color: var(--accent-dark); font-size: 1.3rem; line-height: 1.15; }
+      .journey-card p { margin: 0.6rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.45; }
+      .network-grid { display: grid; gap: 0.8rem; margin-top: 1.5rem; }
+      .network-card { padding: 1rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
+      .network-card h3 { margin: 0; color: var(--ink); font-size: 1.3rem; line-height: 1.15; }
+      .network-card p { margin: 0.5rem 0 0; color: var(--muted); font-size: 0.98rem; line-height: 1.45; }
+      .network-meta { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.8rem; }
+      .network-pill { display: inline-flex; min-height: 2.4rem; align-items: center; padding: 0.35rem 0.55rem; border-radius: 0.6rem; background: #f2f6f1; color: var(--accent-dark); font-size: 0.9rem; font-weight: 760; }
+      .network-live { margin-top: 0.8rem; padding: 0.7rem; border-left: 4px solid var(--marigold); border-radius: 0.2rem 0.7rem 0.7rem 0.2rem; background: #fff8e9; color: #583a08; font-size: 0.98rem; line-height: 1.4; }
+      .faq-list { display: grid; gap: 0.7rem; margin-top: 1.5rem; }
+      .faq-item { border: 2px solid var(--line); border-radius: 0.9rem; background: var(--paper); }
+      .faq-item summary { min-height: 3.75rem; padding: 0.9rem 1rem; cursor: pointer; color: var(--accent-dark); font-size: 1.05rem; font-weight: 800; line-height: 1.35; }
+      .faq-item p { margin: 0; padding: 0 1rem 1rem; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+      .emergency-network { margin-top: 1rem; padding: 1rem; border: 2px solid var(--emergency-red); border-radius: 0.9rem; background: var(--emergency-soft); color: #6f1d18; }
+      .emergency-network h2 { margin: 0; font-size: 1.25rem; }
+      .emergency-network p { margin: 0.5rem 0 0; font-size: 1rem; line-height: 1.45; }
+      .emergency-network .tag { color: #6f1d18; }
+      .qr-wrap { display: flex; align-items: center; gap: 0.8rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--line); }
+      .qr-code { width: 6rem; height: 6rem; flex: 0 0 6rem; border: 0.45rem solid #fff; outline: 2px solid var(--ink); background: repeating-conic-gradient(var(--ink) 0 25%, #fff 0 50%) 0 0 / 1rem 1rem; }
+      .qr-copy { color: var(--muted); font-size: 0.92rem; line-height: 1.4; }
+      .qr-copy strong { display: block; color: var(--ink); font-size: 1rem; }
+      .emergency-hospital { margin-top: 1rem; padding: 0.9rem; border: 1px solid #e3a29b; border-radius: 0.8rem; background: rgba(255,255,255,0.7); }
+      .emergency-hospital h2 { margin: 0; color: #6f1d18; font-size: 1.2rem; }
+      .emergency-hospital p { margin: 0.4rem 0 0; font-size: 1rem; line-height: 1.4; }
+      .emergency-hospital .large-button { margin-top: 0.8rem; border-color: var(--emergency-red); background: var(--emergency-red); color: #fff; }
+      .model-disclosure { margin-top: 0.9rem; padding: 0.8rem; border-radius: 0.7rem; background: #fff8e9; color: #583a08; font-size: 0.95rem; line-height: 1.45; }
+
+      .tagline-hi { font-size: 0.78rem; }
+      .journey-icon { display: grid; width: 2.8rem; height: 2.8rem; place-items: center; margin-bottom: 0.75rem; border-radius: 0.8rem; background: var(--accent-soft); color: var(--accent-dark); font-size: 1.8rem; font-weight: 900; }
+      .triage-workspace { display: grid; gap: 1rem; margin: 1.35rem 0 1rem; }
+      .three-panel, .workspace-side { min-width: 0; padding: 1rem; border: 2px solid var(--line); border-radius: 1.1rem; background: var(--paper); }
+      .workspace-eyebrow { display: flex; align-items: center; gap: 0.45rem; margin: 0; color: var(--muted); font-size: 0.92rem; font-weight: 800; letter-spacing: 0.02em; }
+      .three-panel h2, .workspace-side h2 { margin: 0.75rem 0 0; color: var(--accent-dark); font-size: clamp(1.45rem, 4vw, 2.1rem); letter-spacing: -0.04em; line-height: 1.08; }
+      .workspace-note { margin: 0.45rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.45; }
+      .body-3d-stage { position: relative; min-height: 30rem; margin-top: 0.9rem; overflow: hidden; border-radius: 0.9rem; background: radial-gradient(circle at 50% 35%, #f4fbf5 0%, #e5efe9 62%, #d8e9e0 100%); }
+      #body-3d-canvas { display: block; width: 100%; height: 30rem; touch-action: none; cursor: grab; }
+      #body-3d-canvas:active { cursor: grabbing; }
+      .body-3d-stage::after { position: absolute; right: 1rem; bottom: 0.75rem; padding: 0.35rem 0.55rem; border-radius: 999px; background: rgba(255,255,255,0.78); color: var(--muted); content: "360°"; font-size: 0.8rem; font-weight: 850; pointer-events: none; }
+      .anatomy-node { position: absolute; z-index: 2; transform: translate(-50%, -50%); }
+      .anatomy-node button { min-height: 3.5rem; padding: 0.35rem 0.65rem 0.35rem 1.55rem; border: 2px solid var(--marigold); border-radius: 999px; background: rgba(255,255,255,0.94); color: var(--ink); font-size: 0.92rem; font-weight: 850; box-shadow: 0 0 0 0.3rem rgba(217,119,6,0.14); }
+      .anatomy-node button::before { position: absolute; left: 0.55rem; top: 50%; width: 0.58rem; height: 0.58rem; border-radius: 50%; background: var(--marigold); box-shadow: 0 0 0 0.28rem rgba(217,119,6,0.2); content: ""; transform: translateY(-50%); }
+      .anatomy-node button:hover, .anatomy-node button:focus-visible { background: var(--marigold); color: #fff; }
+      .node-head { top: 13%; left: 73%; }
+      .node-chest { top: 35%; left: 82%; }
+      .node-abdomen { top: 49%; left: 79%; }
+      .node-back { top: 27%; left: 20%; }
+      .node-limbs { top: 69%; left: 77%; }
+      .workspace-controls { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 0.8rem; }
+      .workspace-controls .large-button { flex: 1 1 14rem; min-height: 3.5rem; }
+      .workspace-unsure { display: inline-flex; min-height: 3.5rem; align-items: center; gap: 0.5rem; padding: 0.65rem 0.85rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 1rem; font-weight: 750; }
+      .workspace-unsure > span:first-child { display: grid; width: 1.55rem; height: 1.55rem; place-items: center; border: 2px solid currentColor; border-radius: 50%; }
+      .three-unavailable { margin: 0.75rem 0 0; padding: 0.7rem; border-radius: 0.7rem; background: #fff8e9; color: #583a08; font-size: 0.94rem; line-height: 1.4; }
+      .workspace-summary { display: grid; gap: 0.55rem; margin-top: 1rem; padding: 1rem; border-radius: 0.9rem; background: var(--accent-soft); color: var(--accent-dark); }
+      .workspace-summary strong { font-size: 1.25rem; line-height: 1.2; }
+      .workspace-summary span { color: var(--muted); font-size: 0.98rem; line-height: 1.45; }
+      .workspace-privacy { margin: 1rem 0 0; padding: 0.8rem; border: 1px solid #a9c8ba; border-radius: 0.75rem; background: #f5fbf7; color: #183f31; font-size: 0.96rem; line-height: 1.45; }
+      .support-label { font-weight: 800; color: var(--ink); }
+
+      @media (min-width: 760px) {
+        .site-nav { display: inline-flex; }
+        .landing-hero { grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr); }
+        .journey-grid, .network-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .triage-workspace { grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.65fr); align-items: start; }
+        .workspace-side { position: sticky; top: 6rem; }
+      }
+      @media (min-width: 1100px) {
+        .landing-hero { gap: 4rem; }
+        .network-grid { gap: 1rem; }
+      }
+      @media (max-width: 759px) {
+        .topline { align-items: center; }
+        .tagline { display: none; }
+        .site-nav { order: 3; width: 100%; overflow-x: auto; }
+        .topline { flex-wrap: wrap; }
+        .site-nav a { white-space: nowrap; }
+      }
+      @media (max-width: 640px) {
+        .body-3d-stage, #body-3d-canvas { min-height: 25rem; height: 25rem; }
+        .node-head { left: 76%; }
+        .node-chest, .node-abdomen, .node-limbs { left: 83%; }
+        .node-back { left: 17%; }
+        .map-actions { position: sticky; bottom: 0.35rem; z-index: 4; padding: 0.55rem; border-radius: 0.9rem; background: rgba(251,249,244,0.94); box-shadow: 0 0.3rem 1rem rgba(23,36,31,0.12); }
+      }
+      /* Keep citizen-facing copy and ordinary controls above the accessibility floor. */
+      p, li, label, summary, th, td, input, select, textarea, button { font-size: 1rem; }
+      .tag, .table-label { font-size: 0.82rem; }
+      .language-toggle button, .site-nav a { min-height: 3.5rem; }
+      .example-chip, .hero-example { min-height: 3.5rem; }
     </style>
   </head>
   <body>
     <div class="app-shell">
       <div class="topline">
-        <div class="wordmark">राहत · Raahat</div>
+        <a class="brand-lockup" href="#front-door" id="brand-home" aria-label="Raahat home">
+          <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-labelledby="logo-title logo-desc">
+            <title id="logo-title">Raahat civic relief mark</title>
+            <desc id="logo-desc">A warm sun above a leaf and supportive hands around a medical cross.</desc>
+            <circle cx="47" cy="16" r="9" fill="#d97706" />
+            <path d="M32 54C17 50 10 39 13 25c12 1 22 8 25 20 1 4-1 7-6 9Z" fill="#17634f" />
+            <path d="M27 49c5-9 10-16 18-23" fill="none" stroke="#fffdf9" stroke-linecap="round" stroke-width="2.5" />
+            <path d="M9 42c7-2 13 1 18 7M55 42c-7-2-13 1-18 7" fill="none" stroke="#17634f" stroke-linecap="round" stroke-width="4" />
+            <path d="M32 28v12M26 34h12" fill="none" stroke="#fffdf9" stroke-linecap="round" stroke-width="3.5" />
+          </svg>
+          <span class="brand-copy"><span class="wordmark">राहत · Raahat</span><span class="tagline">Point at where it hurts. We'll do the rest.</span><span class="tagline tagline-hi">जहाँ तकलीफ़ है वहाँ बताइए। बाक़ी हम संभालेंगे।</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Raahat information">
+          <a href="#why-raahat" data-landing-link="true" data-copy="whyLink">Why Raahat?</a>
+          <a href="#how-it-works" data-landing-link="true" data-copy="howLink">How It Works</a>
+          <a href="#ors-comparison" data-landing-link="true" data-copy="orsLink">ORS vs Raahat</a>
+          <a href="#network" data-landing-link="true" data-copy="hospitalsLink">Hospitals</a>
+          <a href="#faqs" data-landing-link="true" data-copy="faqLink">FAQs</a>
+        </nav>
         <div class="language-toggle" role="group" aria-label="Language">
           <button type="button" data-language="en" aria-pressed="true">English</button>
           <button type="button" data-language="hi" aria-pressed="false">हिंदी</button>
@@ -133,7 +468,105 @@
       </div>
 
       <main>
-        <div id="question-content">
+        <section class="landing-screen" id="landing-screen" aria-labelledby="landing-title">
+          <section class="landing-hero" id="front-door">
+            <div class="hero-copy">
+              <p class="hero-kicker" data-copy="landingKicker">A calmer front door to public hospitals</p>
+              <h1 id="landing-title" data-copy="landingTitle">Government Hospital Appointments, Without the Confusion.</h1>
+              <p class="hero-subtitle" data-copy="landingSubtitle">ORS asks which department you need. A sick person only knows where it hurts. Tell us your symptoms in your own words, voice, or tap the body map — we'll guide you to the right OPD counter with honest wait times.</p>
+              <p class="model-disclosure"><span class="tag">Rule</span><span data-copy="modelDisclosure">This prototype reads this sentence in your browser. Nothing is sent to a server; tap the body map if you would rather not type.</span></p>
+              <div class="hero-actions">
+                <button class="large-button primary" type="button" id="start-triage" data-copy="startTriage">Start Triage</button>
+                <a class="back-button" href="#why-raahat" data-copy="learnMore">See how it works</a>
+              </div>
+              <ul class="trust-badges" aria-label="Trust badges">
+                <li class="trust-badge"><span class="tag">Verified</span><span data-copy="privacyBadge">100% Client-Side Privacy</span></li>
+                <li class="trust-badge"><span class="tag">Verified</span><span data-copy="noIdBadge">No Aadhaar/OTP Required to Explore</span></li>
+                <li class="trust-badge"><span class="tag">Verified</span><span data-copy="accessBadge">Accessible for Non-Literate Citizens</span></li>
+              </ul>
+            </div>
+
+            <section class="hero-card" aria-labelledby="hero-card-title">
+              <h2 id="hero-card-title" data-copy="quickStartTitle">Start with what you know</h2>
+              <p class="hero-card-note" data-copy="quickStartNote">No account. No department guessing. Try a sample or type one sentence.</p>
+              <span class="field-label" data-copy="bookingFor">Booking for:</span>
+              <div class="hero-choices" role="group" aria-label="Booking for">
+                <button class="hero-choice" type="button" data-landing-booking="myself" aria-pressed="true" data-copy="myself">Myself</button>
+                <button class="hero-choice" type="button" data-landing-booking="someone" aria-pressed="false" data-copy="someoneElse">Someone else</button>
+              </div>
+              <span class="field-label" data-copy="entryRouteLabel">How would you like to describe it?</span>
+              <div class="hero-entry-routes" role="group" aria-label="Complaint entry route">
+                <button class="entry-route" type="button" data-entry-route="speak" aria-pressed="false" data-copy="entrySpeak">Speak</button>
+                <button class="entry-route" type="button" data-entry-route="type" aria-pressed="true" data-copy="entryType">Type</button>
+                <button class="entry-route" type="button" data-entry-route="map" aria-pressed="false" data-copy="entryMap">Body map</button>
+              </div>
+              <textarea class="hero-input" id="landing-complaint" rows="2" data-copy-placeholder="landingPlaceholder" placeholder="e.g. chest pain, since this morning"></textarea>
+              <div class="hero-examples" role="group" aria-label="Sample symptoms">
+                <button class="hero-example" type="button" data-landing-example="chest pain" data-copy="exampleChest">chest pain</button>
+                <button class="hero-example" type="button" data-landing-example="seene mein dard aur saans lene mein dikkat" data-copy="exampleBreathing">chest pain + breathlessness</button>
+                <button class="hero-example" type="button" data-landing-example="weakness on one side" data-copy="exampleWeakness">weakness on one side</button>
+              </div>
+              <button class="large-button primary" type="button" id="hero-continue" data-copy="continueFromCard">Continue to read-back</button>
+            </section>
+          </section>
+
+          <section class="landing-section" id="why-raahat" aria-labelledby="why-title">
+            <div class="section-heading"><h2 id="why-title" data-copy="whyTitle">A little more dignity at the counter.</h2><p data-copy="whyNote">Raahat starts with the citizen's words, not a medical vocabulary test. The person stays in control before anything is routed.</p></div>
+            <div class="journey-grid">
+              <article class="journey-card"><h3 data-copy="journeyOneTitle">Describe in your voice or tap the map</h3><p data-copy="journeyOneNote">Speak, type, or use a flat body map. Every route creates the same reviewable complaint.</p></article>
+              <article class="journey-card"><h3 data-copy="journeyTwoTitle">Verified hospital & honest queue wait</h3><p data-copy="journeyTwoNote">See public hospital facts, then see simulated token throughput and when people are usually seen.</p></article>
+              <article class="journey-card"><h3 data-copy="journeyThreeTitle">Print specimen slip with citizen rights</h3><p data-copy="journeyThreeNote">A clearly marked mock slip keeps the next step legible and carries a grievance route.</p></article>
+            </div>
+          </section>
+
+          <section class="landing-section" id="how-it-works" aria-labelledby="how-title">
+            <div class="section-heading"><h2 id="how-title" data-copy="howTitle">How Raahat works</h2><p data-copy="howNote">A short, visible journey from “where it hurts” to the right OPD counter.</p></div>
+            <div class="journey-grid">
+              <article class="journey-card"><span class="journey-icon" aria-hidden="true">◌</span><h3 data-copy="howOneTitle">Point, speak, or type</h3><p data-copy="howOneNote">Describe symptoms in any language, or point to a place on the interactive body map.</p></article>
+              <article class="journey-card"><span class="journey-icon" aria-hidden="true">◷</span><h3 data-copy="howTwoTitle">Instant triage & honest wait</h3><p data-copy="howTwoNote">Code matches a verified hospital counter and shows simulated queue timing in plain language.</p></article>
+              <article class="journey-card"><span class="journey-icon" aria-hidden="true">▤</span><h3 data-copy="howThreeTitle">Specimen slip & citizen rights</h3><p data-copy="howThreeNote">Print a clearly marked mock slip with what to carry and a PGPortal grievance safeguard.</p></article>
+            </div>
+          </section>
+
+          <section class="landing-section" id="ors-comparison" aria-labelledby="comparison-title">
+            <div class="section-heading"><h2 id="comparison-title" data-copy="comparisonTitle">How Raahat rethinks ORS</h2><p data-copy="comparisonNote">ORS is a useful appointment system. Raahat addresses the moment before it: when a citizen does not know the right counter.</p></div>
+            <div class="comparison-wrap">
+              <table class="comparison-table">
+                <thead><tr><th data-copy="comparisonQuestion">The front door question</th><th>ors.gov.in <span class="table-label" data-copy="orsEra">2015 · NIC digitised counter</span></th><th>Raahat <span class="table-label" data-copy="raahatEra">2026 · citizen-first triage</span></th></tr></thead>
+                <tbody>
+                  <tr><td data-copy="comparisonDepartment">Finding a department</td><td class="ors-cell" data-copy="orsDepartment">Department guessing</td><td class="raahat-cell" data-copy="raahatDepartment">Zero-Knowledge Triage — start with where it hurts</td></tr>
+                  <tr><td data-copy="comparisonWait">Knowing the real wait</td><td class="ors-cell" data-copy="orsWait">Phantom slot time</td><td class="raahat-cell" data-copy="raahatWait">Honest Queue Wait — slot + simulated seen-time</td></tr>
+                  <tr><td data-copy="comparisonAuth">Getting started</td><td class="ors-cell" data-copy="orsAuth">Front-door distorted CAPTCHA</td><td class="raahat-cell" data-copy="raahatAuth">Late-stage 1-tap Auth — only when making a specimen slip</td></tr>
+                  <tr><td data-copy="comparisonAccess">Describing the problem</td><td class="ors-cell" data-copy="orsAccess">Text Forms</td><td class="raahat-cell" data-copy="raahatAccess">2D Visual Body Map + speak + type</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="landing-section" id="network" aria-labelledby="network-title">
+            <div class="section-heading"><h2 id="network-title" data-copy="networkTitle">Delhi hospital network live status</h2><p><span class="tag">Verified</span> <span data-copy="networkNote">Hospital names, addresses and departments are public facts. Availability and token throughput are simulated for this prototype.</span></p></div>
+            <div class="network-grid">
+              <article class="network-card"><h3>AIIMS New Delhi</h3><p><span class="tag">Verified</span> Ansari Nagar, New Delhi · departments include Cardiology, Neurology and General Medicine.</p><p class="verified-line"><span class="tag">Verified</span> Departments checked 27 Aug 2026 · <a href="https://www.aiims.edu/index.php/en/departments-and-centers/departments" target="_blank" rel="noreferrer">AIIMS public list</a></p><div class="network-meta"><span class="network-pill"><span class="tag">Verified</span> 24/7 Emergency</span><span class="network-pill"><span class="tag">Simulated</span> 12 tokens seen</span></div><p class="network-live"><span class="tag">Simulated</span> Live token throughput: morning rounds in progress · next sample slot 09:30 AM.</p></article>
+              <article class="network-card"><h3>Safdarjung Hospital</h3><p><span class="tag">Verified</span> Ansari Nagar West, New Delhi · departments include Cardiology, Paediatrics and Orthopaedics.</p><p class="verified-line"><span class="tag">Verified</span> Departments checked 27 Aug 2026 · <a href="https://www.vmmc-sjh.mohfw.gov.in/medical-departments" target="_blank" rel="noreferrer">Safdarjung public list</a></p><div class="network-meta"><span class="network-pill"><span class="tag">Verified</span> 24/7 Emergency</span><span class="network-pill"><span class="tag">Simulated</span> 9 tokens seen</span></div><p class="network-live"><span class="tag">Simulated</span> Live token throughput: 9 tokens seen during morning rounds · next sample slot 10:00 AM.</p></article>
+              <article class="network-card"><h3>Dr. RML Hospital</h3><p><span class="tag">Verified</span> Baba Kharak Singh Marg, New Delhi · departments include Gastroenterology, Dermatology and Neurology.</p><p class="verified-line"><span class="tag">Verified</span> Departments checked 27 Aug 2026 · <a href="https://rmlh.nic.in/" target="_blank" rel="noreferrer">RML public site</a></p><div class="network-meta"><span class="network-pill"><span class="tag">Verified</span> 24/7 Emergency</span><span class="network-pill"><span class="tag">Simulated</span> 7 tokens seen</span></div><p class="network-live"><span class="tag">Simulated</span> Live token throughput: 7 tokens seen during morning rounds · next sample slot 10:30 AM.</p></article>
+            </div>
+          </section>
+
+          <section class="landing-section" id="faqs" aria-labelledby="faq-title">
+            <div class="section-heading"><h2 id="faq-title" data-copy="faqTitle">Questions citizens and judges ask</h2><p data-copy="faqNote">Plain answers about safety, access, privacy and what this prototype can really do.</p></div>
+            <div class="faq-list">
+              <details class="faq-item"><summary data-copy="faqSafetyQ">Is this triage safe?</summary><p data-copy="faqSafetyA">Raahat does not diagnose. Code applies a small published rule file after you see and confirm the complaint. When a red flag is present, one flag is enough to route to Emergency.</p></details>
+              <details class="faq-item"><summary data-copy="faqRedFlagQ">What happens when there is an Emergency red flag?</summary><p data-copy="faqRedFlagA">The result says to go to Emergency now and not book an appointment. The rule ID is shown, and the nearest simulated emergency-capable hospital in your chosen locality is displayed.</p></details>
+              <details class="faq-item"><summary data-copy="faqAccessQ">Can someone who cannot read use it?</summary><p data-copy="faqAccessA">Yes. Complaint entry has three equal routes: speak, type, or tap the labelled 2D body map. Large buttons, keyboard focus and screen-reader labels are built into the flow.</p></details>
+              <details class="faq-item"><summary data-copy="faqPrivacyQ">What happens to my data?</summary><p data-copy="faqPrivacyA">This prototype keeps the complaint in the browser for this session and never stores it server-side. Typed words are sent to no service in the body-map route; free-text model reading is disclosed before use.</p></details>
+              <details class="faq-item"><summary data-copy="faqWaitQ">How is the wait time calculated?</summary><p data-copy="faqWaitA">It is simulated as slot start plus a simulated wait. Hospitals are sorted by estimated seen-time, then travel time, then name. It is not live queue data.</p></details>
+              <details class="faq-item"><summary data-copy="faqOrsQ">How is Raahat different from ORS?</summary><p data-copy="faqOrsA">ORS begins by asking you to choose a hospital and department. Raahat helps a citizen structure their own words first, then shows an honest simulated queue view. It does not connect to ORS.</p></details>
+              <details class="faq-item"><summary data-copy="faqAbdmQ">Will this connect to ABDM?</summary><p data-copy="faqAbdmA">No. ABDM, Aadhaar, ABHA, UHID, OTP and government systems are outside this prototype. Any future integration would need explicit consent, security review and a real public-service partnership.</p></details>
+            </div>
+          </section>
+        </section>
+
+        <div id="question-content" hidden>
         <p class="eyebrow" data-copy="eyebrow">A simpler way to reach the right OPD counter</p>
         <h1 data-copy="title">What's wrong?</h1>
         <p class="question-note" data-copy="note">Tell us in your own words. You can speak, type, or point to the body map.</p>
@@ -166,7 +599,7 @@
           <span class="field-label" id="complaint-label" data-copy="complaintLabel">What is bothering you?</span>
           <div class="complaint-box">
             <button class="voice-button" type="button" id="voice-button" aria-label="Speak your complaint" aria-pressed="false"><span aria-hidden="true">🎙</span> <span id="voice-label">Speak</span></button>
-            <textarea id="complaint" rows="3" data-copy-placeholder="placeholder" placeholder="seene mein dard, kal raat se"></textarea>
+            <textarea id="complaint" rows="3" aria-labelledby="complaint-label" data-copy-placeholder="placeholder" placeholder="seene mein dard, kal raat se"></textarea>
             <button class="large-button" type="button" id="body-map-button"><span data-copy="bodyMapButton">Point at the body map</span></button>
           </div>
           <p class="field-help" data-copy="inputHelp">Your words stay in this browser for this session.</p>
@@ -191,41 +624,134 @@
           <button class="back-button" type="button" id="body-map-back" data-copy="backToQuestion">← Back</button>
           <p class="eyebrow" data-copy="mapEyebrow">No reading needed</p>
           <h1 id="body-map-title" tabindex="-1" data-copy="mapTitle">Point to where it hurts</h1>
-          <p class="map-note" data-copy="mapNote">Choose the place that feels wrong. You can do this without typing or speaking.</p>
+          <p class="map-note" data-copy="mapNote">Tap the place that feels wrong.</p>
           <p class="observed-words" id="typed-handoff" hidden><span class="tag">Observed</span> <span data-copy="mapWordsLabel">Your words:</span> <q id="typed-words"></q></p>
-          <p class="model-free-note"><span data-copy="modelFree">This body-map route sends nothing to an AI service.</span></p>
 
-          <div class="body-map-grid" role="group" aria-label="Body regions">
+          <div class="triage-workspace" aria-label="Interactive triage workspace">
+            <section class="three-panel" aria-labelledby="triage-3d-title">
+              <p class="workspace-eyebrow"><span class="tag">Generated</span><span data-copy="triage3dEyebrow">3D body map</span></p>
+              <h2 id="triage-3d-title" data-copy="triage3dTitle">Point at a place</h2>
+              <p class="workspace-note" data-copy="triage3dNote">Drag to rotate. Tap a glowing point. Nothing is decided here.</p>
+              <div class="body-3d-stage" id="body-3d-stage">
+                <canvas id="body-3d-canvas" aria-label="Rotatable 3D human body model"></canvas>
+                <div class="anatomy-node node-head"><button type="button" data-region="head" data-region-copy="regionHead" aria-label="Head"><span data-copy="regionHead">Head</span></button></div>
+                <div class="anatomy-node node-chest"><button type="button" data-region="chest" data-region-copy="regionChest" aria-label="Chest"><span data-copy="regionChest">Chest</span></button></div>
+                <div class="anatomy-node node-abdomen"><button type="button" data-region="upper-abdomen" data-region-copy="regionUpperAbdomen" aria-label="Upper abdomen"><span data-copy="regionUpperAbdomen">Abdomen</span></button></div>
+                <div class="anatomy-node node-back"><button type="button" data-region="back" data-region-copy="regionBack" aria-label="Back"><span data-copy="regionBack">Back</span></button></div>
+                <div class="anatomy-node node-limbs"><button type="button" data-region="leg" data-region-copy="regionLeg" aria-label="Limbs"><span data-copy="regionLeg">Limbs</span></button></div>
+              </div>
+              <div class="workspace-controls">
+                <button class="large-button" type="button" id="toggle-map-mode" aria-pressed="false" data-copy="use2d">Use accessible 2D map</button>
+                <button class="workspace-unsure" type="button" data-no-location="unsure" aria-pressed="false"><span aria-hidden="true">?</span><span data-copy="workspaceUnsure">Not sure where</span></button>
+              </div>
+              <p class="three-unavailable" id="three-unavailable" hidden><span class="tag">Verified</span><span data-copy="map3dUnavailable">3D is not available on this device. The accessible 2D map is ready below.</span></p>
+            </section>
+            <aside class="workspace-side" aria-live="polite">
+              <p class="workspace-eyebrow"><span class="tag">Observed</span><span data-copy="workspaceEyebrow">Read-back workspace</span></p>
+              <h2 data-copy="workspaceTitle">Your choices stay visible</h2>
+              <div class="workspace-summary" id="workspace-summary"><strong data-copy="workspaceEmpty">Choose a glowing point or use the 2D map.</strong><span data-copy="workspaceAwaiting">The department result appears only after you see and confirm the read-back.</span></div>
+              <p class="workspace-privacy"><span class="tag">Rule</span><span data-copy="workspacePrivacy">One red flag is enough for Emergency. The model cannot clear a flag.</span></p>
+            </aside>
+          </div>
+
+          <div id="body-location-picker">
+            <details class="no-location-picker">
+              <summary id="no-location-title" data-copy="noLocationTitle">Nothing in one place?</summary>
+              <p data-copy="noLocationNote">Choose this for a whole-body feeling or if you are not sure where it is.</p>
+              <div class="no-location-grid" role="group" aria-labelledby="no-location-title">
+                <button class="no-location-button" type="button" data-no-location="fever" data-no-location-copy="noLocationFever" aria-label="Fever" aria-pressed="false"><span class="pictogram" aria-hidden="true">☀</span><span data-copy="noLocationFever">Fever</span></button>
+                <button class="no-location-button" type="button" data-no-location="weak" data-no-location-copy="noLocationWeak" aria-label="Weak all over" aria-pressed="false"><span class="pictogram" aria-hidden="true">〰</span><span data-copy="noLocationWeak">Weak all over</span></button>
+                <button class="no-location-button" type="button" data-no-location="unsure" data-no-location-copy="noLocationUnsure" aria-label="Not sure" aria-pressed="false"><span class="pictogram" aria-hidden="true">?</span><span data-copy="noLocationUnsure">Not sure</span></button>
+              </div>
+            </details>
+
+            <div class="map-selection" id="map-selection" role="status" aria-live="polite" aria-atomic="true">
+              <span class="map-selection-icon" aria-hidden="true">⌖</span>
+              <span class="map-selection-copy">
+                <span class="map-selection-kicker" data-copy="selectionKicker">Selected place</span>
+                <strong class="map-selection-name" id="selected-region-name" data-copy="selectionEmpty">Point at a place</strong>
+                <span class="map-selection-message" id="selection-message" data-copy="selectionHint">The place you point to will appear here.</span>
+              </span>
+            </div>
+
+            <div class="body-map-grid" role="group" aria-label="Body figures. Each part is a button.">
             <div class="map-side">
               <h2 data-copy="front">Front</h2>
-              <div class="silhouette" aria-hidden="true">
-                <svg viewBox="0 0 80 130" role="img"><circle cx="40" cy="13" r="10" /><path d="M27 29c5-5 21-5 26 0l7 31-10 3-3-17v33l10 36H43l-3-25-3 25H23l10-36V46l-3 17-10-3 7-31Z" /></svg>
+              <div class="silhouette-stage front-map">
+                <svg viewBox="0 0 160 300" aria-hidden="true"><circle cx="80" cy="28" r="22" /><path d="M55 58c7-7 43-7 50 0l17 73-17 5-8-39v68l24 105H98l-18-72-18 72H39l24-105V97l-8 39-17-5 17-73Z" /></svg>
+                <button class="map-region map-region-head" type="button" data-region="head" data-region-copy="regionHead" aria-label="Head" aria-pressed="false"><span class="visually-hidden" data-copy="regionHead">Head</span></button>
+                <button class="map-region map-region-face" type="button" data-region="face" data-region-copy="regionFace" aria-label="Face / jaw" aria-pressed="false"><span class="visually-hidden" data-copy="regionFace">Face / jaw</span></button>
+                <button class="map-region map-region-neck" type="button" data-region="neck" data-region-copy="regionNeck" aria-label="Neck" aria-pressed="false"><span class="visually-hidden" data-copy="regionNeck">Neck</span></button>
+                <button class="map-region map-region-chest" type="button" data-region="chest" data-region-copy="regionChest" aria-label="Chest" aria-pressed="false"><span class="visually-hidden" data-copy="regionChest">Chest</span></button>
+                <button class="map-region map-region-upper-abdomen" type="button" data-region="upper-abdomen" data-region-copy="regionUpperAbdomen" aria-label="Upper abdomen" aria-pressed="false"><span class="visually-hidden" data-copy="regionUpperAbdomen">Upper abdomen</span></button>
+                <button class="map-region map-region-lower-abdomen" type="button" data-region="lower-abdomen" data-region-copy="regionLowerAbdomen" aria-label="Lower abdomen" aria-pressed="false"><span class="visually-hidden" data-copy="regionLowerAbdomen">Lower abdomen</span></button>
+                <button class="map-region map-region-arm-left" type="button" data-region="arm" data-region-copy="regionArm" aria-label="Arm" aria-pressed="false"><span class="visually-hidden" data-copy="regionArm">Arm</span></button>
+                <button class="map-region map-region-arm-right" type="button" data-region="arm" data-region-copy="regionArm" aria-label="Arm" aria-pressed="false"><span class="visually-hidden" data-copy="regionArm">Arm</span></button>
+                <button class="map-region map-region-hand-left" type="button" data-region="hand" data-region-copy="regionHand" aria-label="Hand" aria-pressed="false"><span class="visually-hidden" data-copy="regionHand">Hand</span></button>
+                <button class="map-region map-region-hand-right" type="button" data-region="hand" data-region-copy="regionHand" aria-label="Hand" aria-pressed="false"><span class="visually-hidden" data-copy="regionHand">Hand</span></button>
+                <button class="map-region map-region-leg-left" type="button" data-region="leg" data-region-copy="regionLeg" aria-label="Leg" aria-pressed="false"><span class="visually-hidden" data-copy="regionLeg">Leg</span></button>
+                <button class="map-region map-region-leg-right" type="button" data-region="leg" data-region-copy="regionLeg" aria-label="Leg" aria-pressed="false"><span class="visually-hidden" data-copy="regionLeg">Leg</span></button>
+                <button class="map-region map-region-foot-left" type="button" data-region="foot" data-region-copy="regionFoot" aria-label="Foot" aria-pressed="false"><span class="visually-hidden" data-copy="regionFoot">Foot</span></button>
+                <button class="map-region map-region-foot-right" type="button" data-region="foot" data-region-copy="regionFoot" aria-label="Foot" aria-pressed="false"><span class="visually-hidden" data-copy="regionFoot">Foot</span></button>
               </div>
-              <div class="region-list">
-                <button class="region-button" type="button" data-region="head" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionHead">Head</span></button>
-                <button class="region-button" type="button" data-region="face" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionFace">Face / jaw</span></button>
-                <button class="region-button" type="button" data-region="neck" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionNeck">Neck</span></button>
-                <button class="region-button" type="button" data-region="chest" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionChest">Chest</span></button>
-                <button class="region-button" type="button" data-region="upper-abdomen" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionUpperAbdomen">Upper abdomen</span></button>
-                <button class="region-button" type="button" data-region="lower-abdomen" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionLowerAbdomen">Lower abdomen</span></button>
-                <button class="region-button" type="button" data-region="arm" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionArm">Arm</span></button>
-                <button class="region-button" type="button" data-region="hand" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionHand">Hand</span></button>
-                <button class="region-button" type="button" data-region="leg" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionLeg">Leg</span></button>
-                <button class="region-button" type="button" data-region="foot" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionFoot">Foot</span></button>
-              </div>
+              <p class="map-side-hint" data-copy="figureHint">Tap the part that feels wrong.</p>
             </div>
             <div class="map-side">
               <h2 data-copy="back">Back</h2>
-              <div class="silhouette" aria-hidden="true">
-                <svg viewBox="0 0 80 130" role="img"><circle cx="40" cy="13" r="10" /><path d="M27 29c5-5 21-5 26 0l7 31-10 3-3-17v33l10 36H43l-3-25-3 25H23l10-36V46l-3 17-10-3 7-31Z" /></svg>
+              <div class="silhouette-stage back-map">
+                <svg viewBox="0 0 160 300" aria-hidden="true"><circle cx="80" cy="28" r="22" /><path d="M55 58c7-7 43-7 50 0l17 73-17 5-8-39v68l24 105H98l-18-72-18 72H39l24-105V97l-8 39-17-5 17-73Z" /></svg>
+                <button class="map-region map-region-back" type="button" data-region="back" data-region-copy="regionBack" aria-label="Back — upper or lower" aria-pressed="false"><span class="visually-hidden" data-copy="regionBack">Back — upper or lower</span></button>
               </div>
-              <div class="region-list">
-                <button class="region-button" type="button" data-region="back" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionBack">Back — upper or lower</span></button>
-              </div>
+              <p class="map-side-hint" data-copy="backHint">Tap anywhere on the upper or lower back.</p>
+            </div>
+            </div>
+
+            <p class="model-free-footnote"><span class="tag">Verified</span><span data-copy="modelFree">This body-map route sends nothing to an AI service.</span></p>
+
+            <div class="fallback-region-picker" aria-labelledby="fallback-region-title">
+            <h2 id="fallback-region-title" data-copy="fallbackTitle">Or choose from a list</h2>
+            <p data-copy="fallbackNote">Use this only if pointing is difficult.</p>
+            <div class="region-list">
+              <button class="region-button" type="button" data-region="head" data-region-copy="regionHead" aria-label="Head" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionHead">Head</span></button>
+              <button class="region-button" type="button" data-region="face" data-region-copy="regionFace" aria-label="Face / jaw" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionFace">Face / jaw</span></button>
+              <button class="region-button" type="button" data-region="neck" data-region-copy="regionNeck" aria-label="Neck" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionNeck">Neck</span></button>
+              <button class="region-button" type="button" data-region="chest" data-region-copy="regionChest" aria-label="Chest" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionChest">Chest</span></button>
+              <button class="region-button" type="button" data-region="upper-abdomen" data-region-copy="regionUpperAbdomen" aria-label="Upper abdomen" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionUpperAbdomen">Upper abdomen</span></button>
+              <button class="region-button" type="button" data-region="lower-abdomen" data-region-copy="regionLowerAbdomen" aria-label="Lower abdomen" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionLowerAbdomen">Lower abdomen</span></button>
+              <button class="region-button" type="button" data-region="back" data-region-copy="regionBack" aria-label="Back — upper or lower" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionBack">Back — upper or lower</span></button>
+              <button class="region-button" type="button" data-region="arm" data-region-copy="regionArm" aria-label="Arm" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionArm">Arm</span></button>
+              <button class="region-button" type="button" data-region="hand" data-region-copy="regionHand" aria-label="Hand" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionHand">Hand</span></button>
+              <button class="region-button" type="button" data-region="leg" data-region-copy="regionLeg" aria-label="Leg" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionLeg">Leg</span></button>
+              <button class="region-button" type="button" data-region="foot" data-region-copy="regionFoot" aria-label="Foot" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionFoot">Foot</span></button>
+              <button class="region-button" type="button" data-region="general" data-region-copy="regionGeneral" aria-label="Whole body / general" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionGeneral">Whole body / general</span></button>
+            </div>
             </div>
           </div>
 
-          <button class="region-button general-region" type="button" data-region="general" aria-pressed="false"><span class="region-glyph" aria-hidden="true">•</span><span data-copy="regionGeneral">Whole body / general</span></button>
+          <section class="kind-question" id="kind-question" aria-labelledby="kind-title" hidden>
+            <h2 id="kind-title" tabindex="-1" data-copy="kindTitle">What kind of trouble?</h2>
+            <p class="kind-question-note" data-copy="kindNote">Choose the picture that feels closest. You can change it.</p>
+            <div class="kind-selection" id="kind-selection" role="status" aria-live="polite" aria-atomic="true">
+              <span class="map-selection-icon" aria-hidden="true">✦</span>
+              <span>
+                <strong class="kind-selection-name" id="selected-kind-name" data-copy="kindEmpty">Choose a kind</strong>
+                <span class="kind-selection-message" id="kind-selection-message" data-copy="kindHint">Your choice will appear here.</span>
+              </span>
+            </div>
+            <div class="kind-grid" role="group" aria-labelledby="kind-title">
+              <button class="kind-button" type="button" data-kind="pain" data-kind-copy="kindPain" aria-label="Pain" aria-pressed="false"><span class="pictogram" aria-hidden="true">✦</span><span data-copy="kindPain">Pain</span></button>
+              <button class="kind-button" type="button" data-kind="fever" data-kind-copy="kindFever" aria-label="Fever or heat" aria-pressed="false"><span class="pictogram" aria-hidden="true">☀</span><span data-copy="kindFever">Fever or heat</span></button>
+              <button class="kind-button" type="button" data-kind="breathing" data-kind-copy="kindBreathing" aria-label="Breathing" aria-pressed="false"><span class="pictogram" aria-hidden="true">≋</span><span data-copy="kindBreathing">Breathing</span></button>
+              <button class="kind-button" type="button" data-kind="bleeding" data-kind-copy="kindBleeding" aria-label="Bleeding" aria-pressed="false"><span class="pictogram" aria-hidden="true">●</span><span data-copy="kindBleeding">Bleeding</span></button>
+              <button class="kind-button" type="button" data-kind="swelling" data-kind-copy="kindSwelling" aria-label="Swelling" aria-pressed="false"><span class="pictogram" aria-hidden="true">◉</span><span data-copy="kindSwelling">Swelling</span></button>
+              <button class="kind-button" type="button" data-kind="rash" data-kind-copy="kindRash" aria-label="Rash" aria-pressed="false"><span class="pictogram" aria-hidden="true">✣</span><span data-copy="kindRash">Rash</span></button>
+              <button class="kind-button" type="button" data-kind="injury" data-kind-copy="kindInjury" aria-label="Injury" aria-pressed="false"><span class="pictogram" aria-hidden="true">▰</span><span data-copy="kindInjury">Injury</span></button>
+              <button class="kind-button" type="button" data-kind="vomiting" data-kind-copy="kindVomiting" aria-label="Vomiting or stomach" aria-pressed="false"><span class="pictogram" aria-hidden="true">◌</span><span data-copy="kindVomiting">Vomiting or stomach</span></button>
+              <button class="kind-button" type="button" data-kind="dizziness" data-kind-copy="kindDizziness" aria-label="Dizziness" aria-pressed="false"><span class="pictogram" aria-hidden="true">⟳</span><span data-copy="kindDizziness">Dizziness</span></button>
+              <button class="kind-button" type="button" data-kind="low" data-kind-copy="kindLow" aria-label="Feeling low" aria-pressed="false"><span class="pictogram" aria-hidden="true">☁</span><span data-copy="kindLow">Feeling low</span></button>
+            </div>
+            <p class="status" id="kind-status" aria-live="polite"></p>
+          </section>
 
           <div class="followups" id="followups" hidden>
             <h2 data-copy="followupTitle">A little more</h2>
@@ -252,28 +778,214 @@
             </div>
             <p class="status" id="map-status" aria-live="polite"></p>
             <div class="map-ready" id="map-ready">
-              <span class="tag">Observed</span><span data-copy="mapReady">Your description is ready for the next step.</span>
-              <dl>
-                <dt data-copy="mapReadyRegion">Place</dt><dd id="map-ready-region"><span class="tag">Observed</span></dd>
-                <dt data-copy="mapReadyDuration">How long</dt><dd id="map-ready-duration"><span class="tag">Observed</span></dd>
-                <dt data-copy="mapReadySeverity">Severe now</dt><dd id="map-ready-severity"><span class="tag">Observed</span></dd>
-              </dl>
-              <p data-copy="mapReadyNote">Nothing has been sent or booked.</p>
+              <span class="tag">Observed</span><span data-copy="mapReady">Your description is ready to review.</span>
+              <p data-copy="mapReadyNote">Nothing has been sent, decided, or booked.</p>
+              <button class="large-button primary" type="button" id="review-map-button" data-copy="reviewMap">Review this</button>
             </div>
           </div>
+        </section>
+
+        <section class="review-screen" id="review-screen" aria-labelledby="review-title" hidden>
+          <button class="back-button" type="button" id="review-back" data-copy="backToQuestion">← Back</button>
+          <p class="eyebrow" data-copy="reviewEyebrow">Screen 2 · Read-back</p>
+          <h1 id="review-title" tabindex="-1" data-copy="reviewTitle">This is what I understood</h1>
+          <p class="screen-note" data-copy="reviewNote">Check these details. Nothing is decided until you confirm.</p>
+          <p class="model-free-note"><span data-copy="sliceNoModel">No model was used in this slice. These details come from your selections.</span></p>
+
+          <div class="observed-words-card" id="readback-words" hidden>
+            <span class="tag">Observed</span><span data-copy="readbackWordsLabel">Your words:</span>
+            <p id="readback-words-value"></p>
+          </div>
+
+          <div class="chip-grid" id="complaint-chips" aria-label="Editable complaint details">
+            <button class="readback-chip" type="button" data-edit-field="region"><span class="tag">Observed</span><span class="chip-label" data-copy="chipRegion">Place</span><strong class="chip-value" id="chip-region"></strong></button>
+            <button class="readback-chip" type="button" data-edit-field="kind"><span class="tag">Observed</span><span class="chip-label" data-copy="chipKind">Kind of trouble</span><strong class="chip-value" id="chip-kind"></strong></button>
+            <button class="readback-chip" type="button" data-edit-field="duration"><span class="tag">Observed</span><span class="chip-label" data-copy="chipDuration">How long</span><strong class="chip-value" id="chip-duration"></strong></button>
+            <button class="readback-chip" type="button" data-edit-field="severity"><span class="tag">Observed</span><span class="chip-label" data-copy="chipSeverity">Severe now</span><strong class="chip-value" id="chip-severity"></strong></button>
+            <button class="readback-chip" type="button" data-edit-field="who_for"><span class="tag">Observed</span><span class="chip-label" data-copy="chipWho">For</span><strong class="chip-value" id="chip-who"></strong></button>
+            <button class="readback-chip" type="button" data-edit-field="age_band"><span class="tag">Observed</span><span class="chip-label" data-copy="chipAge">Age band</span><strong class="chip-value" id="chip-age"></strong></button>
+          </div>
+
+          <div class="readback-editor" id="readback-editor" hidden>
+            <h2 data-copy="editTitle">Change a detail</h2>
+            <p data-copy="editNote">Choose a new answer below. Your read-back will update.</p>
+            <div class="editor-controls" id="editor-controls"></div>
+          </div>
+
+          <div class="unclear-note" id="unclear-note" hidden><span class="tag">Observed</span><span data-copy="unclearLabel">I did not understand:</span> <span id="unclear-value"></span></div>
+          <p class="confirm-note" data-copy="confirmNote">Your answers stay in this browser for this session. Confirm only when they look right.</p>
+          <div class="review-actions">
+            <button class="large-button primary" type="button" id="confirm-button" data-copy="confirm">Confirm</button>
+            <button class="large-button" type="button" id="change-button" data-copy="changeSomething">Change something</button>
+          </div>
+          <p class="status" id="review-status" aria-live="polite"></p>
+        </section>
+
+        <section class="result-screen" id="result-screen" aria-labelledby="result-title" hidden>
+          <div id="ordinary-result" hidden>
+            <p class="result-kicker" data-copy="resultEyebrow">Screen 3 · Where to go</p>
+            <h1 id="result-title"><span data-copy="startAt">Start at</span> <span class="tag">Rule</span> <span id="result-department"></span></h1>
+            <p class="result-reason"><span class="tag">Rule</span><span id="result-reason"></span></p>
+            <p class="rule-line"><span class="tag">Rule</span><span data-copy="ruleFired">Routing rule:</span> <span class="rule-id" id="result-rule-id"></span></p>
+            <a class="quiet-choice" href="#" id="choose-department" data-copy="chooseDepartment">Not right? Choose a department yourself.</a>
+          </div>
+          <div class="result-screen emergency-result" id="emergency-result" hidden>
+            <p class="result-kicker" data-copy="emergencyEyebrow">Emergency guidance</p>
+            <h1 id="emergency-title"><span class="tag">Rule</span> <span data-copy="emergencyTitle">Go to the Emergency department now. Do not book an appointment.</span></h1>
+            <p class="result-reason"><span class="tag">Rule</span><span id="emergency-reason"></span></p>
+            <p class="rule-line"><span class="tag">Rule</span><span data-copy="ruleFired">Routing rule:</span> <span class="rule-id" id="emergency-rule-id"></span></p>
+            <p class="not-diagnosis" data-copy="notDiagnosis">This is not a diagnosis.</p>
+            <div class="emergency-hospital" id="emergency-hospital" aria-live="polite"></div>
+          </div>
+          <div class="result-actions">
+            <button class="large-button primary" type="button" id="find-hospital" data-copy="findHospital">See hospitals and slots</button>
+            <button class="large-button" type="button" id="result-change" data-copy="changeSomething">Change something</button>
+          </div>
+        </section>
+
+        <section class="appointment-screen" id="appointment-screen" aria-labelledby="booking-title" hidden>
+          <button class="back-button" type="button" id="booking-back" data-copy="backToDepartment">← Back to department</button>
+          <p class="eyebrow" data-copy="bookingEyebrow">Your result · choose what happens next</p>
+          <h1 id="booking-title" tabindex="-1" data-copy="bookingTitle">Find a hospital, honestly</h1>
+          <p class="appointment-intro" data-copy="bookingNote">This is one clear result: choose a locality, choose a hospital, then decide whether to make a specimen slip.</p>
+
+          <div class="department-banner"><span class="tag">Rule</span><strong id="booking-department"></strong></div>
+
+          <section class="booking-panel" aria-labelledby="where-title">
+            <h2 id="where-title" data-copy="whereTitle">Where would you like to go?</h2>
+            <p class="booking-panel-note" data-copy="whereNote">Choose a locality. We do not read your device location.</p>
+            <div class="locality-field">
+              <label for="locality-select"><span class="tag">Observed</span><span data-copy="localityLabel">Your chosen locality</span></label>
+              <select class="select-control" id="locality-select" aria-describedby="location-note">
+                <option value="central-delhi">Central Delhi · New Delhi</option>
+                <option value="south-delhi">South Delhi · New Delhi</option>
+                <option value="north-delhi">North Delhi · New Delhi</option>
+              </select>
+            </div>
+            <p class="location-note" id="location-note"><span class="tag">Observed</span><span data-copy="locationChosenNote">Location is chosen by you, never taken from the phone. Travel figures below are simulated.</span></p>
+            <p class="sort-note"><span class="tag">Rule</span><span data-copy="sortNote">Sorted by seen soonest: slot start + simulated wait. Ties use travel time, then hospital name.</span></p>
+            <div class="hospital-list" id="hospital-list" aria-live="polite"></div>
+          </section>
+
+          <section class="booking-panel" id="carry-panel" aria-labelledby="carry-title" hidden>
+            <h2 id="carry-title" data-copy="carryTitle">What to carry</h2>
+            <p class="booking-panel-note" data-copy="carryNote">Choose the list that matches this visit.</p>
+            <div class="carry-options" role="group" aria-labelledby="carry-title">
+              <button class="carry-option" type="button" data-visit-type="first" aria-pressed="false" data-copy="firstVisit">First visit</button>
+              <button class="carry-option" type="button" data-visit-type="returning" aria-pressed="false" data-copy="returningVisit">Returning</button>
+            </div>
+            <ul class="carry-list" id="carry-list" hidden></ul>
+            <p class="fee-line" id="fee-line" hidden></p>
+            <button class="large-button primary" type="button" id="to-sign-in" data-copy="toSignIn" hidden>Continue to sign in</button>
+          </section>
+
+          <section class="booking-panel" id="sign-in-panel" aria-labelledby="sign-in-title" hidden>
+            <h2 id="sign-in-title" data-copy="signInTitle">Sign in to hold this slot</h2>
+            <p class="booking-panel-note" data-copy="signInNote">Identity is needed only now, when making the specimen slip. Nothing real is submitted.</p>
+            <div class="sign-in-disclosure"><span class="tag">Simulated</span><span data-copy="credentialsNote">These demo credentials are printed here so you never have to use a real account.</span></div>
+            <div class="credential-card" aria-label="Mock sign-in credentials">
+              <div><span class="tag">Simulated</span><span data-copy="usernameLabel">Username</span><strong class="credential-value">raahat-demo</strong></div>
+              <div><span class="tag">Simulated</span><span data-copy="passwordLabel">Password</span><strong class="credential-value">demo-pass</strong></div>
+            </div>
+            <div class="sign-in-fields">
+              <div class="sign-in-field"><label for="demo-username"><span class="tag">Simulated</span><span data-copy="usernameInputLabel">Demo username</span></label><input class="sign-in-input" id="demo-username" value="raahat-demo" autocomplete="off" /></div>
+              <div class="sign-in-field"><label for="demo-password"><span class="tag">Simulated</span><span data-copy="passwordInputLabel">Demo password</span></label><input class="sign-in-input" id="demo-password" value="demo-pass" type="text" autocomplete="off" /></div>
+            </div>
+            <button class="human-check" type="button" id="human-check" aria-pressed="false"><span data-copy="humanCheck">Tap once: I am a person</span></button>
+            <button class="large-button primary" type="button" id="sign-in-button" data-copy="signInButton" disabled>Sign in and show the slip</button>
+            <p class="status" id="sign-in-status" aria-live="polite"></p>
+          </section>
+
+          <section class="booking-panel" id="slip-panel" aria-labelledby="slip-heading" hidden>
+            <h2 id="slip-heading" data-copy="slipTitle">Your specimen slip</h2>
+            <p class="booking-panel-note" data-copy="slipNote">Keep this for the counter. It is a mock slip, not a booking.</p>
+            <article class="slip" id="slip-card" aria-label="Specimen appointment slip">
+              <h3 class="slip-title">राहत · Raahat</h3>
+              <p class="slip-watermark">SPECIMEN — NOT A REAL APPOINTMENT</p>
+              <dl class="slip-grid">
+                <div class="slip-field"><dt data-copy="slipPatient">Patient</dt><dd id="slip-patient"></dd></div>
+                <div class="slip-field"><dt data-copy="slipDepartment">Department</dt><dd id="slip-department"></dd></div>
+                <div class="slip-field"><dt data-copy="slipHospital">Hospital</dt><dd id="slip-hospital"></dd></div>
+                <div class="slip-field"><dt data-copy="slipSlot">Slot</dt><dd id="slip-slot"></dd></div>
+                <div class="slip-field"><dt data-copy="slipSeenBy">Honest wait</dt><dd id="slip-seen-by"></dd></div>
+                <div class="slip-field"><dt data-copy="slipAppointmentId">Appointment ID</dt><dd id="slip-appointment-id"></dd></div>
+                <div class="slip-field"><dt data-copy="slipUhid">UHID</dt><dd id="slip-uhid"></dd></div>
+              </dl>
+              <p class="patient-report"><span class="tag">Observed</span><span data-copy="patientSaid">Patient reports:</span> <span id="slip-report"></span></p>
+              <p class="rights-card"><span class="tag">Verified</span><span data-copy="rightsCard">If you are turned away with this slip — note the appointment ID, raise a grievance at pgportal.gov.in, or file an RTI asking why a valid online appointment was not honoured.</span></p>
+              <div class="qr-wrap"><div class="qr-code" role="img" aria-label="Simulated sample QR code"></div><p class="qr-copy"><strong><span class="tag">Simulated</span><span data-copy="qrTitle">Sample QR container</span></strong><span data-copy="qrNote">This pattern is decorative. It does not open a real appointment.</span></p></div>
+            </article>
+            <div class="slip-actions">
+              <button class="large-button primary" type="button" id="print-slip" data-copy="printSlip">Print slip</button>
+              <button class="large-button" type="button" id="download-slip" data-copy="downloadSlip">Download slip</button>
+            </div>
+            <p class="print-only" data-copy="printFooter">SPECIMEN — NOT A REAL APPOINTMENT · independent prototype · mock data.</p>
+          </section>
+        </section>
+
+        <section class="honesty-screen" id="honesty-screen" aria-labelledby="honesty-title" hidden>
+          <button class="back-button" type="button" id="honesty-back" data-copy="honestyBack">← Back</button>
+          <p class="eyebrow" data-copy="honestyEyebrow">Screen 7 · Honesty</p>
+          <h1 id="honesty-title" tabindex="-1" data-copy="honestyTitle">What is real and what is not</h1>
+          <p class="honesty-intro" data-copy="honestyIntro">Start with what ORS already does well. Then see exactly what this independent prototype does — and does not — claim.</p>
+
+          <section class="honesty-section" aria-labelledby="ors-credit-title">
+            <h2 id="ors-credit-title" data-copy="orsCreditTitle">What ORS already does well</h2>
+            <p data-copy="orsCreditNote">These are ORS features we are crediting, not claiming to have invented.</p>
+            <ul class="honesty-facts">
+              <li class="honesty-fact"><span class="tag">Verified</span><span data-copy="orsLabReports">Lab reports</span><span class="honesty-source"><span data-copy="honestySourceLabel">Source · checked 26 Aug 2026:</span> <a href="https://ors.gov.in/" target="_blank" rel="noreferrer">ORS patient portal</a></span></li>
+              <li class="honesty-fact"><span class="tag">Verified</span><span data-copy="orsBlood">Blood availability</span><span class="honesty-source"><span data-copy="honestySourceLabel">Source · checked 26 Aug 2026:</span> <a href="https://ors.gov.in/" target="_blank" rel="noreferrer">ORS patient portal</a></span></li>
+              <li class="honesty-fact"><span class="tag">Verified</span><span data-copy="orsCancellation">Cancellation by appointment ID</span><span class="honesty-source"><span data-copy="honestySourceLabel">Source · checked 26 Aug 2026:</span> <a href="https://ors.gov.in/faq.html" target="_blank" rel="noreferrer">ORS FAQ</a></span></li>
+              <li class="honesty-fact"><span class="tag">Verified</span><span data-copy="orsAbha">ABHA integration</span><span class="honesty-source"><span data-copy="honestySourceLabel">Source · checked 26 Aug 2026:</span> <a href="https://abdm.gov.in/abha" target="_blank" rel="noreferrer">ABHA</a></span></li>
+              <li class="honesty-fact"><span class="tag">Verified</span><span data-copy="orsApp">An official mobile app · Nextgen ORS</span><span class="honesty-source"><span data-copy="honestySourceLabel">Source · checked 26 Aug 2026:</span> <a href="https://play.google.com/store/apps/details?id=in.nic.nextgenors" target="_blank" rel="noreferrer">Google Play listing</a></span></li>
+            </ul>
+          </section>
+
+          <section class="honesty-section" aria-labelledby="limits-title">
+            <h2 id="limits-title" data-copy="limitsTitle">What this prototype does not claim</h2>
+            <ul class="honesty-limits">
+              <li class="honesty-limit"><span class="tag">Rule</span><span data-copy="limitNoOrs">Nothing here connects to ORS. No appointment is real.</span></li>
+              <li class="honesty-limit"><span class="tag">Simulated</span><span data-copy="limitMock">Every hospital, slot, wait, queue position, appointment ID and UHID is mock.</span></li>
+              <li class="honesty-limit"><span class="tag">Rule</span><span data-copy="limitRules">The department mapping is a small hand-written rule file, not a clinical protocol reviewed by any medical body.</span></li>
+              <li class="honesty-limit"><span class="tag">Rule</span><span data-copy="limitAdvice">This is not medical advice.</span></li>
+              <li class="honesty-limit"><span class="tag">Rule</span><span data-copy="limitModel">To read this in your own words we send this sentence to an AI service. Tap the body map instead if you would rather not.</span></li>
+            </ul>
+          </section>
+
+          <section class="honesty-section honesty-build" aria-labelledby="build-title">
+            <h2 id="build-title" data-copy="buildTitle">What built this prototype</h2>
+            <ul class="build-ledger">
+              <li class="build-item"><span class="tag">Generated</span><strong data-copy="buildInterfaceTitle">HTML and CSS</strong> · <span data-copy="buildInterface">the mobile-first screens, large controls, focus states and print view.</span></li>
+              <li class="build-item"><span class="tag">Rule</span><strong data-copy="buildRoutingTitle">JavaScript + routing-rules.js</strong> · <span data-copy="buildRouting">structured complaint to department and urgency, with the rule ID shown.</span></li>
+              <li class="build-item"><span class="tag">Simulated</span><strong data-copy="buildHospitalTitle">hospital-data.js</strong> · <span data-copy="buildHospital">verified hospital names and mock slots, waits, travel figures and identifiers.</span></li>
+              <li class="build-item"><span class="tag">Generated</span><strong data-copy="buildCodexTitle">Codex</strong> · <span data-copy="buildCodex">wrote the application code, tests and verification pass.</span></li>
+            </ul>
+          </section>
+          <button class="back-button honesty-back" type="button" id="honesty-back-bottom" data-copy="honestyBack">← Back</button>
         </section>
       </main>
 
       <div class="support">
+        <span class="support-label" data-copy="helplinesLabel">Emergency quick dial:</span>
+        <a href="tel:102"><span class="tag">Verified</span>102</a>
+        <a href="tel:108"><span class="tag">Verified</span>108</a>
+        <a href="tel:1075"><span class="tag">Verified</span>1075</a>
         <span data-copy="needHelp">Need a person?</span>
         <a href="https://pgportal.gov.in" target="_blank" rel="noreferrer" data-copy="talkToPerson">Talk to a person</a>
+        <a href="#honesty-screen" id="honesty-link" data-copy="honestyLink">What is real?</a>
       </div>
       <p class="prototype-banner" data-copy="prototype">independent prototype · mock data · not affiliated with any government body.</p>
     </div>
 
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
+    <script type="module">
+      import { parseFreeTextComplaint, routeComplaint } from "./routing.js";
+      import { LOCALITIES, HOSPITAL_FACT_CHECKED_ON, hospitalsForDepartment } from "./hospital-data.js";
+      import { createBodyMap3D } from "./body-map-3d.js";
+
       const copy = {
         en: {
+          landingKicker: "A calmer front door to public hospitals", landingTitle: "Government Hospital Appointments, Without the Confusion.", landingSubtitle: "ORS asks which department you need. A sick person only knows where it hurts. Tell us your symptoms in your own words, voice, or tap the body map — we'll guide you to the right OPD counter with honest wait times.", modelDisclosure: "To read this in your own words we send this sentence to an AI service. Tap the body map instead if you would rather not.", startTriage: "Start Triage", learnMore: "See how it works", privacyBadge: "100% Client-Side Privacy", noIdBadge: "No Aadhaar/OTP Required to Explore", accessBadge: "Accessible for Non-Literate Citizens", quickStartTitle: "Start with what you know", quickStartNote: "No account. No department guessing. Try a sample or type one sentence.", entryRouteLabel: "How would you like to describe it?", entrySpeak: "Speak", entryType: "Type", entryMap: "Body map", landingPlaceholder: "e.g. chest pain, since this morning", exampleBreathing: "chest pain + breathlessness", continueFromCard: "Continue to read-back", whyLink: "Why Raahat?", orsLink: "ORS vs Raahat", faqLink: "FAQs", whyTitle: "A little more dignity at the counter.", whyNote: "Raahat starts with the citizen's words, not a medical vocabulary test. The person stays in control before anything is routed.", journeyOneTitle: "Describe in your voice or tap the map", journeyOneNote: "Speak, type, or use a flat body map. Every route creates the same reviewable complaint.", journeyTwoTitle: "Verified hospital & honest queue wait", journeyTwoNote: "See public hospital facts, then see simulated token throughput and when people are usually seen.", journeyThreeTitle: "Print specimen slip with citizen rights", journeyThreeNote: "A clearly marked mock slip keeps the next step legible and carries a grievance route.", comparisonTitle: "How Raahat rethinks ORS", comparisonNote: "ORS is a useful appointment system. Raahat addresses the moment before it: when a citizen does not know the right counter.", comparisonQuestion: "The front door question", orsEra: "2015 · NIC digitised counter", raahatEra: "2026 · citizen-first triage", comparisonDepartment: "Finding a department", orsDepartment: "Department guessing", raahatDepartment: "Zero-Knowledge Triage — start with where it hurts", comparisonWait: "Knowing the real wait", orsWait: "Phantom slot time", raahatWait: "Honest Queue Wait — slot + simulated seen-time", comparisonAuth: "Getting started", orsAuth: "Front-door distorted CAPTCHA", raahatAuth: "Late-stage 1-tap Auth — only when making a specimen slip", comparisonAccess: "Describing the problem", orsAccess: "Text Forms", raahatAccess: "2D Visual Body Map + speak + type", networkTitle: "Delhi hospital network live status", networkNote: "Hospital names, addresses and departments are public facts. Availability and token throughput are simulated for this prototype.", faqTitle: "Questions citizens and judges ask", faqNote: "Plain answers about safety, access, privacy and what this prototype can really do.", faqSafetyQ: "Is this triage safe?", faqSafetyA: "Raahat does not diagnose. Code applies a small published rule file after you see and confirm the complaint. When a red flag is present, one flag is enough to route to Emergency.", faqRedFlagQ: "What happens when there is an Emergency red flag?", faqRedFlagA: "The result says to go to Emergency now and not book an appointment. The rule ID is shown, and the nearest simulated emergency-capable hospital in your chosen locality is displayed.", faqAccessQ: "Can someone who cannot read use it?", faqAccessA: "Yes. Complaint entry has three equal routes: speak, type, or tap the labelled 2D body map. Large buttons, keyboard focus and screen-reader labels are built into the flow.", faqPrivacyQ: "What happens to my data?", faqPrivacyA: "This prototype keeps the complaint in the browser for this session and never stores it server-side. Typed words are sent to no service in the body-map route; free-text model reading is disclosed before use.", faqWaitQ: "How is the wait time calculated?", faqWaitA: "It is simulated as slot start plus a simulated wait. Hospitals are sorted by estimated seen-time, then travel time, then name. It is not live queue data.", faqOrsQ: "How is Raahat different from ORS?", faqOrsA: "ORS begins by asking you to choose a hospital and department. Raahat helps a citizen structure their own words first, then shows an honest simulated queue view. It does not connect to ORS.", faqAbdmQ: "Will this connect to ABDM?", faqAbdmA: "No. ABDM, Aadhaar, ABHA, UHID, OTP and government systems are outside this prototype. Any future integration would need explicit consent, security review and a real public-service partnership.", qrTitle: "Sample QR container", qrNote: "This pattern is decorative. It does not open a real appointment.", emergencyHospitalTitle: "Nearest Emergency-capable hospital in your chosen locality", emergencyHospitalNote: "Go now. This hospital fact is verified; travel is simulated.",
           eyebrow: "A simpler way to reach the right OPD counter", title: "What's wrong?",
           note: "Tell us in your own words. You can speak, type, or point to the body map.",
           bookingFor: "Booking for:", myself: "Myself", someoneElse: "Someone else", whoLabel: "Who is it for?",
@@ -283,15 +995,18 @@
           exampleChest: "chest pain", exampleFever: "fever", exampleWeakness: "weakness on one side", continue: "Continue",
           bodyMapButton: "Point at the body map", captured: "Your words are ready for the next step. Nothing has been sent or booked.", needHelp: "Need a person?",
           backToQuestion: "← Back", mapEyebrow: "No reading needed", mapTitle: "Point to where it hurts",
-          mapNote: "Choose the place that feels wrong. You can do this without typing or speaking.", mapWordsLabel: "Your words:", modelFree: "This body-map route sends nothing to an AI service.", front: "Front", back: "Back",
+          mapNote: "Tap the place that feels wrong.", mapWordsLabel: "Your words:", modelFree: "This body-map route sends nothing to an AI service.", noLocationTitle: "Nothing in one place?", noLocationNote: "Choose this for a whole-body feeling or if you are not sure where it is.", noLocationFever: "Fever", noLocationWeak: "Weak all over", noLocationUnsure: "Not sure", selectionKicker: "Selected place", selectionEmpty: "Point at a place", selectionHint: "The place you point to will appear here.", selectionChosen: "Selected. Now choose the kind of trouble.", selectionNone: "No one place", figureHint: "Tap the part that feels wrong.", backHint: "Tap anywhere on the upper or lower back.", fallbackTitle: "Or choose from a list", fallbackNote: "Use this only if pointing is difficult.", front: "Front", back: "Back",
           regionHead: "Head", regionFace: "Face / jaw", regionNeck: "Neck", regionChest: "Chest", regionUpperAbdomen: "Upper abdomen", regionLowerAbdomen: "Lower abdomen", regionBack: "Back — upper or lower", regionArm: "Arm", regionHand: "Hand", regionLeg: "Leg", regionFoot: "Foot", regionGeneral: "Whole body / general",
-          followupTitle: "A little more", durationLabel: "How long?", durationNow: "Just now", durationToday: "Today", durationDays: "A few days", durationLonger: "A while", durationUnsure: "Not sure", severityLabel: "Is it severe right now?", severityNo: "No", severityYes: "Yes", severityUnsure: "Not sure", mapContinue: "Continue", mapIncomplete: "Choose a place, how long, and whether it is severe right now.", mapReady: "Your description is ready for the next step.", mapReadyRegion: "Place", mapReadyDuration: "How long", mapReadySeverity: "Severe now", mapReadyNote: "Nothing has been sent or booked.",
-          talkToPerson: "Talk to a person", prototype: "independent prototype · mock data · not affiliated with any government body.",
+          kindTitle: "What kind of trouble?", kindNote: "Choose the picture that feels closest. You can change it.", kindEmpty: "Choose a kind", kindHint: "Your choice will appear here.", kindChosen: "Selected. Now add the two quick details.", kindPain: "Pain", kindFever: "Fever or heat", kindBreathing: "Breathing", kindBleeding: "Bleeding", kindSwelling: "Swelling", kindRash: "Rash", kindInjury: "Injury", kindVomiting: "Vomiting or stomach", kindDizziness: "Dizziness", kindLow: "Feeling low", followupTitle: "A little more", durationLabel: "How long?", durationNow: "Just now", durationToday: "Today", durationDays: "A few days", durationLonger: "A while", durationUnsure: "Not sure", severityLabel: "Is it severe right now?", severityNo: "No", severityYes: "Yes", severityUnsure: "Not sure", mapContinue: "Continue", mapIncomplete: "Choose a kind, how long, and whether it is severe right now.", mapReady: "Your description is ready to review.", mapReadyNote: "Nothing has been sent, decided, or booked.", reviewMap: "Review this",
+          reviewEyebrow: "Screen 2 · Read-back", reviewTitle: "This is what I understood", reviewNote: "Check these details. Nothing is decided until you confirm.", sliceNoModel: "No model was used in this slice. These details come from your selections.", readbackWordsLabel: "Your words:", chipRegion: "Place", chipKind: "Kind of trouble", chipDuration: "How long", chipSeverity: "Severe now", chipWho: "For", chipAge: "Age band", editTitle: "Change a detail", editNote: "Choose a new answer below. Your read-back will update.", unclearLabel: "I did not understand:", confirmNote: "Your answers stay in this browser for this session. Confirm only when they look right.", confirm: "Confirm", changeSomething: "Change something", resultEyebrow: "Screen 3 · Where to go", startAt: "Start at", ruleFired: "Routing rule:", chooseDepartment: "Not right? Choose a department yourself.", emergencyEyebrow: "Emergency guidance", emergencyTitle: "Go to the Emergency department now. Do not book an appointment.", notDiagnosis: "This is not a diagnosis.", deptPaediatrics: "Paediatrics", deptCardiology: "Cardiology", deptNeurology: "Neurology", deptGastroenterology: "Gastroenterology", deptOrthopaedics: "Orthopaedics", deptDermatology: "Dermatology", deptDental: "Dental", deptGeneralMedicine: "General Medicine", deptChoose: "Choose a department yourself",
+          backToDepartment: "← Back to department", bookingEyebrow: "Your result · choose what happens next", bookingTitle: "Find a hospital, honestly", bookingNote: "This is one clear result: choose a locality, choose a hospital, then decide whether to make a specimen slip.", findHospital: "See hospitals and slots", whereTitle: "Where would you like to go?", whereNote: "Choose a locality. We do not read your device location.", localityLabel: "Your chosen locality", locationChosenNote: "Location is chosen by you, never taken from the phone. Travel figures below are simulated.", sortNote: "Sorted by seen soonest: slot start + simulated wait. Ties use travel time, then hospital name.", verifiedSource: "Hospital name and department", checked: "Checked", distance: "Travel", nextSlot: "Next open slot", seenBy: "Usually seen by", calendarOpens: "Calendar opens", chooseHospital: "Choose this hospital", chosenHospital: "Hospital chosen", chosenHospitalNote: "Now choose the visit type below.", noHospitals: "No verified hospital is listed for this department in this demo locality.", carryTitle: "What to carry", carryNote: "Choose the list that matches this visit.", firstVisit: "First visit", returningVisit: "Returning", firstId: "a photo ID", phoneOtp: "the phone that receives the one-time passcode", returningUhid: "your UHID from an earlier visit", previousSlip: "your previous appointment slip", feeLine: "OPD registration fee", toSignIn: "Continue to sign in", signInTitle: "Sign in to hold this slot", signInNote: "Identity is needed only now, when making the specimen slip. Nothing real is submitted.", credentialsNote: "These demo credentials are printed here so you never have to use a real account.", usernameLabel: "Username", passwordLabel: "Password", usernameInputLabel: "Demo username", passwordInputLabel: "Demo password", humanCheck: "Tap once: I am a person", signInButton: "Sign in and show the slip", humanCheckNeeded: "Tap the human check first.", slipTitle: "Your specimen slip", slipNote: "Keep this for the counter. It is a mock slip, not a booking.", slipPatient: "Patient", slipDepartment: "Department", slipHospital: "Hospital", slipSlot: "Slot", slipSeenBy: "Honest wait", slipAppointmentId: "Appointment ID", slipUhid: "UHID", patientSaid: "Patient reports:", rightsCard: "If you are turned away with this slip — note the appointment ID, raise a grievance at pgportal.gov.in, or file an RTI asking why a valid online appointment was not honoured.", printSlip: "Print slip", downloadSlip: "Download slip", printFooter: "SPECIMEN — NOT A REAL APPOINTMENT · independent prototype · mock data.", signedIn: "Mock sign-in complete. Your specimen slip is below.", credentialsMismatch: "Use the printed demo credentials above.", feeAmount: "₹10",
+          honestyBack: "← Back", honestyEyebrow: "Screen 7 · Honesty", honestyTitle: "What is real and what is not", honestyIntro: "Start with what ORS already does well. Then see exactly what this independent prototype does — and does not — claim.", honestyLink: "What is real?", orsCreditTitle: "What ORS already does well", orsCreditNote: "These are ORS features we are crediting, not claiming to have invented.", honestySourceLabel: "Source · checked 26 Aug 2026:", orsLabReports: "Lab reports", orsBlood: "Blood availability", orsCancellation: "Cancellation by appointment ID", orsAbha: "ABHA integration", orsApp: "An official mobile app · Nextgen ORS", limitsTitle: "What this prototype does not claim", limitNoOrs: "Nothing here connects to ORS. No appointment is real.", limitMock: "Every hospital, slot, wait, queue position, appointment ID and UHID is mock.", limitRules: "The department mapping is a small hand-written rule file, not a clinical protocol reviewed by any medical body.", limitAdvice: "This is not medical advice.", limitModel: "To read this in your own words we send this sentence to an AI service. Tap the body map instead if you would rather not.", buildTitle: "What built this prototype", buildInterfaceTitle: "HTML and CSS", buildInterface: "the mobile-first screens, large controls, focus states and print view.", buildRoutingTitle: "JavaScript + routing-rules.js", buildRouting: "structured complaint to department and urgency, with the rule ID shown.", buildHospitalTitle: "hospital-data.js", buildHospital: "verified hospital names and mock slots, waits, travel figures and identifiers.", buildCodexTitle: "Codex", buildCodex: "wrote the application code, tests and verification pass.", talkToPerson: "Talk to a person", prototype: "independent prototype · mock data · not affiliated with any government body.",
           voiceStart: "Speak your complaint", voiceStop: "Stop listening", voiceLabel: "Speak", voiceLabelStop: "Stop", voiceUnsupported: "Voice input is not available here. You can type or use the body map.",
           voiceListening: "Listening… say it in your own words.", voiceDone: "I heard your words. You can edit them before continuing.",
-          continueHint: "Add a few words, or choose an example, so we can carry on.", someoneHint: "Choose who this is for and an age band.",
+          continueHint: "Add a few words, or choose an example, so we can carry on.", someoneHint: "Choose who this is for and an age band.", notChosen: "Not chosen", notAsked: "Not asked", chooseDepartmentScreen: "Choose a department yourself",
         },
         hi: {
+          landingKicker: "सरकारी अस्पताल तक पहुँचने का आसान पहला कदम", landingTitle: "सरकारी अस्पताल की अपॉइंटमेंट, बिना उलझन के।", landingSubtitle: "ORS पूछता है कि आपको कौन सा विभाग चाहिए। बीमार व्यक्ति को बस यह पता होता है कि कहाँ दर्द है। अपनी बात बोलकर, लिखकर या शरीर के नक्शे पर चुनकर बताइए — हम सही ओपीडी काउंटर और ईमानदार इंतज़ार दिखाएँगे।", modelDisclosure: "आपकी बात समझने के लिए यह वाक्य एआई सेवा को भेजा जाता है। अगर आप ऐसा नहीं चाहते तो शरीर का नक्शा चुनें।", startTriage: "ट्रायेज शुरू करें", learnMore: "यह कैसे काम करता है", privacyBadge: "100% जानकारी इसी फ़ोन में", noIdBadge: "देखने के लिए आधार/ओटीपी नहीं", accessBadge: "कम पढ़ने वालों के लिए भी आसान", quickStartTitle: "जो पता है, वहीं से शुरू करें", quickStartNote: "खाता नहीं। विभाग का अनुमान नहीं। नमूना चुनें या एक वाक्य लिखें।", entryRouteLabel: "कैसे बताना चाहेंगे?", entrySpeak: "बोलें", entryType: "लिखें", entryMap: "शरीर का नक्शा", landingPlaceholder: "जैसे: सीने में दर्द, आज सुबह से", exampleBreathing: "सीने में दर्द + साँस में दिक्कत", continueFromCard: "दोबारा पढ़ने के लिए आगे बढ़ें", whyLink: "राहत क्यों?", orsLink: "ORS और राहत", faqLink: "सवाल-जवाब", whyTitle: "काउंटर पर थोड़ा और सम्मान।", whyNote: "राहत मेडिकल शब्दावली की परीक्षा नहीं लेता। आपकी बात से शुरुआत होती है और आगे बढ़ने से पहले आप सब कुछ देख सकते हैं।", journeyOneTitle: "अपनी आवाज़ में बताएँ या नक्शे पर चुनें", journeyOneNote: "बोलें, लिखें या सरल शरीर के नक्शे का इस्तेमाल करें। हर रास्ता एक ही जाँच योग्य विवरण बनाता है।", journeyTwoTitle: "सत्यापित अस्पताल और ईमानदार इंतज़ार", journeyTwoNote: "सार्वजनिक अस्पताल की जानकारी, नकली टोकन की चाल और आम तौर पर दिखने का समय देखें।", journeyThreeTitle: "नागरिक अधिकारों वाली नमूना स्लिप", journeyThreeNote: "साफ़ तौर पर नकली बताई गई स्लिप अगला कदम और शिकायत का रास्ता साथ रखती है।", comparisonTitle: "राहत ORS को नए ढंग से सोचता है", comparisonNote: "ORS अपॉइंटमेंट के लिए उपयोगी है। राहत उस पल को आसान बनाता है जब नागरिक को सही काउंटर पता नहीं होता।", comparisonQuestion: "पहले सवाल का फर्क", orsEra: "2015 · NIC का डिजिटल काउंटर", raahatEra: "2026 · नागरिक पहले", comparisonDepartment: "विभाग ढूँढना", orsDepartment: "विभाग का अनुमान", raahatDepartment: "जीरो-नॉलेज ट्रायेज — जहाँ दर्द है वहाँ से शुरुआत", comparisonWait: "सही इंतज़ार जानना", orsWait: "सिर्फ स्लॉट का समय", raahatWait: "ईमानदार इंतज़ार — स्लॉट + नकली दिखने का समय", comparisonAuth: "शुरुआत करना", orsAuth: "शुरू में टेढ़ा CAPTCHA", raahatAuth: "अंत में एक टैप से पहचान — सिर्फ नमूना स्लिप पर", comparisonAccess: "परेशानी बताना", orsAccess: "टेक्स्ट फ़ॉर्म", raahatAccess: "2D शरीर का नक्शा + बोलना + लिखना", networkTitle: "दिल्ली अस्पताल नेटवर्क की स्थिति", networkNote: "अस्पताल के नाम, पते और विभाग सार्वजनिक तथ्य हैं। उपलब्धता और टोकन की गति इस प्रोटोटाइप की नकली जानकारी है।", faqTitle: "नागरिक और जज के सवाल", faqNote: "सुरक्षा, पहुँच, गोपनीयता और इस प्रोटोटाइप की असली सीमा के साफ़ जवाब।", faqSafetyQ: "क्या यह ट्रायेज सुरक्षित है?", faqSafetyA: "राहत बीमारी का पता नहीं लगाता। आपकी पुष्टि के बाद कोड की छोटी नियम-सूची काम करती है। एक भी रेड फ्लैग होने पर इमरजेंसी का रास्ता चुना जाता है।", faqRedFlagQ: "इमरजेंसी रेड फ्लैग होने पर क्या होता है?", faqRedFlagA: "नतीजा कहता है कि अभी इमरजेंसी जाएँ और अपॉइंटमेंट न लें। नियम आईडी और चुने हुए इलाके का सबसे नज़दीकी नकली इमरजेंसी अस्पताल दिखता है।", faqAccessQ: "क्या बिना पढ़े कोई इसे इस्तेमाल कर सकता है?", faqAccessA: "हाँ। परेशानी बताने के तीन बराबर रास्ते हैं: बोलना, लिखना या नाम वाले 2D शरीर के नक्शे पर टैप करना।", faqPrivacyQ: "मेरी जानकारी का क्या होता है?", faqPrivacyA: "परेशानी इसी ब्राउज़र में इस सत्र तक रहती है और सर्वर पर सेव नहीं होती। शरीर के नक्शे वाले रास्ते में कुछ भी किसी सेवा को नहीं भेजा जाता।", faqWaitQ: "इंतज़ार का समय कैसे निकला है?", faqWaitA: "यह स्लॉट शुरू होने का समय और नकली इंतज़ार जोड़कर निकाला गया है। अस्पताल पहले दिखने के समय, फिर यात्रा और फिर नाम से क्रम में आते हैं। यह लाइव कतार नहीं है।", faqOrsQ: "राहत ORS से कैसे अलग है?", faqOrsA: "ORS आपसे अस्पताल और विभाग चुनने को कहता है। राहत पहले आपकी बात को व्यवस्थित करता है और फिर नकली कतार दिखाता है। यह ORS से जुड़ा नहीं है।", faqAbdmQ: "क्या यह ABDM से जुड़ेगा?", faqAbdmA: "नहीं। ABDM, आधार, ABHA, UHID, OTP और सरकारी सिस्टम इस प्रोटोटाइप के बाहर हैं। भविष्य में जोड़ने के लिए साफ़ सहमति और सुरक्षा जाँच ज़रूरी होगी।", qrTitle: "नमूना QR बॉक्स", qrNote: "यह सजावटी पैटर्न है। इससे असली अपॉइंटमेंट नहीं खुलेगी।", emergencyHospitalTitle: "आपके चुने इलाके का सबसे नज़दीकी इमरजेंसी अस्पताल", emergencyHospitalNote: "अभी जाएँ। अस्पताल की जानकारी सत्यापित है; यात्रा का समय नकली है।",
           eyebrow: "सही ओपीडी काउंटर तक पहुँचने का आसान तरीका", title: "क्या तकलीफ़ है?",
           note: "अपने शब्दों में बताइए। बोलें, लिखें या शरीर के नक्शे पर चुनें।",
           bookingFor: "किसके लिए बुकिंग है:", myself: "मेरे लिए", someoneElse: "किसी और के लिए", whoLabel: "किसके लिए है?",
@@ -301,38 +1016,219 @@
           exampleChest: "सीने में दर्द", exampleFever: "बुखार", exampleWeakness: "एक तरफ़ कमज़ोरी", continue: "आगे बढ़ें",
           bodyMapButton: "शरीर के नक्शे पर चुनें", captured: "आपके शब्द अगले कदम के लिए तैयार हैं। कुछ भेजा या बुक नहीं हुआ है।", needHelp: "किसी व्यक्ति से बात करें?",
           backToQuestion: "← वापस", mapEyebrow: "पढ़ने की ज़रूरत नहीं", mapTitle: "जहाँ तकलीफ़ है वहाँ चुनें",
-          mapNote: "जहाँ परेशानी लगती है वहाँ चुनें। इसके लिए लिखना या बोलना ज़रूरी नहीं है।", mapWordsLabel: "आपके शब्द:", modelFree: "शरीर के नक्शे वाला रास्ता किसी एआई सेवा को कुछ नहीं भेजता।", front: "सामने", back: "पीछे",
+          mapNote: "जहाँ परेशानी है वहाँ चुनें।", mapWordsLabel: "आपके शब्द:", modelFree: "शरीर के नक्शे वाला रास्ता किसी एआई सेवा को कुछ नहीं भेजता।", noLocationTitle: "एक जगह पर परेशानी नहीं?", noLocationNote: "पूरे शरीर में परेशानी हो या जगह पता न हो तो इसे चुनें।", noLocationFever: "बुखार", noLocationWeak: "पूरे शरीर में कमज़ोरी", noLocationUnsure: "पता नहीं", selectionKicker: "चुनी हुई जगह", selectionEmpty: "किसी जगह पर चुनें", selectionHint: "आप जहाँ चुनेंगे, वह जगह यहाँ दिखेगी।", selectionChosen: "चुन लिया। अब परेशानी की किस्म चुनें।", selectionNone: "कोई एक जगह नहीं", figureHint: "जहाँ परेशानी है वहाँ चुनें।", backHint: "ऊपरी या निचली पीठ पर कहीं भी चुनें।", fallbackTitle: "या सूची में से चुनें", fallbackNote: "अगर नक्शे पर चुनना मुश्किल हो तभी इसका इस्तेमाल करें।", front: "सामने", back: "पीछे",
           regionHead: "सिर", regionFace: "चेहरा / जबड़ा", regionNeck: "गर्दन", regionChest: "सीना", regionUpperAbdomen: "पेट का ऊपरी हिस्सा", regionLowerAbdomen: "पेट का निचला हिस्सा", regionBack: "पीठ — ऊपर या नीचे", regionArm: "बाँह", regionHand: "हाथ", regionLeg: "टाँग", regionFoot: "पैर", regionGeneral: "पूरा शरीर / सामान्य",
-          followupTitle: "थोड़ा और बताइए", durationLabel: "कब से?", durationNow: "अभी", durationToday: "आज", durationDays: "कुछ दिन", durationLonger: "काफ़ी समय", durationUnsure: "पता नहीं", severityLabel: "क्या अभी बहुत तेज़ है?", severityNo: "नहीं", severityYes: "हाँ", severityUnsure: "पता नहीं", mapContinue: "आगे बढ़ें", mapIncomplete: "जगह, कब से और अभी बहुत तेज़ है या नहीं चुनें।", mapReady: "आपका विवरण अगले कदम के लिए तैयार है।", mapReadyRegion: "जगह", mapReadyDuration: "कब से", mapReadySeverity: "अभी बहुत तेज़", mapReadyNote: "कुछ भेजा या बुक नहीं हुआ है।",
-          talkToPerson: "किसी व्यक्ति से बात करें", prototype: "स्वतंत्र प्रोटोटाइप · नकली डेटा · किसी सरकारी संस्था से जुड़ा नहीं।",
+          kindTitle: "परेशानी किस तरह की है?", kindNote: "जो तस्वीर सबसे करीब लगे उसे चुनें। इसे बदल सकते हैं।", kindEmpty: "किस्म चुनें", kindHint: "आपकी पसंद यहाँ दिखेगी।", kindChosen: "चुन लिया। अब दो छोटी बातें बताइए।", kindPain: "दर्द", kindFever: "बुखार या गर्मी", kindBreathing: "साँस", kindBleeding: "खून आना", kindSwelling: "सूजन", kindRash: "दाने", kindInjury: "चोट", kindVomiting: "उल्टी या पेट", kindDizziness: "चक्कर", kindLow: "कमज़ोरी या मन उदास", followupTitle: "थोड़ा और बताइए", durationLabel: "कब से?", durationNow: "अभी", durationToday: "आज", durationDays: "कुछ दिन", durationLonger: "काफ़ी समय", durationUnsure: "पता नहीं", severityLabel: "क्या अभी बहुत तेज़ है?", severityNo: "नहीं", severityYes: "हाँ", severityUnsure: "पता नहीं", mapContinue: "आगे बढ़ें", mapIncomplete: "परेशानी की किस्म, कब से और अभी बहुत तेज़ है या नहीं चुनें।", mapReady: "आपका विवरण देखने के लिए तैयार है।", mapReadyNote: "कुछ भेजा, तय या बुक नहीं हुआ है।", reviewMap: "इसे देखें",
+          reviewEyebrow: "स्क्रीन 2 · दोबारा पढ़ें", reviewTitle: "हमने यह समझा", reviewNote: "इन जानकारियों को जाँचें। आपकी पुष्टि से पहले कुछ तय नहीं होगा।", sliceNoModel: "इस हिस्से में कोई मॉडल इस्तेमाल नहीं हुआ। ये जानकारियाँ आपकी पसंद से आई हैं।", readbackWordsLabel: "आपके शब्द:", chipRegion: "जगह", chipKind: "परेशानी की किस्म", chipDuration: "कब से", chipSeverity: "अभी बहुत तेज़", chipWho: "किसके लिए", chipAge: "उम्र का समूह", editTitle: "एक जानकारी बदलें", editNote: "नीचे नया जवाब चुनें। दोबारा पढ़ा गया विवरण बदल जाएगा।", unclearLabel: "समझ नहीं आया:", confirmNote: "आपके जवाब इस ब्राउज़र में इसी सत्र तक रहेंगे। सही लगे तभी पुष्टि करें।", confirm: "पुष्टि करें", changeSomething: "कुछ बदलें", resultEyebrow: "स्क्रीन 3 · कहाँ जाएँ", startAt: "यहाँ जाएँ:", ruleFired: "रूटिंग नियम:", chooseDepartment: "सही नहीं? विभाग खुद चुनें।", emergencyEyebrow: "इमरजेंसी की सलाह", emergencyTitle: "अभी इमरजेंसी विभाग जाएँ। अपॉइंटमेंट बुक न करें।", notDiagnosis: "यह बीमारी का पता नहीं है।", deptPaediatrics: "बाल रोग विभाग", deptCardiology: "कार्डियोलॉजी", deptNeurology: "न्यूरोलॉजी", deptGastroenterology: "गैस्ट्रोएंटेरोलॉजी", deptOrthopaedics: "ऑर्थोपेडिक्स", deptDermatology: "त्वचा रोग विभाग", deptDental: "डेंटल", deptGeneralMedicine: "जनरल मेडिसिन", deptChoose: "विभाग खुद चुनें",
+          backToDepartment: "← विभाग पर वापस जाएँ", bookingEyebrow: "आपका नतीजा · अगला कदम चुनें", bookingTitle: "ईमानदारी से अस्पताल चुनें", bookingNote: "एक ही साफ़ नतीजा: इलाका चुनें, अस्पताल चुनें, फिर नकली स्लिप बनाने का फैसला करें।", findHospital: "अस्पताल और स्लॉट देखें", whereTitle: "आप कहाँ जाना चाहेंगे?", whereNote: "इलाका चुनें। हम आपके फ़ोन की जगह नहीं पढ़ते।", localityLabel: "आपका चुना हुआ इलाका", locationChosenNote: "जगह आपने चुनी है, फ़ोन से नहीं ली गई। नीचे आने-जाने का समय नकली है।", sortNote: "जल्दी दिखने के हिसाब से क्रम: स्लॉट का समय + नकली इंतज़ार। बराबरी पर आने-जाने का समय, फिर अस्पताल का नाम।", verifiedSource: "अस्पताल का नाम और विभाग", checked: "जाँच की तारीख", distance: "यात्रा", nextSlot: "अगला खुला स्लॉट", seenBy: "आमतौर पर दिखेंगे", calendarOpens: "कैलेंडर खुलेगा", chooseHospital: "यह अस्पताल चुनें", chosenHospital: "अस्पताल चुना गया", chosenHospitalNote: "अब नीचे इस यात्रा का प्रकार चुनें।", noHospitals: "इस डेमो इलाके में इस विभाग के लिए कोई सत्यापित अस्पताल सूची में नहीं है।", carryTitle: "क्या साथ ले जाएँ", carryNote: "इस यात्रा के अनुसार सूची चुनें।", firstVisit: "पहली यात्रा", returningVisit: "फिर से आना", firstId: "फोटो पहचान पत्र", phoneOtp: "वह फ़ोन जिस पर वन-टाइम पासकोड आएगा", returningUhid: "पहले का यूएचआईडी", previousSlip: "पहली अपॉइंटमेंट की स्लिप", feeLine: "ओपीडी पंजीकरण शुल्क", toSignIn: "साइन इन करने के लिए आगे बढ़ें", signInTitle: "स्लॉट रखने के लिए साइन इन करें", signInNote: "पहचान की ज़रूरत सिर्फ़ अब है, नकली स्लिप बनाते समय। कुछ असली जमा नहीं होता।", credentialsNote: "डेमो क्रेडेंशियल यहाँ बड़े अक्षरों में हैं; असली खाता इस्तेमाल न करें।", usernameLabel: "यूज़रनेम", passwordLabel: "पासवर्ड", usernameInputLabel: "डेमो यूज़रनेम", passwordInputLabel: "डेमो पासवर्ड", humanCheck: "एक बार चुनें: मैं इंसान हूँ", signInButton: "साइन इन करें और स्लिप दिखाएँ", humanCheckNeeded: "पहले मानव-जाँच चुनें।", slipTitle: "आपकी नकली स्लिप", slipNote: "इसे काउंटर पर दिखाने के लिए रखें। यह नकली स्लिप है, बुकिंग नहीं।", slipPatient: "मरीज़", slipDepartment: "विभाग", slipHospital: "अस्पताल", slipSlot: "स्लॉट", slipSeenBy: "ईमानदार इंतज़ार", slipAppointmentId: "अपॉइंटमेंट आईडी", slipUhid: "यूएचआईडी", patientSaid: "मरीज़ ने बताया:", rightsCard: "अगर इस स्लिप के साथ आपको लौटा दिया जाए — अपॉइंटमेंट आईडी लिखें, pgportal.gov.in पर शिकायत करें, या पूछें कि मान्य ऑनलाइन अपॉइंटमेंट क्यों नहीं माना गया।", printSlip: "स्लिप प्रिंट करें", downloadSlip: "स्लिप डाउनलोड करें", printFooter: "नमूना — असली अपॉइंटमेंट नहीं · स्वतंत्र प्रोटोटाइप · नकली डेटा।", signedIn: "नकली साइन-इन पूरा हुआ। आपकी नकली स्लिप नीचे है।", credentialsMismatch: "ऊपर दिए डेमो क्रेडेंशियल इस्तेमाल करें।", feeAmount: "₹10",
+          honestyBack: "← वापस", honestyEyebrow: "स्क्रीन 7 · ईमानदारी", honestyTitle: "क्या असली है और क्या नहीं", honestyIntro: "पहले जानिए कि ओआरएस क्या अच्छा करता है। फिर देखें कि यह स्वतंत्र प्रोटोटाइप क्या दावा करता है — और क्या नहीं।", honestyLink: "क्या असली है?", orsCreditTitle: "ओआरएस पहले से क्या अच्छा करता है", orsCreditNote: "ये ओआरएस की सुविधाएँ हैं; हम इन्हें अपना बनाया हुआ नहीं बता रहे हैं।", honestySourceLabel: "स्रोत · 26 अगस्त 2026 को जाँचा:", orsLabReports: "लैब रिपोर्ट", orsBlood: "खून की उपलब्धता", orsCancellation: "अपॉइंटमेंट आईडी से रद्द करना", orsAbha: "आभा एकीकरण", orsApp: "आधिकारिक मोबाइल ऐप · नेक्स्टजेन ओआरएस", limitsTitle: "यह प्रोटोटाइप क्या दावा नहीं करता", limitNoOrs: "यहाँ कुछ भी ओआरएस से नहीं जुड़ा है। कोई अपॉइंटमेंट असली नहीं है।", limitMock: "हर अस्पताल, स्लॉट, इंतज़ार, कतार की जगह, अपॉइंटमेंट आईडी और यूएचआईडी नकली है।", limitRules: "विभाग चुनने का तरीका एक छोटी, हाथ से लिखी नियम फ़ाइल है; यह क्लिनिकल प्रोटोकॉल नहीं है और किसी मेडिकल संस्था ने इसकी समीक्षा नहीं की है।", limitAdvice: "यह मेडिकल सलाह नहीं है।", limitModel: "आपकी बात अपने शब्दों में पढ़ने के लिए हम यह वाक्य एक एआई सेवा को भेजते हैं। अगर आप ऐसा नहीं चाहते तो शरीर का नक्शा चुनें।", buildTitle: "यह प्रोटोटाइप किससे बना", buildInterfaceTitle: "एचटीएमएल और सीएसएस", buildInterface: "मोबाइल स्क्रीन, बड़े कंट्रोल, फ़ोकस स्थिति और प्रिंट व्यू।", buildRoutingTitle: "जावास्क्रिप्ट + routing-rules.js", buildRouting: "आपकी संरचित शिकायत से विभाग और ज़रूरत की तात्कालिकता; नियम आईडी भी दिखती है।", buildHospitalTitle: "hospital-data.js", buildHospital: "सत्यापित अस्पताल नाम और नकली स्लॉट, इंतज़ार, यात्रा आँकड़े और आईडी।", buildCodexTitle: "Codex", buildCodex: "एप्लिकेशन कोड, टेस्ट और जाँच लिखने में मदद की।", talkToPerson: "किसी व्यक्ति से बात करें", prototype: "स्वतंत्र प्रोटोटाइप · नकली डेटा · किसी सरकारी संस्था से जुड़ा नहीं।",
           voiceStart: "अपनी परेशानी बोलें", voiceStop: "सुनना रोकें", voiceLabel: "बोलें", voiceLabelStop: "रोकें", voiceUnsupported: "यहाँ आवाज़ से लिखना उपलब्ध नहीं है। आप लिख सकते हैं या शरीर का नक्शा चुन सकते हैं।",
           voiceListening: "सुन रहे हैं… अपने शब्दों में बोलें।", voiceDone: "आपके शब्द मिल गए। आगे बढ़ने से पहले उन्हें बदल सकते हैं।",
-          continueHint: "कुछ शब्द लिखें या कोई उदाहरण चुनें ताकि हम आगे बढ़ सकें।", someoneHint: "किसके लिए है और उम्र का समूह चुनें।",
+          continueHint: "कुछ शब्द लिखें या कोई उदाहरण चुनें ताकि हम आगे बढ़ सकें।", someoneHint: "किसके लिए है और उम्र का समूह चुनें।", notChosen: "नहीं चुना", notAsked: "नहीं पूछा गया", chooseDepartmentScreen: "विभाग खुद चुनें",
         },
       };
 
-      const state = { language: "en", booking: "myself", who: null, age: null, listening: false, region: null, duration: null, severity: null };
+      Object.assign(copy.en, {
+        howLink: "How It Works", hospitalsLink: "Hospitals", howTitle: "How Raahat works", howNote: "A short, visible journey from where it hurts to the right OPD counter.",
+        howOneTitle: "Point, speak, or type", howOneNote: "Describe symptoms in any language, or point to a place on the interactive body map.", howTwoTitle: "Instant triage & honest wait", howTwoNote: "Code matches a verified hospital counter and shows simulated queue timing in plain language.", howThreeTitle: "Specimen slip & citizen rights", howThreeNote: "Print a clearly marked mock slip with what to carry and a PGPortal grievance safeguard.",
+        helplinesLabel: "Emergency quick dial:", triage3dEyebrow: "3D body map", triage3dTitle: "Point at a place", triage3dNote: "Drag to rotate. Tap a glowing point. Nothing is decided here.", use2d: "Use accessible 2D map", use3d: "Show 3D map", workspaceUnsure: "Not sure where", workspaceEyebrow: "Read-back workspace", workspaceTitle: "Your choices stay visible", workspaceEmpty: "Choose a glowing point or use the 2D map.", workspaceAwaiting: "The department result appears only after you see and confirm the read-back.", workspacePrivacy: "One red flag is enough for Emergency. The model cannot clear a flag.", map3dUnavailable: "3D is not available on this device. The accessible 2D map is ready below.",
+      });
+      Object.assign(copy.hi, {
+        howLink: "यह कैसे काम करता है", hospitalsLink: "अस्पताल", howTitle: "राहत कैसे काम करता है", howNote: "जहाँ तकलीफ़ है वहाँ से सही ओपीडी काउंटर तक एक साफ़ सफ़र।",
+        howOneTitle: "चुनें, बोलें या लिखें", howOneNote: "किसी भी भाषा में बताइए या शरीर के नक्शे पर जगह चुनिए।", howTwoTitle: "तुरंत रास्ता और ईमानदार इंतज़ार", howTwoNote: "कोड सही अस्पताल काउंटर चुनता है और नकली कतार का समय साफ़ भाषा में दिखाता है।", howThreeTitle: "नमूना स्लिप और नागरिक अधिकार", howThreeNote: "क्या साथ ले जाना है और PGPortal शिकायत रास्ते के साथ साफ़ नकली स्लिप प्रिंट करें।",
+        helplinesLabel: "इमरजेंसी के लिए जल्दी डायल करें:", triage3dEyebrow: "3D शरीर का नक्शा", triage3dTitle: "किसी जगह पर चुनें", triage3dNote: "घुमाने के लिए खींचें। चमकती जगह चुनें। यहाँ कुछ तय नहीं होता।", use2d: "आसान 2D नक्शा चुनें", use3d: "3D नक्शा दिखाएँ", workspaceUnsure: "जगह पता नहीं", workspaceEyebrow: "दोबारा पढ़ने की जगह", workspaceTitle: "आपकी पसंद सामने रहेगी", workspaceEmpty: "चमकती जगह या 2D नक्शा चुनें।", workspaceAwaiting: "विभाग का नतीजा आपकी पुष्टि के बाद ही दिखेगा।", workspacePrivacy: "एक रेड फ्लैग इमरजेंसी के लिए काफ़ी है। मॉडल फ्लैग हटा नहीं सकता।", map3dUnavailable: "इस डिवाइस पर 3D उपलब्ध नहीं है। आसान 2D नक्शा नीचे तैयार है।",
+      });
+      Object.assign(copy.en, {
+        faqSafetyQ: "Does Raahat give medical advice or clinical diagnoses?", faqSafetyA: "No. Raahat is administrative triage only. It structures your words and points you to an OPD counter; it does not diagnose or say that you are fine.", faqRedFlagQ: "How do deterministic Red Flags work?", faqRedFlagA: "Red Flags are code-level rules isolated from AI models. One marker is enough to route to Emergency now, and the model can never clear a flag.", faqAccessQ: "Can someone who cannot read use this platform?", faqAccessA: "Yes. Complaint entry has three equal routes: speak, type, or tap the labelled 3D/2D body map. Large buttons, keyboard focus and screen-reader labels are built into the flow.", faqPrivacyQ: "Is personal health data stored on a server?", faqPrivacyA: "No. This prototype keeps the complaint in the browser for this session and never stores it server-side. The body-map route sends nothing to an AI service.", faqWaitQ: "How are the honest wait times calculated?", faqWaitA: "They are simulated from historical OPD throughput plus a morning-rounds delay: slot start plus estimated wait. This is not live queue data.", faqOrsQ: "How is Raahat different from the government's ORS portal?", faqOrsA: "ORS begins by asking you to choose a hospital and department. Raahat helps a citizen structure their own words first, then shows an honest simulated queue view. It does not connect to ORS.", faqAbdmQ: "How can Raahat integrate with real government infrastructure?", faqAbdmA: "This prototype does not connect to government systems. A future production gateway could integrate with ABDM and e-Hospital HMIS APIs only with explicit consent, security review and a public-service partnership."
+      });
+      Object.assign(copy.hi, {
+        faqSafetyQ: "क्या राहत मेडिकल सलाह या बीमारी की पहचान करता है?", faqSafetyA: "नहीं। राहत केवल प्रशासनिक ट्रायेज है। यह आपकी बात को व्यवस्थित कर ओपीडी काउंटर तक पहुँचाता है; बीमारी की पहचान नहीं करता और यह नहीं कहता कि आप ठीक हैं।", faqRedFlagQ: "नियम से चलने वाले रेड फ्लैग कैसे काम करते हैं?", faqRedFlagA: "रेड फ्लैग एआई से अलग कोड के नियम हैं। एक निशान भी अभी इमरजेंसी भेजने के लिए काफ़ी है और मॉडल फ्लैग हटा नहीं सकता।", faqAccessQ: "क्या बिना पढ़े कोई इस प्लेटफ़ॉर्म का इस्तेमाल कर सकता है?", faqAccessA: "हाँ। परेशानी बताने के तीन बराबर रास्ते हैं: बोलना, लिखना या नाम वाले 3D/2D शरीर के नक्शे पर टैप करना।", faqPrivacyQ: "क्या मेरी निजी स्वास्थ्य जानकारी सर्वर पर सेव होती है?", faqPrivacyA: "नहीं। इस प्रोटोटाइप में परेशानी इसी ब्राउज़र में सत्र तक रहती है और सर्वर पर सेव नहीं होती। शरीर के नक्शे वाला रास्ता एआई सेवा को कुछ नहीं भेजता।", faqWaitQ: "ईमानदार इंतज़ार का समय कैसे निकाला जाता है?", faqWaitA: "यह नकली समय ओपीडी की पुरानी गति और सुबह के डॉक्टर राउंड से बनाया गया है: स्लॉट शुरू होने का समय और अनुमानित इंतज़ार। यह लाइव कतार नहीं है।", faqOrsQ: "राहत सरकारी ORS पोर्टल से कैसे अलग है?", faqOrsA: "ORS पहले अस्पताल और विभाग चुनने को कहता है। राहत पहले आपकी बात को व्यवस्थित करता है और फिर नकली कतार दिखाता है। यह ORS से जुड़ा नहीं है।", faqAbdmQ: "राहत असली सरकारी सिस्टम से कैसे जुड़ सकता है?", faqAbdmA: "यह प्रोटोटाइप सरकारी सिस्टम से नहीं जुड़ा है। भविष्य का प्रोडक्शन गेटवे साफ़ सहमति, सुरक्षा जाँच और सार्वजनिक सेवा साझेदारी के साथ ABDM और e-Hospital HMIS API से जुड़ सकता है।"
+      });
+      const state = { language: "en", screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, listening: false, region: null, noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
       const text = (key) => copy[state.language][key];
       const status = document.querySelector("#status");
       const complaint = document.querySelector("#complaint");
       const voiceButton = document.querySelector("#voice-button");
       const sessionNote = document.querySelector("#session-note");
       const questionContent = document.querySelector("#question-content");
+      const landingScreen = document.querySelector("#landing-screen");
+      const landingComplaint = document.querySelector("#landing-complaint");
       const bodyMapScreen = document.querySelector("#body-map-screen");
+      const bodyLocationPicker = document.querySelector("#body-location-picker");
+      const map3dCanvas = document.querySelector("#body-3d-canvas");
+      const map3dStage = document.querySelector("#body-3d-stage");
+      const toggleMapMode = document.querySelector("#toggle-map-mode");
+      const threeUnavailable = document.querySelector("#three-unavailable");
+      const workspaceSummary = document.querySelector("#workspace-summary");
+      const kindQuestion = document.querySelector("#kind-question");
+      const kindTitle = document.querySelector("#kind-title");
+      const kindStatus = document.querySelector("#kind-status");
       const followups = document.querySelector("#followups");
       const mapStatus = document.querySelector("#map-status");
       const mapReady = document.querySelector("#map-ready");
+      const selectedRegionName = document.querySelector("#selected-region-name");
+      const selectionMessage = document.querySelector("#selection-message");
+      const selectedKindName = document.querySelector("#selected-kind-name");
+      const kindSelectionMessage = document.querySelector("#kind-selection-message");
+      const reviewScreen = document.querySelector("#review-screen");
+      const resultScreen = document.querySelector("#result-screen");
+      const reviewStatus = document.querySelector("#review-status");
+      const readbackWords = document.querySelector("#readback-words");
+      const readbackWordsValue = document.querySelector("#readback-words-value");
+      const unclearNote = document.querySelector("#unclear-note");
+      const unclearValue = document.querySelector("#unclear-value");
+      const readbackEditor = document.querySelector("#readback-editor");
+      const editorControls = document.querySelector("#editor-controls");
+      const ordinaryResult = document.querySelector("#ordinary-result");
+      const emergencyResult = document.querySelector("#emergency-result");
+      const emergencyHospital = document.querySelector("#emergency-hospital");
+      const findHospital = document.querySelector("#find-hospital");
+      const appointmentScreen = document.querySelector("#appointment-screen");
+      const bookingDepartment = document.querySelector("#booking-department");
+      const localitySelect = document.querySelector("#locality-select");
+      const hospitalList = document.querySelector("#hospital-list");
+      const carryPanel = document.querySelector("#carry-panel");
+      const carryList = document.querySelector("#carry-list");
+      const feeLine = document.querySelector("#fee-line");
+      const toSignIn = document.querySelector("#to-sign-in");
+      const signInPanel = document.querySelector("#sign-in-panel");
+      const humanCheck = document.querySelector("#human-check");
+      const signInButton = document.querySelector("#sign-in-button");
+      const signInStatus = document.querySelector("#sign-in-status");
+      const slipPanel = document.querySelector("#slip-panel");
+      const honestyScreen = document.querySelector("#honesty-screen");
+      const regionCopyKeys = {
+        head: "regionHead", face: "regionFace", neck: "regionNeck", chest: "regionChest",
+        "upper-abdomen": "regionUpperAbdomen", "lower-abdomen": "regionLowerAbdomen",
+        back: "regionBack", arm: "regionArm", hand: "regionHand", leg: "regionLeg", foot: "regionFoot", general: "regionGeneral",
+      };
+      const kindCopyKeys = {
+        pain: "kindPain", fever: "kindFever", breathing: "kindBreathing", bleeding: "kindBleeding", swelling: "kindSwelling",
+        rash: "kindRash", injury: "kindInjury", vomiting: "kindVomiting", dizziness: "kindDizziness", low: "kindLow",
+      };
+      const durationCopyKeys = { now: "durationNow", today: "durationToday", days: "durationDays", longer: "durationLonger", unsure: "durationUnsure" };
+      const severityCopyKeys = { no: "severityNo", yes: "severityYes", unsure: "severityUnsure" };
+      const whoCopyKeys = { self: "myself", parent: "parent", child: "child", other: "someoneElseShort" };
+      const ageCopyKeys = { baby: "baby", child: "childAge", adult: "adult", older: "olderAdult" };
+      const departmentCopyKeys = { Paediatrics: "deptPaediatrics", Cardiology: "deptCardiology", Neurology: "deptNeurology", Gastroenterology: "deptGastroenterology", Orthopaedics: "deptOrthopaedics", Dermatology: "deptDermatology", Dental: "deptDental", "General Medicine": "deptGeneralMedicine", "Choose a department yourself": "deptChoose" };
+      const editOptions = {
+        region: ["head", "face", "neck", "chest", "upper-abdomen", "lower-abdomen", "back", "arm", "hand", "leg", "foot", "general"].map((value) => ({ value, label: regionCopyKeys[value] })),
+        kind: Object.keys(kindCopyKeys).map((value) => ({ value, label: kindCopyKeys[value] })),
+        duration: Object.keys(durationCopyKeys).map((value) => ({ value, label: durationCopyKeys[value] })),
+        severity: Object.keys(severityCopyKeys).map((value) => ({ value, label: severityCopyKeys[value] })),
+        who_for: Object.keys(whoCopyKeys).map((value) => ({ value, label: whoCopyKeys[value] })),
+        age_band: [null, ...Object.keys(ageCopyKeys)].map((value) => ({ value, label: value === null ? "notAsked" : ageCopyKeys[value] })),
+      };
+
+      function renderRegionLabels() {
+        document.querySelectorAll("[data-region-copy]").forEach((button) => {
+          button.setAttribute("aria-label", text(button.dataset.regionCopy));
+        });
+      }
+
+      function renderKindLabels() {
+        document.querySelectorAll("[data-kind-copy]").forEach((button) => {
+          button.setAttribute("aria-label", text(button.dataset.kindCopy));
+        });
+        document.querySelectorAll("[data-no-location-copy]").forEach((button) => {
+          button.setAttribute("aria-label", text(button.dataset.noLocationCopy));
+        });
+      }
+
+      function renderRegionSelection() {
+        if (!state.region) {
+          selectedRegionName.textContent = state.noLocation ? text("selectionNone") : text("selectionEmpty");
+          selectionMessage.textContent = state.noLocation ? text("selectionChosen") : text("selectionHint");
+          return;
+        }
+        selectedRegionName.textContent = text(regionCopyKeys[state.region]);
+        selectionMessage.textContent = text("selectionChosen");
+      }
+
+      function renderKindSelection() {
+        if (!state.kind) {
+          selectedKindName.textContent = text("kindEmpty");
+          kindSelectionMessage.textContent = text("kindHint");
+          return;
+        }
+        selectedKindName.textContent = text(kindCopyKeys[state.kind]);
+        kindSelectionMessage.textContent = text("kindChosen");
+      }
+
+      function renderMapMode() {
+        const using3d = state.mapMode === "3d";
+        bodyLocationPicker.hidden = using3d;
+        map3dStage.hidden = !using3d;
+        toggleMapMode.textContent = text(using3d ? "use2d" : "use3d");
+        toggleMapMode.setAttribute("aria-pressed", String(!using3d));
+        threeUnavailable.hidden = using3d || state.threeAvailable;
+      }
+
+      function renderWorkspace() {
+        if (!state.region && !state.noLocation) {
+          workspaceSummary.replaceChildren();
+          const strong = document.createElement("strong");
+          strong.textContent = text("workspaceEmpty");
+          const note = document.createElement("span");
+          note.textContent = text("workspaceAwaiting");
+          workspaceSummary.append(strong, note);
+          return;
+        }
+        workspaceSummary.replaceChildren();
+        const strong = document.createElement("strong");
+        strong.append(makeTag("Observed"), document.createTextNode(` ${state.region ? text(regionCopyKeys[state.region]) : text("selectionNone")}`));
+        const note = document.createElement("span");
+        note.textContent = state.kind ? text("kindChosen") : text("workspaceAwaiting");
+        workspaceSummary.append(strong, note);
+      }
+
+      function resetKindAndFollowups() {
+        state.kind = null;
+        state.duration = null;
+        state.severity = null;
+        document.querySelectorAll("[data-kind], [data-duration], [data-severity]").forEach((item) => item.setAttribute("aria-pressed", "false"));
+        renderKindSelection();
+        kindStatus.textContent = "";
+        followups.hidden = true;
+        mapReady.classList.remove("is-visible");
+      }
+
+      function showKindQuestion(hideLocationPicker = false) {
+        kindQuestion.hidden = false;
+        if (hideLocationPicker) bodyLocationPicker.hidden = true;
+        kindTitle.focus();
+      }
 
       function renderLanguage() {
         document.documentElement.lang = state.language === "hi" ? "hi" : "en";
+        const truthfulPrivacyCopy = state.language === "hi"
+          ? "यह प्रोटोटाइप इस वाक्य को आपके ब्राउज़र में पढ़ता है। कुछ भी सर्वर पर नहीं भेजा जाता; अगर लिखना न चाहें तो शरीर का नक्शा चुनें।"
+          : "This prototype reads this sentence in your browser. Nothing is sent to a server; tap the body map if you would rather not type.";
+        const truthfulPrivacyNote = state.language === "hi"
+          ? "इस हिस्से में छोटी ब्राउज़र नियम-सूची आपकी बात पढ़ती है; कोई वाक्य सर्वर पर नहीं भेजा जाता।"
+          : "This slice uses a small browser rule reader; no sentence is sent to a server.";
         document.querySelectorAll("[data-copy]").forEach((element) => {
           const key = element.dataset.copy;
-          if (copy[state.language][key]) element.textContent = text(key);
+          if (key === "modelDisclosure") element.textContent = truthfulPrivacyCopy;
+          else if (key === "limitModel" || key === "faqPrivacyA") element.textContent = truthfulPrivacyNote;
+          else if (copy[state.language][key]) element.textContent = text(key);
         });
         document.querySelectorAll("[data-copy-placeholder]").forEach((element) => { element.placeholder = text(element.dataset.copyPlaceholder); });
         document.querySelectorAll("[data-language]").forEach((button) => { button.setAttribute("aria-pressed", String(button.dataset.language === state.language)); });
         voiceButton.setAttribute("aria-label", state.listening ? text("voiceStop") : text("voiceStart"));
         document.querySelector("#voice-label").textContent = state.listening ? text("voiceLabelStop") : text("voiceLabel");
+        renderRegionLabels();
+        renderKindLabels();
+        renderRegionSelection();
+        renderKindSelection();
+        renderMapMode();
+        renderWorkspace();
+        if (!reviewScreen.hidden && state.complaint) {
+          renderReadback();
+          if (state.editingField) renderEditor(state.editingField);
+        }
+        if (!resultScreen.hidden && state.complaint) showResult();
+        if (!appointmentScreen.hidden && state.complaint) renderAppointment();
         if (!status.dataset.persistent) status.textContent = "";
       }
 
@@ -355,6 +1251,14 @@
         });
       });
 
+      function setLandingBooking(value) {
+        state.booking = value;
+        document.querySelectorAll("[data-landing-booking]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.landingBooking === value)));
+        document.querySelectorAll("[data-booking]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.booking === value)));
+        document.querySelector("[data-caregiver]").hidden = value !== "someone";
+        if (value === "myself") { state.who = null; state.age = null; }
+      }
+
       document.querySelectorAll("[data-who]").forEach((button) => {
         button.addEventListener("click", () => {
           state.who = button.dataset.who;
@@ -373,13 +1277,51 @@
         button.addEventListener("click", () => { complaint.value = button.dataset.example; complaint.focus(); sessionNote.classList.remove("is-visible"); status.dataset.persistent = ""; status.textContent = ""; });
       });
 
+      document.querySelectorAll("[data-landing-booking]").forEach((button) => button.addEventListener("click", () => setLandingBooking(button.dataset.landingBooking)));
+      document.querySelectorAll("[data-landing-example]").forEach((button) => button.addEventListener("click", () => {
+        landingComplaint.value = button.dataset.landingExample;
+        document.querySelectorAll("[data-entry-route]").forEach((route) => route.setAttribute("aria-pressed", String(route.dataset.entryRoute === "type")));
+        state.entryRoute = "type";
+        landingComplaint.focus();
+      }));
+      document.querySelectorAll("[data-entry-route]").forEach((button) => button.addEventListener("click", () => {
+        state.entryRoute = button.dataset.entryRoute;
+        document.querySelectorAll("[data-entry-route]").forEach((route) => route.setAttribute("aria-pressed", String(route === button)));
+        if (state.entryRoute === "type") landingComplaint.focus();
+      }));
+      document.querySelector("#start-triage").addEventListener("click", () => {
+        if (landingComplaint.value.trim()) complaint.value = landingComplaint.value.trim();
+        setLandingBooking(document.querySelector("[data-landing-booking][aria-pressed='true']")?.dataset.landingBooking || "myself");
+        showQuestion();
+      });
+      document.querySelector("#hero-continue").addEventListener("click", () => {
+        const words = landingComplaint.value.trim();
+        setLandingBooking(document.querySelector("[data-landing-booking][aria-pressed='true']")?.dataset.landingBooking || "myself");
+        if (words) complaint.value = words;
+        if (state.entryRoute === "speak") { showQuestion(); voiceButton.click(); return; }
+        if (!words && state.entryRoute !== "map") { landingComplaint.focus(); return; }
+        if (state.entryRoute === "map") { showQuestion(); showBodyMap(); return; }
+        showQuestion();
+        showReadback(makeComplaint(false));
+      });
+      document.querySelector("#brand-home").addEventListener("click", (event) => { event.preventDefault(); showLanding(); });
+      document.querySelectorAll("[data-landing-link]").forEach((link) => link.addEventListener("click", (event) => {
+        event.preventDefault();
+        showLanding(link.getAttribute("href").slice(1));
+      }));
+
       function moveTo(element) {
         element.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
       }
 
       function showBodyMap() {
+        hideAllScreens();
+        state.screen = "body-map";
         questionContent.hidden = true;
         bodyMapScreen.hidden = false;
+        renderMapMode();
+        kindQuestion.hidden = true;
+        followups.hidden = true;
         const words = complaint.value.trim();
         document.querySelector("#typed-handoff").hidden = !words;
         document.querySelector("#typed-words").textContent = words;
@@ -387,6 +1329,11 @@
       }
 
       document.querySelector("#body-map-button").addEventListener("click", showBodyMap);
+      toggleMapMode.addEventListener("click", () => {
+        state.mapMode = state.mapMode === "3d" ? "2d" : "3d";
+        renderMapMode();
+        if (state.mapMode === "2d") moveTo(bodyLocationPicker);
+      });
       document.querySelector("#body-map-back").addEventListener("click", () => {
         bodyMapScreen.hidden = true;
         questionContent.hidden = false;
@@ -396,11 +1343,44 @@
       document.querySelectorAll("[data-region]").forEach((button) => {
         button.addEventListener("click", () => {
           state.region = button.dataset.region;
-          document.querySelectorAll("[data-region]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-          followups.hidden = false;
-          mapReady.classList.remove("is-visible");
+          state.noLocation = null;
+          document.querySelectorAll("[data-no-location]").forEach((item) => item.setAttribute("aria-pressed", "false"));
+          document.querySelectorAll("[data-region]").forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.region === state.region)));
+          resetKindAndFollowups();
+          renderRegionSelection();
+          renderWorkspace();
           mapStatus.textContent = "";
           mapStatus.removeAttribute("role");
+          showKindQuestion();
+        });
+      });
+
+      document.querySelectorAll("[data-no-location]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.region = null;
+          state.noLocation = button.dataset.noLocation;
+          document.querySelectorAll("[data-no-location]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+          document.querySelectorAll("[data-region]").forEach((item) => item.setAttribute("aria-pressed", "false"));
+          resetKindAndFollowups();
+          selectedRegionName.textContent = text("selectionNone");
+          selectionMessage.textContent = text("selectionChosen");
+          renderWorkspace();
+          mapStatus.textContent = "";
+          mapStatus.removeAttribute("role");
+          showKindQuestion(true);
+        });
+      });
+
+      document.querySelectorAll("[data-kind]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.kind = button.dataset.kind;
+          document.querySelectorAll("[data-kind]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+          renderKindSelection();
+          renderWorkspace();
+          kindStatus.textContent = "";
+          followups.hidden = false;
+          mapReady.classList.remove("is-visible");
+          moveTo(followups);
         });
       });
 
@@ -431,24 +1411,492 @@
         element.replaceChildren(tag, document.createTextNode(` ${value}`));
       }
 
-      function updateMapSummary() {
-        setObservedValue("#map-ready-region", selectedLabel("[data-region]"));
-        setObservedValue("#map-ready-duration", selectedLabel("[data-duration]"));
-        setObservedValue("#map-ready-severity", selectedLabel("[data-severity]"));
+      function makeComplaint(fromMap = false) {
+        if (!fromMap) {
+          const extracted = parseFreeTextComplaint(complaint.value.trim(), state.language);
+          return {
+            ...extracted,
+            age_band: extracted.age_band || state.age,
+            who_for: extracted.who_for || (state.booking === "myself" ? "self" : state.who),
+          };
+        }
+        return {
+          region: state.region,
+          kind: state.kind,
+          duration: state.duration,
+          severity: state.severity,
+          age_band: state.age,
+          who_for: state.booking === "myself" ? "self" : state.who,
+          severity_markers: [],
+          parsed: true,
+          unclear: [],
+          language: state.language,
+        };
       }
 
+      function labelFor(field, value) {
+        if (field === "region") return value ? text(regionCopyKeys[value]) : text("selectionNone");
+        if (field === "kind") return value ? text(kindCopyKeys[value]) : text("notChosen");
+        if (field === "duration") return value ? text(durationCopyKeys[value]) : text("notChosen");
+        if (field === "severity") return value ? text(severityCopyKeys[value]) : text("notChosen");
+        if (field === "who_for") return value ? text(whoCopyKeys[value]) : text("notChosen");
+        if (field === "age_band") return value ? text(ageCopyKeys[value]) : text("notAsked");
+        return text("notChosen");
+      }
+
+      function renderReadback() {
+        const current = state.complaint;
+        if (!current) return;
+        document.querySelector("#chip-region").textContent = labelFor("region", current.region);
+        document.querySelector("#chip-kind").textContent = labelFor("kind", current.kind);
+        document.querySelector("#chip-duration").textContent = labelFor("duration", current.duration);
+        document.querySelector("#chip-severity").textContent = labelFor("severity", current.severity);
+        document.querySelector("#chip-who").textContent = labelFor("who_for", current.who_for);
+        document.querySelector("#chip-age").textContent = labelFor("age_band", current.age_band);
+        const rawWords = current.unclear?.[0] || complaint.value.trim();
+        readbackWords.hidden = !rawWords;
+        readbackWordsValue.textContent = rawWords;
+        unclearNote.hidden = current.parsed || !current.unclear?.length;
+        unclearValue.textContent = current.unclear?.join("; ") || "";
+        reviewStatus.textContent = "";
+        reviewStatus.removeAttribute("role");
+      }
+
+      function showReadback(complaintData = null) {
+        state.complaint = complaintData || makeComplaint(false);
+        state.screen = "review";
+        bodyMapScreen.hidden = true;
+        questionContent.hidden = true;
+        resultScreen.hidden = true;
+        reviewScreen.hidden = false;
+        renderReadback();
+        document.querySelector("#review-title").focus();
+      }
+
+      function syncComplaintToState() {
+        const current = state.complaint;
+        state.region = current.region;
+        state.kind = current.kind;
+        state.duration = current.duration;
+        state.severity = current.severity;
+        state.age = current.age_band;
+        if (current.who_for === "self") { state.booking = "myself"; state.who = null; }
+        else { state.booking = "someone"; state.who = current.who_for; }
+      }
+
+      function renderEditor(field) {
+        const current = state.complaint?.[field];
+        editorControls.replaceChildren();
+        for (const option of editOptions[field]) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "editor-control";
+          button.dataset.editorValue = option.value ?? "";
+          button.setAttribute("aria-pressed", String(current === option.value));
+          const tag = document.createElement("span");
+          tag.className = "tag";
+          tag.textContent = "Observed";
+          button.append(tag, document.createTextNode(text(option.label)));
+          button.addEventListener("click", () => {
+            const nextValue = option.value === "" ? null : option.value;
+            state.complaint[field] = nextValue;
+            if (field === "region") state.noLocation = nextValue ? null : "unsure";
+            const complete = Boolean(state.complaint.kind && state.complaint.duration && state.complaint.severity && (state.complaint.region || state.noLocation));
+            state.complaint.parsed = state.complaint.parsed || complete;
+            if (state.complaint.parsed) state.complaint.unclear = [];
+            syncComplaintToState();
+            renderReadback();
+            renderEditor(field);
+          });
+          editorControls.append(button);
+        }
+        readbackEditor.hidden = false;
+      }
+
+      function makeTag(label) {
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = label;
+        return tag;
+      }
+
+      function formatClock(value) {
+        const [hourValue, minuteValue] = String(value).split(":").map(Number);
+        const suffix = hourValue >= 12 ? "PM" : "AM";
+        const hour = hourValue % 12 || 12;
+        return `${String(hour).padStart(2, "0")}:${String(minuteValue).padStart(2, "0")} ${suffix}`;
+      }
+
+      function honestWaitText(availability) {
+        return `Slot ${formatClock(availability.slot)} · Estimated doctor consultation: ${formatClock(availability.seenAt)} (Avg. ${availability.waitMinutes} min wait). Tokens ${availability.tokenRange} seen during morning rounds.`;
+      }
+
+      function labelledValue(tagLabel, value) {
+        const fragment = document.createDocumentFragment();
+        fragment.append(makeTag(tagLabel), document.createTextNode(value));
+        return fragment;
+      }
+
+      function appendFact(parent, label, tagLabel, value) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "hospital-fact";
+        const heading = document.createElement("dt");
+        heading.textContent = label;
+        const content = document.createElement("dd");
+        content.append(labelledValue(tagLabel, value));
+        wrapper.append(heading, content);
+        parent.append(wrapper);
+      }
+
+      function renderHospitalCards() {
+        const department = state.routeResult?.department;
+        const hospitals = hospitalsForDepartment(department, state.locality);
+        hospitalList.replaceChildren();
+        if (!hospitals.length) {
+          const empty = document.createElement("p");
+          empty.className = "booking-panel-note";
+          empty.textContent = text("noHospitals");
+          hospitalList.append(empty);
+          return;
+        }
+        hospitals.forEach((hospital) => {
+          const { availability } = hospital;
+          const card = document.createElement("article");
+          card.className = `hospital-card${state.selectedHospital === hospital.id ? " is-selected" : ""}`;
+          const verified = document.createElement("p");
+          verified.className = "verified-line";
+          verified.append(makeTag("Verified"), document.createTextNode(`${text("verifiedSource")} · ${text("checked")} ${HOSPITAL_FACT_CHECKED_ON} · `));
+          const source = document.createElement("a");
+          source.href = hospital.sourceUrl;
+          source.target = "_blank";
+          source.rel = "noreferrer";
+          source.textContent = hospital.sourceLabel;
+          verified.append(source);
+
+          const title = document.createElement("h3");
+          title.textContent = hospital.name;
+          const address = document.createElement("p");
+          address.className = "hospital-address";
+          address.append(makeTag("Verified"), document.createTextNode(hospital.address));
+
+          const facts = document.createElement("dl");
+          facts.className = "hospital-facts";
+          appendFact(facts, text("distance"), "Simulated", `${availability.travelMinutes} min · ${availability.distanceKm.toFixed(1)} km`);
+          appendFact(facts, text("nextSlot"), "Simulated", `Slot ${formatClock(availability.slot)}`);
+          appendFact(facts, text("seenBy"), "Simulated", formatClock(availability.seenAt));
+          appendFact(facts, text("calendarOpens"), "Simulated", availability.calendarOpens);
+
+          const honestWait = document.createElement("p");
+          honestWait.className = "honest-wait";
+          honestWait.append(makeTag("Simulated"), document.createTextNode(honestWaitText(availability)));
+
+          const sortKey = document.createElement("p");
+          sortKey.className = "sort-note";
+          sortKey.append(makeTag("Rule"), makeTag("Simulated"), document.createTextNode(` ${availability.seenAt} seen time · ${availability.travelMinutes} min travel · ${hospital.shortName}`));
+
+          const choose = document.createElement("button");
+          choose.type = "button";
+          choose.className = `large-button${state.selectedHospital === hospital.id ? " primary" : ""}`;
+          choose.textContent = state.selectedHospital === hospital.id ? text("chosenHospital") : text("chooseHospital");
+          choose.addEventListener("click", () => {
+            state.selectedHospital = hospital.id;
+            state.visitType = null;
+            state.signInOpened = false;
+            state.humanChecked = false;
+            state.signedIn = false;
+            renderAppointment();
+            moveTo(carryPanel);
+          });
+          card.append(title, address, verified, facts, honestWait, sortKey, choose);
+          hospitalList.append(card);
+        });
+      }
+
+      function renderCarry() {
+        document.querySelectorAll("[data-visit-type]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.visitType === state.visitType)));
+        carryList.replaceChildren();
+        if (!state.visitType) {
+          carryList.hidden = true;
+          feeLine.hidden = true;
+          toSignIn.hidden = true;
+          return;
+        }
+        const items = state.visitType === "first"
+          ? [text("firstId"), text("phoneOtp")]
+          : [text("returningUhid"), text("previousSlip")];
+        items.forEach((item) => { const li = document.createElement("li"); li.textContent = item; carryList.append(li); });
+        carryList.hidden = false;
+        feeLine.hidden = false;
+        feeLine.replaceChildren(makeTag("Simulated"), document.createTextNode(` ${text("feeLine")}: ${text("feeAmount")}`));
+        toSignIn.hidden = false;
+      }
+
+      function renderSlip() {
+        const department = state.routeResult?.department;
+        const hospital = hospitalsForDepartment(department, state.locality).find((entry) => entry.id === state.selectedHospital);
+        if (!hospital) return;
+        const { availability } = hospital;
+        const current = state.complaint || {};
+        const report = current.unclear?.[0] || complaint.value.trim() || [
+          labelFor("region", current.region), labelFor("kind", current.kind), labelFor("duration", current.duration), labelFor("severity", current.severity),
+        ].join(", ");
+        document.querySelector("#slip-patient").replaceChildren(makeTag("Observed"), document.createTextNode(` ${labelFor("who_for", current.who_for)}`));
+        document.querySelector("#slip-department").replaceChildren(makeTag("Rule"), document.createTextNode(` ${departmentCopyKeys[department] ? text(departmentCopyKeys[department]) : department}`));
+        document.querySelector("#slip-hospital").replaceChildren(makeTag("Verified"), document.createTextNode(` ${hospital.shortName}`));
+        document.querySelector("#slip-slot").replaceChildren(makeTag("Simulated"), document.createTextNode(` Slot ${formatClock(availability.slot)}`));
+        document.querySelector("#slip-seen-by").replaceChildren(makeTag("Simulated"), document.createTextNode(honestWaitText(availability)));
+        document.querySelector("#slip-appointment-id").replaceChildren(makeTag("Simulated"), document.createTextNode(" APPT-DEMO-4802"));
+        document.querySelector("#slip-uhid").replaceChildren(makeTag("Simulated"), document.createTextNode(" UHID-MOCK-7281"));
+        document.querySelector("#slip-report").textContent = report;
+      }
+
+      function renderAppointment() {
+        if (!state.routeResult && state.complaint) state.routeResult = routeComplaint(state.complaint);
+        const department = state.routeResult?.department || "General Medicine";
+        bookingDepartment.textContent = departmentCopyKeys[department] ? text(departmentCopyKeys[department]) : department;
+        localitySelect.value = state.locality;
+        renderHospitalCards();
+        carryPanel.hidden = !state.selectedHospital;
+        renderCarry();
+        signInPanel.hidden = !state.signInOpened;
+        humanCheck.setAttribute("aria-pressed", String(state.humanChecked));
+        signInButton.disabled = !state.humanChecked;
+        slipPanel.hidden = !state.signedIn;
+        if (state.signedIn) renderSlip();
+      }
+
+      function renderLocalities() {
+        localitySelect.replaceChildren();
+        LOCALITIES.forEach((locality) => {
+          const option = document.createElement("option");
+          option.value = locality.id;
+          option.textContent = locality.label;
+          localitySelect.append(option);
+        });
+      }
+
+      function hideAllScreens() {
+        landingScreen.hidden = true;
+        reviewScreen.hidden = true;
+        resultScreen.hidden = true;
+        appointmentScreen.hidden = true;
+        honestyScreen.hidden = true;
+        ordinaryResult.hidden = true;
+        emergencyResult.hidden = true;
+      }
+
+      function showQuestion() {
+        hideAllScreens();
+        state.screen = "question";
+        bodyMapScreen.hidden = true;
+        questionContent.hidden = false;
+        complaint.focus();
+      }
+
+      function showLanding(targetId = "front-door") {
+        hideAllScreens();
+        state.screen = "landing";
+        questionContent.hidden = true;
+        bodyMapScreen.hidden = true;
+        landingScreen.hidden = false;
+        const target = document.querySelector(`#${targetId}`) || landingScreen;
+        target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      }
+
+      function showHonesty() {
+        if (state.screen !== "honesty") state.previousScreen = state.screen;
+        hideAllScreens();
+        state.screen = "honesty";
+        questionContent.hidden = true;
+        bodyMapScreen.hidden = true;
+        honestyScreen.hidden = false;
+        document.querySelector("#honesty-title").focus();
+      }
+
+      function restorePreviousScreen() {
+        const previousScreen = state.previousScreen || "question";
+        if (previousScreen === "body-map") {
+          hideAllScreens();
+          state.screen = "body-map";
+          questionContent.hidden = true;
+          bodyMapScreen.hidden = false;
+          document.querySelector("#body-map-title").focus();
+          return;
+        }
+        if (previousScreen === "review") {
+          showReadback(state.complaint);
+          return;
+        }
+        if (previousScreen === "result") {
+          showResult();
+          return;
+        }
+        if (previousScreen === "appointment") {
+          hideAllScreens();
+          state.screen = "appointment";
+          questionContent.hidden = true;
+          bodyMapScreen.hidden = true;
+          appointmentScreen.hidden = false;
+          renderAppointment();
+          document.querySelector("#booking-title").focus();
+          return;
+        }
+        if (previousScreen === "landing") {
+          showLanding();
+          return;
+        }
+        showQuestion();
+      }
+
+      function renderEmergencyHospital() {
+        const hospital = hospitalsForDepartment("Emergency", state.locality)[0];
+        emergencyHospital.replaceChildren();
+        if (!hospital) return;
+        const title = document.createElement("h2");
+        title.textContent = text("emergencyHospitalTitle");
+        const name = document.createElement("p");
+        name.append(makeTag("Verified"), document.createTextNode(` ${hospital.shortName}`));
+        const address = document.createElement("p");
+        address.append(makeTag("Verified"), document.createTextNode(` ${hospital.address}`));
+        const travel = document.createElement("p");
+        const availability = hospital.availability;
+        travel.append(makeTag("Simulated"), document.createTextNode(` ${availability.travelMinutes} min · ${availability.distanceKm.toFixed(1)} km`));
+        const note = document.createElement("p");
+        note.textContent = text("emergencyHospitalNote");
+        emergencyHospital.append(title, name, address, travel, note);
+      }
+
+      function showResult() {
+        const result = routeComplaint(state.complaint);
+        state.routeResult = result;
+        state.screen = "result";
+        reviewScreen.hidden = true;
+        appointmentScreen.hidden = true;
+        honestyScreen.hidden = true;
+        resultScreen.hidden = false;
+        ordinaryResult.hidden = result.urgency === "emergency";
+        emergencyResult.hidden = result.urgency !== "emergency";
+        resultScreen.setAttribute("aria-labelledby", result.urgency === "emergency" ? "emergency-title" : "result-title");
+        findHospital.hidden = result.urgency === "emergency";
+        const reason = result.reason[state.language];
+        if (result.urgency === "emergency") {
+          document.querySelector("#emergency-reason").textContent = reason;
+          document.querySelector("#emergency-rule-id").textContent = result.rule_id;
+          renderEmergencyHospital();
+          document.querySelector("#emergency-title").focus();
+        } else {
+          document.querySelector("#result-department").textContent = text(departmentCopyKeys[result.department] || result.department);
+          document.querySelector("#result-reason").textContent = reason;
+          document.querySelector("#result-rule-id").textContent = result.rule_id;
+          document.querySelector("#result-title").focus();
+        }
+      }
+
+      function showAppointment() {
+        const result = routeComplaint(state.complaint);
+        if (result.urgency === "emergency") return;
+        state.routeResult = result;
+        state.screen = "appointment";
+        resultScreen.hidden = true;
+        appointmentScreen.hidden = false;
+        renderAppointment();
+        document.querySelector("#booking-title").focus();
+      }
+
+      findHospital.addEventListener("click", showAppointment);
+      document.querySelector("#honesty-link").addEventListener("click", (event) => { event.preventDefault(); showHonesty(); });
+      document.querySelectorAll("#honesty-back, #honesty-back-bottom").forEach((button) => button.addEventListener("click", restorePreviousScreen));
+      document.querySelector("#booking-back").addEventListener("click", () => { appointmentScreen.hidden = true; showResult(); });
+      localitySelect.addEventListener("change", () => {
+        state.locality = localitySelect.value;
+        state.selectedHospital = null;
+        state.visitType = null;
+        state.signInOpened = false;
+        state.humanChecked = false;
+        state.signedIn = false;
+        renderAppointment();
+      });
+      document.querySelectorAll("[data-visit-type]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.visitType = button.dataset.visitType;
+          renderAppointment();
+          moveTo(toSignIn);
+        });
+      });
+      toSignIn.addEventListener("click", () => {
+        state.signInOpened = true;
+        renderAppointment();
+        document.querySelector("#sign-in-title").focus();
+      });
+      humanCheck.addEventListener("click", () => {
+        state.humanChecked = !state.humanChecked;
+        renderAppointment();
+      });
+      signInButton.addEventListener("click", () => {
+        const username = document.querySelector("#demo-username").value.trim();
+        const password = document.querySelector("#demo-password").value.trim();
+        if (!state.humanChecked) {
+          signInStatus.textContent = text("humanCheckNeeded");
+          signInStatus.setAttribute("role", "alert");
+          return;
+        }
+        if (username !== "raahat-demo" || password !== "demo-pass") {
+          signInStatus.textContent = text("credentialsMismatch");
+          signInStatus.setAttribute("role", "alert");
+          return;
+        }
+        state.signedIn = true;
+        signInStatus.textContent = text("signedIn");
+        signInStatus.removeAttribute("role");
+        renderAppointment();
+        moveTo(slipPanel);
+        document.querySelector("#slip-heading").focus();
+      });
+      document.querySelector("#print-slip").addEventListener("click", () => window.print());
+      document.querySelector("#download-slip").addEventListener("click", () => {
+        const hospital = hospitalsForDepartment(state.routeResult?.department, state.locality).find((entry) => entry.id === state.selectedHospital);
+        if (!hospital) return;
+        const { availability } = hospital;
+        const content = [
+          "राहत · Raahat",
+          "SPECIMEN — NOT A REAL APPOINTMENT",
+          `Patient: ${labelFor("who_for", state.complaint?.who_for)}`,
+          `Department: ${state.routeResult.department}`,
+          `Hospital: ${hospital.shortName}`,
+          `Slot: ${availability.slot}`,
+          `Honest wait: ${honestWaitText(availability)}`,
+          "Appointment ID: APPT-DEMO-4802",
+          "UHID: UHID-MOCK-7281",
+          `Patient reports: ${document.querySelector("#slip-report").textContent}`,
+          "If you are turned away with this slip — note the appointment ID, raise a grievance at pgportal.gov.in, or file an RTI asking why a valid online appointment was not honoured.",
+        ].join("\n");
+        const url = URL.createObjectURL(new Blob([content], { type: "text/plain;charset=utf-8" }));
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "raahat-specimen-slip.txt";
+        link.click();
+        URL.revokeObjectURL(url);
+      });
+
       document.querySelector("#map-continue").addEventListener("click", () => {
-        if (!state.region || !state.duration || !state.severity) {
+        if (!state.kind || !state.duration || !state.severity) {
           mapStatus.textContent = text("mapIncomplete");
           mapStatus.setAttribute("role", "alert");
           return;
         }
-        updateMapSummary();
         mapStatus.textContent = "";
         mapStatus.removeAttribute("role");
         mapReady.classList.add("is-visible");
         moveTo(mapReady);
       });
+
+      document.querySelector("#review-map-button").addEventListener("click", () => showReadback(makeComplaint(true)));
+      document.querySelectorAll("[data-edit-field]").forEach((chip) => chip.addEventListener("click", () => { state.editingField = chip.dataset.editField; renderEditor(state.editingField); }));
+      document.querySelector("#confirm-button").addEventListener("click", showResult);
+      document.querySelector("#change-button").addEventListener("click", showBodyMap);
+      document.querySelector("#result-change").addEventListener("click", () => showReadback(state.complaint));
+      document.querySelector("#review-back").addEventListener("click", showQuestion);
+      document.querySelector("#choose-department").addEventListener("click", (event) => { event.preventDefault(); showQuestion(); });
 
       function speechRecognition() { return window.SpeechRecognition || window.webkitSpeechRecognition || null; }
 
@@ -475,12 +1923,20 @@
         const missingCaregiver = state.booking === "someone" && (!state.who || !state.age);
         if (missingCaregiver) { showStatus(text("someoneHint"), true); document.querySelector("[data-caregiver]").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
         if (!complaint.value.trim()) { showStatus(text("continueHint"), true); complaint.focus(); return; }
-        sessionNote.classList.add("is-visible");
-        showStatus("");
-        status.dataset.persistent = "";
-        sessionNote.scrollIntoView({ behavior: "smooth", block: "center" });
+        sessionNote.classList.remove("is-visible");
+        showReadback(makeComplaint(false));
       });
 
+      const bodyMap3d = createBodyMap3D({
+        canvas: map3dCanvas,
+        onUnavailable: () => {
+          state.threeAvailable = false;
+          state.mapMode = "2d";
+        },
+      });
+      state.threeAvailable = bodyMap3d.available;
+      if (!state.threeAvailable) state.mapMode = "2d";
+      renderLocalities();
       renderLanguage();
     </script>
   </body>
