@@ -16,17 +16,22 @@
         color: #17241f;
         --ink: #0f172a;
         --muted: #475569;
-        --line: #d7e1da;
+        --line: #cbd5e1;
         --paper: #ffffff;
         --background: #f8faf9;
         --accent: #166534;
         --accent-dark: #14532d;
         --accent-soft: #dcfce7;
         --marigold: #d97706;
+        --marigold-soft: #fef3c7;
         --emergency: #dc2626;
         --emergency-red: var(--emergency);
         --emergency-soft: #fef2f2;
         --focus: #eab308;
+        --radius-lg: 1.25rem;
+        --radius-md: 0.85rem;
+        --radius-full: 9999px;
+        --card-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 6px -2px rgba(15, 23, 42, 0.02);
       }
 
       * { box-sizing: border-box; }
@@ -37,21 +42,25 @@
       button { cursor: pointer; }
       :focus-visible { outline: 4px solid var(--focus); outline-offset: 3px; }
 
-      .app-shell { width: min(100%, 86rem); min-height: 100vh; margin: 0 auto; padding: 1rem clamp(1rem, 3vw, 2.5rem) 1.5rem; display: flex; flex-direction: column; }
-      .topline { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.5rem; padding: 0.55rem 0; background: rgba(247, 245, 240, 0.96); backdrop-filter: blur(12px); }
+      .app-shell { width: min(100%, 90rem); min-height: 100vh; margin: 0 auto; padding: 0 clamp(1rem, 3vw, 2.5rem) 1.5rem; display: flex; flex-direction: column; }
+      .topline { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 5.5rem; padding: 0.7rem 0; border-bottom: 1px solid rgba(203, 213, 225, 0.78); background: rgba(248, 250, 249, 0.93); backdrop-filter: blur(18px); }
       .brand-lockup { display: flex; align-items: center; gap: 0.75rem; min-width: 0; color: var(--accent-dark); text-decoration: none; }
-      .brand-mark { flex: 0 0 3.25rem; width: 3.25rem; height: 3.25rem; }
+      .brand-mark { flex: 0 0 3.5rem; width: 3.5rem; height: 3.5rem; }
       .brand-copy { display: grid; gap: 0.1rem; min-width: 0; }
       .wordmark { color: var(--accent-dark); font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 850; letter-spacing: -0.03em; }
       .tagline { color: var(--muted); font-size: 0.9rem; line-height: 1.2; }
-      .site-nav { display: none; align-items: center; gap: 0.15rem; }
-      .site-nav a { min-height: 3.25rem; display: inline-flex; align-items: center; padding: 0.5rem 0.7rem; border-radius: 0.65rem; color: var(--accent-dark); font-size: 0.92rem; font-weight: 750; text-decoration: none; }
-      .site-nav a:hover { background: var(--accent-soft); }
+      .site-nav { display: none; align-items: center; gap: 0.18rem; }
+      .site-nav a { position: relative; min-height: 3.25rem; display: inline-flex; align-items: center; padding: 0.5rem 0.75rem; border-radius: 0.7rem; color: var(--muted); font-size: 0.89rem; font-weight: 800; text-decoration: none; white-space: nowrap; }
+      .site-nav a:hover, .site-nav a[aria-current="page"] { background: var(--accent-soft); color: var(--accent-dark); }
+      .site-nav a[aria-current="page"]::after { position: absolute; right: 0.75rem; bottom: 0.18rem; left: 0.75rem; height: 0.2rem; border-radius: 999px; background: var(--accent); content: ""; }
       .language-toggle { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.25rem; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); }
       .language-toggle button { min-height: 2.75rem; padding: 0.35rem 0.8rem; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font-size: 0.95rem; font-weight: 700; }
       .language-toggle button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+      .nav-actions { display: flex; align-items: center; gap: 0.55rem; }
+      .nav-start { min-height: 3.5rem; padding: 0.55rem 0.9rem; border: 0; border-radius: var(--radius-full); background: var(--accent); color: #fff; font-size: 0.95rem; font-weight: 850; box-shadow: 0 0.45rem 1rem rgba(22, 101, 52, 0.18); }
+      .nav-start:hover { background: var(--accent-dark); }
 
-      main { flex: 1; display: flex; flex-direction: column; padding: 2rem 0 2.5rem; }
+      main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .eyebrow { margin: 0 0 0.65rem; color: var(--muted); font-size: 1rem; font-weight: 750; letter-spacing: 0.02em; }
       h1 { max-width: 18ch; margin: 0; color: var(--ink); font-size: 3.25rem; font-weight: 780; letter-spacing: -0.03em; line-height: 1.08; }
       .question-note { max-width: 36rem; margin: 1rem 0 0; color: var(--muted); font-size: 1.125rem; line-height: 1.55; }
@@ -306,6 +315,10 @@
 
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after { transition-duration: 0.001ms !important; scroll-behavior: auto; }
+        .splash-lockup { animation: none; transform: none; opacity: 1; }
+        .intro-splash { display: none; }
+        body.intro-complete .landing-hero .hero-copy,
+        body.intro-complete .landing-hero .hero-card { animation: none; }
       }
 
       /* Front door: a spacious civic welcome that still hands off to the tested flow. */
@@ -380,6 +393,39 @@
       .emergency-hospital .large-button { margin-top: 0.8rem; border-color: var(--emergency-red); background: var(--emergency-red); color: #fff; }
       .model-disclosure { margin-top: 0.9rem; padding: 0.8rem; border-radius: 0.7rem; background: #fff8e9; color: #583a08; font-size: 0.95rem; line-height: 1.45; }
 
+      .intro-splash { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; background: var(--background); transition: opacity 0.45s ease, visibility 0.45s ease; }
+      .intro-splash.is-gliding { opacity: 0; visibility: hidden; pointer-events: none; }
+      .splash-lockup { display: flex; align-items: center; gap: 1rem; transform: scale(1.15); opacity: 0; animation: splash-mark-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+      .splash-mark { width: 6.5rem; height: 6.5rem; }
+      .splash-copy { display: grid; gap: 0.25rem; }
+      .splash-wordmark { color: var(--accent-dark); font-size: clamp(2rem, 5vw, 3rem); font-weight: 850; letter-spacing: -0.06em; line-height: 1; }
+      .splash-tagline { max-width: 24rem; color: var(--muted); font-size: 1rem; line-height: 1.3; }
+      .splash-tagline-hi { font-family: "Noto Sans Devanagari", sans-serif; font-size: 0.9rem; }
+      .screen-heading { max-width: 58rem; }
+      .screen-heading h1 { max-width: 16ch; }
+      .screen-heading p { max-width: 47rem; }
+      .landing-screen > .landing-section { padding-top: 0.5rem; }
+      .landing-section { scroll-margin-top: 7rem; }
+      .hero-actions .large-button { min-height: 3.75rem; }
+      .trust-badge { background: #effaf2; }
+      .network-card, .comparison-wrap, .faq-item, .journey-card, .three-panel, .workspace-side, .booking-panel, .honesty-section { box-shadow: var(--card-shadow); }
+      .support { margin-top: auto; padding-top: 0.7rem; }
+      body:not(.intro-complete) .landing-hero .hero-copy,
+      body:not(.intro-complete) .landing-hero .hero-card { opacity: 0; transform: translateY(1.4rem); }
+      .home-cta { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: clamp(1.25rem, 4vw, 2rem); border-radius: var(--radius-lg); background: var(--accent-dark); color: #fff; box-shadow: 0 1rem 2.5rem rgba(20, 83, 45, 0.16); }
+      .home-cta-copy { max-width: 42rem; }
+      .home-cta .screen-kicker { color: #bbf7d0; }
+      .home-cta h2 { margin: 0; color: #fff; font-size: clamp(1.65rem, 3.2vw, 2.35rem); letter-spacing: -0.04em; line-height: 1.1; }
+      .home-cta p:not(.screen-kicker) { margin: 0.55rem 0 0; color: #dcfce7; line-height: 1.45; }
+      .home-cta .large-button { flex: 0 0 auto; border-color: #fff; background: #fff; color: var(--accent-dark); }
+      .home-cta .large-button:hover { border-color: var(--marigold-soft); background: var(--marigold-soft); }
+
+      body.intro-complete .landing-hero .hero-copy,
+      body.intro-complete .landing-hero .hero-card { animation: content-rise 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
+      body.intro-complete .landing-hero .hero-card { animation-delay: 0.08s; }
+      @keyframes splash-mark-in { to { transform: scale(1); opacity: 1; } }
+      @keyframes content-rise { from { opacity: 0; transform: translateY(1.4rem); } to { opacity: 1; transform: translateY(0); } }
+
       .tagline-hi { font-size: 0.78rem; }
       .journey-icon { display: grid; width: 2.8rem; height: 2.8rem; place-items: center; margin-bottom: 0.75rem; border-radius: 0.8rem; background: var(--accent-soft); color: var(--accent-dark); font-size: 1.8rem; font-weight: 900; }
       .triage-workspace { display: grid; gap: 1rem; margin: 1.35rem 0 1rem; }
@@ -420,9 +466,12 @@
       @media (max-width: 759px) {
         .topline { align-items: center; }
         .tagline { display: none; }
-        .site-nav { order: 3; width: 100%; overflow-x: auto; }
+        .site-nav { display: flex; order: 3; width: 100%; overflow-x: auto; scrollbar-width: none; }
+        .site-nav::-webkit-scrollbar { display: none; }
         .topline { flex-wrap: wrap; }
         .site-nav a { white-space: nowrap; }
+        .nav-actions { margin-left: auto; }
+        .nav-start { padding-inline: 0.75rem; font-size: 0.88rem; }
       }
       @media (max-width: 640px) {
         h1 { font-size: 2.45rem; }
@@ -430,6 +479,8 @@
         .section-heading h2 { font-size: 2.25rem; }
         .body-3d-stage, #body-3d-canvas { min-height: 25rem; height: 25rem; }
         .map-actions { position: sticky; bottom: 0.35rem; z-index: 4; padding: 0.55rem; border-radius: 0.9rem; background: rgba(251,249,244,0.94); box-shadow: 0 0.3rem 1rem rgba(23,36,31,0.12); }
+        .home-cta { align-items: stretch; flex-direction: column; }
+        .home-cta .large-button { width: 100%; }
       }
       /* Keep citizen-facing copy and ordinary controls above the accessibility floor. */
       p, li, label, summary, th, td, input, select, textarea, button { font-size: 1.0625rem; }
@@ -439,9 +490,25 @@
     </style>
   </head>
   <body>
+    <div class="intro-splash" id="intro-splash" aria-label="Raahat loading" aria-live="polite">
+      <div class="splash-lockup">
+        <svg class="splash-mark brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="47" cy="16" r="9" fill="#d97706" />
+          <path d="M32 54C17 50 10 39 13 25c12 1 22 8 25 20 1 4-1 7-6 9Z" fill="#166534" />
+          <path d="M27 49c5-9 10-16 18-23" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.5" />
+          <path d="M9 42c7-2 13 1 18 7M55 42c-7-2-13 1-18 7" fill="none" stroke="#166534" stroke-linecap="round" stroke-width="4" />
+          <path d="M32 28v12M26 34h12" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3.5" />
+        </svg>
+        <div class="splash-copy">
+          <span class="splash-wordmark">राहत · Raahat</span>
+          <span class="splash-tagline">Point at where it hurts. We'll do the rest.</span>
+          <span class="splash-tagline splash-tagline-hi">जहाँ तकलीफ़ है वहाँ बताइए। बाक़ी हम संभालेंगे।</span>
+        </div>
+      </div>
+    </div>
     <div class="app-shell">
       <div class="topline">
-        <a class="brand-lockup" href="#front-door" id="brand-home" aria-label="Raahat home">
+        <a class="brand-lockup" href="#screen-home" id="brand-home" aria-label="Raahat home">
           <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-labelledby="logo-title logo-desc">
             <title id="logo-title">Raahat civic relief mark</title>
             <desc id="logo-desc">A warm sun above a leaf and supportive hands around a medical cross.</desc>
@@ -453,22 +520,26 @@
           </svg>
           <span class="brand-copy"><span class="wordmark">राहत · Raahat</span><span class="tagline">Point at where it hurts. We'll do the rest.</span><span class="tagline tagline-hi">जहाँ तकलीफ़ है वहाँ बताइए। बाक़ी हम संभालेंगे।</span></span>
         </a>
-        <nav class="site-nav" aria-label="Raahat information">
-          <a href="#why-raahat" data-landing-link="true" data-copy="whyLink">Why Raahat?</a>
-          <a href="#how-it-works" data-landing-link="true" data-copy="howLink">How It Works</a>
-          <a href="#ors-comparison" data-landing-link="true" data-copy="orsLink">ORS vs Raahat</a>
-          <a href="#network" data-landing-link="true" data-copy="hospitalsLink">Hospitals</a>
-          <a href="#faqs" data-landing-link="true" data-copy="faqLink">FAQs</a>
+        <nav class="site-nav" aria-label="Raahat screens">
+          <a href="#screen-home" data-view-link="home" data-copy="homeNav">Home</a>
+          <a href="#screen-triage" data-view-link="triage" data-copy="triageNav">3D Triage Studio</a>
+          <a href="#screen-comparison" data-view-link="comparison" data-copy="orsLink">ORS vs Raahat</a>
+          <a href="#screen-hospitals" data-view-link="hospitals" data-copy="hospitalsLink">Delhi Hospitals</a>
+          <a href="#screen-faqs" data-view-link="faqs" data-copy="faqLink">FAQs</a>
+          <a href="#screen-honesty" data-view-link="honesty" data-copy="honestyNav">Honesty</a>
         </nav>
-        <div class="language-toggle" role="group" aria-label="Language">
-          <button type="button" data-language="en" aria-pressed="true">English</button>
-          <button type="button" data-language="hi" aria-pressed="false">हिंदी</button>
+        <div class="nav-actions">
+          <div class="language-toggle" role="group" aria-label="Language">
+            <button type="button" data-language="en" aria-pressed="true">English</button>
+            <button type="button" data-language="hi" aria-pressed="false">हिंदी</button>
+          </div>
+          <button class="nav-start" type="button" id="nav-start-triage" data-copy="startTriage">Start Triage</button>
         </div>
       </div>
 
       <main>
         <section class="landing-screen" id="landing-screen" aria-labelledby="landing-title">
-          <section class="landing-hero" id="front-door">
+          <section class="landing-hero view-section" id="front-door" data-view="home">
             <div class="hero-copy">
               <p class="hero-kicker" data-copy="landingKicker">A calmer front door to public hospitals</p>
               <h1 id="landing-title" data-copy="landingTitle">Government Hospital Appointments, Without the Confusion.</h1>
@@ -476,7 +547,7 @@
               <p class="model-disclosure"><span class="tag">Rule</span><span data-copy="modelDisclosure">This prototype reads this sentence in your browser. Nothing is sent to a server; tap the body map if you would rather not type.</span></p>
               <div class="hero-actions">
                 <button class="large-button primary" type="button" id="start-triage" data-copy="startTriage">Start Triage</button>
-                <a class="back-button" href="#why-raahat" data-copy="learnMore">See how it works</a>
+                <a class="back-button" href="#screen-home" data-view-link="home" data-copy="learnMore">See how it works</a>
               </div>
               <ul class="trust-badges" aria-label="Trust badges">
                 <li class="trust-badge"><span class="tag">Verified</span><span data-copy="privacyBadge">100% Client-Side Privacy</span></li>
@@ -509,7 +580,7 @@
             </section>
           </section>
 
-          <section class="landing-section" id="why-raahat" aria-labelledby="why-title">
+          <section class="landing-section view-section" id="why-raahat" data-view="home" aria-labelledby="why-title">
             <div class="section-heading"><h2 id="why-title" data-copy="whyTitle">A little more dignity at the counter.</h2><p data-copy="whyNote">Raahat starts with the citizen's words, not a medical vocabulary test. The person stays in control before anything is routed.</p></div>
             <div class="journey-grid">
               <article class="journey-card"><h3 data-copy="journeyOneTitle">Describe in your voice or tap the map</h3><p data-copy="journeyOneNote">Speak, type, or use a flat body map. Every route creates the same reviewable complaint.</p></article>
@@ -518,7 +589,7 @@
             </div>
           </section>
 
-          <section class="landing-section" id="how-it-works" aria-labelledby="how-title">
+          <section class="landing-section view-section" id="how-it-works" data-view="home" aria-labelledby="how-title">
             <div class="section-heading"><h2 id="how-title" data-copy="howTitle">How Raahat works</h2><p data-copy="howNote">A short, visible journey from “where it hurts” to the right OPD counter.</p></div>
             <div class="journey-grid">
               <article class="journey-card"><span class="journey-icon" aria-hidden="true">◌</span><h3 data-copy="howOneTitle">Point, speak, or type</h3><p data-copy="howOneNote">Describe symptoms in any language, or point to a place on the interactive body map.</p></article>
@@ -527,8 +598,17 @@
             </div>
           </section>
 
-          <section class="landing-section" id="ors-comparison" aria-labelledby="comparison-title">
-            <div class="section-heading"><h2 id="comparison-title" data-copy="comparisonTitle">How Raahat rethinks ORS</h2><p data-copy="comparisonNote">ORS is a useful appointment system. Raahat addresses the moment before it: when a citizen does not know the right counter.</p></div>
+          <section class="landing-section view-section home-cta" data-view="home" aria-labelledby="home-cta-title">
+            <div class="home-cta-copy">
+              <p class="screen-kicker" data-copy="ctaKicker">Your next step stays yours</p>
+              <h2 id="home-cta-title" data-copy="ctaTitle">Ready to find the right OPD counter?</h2>
+              <p data-copy="ctaNote">Start with a sentence, your voice, or a point on the body map. You will see and confirm the read-back before any routing happens.</p>
+            </div>
+            <button class="large-button primary" type="button" data-view-link="triage" data-copy="startTriage">Start Triage</button>
+          </section>
+
+          <section class="landing-section view-section" id="ors-comparison" data-view="comparison" aria-labelledby="comparison-title">
+            <div class="screen-heading"><p class="screen-kicker" data-copy="comparisonKicker">A clearer front door</p><div class="section-heading"><h1 id="comparison-title" data-copy="comparisonTitle">How Raahat rethinks ORS</h1><p data-copy="comparisonNote">ORS is a useful appointment system. Raahat addresses the moment before it: when a citizen does not know the right counter.</p></div></div>
             <div class="comparison-wrap">
               <table class="comparison-table">
                 <thead><tr><th data-copy="comparisonQuestion">The front door question</th><th>ors.gov.in <span class="table-label" data-copy="orsEra">2015 · NIC digitised counter</span></th><th>Raahat <span class="table-label" data-copy="raahatEra">2026 · citizen-first triage</span></th></tr></thead>
@@ -543,8 +623,8 @@
             </div>
           </section>
 
-          <section class="landing-section" id="network" aria-labelledby="network-title">
-            <div class="section-heading"><h2 id="network-title" data-copy="networkTitle">Delhi hospital network live status</h2><p><span class="tag">Verified</span> <span data-copy="networkNote">Hospital names, addresses and departments are public facts. Availability and token throughput are simulated for this prototype.</span></p></div>
+          <section class="landing-section view-section" id="network" data-view="hospitals" aria-labelledby="network-title">
+            <div class="screen-heading"><p class="screen-kicker" data-copy="hospitalsKicker">Verified public directory</p><div class="section-heading"><h1 id="network-title" data-copy="networkTitle">Delhi hospital network</h1><p><span class="tag">Verified</span> <span data-copy="networkNote">Hospital names, addresses and departments are public facts. Availability and token throughput are simulated for this prototype.</span></p></div></div>
             <div class="network-grid">
               <article class="network-card"><h3>AIIMS New Delhi</h3><p><span class="tag">Verified</span> Ansari Nagar, New Delhi · departments include Cardiology, Neurology and General Medicine.</p><p class="verified-line"><span class="tag">Verified</span> Departments checked 27 Aug 2026 · <a href="https://www.aiims.edu/index.php/en/departments-and-centers/departments" target="_blank" rel="noreferrer">AIIMS public list</a></p><div class="network-meta"><span class="network-pill"><span class="tag">Verified</span> 24/7 Emergency</span><span class="network-pill"><span class="tag">Simulated</span> 12 tokens seen</span></div><p class="network-live"><span class="tag">Simulated</span> Live token throughput: morning rounds in progress · next sample slot 09:30 AM.</p></article>
               <article class="network-card"><h3>Safdarjung Hospital</h3><p><span class="tag">Verified</span> Ansari Nagar West, New Delhi · departments include Cardiology, Paediatrics and Orthopaedics.</p><p class="verified-line"><span class="tag">Verified</span> Departments checked 27 Aug 2026 · <a href="https://www.vmmc-sjh.mohfw.gov.in/medical-departments" target="_blank" rel="noreferrer">Safdarjung public list</a></p><div class="network-meta"><span class="network-pill"><span class="tag">Verified</span> 24/7 Emergency</span><span class="network-pill"><span class="tag">Simulated</span> 9 tokens seen</span></div><p class="network-live"><span class="tag">Simulated</span> Live token throughput: 9 tokens seen during morning rounds · next sample slot 10:00 AM.</p></article>
@@ -552,8 +632,8 @@
             </div>
           </section>
 
-          <section class="landing-section" id="faqs" aria-labelledby="faq-title">
-            <div class="section-heading"><h2 id="faq-title" data-copy="faqTitle">Questions citizens and judges ask</h2><p data-copy="faqNote">Plain answers about safety, access, privacy and what this prototype can really do.</p></div>
+          <section class="landing-section view-section" id="faqs" data-view="faqs" aria-labelledby="faq-title">
+            <div class="screen-heading"><p class="screen-kicker" data-copy="faqKicker">Plain-language answers</p><div class="section-heading"><h1 id="faq-title" data-copy="faqTitle">Questions citizens and judges ask</h1><p data-copy="faqNote">Plain answers about safety, access, privacy and what this prototype can really do.</p></div></div>
             <div class="faq-list">
               <details class="faq-item"><summary data-copy="faqSafetyQ">Is this triage safe?</summary><p data-copy="faqSafetyA">Raahat does not diagnose. Code applies a small published rule file after you see and confirm the complaint. When a red flag is present, one flag is enough to route to Emergency.</p></details>
               <details class="faq-item"><summary data-copy="faqRedFlagQ">What happens when there is an Emergency red flag?</summary><p data-copy="faqRedFlagA">The result says to go to Emergency now and not book an appointment. The rule ID is shown, and the nearest simulated emergency-capable hospital in your chosen locality is displayed.</p></details>
@@ -972,7 +1052,7 @@
         <a href="tel:1075"><span class="tag">Verified</span>1075</a>
         <span data-copy="needHelp">Need a person?</span>
         <a href="https://pgportal.gov.in" target="_blank" rel="noreferrer" data-copy="talkToPerson">Talk to a person</a>
-        <a href="#honesty-screen" id="honesty-link" data-copy="honestyLink">What is real?</a>
+        <a href="#screen-honesty" id="honesty-link" data-view-link="honesty" data-copy="honestyLink">What is real?</a>
       </div>
       <p class="prototype-banner" data-copy="prototype">independent prototype · mock data · not affiliated with any government body.</p>
     </div>
@@ -1043,6 +1123,16 @@
       });
       Object.assign(copy.hi, {
         faqSafetyQ: "क्या राहत मेडिकल सलाह या बीमारी की पहचान करता है?", faqSafetyA: "नहीं। राहत केवल प्रशासनिक ट्रायेज है। यह आपकी बात को व्यवस्थित कर ओपीडी काउंटर तक पहुँचाता है; बीमारी की पहचान नहीं करता और यह नहीं कहता कि आप ठीक हैं।", faqRedFlagQ: "नियम से चलने वाले रेड फ्लैग कैसे काम करते हैं?", faqRedFlagA: "रेड फ्लैग एआई से अलग कोड के नियम हैं। एक निशान भी अभी इमरजेंसी भेजने के लिए काफ़ी है और मॉडल फ्लैग हटा नहीं सकता।", faqAccessQ: "क्या बिना पढ़े कोई इस प्लेटफ़ॉर्म का इस्तेमाल कर सकता है?", faqAccessA: "हाँ। परेशानी बताने के तीन बराबर रास्ते हैं: बोलना, लिखना या नाम वाले 3D/2D शरीर के नक्शे पर टैप करना।", faqPrivacyQ: "क्या मेरी निजी स्वास्थ्य जानकारी सर्वर पर सेव होती है?", faqPrivacyA: "नहीं। इस प्रोटोटाइप में परेशानी इसी ब्राउज़र में सत्र तक रहती है और सर्वर पर सेव नहीं होती। शरीर के नक्शे वाला रास्ता एआई सेवा को कुछ नहीं भेजता।", faqWaitQ: "ईमानदार इंतज़ार का समय कैसे निकाला जाता है?", faqWaitA: "यह नकली समय ओपीडी की पुरानी गति और सुबह के डॉक्टर राउंड से बनाया गया है: स्लॉट शुरू होने का समय और अनुमानित इंतज़ार। यह लाइव कतार नहीं है।", faqOrsQ: "राहत सरकारी ORS पोर्टल से कैसे अलग है?", faqOrsA: "ORS पहले अस्पताल और विभाग चुनने को कहता है। राहत पहले आपकी बात को व्यवस्थित करता है और फिर नकली कतार दिखाता है। यह ORS से जुड़ा नहीं है।", faqAbdmQ: "राहत असली सरकारी सिस्टम से कैसे जुड़ सकता है?", faqAbdmA: "यह प्रोटोटाइप सरकारी सिस्टम से नहीं जुड़ा है। भविष्य का प्रोडक्शन गेटवे साफ़ सहमति, सुरक्षा जाँच और सार्वजनिक सेवा साझेदारी के साथ ABDM और e-Hospital HMIS API से जुड़ सकता है।"
+      });
+      Object.assign(copy.en, {
+        homeNav: "Home", triageNav: "3D Triage Studio", honestyNav: "Honesty", hospitalsLink: "Delhi Hospitals",
+        comparisonKicker: "A clearer front door", hospitalsKicker: "Verified public directory", faqKicker: "Plain-language answers",
+        ctaKicker: "Your next step stays yours", ctaTitle: "Ready to find the right OPD counter?", ctaNote: "Start with a sentence, your voice, or a point on the body map. You will see and confirm the read-back before any routing happens.",
+      });
+      Object.assign(copy.hi, {
+        homeNav: "होम", triageNav: "3D ट्रायेज स्टूडियो", honestyNav: "ईमानदारी", hospitalsLink: "दिल्ली अस्पताल",
+        comparisonKicker: "एक साफ़ शुरुआत", hospitalsKicker: "सत्यापित सार्वजनिक सूची", faqKicker: "सीधे सवालों के जवाब",
+        ctaKicker: "अगला कदम आपका है", ctaTitle: "सही ओपीडी काउंटर ढूँढने के लिए तैयार?", ctaNote: "एक वाक्य, अपनी आवाज़ या शरीर के नक्शे पर एक जगह से शुरू करें। किसी भी रास्ते से पहले आप दोबारा पढ़ा गया विवरण देखकर पुष्टि करेंगे।",
       });
       const state = { language: "en", screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, listening: false, region: null, noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
       const text = (key) => copy[state.language][key];
@@ -1295,7 +1385,7 @@
       document.querySelector("#start-triage").addEventListener("click", () => {
         if (landingComplaint.value.trim()) complaint.value = landingComplaint.value.trim();
         setLandingBooking(document.querySelector("[data-landing-booking][aria-pressed='true']")?.dataset.landingBooking || "myself");
-        showQuestion();
+        switchView("triage");
       });
       document.querySelector("#hero-continue").addEventListener("click", () => {
         const words = landingComplaint.value.trim();
@@ -1307,10 +1397,11 @@
         showQuestion();
         showReadback(makeComplaint(false));
       });
-      document.querySelector("#brand-home").addEventListener("click", (event) => { event.preventDefault(); showLanding(); });
-      document.querySelectorAll("[data-landing-link]").forEach((link) => link.addEventListener("click", (event) => {
+      document.querySelector("#brand-home").addEventListener("click", (event) => { event.preventDefault(); switchView("home"); });
+      document.querySelector("#nav-start-triage").addEventListener("click", () => switchView("triage"));
+      document.querySelectorAll("[data-view-link]").forEach((link) => link.addEventListener("click", (event) => {
         event.preventDefault();
-        showLanding(link.getAttribute("href").slice(1));
+        switchView(link.dataset.viewLink);
       }));
 
       function moveTo(element) {
@@ -1679,8 +1770,26 @@
         });
       }
 
+      const viewHash = Object.freeze({ home: "screen-home", triage: "screen-triage", comparison: "screen-comparison", hospitals: "screen-hospitals", faqs: "screen-faqs", honesty: "screen-honesty" });
+
+      function setActiveNav(viewId) {
+        document.querySelectorAll("[data-view-link]").forEach((link) => {
+          if (!link.matches(".site-nav a")) return;
+          const active = link.dataset.viewLink === viewId;
+          link.setAttribute("aria-current", active ? "page" : "false");
+        });
+      }
+
+      function setLandingView(viewId) {
+        document.querySelectorAll("#landing-screen [data-view]").forEach((section) => {
+          section.hidden = section.dataset.view !== viewId;
+        });
+      }
+
       function hideAllScreens() {
         landingScreen.hidden = true;
+        questionContent.hidden = true;
+        bodyMapScreen.hidden = true;
         reviewScreen.hidden = true;
         resultScreen.hidden = true;
         appointmentScreen.hidden = true;
@@ -1692,30 +1801,52 @@
       function showQuestion() {
         hideAllScreens();
         state.screen = "question";
-        bodyMapScreen.hidden = true;
         questionContent.hidden = false;
-        complaint.focus();
+        setActiveNav("triage");
+        complaint.focus({ preventScroll: true });
       }
 
-      function showLanding(targetId = "front-door") {
+      function showLanding(targetId = "front-door", viewId = "home") {
         hideAllScreens();
         state.screen = "landing";
-        questionContent.hidden = true;
-        bodyMapScreen.hidden = true;
         landingScreen.hidden = false;
+        setLandingView(viewId);
+        setActiveNav(viewId);
         const target = document.querySelector(`#${targetId}`) || landingScreen;
-        target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+        window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+        if (targetId !== "front-door") target.scrollIntoView({ behavior: "auto", block: "start" });
       }
 
       function showHonesty() {
         if (state.screen !== "honesty") state.previousScreen = state.screen;
         hideAllScreens();
         state.screen = "honesty";
-        questionContent.hidden = true;
-        bodyMapScreen.hidden = true;
         honestyScreen.hidden = false;
+        setActiveNav("honesty");
+        window.scrollTo({ top: 0, behavior: "auto" });
         document.querySelector("#honesty-title").focus();
       }
+
+      function switchView(viewId, { updateHash = true } = {}) {
+        const nextView = viewHash[viewId] ? viewId : "home";
+        if (updateHash && window.location.hash !== `#${viewHash[nextView]}`) window.location.hash = viewHash[nextView];
+        if (nextView === "triage") {
+          showQuestion();
+          return;
+        }
+        if (nextView === "honesty") {
+          showHonesty();
+          return;
+        }
+        showLanding(nextView === "home" ? "front-door" : nextView === "comparison" ? "ors-comparison" : nextView === "hospitals" ? "network" : "faqs", nextView);
+      }
+
+      function handleHashChange() {
+        const requestedView = Object.entries(viewHash).find(([, hash]) => hash === window.location.hash.slice(1))?.[0] || "home";
+        switchView(requestedView, { updateHash: false });
+      }
+
+      window.addEventListener("hashchange", handleHashChange);
 
       function restorePreviousScreen() {
         const previousScreen = state.previousScreen || "question";
@@ -1808,7 +1939,6 @@
       }
 
       findHospital.addEventListener("click", showAppointment);
-      document.querySelector("#honesty-link").addEventListener("click", (event) => { event.preventDefault(); showHonesty(); });
       document.querySelectorAll("#honesty-back, #honesty-back-bottom").forEach((button) => button.addEventListener("click", restorePreviousScreen));
       document.querySelector("#booking-back").addEventListener("click", () => { appointmentScreen.hidden = true; showResult(); });
       localitySelect.addEventListener("change", () => {
@@ -1931,6 +2061,19 @@
         showReadback(makeComplaint(false));
       });
 
+      const introSplash = document.querySelector("#intro-splash");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reducedMotion) {
+        document.body.classList.add("intro-complete");
+        introSplash?.remove();
+      } else {
+        window.setTimeout(() => {
+          document.body.classList.add("intro-complete");
+          introSplash?.classList.add("is-gliding");
+        }, 600);
+        window.setTimeout(() => introSplash?.remove(), 1120);
+      }
+
       const bodyMap3d = await createBodyMap3D({
           canvas: map3dCanvas,
           stage: map3dStage,
@@ -1951,6 +2094,7 @@
       if (!state.threeAvailable) state.mapMode = "2d";
       renderLocalities();
       renderLanguage();
+      handleHashChange();
     </script>
   </body>
 </html>
