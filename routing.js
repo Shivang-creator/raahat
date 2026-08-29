@@ -37,12 +37,22 @@ export function parseFreeTextComplaint(input, language = "en") {
 
   const hasChest = hasAny(text, ["chest", "सीने", "सीना", "seene", "sine"]);
   const hasHead = hasAny(text, ["headache", "head pain", "सिरदर्द", "सिर दर्द", "sar dard", "sir dard"]);
+  const hasEyes = hasAny(text, ["eye", "eyes", "vision", "आँख", "आंख", "नज़र", "नजर", "दृष्टि"]);
+  const hasEars = hasAny(text, ["ear", "ears", "throat", "कान", "गला"]);
+  const hasTeeth = hasAny(text, ["tooth", "teeth", "dental", "दाँत", "दांत", "मुँह", "मुंह"]);
   const hasAbdomen = hasAny(text, [
     "stomach", "tummy", "stomach upset", "upset stomach", "indigestion", "pet", "पेट",
     "पेट खराब", "पेट ख़राब", "pet kharab", "pet kharaab", "pet upset", "loose motion",
     "loose motions", "dast", "vomit", "vomiting", "उल्टी", "दस्त",
   ]);
-  const hasLeg = hasAny(text, ["leg", "pair", "पैर", "टांग", "टाँग"]);
+  const hasShoulder = hasAny(text, ["shoulder", "कंधा", "कन्धा"]);
+  const hasKnee = hasAny(text, ["knee", "घुटना", "घुटने"]);
+  const hasHand = hasAny(text, ["hand", "wrist", "हाथ", "कलाई"]);
+  const hasFoot = hasAny(text, ["foot", "feet", "ankle", "पैर", "टखना", "टखने"]);
+  const hasPelvis = hasAny(text, ["pelvis", "hip", "hips", "कूल्हा", "कूल्हे", "पेल्विस"]);
+  const hasUpperBack = hasAny(text, ["upper back", "ऊपरी पीठ"]);
+  const hasLowerBack = hasAny(text, ["lower back", "lumbar", "कमर", "निचली पीठ"]);
+  const hasLeg = hasAny(text, ["leg", "pair", "टांग", "टाँग"]);
 
   const breathlessness = hasAny(text, [
     "breathlessness", "shortness of breath", "difficulty breathing", "breathing difficulty",
@@ -83,12 +93,24 @@ export function parseFreeTextComplaint(input, language = "en") {
 
   if (hasChest) complaint.region = "chest";
   else if (hasHead) complaint.region = "head";
+  else if (hasEyes) complaint.region = "eyes";
+  else if (hasEars) complaint.region = "ears";
+  else if (hasTeeth) complaint.region = "teeth";
+  else if (hasShoulder) complaint.region = "shoulder";
+  else if (hasKnee) complaint.region = "knee";
+  else if (hasHand) complaint.region = "hand";
+  else if (hasFoot) complaint.region = "foot";
+  else if (hasPelvis) complaint.region = "pelvis";
+  else if (hasUpperBack) complaint.region = "upper-back";
+  else if (hasLowerBack) complaint.region = "lower-back";
   else if (hasLeg) complaint.region = "leg";
   else if (hasAbdomen) complaint.region = "upper-abdomen";
   else if (oneSidedWeakness || oneSidedNumbness || isChild || heavyBleeding || seizure || selfHarm) complaint.region = "general";
 
   if (hasChest && (hasAny(text, ["pain", "dard", "दर्द", "discomfort", "भारीपन"]) || breathlessness)) complaint.kind = "pain";
   else if (hasHead && hasAny(text, ["pain", "ache", "dard", "दर्द"])) complaint.kind = "pain";
+  else if ((hasEyes || hasEars || hasTeeth || hasShoulder || hasKnee || hasHand || hasFoot || hasPelvis || hasUpperBack || hasLowerBack)
+    && hasAny(text, ["pain", "ache", "dard", "दर्द", "hurt", "दिक्कत", "problem", "परेशानी", "blur", "itch", "खुजली"])) complaint.kind = "pain";
   else if (hasAbdomen && hasAny(text, [
     "pain", "ache", "dard", "दर्द", "खराब", "ख़राब", "kharab", "kharaab", "upset",
     "indigestion", "loose motion", "dast", " दस्त", "दस्त", "vomit", " उल्टी", "उल्टी",

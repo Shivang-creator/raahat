@@ -144,10 +144,18 @@
       .map-region:focus-visible { z-index: 5; outline: 4px solid var(--focus); outline-offset: 3px; }
       .map-region-head { top: 2%; left: 31%; width: 38%; height: 12%; border-radius: 50%; }
       .map-region-face { z-index: 2; top: 15%; left: 36%; width: 28%; height: 8%; border-radius: 50%; }
+      .map-region-eyes { z-index: 3; top: 16%; left: 38%; width: 24%; height: 5%; border-radius: 50%; }
+      .map-region-ear-left, .map-region-ear-right { z-index: 3; top: 15%; width: 12%; height: 9%; border-radius: 50%; }
+      .map-region-ear-left { left: 27%; }
+      .map-region-ear-right { right: 27%; }
+      .map-region-teeth { z-index: 3; top: 19%; left: 41%; width: 18%; height: 5%; border-radius: 50%; }
       .map-region-neck { top: 25%; left: 40%; width: 20%; height: 8%; }
       .map-region-chest { top: 35%; left: 24%; width: 52%; height: 18%; clip-path: polygon(19% 0, 81% 0, 100% 22%, 92% 100%, 8% 100%, 0 22%); }
       .map-region-upper-abdomen { top: 53%; left: 29%; width: 42%; height: 14%; }
       .map-region-lower-abdomen { top: 69%; left: 30%; width: 40%; height: 16%; border-radius: 0.65rem 0.65rem 1.2rem 1.2rem; }
+      .map-region-shoulder-left, .map-region-shoulder-right { z-index: 3; top: 31%; width: 25%; height: 12%; border-radius: 50%; }
+      .map-region-shoulder-left { left: 7%; }
+      .map-region-shoulder-right { right: 7%; }
       .map-region-arm-left, .map-region-arm-right { top: 34%; width: 20%; height: 42%; clip-path: polygon(28% 0, 78% 0, 100% 14%, 82% 100%, 18% 100%, 0 14%); }
       .map-region-arm-left { left: 5%; }
       .map-region-arm-right { right: 5%; }
@@ -157,10 +165,17 @@
       .map-region-leg-left, .map-region-leg-right { top: 68%; width: 19%; height: 27%; clip-path: polygon(14% 0, 86% 0, 100% 100%, 0 100%); }
       .map-region-leg-left { left: 30%; }
       .map-region-leg-right { right: 30%; }
+      .map-region-knee-left, .map-region-knee-right { z-index: 3; top: 78%; width: 16%; height: 10%; border-radius: 50%; }
+      .map-region-knee-left { left: 31%; }
+      .map-region-knee-right { right: 31%; }
       .map-region-foot-left, .map-region-foot-right { top: 91%; width: 23%; height: 8%; border-radius: 0.45rem 0.45rem 0.85rem 0.85rem; }
       .map-region-foot-left { left: 25%; }
       .map-region-foot-right { right: 25%; }
       .map-region-back { top: 25%; left: 20%; width: 60%; height: 58%; clip-path: polygon(14% 0, 86% 0, 100% 12%, 86% 100%, 14% 100%, 0 12%); }
+      .map-region-upper-back, .map-region-lower-back { z-index: 3; left: 25%; width: 50%; border-radius: 0.7rem; }
+      .map-region-upper-back { top: 28%; height: 22%; }
+      .map-region-lower-back { top: 50%; height: 22%; }
+      .map-region-pelvis { z-index: 3; top: 68%; left: 34%; width: 32%; height: 12%; border-radius: 50%; }
       .map-side-hint { margin: 0.35rem 0.35rem 0; color: var(--muted); font-size: 0.9rem; line-height: 1.35; text-align: center; }
       .no-location-picker { margin-top: 0.8rem; padding: 0.1rem 0.9rem 0.1rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
       .no-location-picker summary { min-height: 3.25rem; padding: 0.8rem 0.1rem; color: var(--ink); cursor: pointer; font-size: 1.08rem; font-weight: 800; }
@@ -459,6 +474,13 @@
       .journey-card::before { position: absolute; left: 1.1rem; top: 1.1rem; display: grid; width: 2.6rem; height: 2.6rem; place-items: center; border-radius: 50%; background: var(--marigold); color: #fff; content: counter(journey); counter-increment: journey; font-size: 1.25rem; font-weight: 900; }
       .journey-card h3 { margin: 0; color: var(--accent-dark); font-size: 1.3rem; line-height: 1.15; }
       .journey-card p { margin: 0.6rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.45; }
+      .roadmap-section { padding: clamp(1.25rem, 3vw, 2rem); border: 2px solid var(--accent); border-radius: 1.25rem; background: linear-gradient(135deg, var(--accent-soft), var(--paper)); }
+      .roadmap-section .section-heading h2 { color: var(--accent-dark); }
+      .roadmap-grid { display: grid; gap: 0.8rem; margin-top: 1.5rem; counter-reset: roadmap; }
+      .roadmap-card { position: relative; min-height: 9rem; padding: 1.15rem 1.1rem 1.1rem 4.6rem; border-radius: 1rem; background: var(--paper); box-shadow: 0 0 0 1px var(--line); }
+      .roadmap-card::before { position: absolute; left: 1.1rem; top: 1.1rem; display: grid; width: 2.6rem; height: 2.6rem; place-items: center; border-radius: 50%; background: var(--accent); color: #fff; content: counter(roadmap); counter-increment: roadmap; font-size: 1.25rem; font-weight: 900; }
+      .roadmap-card h3 { margin: 0; color: var(--accent-dark); font-size: 1.2rem; line-height: 1.2; }
+      .roadmap-card p { margin: 0.55rem 0 0; color: var(--muted); font-size: 0.98rem; line-height: 1.45; }
       .network-grid { display: grid; gap: 0.8rem; margin-top: 1.5rem; }
       .network-card { padding: 1rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
       .network-card h3 { margin: 0; color: var(--ink); font-size: 1.3rem; line-height: 1.15; }
@@ -659,6 +681,7 @@
         .site-nav::-webkit-scrollbar { display: none; }
         .landing-hero { grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr); }
         .journey-grid, .network-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .roadmap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .triage-workspace { grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.65fr); align-items: start; }
         .workspace-side { position: sticky; top: 6rem; }
       }
@@ -815,6 +838,16 @@
             </div>
           </section>
 
+          <section class="landing-section view-section roadmap-section" id="screen-roadmap" data-view="home" aria-labelledby="roadmap-title">
+            <div class="section-heading"><h2 id="roadmap-title" data-copy="roadmapTitle">What’s next for Raahat</h2><p data-copy="roadmapNote">A civic roadmap for turning a clear prototype into a more connected, accessible public-service front door.</p></div>
+            <div class="roadmap-grid">
+              <article class="roadmap-card"><h3 data-copy="roadmapAbdmTitle">ABDM &amp; e-Hospital integration</h3><p data-copy="roadmapAbdmNote">Link generated specimen tokens directly into the Ayushman Bharat Digital Mission (ABDM) and national Hospital Management Information Systems (HMIS).</p></article>
+              <article class="roadmap-card"><h3 data-copy="roadmapIvrTitle">AI Voice IVR for feature phones (104 integration)</h3><p data-copy="roadmapIvrNote">Let rural citizens dial a toll-free number, speak symptoms in 22 regional dialects—including Bhojpuri, Maithili, Tamil and Bengali—and receive an OPD token by SMS.</p></article>
+              <article class="roadmap-card"><h3 data-copy="roadmapQueueTitle">Real-time hospital queue vision</h3><p data-copy="roadmapQueueNote">Connect waiting-hall token counters to stream live consultation turnaround times before citizens leave home.</p></article>
+              <article class="roadmap-card"><h3 data-copy="roadmapLanguagesTitle">Pan-India vernacular expansion</h3><p data-copy="roadmapLanguagesNote">Build native voice and dialect support across all 22 scheduled Indian languages.</p></article>
+            </div>
+          </section>
+
           <section class="landing-section view-section home-cta" data-view="home" aria-labelledby="home-cta-title">
             <div class="home-cta-copy">
               <p class="screen-kicker" data-copy="ctaKicker">Your next step stays yours</p>
@@ -945,9 +978,25 @@
           <p class="section-kicker"><span class="tag">Observed</span><span data-copy="patientDetailsKicker">Step 1 · Patient details</span></p>
           <h2 id="patient-details-title" data-copy="patientDetailsTitle">Tell us who needs the appointment</h2>
           <p class="booking-panel-note" data-copy="patientDetailsNote">These details stay in this browser for this session. Please do not enter an Aadhaar, ABHA, UHID, OTP or real health record.</p>
+          <section class="field-group" aria-labelledby="booking-label">
+            <span class="field-label" id="booking-label" data-copy="bookingFor">Booking for:</span>
+            <div class="choice-grid" role="group" aria-labelledby="booking-label">
+              <button class="choice-button" type="button" data-booking="myself" aria-pressed="true" data-copy="myself">Myself</button>
+              <button class="choice-button" type="button" data-booking="someone" aria-pressed="false" data-copy="someoneElse">Someone else (Caregiver)</button>
+            </div>
+
+            <div class="subchoices" data-caregiver hidden>
+              <span class="field-label" data-copy="whoLabel">Who is it for?</span>
+              <div class="choice-grid" role="group" aria-label="Who is it for?">
+                <button class="choice-button" type="button" data-who="parent" aria-pressed="false" data-copy="parent">My parent</button>
+                <button class="choice-button" type="button" data-who="child" aria-pressed="false" data-copy="child">My child</button>
+                <button class="choice-button" type="button" data-who="other" aria-pressed="false" data-copy="someoneElseShort">Someone else</button>
+              </div>
+            </div>
+          </section>
           <div class="form-grid">
-            <div class="form-field"><label for="patient-name"><span class="tag">Observed</span><span data-copy="patientNameLabel">Full Name of Patient</span></label><input id="patient-name" type="text" autocomplete="off" data-copy-placeholder="patientNamePlaceholder" placeholder="Enter the patient's name" /></div>
-            <div class="form-field"><label for="patient-phone"><span class="tag">Observed</span><span data-copy="patientPhoneLabel">Phone Number (for SMS token reminder)</span></label><input id="patient-phone" type="tel" inputmode="numeric" autocomplete="off" pattern="[6-9][0-9]{9}" maxlength="10" title="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9" data-copy-placeholder="patientPhonePlaceholder" placeholder="Optional demo number" /><small class="field-note">10-digit Indian mobile number for SMS token updates</small></div>
+            <div class="form-field"><label for="patient-name"><span class="tag">Observed</span><span data-copy="patientNameLabel">Full Name of Patient</span></label><input id="patient-name" type="text" autocomplete="off" data-copy-placeholder="patientNamePlaceholder" placeholder="e.g. Ramesh Kumar / Priya Sharma" /></div>
+            <div class="form-field"><label for="patient-phone"><span class="tag">Observed</span><span data-copy="patientPhoneLabel">Phone Number (for SMS token reminder)</span></label><input id="patient-phone" type="tel" inputmode="numeric" autocomplete="off" pattern="[6-9][0-9]{9}" maxlength="10" title="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9" data-copy-placeholder="patientPhonePlaceholder" placeholder="e.g. 9876543210 (10-digit mobile)" /><small class="field-note">10-digit Indian mobile number for SMS token updates</small></div>
           </div>
           <div class="field-group compact-field-group">
             <span class="field-label" id="numeric-age-label"><span class="tag">Observed</span><span data-copy="numericAgeLabel">Age band</span></span>
@@ -978,23 +1027,6 @@
               <button class="condition-chip" type="button" data-condition="asthma" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionAsthma">Asthma / Respiratory</span></button>
               <button class="condition-chip" type="button" data-condition="pregnancy" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionPregnancy">Pregnancy</span></button>
               <button class="condition-chip" type="button" data-condition="none" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionNone">No pre-existing condition</span></button>
-            </div>
-          </div>
-        </section>
-
-        <section class="field-group" aria-labelledby="booking-label">
-          <span class="field-label" id="booking-label" data-copy="bookingFor">Booking for:</span>
-          <div class="choice-grid" role="group" aria-labelledby="booking-label">
-            <button class="choice-button" type="button" data-booking="myself" aria-pressed="true" data-copy="myself">Myself</button>
-            <button class="choice-button" type="button" data-booking="someone" aria-pressed="false" data-copy="someoneElse">Someone else</button>
-          </div>
-
-          <div class="subchoices" data-caregiver hidden>
-            <span class="field-label" data-copy="whoLabel">Who is it for?</span>
-            <div class="choice-grid" role="group" aria-label="Who is it for?">
-              <button class="choice-button" type="button" data-who="parent" aria-pressed="false" data-copy="parent">My parent</button>
-              <button class="choice-button" type="button" data-who="child" aria-pressed="false" data-copy="child">My child</button>
-              <button class="choice-button" type="button" data-who="other" aria-pressed="false" data-copy="someoneElseShort">Someone else</button>
             </div>
           </div>
         </section>
@@ -1085,17 +1117,26 @@
               <div class="silhouette-stage front-map">
                 <svg viewBox="0 0 160 300" aria-hidden="true"><circle cx="80" cy="28" r="22" /><path d="M55 58c7-7 43-7 50 0l17 73-17 5-8-39v68l24 105H98l-18-72-18 72H39l24-105V97l-8 39-17-5 17-73Z" /></svg>
                 <button class="map-region map-region-head" type="button" data-region="head" data-region-copy="regionHead" aria-label="Head" aria-pressed="false"><span class="visually-hidden" data-copy="regionHead">Head</span></button>
+                <button class="map-region map-region-eyes" type="button" data-region="eyes" data-region-copy="regionEyes" aria-label="Eyes / vision" aria-pressed="false"><span class="visually-hidden" data-copy="regionEyes">Eyes / vision</span></button>
+                <button class="map-region map-region-ear-left" type="button" data-region="ears" data-region-copy="regionEars" aria-label="Ears / throat" aria-pressed="false"><span class="visually-hidden" data-copy="regionEars">Ears / throat</span></button>
+                <button class="map-region map-region-ear-right" type="button" data-region="ears" data-region-copy="regionEars" aria-label="Ears / throat" aria-pressed="false"><span class="visually-hidden" data-copy="regionEars">Ears / throat</span></button>
+                <button class="map-region map-region-teeth" type="button" data-region="teeth" data-region-copy="regionTeeth" aria-label="Teeth / mouth / jaw" aria-pressed="false"><span class="visually-hidden" data-copy="regionTeeth">Teeth / mouth / jaw</span></button>
                 <button class="map-region map-region-face" type="button" data-region="face" data-region-copy="regionFace" aria-label="Face / jaw" aria-pressed="false"><span class="visually-hidden" data-copy="regionFace">Face / jaw</span></button>
                 <button class="map-region map-region-neck" type="button" data-region="neck" data-region-copy="regionNeck" aria-label="Neck" aria-pressed="false"><span class="visually-hidden" data-copy="regionNeck">Neck</span></button>
                 <button class="map-region map-region-chest" type="button" data-region="chest" data-region-copy="regionChest" aria-label="Chest" aria-pressed="false"><span class="visually-hidden" data-copy="regionChest">Chest</span></button>
                 <button class="map-region map-region-upper-abdomen" type="button" data-region="upper-abdomen" data-region-copy="regionUpperAbdomen" aria-label="Upper abdomen" aria-pressed="false"><span class="visually-hidden" data-copy="regionUpperAbdomen">Upper abdomen</span></button>
                 <button class="map-region map-region-lower-abdomen" type="button" data-region="lower-abdomen" data-region-copy="regionLowerAbdomen" aria-label="Lower abdomen" aria-pressed="false"><span class="visually-hidden" data-copy="regionLowerAbdomen">Lower abdomen</span></button>
+                <button class="map-region map-region-pelvis" type="button" data-region="pelvis" data-region-copy="regionPelvis" aria-label="Pelvis / hips" aria-pressed="false"><span class="visually-hidden" data-copy="regionPelvis">Pelvis / hips</span></button>
+                <button class="map-region map-region-shoulder-left" type="button" data-region="shoulder" data-region-copy="regionShoulder" aria-label="Shoulder joints" aria-pressed="false"><span class="visually-hidden" data-copy="regionShoulder">Shoulder joints</span></button>
+                <button class="map-region map-region-shoulder-right" type="button" data-region="shoulder" data-region-copy="regionShoulder" aria-label="Shoulder joints" aria-pressed="false"><span class="visually-hidden" data-copy="regionShoulder">Shoulder joints</span></button>
                 <button class="map-region map-region-arm-left" type="button" data-region="arm" data-region-copy="regionArm" aria-label="Arm" aria-pressed="false"><span class="visually-hidden" data-copy="regionArm">Arm</span></button>
                 <button class="map-region map-region-arm-right" type="button" data-region="arm" data-region-copy="regionArm" aria-label="Arm" aria-pressed="false"><span class="visually-hidden" data-copy="regionArm">Arm</span></button>
                 <button class="map-region map-region-hand-left" type="button" data-region="hand" data-region-copy="regionHand" aria-label="Hand" aria-pressed="false"><span class="visually-hidden" data-copy="regionHand">Hand</span></button>
                 <button class="map-region map-region-hand-right" type="button" data-region="hand" data-region-copy="regionHand" aria-label="Hand" aria-pressed="false"><span class="visually-hidden" data-copy="regionHand">Hand</span></button>
                 <button class="map-region map-region-leg-left" type="button" data-region="leg" data-region-copy="regionLeg" aria-label="Leg" aria-pressed="false"><span class="visually-hidden" data-copy="regionLeg">Leg</span></button>
                 <button class="map-region map-region-leg-right" type="button" data-region="leg" data-region-copy="regionLeg" aria-label="Leg" aria-pressed="false"><span class="visually-hidden" data-copy="regionLeg">Leg</span></button>
+                <button class="map-region map-region-knee-left" type="button" data-region="knee" data-region-copy="regionKnee" aria-label="Knee joints" aria-pressed="false"><span class="visually-hidden" data-copy="regionKnee">Knee joints</span></button>
+                <button class="map-region map-region-knee-right" type="button" data-region="knee" data-region-copy="regionKnee" aria-label="Knee joints" aria-pressed="false"><span class="visually-hidden" data-copy="regionKnee">Knee joints</span></button>
                 <button class="map-region map-region-foot-left" type="button" data-region="foot" data-region-copy="regionFoot" aria-label="Foot" aria-pressed="false"><span class="visually-hidden" data-copy="regionFoot">Foot</span></button>
                 <button class="map-region map-region-foot-right" type="button" data-region="foot" data-region-copy="regionFoot" aria-label="Foot" aria-pressed="false"><span class="visually-hidden" data-copy="regionFoot">Foot</span></button>
               </div>
@@ -1105,6 +1146,8 @@
               <h2 data-copy="back">Back</h2>
               <div class="silhouette-stage back-map">
                 <svg viewBox="0 0 160 300" aria-hidden="true"><circle cx="80" cy="28" r="22" /><path d="M55 58c7-7 43-7 50 0l17 73-17 5-8-39v68l24 105H98l-18-72-18 72H39l24-105V97l-8 39-17-5 17-73Z" /></svg>
+                <button class="map-region map-region-upper-back" type="button" data-region="upper-back" data-region-copy="regionUpperBack" aria-label="Upper back / spine" aria-pressed="false"><span class="visually-hidden" data-copy="regionUpperBack">Upper back / spine</span></button>
+                <button class="map-region map-region-lower-back" type="button" data-region="lower-back" data-region-copy="regionLowerBack" aria-label="Lower back / lumbar" aria-pressed="false"><span class="visually-hidden" data-copy="regionLowerBack">Lower back / lumbar</span></button>
                 <button class="map-region map-region-back" type="button" data-region="back" data-region-copy="regionBack" aria-label="Back , upper or lower" aria-pressed="false"><span class="visually-hidden" data-copy="regionBack">Back , upper or lower</span></button>
               </div>
               <p class="map-side-hint" data-copy="backHint">Tap anywhere on the upper or lower back.</p>
@@ -1118,15 +1161,23 @@
             <p data-copy="fallbackNote">Use this only if pointing is difficult.</p>
             <div class="region-list">
               <button class="region-button" type="button" data-region="head" data-region-copy="regionHead" aria-label="Head" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionHead">Head</span></button>
+              <button class="region-button" type="button" data-region="eyes" data-region-copy="regionEyes" aria-label="Eyes / vision" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionEyes">Eyes / vision</span></button>
+              <button class="region-button" type="button" data-region="ears" data-region-copy="regionEars" aria-label="Ears / throat" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionEars">Ears / throat</span></button>
+              <button class="region-button" type="button" data-region="teeth" data-region-copy="regionTeeth" aria-label="Teeth / mouth / jaw" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionTeeth">Teeth / mouth / jaw</span></button>
               <button class="region-button" type="button" data-region="face" data-region-copy="regionFace" aria-label="Face / jaw" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionFace">Face / jaw</span></button>
               <button class="region-button" type="button" data-region="neck" data-region-copy="regionNeck" aria-label="Neck" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionNeck">Neck</span></button>
               <button class="region-button" type="button" data-region="chest" data-region-copy="regionChest" aria-label="Chest" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionChest">Chest</span></button>
               <button class="region-button" type="button" data-region="upper-abdomen" data-region-copy="regionUpperAbdomen" aria-label="Upper abdomen" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionUpperAbdomen">Upper abdomen</span></button>
               <button class="region-button" type="button" data-region="lower-abdomen" data-region-copy="regionLowerAbdomen" aria-label="Lower abdomen" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionLowerAbdomen">Lower abdomen</span></button>
+              <button class="region-button" type="button" data-region="pelvis" data-region-copy="regionPelvis" aria-label="Pelvis / hips" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionPelvis">Pelvis / hips</span></button>
+              <button class="region-button" type="button" data-region="upper-back" data-region-copy="regionUpperBack" aria-label="Upper back / spine" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionUpperBack">Upper back / spine</span></button>
+              <button class="region-button" type="button" data-region="lower-back" data-region-copy="regionLowerBack" aria-label="Lower back / lumbar" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionLowerBack">Lower back / lumbar</span></button>
+              <button class="region-button" type="button" data-region="shoulder" data-region-copy="regionShoulder" aria-label="Shoulder joints" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionShoulder">Shoulder joints</span></button>
               <button class="region-button" type="button" data-region="back" data-region-copy="regionBack" aria-label="Back , upper or lower" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionBack">Back , upper or lower</span></button>
               <button class="region-button" type="button" data-region="arm" data-region-copy="regionArm" aria-label="Arm" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionArm">Arm</span></button>
               <button class="region-button" type="button" data-region="hand" data-region-copy="regionHand" aria-label="Hand" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionHand">Hand</span></button>
               <button class="region-button" type="button" data-region="leg" data-region-copy="regionLeg" aria-label="Leg" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionLeg">Leg</span></button>
+              <button class="region-button" type="button" data-region="knee" data-region-copy="regionKnee" aria-label="Knee joints" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionKnee">Knee joints</span></button>
               <button class="region-button" type="button" data-region="foot" data-region-copy="regionFoot" aria-label="Foot" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionFoot">Foot</span></button>
               <button class="region-button" type="button" data-region="general" data-region-copy="regionGeneral" aria-label="Whole body / general" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionGeneral">Whole body / general</span></button>
             </div>
@@ -1536,6 +1587,22 @@
         labEyebrow: "जाँच सेवाएँ", labTitle: "लैब टेस्ट और स्कैन बुक करें", labIntro: "टेस्ट, सार्वजनिक अस्पताल की जाँच जगह और नकली स्लॉट चुनें। शुल्क और उपलब्धता इस प्रोटोटाइप की नकली जानकारी है।", labMockNote: "कोई टेस्ट बुक नहीं होता, भुगतान नहीं लिया जाता और स्वास्थ्य रिकॉर्ड नहीं बनता।", labBookingTitle: "टेस्ट का अनुरोध तैयार करें", labSelectionNote: "नकली अनुरोध बनाने तक आपकी पसंद इसी ब्राउज़र में रहेगी।", labHospitalLabel: "अस्पताल की लैब चुनें", labDateLabel: "तारीख चुनें", labTimeLabel: "समय चुनें", beforeTestTitle: "टेस्ट से पहले", beforeFasting: "शुगर और लिपिड प्रोफ़ाइल के लिए रात में 10 से 12 घंटे खाली पेट रहें। सादा पानी पी सकते हैं।", beforeMedication: "डॉक्टर ने अलग न कहा हो तो नियमित बीपी की दवा पानी के साथ लें।", beforeScans: "स्कैन और एमआरआई में ढीले सूती कपड़े पहनें। पेट के अल्ट्रासाउंड के लिए मूत्राशय भरा रखें।", afterTestTitle: "टेस्ट के बाद", afterSnack: "खून लेने के बाद हल्का नाश्ता करें।", afterReports: "डिजिटल रिपोर्ट 4 से 24 घंटे में प्रोफ़ाइल पर जुड़ती है।", paymentTitle: "भुगतान कैसे करेंगे?", paymentFree: "आयुष्मान भारत / पीएम-जय / बीपीएल कार्ड में मुफ्त", paymentCounter: "अस्पताल काउंटर पर मामूली सरकारी शुल्क (नकद/कार्ड)", paymentUpi: "तुरंत ऑनलाइन नकली भुगतान (यूपीआई / क्यूआर)", labBookButton: "नकली टेस्ट अनुरोध बनाएँ", reportTitle: "डिजिटल स्वास्थ्य रिकॉर्ड का नमूना", reportReady: "रिपोर्ट स्थिति: डाउनलोड के लिए तैयार", reportDoctor: "इस नकली नमूने में सत्यापित डॉक्टर की स्वीकृति दिखाई गई है।", downloadReport: "रिपोर्ट का नमूना डाउनलोड करें",
         bloodEyebrow: "दिल्ली ब्लड नेटवर्क", bloodTitle: "ब्लड बैंक स्टॉक और डोनर सहायता", bloodIntro: "नमूना स्टॉक देखें, इमरजेंसी अनुरोध की स्लिप बनाएँ या स्थानीय रक्तदाता बनें। जाने से पहले ब्लड बैंक को फ़ोन करें।", bloodMockNote: "स्टॉक, अनुरोध टोकन और डोनर टोकन नकली हैं। यह पेज खून रिज़र्व नहीं करता।", stockTitle: "दिल्ली अस्पताल ब्लड स्टॉक मॉनिटर", stockNote: "इस डेमो के लिए जाँची गई नमूना उपलब्धता।", bloodBankColumn: "ब्लड बैंक", emergencyBloodTitle: "इमरजेंसी ब्लड अनुरोध", emergencyBloodNote: "ऑन-ड्यूटी ब्लड बैंक अधिकारी से बात करने के लिए यह नकली स्लिप बनाएँ। यह रिज़र्वेशन नहीं है।", bloodPatientLabel: "मरीज़ का नाम", bloodWardLabel: "अस्पताल वार्ड / आईसीयू बेड नंबर", bloodGroupLabel: "चाहिए ब्लड ग्रुप", bloodUnitsLabel: "कितनी यूनिट", bloodComponentLabel: "घटक", doctorNameLabel: "ड्यूटी डॉक्टर का नाम", doctorContactLabel: "ड्यूटी डॉक्टर का संपर्क", bloodRequestButton: "इमरजेंसी ब्लड टोकन स्लिप बनाएँ", donorTitle: "स्वैच्छिक रक्तदाता बनें", donorNote: "रजिस्ट्रेशन केवल इसी ब्राउज़र में सेव होगा। रक्तदान से पहले ब्लड बैंक पात्रता जाँचेगा।", donorNameLabel: "नाम", donorAgeLabel: "उम्र", donorGroupLabel: "ब्लड ग्रुप", donorLocalityLabel: "इलाका", donorLastDateLabel: "पिछली बार रक्तदान की तारीख", donorButton: "डोनर रजिस्ट्रेशन इसी ब्राउज़र में सेव करें", helplineTitle: "24/7 राष्ट्रीय इमरजेंसी हेल्पलाइन", helpline104: "स्वास्थ्य और ब्लड हेल्पलाइन", helpline1910: "राष्ट्रीय ब्लड ट्रांसफ्यूजन काउंसिल हेल्पलाइन", helpline108: "आपदा इमरजेंसी", stockAvailable: "स्टॉक उपलब्ध", stockModerate: "मध्यम", stockCritical: "बहुत कम स्टॉक", bloodTokenTitle: "इमरजेंसी ब्लड टोकन स्लिप", bloodTokenCall: "अभी ऑन-ड्यूटी ब्लड बैंक अधिकारी को फ़ोन करें।", donorSaved: "डोनर रजिस्ट्रेशन इसी ब्राउज़र में सेव हुआ। पुष्टि टोकन:", labRequestCreated: "नकली टेस्ट अनुरोध बन गया। इसे जाँच काउंटर के लिए रखें।", labReportDownloaded: "रिपोर्ट का नकली नमूना डाउनलोड हो गया।"
       });
+      Object.assign(copy.en, {
+        someoneElse: "Someone else (Caregiver)", whoLabel: "Caregiver relationship", parent: "My Parent", child: "My Child",
+        patientNamePlaceholder: "e.g. Ramesh Kumar / Priya Sharma", patientPhonePlaceholder: "e.g. 9876543210 (10-digit mobile)",
+        regionEyes: "Eyes / vision", regionEars: "Ears / throat", regionTeeth: "Teeth / mouth / jaw", regionShoulder: "Shoulder joints", regionKnee: "Knee joints", regionHand: "Hands & wrists", regionFoot: "Feet & ankles", regionPelvis: "Pelvis & hips", regionUpperBack: "Upper back & spine", regionLowerBack: "Lower back & lumbar", deptENT: "ENT", deptOphthalmology: "Ophthalmology",
+        comparisonDepartment: "Department selection", orsDepartment: "Forces patients to guess a medical specialty before seeing open slots.", raahatDepartment: "Zero-Knowledge Triage starts with where it hurts, then shows the matching counter.", comparisonWait: "Queue transparency", orsWait: "Phantom morning slot times with zero wait context.", raahatWait: "Honest Queue Wait calculated around doctor morning rounds.", comparisonAuth: "Front-door access", orsAuth: "Blocks citizens with distorted CAPTCHAs and OTPs upfront.", raahatAuth: "Friction-free symptom discovery; 1-tap verification only when making a specimen slip.", comparisonEmergency: "Emergency safety", orsEmergency: "Allows routine booking for acute stroke or cardiac cases.", raahatEmergency: "Halts routine booking on Red Flags and escalates to 24/7 Emergency.", comparisonAccess: "Non-literate accessibility", orsAccess: "Requires desktop 1920×1080 resolution and text literacy.", raahatAccess: "100% mobile-first with a visual 3D/2D body map and spoken voice intake.",
+        faqSafetyA: "No. Raahat is administrative triage, not a diagnosis or a doctor. You see and confirm the structured complaint before code applies the published rules; one Red Flag is enough to send you to Emergency.", faqRedFlagA: "Routine booking stops immediately. The result tells you to go to a 24/7 Emergency department now, shows the rule reference, and does not issue an OPD appointment.", faqPrivacyA: "No server stores this data. The complaint and patient details stay in this browser for this session; the body-map route sends nothing to an outside service. Do not enter Aadhaar, ABHA, UHID, OTPs or real health records.", faqWaitA: "The wait is simulated from the selected slot, doctor morning-round timing and sample queue throughput. It is an honest estimate for this prototype, not live hospital queue data.", faqOrsA: "ORS asks patients to choose a hospital and department first. Raahat offers Zero-Knowledge Triage from where it hurts, transparent simulated queue context, and emergency safeguards. It does not connect to ORS.", faqAbdmA: "Not today. This prototype does not connect to ABDM, e-Hospital HMIS or any government system. A future integration would require explicit consent, security review and a public-service partnership.",
+        roadmapTitle: "What’s next for Raahat", roadmapNote: "A civic roadmap for turning this prototype into a more connected, accessible public-service front door.", roadmapAbdmTitle: "ABDM & e-Hospital integration", roadmapAbdmNote: "Link generated specimen tokens directly into the Ayushman Bharat Digital Mission (ABDM) and national Hospital Management Information Systems (HMIS).", roadmapIvrTitle: "AI Voice IVR for feature phones (104 integration)", roadmapIvrNote: "Let rural citizens dial a toll-free number, speak symptoms in 22 regional dialects—including Bhojpuri, Maithili, Tamil and Bengali—and receive an OPD appointment token by SMS.", roadmapQueueTitle: "Real-time hospital queue vision", roadmapQueueNote: "Integrate waiting-hall token counters to stream live consultation turnaround times before citizens leave home.", roadmapLanguagesTitle: "Pan-India vernacular expansion", roadmapLanguagesNote: "Build native voice and dialect support across all 22 scheduled Indian languages."
+      });
+      Object.assign(copy.hi, {
+        someoneElse: "किसी और के लिए (केयरगिवर)", whoLabel: "देखभाल करने वाले का रिश्ता", parent: "मेरे माता-पिता", child: "मेरा बच्चा",
+        patientNamePlaceholder: "उदा. रमेश कुमार / प्रिया शर्मा", patientPhonePlaceholder: "उदा. 9876543210 (10 अंकों का मोबाइल)",
+        regionEyes: "आँखें / नज़र", regionEars: "कान और गला", regionTeeth: "दाँत और मुँह / जबड़ा", regionShoulder: "कंधे", regionKnee: "घुटने", regionHand: "हाथ और कलाई", regionFoot: "पैर और टखने", regionPelvis: "कूल्हा और पेल्विस", regionUpperBack: "ऊपरी पीठ / रीढ़", regionLowerBack: "कमर / निचली पीठ", deptENT: "ईएनटी", deptOphthalmology: "नेत्र रोग",
+        comparisonDepartment: "विभाग चुनना", orsDepartment: "खुले स्लॉट देखने से पहले मरीज को मेडिकल विभाग का अनुमान लगाना पड़ता है।", raahatDepartment: "जीरो-नॉलेज ट्रायेज जहाँ दर्द है वहाँ से शुरू होकर सही काउंटर दिखाता है।", comparisonWait: "कतार की पारदर्शिता", orsWait: "सुबह के नकली स्लॉट समय, बिना इंतज़ार के संदर्भ के।", raahatWait: "डॉक्टर के सुबह के राउंड के आधार पर ईमानदार कतार इंतज़ार।", comparisonAuth: "पहुँच की शुरुआत", orsAuth: "शुरुआत में टेढ़े CAPTCHA और OTP से नागरिक रुक जाते हैं।", raahatAuth: "परेशानी खोजने में कोई रुकावट नहीं; सिर्फ नमूना स्लिप बनाते समय एक-टैप पहचान।", comparisonEmergency: "इमरजेंसी सुरक्षा", orsEmergency: "तेज़ स्ट्रोक या हृदय की परेशानी में भी साधारण स्लॉट बुक हो सकता है।", raahatEmergency: "रेड फ्लैग पर साधारण बुकिंग तुरंत रोककर 24/7 इमरजेंसी तक पहुँचाता है।", comparisonAccess: "कम पढ़ने वालों की पहुँच", orsAccess: "1920×1080 डेस्कटॉप और टेक्स्ट पढ़ने की ज़रूरत।", raahatAccess: "100% मोबाइल-फर्स्ट: दृश्य 3D/2D शरीर का नक्शा और आवाज़ में जानकारी।",
+        faqSafetyA: "नहीं। राहत प्रशासनिक ट्रायेज है, बीमारी की पहचान या डॉक्टर नहीं। आप नियम लागू होने से पहले व्यवस्थित विवरण देखकर पुष्टि करते हैं; एक रेड फ्लैग इमरजेंसी के लिए काफ़ी है।", faqRedFlagA: "साधारण बुकिंग तुरंत रुक जाती है। नतीजा अभी 24/7 इमरजेंसी जाने को कहता है, नियम संदर्भ दिखाता है और ओपीडी अपॉइंटमेंट जारी नहीं करता।", faqPrivacyA: "कोई सर्वर यह जानकारी सेव नहीं करता। परेशानी और मरीज की जानकारी इस सत्र में इसी ब्राउज़र में रहती है; शरीर के नक्शे वाला रास्ता किसी बाहरी सेवा को कुछ नहीं भेजता। आधार, आभा, यूएचआईडी, ओटीपी या असली स्वास्थ्य रिकॉर्ड न लिखें।", faqWaitA: "इंतज़ार का समय चुने गए स्लॉट, डॉक्टर के सुबह के राउंड और नमूना कतार की गति से नकली रूप में निकाला जाता है। यह इस प्रोटोटाइप का ईमानदार अनुमान है, लाइव अस्पताल कतार नहीं।", faqOrsA: "ORS पहले अस्पताल और विभाग चुनने को कहता है। राहत जहाँ दर्द है वहाँ से जीरो-नॉलेज ट्रायेज, साफ़ नकली कतार संदर्भ और इमरजेंसी सुरक्षा देता है। यह ORS से जुड़ा नहीं है।", faqAbdmA: "अभी नहीं। यह प्रोटोटाइप ABDM, e-Hospital HMIS या किसी सरकारी सिस्टम से नहीं जुड़ा है। भविष्य में जोड़ने के लिए साफ़ सहमति, सुरक्षा जाँच और सार्वजनिक सेवा साझेदारी ज़रूरी होगी।",
+        roadmapTitle: "राहत के लिए आगे क्या?", roadmapNote: "इस प्रोटोटाइप को अधिक जुड़े हुए और आसान सार्वजनिक सेवा के दरवाज़े में बदलने का नागरिक रोडमैप।", roadmapAbdmTitle: "ABDM और e-Hospital इंटीग्रेशन", roadmapAbdmNote: "बनाए गए नमूना टोकन को आयुष्मान भारत डिजिटल मिशन (ABDM) और राष्ट्रीय हॉस्पिटल मैनेजमेंट इन्फॉर्मेशन सिस्टम (HMIS) से सीधे जोड़ना।", roadmapIvrTitle: "फीचर फोन के लिए AI वॉइस IVR (104 इंटीग्रेशन)", roadmapIvrNote: "ग्रामीण नागरिक टोल-फ्री नंबर पर 22 क्षेत्रीय बोलियों—भोजपुरी, मैथिली, तमिल और बंगाली सहित—में परेशानी बोलें और SMS से ओपीडी टोकन पाएँ।", roadmapQueueTitle: "अस्पताल की लाइव कतार की तस्वीर", roadmapQueueNote: "वेटिंग हॉल के टोकन काउंटर जोड़कर घर से निकलने से पहले परामर्श का लाइव समय दिखाना।", roadmapLanguagesTitle: "पूरे भारत में स्थानीय भाषाओं का विस्तार", roadmapLanguagesNote: "सभी 22 अनुसूचित भारतीय भाषाओं में मूल आवाज़ और बोली का समर्थन बनाना।"
+      });
       const state = { language: "en", screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, fullName: "", phone: "", exactAge: "", gender: null, conditions: [], listening: false, region: null, noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, consultationMode: "in-person", appointmentDate: null, appointmentShift: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
       const text = (key) => copy[state.language][key];
       const themeToggle = document.querySelector("#theme-toggle");
@@ -1651,9 +1718,9 @@
         afternoon: { start: "14:30", seen: "15:45" },
       };
       const regionCopyKeys = {
-        head: "regionHead", face: "regionFace", neck: "regionNeck", chest: "regionChest",
-        "upper-abdomen": "regionUpperAbdomen", "lower-abdomen": "regionLowerAbdomen",
-        back: "regionBack", arm: "regionArm", hand: "regionHand", leg: "regionLeg", foot: "regionFoot", general: "regionGeneral",
+        head: "regionHead", eyes: "regionEyes", ears: "regionEars", teeth: "regionTeeth", face: "regionFace", neck: "regionNeck", chest: "regionChest",
+        "upper-abdomen": "regionUpperAbdomen", "lower-abdomen": "regionLowerAbdomen", pelvis: "regionPelvis",
+        back: "regionBack", "upper-back": "regionUpperBack", "lower-back": "regionLowerBack", shoulder: "regionShoulder", arm: "regionArm", hand: "regionHand", leg: "regionLeg", knee: "regionKnee", foot: "regionFoot", general: "regionGeneral",
       };
       const kindCopyKeys = {
         pain: "kindPain", fever: "kindFever", breathing: "kindBreathing", bleeding: "kindBleeding", swelling: "kindSwelling",
@@ -1665,9 +1732,9 @@
       const ageCopyKeys = { baby: "ageBabyNumeric", child: "ageChildNumeric", adolescent: "ageAdolescent", adult: "ageAdultNumeric", middle: "ageMiddle", older: "ageOlderNumeric" };
       const genderCopyKeys = { male: "genderMale", female: "genderFemale", other: "genderOther" };
       const conditionCopyKeys = { diabetes: "conditionDiabetes", hypertension: "conditionHypertension", heart: "conditionHeart", asthma: "conditionAsthma", pregnancy: "conditionPregnancy", none: "conditionNone" };
-      const departmentCopyKeys = { Paediatrics: "deptPaediatrics", Cardiology: "deptCardiology", Neurology: "deptNeurology", Gastroenterology: "deptGastroenterology", Orthopaedics: "deptOrthopaedics", Dermatology: "deptDermatology", Dental: "deptDental", "General Medicine": "deptGeneralMedicine", "Choose a department yourself": "deptChoose" };
+      const departmentCopyKeys = { Paediatrics: "deptPaediatrics", Cardiology: "deptCardiology", Neurology: "deptNeurology", Gastroenterology: "deptGastroenterology", Orthopaedics: "deptOrthopaedics", Dermatology: "deptDermatology", Dental: "deptDental", ENT: "deptENT", Ophthalmology: "deptOphthalmology", "General Medicine": "deptGeneralMedicine", "Choose a department yourself": "deptChoose" };
       const editOptions = {
-        region: ["head", "face", "neck", "chest", "upper-abdomen", "lower-abdomen", "back", "arm", "hand", "leg", "foot", "general"].map((value) => ({ value, label: regionCopyKeys[value] })),
+        region: ["head", "eyes", "ears", "teeth", "face", "neck", "chest", "upper-abdomen", "lower-abdomen", "pelvis", "back", "upper-back", "lower-back", "shoulder", "arm", "hand", "leg", "knee", "foot", "general"].map((value) => ({ value, label: regionCopyKeys[value] })),
         kind: Object.keys(kindCopyKeys).map((value) => ({ value, label: kindCopyKeys[value] })),
         duration: Object.keys(durationCopyKeys).map((value) => ({ value, label: durationCopyKeys[value] })),
         severity: Object.keys(severityCopyKeys).map((value) => ({ value, label: severityCopyKeys[value] })),

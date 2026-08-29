@@ -13,16 +13,24 @@ const COLORS = Object.freeze({
 
 const REGION_LABELS = Object.freeze({
   head: { en: "Head / cranium", hi: "सिर / खोपड़ी" },
+  eyes: { en: "Eyes / vision", hi: "आँखें / नज़र" },
+  ears: { en: "Ears / throat", hi: "कान और गला" },
+  teeth: { en: "Teeth / mouth / jaw", hi: "दाँत और मुँह / जबड़ा" },
   face: { en: "Face / jaw", hi: "चेहरा / जबड़ा" },
   neck: { en: "Neck / throat", hi: "गर्दन / गला" },
   chest: { en: "Chest / heart / lungs", hi: "छाती / दिल / फेफड़े" },
   "upper-abdomen": { en: "Upper abdomen / stomach", hi: "ऊपरी पेट / आमाशय" },
   "lower-abdomen": { en: "Lower abdomen / pelvis", hi: "निचला पेट / पेल्विस" },
   back: { en: "Back / spine", hi: "पीठ / रीढ़" },
+  "upper-back": { en: "Upper back / spine", hi: "ऊपरी पीठ / रीढ़" },
+  "lower-back": { en: "Lower back / lumbar", hi: "कमर / निचली पीठ" },
+  shoulder: { en: "Shoulder joints", hi: "कंधे" },
   arm: { en: "Arm", hi: "बाँह" },
-  hand: { en: "Hand / palm", hi: "हाथ / हथेली" },
-  leg: { en: "Leg / knee", hi: "पैर / घुटना" },
-  foot: { en: "Foot / ankle", hi: "पंजा / टखना" },
+  hand: { en: "Hands / wrists", hi: "हाथ और कलाई" },
+  leg: { en: "Leg", hi: "पैर" },
+  knee: { en: "Knee joints", hi: "घुटने" },
+  foot: { en: "Feet / ankles", hi: "पैर और टखने" },
+  pelvis: { en: "Pelvis / hips", hi: "कूल्हा और पेल्विस" },
 });
 
 function themePalette() {
@@ -110,6 +118,11 @@ function buildBody(THREE) {
   addEllipsoid(THREE, body, "head", [0, 4.05, -0.02], [0.58, 0.32, 0.56], innerMaterial, "inner", 20);
   addEllipsoid(THREE, body, "face", [0, 3.72, 0.56], [0.48, 0.42, 0.2], innerMaterial, "inner", 20);
   addEllipsoid(THREE, body, "face", [0, 3.43, 0.48], [0.43, 0.22, 0.25], secondaryMaterial, "secondary", 20);
+  for (const side of [-1, 1]) {
+    addEllipsoid(THREE, body, "eyes", [side * 0.2, 3.78, 0.73], [0.11, 0.09, 0.06], amberMaterial, "organ", 16);
+    addEllipsoid(THREE, body, "ears", [side * 0.62, 3.72, 0.03], [0.11, 0.2, 0.12], innerMaterial, "inner", 16);
+  }
+  addEllipsoid(THREE, body, "teeth", [0, 3.43, 0.72], [0.19, 0.07, 0.055], amberMaterial, "organ", 16);
   addCapsule(THREE, body, "neck", [0, 2.7, 0], [0, 3.25, 0], 0.3, secondaryMaterial, "secondary");
   addCapsule(THREE, body, "neck", [-0.25, 2.8, 0], [-0.9, 2.52, 0], 0.18, innerMaterial, "inner");
   addCapsule(THREE, body, "neck", [0.25, 2.8, 0], [0.9, 2.52, 0], 0.18, innerMaterial, "inner");
@@ -131,23 +144,29 @@ function buildBody(THREE) {
   addEllipsoid(THREE, body, "upper-abdomen", [-0.16, 1.2, 0.47], [0.38, 0.3, 0.15], innerMaterial, "inner", 20);
   addEllipsoid(THREE, body, "upper-abdomen", [0.12, 1.08, 0.52], [0.23, 0.31, 0.14], amberMaterial, "organ", 20);
   addEllipsoid(THREE, body, "lower-abdomen", [0, 0.35, 0.03], [0.8, 0.63, 0.5], secondaryMaterial, "secondary");
+  addEllipsoid(THREE, body, "pelvis", [0, 0.35, 0.48], [0.66, 0.3, 0.16], amberMaterial, "organ", 20);
+  addEllipsoid(THREE, body, "pelvis", [-0.62, 0.32, 0.12], [0.18, 0.25, 0.18], innerMaterial, "inner", 18);
+  addEllipsoid(THREE, body, "pelvis", [0.62, 0.32, 0.12], [0.18, 0.25, 0.18], innerMaterial, "inner", 18);
   addBand(THREE, body, "lower-abdomen", [0, 0.2, 0], 0.64, 0.075, innerMaterial, "inner");
   addEllipsoid(THREE, body, "lower-abdomen", [0, -0.08, -0.02], [0.84, 0.31, 0.46], secondaryMaterial, "secondary");
 
   // Dorsal plate and articulated vertebral column, visible when rotated rearward.
-  addEllipsoid(THREE, body, "back", [0, 1.6, -0.5], [0.83, 1.22, 0.14], innerMaterial, "inner", 24);
+  addEllipsoid(THREE, body, "upper-back", [0, 2.0, -0.5], [0.83, 0.68, 0.14], innerMaterial, "inner", 24);
+  addEllipsoid(THREE, body, "lower-back", [0, 1.08, -0.5], [0.8, 0.55, 0.14], innerMaterial, "inner", 24);
   for (let index = 0; index < 8; index += 1) {
-    addEllipsoid(THREE, body, "back", [0, 2.55 - index * 0.28, -0.66], [0.13, 0.095, 0.08], amberMaterial, "organ", 14);
+    const y = 2.55 - index * 0.28;
+    addEllipsoid(THREE, body, y > 1.45 ? "upper-back" : "lower-back", [0, y, -0.66], [0.13, 0.095, 0.08], amberMaterial, "organ", 14);
   }
-  addCapsule(THREE, body, "back", [0, 2.25, -0.62], [0, 0.55, -0.62], 0.06, amberMaterial, "organ");
+  addCapsule(THREE, body, "lower-back", [0, 2.25, -0.62], [0, 0.55, -0.62], 0.06, amberMaterial, "organ");
 
   // Trapezius, deltoids, arms, forearms and palms.
-  addEllipsoid(THREE, body, "neck", [-0.55, 2.58, 0], [0.52, 0.22, 0.34], baseMaterial);
-  addEllipsoid(THREE, body, "neck", [0.55, 2.58, 0], [0.52, 0.22, 0.34], baseMaterial);
+  addEllipsoid(THREE, body, "shoulder", [-0.55, 2.58, 0], [0.52, 0.22, 0.34], baseMaterial);
+  addEllipsoid(THREE, body, "shoulder", [0.55, 2.58, 0], [0.52, 0.22, 0.34], baseMaterial);
   for (const side of [-1, 1]) {
-    addEllipsoid(THREE, body, "arm", [side * 1.02, 2.48, 0], [0.34, 0.38, 0.34], secondaryMaterial, "secondary");
+    addEllipsoid(THREE, body, "shoulder", [side * 1.02, 2.48, 0], [0.34, 0.38, 0.34], secondaryMaterial, "secondary");
     addCapsule(THREE, body, "arm", [side * 0.92, 2.38, 0], [side * 1.48, 1.48, 0], 0.23, baseMaterial);
     addCapsule(THREE, body, "arm", [side * 1.48, 1.48, 0], [side * 1.68, 0.38, 0.04], 0.18, baseMaterial);
+    addCapsule(THREE, body, "hand", [side * 1.68, 0.38, 0.04], [side * 1.7, 0.18, 0.05], 0.1, innerMaterial, "inner");
     addEllipsoid(THREE, body, "hand", [side * 1.7, 0.07, 0.05], [0.23, 0.32, 0.2], innerMaterial, "inner", 20);
     addCapsule(THREE, body, "hand", [side * 1.7, 0.03, 0.17], [side * 1.7, -0.1, 0.2], 0.045, amberMaterial, "organ");
   }
@@ -155,7 +174,7 @@ function buildBody(THREE) {
   // Thighs, patella joints, calves, ankles and contoured foot plates.
   for (const side of [-1, 1]) {
     addCapsule(THREE, body, "leg", [side * 0.47, -0.08, 0], [side * 0.56, -1.35, 0], 0.29, baseMaterial);
-    addEllipsoid(THREE, body, "leg", [side * 0.56, -1.38, 0.27], [0.22, 0.25, 0.12], amberMaterial, "organ", 18);
+    addEllipsoid(THREE, body, "knee", [side * 0.56, -1.38, 0.27], [0.22, 0.25, 0.12], amberMaterial, "organ", 18);
     addCapsule(THREE, body, "leg", [side * 0.56, -1.48, 0], [side * 0.65, -2.72, 0.04], 0.23, secondaryMaterial, "secondary");
     addEllipsoid(THREE, body, "leg", [side * 0.66, -2.72, 0.03], [0.18, 0.18, 0.18], innerMaterial, "inner", 18);
     addEllipsoid(THREE, body, "foot", [side * 0.73, -2.92, 0.16], [0.3, 0.18, 0.55], innerMaterial, "inner", 20);

@@ -86,6 +86,44 @@ test("a flag cannot be cleared by reassuring details", () => {
   assert.equal(result.department, "Emergency");
 });
 
+test("expanded anatomical regions route to their first counters", () => {
+  const expectedDepartments = {
+    eyes: "Ophthalmology",
+    ears: "ENT",
+    teeth: "Dental",
+    shoulder: "Orthopaedics",
+    knee: "Orthopaedics",
+    hand: "Orthopaedics",
+    foot: "Orthopaedics",
+    pelvis: "Orthopaedics",
+    "upper-back": "Orthopaedics",
+    "lower-back": "Orthopaedics",
+  };
+  for (const [region, department] of Object.entries(expectedDepartments)) {
+    assert.equal(routeComplaint({ ...baseComplaint, region, kind: "pain" }).department, department, region);
+  }
+});
+
+test("expanded region phrases create routeable complaints", () => {
+  const cases = [
+    ["eye pain", "Ophthalmology", "eyes"],
+    ["ear pain", "ENT", "ears"],
+    ["tooth pain", "Dental", "teeth"],
+    ["shoulder pain", "Orthopaedics", "shoulder"],
+    ["knee pain", "Orthopaedics", "knee"],
+    ["wrist pain", "Orthopaedics", "hand"],
+    ["ankle pain", "Orthopaedics", "foot"],
+    ["hip pain", "Orthopaedics", "pelvis"],
+    ["upper back pain", "Orthopaedics", "upper-back"],
+    ["lower back pain", "Orthopaedics", "lower-back"],
+  ];
+  for (const [phrase, department, region] of cases) {
+    const complaint = parseFreeTextComplaint(phrase);
+    assert.equal(complaint.region, region, phrase);
+    assert.equal(routeComplaint(complaint).department, department, phrase);
+  }
+});
+
 test("free-text and Hinglish phrases create the expected structured complaint", () => {
   const cases = [
     ["chest pain", "Cardiology", { region: "chest", kind: "pain", duration: "today", severity: "no" }],

@@ -14,6 +14,56 @@ export const ROUTING_RULES = Object.freeze({
       severity: "routine",
     },
     {
+      id: "R-11",
+      matches: { all: [{ field: "region", equals: "eyes" }] },
+      department: "Ophthalmology",
+      reason: {
+        en: "Eye or vision concerns start at Ophthalmology for an in-person assessment.",
+        hi: "आँखों या नज़र की परेशानी के लिए आमने-सामने जाँच हेतु नेत्र रोग विभाग से शुरू करें।",
+      },
+      severity: "routine",
+    },
+    {
+      id: "R-12",
+      matches: { all: [{ field: "region", equals: "ears" }] },
+      department: "ENT",
+      reason: {
+        en: "Ear or throat concerns start at ENT for an in-person assessment.",
+        hi: "कान या गले की परेशानी के लिए आमने-सामने जाँच हेतु ईएनटी से शुरू करें।",
+      },
+      severity: "routine",
+    },
+    {
+      id: "R-13",
+      matches: { all: [{ field: "region", equals: "teeth" }] },
+      department: "Dental",
+      reason: {
+        en: "Teeth, mouth or jaw concerns start at the Dental counter.",
+        hi: "दाँत, मुँह या जबड़े की परेशानी के लिए डेंटल काउंटर से शुरू करें।",
+      },
+      severity: "routine",
+    },
+    {
+      id: "R-14",
+      matches: { all: [{ field: "region", in: ["shoulder", "knee", "hand", "foot", "upper-back", "lower-back"] }] },
+      department: "Orthopaedics",
+      reason: {
+        en: "This joint, limb or spine concern starts at Orthopaedics.",
+        hi: "इस जोड़, हाथ-पैर या रीढ़ की परेशानी के लिए ऑर्थोपेडिक्स से शुरू करें।",
+      },
+      severity: "routine",
+    },
+    {
+      id: "R-15",
+      matches: { all: [{ field: "region", equals: "pelvis" }] },
+      department: "Orthopaedics",
+      reason: {
+        en: "Pelvis or hip concerns start at Orthopaedics for an in-person assessment.",
+        hi: "कूल्हे या पेल्विस की परेशानी के लिए आमने-सामने जाँच हेतु ऑर्थोपेडिक्स से शुरू करें।",
+      },
+      severity: "routine",
+    },
+    {
       id: "R-02",
       matches: { all: [{ field: "kind", equals: "pain" }, { field: "region", equals: "chest" }] },
       department: "Cardiology",
