@@ -5,7 +5,7 @@ export const ROUTING_RULES = Object.freeze({
   rules: [
     {
       id: "R-01",
-      matches: { all: [{ field: "age_band", in: ["baby", "child"] }] },
+      matches: { all: [{ field: "age_band", in: ["baby", "child", "adolescent"] }] },
       department: "Paediatrics",
       reason: {
         en: "For a child, Paediatrics is the right first counter.",

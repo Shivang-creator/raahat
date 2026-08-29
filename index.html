@@ -484,6 +484,86 @@
       .emergency-hospital .large-button { margin-top: 0.8rem; border-color: var(--emergency-red); background: var(--emergency-red); color: #fff; }
       .model-disclosure { margin-top: 0.9rem; padding: 0.8rem; border-radius: 0.7rem; background: #fff8e9; color: #583a08; font-size: 0.95rem; line-height: 1.45; }
 
+      .hero-primary-action { width: 100%; margin-top: 1rem; text-align: center; }
+      .service-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem; margin-top: 1rem; }
+      .service-card { display: grid; min-height: 8.7rem; align-content: start; gap: 0.35rem; padding: 0.9rem; border: 2px solid var(--line); border-radius: 0.9rem; background: var(--paper); color: var(--ink); text-align: left; transition: border-color 150ms ease, transform 150ms ease; }
+      .service-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+      .service-card > span { font-size: 1.8rem; line-height: 1; }
+      .service-card strong { color: var(--accent-dark); font-size: 1rem; line-height: 1.2; }
+      .service-card small { color: var(--muted); font-size: 0.86rem; line-height: 1.25; }
+      .patient-details { margin-top: 1.5rem; padding: 1rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
+      .patient-details h2 { margin: 0.35rem 0 0; color: var(--accent-dark); font-size: clamp(1.4rem, 5vw, 1.9rem); line-height: 1.1; }
+      .section-kicker { display: flex; align-items: center; flex-wrap: wrap; gap: 0.35rem; margin: 0; color: var(--muted); font-size: 0.92rem; font-weight: 800; }
+      .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; margin-top: 1rem; }
+      .form-field { min-width: 0; }
+      .form-field label { display: block; margin-bottom: 0.45rem; color: var(--ink); font-weight: 750; line-height: 1.25; }
+      .form-field input, .form-field select, .sign-in-input { width: 100%; min-height: 3.5rem; padding: 0.7rem 0.8rem; border: 2px solid var(--line); border-radius: 0.75rem; background: var(--paper); color: var(--ink); }
+      .form-field input:focus, .form-field select:focus { border-color: var(--accent); outline: 0; }
+      .compact-field-group { margin-top: 1rem; }
+      .age-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; }
+      .age-button, .condition-chip { min-height: 3.5rem; padding: 0.6rem 0.7rem; border: 2px solid var(--line); border-radius: 0.75rem; background: var(--paper); color: var(--ink); font-size: 0.98rem; font-weight: 700; line-height: 1.25; text-align: left; }
+      .age-button[aria-pressed="true"], .condition-chip[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
+      .exact-age-field { max-width: 15rem; margin-top: 0.7rem; }
+      .inline-choices, .condition-grid { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+      .inline-choices .choice-button { flex: 1 1 8rem; }
+      .condition-chip { flex: 1 1 12rem; text-align: center; }
+      .patient-readback { display: grid; gap: 0.55rem; margin-top: 1rem; padding: 0.9rem; border: 1px solid var(--line); border-radius: 0.8rem; background: var(--paper); }
+      .patient-readback p { margin: 0; color: var(--ink); font-size: 0.98rem; line-height: 1.35; }
+      .patient-readback .tag { min-width: 5.1rem; justify-content: center; }
+      .service-screen { padding: 0.5rem 0 1rem; }
+      .service-screen h1 { max-width: 22ch; }
+      .service-disclosure { margin-top: 1rem; padding: 0.8rem 1rem; border-radius: 0.8rem; background: var(--marigold-soft); color: var(--ink); font-size: 1rem; line-height: 1.45; }
+      .catalog-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; margin-top: 1.25rem; }
+      .catalog-card { display: grid; gap: 0.5rem; min-width: 0; padding: 1rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
+      .catalog-card[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+      .catalog-card h2 { margin: 0; color: var(--accent-dark); font-size: 1.2rem; line-height: 1.2; }
+      .catalog-card p { margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.4; }
+      .catalog-card .large-button { margin-top: 0.35rem; }
+      .lab-selection-summary { margin-top: 1rem; padding: 0.8rem; border-radius: 0.8rem; background: var(--accent-soft); color: var(--accent-dark); font-weight: 800; }
+      .preparation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; margin-top: 1rem; }
+      .preparation-grid article { padding: 0.9rem; border-radius: 0.8rem; background: var(--accent-soft); }
+      .preparation-grid h3 { margin: 0; color: var(--accent-dark); font-size: 1.15rem; }
+      .preparation-grid ul { margin: 0.5rem 0 0; padding-left: 1.15rem; color: var(--muted); font-size: 0.96rem; line-height: 1.4; }
+      .payment-options { display: grid; gap: 0.75rem; margin: 1rem 0; padding: 0.9rem; border: 2px solid var(--line); border-radius: 0.8rem; }
+      .payment-options legend { padding: 0 0.3rem; color: var(--ink); font-weight: 800; }
+      .payment-options label { display: flex; align-items: flex-start; gap: 0.5rem; color: var(--ink); line-height: 1.35; }
+      .payment-options input { flex: 0 0 auto; width: 1.3rem; height: 1.3rem; margin-top: 0.15rem; }
+      .patient-report { margin-top: 1rem; padding: 1rem; border: 2px solid var(--accent); border-radius: 1rem; background: var(--accent-soft); }
+      .patient-report h2 { margin: 0; color: var(--accent-dark); font-size: 1.35rem; }
+      .patient-report p { color: var(--ink); }
+      .appointment-options { margin-top: 1rem; }
+      .mode-grid, .shift-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem; margin-top: 0.75rem; }
+      .mode-card, .shift-card { display: grid; min-height: 5.5rem; align-content: center; gap: 0.25rem; padding: 0.75rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); text-align: left; }
+      .mode-card[aria-pressed="true"], .shift-card[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
+      .mode-card span, .shift-card span { color: var(--muted); font-size: 0.9rem; line-height: 1.3; }
+      .mode-card[aria-pressed="true"] span, .shift-card[aria-pressed="true"] span { color: #e8f7ed; }
+      .calendar-block { margin-top: 1.2rem; }
+      .date-strip { display: grid; grid-template-columns: repeat(7, minmax(6.5rem, 1fr)); gap: 0.5rem; margin-top: 0.7rem; overflow-x: auto; padding-bottom: 0.35rem; }
+      .date-button { min-height: 5.2rem; padding: 0.45rem; border: 2px solid var(--line); border-radius: 0.75rem; background: var(--paper); color: var(--ink); font-weight: 750; line-height: 1.2; }
+      .date-button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
+      .date-button small { display: block; margin-top: 0.25rem; color: var(--muted); font-size: 0.78rem; }
+      .date-button[aria-pressed="true"] small { color: #e8f7ed; }
+      .appointment-wait { margin-top: 1rem; }
+      .blood-table-wrap { overflow-x: auto; margin-top: 1rem; }
+      .blood-table { width: 100%; min-width: 58rem; border-collapse: collapse; }
+      .blood-table th, .blood-table td { padding: 0.65rem 0.45rem; border-bottom: 1px solid var(--line); text-align: center; vertical-align: middle; font-size: 0.86rem; line-height: 1.25; }
+      .blood-table th { background: var(--accent-soft); color: var(--accent-dark); }
+      .blood-table th:first-child, .blood-table td:first-child { min-width: 14rem; text-align: left; }
+      .stock-cell { min-width: 5.2rem; }
+      .stock-count { display: block; margin-top: 0.25rem; color: var(--ink); font-weight: 800; }
+      .stock-critical { color: var(--emergency); }
+      .blood-actions-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
+      .form-stack { display: grid; gap: 0.85rem; margin-top: 1rem; }
+      .blood-token-slip { margin-top: 1rem; padding: 1rem; border: 2px solid var(--emergency); border-radius: 0.9rem; background: var(--emergency-soft); color: var(--ink); }
+      .blood-token-slip h3 { margin: 0; color: var(--emergency); }
+      .blood-token-slip p { margin: 0.45rem 0 0; }
+
+      @media (max-width: 640px) {
+        .form-grid, .catalog-grid, .preparation-grid, .blood-actions-grid, .mode-grid { grid-template-columns: 1fr; }
+        .age-grid { grid-template-columns: 1fr; }
+        .date-strip { grid-template-columns: repeat(7, 6.5rem); }
+      }
+
       .intro-splash { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; background: var(--background); transition: opacity 0.45s ease, visibility 0.45s ease; }
       .intro-splash.is-gliding { opacity: 0; visibility: hidden; pointer-events: none; }
       .splash-lockup { display: flex; align-items: center; gap: 1rem; transform: scale(1.15); opacity: 0; animation: splash-mark-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
@@ -545,6 +625,9 @@
 
       @media (min-width: 760px) {
         .site-nav { display: inline-flex; }
+        .topline { flex-wrap: wrap; }
+        .site-nav { order: 3; width: 100%; overflow-x: auto; justify-content: center; scrollbar-width: none; }
+        .site-nav::-webkit-scrollbar { display: none; }
         .landing-hero { grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr); }
         .journey-grid, .network-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         .triage-workspace { grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.65fr); align-items: start; }
@@ -635,7 +718,9 @@
         </a>
         <nav class="site-nav" aria-label="Raahat screens">
           <a href="#screen-home" data-view-link="home" data-copy="homeNav">Home</a>
-          <a href="#screen-triage" data-view-link="triage" data-copy="triageNav">3D Triage Studio</a>
+          <a href="#screen-triage" data-view-link="triage" data-copy="triageNav">OPD Triage</a>
+          <a href="#screen-lab-tests" data-view-link="lab-tests" data-copy="labNav">Lab Tests &amp; Scans</a>
+          <a href="#screen-blood-bank" data-view-link="blood-bank" data-copy="bloodNav">Blood Bank</a>
           <a href="#screen-comparison" data-view-link="comparison" data-copy="orsLink">ORS vs Raahat</a>
           <a href="#screen-hospitals" data-view-link="hospitals" data-copy="hospitalsLink">Delhi Hospitals</a>
           <a href="#screen-faqs" data-view-link="faqs" data-copy="faqLink">FAQs</a>
@@ -652,15 +737,15 @@
       </div>
 
       <main>
-        <section class="landing-screen" id="landing-screen" aria-labelledby="landing-title">
+        <section class="landing-screen" id="screen-home" aria-labelledby="landing-title">
           <section class="landing-hero view-section" id="front-door" data-view="home">
             <div class="hero-copy">
               <p class="hero-kicker" data-copy="landingKicker">A calmer front door to public hospitals</p>
               <h1 id="landing-title" data-copy="landingTitle">Government Hospital Appointments, Without the Confusion.</h1>
-              <p class="hero-subtitle" data-copy="landingSubtitle">ORS asks which department you need. A sick person only knows where it hurts. Tell us your symptoms in your own words, voice, or tap the body map — we'll guide you to the right OPD counter with honest wait times.</p>
+              <p class="hero-subtitle" data-copy="landingSubtitle">ORS asks which department you need. A sick person only knows where it hurts. Tell us what feels wrong in your own words, voice, or tap the interactive 3D body map. We guide you to the right OPD counter with honest queue wait times.</p>
               <p class="model-disclosure"><strong data-copy="processingLabel">Client-side browser processing:</strong> <span data-copy="modelDisclosure">Your words are evaluated securely inside this browser to guide you to the right counter. Nothing is sent to a server.</span></p>
               <div class="hero-actions">
-                <button class="large-button primary" type="button" id="start-triage" data-copy="startTriage">Start Triage</button>
+                <button class="large-button primary" type="button" id="start-triage" data-view-link="triage" data-copy="startBooking">Start OPD Triage &amp; Book Slot →</button>
                 <a class="back-button" href="#screen-home" data-view-link="home" data-copy="learnMore">See how it works</a>
               </div>
               <ul class="trust-badges" aria-label="Trust badges">
@@ -671,26 +756,15 @@
             </div>
 
             <section class="hero-card" aria-labelledby="hero-card-title">
-              <h2 id="hero-card-title" data-copy="quickStartTitle">Start with what you know</h2>
-              <p class="hero-card-note" data-copy="quickStartNote">No account. No department guessing. Try a sample or type one sentence.</p>
-              <span class="field-label" data-copy="bookingFor">Booking for:</span>
-              <div class="hero-choices" role="group" aria-label="Booking for">
-                <button class="hero-choice" type="button" data-landing-booking="myself" aria-pressed="true" data-copy="myself">Myself</button>
-                <button class="hero-choice" type="button" data-landing-booking="someone" aria-pressed="false" data-copy="someoneElse">Someone else</button>
+              <p class="screen-kicker" data-copy="serviceGridKicker">Services at a glance</p>
+              <h2 id="hero-card-title" data-copy="serviceGridTitle">Choose the help you need today.</h2>
+              <button class="large-button primary hero-primary-action" type="button" id="hero-triage-action" data-copy="startBooking">Start OPD Triage &amp; Book Slot →</button>
+              <div class="service-grid" aria-label="Raahat services">
+                <button class="service-card" type="button" data-service-view="triage"><span aria-hidden="true">🏥</span><strong data-copy="opdService">OPD Counter Triage</strong><small data-copy="opdServiceNote">Find the right first counter</small></button>
+                <button class="service-card" type="button" data-service-view="lab-tests"><span aria-hidden="true">🔬</span><strong data-copy="labService">Book Lab &amp; Scan Tests</strong><small data-copy="labServiceNote">See preparation and fees</small></button>
+                <button class="service-card" type="button" data-service-view="blood-bank"><span aria-hidden="true">🩸</span><strong data-copy="bloodService">Blood Bank Inventory</strong><small data-copy="bloodServiceNote">Check mock stock and donors</small></button>
+                <button class="service-card" type="button" data-service-view="triage" data-teleconsult="true"><span aria-hidden="true">📹</span><strong data-copy="teleService">Online Video Tele-OPD</strong><small data-copy="teleServiceNote">Start from home</small></button>
               </div>
-              <span class="field-label" data-copy="entryRouteLabel">How would you like to describe it?</span>
-              <div class="hero-entry-routes" role="group" aria-label="Complaint entry route">
-                <button class="entry-route" type="button" data-entry-route="speak" aria-pressed="false" data-copy="entrySpeak">Speak</button>
-                <button class="entry-route" type="button" data-entry-route="type" aria-pressed="true" data-copy="entryType">Type</button>
-                <button class="entry-route" type="button" data-entry-route="map" aria-pressed="false" data-copy="entryMap">Body map</button>
-              </div>
-              <textarea class="hero-input" id="landing-complaint" rows="2" data-copy-placeholder="landingPlaceholder" placeholder="e.g. chest pain, since this morning"></textarea>
-              <div class="hero-examples" role="group" aria-label="Sample symptoms">
-                <button class="hero-example" type="button" data-landing-example="chest pain" data-copy="exampleChest">chest pain</button>
-                <button class="hero-example" type="button" data-landing-example="seene mein dard aur saans lene mein dikkat" data-copy="exampleBreathing">chest pain + breathlessness</button>
-                <button class="hero-example" type="button" data-landing-example="weakness on one side" data-copy="exampleWeakness">weakness on one side</button>
-              </div>
-              <button class="large-button primary" type="button" id="hero-continue" data-copy="continueFromCard">Continue to read-back</button>
             </section>
           </section>
 
@@ -721,7 +795,7 @@
             <button class="large-button primary" type="button" data-view-link="triage" data-copy="startTriage">Start Triage</button>
           </section>
 
-          <section class="landing-section view-section" id="ors-comparison" data-view="comparison" aria-labelledby="comparison-title">
+          <section class="landing-section view-section" id="screen-comparison" data-view="comparison" aria-labelledby="comparison-title">
             <div class="screen-heading"><p class="screen-kicker" data-copy="comparisonKicker">A clearer front door</p><div class="section-heading"><h1 id="comparison-title" data-copy="comparisonTitle">How Raahat rethinks ORS</h1><p data-copy="comparisonNote">ORS is a useful appointment system. Raahat addresses the moment before it: when a citizen does not know the right counter.</p></div></div>
             <div class="comparison-wrap">
               <table class="comparison-table">
@@ -729,7 +803,7 @@
                 <tbody>
                   <tr><td data-copy="comparisonDepartment">Finding a department</td><td class="ors-cell" data-copy="orsDepartment">Department guessing</td><td class="raahat-cell" data-copy="raahatDepartment">Start with where it hurts; we will show the counter that matches your confirmed details.</td></tr>
                   <tr><td data-copy="comparisonWait">Knowing the real wait</td><td class="ors-cell" data-copy="orsWait">Slot time only</td><td class="raahat-cell" data-copy="raahatWait">Estimated consultation time, based on the slot and simulated queue throughput.</td></tr>
-                  <tr><td data-copy="comparisonAuth">Getting started</td><td class="ors-cell" data-copy="orsAuth">Front-door distorted CAPTCHA</td><td class="raahat-cell" data-copy="raahatAuth">Late-stage 1-tap Auth — only when making a specimen slip</td></tr>
+                  <tr><td data-copy="comparisonAuth">Getting started</td><td class="ors-cell" data-copy="orsAuth">Front-door distorted CAPTCHA</td><td class="raahat-cell" data-copy="raahatAuth">Late-stage 1-tap Auth , only when making a specimen slip</td></tr>
                   <tr><td data-copy="comparisonEmergency">Emergency safety</td><td class="ors-cell" data-copy="orsEmergency">Routine booking can hide a critical emergency</td><td class="raahat-cell" data-copy="raahatEmergency">One red flag → 24/7 Emergency now</td></tr>
                   <tr><td data-copy="comparisonAccess">Accessibility</td><td class="ors-cell" data-copy="orsAccess">Text forms, CAPTCHA and desktop-first barriers</td><td class="raahat-cell" data-copy="raahatAccess">100% mobile-first: 3D/2D map + speak + type</td></tr>
                 </tbody>
@@ -737,7 +811,7 @@
             </div>
           </section>
 
-          <section class="landing-section view-section" id="network" data-view="hospitals" aria-labelledby="network-title">
+          <section class="landing-section view-section" id="screen-hospitals" data-view="hospitals" aria-labelledby="network-title">
             <div class="screen-heading"><p class="screen-kicker" data-copy="hospitalsKicker">Verified public directory</p><div class="section-heading"><h1 id="network-title" data-copy="networkTitle">Delhi hospital network</h1><p><span class="tag">Verified</span> <span data-copy="networkNote">Hospital names, addresses and departments are public facts. Availability and token throughput are simulated for this prototype.</span></p></div></div>
             <div class="network-grid">
               <article class="network-card"><h3>AIIMS New Delhi</h3><p><span class="tag">Verified</span> Ansari Nagar, New Delhi · departments include Cardiology, Neurology and General Medicine.</p><p class="network-access"><span class="tag">Verified</span> Metro: AIIMS Metro (Yellow Line) · Gate: Gate 2 (Aurobindo Marg) · 24/7 Emergency Counter</p><p class="verified-line"><span class="tag">Verified</span> Departments checked 27 Aug 2026 · <a href="https://www.aiims.edu/index.php/en/departments-and-centers/departments" target="_blank" rel="noreferrer">AIIMS public list</a></p><div class="network-meta"><span class="network-pill"><span class="tag">Verified</span> 24/7 Emergency</span><span class="network-pill"><span class="tag">Simulated</span> 12 tokens seen</span></div><p class="network-live"><span class="tag">Simulated</span> Live token throughput: morning rounds in progress · next sample slot 09:30 AM.</p></article>
@@ -746,7 +820,7 @@
             </div>
           </section>
 
-          <section class="landing-section view-section" id="faqs" data-view="faqs" aria-labelledby="faq-title">
+          <section class="landing-section view-section" id="screen-faqs" data-view="faqs" aria-labelledby="faq-title">
             <div class="screen-heading"><p class="screen-kicker" data-copy="faqKicker">Plain-language answers</p><div class="section-heading"><h1 id="faq-title" data-copy="faqTitle">Questions citizens and judges ask</h1><p data-copy="faqNote">Plain answers about safety, access, privacy and what this prototype can really do.</p></div></div>
             <div class="faq-list">
               <details class="faq-item"><summary data-copy="faqSafetyQ">Is this triage safe?</summary><p data-copy="faqSafetyA">Raahat does not diagnose. Code applies a small published rule file after you see and confirm the complaint. When a red flag is present, one flag is enough to route to Emergency.</p></details>
@@ -758,6 +832,69 @@
               <details class="faq-item"><summary data-copy="faqAbdmQ">Will this connect to ABDM?</summary><p data-copy="faqAbdmA">No. ABDM, Aadhaar, ABHA, UHID, OTP and government systems are outside this prototype. Any future integration would need explicit consent, security review and a real public-service partnership.</p></details>
             </div>
           </section>
+        </section>
+
+        <section class="service-screen view-section" id="screen-lab-tests" data-view="lab-tests" aria-labelledby="lab-title" hidden>
+          <button class="back-button" type="button" data-service-back="home" data-copy="backToServices">← Back to services</button>
+          <p class="eyebrow"><span class="tag">Verified</span> <span data-copy="labEyebrow">Diagnostic services</span></p>
+          <h1 id="lab-title" tabindex="-1" data-copy="labTitle">Book lab tests and scans</h1>
+          <p class="screen-note" data-copy="labIntro">Choose a test, a public hospital diagnostic centre, and a simulated slot. Fees and availability are mock data for this prototype.</p>
+          <div class="service-disclosure"><span class="tag">Simulated</span><span data-copy="labMockNote">No test is booked, no payment is taken, and no health record is created.</span></div>
+          <div class="catalog-grid" id="lab-catalog" aria-label="Diagnostic test catalog"></div>
+          <section class="booking-panel lab-booking-panel" id="lab-booking-panel" aria-labelledby="lab-booking-title" hidden>
+            <h2 id="lab-booking-title" data-copy="labBookingTitle">Prepare a test request</h2>
+            <p class="booking-panel-note"><span class="tag">Observed</span> <span data-copy="labSelectionNote">Your selections stay in this browser until you create a mock request.</span></p>
+            <div class="lab-selection-summary" id="lab-selection-summary"></div>
+            <div class="form-grid">
+              <div class="form-field"><label for="lab-hospital"><span class="tag">Verified</span><span data-copy="labHospitalLabel">Choose hospital lab</span></label><select id="lab-hospital" class="select-control"></select></div>
+              <div class="form-field"><label for="lab-date"><span class="tag">Observed</span><span data-copy="labDateLabel">Select date</span></label><select id="lab-date" class="select-control"></select></div>
+              <div class="form-field"><label for="lab-time"><span class="tag">Simulated</span><span data-copy="labTimeLabel">Select time slot</span></label><select id="lab-time" class="select-control"><option>08:30 AM to 09:00 AM</option><option>09:30 AM to 10:00 AM</option><option>10:30 AM to 11:00 AM</option></select></div>
+            </div>
+            <div class="preparation-grid">
+              <article><h3 data-copy="beforeTestTitle">Before test</h3><ul><li data-copy="beforeFasting">Fasting: 10 to 12 hours overnight for sugar and lipid profiles. Plain water is permitted.</li><li data-copy="beforeMedication">Medication: take regular BP medicines with water unless a doctor has instructed otherwise.</li><li data-copy="beforeScans">Scans and MRI: wear loose cotton clothing without metal zippers or jewelry. Arrive with a full bladder for abdominal ultrasound.</li></ul></article>
+              <article><h3 data-copy="afterTestTitle">After test</h3><ul><li data-copy="afterSnack">Have a light snack immediately after a blood draw.</li><li data-copy="afterReports">Digital test reports are linked to your profile within 4 to 24 hours.</li></ul></article>
+            </div>
+            <fieldset class="payment-options"><legend data-copy="paymentTitle">How would you pay?</legend><label><input type="radio" name="lab-payment" value="free" checked /> <span data-copy="paymentFree">Free under Ayushman Bharat / PM-JAY / BPL Card</span></label><label><input type="radio" name="lab-payment" value="counter" /> <span data-copy="paymentCounter">Pay Nominal Govt Fee at Hospital Counter (Cash/Card)</span></label><label><input type="radio" name="lab-payment" value="upi" /> <span data-copy="paymentUpi">Instant Online Mock Payment (UPI / QR)</span></label></fieldset>
+            <button class="large-button primary" type="button" id="lab-book-button" data-copy="labBookButton">Create mock test request</button>
+            <p class="status" id="lab-status" aria-live="polite"></p>
+          </section>
+          <section class="patient-report" id="lab-report-card" aria-labelledby="lab-report-title" hidden>
+            <h2 id="lab-report-title" data-copy="reportTitle">Digital health record preview</h2>
+            <p><span class="tag">Simulated</span> <span data-copy="reportReady">Report Status: Ready for Download</span></p>
+            <p><span class="tag">Verified</span> <span data-copy="reportDoctor">Doctor sign-off shown for this mock preview.</span></p>
+            <button class="large-button" type="button" id="lab-download-button" data-copy="downloadReport">Download report preview</button>
+          </section>
+        </section>
+
+        <section class="service-screen view-section" id="screen-blood-bank" data-view="blood-bank" aria-labelledby="blood-title" hidden>
+          <button class="back-button" type="button" data-service-back="home" data-copy="backToServices">← Back to services</button>
+          <p class="eyebrow"><span class="tag">Simulated</span> <span data-copy="bloodEyebrow">Delhi blood network</span></p>
+          <h1 id="blood-title" tabindex="-1" data-copy="bloodTitle">Blood bank stock and donor help</h1>
+          <p class="screen-note" data-copy="bloodIntro">Check the sample stock monitor, create an emergency request slip, or offer to donate locally. Call the blood bank before travelling.</p>
+          <div class="service-disclosure"><span class="tag">Simulated</span><span data-copy="bloodMockNote">Stock counts, request tokens and donor confirmation tokens are mock data. This page does not reserve blood.</span></div>
+          <section class="booking-panel" aria-labelledby="stock-title">
+            <div class="section-heading"><h2 id="stock-title" data-copy="stockTitle">Live Delhi hospital blood stock monitor</h2><p><span class="tag">Simulated</span> <span data-copy="stockNote">Sample availability, checked for this demo.</span></p></div>
+            <div class="blood-table-wrap"><table class="blood-table"><thead><tr><th data-copy="bloodBankColumn">Blood bank</th><th>A+</th><th>A-</th><th>B+</th><th>B-</th><th>AB+</th><th>AB-</th><th>O+</th><th>O-</th></tr></thead><tbody id="blood-stock-body"></tbody></table></div>
+          </section>
+          <div class="blood-actions-grid">
+            <section class="booking-panel" aria-labelledby="emergency-blood-title">
+              <h2 id="emergency-blood-title" data-copy="emergencyBloodTitle">Emergency blood request</h2>
+              <p class="booking-panel-note" data-copy="emergencyBloodNote">Use this mock slip to organise a call with the on-duty blood bank officer. It is not a reservation.</p>
+              <form id="emergency-blood-form" class="form-stack">
+                <div class="form-grid"><div class="form-field"><label for="blood-patient"><span class="tag">Observed</span><span data-copy="bloodPatientLabel">Patient Name</span></label><input id="blood-patient" required /></div><div class="form-field"><label for="blood-ward"><span class="tag">Observed</span><span data-copy="bloodWardLabel">Hospital Ward / ICU bed number</span></label><input id="blood-ward" required /></div><div class="form-field"><label for="blood-group"><span class="tag">Observed</span><span data-copy="bloodGroupLabel">Blood Group needed</span></label><select id="blood-group" required><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div><div class="form-field"><label for="blood-units"><span class="tag">Observed</span><span data-copy="bloodUnitsLabel">Units required</span></label><input id="blood-units" type="number" min="1" max="20" value="1" required /></div></div>
+                <div class="form-field"><label for="blood-component"><span class="tag">Observed</span><span data-copy="bloodComponentLabel">Component</span></label><select id="blood-component"><option>Whole Blood</option><option>Packed Red Blood Cells (PRBC)</option><option>Platelets (RDP/SDP)</option><option>Fresh Frozen Plasma (FFP)</option></select></div>
+                <div class="form-grid"><div class="form-field"><label for="doctor-name"><span class="tag">Observed</span><span data-copy="doctorNameLabel">Attending Doctor Name</span></label><input id="doctor-name" required /></div><div class="form-field"><label for="doctor-contact"><span class="tag">Observed</span><span data-copy="doctorContactLabel">Attending Doctor Contact</span></label><input id="doctor-contact" type="tel" required /></div></div>
+                <button class="large-button primary" type="submit" data-copy="bloodRequestButton">Generate emergency blood token slip</button>
+              </form>
+              <article class="blood-token-slip" id="blood-token-slip" hidden aria-live="polite"></article>
+            </section>
+            <section class="booking-panel" aria-labelledby="donor-title">
+              <h2 id="donor-title" data-copy="donorTitle">Register as a voluntary donor</h2>
+              <p class="booking-panel-note" data-copy="donorNote">Registration is saved only in this browser. A blood bank must confirm eligibility before donation.</p>
+              <form id="donor-form" class="form-stack"><div class="form-grid"><div class="form-field"><label for="donor-name"><span class="tag">Observed</span><span data-copy="donorNameLabel">Name</span></label><input id="donor-name" required /></div><div class="form-field"><label for="donor-age"><span class="tag">Observed</span><span data-copy="donorAgeLabel">Age</span></label><input id="donor-age" type="number" min="18" max="65" required /></div><div class="form-field"><label for="donor-group"><span class="tag">Observed</span><span data-copy="donorGroupLabel">Blood Group</span></label><select id="donor-group"><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div><div class="form-field"><label for="donor-locality"><span class="tag">Observed</span><span data-copy="donorLocalityLabel">Locality</span></label><select id="donor-locality"><option>Central Delhi</option><option>South Delhi</option><option>North Delhi</option></select></div></div><div class="form-field"><label for="donor-last-date"><span class="tag">Observed</span><span data-copy="donorLastDateLabel">Last Donation Date</span></label><input id="donor-last-date" type="date" /></div><button class="large-button primary" type="submit" data-copy="donorButton">Save donor registration locally</button></form><p class="status" id="donor-status" aria-live="polite"></p>
+            </section>
+          </div>
+          <section class="emergency-network" aria-labelledby="helpline-title"><h2 id="helpline-title" data-copy="helplineTitle">24/7 national emergency helplines</h2><p><a href="tel:104"><span class="tag">Verified</span> 104</a> <span data-copy="helpline104">Health &amp; Blood Helpline</span></p><p><a href="tel:1910"><span class="tag">Verified</span> 1910</a> <span data-copy="helpline1910">National Blood Transfusion Council Helpline</span></p><p><a href="tel:108"><span class="tag">Verified</span> 108</a> <span data-copy="helpline108">Disaster Emergency</span></p></section>
         </section>
 
         <section id="screen-triage" hidden aria-label="Triage journey">
@@ -773,6 +910,48 @@
         <p class="eyebrow" data-copy="eyebrow">A simpler way to reach the right OPD counter</p>
         <h1 data-copy="title">What's wrong?</h1>
         <p class="question-note" data-copy="note">Tell us in your own words. You can speak, type, or point to the body map.</p>
+        <p class="service-disclosure" id="tele-mode-note" hidden><span class="tag">Observed</span> <span data-copy="teleModeSelected">Online Video Consultation is selected. We will show the secure mock Tele-OPD details after you choose a hospital and slot.</span></p>
+
+        <section class="patient-details" aria-labelledby="patient-details-title">
+          <p class="section-kicker"><span class="tag">Observed</span><span data-copy="patientDetailsKicker">Step 1 · Patient details</span></p>
+          <h2 id="patient-details-title" data-copy="patientDetailsTitle">Tell us who needs the appointment</h2>
+          <p class="booking-panel-note" data-copy="patientDetailsNote">These details stay in this browser for this session. Please do not enter an Aadhaar, ABHA, UHID, OTP or real health record.</p>
+          <div class="form-grid">
+            <div class="form-field"><label for="patient-name"><span class="tag">Observed</span><span data-copy="patientNameLabel">Full Name of Patient</span></label><input id="patient-name" type="text" autocomplete="off" data-copy-placeholder="patientNamePlaceholder" placeholder="Enter the patient's name" /></div>
+            <div class="form-field"><label for="patient-phone"><span class="tag">Observed</span><span data-copy="patientPhoneLabel">Phone Number (for SMS token reminder)</span></label><input id="patient-phone" type="tel" inputmode="numeric" autocomplete="off" data-copy-placeholder="patientPhonePlaceholder" placeholder="Optional demo number" /></div>
+          </div>
+          <div class="field-group compact-field-group">
+            <span class="field-label" id="numeric-age-label"><span class="tag">Observed</span><span data-copy="numericAgeLabel">Age band</span></span>
+            <div class="age-grid" role="group" aria-labelledby="numeric-age-label">
+              <button class="age-button" type="button" data-age="baby" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageBabyNumeric">0 to 1 year (Infant / Baby)</span></button>
+              <button class="age-button" type="button" data-age="child" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageChildNumeric">1 to 12 years (Child / Paediatric)</span></button>
+              <button class="age-button" type="button" data-age="adolescent" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageAdolescent">13 to 17 years (Adolescent / Teen)</span></button>
+              <button class="age-button" type="button" data-age="adult" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageAdultNumeric">18 to 44 years (Young Adult)</span></button>
+              <button class="age-button" type="button" data-age="middle" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageMiddle">45 to 59 years (Middle-Aged Adult)</span></button>
+              <button class="age-button" type="button" data-age="older" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageOlderNumeric">60+ years (Senior Citizen)</span></button>
+            </div>
+            <div class="form-field exact-age-field"><label for="exact-age"><span class="tag">Observed</span><span data-copy="exactAgeLabel">Exact Age (optional)</span></label><input id="exact-age" type="number" min="0" max="120" inputmode="numeric" data-copy-placeholder="exactAgePlaceholder" placeholder="e.g. 42" /></div>
+          </div>
+          <div class="field-group compact-field-group">
+            <span class="field-label" id="gender-label"><span class="tag">Observed</span><span data-copy="genderLabel">Gender selection</span></span>
+            <div class="inline-choices" role="group" aria-labelledby="gender-label">
+              <button class="choice-button" type="button" data-gender="male" aria-pressed="false"><span class="tag">Observed</span><span data-copy="genderMale">Male</span></button>
+              <button class="choice-button" type="button" data-gender="female" aria-pressed="false"><span class="tag">Observed</span><span data-copy="genderFemale">Female</span></button>
+              <button class="choice-button" type="button" data-gender="other" aria-pressed="false"><span class="tag">Observed</span><span data-copy="genderOther">Other</span></button>
+            </div>
+          </div>
+          <div class="field-group compact-field-group">
+            <span class="field-label" id="conditions-label"><span class="tag">Observed</span><span data-copy="conditionsLabel">Pre-existing medical conditions</span></span>
+            <div class="condition-grid" role="group" aria-labelledby="conditions-label">
+              <button class="condition-chip" type="button" data-condition="diabetes" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionDiabetes">Diabetes</span></button>
+              <button class="condition-chip" type="button" data-condition="hypertension" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionHypertension">Hypertension (BP)</span></button>
+              <button class="condition-chip" type="button" data-condition="heart" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionHeart">Heart Condition</span></button>
+              <button class="condition-chip" type="button" data-condition="asthma" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionAsthma">Asthma / Respiratory</span></button>
+              <button class="condition-chip" type="button" data-condition="pregnancy" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionPregnancy">Pregnancy</span></button>
+              <button class="condition-chip" type="button" data-condition="none" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionNone">No pre-existing condition</span></button>
+            </div>
+          </div>
+        </section>
 
         <section class="field-group" aria-labelledby="booking-label">
           <span class="field-label" id="booking-label" data-copy="bookingFor">Booking for:</span>
@@ -787,13 +966,6 @@
               <button class="choice-button" type="button" data-who="parent" aria-pressed="false" data-copy="parent">My parent</button>
               <button class="choice-button" type="button" data-who="child" aria-pressed="false" data-copy="child">My child</button>
               <button class="choice-button" type="button" data-who="other" aria-pressed="false" data-copy="someoneElseShort">Someone else</button>
-            </div>
-            <span class="field-label" data-copy="ageLabel">Age band</span>
-            <div class="choice-grid" role="group" aria-label="Age band">
-              <button class="choice-button" type="button" data-age="baby" aria-pressed="false" data-copy="baby">Baby</button>
-              <button class="choice-button" type="button" data-age="child" aria-pressed="false" data-copy="childAge">Child</button>
-              <button class="choice-button" type="button" data-age="adult" aria-pressed="false" data-copy="adult">Adult</button>
-              <button class="choice-button" type="button" data-age="older" aria-pressed="false" data-copy="olderAdult">Older adult</button>
             </div>
           </div>
         </section>
@@ -904,7 +1076,7 @@
               <h2 data-copy="back">Back</h2>
               <div class="silhouette-stage back-map">
                 <svg viewBox="0 0 160 300" aria-hidden="true"><circle cx="80" cy="28" r="22" /><path d="M55 58c7-7 43-7 50 0l17 73-17 5-8-39v68l24 105H98l-18-72-18 72H39l24-105V97l-8 39-17-5 17-73Z" /></svg>
-                <button class="map-region map-region-back" type="button" data-region="back" data-region-copy="regionBack" aria-label="Back — upper or lower" aria-pressed="false"><span class="visually-hidden" data-copy="regionBack">Back — upper or lower</span></button>
+                <button class="map-region map-region-back" type="button" data-region="back" data-region-copy="regionBack" aria-label="Back , upper or lower" aria-pressed="false"><span class="visually-hidden" data-copy="regionBack">Back , upper or lower</span></button>
               </div>
               <p class="map-side-hint" data-copy="backHint">Tap anywhere on the upper or lower back.</p>
             </div>
@@ -922,7 +1094,7 @@
               <button class="region-button" type="button" data-region="chest" data-region-copy="regionChest" aria-label="Chest" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionChest">Chest</span></button>
               <button class="region-button" type="button" data-region="upper-abdomen" data-region-copy="regionUpperAbdomen" aria-label="Upper abdomen" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionUpperAbdomen">Upper abdomen</span></button>
               <button class="region-button" type="button" data-region="lower-abdomen" data-region-copy="regionLowerAbdomen" aria-label="Lower abdomen" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionLowerAbdomen">Lower abdomen</span></button>
-              <button class="region-button" type="button" data-region="back" data-region-copy="regionBack" aria-label="Back — upper or lower" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionBack">Back — upper or lower</span></button>
+              <button class="region-button" type="button" data-region="back" data-region-copy="regionBack" aria-label="Back , upper or lower" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionBack">Back , upper or lower</span></button>
               <button class="region-button" type="button" data-region="arm" data-region-copy="regionArm" aria-label="Arm" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionArm">Arm</span></button>
               <button class="region-button" type="button" data-region="hand" data-region-copy="regionHand" aria-label="Hand" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionHand">Hand</span></button>
               <button class="region-button" type="button" data-region="leg" data-region-copy="regionLeg" aria-label="Leg" aria-pressed="false"><svg class="icon region-glyph" aria-hidden="true"><use href="#icon-pin"></use></svg><span data-copy="regionLeg">Leg</span></button>
@@ -1009,6 +1181,7 @@
             <button class="readback-chip" type="button" data-edit-field="who_for"><span class="chip-label" data-copy="chipWho">For</span><strong class="chip-value" id="chip-who"></strong></button>
             <button class="readback-chip" type="button" data-edit-field="age_band"><span class="chip-label" data-copy="chipAge">Age band</span><strong class="chip-value" id="chip-age"></strong></button>
           </div>
+          <div class="patient-readback" id="patient-readback" aria-label="Patient details read-back"></div>
 
           <div class="readback-editor" id="readback-editor" hidden>
             <h2 data-copy="editTitle">Change a detail</h2>
@@ -1054,6 +1227,28 @@
           <p class="appointment-intro" data-copy="bookingNote">This is one clear result: choose a locality, choose a hospital, then decide whether to make a specimen slip.</p>
 
           <div class="department-banner"><span class="tag">Rule</span><strong id="booking-department"></strong></div>
+
+          <section class="booking-panel appointment-options" id="appointment-options" aria-labelledby="appointment-options-title" hidden>
+            <p class="section-kicker"><span class="tag">Observed</span><span data-copy="appointmentStepLabel">Step 4 · Appointment choices</span></p>
+            <h2 id="appointment-options-title" data-copy="consultationModeTitle">How would you like to meet the OPD team?</h2>
+            <div class="mode-grid" role="group" aria-labelledby="appointment-options-title">
+              <button class="mode-card" type="button" data-consultation-mode="in-person" aria-pressed="false"><span class="tag">Observed</span><strong data-copy="inPersonMode">In-Person Hospital Visit</strong><span data-copy="inPersonModeNote">Walk-in to OPD Counter</span></button>
+              <button class="mode-card" type="button" data-consultation-mode="tele" aria-pressed="false"><span class="tag">Observed</span><strong data-copy="teleMode">Online Video Consultation</strong><span data-copy="teleModeNote">e-Sanjeevani Tele-OPD from home</span></button>
+            </div>
+            <div class="calendar-block">
+              <span class="field-label" id="date-strip-label"><span class="tag">Simulated</span><span data-copy="dateStripLabel">Choose a date</span></span>
+              <div class="date-strip" id="date-strip" role="group" aria-labelledby="date-strip-label"></div>
+            </div>
+            <div class="calendar-block">
+              <span class="field-label" id="shift-label"><span class="tag">Simulated</span><span data-copy="shiftLabel">Choose a session</span></span>
+              <div class="shift-grid" id="shift-grid" role="group" aria-labelledby="shift-label">
+                <button class="shift-card" type="button" data-shift="morning" aria-pressed="false"><span class="tag">Simulated</span><strong data-copy="morningShift">Morning Session</strong><span data-copy="morningShiftNote">09:00 AM to 11:00 AM · 6 slots open</span></button>
+                <button class="shift-card" type="button" data-shift="midday" aria-pressed="false"><span class="tag">Simulated</span><strong data-copy="middayShift">Mid-Day Session</strong><span data-copy="middayShiftNote">11:30 AM to 01:30 PM · 14 slots open</span></button>
+                <button class="shift-card" type="button" data-shift="afternoon" aria-pressed="false"><span class="tag">Simulated</span><strong data-copy="afternoonShift">Afternoon Session</strong><span data-copy="afternoonShiftNote">02:30 PM to 04:30 PM · 8 slots open</span></button>
+              </div>
+            </div>
+            <p class="honest-wait appointment-wait" id="appointment-wait" aria-live="polite"><span class="tag">Simulated</span><span data-copy="appointmentWaitHint">Choose a date and session to see the estimated consultation time.</span></p>
+          </section>
 
           <section class="booking-panel" aria-labelledby="where-title">
             <h2 id="where-title" data-copy="whereTitle">Where would you like to go?</h2>
@@ -1108,7 +1303,7 @@
                 <div class="slip-header-copy"><h3 class="slip-title">राहत · Raahat</h3><span class="slip-subtitle" data-copy="slipSubtitle">Public Hospital OPD Specimen Slip</span></div>
                 <div class="slip-token"><small><span class="tag">Simulated</span><span data-copy="slipTokenLabel">Mock token</span></small><span id="slip-token">#OPD-2026-4802</span></div>
               </div>
-              <p class="slip-watermark">SPECIMEN — NOT A REAL APPOINTMENT</p>
+              <p class="slip-watermark">SPECIMEN , NOT A REAL APPOINTMENT</p>
               <p class="slip-time-summary"><span data-copy="slipTimeSummary">Slot</span> <span id="slip-time-summary"></span></p>
               <dl class="slip-grid">
                 <div class="slip-field"><dt data-copy="slipPatient">Patient</dt><dd id="slip-patient"></dd></div>
@@ -1118,27 +1313,29 @@
                 <div class="slip-field"><dt data-copy="slipSlot">Slot</dt><dd id="slip-slot"></dd></div>
                 <div class="slip-field"><dt data-copy="slipSeenBy">Estimated consultation</dt><dd id="slip-seen-by"></dd></div>
                 <div class="slip-field"><dt data-copy="slipToken">Token</dt><dd id="slip-token-detail"></dd></div>
+                <div class="slip-field slip-field--wide"><dt data-copy="slipMode">Mode</dt><dd id="slip-mode"></dd></div>
+                <div class="slip-field slip-field--wide" id="slip-link-field" hidden><dt data-copy="slipLink">Tele-OPD link</dt><dd id="slip-link"></dd></div>
                 <div class="slip-field"><dt data-copy="slipAppointmentId">Appointment ID</dt><dd id="slip-appointment-id"></dd></div>
                 <div class="slip-field"><dt data-copy="slipUhid">UHID</dt><dd id="slip-uhid"></dd></div>
               </dl>
               <p class="patient-report"><span class="tag">Observed</span><span data-copy="patientSaid">Patient reports:</span> <span id="slip-report"></span></p>
-              <p class="rights-card"><span class="tag">Verified</span><span data-copy="rightsCard">If you are turned away with this slip — note the appointment ID, raise a grievance at pgportal.gov.in, or file an RTI asking why a valid online appointment was not honoured.</span></p>
+              <p class="rights-card"><span class="tag">Verified</span><span data-copy="rightsCard">If you are turned away with this slip , note the appointment ID, raise a grievance at pgportal.gov.in, or file an RTI asking why a valid online appointment was not honoured.</span></p>
               <div class="qr-wrap"><svg class="barcode-code" viewBox="0 0 64 64" role="img" aria-label="Simulated security barcode"><defs><pattern id="security-grid" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 0h3v3H0zM5 5h3v3H5z" fill="currentColor"/><path d="M5 0h1v3H5zM0 5h1v3H0z" fill="currentColor" opacity=".45"/></pattern></defs><rect width="64" height="64" fill="url(#security-grid)"/><path d="M8 8h16v16H8zM12 12h8v8h-8zM40 8h16v16H40zM44 12h8v8h-8zM8 40h16v16H8zM12 44h8v8h-8zM38 38h5v5h-5zM48 38h8v8h-8zM38 49h5v7h-5zM48 49h8v7h-8z" fill="currentColor"/></svg><p class="qr-copy"><strong><span class="tag">Simulated</span><span data-copy="qrTitle">Sample security pattern</span></strong><span data-copy="qrNote">This pattern is decorative. It does not open a real appointment.</span></p></div>
             </article>
             <div class="slip-actions">
               <button class="large-button primary" type="button" id="print-slip" data-copy="printSlip">Print slip</button>
               <button class="large-button" type="button" id="download-slip" data-copy="downloadSlip">Download slip</button>
             </div>
-            <p class="print-only" data-copy="printFooter">SPECIMEN — NOT A REAL APPOINTMENT · independent prototype · mock data.</p>
+            <p class="print-only" data-copy="printFooter">SPECIMEN , NOT A REAL APPOINTMENT · independent prototype · mock data.</p>
           </section>
         </section>
         </section>
 
-        <section class="honesty-screen" id="honesty-screen" aria-labelledby="honesty-title" hidden>
+        <section class="honesty-screen" id="screen-honesty" aria-labelledby="honesty-title" hidden>
           <button class="back-button" type="button" id="honesty-back" data-copy="honestyBack">← Back</button>
           <p class="eyebrow" data-copy="honestyEyebrow">Screen 7 · Honesty</p>
           <h1 id="honesty-title" tabindex="-1" data-copy="honestyTitle">What is real and what is not</h1>
-          <p class="honesty-intro" data-copy="honestyIntro">Start with what ORS already does well. Then see exactly what this independent prototype does — and does not — claim.</p>
+          <p class="honesty-intro" data-copy="honestyIntro">Start with what ORS already does well. Then see exactly what this independent prototype does , and does not , claim.</p>
 
           <section class="honesty-section" aria-labelledby="ors-credit-title">
             <h2 id="ors-credit-title" data-copy="orsCreditTitle">What ORS already does well</h2>
@@ -1196,7 +1393,7 @@
 
       const copy = {
         en: {
-          landingKicker: "A calmer front door to public hospitals", landingTitle: "Government Hospital Appointments, Without the Confusion.", landingSubtitle: "ORS asks which department you need. A sick person only knows where it hurts. Tell us your symptoms in your own words, voice, or tap the body map — we'll guide you to the right OPD counter with honest wait times.", modelDisclosure: "Your words are evaluated securely inside this browser to guide you to the right counter. Nothing is sent to a server.", startTriage: "Start Triage", learnMore: "See how it works", privacyBadge: "100% Client-Side Privacy", noIdBadge: "No Aadhaar/OTP Required to Explore", accessBadge: "Accessible for Non-Literate Citizens", quickStartTitle: "Start with what you know", quickStartNote: "No account. No department guessing. Try a sample or type one sentence.", entryRouteLabel: "How would you like to describe it?", entrySpeak: "Speak", entryType: "Type", entryMap: "Body map", landingPlaceholder: "e.g. chest pain, since this morning", exampleBreathing: "chest pain + breathlessness", continueFromCard: "Continue to read-back", whyLink: "Why Raahat?", orsLink: "ORS vs Raahat", faqLink: "FAQs", whyTitle: "A little more dignity at the counter.", whyNote: "Raahat starts with the citizen's words, not a medical vocabulary test. The person stays in control before anything is routed.", journeyOneTitle: "Describe in your voice or tap the map", journeyOneNote: "Speak, type, or use a flat body map. Every route creates the same reviewable complaint.", journeyTwoTitle: "Verified hospital & honest queue wait", journeyTwoNote: "See public hospital facts, then see simulated token throughput and when people are usually seen.", journeyThreeTitle: "Print specimen slip with citizen rights", journeyThreeNote: "A clearly marked mock slip keeps the next step legible and carries a grievance route.", comparisonTitle: "How Raahat rethinks ORS", comparisonNote: "ORS is a useful appointment system. Raahat addresses the moment before it: when a citizen does not know the right counter.", comparisonQuestion: "The front door question", orsEra: "2015 · NIC digitised counter", raahatEra: "2026 · citizen-first triage", comparisonDepartment: "Finding a department", orsDepartment: "Department guessing", raahatDepartment: "Start with where it hurts, not a department name", comparisonWait: "Knowing the real wait", orsWait: "Slot time without a seen-time estimate", raahatWait: "Estimated seen-time from slot + simulated throughput", comparisonAuth: "Getting started", orsAuth: "Front-door distorted CAPTCHA", raahatAuth: "Late-stage 1-tap Auth — only when making a specimen slip", comparisonAccess: "Describing the problem", orsAccess: "Text Forms", raahatAccess: "2D Visual Body Map + speak + type", networkTitle: "Delhi hospital network live status", networkNote: "Hospital names, addresses and departments are public facts. Availability and token throughput are simulated for this prototype.", faqTitle: "Questions citizens and judges ask", faqNote: "Plain answers about safety, access, privacy and what this prototype can really do.", faqSafetyQ: "Is this triage safe?", faqSafetyA: "Raahat does not diagnose. Code applies a small published rule file after you see and confirm the complaint. When a red flag is present, one flag is enough to route to Emergency.", faqRedFlagQ: "What happens when there is an Emergency red flag?", faqRedFlagA: "The result says to go to Emergency now and not book an appointment. The rule ID is shown, and the nearest simulated emergency-capable hospital in your chosen locality is displayed.", faqAccessQ: "Can someone who cannot read use it?", faqAccessA: "Yes. Complaint entry has three equal routes: speak, type, or tap the labelled 2D body map. Large buttons, keyboard focus and screen-reader labels are built into the flow.", faqPrivacyQ: "What happens to my data?", faqPrivacyA: "This prototype keeps the complaint in the browser for this session and never stores it server-side. Typed words are sent to no service in the body-map route; typed words stay in this browser for this session.", faqWaitQ: "How is the wait time calculated?", faqWaitA: "It is simulated as slot start plus a simulated wait. Hospitals are sorted by estimated seen-time, then travel time, then name. It is not live queue data.", faqOrsQ: "How is Raahat different from ORS?", faqOrsA: "ORS begins by asking you to choose a hospital and department. Raahat helps a citizen structure their own words first, then shows an honest simulated queue view. It does not connect to ORS.", faqAbdmQ: "Will this connect to ABDM?", faqAbdmA: "No. ABDM, Aadhaar, ABHA, UHID, OTP and government systems are outside this prototype. Any future integration would need explicit consent, security review and a real public-service partnership.", qrTitle: "Sample QR container", qrNote: "This pattern is decorative. It does not open a real appointment.", emergencyHospitalTitle: "Nearest Emergency-capable hospital in your chosen locality", emergencyHospitalNote: "Go now. This hospital fact is verified; travel is simulated.",
+          landingKicker: "A calmer front door to public hospitals", landingTitle: "Government Hospital Appointments, Without the Confusion.", landingSubtitle: "ORS asks which department you need. A sick person only knows where it hurts. Tell us what feels wrong in your own words, voice, or tap the interactive 3D body map. We guide you to the right OPD counter with honest queue wait times.", modelDisclosure: "Your words are evaluated securely inside this browser to guide you to the right counter. Nothing is sent to a server.", startTriage: "Start Triage", learnMore: "See how it works", privacyBadge: "100% Client-Side Privacy", noIdBadge: "No Aadhaar/OTP Required to Explore", accessBadge: "Accessible for Non-Literate Citizens", quickStartTitle: "Start with what you know", quickStartNote: "No account. No department guessing. Try a sample or type one sentence.", entryRouteLabel: "How would you like to describe it?", entrySpeak: "Speak", entryType: "Type", entryMap: "Body map", landingPlaceholder: "e.g. chest pain, since this morning", exampleBreathing: "chest pain + breathlessness", continueFromCard: "Continue to read-back", whyLink: "Why Raahat?", orsLink: "ORS vs Raahat", faqLink: "FAQs", whyTitle: "A little more dignity at the counter.", whyNote: "Raahat starts with the citizen's words, not a medical vocabulary test. The person stays in control before anything is routed.", journeyOneTitle: "Describe in your voice or tap the map", journeyOneNote: "Speak, type, or use a flat body map. Every route creates the same reviewable complaint.", journeyTwoTitle: "Verified hospital & honest queue wait", journeyTwoNote: "See public hospital facts, then see simulated token throughput and when people are usually seen.", journeyThreeTitle: "Print specimen slip with citizen rights", journeyThreeNote: "A clearly marked mock slip keeps the next step legible and carries a grievance route.", comparisonTitle: "How Raahat rethinks ORS", comparisonNote: "ORS is a useful appointment system. Raahat addresses the moment before it: when a citizen does not know the right counter.", comparisonQuestion: "The front door question", orsEra: "2015 · NIC digitised counter", raahatEra: "2026 · citizen-first triage", comparisonDepartment: "Finding a department", orsDepartment: "Department guessing", raahatDepartment: "Start with where it hurts, not a department name", comparisonWait: "Knowing the real wait", orsWait: "Slot time without a seen-time estimate", raahatWait: "Estimated seen-time from slot + simulated throughput", comparisonAuth: "Getting started", orsAuth: "Front-door distorted CAPTCHA", raahatAuth: "Late-stage 1-tap Auth , only when making a specimen slip", comparisonAccess: "Describing the problem", orsAccess: "Text Forms", raahatAccess: "2D Visual Body Map + speak + type", networkTitle: "Delhi hospital network live status", networkNote: "Hospital names, addresses and departments are public facts. Availability and token throughput are simulated for this prototype.", faqTitle: "Questions citizens and judges ask", faqNote: "Plain answers about safety, access, privacy and what this prototype can really do.", faqSafetyQ: "Is this triage safe?", faqSafetyA: "Raahat does not diagnose. Code applies a small published rule file after you see and confirm the complaint. When a red flag is present, one flag is enough to route to Emergency.", faqRedFlagQ: "What happens when there is an Emergency red flag?", faqRedFlagA: "The result says to go to Emergency now and not book an appointment. The rule ID is shown, and the nearest simulated emergency-capable hospital in your chosen locality is displayed.", faqAccessQ: "Can someone who cannot read use it?", faqAccessA: "Yes. Complaint entry has three equal routes: speak, type, or tap the labelled 2D body map. Large buttons, keyboard focus and screen-reader labels are built into the flow.", faqPrivacyQ: "What happens to my data?", faqPrivacyA: "This prototype keeps the complaint in the browser for this session and never stores it server-side. Typed words are sent to no service in the body-map route; typed words stay in this browser for this session.", faqWaitQ: "How is the wait time calculated?", faqWaitA: "It is simulated as slot start plus a simulated wait. Hospitals are sorted by estimated seen-time, then travel time, then name. It is not live queue data.", faqOrsQ: "How is Raahat different from ORS?", faqOrsA: "ORS begins by asking you to choose a hospital and department. Raahat helps a citizen structure their own words first, then shows an honest simulated queue view. It does not connect to ORS.", faqAbdmQ: "Will this connect to ABDM?", faqAbdmA: "No. ABDM, Aadhaar, ABHA, UHID, OTP and government systems are outside this prototype. Any future integration would need explicit consent, security review and a real public-service partnership.", qrTitle: "Sample QR container", qrNote: "This pattern is decorative. It does not open a real appointment.", emergencyHospitalTitle: "Nearest Emergency-capable hospital in your chosen locality", emergencyHospitalNote: "Go now. This hospital fact is verified; travel is simulated.",
           eyebrow: "A simpler way to reach the right OPD counter", title: "What's wrong?",
           note: "Tell us in your own words. You can speak, type, or point to the body map.",
           bookingFor: "Booking for:", myself: "Myself", someoneElse: "Someone else", whoLabel: "Who is it for?",
@@ -1207,17 +1404,17 @@
           bodyMapButton: "Point at the body map", captured: "Your words are ready for the next step. Nothing has been sent or booked.", needHelp: "Need a person?",
           backToQuestion: "← Back", mapEyebrow: "No reading needed", mapTitle: "Point to where it hurts",
           mapNote: "Tap the place that feels wrong.", mapWordsLabel: "Your words:", browserProcessing: "This body map stays in your browser. Nothing is sent to a server.", noLocationTitle: "Nothing in one place?", noLocationNote: "Choose this for a whole-body feeling or if you are not sure where it is.", noLocationFever: "Fever", noLocationWeak: "Weak all over", noLocationUnsure: "Not sure", selectionKicker: "Selected place", selectionEmpty: "Point at a place", selectionHint: "The place you point to will appear here.", selectionChosen: "Selected. Now choose the kind of trouble.", selectionNone: "No one place", figureHint: "Tap the part that feels wrong.", backHint: "Tap anywhere on the upper or lower back.", fallbackTitle: "Or choose from a list", fallbackNote: "Use this only if pointing is difficult.", front: "Front", back: "Back",
-          regionHead: "Head", regionFace: "Face / jaw", regionNeck: "Neck", regionChest: "Chest", regionUpperAbdomen: "Upper abdomen", regionLowerAbdomen: "Lower abdomen", regionBack: "Back — upper or lower", regionArm: "Arm", regionHand: "Hand", regionLeg: "Leg", regionFoot: "Foot", regionGeneral: "Whole body / general", frontView: "Front view", backView: "Back view", resetView: "Reset view",
+          regionHead: "Head", regionFace: "Face / jaw", regionNeck: "Neck", regionChest: "Chest", regionUpperAbdomen: "Upper abdomen", regionLowerAbdomen: "Lower abdomen", regionBack: "Back , upper or lower", regionArm: "Arm", regionHand: "Hand", regionLeg: "Leg", regionFoot: "Foot", regionGeneral: "Whole body / general", frontView: "Front view", backView: "Back view", resetView: "Reset view",
           kindTitle: "What kind of trouble?", kindNote: "Choose the picture that feels closest. You can change it.", kindEmpty: "Choose a kind", kindHint: "Your choice will appear here.", kindChosen: "Selected. Now add the two quick details.", kindPain: "Pain", kindFever: "Fever or heat", kindBreathing: "Breathing", kindBleeding: "Bleeding", kindSwelling: "Swelling", kindRash: "Rash", kindInjury: "Injury", kindVomiting: "Vomiting or stomach", kindDizziness: "Dizziness", kindLow: "Feeling low", followupTitle: "A little more", durationLabel: "How long?", durationNow: "Just now", durationToday: "Today", durationDays: "A few days", durationLonger: "A while", durationUnsure: "Not sure", severityLabel: "Is it severe right now?", severityNo: "No", severityYes: "Yes", severityUnsure: "Not sure", mapContinue: "Continue", mapIncomplete: "Choose a kind, how long, and whether it is severe right now.", mapReady: "Your description is ready to review.", mapReadyNote: "Nothing has been sent, decided, or booked.", reviewMap: "Review this",
           reviewEyebrow: "Screen 2 · Read-back", reviewTitle: "This is what I understood", reviewNote: "Check these details. Nothing is decided until you confirm.", browserProcessingReview: "These details were prepared in this browser from the choices you can see below.", readbackWordsLabel: "Your words:", chipRegion: "Place", chipKind: "Kind of trouble", chipDuration: "How long", chipSeverity: "Severe now", chipWho: "For", chipAge: "Age band", editTitle: "Change a detail", editNote: "Choose a new answer below. Your read-back will update.", unclearLabel: "I did not understand:", confirmNote: "Your answers stay in this browser for this session. Confirm only when they look right.", confirm: "Confirm", changeSomething: "Change something", resultEyebrow: "Screen 3 · Where to go", matchedCounter: "Matched Counter:", routeReference: "Route reference:", chooseDepartment: "Not right? Choose a department yourself.", emergencyEyebrow: "Emergency guidance", emergencyTitle: "Go to the Emergency department now. Do not book an appointment.", notDiagnosis: "This is not a diagnosis.", deptPaediatrics: "Paediatrics", deptCardiology: "Cardiology", deptNeurology: "Neurology", deptGastroenterology: "Gastroenterology", deptOrthopaedics: "Orthopaedics", deptDermatology: "Dermatology", deptDental: "Dental", deptGeneralMedicine: "General Medicine", deptChoose: "Choose a department yourself",
-          backToDepartment: "← Back to department", bookingEyebrow: "Your result · choose what happens next", bookingTitle: "Find a hospital, honestly", bookingNote: "This is one clear result: choose a locality, choose a hospital, then decide whether to make a specimen slip.", findHospital: "See hospitals and slots", whereTitle: "Where would you like to go?", whereNote: "Choose a locality. We do not read your device location.", localityLabel: "Your chosen locality", locationChosenNote: "Location is chosen by you, never taken from the phone. Travel figures below are simulated.", sortNote: "Sorted by seen soonest: slot start + simulated wait. Ties use travel time, then hospital name.", verifiedSource: "Hospital name and department", checked: "Checked", distance: "Travel", nextSlot: "Next open slot", seenBy: "Usually seen by", calendarOpens: "Calendar opens", chooseHospital: "Choose this hospital", chosenHospital: "Hospital chosen", chosenHospitalNote: "Now choose the visit type below.", noHospitals: "No verified hospital is listed for this department in this demo locality.", carryTitle: "What to carry", carryNote: "Choose the list that matches this visit.", firstVisit: "First visit", returningVisit: "Returning", firstId: "a photo ID", phoneOtp: "the phone that receives the one-time passcode", returningUhid: "your UHID from an earlier visit", previousSlip: "your previous appointment slip", feeLine: "OPD registration fee", toSignIn: "Continue to sign in", signInTitle: "Sign in to hold this slot", signInNote: "Identity is needed only now, when making the specimen slip. Nothing real is submitted.", credentialsNote: "These demo credentials are printed here so you never have to use a real account.", usernameLabel: "Username", passwordLabel: "Password", usernameInputLabel: "Demo username", passwordInputLabel: "Demo password", humanCheck: "Tap once: I am a person", signInButton: "Sign in and show the slip", humanCheckNeeded: "Tap the human check first.", slipTitle: "Your specimen slip", slipNote: "Keep this for the counter. It is a mock slip, not a booking.", slipPatient: "Patient", slipDepartment: "Department", slipHospital: "Hospital", slipSlot: "Slot", slipSeenBy: "Honest wait", slipAppointmentId: "Appointment ID", slipUhid: "UHID", patientSaid: "Patient reports:", rightsCard: "If you are turned away with this slip — note the appointment ID, raise a grievance at pgportal.gov.in, or file an RTI asking why a valid online appointment was not honoured.", printSlip: "Print slip", downloadSlip: "Download slip", printFooter: "SPECIMEN — NOT A REAL APPOINTMENT · independent prototype · mock data.", signedIn: "Mock sign-in complete. Your specimen slip is below.", credentialsMismatch: "Use the printed demo credentials above.", feeAmount: "₹10",
-          honestyBack: "← Back", honestyEyebrow: "Screen 7 · Honesty", honestyTitle: "What is real and what is not", honestyIntro: "Start with what ORS already does well. Then see exactly what this independent prototype does — and does not — claim.", honestyLink: "What is real?", orsCreditTitle: "What ORS already does well", orsCreditNote: "These are ORS features we are crediting, not claiming to have invented.", honestySourceLabel: "Source · checked 26 Aug 2026:", orsLabReports: "Lab reports", orsBlood: "Blood availability", orsCancellation: "Cancellation by appointment ID", orsAbha: "ABHA integration", orsApp: "An official mobile app · Nextgen ORS", limitsTitle: "What this prototype does not claim", limitNoOrs: "Nothing here connects to ORS. No appointment is real.", limitMock: "Every hospital, slot, wait, queue position, appointment ID and UHID is mock.", limitRules: "The department mapping is a small hand-written rule file, not a clinical protocol reviewed by any medical body.", limitAdvice: "This is not medical advice.", limitModel: "Your words are handled in this browser for this prototype. Nothing is sent to a server.", buildTitle: "What built this prototype", buildInterfaceTitle: "HTML and CSS", buildInterface: "the mobile-first screens, large controls, focus states and print view.", buildRoutingTitle: "JavaScript + routing-rules.js", buildRouting: "structured complaint to department and urgency, with the rule ID shown.", buildHospitalTitle: "hospital-data.js", buildHospital: "verified hospital names and mock slots, waits, travel figures and identifiers.", buildCodexTitle: "Codex", buildCodex: "wrote the application code, tests and verification pass.", talkToPerson: "Talk to a person", prototype: "independent prototype · mock data · not affiliated with any government body.",
+          backToDepartment: "← Back to department", bookingEyebrow: "Your result · choose what happens next", bookingTitle: "Find a hospital, honestly", bookingNote: "This is one clear result: choose a locality, choose a hospital, then decide whether to make a specimen slip.", findHospital: "See hospitals and slots", whereTitle: "Where would you like to go?", whereNote: "Choose a locality. We do not read your device location.", localityLabel: "Your chosen locality", locationChosenNote: "Location is chosen by you, never taken from the phone. Travel figures below are simulated.", sortNote: "Sorted by seen soonest: slot start + simulated wait. Ties use travel time, then hospital name.", verifiedSource: "Hospital name and department", checked: "Checked", distance: "Travel", nextSlot: "Next open slot", seenBy: "Usually seen by", calendarOpens: "Calendar opens", chooseHospital: "Choose this hospital", chosenHospital: "Hospital chosen", chosenHospitalNote: "Now choose the visit type below.", noHospitals: "No verified hospital is listed for this department in this demo locality.", carryTitle: "What to carry", carryNote: "Choose the list that matches this visit.", firstVisit: "First visit", returningVisit: "Returning", firstId: "a photo ID", phoneOtp: "the phone that receives the one-time passcode", returningUhid: "your UHID from an earlier visit", previousSlip: "your previous appointment slip", feeLine: "OPD registration fee", toSignIn: "Continue to sign in", signInTitle: "Sign in to hold this slot", signInNote: "Identity is needed only now, when making the specimen slip. Nothing real is submitted.", credentialsNote: "These demo credentials are printed here so you never have to use a real account.", usernameLabel: "Username", passwordLabel: "Password", usernameInputLabel: "Demo username", passwordInputLabel: "Demo password", humanCheck: "Tap once: I am a person", signInButton: "Sign in and show the slip", humanCheckNeeded: "Tap the human check first.", slipTitle: "Your specimen slip", slipNote: "Keep this for the counter. It is a mock slip, not a booking.", slipPatient: "Patient", slipDepartment: "Department", slipHospital: "Hospital", slipSlot: "Slot", slipSeenBy: "Honest wait", slipAppointmentId: "Appointment ID", slipUhid: "UHID", patientSaid: "Patient reports:", rightsCard: "If you are turned away with this slip , note the appointment ID, raise a grievance at pgportal.gov.in, or file an RTI asking why a valid online appointment was not honoured.", printSlip: "Print slip", downloadSlip: "Download slip", printFooter: "SPECIMEN , NOT A REAL APPOINTMENT · independent prototype · mock data.", signedIn: "Mock sign-in complete. Your specimen slip is below.", credentialsMismatch: "Use the printed demo credentials above.", feeAmount: "₹10",
+          honestyBack: "← Back", honestyEyebrow: "Screen 7 · Honesty", honestyTitle: "What is real and what is not", honestyIntro: "Start with what ORS already does well. Then see exactly what this independent prototype does , and does not , claim.", honestyLink: "What is real?", orsCreditTitle: "What ORS already does well", orsCreditNote: "These are ORS features we are crediting, not claiming to have invented.", honestySourceLabel: "Source · checked 26 Aug 2026:", orsLabReports: "Lab reports", orsBlood: "Blood availability", orsCancellation: "Cancellation by appointment ID", orsAbha: "ABHA integration", orsApp: "An official mobile app · Nextgen ORS", limitsTitle: "What this prototype does not claim", limitNoOrs: "Nothing here connects to ORS. No appointment is real.", limitMock: "Every hospital, slot, wait, queue position, appointment ID and UHID is mock.", limitRules: "The department mapping is a small hand-written rule file, not a clinical protocol reviewed by any medical body.", limitAdvice: "This is not medical advice.", limitModel: "Your words are handled in this browser for this prototype. Nothing is sent to a server.", buildTitle: "What built this prototype", buildInterfaceTitle: "HTML and CSS", buildInterface: "the mobile-first screens, large controls, focus states and print view.", buildRoutingTitle: "JavaScript + routing-rules.js", buildRouting: "structured complaint to department and urgency, with the rule ID shown.", buildHospitalTitle: "hospital-data.js", buildHospital: "verified hospital names and mock slots, waits, travel figures and identifiers.", buildCodexTitle: "Codex", buildCodex: "wrote the application code, tests and verification pass.", talkToPerson: "Talk to a person", prototype: "independent prototype · mock data · not affiliated with any government body.",
           voiceStart: "Speak your complaint", voiceStop: "Stop listening", voiceLabel: "Speak", voiceLabelStop: "Stop", voiceUnsupported: "Voice input is not available here. You can type or use the body map.",
           voiceListening: "Listening… say it in your own words.", voiceDone: "I heard your words. You can edit them before continuing.",
           continueHint: "Add a few words, or choose an example, so we can carry on.", someoneHint: "Choose who this is for and an age band.", notChosen: "Not chosen", notAsked: "Not asked", chooseDepartmentScreen: "Choose a department yourself",
         },
         hi: {
-          landingKicker: "सरकारी अस्पताल तक पहुँचने का आसान पहला कदम", landingTitle: "सरकारी अस्पताल की अपॉइंटमेंट, बिना उलझन के।", landingSubtitle: "ORS पूछता है कि आपको कौन सा विभाग चाहिए। बीमार व्यक्ति को बस यह पता होता है कि कहाँ दर्द है। अपनी बात बोलकर, लिखकर या शरीर के नक्शे पर चुनकर बताइए — हम सही ओपीडी काउंटर और ईमानदार इंतज़ार दिखाएँगे।", modelDisclosure: "आपकी बात समझने के लिए यह वाक्य एआई सेवा को भेजा जाता है। अगर आप ऐसा नहीं चाहते तो शरीर का नक्शा चुनें।", startTriage: "ट्रायेज शुरू करें", learnMore: "यह कैसे काम करता है", privacyBadge: "100% जानकारी इसी फ़ोन में", noIdBadge: "देखने के लिए आधार/ओटीपी नहीं", accessBadge: "कम पढ़ने वालों के लिए भी आसान", quickStartTitle: "जो पता है, वहीं से शुरू करें", quickStartNote: "खाता नहीं। विभाग का अनुमान नहीं। नमूना चुनें या एक वाक्य लिखें।", entryRouteLabel: "कैसे बताना चाहेंगे?", entrySpeak: "बोलें", entryType: "लिखें", entryMap: "शरीर का नक्शा", landingPlaceholder: "जैसे: सीने में दर्द, आज सुबह से", exampleBreathing: "सीने में दर्द + साँस में दिक्कत", continueFromCard: "दोबारा पढ़ने के लिए आगे बढ़ें", whyLink: "राहत क्यों?", orsLink: "ORS और राहत", faqLink: "सवाल-जवाब", whyTitle: "काउंटर पर थोड़ा और सम्मान।", whyNote: "राहत मेडिकल शब्दावली की परीक्षा नहीं लेता। आपकी बात से शुरुआत होती है और आगे बढ़ने से पहले आप सब कुछ देख सकते हैं।", journeyOneTitle: "अपनी आवाज़ में बताएँ या नक्शे पर चुनें", journeyOneNote: "बोलें, लिखें या सरल शरीर के नक्शे का इस्तेमाल करें। हर रास्ता एक ही जाँच योग्य विवरण बनाता है।", journeyTwoTitle: "सत्यापित अस्पताल और ईमानदार इंतज़ार", journeyTwoNote: "सार्वजनिक अस्पताल की जानकारी, नकली टोकन की चाल और आम तौर पर दिखने का समय देखें।", journeyThreeTitle: "नागरिक अधिकारों वाली नमूना स्लिप", journeyThreeNote: "साफ़ तौर पर नकली बताई गई स्लिप अगला कदम और शिकायत का रास्ता साथ रखती है।", comparisonTitle: "राहत ORS को नए ढंग से सोचता है", comparisonNote: "ORS अपॉइंटमेंट के लिए उपयोगी है। राहत उस पल को आसान बनाता है जब नागरिक को सही काउंटर पता नहीं होता।", comparisonQuestion: "पहले सवाल का फर्क", orsEra: "2015 · NIC का डिजिटल काउंटर", raahatEra: "2026 · नागरिक पहले", comparisonDepartment: "विभाग ढूँढना", orsDepartment: "विभाग का अनुमान", raahatDepartment: "जीरो-नॉलेज ट्रायेज — जहाँ दर्द है वहाँ से शुरुआत", comparisonWait: "सही इंतज़ार जानना", orsWait: "सिर्फ स्लॉट का समय", raahatWait: "ईमानदार इंतज़ार — स्लॉट + नकली दिखने का समय", comparisonAuth: "शुरुआत करना", orsAuth: "शुरू में टेढ़ा CAPTCHA", raahatAuth: "अंत में एक टैप से पहचान — सिर्फ नमूना स्लिप पर", comparisonAccess: "परेशानी बताना", orsAccess: "टेक्स्ट फ़ॉर्म", raahatAccess: "2D शरीर का नक्शा + बोलना + लिखना", networkTitle: "दिल्ली अस्पताल नेटवर्क की स्थिति", networkNote: "अस्पताल के नाम, पते और विभाग सार्वजनिक तथ्य हैं। उपलब्धता और टोकन की गति इस प्रोटोटाइप की नकली जानकारी है।", faqTitle: "नागरिक और जज के सवाल", faqNote: "सुरक्षा, पहुँच, गोपनीयता और इस प्रोटोटाइप की असली सीमा के साफ़ जवाब।", faqSafetyQ: "क्या यह ट्रायेज सुरक्षित है?", faqSafetyA: "राहत बीमारी का पता नहीं लगाता। आपकी पुष्टि के बाद कोड की छोटी नियम-सूची काम करती है। एक भी रेड फ्लैग होने पर इमरजेंसी का रास्ता चुना जाता है।", faqRedFlagQ: "इमरजेंसी रेड फ्लैग होने पर क्या होता है?", faqRedFlagA: "नतीजा कहता है कि अभी इमरजेंसी जाएँ और अपॉइंटमेंट न लें। नियम आईडी और चुने हुए इलाके का सबसे नज़दीकी नकली इमरजेंसी अस्पताल दिखता है।", faqAccessQ: "क्या बिना पढ़े कोई इसे इस्तेमाल कर सकता है?", faqAccessA: "हाँ। परेशानी बताने के तीन बराबर रास्ते हैं: बोलना, लिखना या नाम वाले 2D शरीर के नक्शे पर टैप करना।", faqPrivacyQ: "मेरी जानकारी का क्या होता है?", faqPrivacyA: "परेशानी इसी ब्राउज़र में इस सत्र तक रहती है और सर्वर पर सेव नहीं होती। शरीर के नक्शे वाले रास्ते में कुछ भी किसी सेवा को नहीं भेजा जाता।", faqWaitQ: "इंतज़ार का समय कैसे निकला है?", faqWaitA: "यह स्लॉट शुरू होने का समय और नकली इंतज़ार जोड़कर निकाला गया है। अस्पताल पहले दिखने के समय, फिर यात्रा और फिर नाम से क्रम में आते हैं। यह लाइव कतार नहीं है।", faqOrsQ: "राहत ORS से कैसे अलग है?", faqOrsA: "ORS आपसे अस्पताल और विभाग चुनने को कहता है। राहत पहले आपकी बात को व्यवस्थित करता है और फिर नकली कतार दिखाता है। यह ORS से जुड़ा नहीं है।", faqAbdmQ: "क्या यह ABDM से जुड़ेगा?", faqAbdmA: "नहीं। ABDM, आधार, ABHA, UHID, OTP और सरकारी सिस्टम इस प्रोटोटाइप के बाहर हैं। भविष्य में जोड़ने के लिए साफ़ सहमति और सुरक्षा जाँच ज़रूरी होगी।", qrTitle: "नमूना QR बॉक्स", qrNote: "यह सजावटी पैटर्न है। इससे असली अपॉइंटमेंट नहीं खुलेगी।", emergencyHospitalTitle: "आपके चुने इलाके का सबसे नज़दीकी इमरजेंसी अस्पताल", emergencyHospitalNote: "अभी जाएँ। अस्पताल की जानकारी सत्यापित है; यात्रा का समय नकली है।",
+          landingKicker: "सरकारी अस्पताल तक पहुँचने का आसान पहला कदम", landingTitle: "सरकारी अस्पताल की अपॉइंटमेंट, बिना उलझन के।", landingSubtitle: "ORS पूछता है कि आपको कौन सा विभाग चाहिए। बीमार व्यक्ति को बस यह पता होता है कि कहाँ दर्द है। अपनी बात बोलकर, लिखकर या शरीर के नक्शे पर चुनकर बताइए , हम सही ओपीडी काउंटर और ईमानदार इंतज़ार दिखाएँगे।", modelDisclosure: "आपकी बात समझने के लिए यह वाक्य एआई सेवा को भेजा जाता है। अगर आप ऐसा नहीं चाहते तो शरीर का नक्शा चुनें।", startTriage: "ट्रायेज शुरू करें", learnMore: "यह कैसे काम करता है", privacyBadge: "100% जानकारी इसी फ़ोन में", noIdBadge: "देखने के लिए आधार/ओटीपी नहीं", accessBadge: "कम पढ़ने वालों के लिए भी आसान", quickStartTitle: "जो पता है, वहीं से शुरू करें", quickStartNote: "खाता नहीं। विभाग का अनुमान नहीं। नमूना चुनें या एक वाक्य लिखें।", entryRouteLabel: "कैसे बताना चाहेंगे?", entrySpeak: "बोलें", entryType: "लिखें", entryMap: "शरीर का नक्शा", landingPlaceholder: "जैसे: सीने में दर्द, आज सुबह से", exampleBreathing: "सीने में दर्द + साँस में दिक्कत", continueFromCard: "दोबारा पढ़ने के लिए आगे बढ़ें", whyLink: "राहत क्यों?", orsLink: "ORS और राहत", faqLink: "सवाल-जवाब", whyTitle: "काउंटर पर थोड़ा और सम्मान।", whyNote: "राहत मेडिकल शब्दावली की परीक्षा नहीं लेता। आपकी बात से शुरुआत होती है और आगे बढ़ने से पहले आप सब कुछ देख सकते हैं।", journeyOneTitle: "अपनी आवाज़ में बताएँ या नक्शे पर चुनें", journeyOneNote: "बोलें, लिखें या सरल शरीर के नक्शे का इस्तेमाल करें। हर रास्ता एक ही जाँच योग्य विवरण बनाता है।", journeyTwoTitle: "सत्यापित अस्पताल और ईमानदार इंतज़ार", journeyTwoNote: "सार्वजनिक अस्पताल की जानकारी, नकली टोकन की चाल और आम तौर पर दिखने का समय देखें।", journeyThreeTitle: "नागरिक अधिकारों वाली नमूना स्लिप", journeyThreeNote: "साफ़ तौर पर नकली बताई गई स्लिप अगला कदम और शिकायत का रास्ता साथ रखती है।", comparisonTitle: "राहत ORS को नए ढंग से सोचता है", comparisonNote: "ORS अपॉइंटमेंट के लिए उपयोगी है। राहत उस पल को आसान बनाता है जब नागरिक को सही काउंटर पता नहीं होता।", comparisonQuestion: "पहले सवाल का फर्क", orsEra: "2015 · NIC का डिजिटल काउंटर", raahatEra: "2026 · नागरिक पहले", comparisonDepartment: "विभाग ढूँढना", orsDepartment: "विभाग का अनुमान", raahatDepartment: "जीरो-नॉलेज ट्रायेज , जहाँ दर्द है वहाँ से शुरुआत", comparisonWait: "सही इंतज़ार जानना", orsWait: "सिर्फ स्लॉट का समय", raahatWait: "ईमानदार इंतज़ार , स्लॉट + नकली दिखने का समय", comparisonAuth: "शुरुआत करना", orsAuth: "शुरू में टेढ़ा CAPTCHA", raahatAuth: "अंत में एक टैप से पहचान , सिर्फ नमूना स्लिप पर", comparisonAccess: "परेशानी बताना", orsAccess: "टेक्स्ट फ़ॉर्म", raahatAccess: "2D शरीर का नक्शा + बोलना + लिखना", networkTitle: "दिल्ली अस्पताल नेटवर्क की स्थिति", networkNote: "अस्पताल के नाम, पते और विभाग सार्वजनिक तथ्य हैं। उपलब्धता और टोकन की गति इस प्रोटोटाइप की नकली जानकारी है।", faqTitle: "नागरिक और जज के सवाल", faqNote: "सुरक्षा, पहुँच, गोपनीयता और इस प्रोटोटाइप की असली सीमा के साफ़ जवाब।", faqSafetyQ: "क्या यह ट्रायेज सुरक्षित है?", faqSafetyA: "राहत बीमारी का पता नहीं लगाता। आपकी पुष्टि के बाद कोड की छोटी नियम-सूची काम करती है। एक भी रेड फ्लैग होने पर इमरजेंसी का रास्ता चुना जाता है।", faqRedFlagQ: "इमरजेंसी रेड फ्लैग होने पर क्या होता है?", faqRedFlagA: "नतीजा कहता है कि अभी इमरजेंसी जाएँ और अपॉइंटमेंट न लें। नियम आईडी और चुने हुए इलाके का सबसे नज़दीकी नकली इमरजेंसी अस्पताल दिखता है।", faqAccessQ: "क्या बिना पढ़े कोई इसे इस्तेमाल कर सकता है?", faqAccessA: "हाँ। परेशानी बताने के तीन बराबर रास्ते हैं: बोलना, लिखना या नाम वाले 2D शरीर के नक्शे पर टैप करना।", faqPrivacyQ: "मेरी जानकारी का क्या होता है?", faqPrivacyA: "परेशानी इसी ब्राउज़र में इस सत्र तक रहती है और सर्वर पर सेव नहीं होती। शरीर के नक्शे वाले रास्ते में कुछ भी किसी सेवा को नहीं भेजा जाता।", faqWaitQ: "इंतज़ार का समय कैसे निकला है?", faqWaitA: "यह स्लॉट शुरू होने का समय और नकली इंतज़ार जोड़कर निकाला गया है। अस्पताल पहले दिखने के समय, फिर यात्रा और फिर नाम से क्रम में आते हैं। यह लाइव कतार नहीं है।", faqOrsQ: "राहत ORS से कैसे अलग है?", faqOrsA: "ORS आपसे अस्पताल और विभाग चुनने को कहता है। राहत पहले आपकी बात को व्यवस्थित करता है और फिर नकली कतार दिखाता है। यह ORS से जुड़ा नहीं है।", faqAbdmQ: "क्या यह ABDM से जुड़ेगा?", faqAbdmA: "नहीं। ABDM, आधार, ABHA, UHID, OTP और सरकारी सिस्टम इस प्रोटोटाइप के बाहर हैं। भविष्य में जोड़ने के लिए साफ़ सहमति और सुरक्षा जाँच ज़रूरी होगी।", qrTitle: "नमूना QR बॉक्स", qrNote: "यह सजावटी पैटर्न है। इससे असली अपॉइंटमेंट नहीं खुलेगी।", emergencyHospitalTitle: "आपके चुने इलाके का सबसे नज़दीकी इमरजेंसी अस्पताल", emergencyHospitalNote: "अभी जाएँ। अस्पताल की जानकारी सत्यापित है; यात्रा का समय नकली है।",
           eyebrow: "सही ओपीडी काउंटर तक पहुँचने का आसान तरीका", title: "क्या तकलीफ़ है?",
           note: "अपने शब्दों में बताइए। बोलें, लिखें या शरीर के नक्शे पर चुनें।",
           bookingFor: "किसके लिए बुकिंग है:", myself: "मेरे लिए", someoneElse: "किसी और के लिए", whoLabel: "किसके लिए है?",
@@ -1228,11 +1425,11 @@
           bodyMapButton: "शरीर के नक्शे पर चुनें", captured: "आपके शब्द अगले कदम के लिए तैयार हैं। कुछ भेजा या बुक नहीं हुआ है।", needHelp: "किसी व्यक्ति से बात करें?",
           backToQuestion: "← वापस", mapEyebrow: "पढ़ने की ज़रूरत नहीं", mapTitle: "जहाँ तकलीफ़ है वहाँ चुनें",
           mapNote: "जहाँ परेशानी है वहाँ चुनें।", mapWordsLabel: "आपके शब्द:", browserProcessing: "शरीर का यह नक्शा इसी ब्राउज़र में चलता है। कुछ भी सर्वर पर नहीं भेजा जाता।", noLocationTitle: "एक जगह पर परेशानी नहीं?", noLocationNote: "पूरे शरीर में परेशानी हो या जगह पता न हो तो इसे चुनें।", noLocationFever: "बुखार", noLocationWeak: "पूरे शरीर में कमज़ोरी", noLocationUnsure: "पता नहीं", selectionKicker: "चुनी हुई जगह", selectionEmpty: "किसी जगह पर चुनें", selectionHint: "आप जहाँ चुनेंगे, वह जगह यहाँ दिखेगी।", selectionChosen: "चुन लिया। अब परेशानी की किस्म चुनें।", selectionNone: "कोई एक जगह नहीं", figureHint: "जहाँ परेशानी है वहाँ चुनें।", backHint: "ऊपरी या निचली पीठ पर कहीं भी चुनें।", fallbackTitle: "या सूची में से चुनें", fallbackNote: "अगर नक्शे पर चुनना मुश्किल हो तभी इसका इस्तेमाल करें।", front: "सामने", back: "पीछे",
-          regionHead: "सिर", regionFace: "चेहरा / जबड़ा", regionNeck: "गर्दन", regionChest: "सीना", regionUpperAbdomen: "पेट का ऊपरी हिस्सा", regionLowerAbdomen: "पेट का निचला हिस्सा", regionBack: "पीठ — ऊपर या नीचे", regionArm: "बाँह", regionHand: "हाथ", regionLeg: "टाँग", regionFoot: "पैर", regionGeneral: "पूरा शरीर / सामान्य", frontView: "सामने से", backView: "पीछे से", resetView: "दृश्य रीसेट करें",
+          regionHead: "सिर", regionFace: "चेहरा / जबड़ा", regionNeck: "गर्दन", regionChest: "सीना", regionUpperAbdomen: "पेट का ऊपरी हिस्सा", regionLowerAbdomen: "पेट का निचला हिस्सा", regionBack: "पीठ , ऊपर या नीचे", regionArm: "बाँह", regionHand: "हाथ", regionLeg: "टाँग", regionFoot: "पैर", regionGeneral: "पूरा शरीर / सामान्य", frontView: "सामने से", backView: "पीछे से", resetView: "दृश्य रीसेट करें",
           kindTitle: "परेशानी किस तरह की है?", kindNote: "जो तस्वीर सबसे करीब लगे उसे चुनें। इसे बदल सकते हैं।", kindEmpty: "किस्म चुनें", kindHint: "आपकी पसंद यहाँ दिखेगी।", kindChosen: "चुन लिया। अब दो छोटी बातें बताइए।", kindPain: "दर्द", kindFever: "बुखार या गर्मी", kindBreathing: "साँस", kindBleeding: "खून आना", kindSwelling: "सूजन", kindRash: "दाने", kindInjury: "चोट", kindVomiting: "उल्टी या पेट", kindDizziness: "चक्कर", kindLow: "कमज़ोरी या मन उदास", followupTitle: "थोड़ा और बताइए", durationLabel: "कब से?", durationNow: "अभी", durationToday: "आज", durationDays: "कुछ दिन", durationLonger: "काफ़ी समय", durationUnsure: "पता नहीं", severityLabel: "क्या अभी बहुत तेज़ है?", severityNo: "नहीं", severityYes: "हाँ", severityUnsure: "पता नहीं", mapContinue: "आगे बढ़ें", mapIncomplete: "परेशानी की किस्म, कब से और अभी बहुत तेज़ है या नहीं चुनें।", mapReady: "आपका विवरण देखने के लिए तैयार है।", mapReadyNote: "कुछ भेजा, तय या बुक नहीं हुआ है।", reviewMap: "इसे देखें",
           reviewEyebrow: "स्क्रीन 2 · दोबारा पढ़ें", reviewTitle: "हमने यह समझा", reviewNote: "इन जानकारियों को जाँचें। आपकी पुष्टि से पहले कुछ तय नहीं होगा।", browserProcessingReview: "नीचे दिख रहे आपके जवाबों से यह विवरण इसी ब्राउज़र में तैयार हुआ है।", readbackWordsLabel: "आपके शब्द:", chipRegion: "जगह", chipKind: "परेशानी की किस्म", chipDuration: "कब से", chipSeverity: "अभी बहुत तेज़", chipWho: "किसके लिए", chipAge: "उम्र का समूह", editTitle: "एक जानकारी बदलें", editNote: "नीचे नया जवाब चुनें। दोबारा पढ़ा गया विवरण बदल जाएगा।", unclearLabel: "समझ नहीं आया:", confirmNote: "आपके जवाब इस ब्राउज़र में इसी सत्र तक रहेंगे। सही लगे तभी पुष्टि करें।", confirm: "पुष्टि करें", changeSomething: "कुछ बदलें", resultEyebrow: "स्क्रीन 3 · कहाँ जाएँ", matchedCounter: "मिलान हुआ काउंटर:", routeReference: "रूट संदर्भ:", chooseDepartment: "सही नहीं? विभाग खुद चुनें।", emergencyEyebrow: "इमरजेंसी की सलाह", emergencyTitle: "अभी इमरजेंसी विभाग जाएँ। अपॉइंटमेंट बुक न करें।", notDiagnosis: "यह बीमारी का पता नहीं है।", deptPaediatrics: "बाल रोग विभाग", deptCardiology: "कार्डियोलॉजी", deptNeurology: "न्यूरोलॉजी", deptGastroenterology: "गैस्ट्रोएंटेरोलॉजी", deptOrthopaedics: "ऑर्थोपेडिक्स", deptDermatology: "त्वचा रोग विभाग", deptDental: "डेंटल", deptGeneralMedicine: "जनरल मेडिसिन", deptChoose: "विभाग खुद चुनें",
-          backToDepartment: "← विभाग पर वापस जाएँ", bookingEyebrow: "आपका नतीजा · अगला कदम चुनें", bookingTitle: "ईमानदारी से अस्पताल चुनें", bookingNote: "एक ही साफ़ नतीजा: इलाका चुनें, अस्पताल चुनें, फिर नकली स्लिप बनाने का फैसला करें।", findHospital: "अस्पताल और स्लॉट देखें", whereTitle: "आप कहाँ जाना चाहेंगे?", whereNote: "इलाका चुनें। हम आपके फ़ोन की जगह नहीं पढ़ते।", localityLabel: "आपका चुना हुआ इलाका", locationChosenNote: "जगह आपने चुनी है, फ़ोन से नहीं ली गई। नीचे आने-जाने का समय नकली है।", sortNote: "जल्दी दिखने के हिसाब से क्रम: स्लॉट का समय + नकली इंतज़ार। बराबरी पर आने-जाने का समय, फिर अस्पताल का नाम।", verifiedSource: "अस्पताल का नाम और विभाग", checked: "जाँच की तारीख", distance: "यात्रा", nextSlot: "अगला खुला स्लॉट", seenBy: "आमतौर पर दिखेंगे", calendarOpens: "कैलेंडर खुलेगा", chooseHospital: "यह अस्पताल चुनें", chosenHospital: "अस्पताल चुना गया", chosenHospitalNote: "अब नीचे इस यात्रा का प्रकार चुनें।", noHospitals: "इस डेमो इलाके में इस विभाग के लिए कोई सत्यापित अस्पताल सूची में नहीं है।", carryTitle: "क्या साथ ले जाएँ", carryNote: "इस यात्रा के अनुसार सूची चुनें।", firstVisit: "पहली यात्रा", returningVisit: "फिर से आना", firstId: "फोटो पहचान पत्र", phoneOtp: "वह फ़ोन जिस पर वन-टाइम पासकोड आएगा", returningUhid: "पहले का यूएचआईडी", previousSlip: "पहली अपॉइंटमेंट की स्लिप", feeLine: "ओपीडी पंजीकरण शुल्क", toSignIn: "साइन इन करने के लिए आगे बढ़ें", signInTitle: "स्लॉट रखने के लिए साइन इन करें", signInNote: "पहचान की ज़रूरत सिर्फ़ अब है, नकली स्लिप बनाते समय। कुछ असली जमा नहीं होता।", credentialsNote: "डेमो क्रेडेंशियल यहाँ बड़े अक्षरों में हैं; असली खाता इस्तेमाल न करें।", usernameLabel: "यूज़रनेम", passwordLabel: "पासवर्ड", usernameInputLabel: "डेमो यूज़रनेम", passwordInputLabel: "डेमो पासवर्ड", humanCheck: "एक बार चुनें: मैं इंसान हूँ", signInButton: "साइन इन करें और स्लिप दिखाएँ", humanCheckNeeded: "पहले मानव-जाँच चुनें।", slipTitle: "आपकी नकली स्लिप", slipNote: "इसे काउंटर पर दिखाने के लिए रखें। यह नकली स्लिप है, बुकिंग नहीं।", slipPatient: "मरीज़", slipDepartment: "विभाग", slipHospital: "अस्पताल", slipSlot: "स्लॉट", slipSeenBy: "ईमानदार इंतज़ार", slipAppointmentId: "अपॉइंटमेंट आईडी", slipUhid: "यूएचआईडी", patientSaid: "मरीज़ ने बताया:", rightsCard: "अगर इस स्लिप के साथ आपको लौटा दिया जाए — अपॉइंटमेंट आईडी लिखें, pgportal.gov.in पर शिकायत करें, या पूछें कि मान्य ऑनलाइन अपॉइंटमेंट क्यों नहीं माना गया।", printSlip: "स्लिप प्रिंट करें", downloadSlip: "स्लिप डाउनलोड करें", printFooter: "नमूना — असली अपॉइंटमेंट नहीं · स्वतंत्र प्रोटोटाइप · नकली डेटा।", signedIn: "नकली साइन-इन पूरा हुआ। आपकी नकली स्लिप नीचे है।", credentialsMismatch: "ऊपर दिए डेमो क्रेडेंशियल इस्तेमाल करें।", feeAmount: "₹10",
-          honestyBack: "← वापस", honestyEyebrow: "स्क्रीन 7 · ईमानदारी", honestyTitle: "क्या असली है और क्या नहीं", honestyIntro: "पहले जानिए कि ओआरएस क्या अच्छा करता है। फिर देखें कि यह स्वतंत्र प्रोटोटाइप क्या दावा करता है — और क्या नहीं।", honestyLink: "क्या असली है?", orsCreditTitle: "ओआरएस पहले से क्या अच्छा करता है", orsCreditNote: "ये ओआरएस की सुविधाएँ हैं; हम इन्हें अपना बनाया हुआ नहीं बता रहे हैं।", honestySourceLabel: "स्रोत · 26 अगस्त 2026 को जाँचा:", orsLabReports: "लैब रिपोर्ट", orsBlood: "खून की उपलब्धता", orsCancellation: "अपॉइंटमेंट आईडी से रद्द करना", orsAbha: "आभा एकीकरण", orsApp: "आधिकारिक मोबाइल ऐप · नेक्स्टजेन ओआरएस", limitsTitle: "यह प्रोटोटाइप क्या दावा नहीं करता", limitNoOrs: "यहाँ कुछ भी ओआरएस से नहीं जुड़ा है। कोई अपॉइंटमेंट असली नहीं है।", limitMock: "हर अस्पताल, स्लॉट, इंतज़ार, कतार की जगह, अपॉइंटमेंट आईडी और यूएचआईडी नकली है।", limitRules: "विभाग चुनने का तरीका एक छोटी, हाथ से लिखी नियम फ़ाइल है; यह क्लिनिकल प्रोटोकॉल नहीं है और किसी मेडिकल संस्था ने इसकी समीक्षा नहीं की है।", limitAdvice: "यह मेडिकल सलाह नहीं है।", limitModel: "आपकी बात अपने शब्दों में पढ़ने के लिए हम यह वाक्य एक एआई सेवा को भेजते हैं। अगर आप ऐसा नहीं चाहते तो शरीर का नक्शा चुनें।", buildTitle: "यह प्रोटोटाइप किससे बना", buildInterfaceTitle: "एचटीएमएल और सीएसएस", buildInterface: "मोबाइल स्क्रीन, बड़े कंट्रोल, फ़ोकस स्थिति और प्रिंट व्यू।", buildRoutingTitle: "जावास्क्रिप्ट + routing-rules.js", buildRouting: "आपकी संरचित शिकायत से विभाग और ज़रूरत की तात्कालिकता; नियम आईडी भी दिखती है।", buildHospitalTitle: "hospital-data.js", buildHospital: "सत्यापित अस्पताल नाम और नकली स्लॉट, इंतज़ार, यात्रा आँकड़े और आईडी।", buildCodexTitle: "Codex", buildCodex: "एप्लिकेशन कोड, टेस्ट और जाँच लिखने में मदद की।", talkToPerson: "किसी व्यक्ति से बात करें", prototype: "स्वतंत्र प्रोटोटाइप · नकली डेटा · किसी सरकारी संस्था से जुड़ा नहीं।",
+          backToDepartment: "← विभाग पर वापस जाएँ", bookingEyebrow: "आपका नतीजा · अगला कदम चुनें", bookingTitle: "ईमानदारी से अस्पताल चुनें", bookingNote: "एक ही साफ़ नतीजा: इलाका चुनें, अस्पताल चुनें, फिर नकली स्लिप बनाने का फैसला करें।", findHospital: "अस्पताल और स्लॉट देखें", whereTitle: "आप कहाँ जाना चाहेंगे?", whereNote: "इलाका चुनें। हम आपके फ़ोन की जगह नहीं पढ़ते।", localityLabel: "आपका चुना हुआ इलाका", locationChosenNote: "जगह आपने चुनी है, फ़ोन से नहीं ली गई। नीचे आने-जाने का समय नकली है।", sortNote: "जल्दी दिखने के हिसाब से क्रम: स्लॉट का समय + नकली इंतज़ार। बराबरी पर आने-जाने का समय, फिर अस्पताल का नाम।", verifiedSource: "अस्पताल का नाम और विभाग", checked: "जाँच की तारीख", distance: "यात्रा", nextSlot: "अगला खुला स्लॉट", seenBy: "आमतौर पर दिखेंगे", calendarOpens: "कैलेंडर खुलेगा", chooseHospital: "यह अस्पताल चुनें", chosenHospital: "अस्पताल चुना गया", chosenHospitalNote: "अब नीचे इस यात्रा का प्रकार चुनें।", noHospitals: "इस डेमो इलाके में इस विभाग के लिए कोई सत्यापित अस्पताल सूची में नहीं है।", carryTitle: "क्या साथ ले जाएँ", carryNote: "इस यात्रा के अनुसार सूची चुनें।", firstVisit: "पहली यात्रा", returningVisit: "फिर से आना", firstId: "फोटो पहचान पत्र", phoneOtp: "वह फ़ोन जिस पर वन-टाइम पासकोड आएगा", returningUhid: "पहले का यूएचआईडी", previousSlip: "पहली अपॉइंटमेंट की स्लिप", feeLine: "ओपीडी पंजीकरण शुल्क", toSignIn: "साइन इन करने के लिए आगे बढ़ें", signInTitle: "स्लॉट रखने के लिए साइन इन करें", signInNote: "पहचान की ज़रूरत सिर्फ़ अब है, नकली स्लिप बनाते समय। कुछ असली जमा नहीं होता।", credentialsNote: "डेमो क्रेडेंशियल यहाँ बड़े अक्षरों में हैं; असली खाता इस्तेमाल न करें।", usernameLabel: "यूज़रनेम", passwordLabel: "पासवर्ड", usernameInputLabel: "डेमो यूज़रनेम", passwordInputLabel: "डेमो पासवर्ड", humanCheck: "एक बार चुनें: मैं इंसान हूँ", signInButton: "साइन इन करें और स्लिप दिखाएँ", humanCheckNeeded: "पहले मानव-जाँच चुनें।", slipTitle: "आपकी नकली स्लिप", slipNote: "इसे काउंटर पर दिखाने के लिए रखें। यह नकली स्लिप है, बुकिंग नहीं।", slipPatient: "मरीज़", slipDepartment: "विभाग", slipHospital: "अस्पताल", slipSlot: "स्लॉट", slipSeenBy: "ईमानदार इंतज़ार", slipAppointmentId: "अपॉइंटमेंट आईडी", slipUhid: "यूएचआईडी", patientSaid: "मरीज़ ने बताया:", rightsCard: "अगर इस स्लिप के साथ आपको लौटा दिया जाए , अपॉइंटमेंट आईडी लिखें, pgportal.gov.in पर शिकायत करें, या पूछें कि मान्य ऑनलाइन अपॉइंटमेंट क्यों नहीं माना गया।", printSlip: "स्लिप प्रिंट करें", downloadSlip: "स्लिप डाउनलोड करें", printFooter: "नमूना , असली अपॉइंटमेंट नहीं · स्वतंत्र प्रोटोटाइप · नकली डेटा।", signedIn: "नकली साइन-इन पूरा हुआ। आपकी नकली स्लिप नीचे है।", credentialsMismatch: "ऊपर दिए डेमो क्रेडेंशियल इस्तेमाल करें।", feeAmount: "₹10",
+          honestyBack: "← वापस", honestyEyebrow: "स्क्रीन 7 · ईमानदारी", honestyTitle: "क्या असली है और क्या नहीं", honestyIntro: "पहले जानिए कि ओआरएस क्या अच्छा करता है। फिर देखें कि यह स्वतंत्र प्रोटोटाइप क्या दावा करता है , और क्या नहीं।", honestyLink: "क्या असली है?", orsCreditTitle: "ओआरएस पहले से क्या अच्छा करता है", orsCreditNote: "ये ओआरएस की सुविधाएँ हैं; हम इन्हें अपना बनाया हुआ नहीं बता रहे हैं।", honestySourceLabel: "स्रोत · 26 अगस्त 2026 को जाँचा:", orsLabReports: "लैब रिपोर्ट", orsBlood: "खून की उपलब्धता", orsCancellation: "अपॉइंटमेंट आईडी से रद्द करना", orsAbha: "आभा एकीकरण", orsApp: "आधिकारिक मोबाइल ऐप · नेक्स्टजेन ओआरएस", limitsTitle: "यह प्रोटोटाइप क्या दावा नहीं करता", limitNoOrs: "यहाँ कुछ भी ओआरएस से नहीं जुड़ा है। कोई अपॉइंटमेंट असली नहीं है।", limitMock: "हर अस्पताल, स्लॉट, इंतज़ार, कतार की जगह, अपॉइंटमेंट आईडी और यूएचआईडी नकली है।", limitRules: "विभाग चुनने का तरीका एक छोटी, हाथ से लिखी नियम फ़ाइल है; यह क्लिनिकल प्रोटोकॉल नहीं है और किसी मेडिकल संस्था ने इसकी समीक्षा नहीं की है।", limitAdvice: "यह मेडिकल सलाह नहीं है।", limitModel: "आपकी बात अपने शब्दों में पढ़ने के लिए हम यह वाक्य एक एआई सेवा को भेजते हैं। अगर आप ऐसा नहीं चाहते तो शरीर का नक्शा चुनें।", buildTitle: "यह प्रोटोटाइप किससे बना", buildInterfaceTitle: "एचटीएमएल और सीएसएस", buildInterface: "मोबाइल स्क्रीन, बड़े कंट्रोल, फ़ोकस स्थिति और प्रिंट व्यू।", buildRoutingTitle: "जावास्क्रिप्ट + routing-rules.js", buildRouting: "आपकी संरचित शिकायत से विभाग और ज़रूरत की तात्कालिकता; नियम आईडी भी दिखती है।", buildHospitalTitle: "hospital-data.js", buildHospital: "सत्यापित अस्पताल नाम और नकली स्लॉट, इंतज़ार, यात्रा आँकड़े और आईडी।", buildCodexTitle: "Codex", buildCodex: "एप्लिकेशन कोड, टेस्ट और जाँच लिखने में मदद की।", talkToPerson: "किसी व्यक्ति से बात करें", prototype: "स्वतंत्र प्रोटोटाइप · नकली डेटा · किसी सरकारी संस्था से जुड़ा नहीं।",
           voiceStart: "अपनी परेशानी बोलें", voiceStop: "सुनना रोकें", voiceLabel: "बोलें", voiceLabelStop: "रोकें", voiceUnsupported: "यहाँ आवाज़ से लिखना उपलब्ध नहीं है। आप लिख सकते हैं या शरीर का नक्शा चुन सकते हैं।",
           voiceListening: "सुन रहे हैं… अपने शब्दों में बोलें।", voiceDone: "आपके शब्द मिल गए। आगे बढ़ने से पहले उन्हें बदल सकते हैं।",
           continueHint: "कुछ शब्द लिखें या कोई उदाहरण चुनें ताकि हम आगे बढ़ सकें।", someoneHint: "किसके लिए है और उम्र का समूह चुनें।", notChosen: "नहीं चुना", notAsked: "नहीं पूछा गया", chooseDepartmentScreen: "विभाग खुद चुनें",
@@ -1277,7 +1474,22 @@
         slipSubtitle: "सरकारी अस्पताल ओपीडी की नमूना स्लिप", slipTokenLabel: "नमूना टोकन", slipTimeSummary: "अपॉइंटमेंट का समय:", slipAddress: "अस्पताल का पता", slipToken: "टोकन", slipSeenBy: "अनुमानित दिखने का समय", rightsCard: "अगर अस्पताल का पंजीकरण काउंटर इस मान्य ऑनलाइन टोकन को मानने से इनकार करे: अपनी अपॉइंटमेंट आईडी लिखें, pgportal.gov.in पर शिकायत करें या सिटिज़न्स चार्टर का हवाला दें।", qrTitle: "नमूना सुरक्षा पैटर्न", themeDark: "डार्क थीम चुनें", themeLight: "लाइट थीम चुनें",
         stepPatient: "मरीज़", stepPatientHi: "किसके लिए?", stepBody: "शरीर का नक्शा", stepBodyHi: "जगह चुनें", stepCounter: "मिलान हुआ काउंटर", stepCounterHi: "कहाँ जाएँ?", stepHospital: "अस्पताल और इंतज़ार", stepHospitalHi: "ईमानदारी से चुनें", stepSlip: "नमूना स्लिप", stepSlipHi: "अपनी प्रति रखें", upperView: "ऊपरी हिस्सा", lowerView: "निचला हिस्सा",
       });
-      const state = { language: "en", screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, listening: false, region: null, noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
+      Object.assign(copy.en, {
+        labNav: "Lab Tests & Scans", bloodNav: "Blood Bank", backToServices: "← Back to services", startBooking: "Start OPD Triage & Book Slot →", serviceGridKicker: "Services at a glance", serviceGridTitle: "Choose the help you need today.", opdService: "OPD Counter Triage", opdServiceNote: "Find the right first counter", labService: "Book Lab & Scan Tests", labServiceNote: "See preparation and fees", bloodService: "Blood Bank Inventory", bloodServiceNote: "Check mock stock and donors", teleService: "Online Video Tele-OPD", teleServiceNote: "Start from home",
+        patientDetailsKicker: "Step 1 · Patient details", patientDetailsTitle: "Tell us who needs the appointment", patientDetailsNote: "These details stay in this browser for this session. Please do not enter an Aadhaar, ABHA, UHID, OTP or real health record.", patientNameLabel: "Full Name of Patient", patientNamePlaceholder: "Enter the patient's name", patientPhoneLabel: "Phone Number (for SMS token reminder)", patientPhonePlaceholder: "Optional demo number", numericAgeLabel: "Age band", ageBabyNumeric: "0 to 1 year (Infant / Baby)", ageChildNumeric: "1 to 12 years (Child / Paediatric)", ageAdolescent: "13 to 17 years (Adolescent / Teen)", ageAdultNumeric: "18 to 44 years (Young Adult)", ageMiddle: "45 to 59 years (Middle-Aged Adult)", ageOlderNumeric: "60+ years (Senior Citizen)", exactAgeLabel: "Exact Age (optional)", exactAgePlaceholder: "e.g. 42", genderLabel: "Gender selection", genderMale: "Male", genderFemale: "Female", genderOther: "Other", conditionsLabel: "Pre-existing medical conditions", conditionDiabetes: "Diabetes", conditionHypertension: "Hypertension (BP)", conditionHeart: "Heart Condition", conditionAsthma: "Asthma / Respiratory", conditionPregnancy: "Pregnancy", conditionNone: "No pre-existing condition",
+        appointmentStepLabel: "Step 4 · Appointment choices", consultationModeTitle: "How would you like to meet the OPD team?", teleModeSelected: "Online Video Consultation is selected. We will show the secure mock Tele-OPD details after you choose a hospital and slot.", inPersonMode: "In-Person Hospital Visit", inPersonModeNote: "Walk-in to OPD Counter", teleMode: "Online Video Consultation", teleModeNote: "e-Sanjeevani Tele-OPD from home", dateStripLabel: "Choose a date", shiftLabel: "Choose a session", morningShift: "Morning Session", morningShiftNote: "09:00 AM to 11:00 AM · 6 slots open", middayShift: "Mid-Day Session", middayShiftNote: "11:30 AM to 01:30 PM · 14 slots open", afternoonShift: "Afternoon Session", afternoonShiftNote: "02:30 PM to 04:30 PM · 8 slots open", appointmentWaitHint: "Choose a date and session to see the estimated consultation time.", appointmentWaitText: "Slot {slot} · Estimated doctor consultation {seen}", slipMode: "Mode", slipLink: "Tele-OPD link", voiceSilence: "No words were captured. Listening has stopped.",
+        labEyebrow: "Diagnostic services", labTitle: "Book lab tests and scans", labIntro: "Choose a test, a public hospital diagnostic centre, and a simulated slot. Fees and availability are mock data for this prototype.", labMockNote: "No test is booked, no payment is taken, and no health record is created.", labBookingTitle: "Prepare a test request", labSelectionNote: "Your selections stay in this browser until you create a mock request.", labHospitalLabel: "Choose hospital lab", labDateLabel: "Select date", labTimeLabel: "Select time slot", beforeTestTitle: "Before test", beforeFasting: "Fasting: 10 to 12 hours overnight for sugar and lipid profiles. Plain water is permitted.", beforeMedication: "Medication: take regular BP medicines with water unless a doctor has instructed otherwise.", beforeScans: "Scans and MRI: wear loose cotton clothing without metal zippers or jewelry. Arrive with a full bladder for abdominal ultrasound.", afterTestTitle: "After test", afterSnack: "Have a light snack immediately after a blood draw.", afterReports: "Digital test reports are linked to your profile within 4 to 24 hours.", paymentTitle: "How would you pay?", paymentFree: "Free under Ayushman Bharat / PM-JAY / BPL Card", paymentCounter: "Pay Nominal Govt Fee at Hospital Counter (Cash/Card)", paymentUpi: "Instant Online Mock Payment (UPI / QR)", labBookButton: "Create mock test request", reportTitle: "Digital health record preview", reportReady: "Report Status: Ready for Download", reportDoctor: "Doctor sign-off shown for this mock preview.", downloadReport: "Download report preview",
+        bloodEyebrow: "Delhi blood network", bloodTitle: "Blood bank stock and donor help", bloodIntro: "Check the sample stock monitor, create an emergency request slip, or offer to donate locally. Call the blood bank before travelling.", bloodMockNote: "Stock counts, request tokens and donor confirmation tokens are mock data. This page does not reserve blood.", stockTitle: "Live Delhi hospital blood stock monitor", stockNote: "Sample availability, checked for this demo.", bloodBankColumn: "Blood bank", emergencyBloodTitle: "Emergency blood request", emergencyBloodNote: "Use this mock slip to organise a call with the on-duty blood bank officer. It is not a reservation.", bloodPatientLabel: "Patient Name", bloodWardLabel: "Hospital Ward / ICU bed number", bloodGroupLabel: "Blood Group needed", bloodUnitsLabel: "Units required", bloodComponentLabel: "Component", doctorNameLabel: "Attending Doctor Name", doctorContactLabel: "Attending Doctor Contact", bloodRequestButton: "Generate emergency blood token slip", donorTitle: "Register as a voluntary donor", donorNote: "Registration is saved only in this browser. A blood bank must confirm eligibility before donation.", donorNameLabel: "Name", donorAgeLabel: "Age", donorGroupLabel: "Blood Group", donorLocalityLabel: "Locality", donorLastDateLabel: "Last Donation Date", donorButton: "Save donor registration locally", helplineTitle: "24/7 national emergency helplines", helpline104: "Health & Blood Helpline", helpline1910: "National Blood Transfusion Council Helpline", helpline108: "Disaster Emergency",
+        stockAvailable: "Stock Available", stockModerate: "Moderate", stockCritical: "Critical / Low Stock", bloodTokenTitle: "Emergency Blood Token Slip", bloodTokenCall: "Call the on-duty blood bank officer now.", donorSaved: "Donor registration saved locally. Confirmation token:", labRequestCreated: "Mock test request created. Keep this confirmation for the diagnostic counter.", labReportDownloaded: "A mock report preview has been downloaded."
+      });
+      Object.assign(copy.hi, {
+        labNav: "लैब टेस्ट और स्कैन", bloodNav: "ब्लड बैंक", backToServices: "← सेवाओं पर वापस", startBooking: "ओपीडी ट्रायेज और स्लॉट बुक करें →", serviceGridKicker: "सेवाएँ एक नज़र में", serviceGridTitle: "आज आपको किस मदद की ज़रूरत है?", opdService: "ओपीडी काउंटर ट्रायेज", opdServiceNote: "पहला सही काउंटर खोजें", labService: "लैब और स्कैन बुक करें", labServiceNote: "तैयारी और शुल्क देखें", bloodService: "ब्लड बैंक सूची", bloodServiceNote: "नकली स्टॉक और डोनर देखें", teleService: "ऑनलाइन वीडियो टेली-ओपीडी", teleServiceNote: "घर से शुरू करें",
+        patientDetailsKicker: "चरण 1 · मरीज़ की जानकारी", patientDetailsTitle: "बताइए अपॉइंटमेंट किसके लिए है", patientDetailsNote: "यह जानकारी इस सत्र में इसी ब्राउज़र में रहेगी। आधार, आभा, यूएचआईडी, ओटीपी या असली स्वास्थ्य रिकॉर्ड न लिखें।", patientNameLabel: "मरीज़ का पूरा नाम", patientNamePlaceholder: "मरीज़ का नाम लिखें", patientPhoneLabel: "फ़ोन नंबर (एसएमएस टोकन याद दिलाने के लिए)", patientPhonePlaceholder: "वैकल्पिक नकली नंबर", numericAgeLabel: "उम्र का वर्ग", ageBabyNumeric: "0 से 1 साल (शिशु)", ageChildNumeric: "1 से 12 साल (बच्चा)", ageAdolescent: "13 से 17 साल (किशोर)", ageAdultNumeric: "18 से 44 साल (युवा वयस्क)", ageMiddle: "45 से 59 साल (मध्यम उम्र)", ageOlderNumeric: "60 साल से अधिक (वरिष्ठ नागरिक)", exactAgeLabel: "सटीक उम्र (वैकल्पिक)", exactAgePlaceholder: "जैसे 42", genderLabel: "लिंग चुनें", genderMale: "पुरुष", genderFemale: "महिला", genderOther: "अन्य", conditionsLabel: "पहले से मौजूद स्वास्थ्य स्थिति", conditionDiabetes: "मधुमेह", conditionHypertension: "हाई ब्लड प्रेशर", conditionHeart: "हृदय की स्थिति", conditionAsthma: "अस्थमा / साँस", conditionPregnancy: "गर्भावस्था", conditionNone: "कोई पहले की स्थिति नहीं",
+        appointmentStepLabel: "चरण 4 · अपॉइंटमेंट विकल्प", consultationModeTitle: "ओपीडी टीम से कैसे मिलना चाहेंगे?", teleModeSelected: "ऑनलाइन वीडियो सलाह चुनी गई है। अस्पताल और स्लॉट चुनने के बाद सुरक्षित नकली टेली-ओपीडी जानकारी दिखेगी।", inPersonMode: "अस्पताल में आमने-सामने", inPersonModeNote: "ओपीडी काउंटर पर जाएँ", teleMode: "ऑनलाइन वीडियो सलाह", teleModeNote: "घर से ई-संजीवनी टेली-ओपीडी", dateStripLabel: "तारीख चुनें", shiftLabel: "सत्र चुनें", morningShift: "सुबह का सत्र", morningShiftNote: "सुबह 09:00 से 11:00 · 6 स्लॉट खुले", middayShift: "दोपहर का सत्र", middayShiftNote: "11:30 से 01:30 · 14 स्लॉट खुले", afternoonShift: "शाम से पहले का सत्र", afternoonShiftNote: "02:30 से 04:30 · 8 स्लॉट खुले", appointmentWaitHint: "अनुमानित समय देखने के लिए तारीख और सत्र चुनें।", appointmentWaitText: "स्लॉट {slot} · डॉक्टर से मिलने का अनुमानित समय {seen}", slipMode: "तरीका", slipLink: "टेली-ओपीडी लिंक", voiceSilence: "कोई शब्द नहीं मिले। सुनना बंद हो गया है।",
+        labEyebrow: "जाँच सेवाएँ", labTitle: "लैब टेस्ट और स्कैन बुक करें", labIntro: "टेस्ट, सार्वजनिक अस्पताल की जाँच जगह और नकली स्लॉट चुनें। शुल्क और उपलब्धता इस प्रोटोटाइप की नकली जानकारी है।", labMockNote: "कोई टेस्ट बुक नहीं होता, भुगतान नहीं लिया जाता और स्वास्थ्य रिकॉर्ड नहीं बनता।", labBookingTitle: "टेस्ट का अनुरोध तैयार करें", labSelectionNote: "नकली अनुरोध बनाने तक आपकी पसंद इसी ब्राउज़र में रहेगी।", labHospitalLabel: "अस्पताल की लैब चुनें", labDateLabel: "तारीख चुनें", labTimeLabel: "समय चुनें", beforeTestTitle: "टेस्ट से पहले", beforeFasting: "शुगर और लिपिड प्रोफ़ाइल के लिए रात में 10 से 12 घंटे खाली पेट रहें। सादा पानी पी सकते हैं।", beforeMedication: "डॉक्टर ने अलग न कहा हो तो नियमित बीपी की दवा पानी के साथ लें।", beforeScans: "स्कैन और एमआरआई में ढीले सूती कपड़े पहनें। पेट के अल्ट्रासाउंड के लिए मूत्राशय भरा रखें।", afterTestTitle: "टेस्ट के बाद", afterSnack: "खून लेने के बाद हल्का नाश्ता करें।", afterReports: "डिजिटल रिपोर्ट 4 से 24 घंटे में प्रोफ़ाइल पर जुड़ती है।", paymentTitle: "भुगतान कैसे करेंगे?", paymentFree: "आयुष्मान भारत / पीएम-जय / बीपीएल कार्ड में मुफ्त", paymentCounter: "अस्पताल काउंटर पर मामूली सरकारी शुल्क (नकद/कार्ड)", paymentUpi: "तुरंत ऑनलाइन नकली भुगतान (यूपीआई / क्यूआर)", labBookButton: "नकली टेस्ट अनुरोध बनाएँ", reportTitle: "डिजिटल स्वास्थ्य रिकॉर्ड का नमूना", reportReady: "रिपोर्ट स्थिति: डाउनलोड के लिए तैयार", reportDoctor: "इस नकली नमूने में सत्यापित डॉक्टर की स्वीकृति दिखाई गई है।", downloadReport: "रिपोर्ट का नमूना डाउनलोड करें",
+        bloodEyebrow: "दिल्ली ब्लड नेटवर्क", bloodTitle: "ब्लड बैंक स्टॉक और डोनर सहायता", bloodIntro: "नमूना स्टॉक देखें, इमरजेंसी अनुरोध की स्लिप बनाएँ या स्थानीय रक्तदाता बनें। जाने से पहले ब्लड बैंक को फ़ोन करें।", bloodMockNote: "स्टॉक, अनुरोध टोकन और डोनर टोकन नकली हैं। यह पेज खून रिज़र्व नहीं करता।", stockTitle: "दिल्ली अस्पताल ब्लड स्टॉक मॉनिटर", stockNote: "इस डेमो के लिए जाँची गई नमूना उपलब्धता।", bloodBankColumn: "ब्लड बैंक", emergencyBloodTitle: "इमरजेंसी ब्लड अनुरोध", emergencyBloodNote: "ऑन-ड्यूटी ब्लड बैंक अधिकारी से बात करने के लिए यह नकली स्लिप बनाएँ। यह रिज़र्वेशन नहीं है।", bloodPatientLabel: "मरीज़ का नाम", bloodWardLabel: "अस्पताल वार्ड / आईसीयू बेड नंबर", bloodGroupLabel: "चाहिए ब्लड ग्रुप", bloodUnitsLabel: "कितनी यूनिट", bloodComponentLabel: "घटक", doctorNameLabel: "ड्यूटी डॉक्टर का नाम", doctorContactLabel: "ड्यूटी डॉक्टर का संपर्क", bloodRequestButton: "इमरजेंसी ब्लड टोकन स्लिप बनाएँ", donorTitle: "स्वैच्छिक रक्तदाता बनें", donorNote: "रजिस्ट्रेशन केवल इसी ब्राउज़र में सेव होगा। रक्तदान से पहले ब्लड बैंक पात्रता जाँचेगा।", donorNameLabel: "नाम", donorAgeLabel: "उम्र", donorGroupLabel: "ब्लड ग्रुप", donorLocalityLabel: "इलाका", donorLastDateLabel: "पिछली बार रक्तदान की तारीख", donorButton: "डोनर रजिस्ट्रेशन इसी ब्राउज़र में सेव करें", helplineTitle: "24/7 राष्ट्रीय इमरजेंसी हेल्पलाइन", helpline104: "स्वास्थ्य और ब्लड हेल्पलाइन", helpline1910: "राष्ट्रीय ब्लड ट्रांसफ्यूजन काउंसिल हेल्पलाइन", helpline108: "आपदा इमरजेंसी", stockAvailable: "स्टॉक उपलब्ध", stockModerate: "मध्यम", stockCritical: "बहुत कम स्टॉक", bloodTokenTitle: "इमरजेंसी ब्लड टोकन स्लिप", bloodTokenCall: "अभी ऑन-ड्यूटी ब्लड बैंक अधिकारी को फ़ोन करें।", donorSaved: "डोनर रजिस्ट्रेशन इसी ब्राउज़र में सेव हुआ। पुष्टि टोकन:", labRequestCreated: "नकली टेस्ट अनुरोध बन गया। इसे जाँच काउंटर के लिए रखें।", labReportDownloaded: "रिपोर्ट का नकली नमूना डाउनलोड हो गया।"
+      });
+      const state = { language: "en", screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, fullName: "", phone: "", exactAge: "", gender: null, conditions: [], listening: false, region: null, noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, consultationMode: "in-person", appointmentDate: null, appointmentShift: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
       const text = (key) => copy[state.language][key];
       const themeToggle = document.querySelector("#theme-toggle");
       const triageScreen = document.querySelector("#screen-triage");
@@ -1286,8 +1498,7 @@
       const voiceButton = document.querySelector("#voice-button");
       const sessionNote = document.querySelector("#session-note");
       const questionContent = document.querySelector("#question-content");
-      const landingScreen = document.querySelector("#landing-screen");
-      const landingComplaint = document.querySelector("#landing-complaint");
+      const landingScreen = document.querySelector("#screen-home");
       const bodyMapScreen = document.querySelector("#body-map-screen");
       const bodyLocationPicker = document.querySelector("#body-location-picker");
       const map3dCanvas = document.querySelector("#body-3d-canvas");
@@ -1331,7 +1542,53 @@
       const signInButton = document.querySelector("#sign-in-button");
       const signInStatus = document.querySelector("#sign-in-status");
       const slipPanel = document.querySelector("#slip-panel");
-      const honestyScreen = document.querySelector("#honesty-screen");
+      const honestyScreen = document.querySelector("#screen-honesty");
+      const appointmentOptions = document.querySelector("#appointment-options");
+      const appointmentWait = document.querySelector("#appointment-wait");
+      const dateStrip = document.querySelector("#date-strip");
+      const shiftGrid = document.querySelector("#shift-grid");
+      const labBookingPanel = document.querySelector("#lab-booking-panel");
+      const labCatalog = document.querySelector("#lab-catalog");
+      const labSelectionSummary = document.querySelector("#lab-selection-summary");
+      const labHospital = document.querySelector("#lab-hospital");
+      const labDate = document.querySelector("#lab-date");
+      const labStatus = document.querySelector("#lab-status");
+      const labReportCard = document.querySelector("#lab-report-card");
+      const bloodStockBody = document.querySelector("#blood-stock-body");
+      const teleModeNote = document.querySelector("#tele-mode-note");
+      let activeRecognition = null;
+      let speechSilenceTimer = null;
+      let labSelectedTest = null;
+
+      const labTests = [
+        { name: "Complete Blood Count (CBC)", turnaround: "Same Day", fasting: "Not required", fee: "₹0 to ₹30" },
+        { name: "Lipid Profile & Cholesterol", turnaround: "24 Hours", fasting: "10 to 12 Hours", fee: "₹0 to ₹60" },
+        { name: "HbA1c & Fasting Blood Sugar", turnaround: "Same Day", fasting: "8 to 10 Hours", fee: "₹0 to ₹50" },
+        { name: "Liver Function Test (LFT) & Kidney Function (KFT)", turnaround: "24 Hours", fasting: "8 Hours", fee: "₹0 to ₹80" },
+        { name: "Thyroid Profile (T3, T4, TSH)", turnaround: "24 Hours", fasting: "Not required", fee: "₹0 to ₹70" },
+        { name: "Chest Digital X-Ray", turnaround: "2 Hours", fasting: "Not required", fee: "₹0 to ₹40" },
+        { name: "Brain / Spine MRI (1.5T / 3T)", turnaround: "Next Day", fasting: "Not required", fee: "₹0 to ₹150" },
+        { name: "Abdomen & Pelvis CT Scan", turnaround: "Same Day", fasting: "Not required", fee: "₹0 to ₹120" },
+        { name: "Whole Abdomen Ultrasound (USG)", turnaround: "Same Day", fasting: "Not required", fee: "₹0 to ₹50" },
+        { name: "12-Lead Electrocardiogram (ECG)", turnaround: "Instant 15 mins", fasting: "Not required", fee: "₹0" },
+      ];
+      const labSites = [
+        { name: "AIIMS Diagnostic Wing", source: "AIIMS public department list", url: "https://www.aiims.edu/index.php/en/departments-and-centers/departments" },
+        { name: "Safdarjung Central Lab", source: "Safdarjung medical departments", url: "https://www.vmmc-sjh.mohfw.gov.in/medical-departments" },
+        { name: "Dr. RML Radiology", source: "RML Hospital public site", url: "https://rmlh.nic.in/" },
+      ];
+      const bloodBanks = [
+        { name: "AIIMS Central Blood Bank", address: "Ansari Nagar", values: [24, 9, 24, 2, 9, 2, 24, 2] },
+        { name: "VMMC & Safdarjung Rotary Blood Bank", address: "Ring Road", values: [9, 2, 24, 9, 2, 2, 24, 9] },
+        { name: "Dr. RML Hospital Blood Bank", address: "BKS Marg", values: [24, 2, 9, 2, 9, 2, 24, 2] },
+        { name: "Indian Red Cross Society Blood Bank", address: "Red Cross Road", values: [9, 2, 24, 2, 2, 2, 9, 2] },
+      ];
+      const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+      const shiftCatalog = {
+        morning: { start: "09:30", seen: "12:15" },
+        midday: { start: "11:30", seen: "13:00" },
+        afternoon: { start: "14:30", seen: "15:45" },
+      };
       const regionCopyKeys = {
         head: "regionHead", face: "regionFace", neck: "regionNeck", chest: "regionChest",
         "upper-abdomen": "regionUpperAbdomen", "lower-abdomen": "regionLowerAbdomen",
@@ -1344,7 +1601,9 @@
       const durationCopyKeys = { now: "durationNow", today: "durationToday", days: "durationDays", longer: "durationLonger", unsure: "durationUnsure" };
       const severityCopyKeys = { no: "severityNo", yes: "severityYes", unsure: "severityUnsure" };
       const whoCopyKeys = { self: "myself", parent: "parent", child: "child", other: "someoneElseShort" };
-      const ageCopyKeys = { baby: "baby", child: "childAge", adult: "adult", older: "olderAdult" };
+      const ageCopyKeys = { baby: "ageBabyNumeric", child: "ageChildNumeric", adolescent: "ageAdolescent", adult: "ageAdultNumeric", middle: "ageMiddle", older: "ageOlderNumeric" };
+      const genderCopyKeys = { male: "genderMale", female: "genderFemale", other: "genderOther" };
+      const conditionCopyKeys = { diabetes: "conditionDiabetes", hypertension: "conditionHypertension", heart: "conditionHeart", asthma: "conditionAsthma", pregnancy: "conditionPregnancy", none: "conditionNone" };
       const departmentCopyKeys = { Paediatrics: "deptPaediatrics", Cardiology: "deptCardiology", Neurology: "deptNeurology", Gastroenterology: "deptGastroenterology", Orthopaedics: "deptOrthopaedics", Dermatology: "deptDermatology", Dental: "deptDental", "General Medicine": "deptGeneralMedicine", "Choose a department yourself": "deptChoose" };
       const editOptions = {
         region: ["head", "face", "neck", "chest", "upper-abdomen", "lower-abdomen", "back", "arm", "hand", "leg", "foot", "general"].map((value) => ({ value, label: regionCopyKeys[value] })),
@@ -1452,6 +1711,8 @@
         renderKindSelection();
         renderMapMode();
         renderWorkspace();
+        teleModeNote.hidden = state.consultationMode !== "tele";
+        renderBloodStock();
         renderTheme();
         bodyMap3d?.setLanguage?.(state.language);
         if (!reviewScreen.hidden && state.complaint) {
@@ -1506,14 +1767,6 @@
         });
       });
 
-      function setLandingBooking(value) {
-        state.booking = value;
-        document.querySelectorAll("[data-landing-booking]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.landingBooking === value)));
-        document.querySelectorAll("[data-booking]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.booking === value)));
-        document.querySelector("[data-caregiver]").hidden = value !== "someone";
-        if (value === "myself") { state.who = null; state.age = null; }
-      }
-
       document.querySelectorAll("[data-who]").forEach((button) => {
         button.addEventListener("click", () => {
           state.who = button.dataset.who;
@@ -1524,41 +1777,35 @@
       document.querySelectorAll("[data-age]").forEach((button) => {
         button.addEventListener("click", () => {
           state.age = button.dataset.age;
-          document.querySelectorAll("[data-age]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+          document.querySelectorAll("[data-age]").forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.age === state.age)));
         });
       });
+
+      document.querySelector("#patient-name").addEventListener("input", (event) => { state.fullName = event.target.value; });
+      document.querySelector("#patient-phone").addEventListener("input", (event) => { state.phone = event.target.value; });
+      document.querySelector("#exact-age").addEventListener("input", (event) => { state.exactAge = event.target.value; });
+      document.querySelectorAll("[data-gender]").forEach((button) => button.addEventListener("click", () => {
+        state.gender = button.dataset.gender;
+        document.querySelectorAll("[data-gender]").forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.gender === state.gender)));
+      }));
+      document.querySelectorAll("[data-condition]").forEach((button) => button.addEventListener("click", () => {
+        const condition = button.dataset.condition;
+        if (condition === "none") state.conditions = state.conditions.includes("none") ? [] : ["none"];
+        else if (state.conditions.includes(condition)) state.conditions = state.conditions.filter((item) => item !== condition);
+        else state.conditions = [...state.conditions.filter((item) => item !== "none"), condition];
+        document.querySelectorAll("[data-condition]").forEach((item) => item.setAttribute("aria-pressed", String(state.conditions.includes(item.dataset.condition))));
+      }));
 
       document.querySelectorAll("[data-example]").forEach((button) => {
         button.addEventListener("click", () => { complaint.value = button.dataset.example; complaint.focus(); sessionNote.classList.remove("is-visible"); status.dataset.persistent = ""; status.textContent = ""; });
       });
 
-      document.querySelectorAll("[data-landing-booking]").forEach((button) => button.addEventListener("click", () => setLandingBooking(button.dataset.landingBooking)));
-      document.querySelectorAll("[data-landing-example]").forEach((button) => button.addEventListener("click", () => {
-        landingComplaint.value = button.dataset.landingExample;
-        document.querySelectorAll("[data-entry-route]").forEach((route) => route.setAttribute("aria-pressed", String(route.dataset.entryRoute === "type")));
-        state.entryRoute = "type";
-        landingComplaint.focus();
+      document.querySelector("#hero-triage-action").addEventListener("click", () => switchView("triage"));
+      document.querySelectorAll("[data-service-view]").forEach((button) => button.addEventListener("click", () => {
+        if (button.dataset.teleconsult === "true") state.consultationMode = "tele";
+        switchView(button.dataset.serviceView);
       }));
-      document.querySelectorAll("[data-entry-route]").forEach((button) => button.addEventListener("click", () => {
-        state.entryRoute = button.dataset.entryRoute;
-        document.querySelectorAll("[data-entry-route]").forEach((route) => route.setAttribute("aria-pressed", String(route === button)));
-        if (state.entryRoute === "type") landingComplaint.focus();
-      }));
-      document.querySelector("#start-triage").addEventListener("click", () => {
-        if (landingComplaint.value.trim()) complaint.value = landingComplaint.value.trim();
-        setLandingBooking(document.querySelector("[data-landing-booking][aria-pressed='true']")?.dataset.landingBooking || "myself");
-        switchView("triage");
-      });
-      document.querySelector("#hero-continue").addEventListener("click", () => {
-        const words = landingComplaint.value.trim();
-        setLandingBooking(document.querySelector("[data-landing-booking][aria-pressed='true']")?.dataset.landingBooking || "myself");
-        if (words) complaint.value = words;
-        if (state.entryRoute === "speak") { showQuestion(); voiceButton.click(); return; }
-        if (!words && state.entryRoute !== "map") { landingComplaint.focus(); return; }
-        if (state.entryRoute === "map") { showQuestion(); showBodyMap(); return; }
-        showQuestion();
-        showReadback(makeComplaint(false));
-      });
+      document.querySelectorAll("[data-service-back]").forEach((button) => button.addEventListener("click", () => switchView(button.dataset.serviceBack)));
       document.querySelector("#brand-home").addEventListener("click", (event) => { event.preventDefault(); switchView("home"); });
       document.querySelector("#nav-start-triage").addEventListener("click", () => switchView("triage"));
       document.querySelectorAll("[data-view-link]").forEach((link) => link.addEventListener("click", (event) => {
@@ -1571,6 +1818,7 @@
       }
 
       function showBodyMap() {
+        abortSpeechRecognition();
         hideAllScreens();
         triageScreen.hidden = false;
         state.screen = "body-map";
@@ -1677,6 +1925,11 @@
             ...extracted,
             age_band: extracted.age_band || state.age,
             who_for: extracted.who_for || (state.booking === "myself" ? "self" : state.who),
+            patient_name: state.fullName,
+            phone: state.phone,
+            exact_age: state.exactAge,
+            gender: state.gender,
+            conditions: [...state.conditions],
           };
         }
         return {
@@ -1686,6 +1939,11 @@
           severity: state.severity,
           age_band: state.age,
           who_for: state.booking === "myself" ? "self" : state.who,
+          patient_name: state.fullName,
+          phone: state.phone,
+          exact_age: state.exactAge,
+          gender: state.gender,
+          conditions: [...state.conditions],
           severity_markers: [],
           parsed: true,
           unclear: [],
@@ -1717,6 +1975,19 @@
         readbackWordsValue.textContent = rawWords;
         unclearNote.hidden = current.parsed || !current.unclear?.length;
         unclearValue.textContent = current.unclear?.join("; ") || "";
+        const patientReadback = document.querySelector("#patient-readback");
+        patientReadback.replaceChildren();
+        const readbackLine = (label, value) => {
+          const line = document.createElement("p");
+          line.append(makeTag("Observed"), document.createTextNode(` ${label}: ${value || text("notChosen")}`));
+          patientReadback.append(line);
+        };
+        readbackLine(text("patientNameLabel"), current.patient_name);
+        readbackLine(text("patientPhoneLabel"), current.phone);
+        readbackLine(text("exactAgeLabel"), current.exact_age);
+        readbackLine(text("genderLabel"), current.gender ? text(genderCopyKeys[current.gender]) : "");
+        const conditionText = current.conditions?.length ? current.conditions.map((condition) => text(conditionCopyKeys[condition])).join(", ") : "";
+        readbackLine(text("conditionsLabel"), conditionText);
         reviewStatus.textContent = "";
         reviewStatus.removeAttribute("role");
       }
@@ -1865,6 +2136,8 @@
           choose.addEventListener("click", () => {
             state.selectedHospital = hospital.id;
             state.visitType = null;
+            state.appointmentDate = null;
+            state.appointmentShift = null;
             state.signInOpened = false;
             state.humanChecked = false;
             state.signedIn = false;
@@ -1892,7 +2165,7 @@
         carryList.hidden = false;
         feeLine.hidden = false;
         feeLine.replaceChildren(makeTag("Simulated"), document.createTextNode(` ${text("feeLine")}: ${text("feeAmount")}`));
-        toSignIn.hidden = false;
+        toSignIn.hidden = !(state.consultationMode && state.appointmentDate && state.appointmentShift);
       }
 
       function renderSlip() {
@@ -1900,21 +2173,129 @@
         const hospital = hospitalsForDepartment(department, state.locality).find((entry) => entry.id === state.selectedHospital);
         if (!hospital) return;
         const { availability } = hospital;
+        const appointment = state.appointmentShift ? shiftCatalog[state.appointmentShift] : { start: availability.slot, seen: availability.seenAt };
         const current = state.complaint || {};
         const report = current.unclear?.[0] || complaint.value.trim() || [
           labelFor("region", current.region), labelFor("kind", current.kind), labelFor("duration", current.duration), labelFor("severity", current.severity),
         ].join(", ");
-        document.querySelector("#slip-patient").replaceChildren(makeTag("Observed"), document.createTextNode(` ${labelFor("who_for", current.who_for)}`));
+        document.querySelector("#slip-patient").replaceChildren(makeTag("Observed"), document.createTextNode(` ${current.patient_name || labelFor("who_for", current.who_for)}`));
         document.querySelector("#slip-department").replaceChildren(makeTag("Rule"), document.createTextNode(` ${departmentCopyKeys[department] ? text(departmentCopyKeys[department]) : department}`));
         document.querySelector("#slip-hospital").replaceChildren(makeTag("Verified"), document.createTextNode(` ${hospital.shortName}`));
         document.querySelector("#slip-address").replaceChildren(makeTag("Verified"), document.createTextNode(` ${hospital.address}`));
-        document.querySelector("#slip-slot").replaceChildren(makeTag("Simulated"), document.createTextNode(` ${formatClock(availability.slot)}`));
-        document.querySelector("#slip-seen-by").replaceChildren(makeTag("Simulated"), document.createTextNode(` ~${formatClock(availability.seenAt)}`));
+        document.querySelector("#slip-slot").replaceChildren(makeTag("Simulated"), document.createTextNode(` ${formatClock(appointment.start)}`));
+        document.querySelector("#slip-seen-by").replaceChildren(makeTag("Simulated"), document.createTextNode(` ~${formatClock(appointment.seen)}`));
         document.querySelector("#slip-token-detail").replaceChildren(makeTag("Simulated"), document.createTextNode(" #OPD-2026-4802"));
-        document.querySelector("#slip-time-summary").replaceChildren(makeTag("Simulated"), document.createTextNode(` ${formatClock(availability.slot)} · Seen ~${formatClock(availability.seenAt)}`));
+        document.querySelector("#slip-time-summary").replaceChildren(makeTag("Simulated"), document.createTextNode(` ${formatClock(appointment.start)} · Seen ~${formatClock(appointment.seen)}`));
+        const mode = document.querySelector("#slip-mode");
+        const linkField = document.querySelector("#slip-link-field");
+        if (state.consultationMode === "tele") {
+          mode.replaceChildren(makeTag("Simulated"), document.createTextNode(" Mode: Secure Video Tele-OPD (Room #OPD-702)"));
+          document.querySelector("#slip-link").replaceChildren(makeTag("Simulated"), document.createTextNode(" Link: Join via raahat-nu.vercel.app/tele-opd"));
+          linkField.hidden = false;
+        } else {
+          mode.replaceChildren(makeTag("Simulated"), document.createTextNode(" Mode: In-Person Hospital Visit (Walk-in to OPD Counter)"));
+          linkField.hidden = true;
+        }
         document.querySelector("#slip-appointment-id").replaceChildren(makeTag("Simulated"), document.createTextNode(" APPT-DEMO-4802"));
         document.querySelector("#slip-uhid").replaceChildren(makeTag("Simulated"), document.createTextNode(" UHID-MOCK-7281"));
         document.querySelector("#slip-report").textContent = report;
+      }
+
+      function appointmentDates() {
+        return Array.from({ length: 7 }, (_, offset) => {
+          const date = new Date();
+          date.setHours(0, 0, 0, 0);
+          date.setDate(date.getDate() + offset);
+          const iso = [date.getFullYear(), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")].join("-");
+          return { iso, weekday: date.toLocaleDateString(state.language === "hi" ? "hi-IN" : "en-IN", { weekday: "short" }), label: date.toLocaleDateString(state.language === "hi" ? "hi-IN" : "en-IN", { day: "numeric", month: "short" }) };
+        });
+      }
+
+      function renderAppointmentOptions() {
+        appointmentOptions.hidden = !state.selectedHospital;
+        document.querySelectorAll("[data-consultation-mode]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.consultationMode === state.consultationMode)));
+        dateStrip.replaceChildren();
+        appointmentDates().forEach((date) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "date-button";
+          button.dataset.appointmentDate = date.iso;
+          button.setAttribute("aria-pressed", String(date.iso === state.appointmentDate));
+          button.innerHTML = `<span class="tag">Simulated</span>${date.weekday}<strong>${date.label}</strong><small>Sample date</small>`;
+          button.addEventListener("click", () => { state.appointmentDate = date.iso; renderAppointment(); });
+          dateStrip.append(button);
+        });
+        document.querySelectorAll("[data-shift]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.shift === state.appointmentShift)));
+        appointmentWait.replaceChildren(makeTag("Simulated"));
+        if (state.appointmentDate && state.appointmentShift) {
+          const shift = shiftCatalog[state.appointmentShift];
+          const waitText = text("appointmentWaitText").replace("{slot}", formatClock(shift.start)).replace("{seen}", formatClock(shift.seen));
+          appointmentWait.append(document.createTextNode(` ${waitText}`));
+        } else appointmentWait.append(document.createTextNode(` ${text("appointmentWaitHint")}`));
+      }
+
+      function renderLabCatalog() {
+        labCatalog.replaceChildren();
+        labTests.forEach((test, index) => {
+          const card = document.createElement("article");
+          card.className = "catalog-card";
+          card.setAttribute("aria-pressed", String(labSelectedTest?.name === test.name));
+          card.innerHTML = `<h2><span class="tag">Verified</span>${test.name}</h2><p><span class="tag">Simulated</span> Turnaround: ${test.turnaround}</p><p><span class="tag">Simulated</span> Fasting: ${test.fasting}</p><p><span class="tag">Simulated</span> Govt Fee: ${test.fee}</p>`;
+          const choose = document.createElement("button");
+          choose.type = "button";
+          choose.className = "large-button";
+          choose.textContent = labSelectedTest?.name === test.name ? "Selected test" : "Choose this test";
+          choose.addEventListener("click", () => {
+            labSelectedTest = test;
+            labBookingPanel.hidden = false;
+            labReportCard.hidden = true;
+            labSelectionSummary.replaceChildren(makeTag("Observed"), document.createTextNode(` ${test.name}`));
+            renderLabCatalog();
+            labBookingPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+          card.append(choose);
+          labCatalog.append(card);
+        });
+      }
+
+      function renderLabDates() {
+        labDate.replaceChildren();
+        appointmentDates().slice(0, 4).forEach((date) => {
+          const option = document.createElement("option");
+          option.value = date.iso;
+          option.textContent = `${date.weekday} ${date.label}`;
+          labDate.append(option);
+        });
+      }
+
+      function renderLabSites() {
+        labHospital.replaceChildren();
+        labSites.forEach((site) => {
+          const option = document.createElement("option");
+          option.value = site.name;
+          option.textContent = site.name;
+          labHospital.append(option);
+        });
+      }
+
+      function renderBloodStock() {
+        bloodStockBody.replaceChildren();
+        bloodBanks.forEach((bank) => {
+          const row = document.createElement("tr");
+          const heading = document.createElement("th");
+          heading.scope = "row";
+          heading.innerHTML = `<span class="tag">Verified</span>${bank.name}<br><small>${bank.address}</small>`;
+          row.append(heading);
+          bank.values.forEach((count) => {
+            const cell = document.createElement("td");
+            cell.className = "stock-cell";
+            const statusKey = count >= 20 ? "stockAvailable" : count >= 8 ? "stockModerate" : "stockCritical";
+            const statusClass = count < 8 ? " stock-critical" : "";
+            cell.innerHTML = `<span class="tag${statusClass}">${text(statusKey)}</span><span class="stock-count${statusClass}">${count} units</span>`;
+            row.append(cell);
+          });
+          bloodStockBody.append(row);
+        });
       }
 
       function renderAppointment() {
@@ -1923,6 +2304,7 @@
         bookingDepartment.textContent = departmentCopyKeys[department] ? text(departmentCopyKeys[department]) : department;
         localitySelect.value = state.locality;
         renderHospitalCards();
+        renderAppointmentOptions();
         carryPanel.hidden = !state.selectedHospital;
         renderCarry();
         signInPanel.hidden = !state.signInOpened;
@@ -1943,7 +2325,40 @@
         });
       }
 
-      const viewHash = Object.freeze({ home: "screen-home", triage: "screen-triage", comparison: "screen-comparison", hospitals: "screen-hospitals", faqs: "screen-faqs", honesty: "screen-honesty" });
+      document.querySelector("#lab-book-button").addEventListener("click", () => {
+        if (!labSelectedTest) return;
+        labStatus.textContent = text("labRequestCreated");
+        labStatus.removeAttribute("role");
+        labReportCard.hidden = false;
+        labReportCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      document.querySelector("#lab-download-button").addEventListener("click", () => {
+        const content = `Raahat diagnostic report preview\nTest: ${labSelectedTest?.name || "Sample test"}\nStatus: Ready for Download\nThis is simulated data, not a medical report.`;
+        const url = URL.createObjectURL(new Blob([content], { type: "text/plain;charset=utf-8" }));
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "raahat-report-preview.txt";
+        link.click();
+        URL.revokeObjectURL(url);
+        labStatus.textContent = text("labReportDownloaded");
+      });
+      document.querySelector("#emergency-blood-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const token = `EBT-DEMO-${String(Date.now()).slice(-4)}`;
+        const slip = document.querySelector("#blood-token-slip");
+        slip.hidden = false;
+        slip.innerHTML = `<h3><span class="tag">Simulated</span>${text("bloodTokenTitle")}</h3><p><span class="tag">Simulated</span> Token: ${token}</p><p><span class="tag">Observed</span> ${document.querySelector("#blood-patient").value} · ${document.querySelector("#blood-group").value} · ${document.querySelector("#blood-units").value} units</p><p><span class="tag">Observed</span> ${document.querySelector("#blood-component").value} · Ward / ICU: ${document.querySelector("#blood-ward").value}</p><p><span class="tag">Simulated</span> ${text("bloodTokenCall")} <a href="tel:01126594405">011 2659 4405</a> or <a href="tel:01126731287">011 2673 1287</a></p>`;
+        slip.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+      document.querySelector("#donor-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const donor = { name: document.querySelector("#donor-name").value, age: document.querySelector("#donor-age").value, group: document.querySelector("#donor-group").value, locality: document.querySelector("#donor-locality").value, lastDonation: document.querySelector("#donor-last-date").value };
+        const token = `DONOR-DEMO-${String(Date.now()).slice(-4)}`;
+        try { localStorage.setItem("raahat-donor-registration", JSON.stringify({ donor, token })); } catch { /* Local storage can be unavailable in private browsing. */ }
+        document.querySelector("#donor-status").textContent = `${text("donorSaved")} ${token}`;
+      });
+
+      const viewHash = Object.freeze({ home: "screen-home", triage: "screen-triage", "lab-tests": "screen-lab-tests", "blood-bank": "screen-blood-bank", comparison: "screen-comparison", hospitals: "screen-hospitals", faqs: "screen-faqs", honesty: "screen-honesty" });
 
       function setActiveNav(viewId) {
         document.querySelectorAll("[data-view-link]").forEach((link) => {
@@ -1954,7 +2369,7 @@
       }
 
       function setLandingView(viewId) {
-        document.querySelectorAll("#landing-screen [data-view]").forEach((section) => {
+        document.querySelectorAll("#screen-home [data-view], .service-screen[data-view]").forEach((section) => {
           section.hidden = section.dataset.view !== viewId;
         });
       }
@@ -1978,6 +2393,7 @@
         state.screen = "question";
         renderStepper(1);
         questionContent.hidden = false;
+        teleModeNote.hidden = state.consultationMode !== "tele";
         setActiveNav("triage");
         complaint.focus({ preventScroll: true });
         window.scrollTo({ top: Math.max(0, triageScreen.offsetTop - 8), behavior: "auto" });
@@ -2008,6 +2424,7 @@
 
       function switchView(viewId, { updateHash = true } = {}) {
         const nextView = viewHash[viewId] ? viewId : "home";
+        abortSpeechRecognition();
         if (updateHash && window.location.hash !== `#${viewHash[nextView]}`) window.location.hash = viewHash[nextView];
         if (nextView === "triage") {
           showQuestion();
@@ -2017,7 +2434,7 @@
           showHonesty();
           return;
         }
-        showLanding(nextView === "home" ? "front-door" : nextView === "comparison" ? "ors-comparison" : nextView === "hospitals" ? "network" : "faqs", nextView);
+        showLanding(nextView === "home" ? "front-door" : nextView === "comparison" ? "screen-comparison" : nextView === "hospitals" ? "screen-hospitals" : nextView === "faqs" ? "screen-faqs" : viewHash[nextView], nextView);
       }
 
       function handleHashChange() {
@@ -2026,6 +2443,8 @@
       }
 
       window.addEventListener("hashchange", handleHashChange);
+      window.addEventListener("beforeunload", abortSpeechRecognition);
+      window.addEventListener("pagehide", abortSpeechRecognition);
 
       function restorePreviousScreen() {
         const previousScreen = state.previousScreen || "question";
@@ -2139,9 +2558,19 @@
         button.addEventListener("click", () => {
           state.visitType = button.dataset.visitType;
           renderAppointment();
-          moveTo(toSignIn);
+          moveTo(appointmentOptions);
         });
       });
+      document.querySelectorAll("[data-consultation-mode]").forEach((button) => button.addEventListener("click", () => {
+        state.consultationMode = button.dataset.consultationMode;
+        state.signedIn = false;
+        state.signInOpened = false;
+        renderAppointment();
+      }));
+      document.querySelectorAll("[data-shift]").forEach((button) => button.addEventListener("click", () => {
+        state.appointmentShift = button.dataset.shift;
+        renderAppointment();
+      }));
       toSignIn.addEventListener("click", () => {
         state.signInOpened = true;
         renderAppointment();
@@ -2179,7 +2608,7 @@
         const { availability } = hospital;
         const content = [
           "राहत · Raahat",
-          "SPECIMEN — NOT A REAL APPOINTMENT",
+          "SPECIMEN , NOT A REAL APPOINTMENT",
           `Patient: ${labelFor("who_for", state.complaint?.who_for)}`,
           `Department: ${state.routeResult.department}`,
           `Hospital: ${hospital.shortName}`,
@@ -2188,7 +2617,7 @@
           "Appointment ID: APPT-DEMO-4802",
           "UHID: UHID-MOCK-7281",
           `Patient reports: ${document.querySelector("#slip-report").textContent}`,
-          "If you are turned away with this slip — note the appointment ID, raise a grievance at pgportal.gov.in, or file an RTI asking why a valid online appointment was not honoured.",
+          "If you are turned away with this slip , note the appointment ID, raise a grievance at pgportal.gov.in, or file an RTI asking why a valid online appointment was not honoured.",
         ].join("\n");
         const url = URL.createObjectURL(new Blob([content], { type: "text/plain;charset=utf-8" }));
         const link = document.createElement("a");
@@ -2220,23 +2649,58 @@
 
       function speechRecognition() { return window.SpeechRecognition || window.webkitSpeechRecognition || null; }
 
+      function resetVoiceButton() {
+        state.listening = false;
+        voiceButton.setAttribute("aria-pressed", "false");
+        voiceButton.setAttribute("aria-label", text("voiceStart"));
+        document.querySelector("#voice-label").textContent = text("voiceLabel");
+      }
+
+      function abortSpeechRecognition() {
+        if (speechSilenceTimer) window.clearTimeout(speechSilenceTimer);
+        speechSilenceTimer = null;
+        if (activeRecognition) {
+          try { activeRecognition.abort(); } catch { /* Recognition may already have ended. */ }
+          activeRecognition = null;
+        }
+        if (state.listening) resetVoiceButton();
+      }
+
+      function stopSpeechRecognition() {
+        if (speechSilenceTimer) window.clearTimeout(speechSilenceTimer);
+        speechSilenceTimer = null;
+        if (activeRecognition) {
+          try { activeRecognition.stop(); } catch { /* Recognition may already have ended. */ }
+          activeRecognition = null;
+        }
+        if (state.listening) resetVoiceButton();
+      }
+
       voiceButton.addEventListener("click", () => {
-        if (state.listening) return;
+        if (state.listening) { stopSpeechRecognition(); return; }
         const Recognition = speechRecognition();
         if (!Recognition) { showStatus(text("voiceUnsupported"), true); return; }
         const recognizer = new Recognition();
+        activeRecognition = recognizer;
         recognizer.lang = state.language === "hi" ? "hi-IN" : "en-IN";
         recognizer.interimResults = false;
         recognizer.maxAlternatives = 1;
         state.listening = true;
-          voiceButton.setAttribute("aria-pressed", "true");
-          voiceButton.setAttribute("aria-label", text("voiceStop"));
-          document.querySelector("#voice-label").textContent = text("voiceLabelStop");
+        voiceButton.setAttribute("aria-pressed", "true");
+        voiceButton.setAttribute("aria-label", text("voiceStop"));
+        document.querySelector("#voice-label").textContent = text("voiceLabelStop");
         showStatus(text("voiceListening"));
-        recognizer.onresult = (event) => { complaint.value = event.results[0][0].transcript; showStatus(text("voiceDone")); };
-        recognizer.onerror = () => showStatus(text("voiceUnsupported"), true);
-        recognizer.onend = () => { state.listening = false; voiceButton.setAttribute("aria-pressed", "false"); voiceButton.setAttribute("aria-label", text("voiceStart")); document.querySelector("#voice-label").textContent = text("voiceLabel"); };
-        recognizer.start();
+        recognizer.onresult = (event) => {
+          if (speechSilenceTimer) window.clearTimeout(speechSilenceTimer);
+          complaint.value = event.results[0][0].transcript;
+          showStatus(text("voiceDone"));
+        };
+        recognizer.onerror = () => { showStatus(text("voiceUnsupported"), true); resetVoiceButton(); };
+        recognizer.onend = () => { if (activeRecognition === recognizer) activeRecognition = null; if (speechSilenceTimer) window.clearTimeout(speechSilenceTimer); speechSilenceTimer = null; resetVoiceButton(); };
+        try {
+          recognizer.start();
+          speechSilenceTimer = window.setTimeout(() => { showStatus(text("voiceSilence"), true); abortSpeechRecognition(); }, 7000);
+        } catch { resetVoiceButton(); showStatus(text("voiceUnsupported"), true); }
       });
 
       document.querySelector("#continue-button").addEventListener("click", () => {
@@ -2279,6 +2743,10 @@
       state.threeAvailable = bodyMap3d.available;
       if (!state.threeAvailable) state.mapMode = "2d";
       renderLocalities();
+      renderLabCatalog();
+      renderLabDates();
+      renderLabSites();
+      renderBloodStock();
       renderLanguage();
       handleHashChange();
     </script>
