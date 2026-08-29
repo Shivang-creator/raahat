@@ -1,10 +1,13 @@
-# Keep the static site, ES modules, tests and assets in the deployment.
+# Keep the static site, ES modules and assets in the deployment.
 # Internal planning notes and local metadata are not part of the public site.
-node_modules
+node_modules/
 .git
 .DS_Store
-.env
-.env.*
-.vercel
+.env*
+*.log
+scratch/
+.idea/
+.vscode/
+.vercel/
 *.md
-craft
+craft/
