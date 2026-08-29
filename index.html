@@ -557,6 +557,35 @@
       .blood-token-slip { margin-top: 1rem; padding: 1rem; border: 2px solid var(--emergency); border-radius: 0.9rem; background: var(--emergency-soft); color: var(--ink); }
       .blood-token-slip h3 { margin: 0; color: var(--emergency); }
       .blood-token-slip p { margin: 0.45rem 0 0; }
+      .field-note { display: block; margin-top: 0.35rem; color: var(--muted); font-size: 0.86rem; line-height: 1.35; }
+      .tele-modal { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 1rem; background: rgba(15, 23, 42, 0); opacity: 0; pointer-events: none; transition: opacity 220ms ease, background-color 220ms ease; }
+      .tele-modal.is-open { background: rgba(15, 23, 42, 0.72); opacity: 1; pointer-events: auto; }
+      .tele-modal-card { width: min(100%, 70rem); max-height: min(92vh, 52rem); overflow: auto; padding: clamp(1rem, 3vw, 1.5rem); border: 2px solid var(--accent); border-radius: 1.25rem; background: var(--paper); color: var(--ink); box-shadow: 0 1.5rem 4rem rgba(15, 23, 42, 0.3); transform: translateY(1rem) scale(0.98); transition: transform 220ms ease; }
+      .tele-modal.is-open .tele-modal-card { transform: translateY(0) scale(1); }
+      .tele-modal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+      .tele-modal-header h2 { margin: 0; color: var(--accent-dark); font-size: clamp(1.45rem, 4vw, 2rem); line-height: 1.1; }
+      .tele-modal-note { margin: 0.45rem 0 0; color: var(--muted); font-size: 0.95rem; line-height: 1.4; }
+      .tele-modal-close { display: inline-grid; flex: 0 0 3.5rem; width: 3.5rem; height: 3.5rem; place-items: center; padding: 0; border: 2px solid var(--line); border-radius: 50%; background: var(--paper); color: var(--ink); font-size: 1.6rem; line-height: 1; }
+      .tele-feeds { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; margin-top: 1rem; }
+      .tele-feed { position: relative; min-height: 15rem; overflow: hidden; padding: 1rem; border: 2px solid var(--line); border-radius: 1rem; background: #101a2a; color: #fff; }
+      .doctor-feed { display: grid; place-items: center; background: radial-gradient(circle at 50% 30%, #315d4d 0, #152a25 44%, #101a2a 100%); }
+      .doctor-avatar { display: grid; width: 6rem; height: 6rem; place-items: center; border: 4px solid #bbf7d0; border-radius: 50%; background: #166534; color: #fff; font-size: 1.8rem; font-weight: 900; }
+      .tele-feed-label { position: absolute; right: 0.8rem; bottom: 0.7rem; left: 0.8rem; display: grid; gap: 0.2rem; padding: 0.55rem 0.65rem; border-radius: 0.65rem; background: rgba(15, 23, 42, 0.78); }
+      .tele-feed-label strong { font-size: 1rem; line-height: 1.25; }
+      .tele-feed-label small { color: #dbeafe; font-size: 0.84rem; line-height: 1.3; }
+      .citizen-feed { display: grid; place-items: center; background: linear-gradient(135deg, #1e293b, #334155); }
+      .citizen-feed canvas { width: 100%; height: 100%; min-height: 13rem; opacity: 0.65; }
+      .citizen-feed .tele-feed-label { text-align: center; }
+      .tele-call-status { margin: 0.8rem 0 0; padding: 0.65rem 0.8rem; border-radius: 0.7rem; background: var(--accent-soft); color: var(--accent-dark); font-size: 0.95rem; line-height: 1.4; }
+      .tele-room-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.7fr); gap: 1rem; margin-top: 1rem; }
+      .tele-controls { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.8rem; }
+      .tele-controls .large-button { flex: 1 1 10rem; }
+      .tele-prescription-drawer { padding: 1rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--surface-elevated); }
+      .tele-prescription-drawer h3 { margin: 0; color: var(--accent-dark); font-size: 1.25rem; line-height: 1.2; }
+      .tele-prescription-drawer label { display: block; margin-top: 0.8rem; color: var(--ink); font-weight: 750; }
+      .tele-prescription-drawer textarea { min-height: 7rem; margin-top: 0.35rem; padding: 0.7rem; border: 2px solid var(--line); border-radius: 0.7rem; background: var(--paper); }
+      .tele-prescription-preview { min-height: 7rem; margin-top: 0.8rem; padding: 0.8rem; border-radius: 0.7rem; background: var(--accent-soft); color: var(--ink); font-size: 0.95rem; line-height: 1.45; white-space: pre-wrap; }
+      @media (max-width: 700px) { .tele-feeds, .tele-room-body { grid-template-columns: 1fr; } .tele-feed { min-height: 12rem; } }
 
       @media (max-width: 640px) {
         .form-grid, .catalog-grid, .preparation-grid, .blood-actions-grid, .mode-grid { grid-template-columns: 1fr; }
@@ -883,7 +912,7 @@
               <form id="emergency-blood-form" class="form-stack">
                 <div class="form-grid"><div class="form-field"><label for="blood-patient"><span class="tag">Observed</span><span data-copy="bloodPatientLabel">Patient Name</span></label><input id="blood-patient" required /></div><div class="form-field"><label for="blood-ward"><span class="tag">Observed</span><span data-copy="bloodWardLabel">Hospital Ward / ICU bed number</span></label><input id="blood-ward" required /></div><div class="form-field"><label for="blood-group"><span class="tag">Observed</span><span data-copy="bloodGroupLabel">Blood Group needed</span></label><select id="blood-group" required><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div><div class="form-field"><label for="blood-units"><span class="tag">Observed</span><span data-copy="bloodUnitsLabel">Units required</span></label><input id="blood-units" type="number" min="1" max="20" value="1" required /></div></div>
                 <div class="form-field"><label for="blood-component"><span class="tag">Observed</span><span data-copy="bloodComponentLabel">Component</span></label><select id="blood-component"><option>Whole Blood</option><option>Packed Red Blood Cells (PRBC)</option><option>Platelets (RDP/SDP)</option><option>Fresh Frozen Plasma (FFP)</option></select></div>
-                <div class="form-grid"><div class="form-field"><label for="doctor-name"><span class="tag">Observed</span><span data-copy="doctorNameLabel">Attending Doctor Name</span></label><input id="doctor-name" required /></div><div class="form-field"><label for="doctor-contact"><span class="tag">Observed</span><span data-copy="doctorContactLabel">Attending Doctor Contact</span></label><input id="doctor-contact" type="tel" required /></div></div>
+                <div class="form-grid"><div class="form-field"><label for="doctor-name"><span class="tag">Observed</span><span data-copy="doctorNameLabel">Attending Doctor Name</span></label><input id="doctor-name" required /></div><div class="form-field"><label for="doctor-contact"><span class="tag">Observed</span><span data-copy="doctorContactLabel">Attending Doctor Contact</span></label><input id="doctor-contact" type="tel" pattern="[6-9][0-9]{9}" maxlength="10" title="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9" required /><small class="field-note">10-digit Indian mobile number for SMS token updates</small></div></div>
                 <button class="large-button primary" type="submit" data-copy="bloodRequestButton">Generate emergency blood token slip</button>
               </form>
               <article class="blood-token-slip" id="blood-token-slip" hidden aria-live="polite"></article>
@@ -918,13 +947,13 @@
           <p class="booking-panel-note" data-copy="patientDetailsNote">These details stay in this browser for this session. Please do not enter an Aadhaar, ABHA, UHID, OTP or real health record.</p>
           <div class="form-grid">
             <div class="form-field"><label for="patient-name"><span class="tag">Observed</span><span data-copy="patientNameLabel">Full Name of Patient</span></label><input id="patient-name" type="text" autocomplete="off" data-copy-placeholder="patientNamePlaceholder" placeholder="Enter the patient's name" /></div>
-            <div class="form-field"><label for="patient-phone"><span class="tag">Observed</span><span data-copy="patientPhoneLabel">Phone Number (for SMS token reminder)</span></label><input id="patient-phone" type="tel" inputmode="numeric" autocomplete="off" data-copy-placeholder="patientPhonePlaceholder" placeholder="Optional demo number" /></div>
+            <div class="form-field"><label for="patient-phone"><span class="tag">Observed</span><span data-copy="patientPhoneLabel">Phone Number (for SMS token reminder)</span></label><input id="patient-phone" type="tel" inputmode="numeric" autocomplete="off" pattern="[6-9][0-9]{9}" maxlength="10" title="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9" data-copy-placeholder="patientPhonePlaceholder" placeholder="Optional demo number" /><small class="field-note">10-digit Indian mobile number for SMS token updates</small></div>
           </div>
           <div class="field-group compact-field-group">
             <span class="field-label" id="numeric-age-label"><span class="tag">Observed</span><span data-copy="numericAgeLabel">Age band</span></span>
             <div class="age-grid" role="group" aria-labelledby="numeric-age-label">
               <button class="age-button" type="button" data-age="baby" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageBabyNumeric">0 to 1 year (Infant / Baby)</span></button>
-              <button class="age-button" type="button" data-age="child" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageChildNumeric">1 to 12 years (Child / Paediatric)</span></button>
+              <button class="age-button" type="button" data-age="child" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageChildNumeric">2 to 12 years (Child / Paediatric)</span></button>
               <button class="age-button" type="button" data-age="adolescent" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageAdolescent">13 to 17 years (Adolescent / Teen)</span></button>
               <button class="age-button" type="button" data-age="adult" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageAdultNumeric">18 to 44 years (Young Adult)</span></button>
               <button class="age-button" type="button" data-age="middle" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageMiddle">45 to 59 years (Middle-Aged Adult)</span></button>
@@ -1314,7 +1343,7 @@
                 <div class="slip-field"><dt data-copy="slipSeenBy">Estimated consultation</dt><dd id="slip-seen-by"></dd></div>
                 <div class="slip-field"><dt data-copy="slipToken">Token</dt><dd id="slip-token-detail"></dd></div>
                 <div class="slip-field slip-field--wide"><dt data-copy="slipMode">Mode</dt><dd id="slip-mode"></dd></div>
-                <div class="slip-field slip-field--wide" id="slip-link-field" hidden><dt data-copy="slipLink">Tele-OPD link</dt><dd id="slip-link"></dd></div>
+                <div class="slip-field slip-field--wide" id="slip-link-field" hidden><dt data-copy="slipLink">Tele-OPD link</dt><dd id="slip-link"><span class="tag">Simulated</span> <button class="large-button primary" type="button" id="join-tele-room">Join Tele-OPD Video Room →</button></dd></div>
                 <div class="slip-field"><dt data-copy="slipAppointmentId">Appointment ID</dt><dd id="slip-appointment-id"></dd></div>
                 <div class="slip-field"><dt data-copy="slipUhid">UHID</dt><dd id="slip-uhid"></dd></div>
               </dl>
@@ -1329,6 +1358,24 @@
             <p class="print-only" data-copy="printFooter">SPECIMEN , NOT A REAL APPOINTMENT · independent prototype · mock data.</p>
           </section>
         </section>
+        </section>
+
+        <section class="tele-modal" id="tele-modal" role="dialog" aria-modal="true" aria-labelledby="tele-modal-title" hidden>
+          <div class="tele-modal-card">
+            <div class="tele-modal-header">
+              <div><p class="eyebrow"><span class="tag">Simulated</span> Secure Tele-OPD room</p><h2 id="tele-modal-title">Tele-OPD Video Room</h2><p class="tele-modal-note">This is a simulated consultation room for the prototype. No call or prescription is real.</p></div>
+              <button class="tele-modal-close" type="button" id="tele-modal-close" aria-label="Close Tele-OPD video room">×</button>
+            </div>
+            <div class="tele-feeds">
+              <div class="tele-feed doctor-feed" aria-label="Simulated doctor video feed"><div class="doctor-avatar" aria-hidden="true">DS</div><div class="tele-feed-label"><span class="tag">Simulated</span><strong>Dr. Sharma (AIIMS Tele-Medicine Unit)</strong><small>Doctor feed · connected</small></div></div>
+              <div class="tele-feed citizen-feed" aria-label="Citizen self-feed"><canvas id="tele-self-feed" width="640" height="360"></canvas><div class="tele-feed-label"><span class="tag">Simulated</span><strong>Connected via Secure e-Sanjeevani Tele-OPD</strong><small>Citizen self-feed placeholder</small></div></div>
+            </div>
+            <p class="tele-call-status" id="tele-call-status" aria-live="polite"><span class="tag">Simulated</span> Call connected · microphone and camera are on.</p>
+            <div class="tele-room-body">
+              <div><div class="tele-controls"><button class="large-button" type="button" id="tele-mute-button" aria-pressed="false">Mute Mic</button><button class="large-button" type="button" id="tele-camera-button" aria-pressed="false">Toggle Camera</button><button class="large-button" type="button" id="tele-end-button">End Call</button></div></div>
+              <aside class="tele-prescription-drawer" aria-labelledby="tele-prescription-title"><h3 id="tele-prescription-title">Live Prescription Preview</h3><p class="tele-modal-note">Generated from simulated consultation notes; not medical advice.</p><label for="tele-notes">Real-time consultation notes</label><textarea id="tele-notes" placeholder="Type simulated notes here"></textarea><div class="tele-prescription-preview" id="tele-prescription-preview" aria-live="polite"><strong>Digital prescription drawer</strong><br />No prescription has been entered in this simulation.</div></aside>
+            </div>
+          </div>
         </section>
 
         <section class="honesty-screen" id="screen-honesty" aria-labelledby="honesty-title" hidden>
@@ -1476,7 +1523,7 @@
       });
       Object.assign(copy.en, {
         labNav: "Lab Tests & Scans", bloodNav: "Blood Bank", backToServices: "← Back to services", startBooking: "Start OPD Triage & Book Slot →", serviceGridKicker: "Services at a glance", serviceGridTitle: "Choose the help you need today.", opdService: "OPD Counter Triage", opdServiceNote: "Find the right first counter", labService: "Book Lab & Scan Tests", labServiceNote: "See preparation and fees", bloodService: "Blood Bank Inventory", bloodServiceNote: "Check mock stock and donors", teleService: "Online Video Tele-OPD", teleServiceNote: "Start from home",
-        patientDetailsKicker: "Step 1 · Patient details", patientDetailsTitle: "Tell us who needs the appointment", patientDetailsNote: "These details stay in this browser for this session. Please do not enter an Aadhaar, ABHA, UHID, OTP or real health record.", patientNameLabel: "Full Name of Patient", patientNamePlaceholder: "Enter the patient's name", patientPhoneLabel: "Phone Number (for SMS token reminder)", patientPhonePlaceholder: "Optional demo number", numericAgeLabel: "Age band", ageBabyNumeric: "0 to 1 year (Infant / Baby)", ageChildNumeric: "1 to 12 years (Child / Paediatric)", ageAdolescent: "13 to 17 years (Adolescent / Teen)", ageAdultNumeric: "18 to 44 years (Young Adult)", ageMiddle: "45 to 59 years (Middle-Aged Adult)", ageOlderNumeric: "60+ years (Senior Citizen)", exactAgeLabel: "Exact Age (optional)", exactAgePlaceholder: "e.g. 42", genderLabel: "Gender selection", genderMale: "Male", genderFemale: "Female", genderOther: "Other", conditionsLabel: "Pre-existing medical conditions", conditionDiabetes: "Diabetes", conditionHypertension: "Hypertension (BP)", conditionHeart: "Heart Condition", conditionAsthma: "Asthma / Respiratory", conditionPregnancy: "Pregnancy", conditionNone: "No pre-existing condition",
+        patientDetailsKicker: "Step 1 · Patient details", patientDetailsTitle: "Tell us who needs the appointment", patientDetailsNote: "These details stay in this browser for this session. Please do not enter an Aadhaar, ABHA, UHID, OTP or real health record.", patientNameLabel: "Full Name of Patient", patientNamePlaceholder: "Enter the patient's name", patientPhoneLabel: "Phone Number (for SMS token reminder)", patientPhonePlaceholder: "Optional demo number", numericAgeLabel: "Age band", ageBabyNumeric: "0 to 1 year (Infant / Baby)", ageChildNumeric: "2 to 12 years (Child / Paediatric)", ageAdolescent: "13 to 17 years (Adolescent / Teen)", ageAdultNumeric: "18 to 44 years (Young Adult)", ageMiddle: "45 to 59 years (Middle-Aged Adult)", ageOlderNumeric: "60+ years (Senior Citizen)", exactAgeLabel: "Exact Age (optional)", exactAgePlaceholder: "e.g. 42", genderLabel: "Gender selection", genderMale: "Male", genderFemale: "Female", genderOther: "Other", conditionsLabel: "Pre-existing medical conditions", conditionDiabetes: "Diabetes", conditionHypertension: "Hypertension (BP)", conditionHeart: "Heart Condition", conditionAsthma: "Asthma / Respiratory", conditionPregnancy: "Pregnancy", conditionNone: "No pre-existing condition",
         appointmentStepLabel: "Step 4 · Appointment choices", consultationModeTitle: "How would you like to meet the OPD team?", teleModeSelected: "Online Video Consultation is selected. We will show the secure mock Tele-OPD details after you choose a hospital and slot.", inPersonMode: "In-Person Hospital Visit", inPersonModeNote: "Walk-in to OPD Counter", teleMode: "Online Video Consultation", teleModeNote: "e-Sanjeevani Tele-OPD from home", dateStripLabel: "Choose a date", shiftLabel: "Choose a session", morningShift: "Morning Session", morningShiftNote: "09:00 AM to 11:00 AM · 6 slots open", middayShift: "Mid-Day Session", middayShiftNote: "11:30 AM to 01:30 PM · 14 slots open", afternoonShift: "Afternoon Session", afternoonShiftNote: "02:30 PM to 04:30 PM · 8 slots open", appointmentWaitHint: "Choose a date and session to see the estimated consultation time.", appointmentWaitText: "Slot {slot} · Estimated doctor consultation {seen}", slipMode: "Mode", slipLink: "Tele-OPD link", voiceSilence: "No words were captured. Listening has stopped.",
         labEyebrow: "Diagnostic services", labTitle: "Book lab tests and scans", labIntro: "Choose a test, a public hospital diagnostic centre, and a simulated slot. Fees and availability are mock data for this prototype.", labMockNote: "No test is booked, no payment is taken, and no health record is created.", labBookingTitle: "Prepare a test request", labSelectionNote: "Your selections stay in this browser until you create a mock request.", labHospitalLabel: "Choose hospital lab", labDateLabel: "Select date", labTimeLabel: "Select time slot", beforeTestTitle: "Before test", beforeFasting: "Fasting: 10 to 12 hours overnight for sugar and lipid profiles. Plain water is permitted.", beforeMedication: "Medication: take regular BP medicines with water unless a doctor has instructed otherwise.", beforeScans: "Scans and MRI: wear loose cotton clothing without metal zippers or jewelry. Arrive with a full bladder for abdominal ultrasound.", afterTestTitle: "After test", afterSnack: "Have a light snack immediately after a blood draw.", afterReports: "Digital test reports are linked to your profile within 4 to 24 hours.", paymentTitle: "How would you pay?", paymentFree: "Free under Ayushman Bharat / PM-JAY / BPL Card", paymentCounter: "Pay Nominal Govt Fee at Hospital Counter (Cash/Card)", paymentUpi: "Instant Online Mock Payment (UPI / QR)", labBookButton: "Create mock test request", reportTitle: "Digital health record preview", reportReady: "Report Status: Ready for Download", reportDoctor: "Doctor sign-off shown for this mock preview.", downloadReport: "Download report preview",
         bloodEyebrow: "Delhi blood network", bloodTitle: "Blood bank stock and donor help", bloodIntro: "Check the sample stock monitor, create an emergency request slip, or offer to donate locally. Call the blood bank before travelling.", bloodMockNote: "Stock counts, request tokens and donor confirmation tokens are mock data. This page does not reserve blood.", stockTitle: "Live Delhi hospital blood stock monitor", stockNote: "Sample availability, checked for this demo.", bloodBankColumn: "Blood bank", emergencyBloodTitle: "Emergency blood request", emergencyBloodNote: "Use this mock slip to organise a call with the on-duty blood bank officer. It is not a reservation.", bloodPatientLabel: "Patient Name", bloodWardLabel: "Hospital Ward / ICU bed number", bloodGroupLabel: "Blood Group needed", bloodUnitsLabel: "Units required", bloodComponentLabel: "Component", doctorNameLabel: "Attending Doctor Name", doctorContactLabel: "Attending Doctor Contact", bloodRequestButton: "Generate emergency blood token slip", donorTitle: "Register as a voluntary donor", donorNote: "Registration is saved only in this browser. A blood bank must confirm eligibility before donation.", donorNameLabel: "Name", donorAgeLabel: "Age", donorGroupLabel: "Blood Group", donorLocalityLabel: "Locality", donorLastDateLabel: "Last Donation Date", donorButton: "Save donor registration locally", helplineTitle: "24/7 national emergency helplines", helpline104: "Health & Blood Helpline", helpline1910: "National Blood Transfusion Council Helpline", helpline108: "Disaster Emergency",
@@ -1484,7 +1531,7 @@
       });
       Object.assign(copy.hi, {
         labNav: "लैब टेस्ट और स्कैन", bloodNav: "ब्लड बैंक", backToServices: "← सेवाओं पर वापस", startBooking: "ओपीडी ट्रायेज और स्लॉट बुक करें →", serviceGridKicker: "सेवाएँ एक नज़र में", serviceGridTitle: "आज आपको किस मदद की ज़रूरत है?", opdService: "ओपीडी काउंटर ट्रायेज", opdServiceNote: "पहला सही काउंटर खोजें", labService: "लैब और स्कैन बुक करें", labServiceNote: "तैयारी और शुल्क देखें", bloodService: "ब्लड बैंक सूची", bloodServiceNote: "नकली स्टॉक और डोनर देखें", teleService: "ऑनलाइन वीडियो टेली-ओपीडी", teleServiceNote: "घर से शुरू करें",
-        patientDetailsKicker: "चरण 1 · मरीज़ की जानकारी", patientDetailsTitle: "बताइए अपॉइंटमेंट किसके लिए है", patientDetailsNote: "यह जानकारी इस सत्र में इसी ब्राउज़र में रहेगी। आधार, आभा, यूएचआईडी, ओटीपी या असली स्वास्थ्य रिकॉर्ड न लिखें।", patientNameLabel: "मरीज़ का पूरा नाम", patientNamePlaceholder: "मरीज़ का नाम लिखें", patientPhoneLabel: "फ़ोन नंबर (एसएमएस टोकन याद दिलाने के लिए)", patientPhonePlaceholder: "वैकल्पिक नकली नंबर", numericAgeLabel: "उम्र का वर्ग", ageBabyNumeric: "0 से 1 साल (शिशु)", ageChildNumeric: "1 से 12 साल (बच्चा)", ageAdolescent: "13 से 17 साल (किशोर)", ageAdultNumeric: "18 से 44 साल (युवा वयस्क)", ageMiddle: "45 से 59 साल (मध्यम उम्र)", ageOlderNumeric: "60 साल से अधिक (वरिष्ठ नागरिक)", exactAgeLabel: "सटीक उम्र (वैकल्पिक)", exactAgePlaceholder: "जैसे 42", genderLabel: "लिंग चुनें", genderMale: "पुरुष", genderFemale: "महिला", genderOther: "अन्य", conditionsLabel: "पहले से मौजूद स्वास्थ्य स्थिति", conditionDiabetes: "मधुमेह", conditionHypertension: "हाई ब्लड प्रेशर", conditionHeart: "हृदय की स्थिति", conditionAsthma: "अस्थमा / साँस", conditionPregnancy: "गर्भावस्था", conditionNone: "कोई पहले की स्थिति नहीं",
+        patientDetailsKicker: "चरण 1 · मरीज़ की जानकारी", patientDetailsTitle: "बताइए अपॉइंटमेंट किसके लिए है", patientDetailsNote: "यह जानकारी इस सत्र में इसी ब्राउज़र में रहेगी। आधार, आभा, यूएचआईडी, ओटीपी या असली स्वास्थ्य रिकॉर्ड न लिखें।", patientNameLabel: "मरीज़ का पूरा नाम", patientNamePlaceholder: "मरीज़ का नाम लिखें", patientPhoneLabel: "फ़ोन नंबर (एसएमएस टोकन याद दिलाने के लिए)", patientPhonePlaceholder: "वैकल्पिक नकली नंबर", numericAgeLabel: "उम्र का वर्ग", ageBabyNumeric: "0 से 1 साल (शिशु)", ageChildNumeric: "2 से 12 साल (बच्चा)", ageAdolescent: "13 से 17 साल (किशोर)", ageAdultNumeric: "18 से 44 साल (युवा वयस्क)", ageMiddle: "45 से 59 साल (मध्यम उम्र)", ageOlderNumeric: "60 साल से अधिक (वरिष्ठ नागरिक)", exactAgeLabel: "सटीक उम्र (वैकल्पिक)", exactAgePlaceholder: "जैसे 42", genderLabel: "लिंग चुनें", genderMale: "पुरुष", genderFemale: "महिला", genderOther: "अन्य", conditionsLabel: "पहले से मौजूद स्वास्थ्य स्थिति", conditionDiabetes: "मधुमेह", conditionHypertension: "हाई ब्लड प्रेशर", conditionHeart: "हृदय की स्थिति", conditionAsthma: "अस्थमा / साँस", conditionPregnancy: "गर्भावस्था", conditionNone: "कोई पहले की स्थिति नहीं",
         appointmentStepLabel: "चरण 4 · अपॉइंटमेंट विकल्प", consultationModeTitle: "ओपीडी टीम से कैसे मिलना चाहेंगे?", teleModeSelected: "ऑनलाइन वीडियो सलाह चुनी गई है। अस्पताल और स्लॉट चुनने के बाद सुरक्षित नकली टेली-ओपीडी जानकारी दिखेगी।", inPersonMode: "अस्पताल में आमने-सामने", inPersonModeNote: "ओपीडी काउंटर पर जाएँ", teleMode: "ऑनलाइन वीडियो सलाह", teleModeNote: "घर से ई-संजीवनी टेली-ओपीडी", dateStripLabel: "तारीख चुनें", shiftLabel: "सत्र चुनें", morningShift: "सुबह का सत्र", morningShiftNote: "सुबह 09:00 से 11:00 · 6 स्लॉट खुले", middayShift: "दोपहर का सत्र", middayShiftNote: "11:30 से 01:30 · 14 स्लॉट खुले", afternoonShift: "शाम से पहले का सत्र", afternoonShiftNote: "02:30 से 04:30 · 8 स्लॉट खुले", appointmentWaitHint: "अनुमानित समय देखने के लिए तारीख और सत्र चुनें।", appointmentWaitText: "स्लॉट {slot} · डॉक्टर से मिलने का अनुमानित समय {seen}", slipMode: "तरीका", slipLink: "टेली-ओपीडी लिंक", voiceSilence: "कोई शब्द नहीं मिले। सुनना बंद हो गया है।",
         labEyebrow: "जाँच सेवाएँ", labTitle: "लैब टेस्ट और स्कैन बुक करें", labIntro: "टेस्ट, सार्वजनिक अस्पताल की जाँच जगह और नकली स्लॉट चुनें। शुल्क और उपलब्धता इस प्रोटोटाइप की नकली जानकारी है।", labMockNote: "कोई टेस्ट बुक नहीं होता, भुगतान नहीं लिया जाता और स्वास्थ्य रिकॉर्ड नहीं बनता।", labBookingTitle: "टेस्ट का अनुरोध तैयार करें", labSelectionNote: "नकली अनुरोध बनाने तक आपकी पसंद इसी ब्राउज़र में रहेगी।", labHospitalLabel: "अस्पताल की लैब चुनें", labDateLabel: "तारीख चुनें", labTimeLabel: "समय चुनें", beforeTestTitle: "टेस्ट से पहले", beforeFasting: "शुगर और लिपिड प्रोफ़ाइल के लिए रात में 10 से 12 घंटे खाली पेट रहें। सादा पानी पी सकते हैं।", beforeMedication: "डॉक्टर ने अलग न कहा हो तो नियमित बीपी की दवा पानी के साथ लें।", beforeScans: "स्कैन और एमआरआई में ढीले सूती कपड़े पहनें। पेट के अल्ट्रासाउंड के लिए मूत्राशय भरा रखें।", afterTestTitle: "टेस्ट के बाद", afterSnack: "खून लेने के बाद हल्का नाश्ता करें।", afterReports: "डिजिटल रिपोर्ट 4 से 24 घंटे में प्रोफ़ाइल पर जुड़ती है।", paymentTitle: "भुगतान कैसे करेंगे?", paymentFree: "आयुष्मान भारत / पीएम-जय / बीपीएल कार्ड में मुफ्त", paymentCounter: "अस्पताल काउंटर पर मामूली सरकारी शुल्क (नकद/कार्ड)", paymentUpi: "तुरंत ऑनलाइन नकली भुगतान (यूपीआई / क्यूआर)", labBookButton: "नकली टेस्ट अनुरोध बनाएँ", reportTitle: "डिजिटल स्वास्थ्य रिकॉर्ड का नमूना", reportReady: "रिपोर्ट स्थिति: डाउनलोड के लिए तैयार", reportDoctor: "इस नकली नमूने में सत्यापित डॉक्टर की स्वीकृति दिखाई गई है।", downloadReport: "रिपोर्ट का नमूना डाउनलोड करें",
         bloodEyebrow: "दिल्ली ब्लड नेटवर्क", bloodTitle: "ब्लड बैंक स्टॉक और डोनर सहायता", bloodIntro: "नमूना स्टॉक देखें, इमरजेंसी अनुरोध की स्लिप बनाएँ या स्थानीय रक्तदाता बनें। जाने से पहले ब्लड बैंक को फ़ोन करें।", bloodMockNote: "स्टॉक, अनुरोध टोकन और डोनर टोकन नकली हैं। यह पेज खून रिज़र्व नहीं करता।", stockTitle: "दिल्ली अस्पताल ब्लड स्टॉक मॉनिटर", stockNote: "इस डेमो के लिए जाँची गई नमूना उपलब्धता।", bloodBankColumn: "ब्लड बैंक", emergencyBloodTitle: "इमरजेंसी ब्लड अनुरोध", emergencyBloodNote: "ऑन-ड्यूटी ब्लड बैंक अधिकारी से बात करने के लिए यह नकली स्लिप बनाएँ। यह रिज़र्वेशन नहीं है।", bloodPatientLabel: "मरीज़ का नाम", bloodWardLabel: "अस्पताल वार्ड / आईसीयू बेड नंबर", bloodGroupLabel: "चाहिए ब्लड ग्रुप", bloodUnitsLabel: "कितनी यूनिट", bloodComponentLabel: "घटक", doctorNameLabel: "ड्यूटी डॉक्टर का नाम", doctorContactLabel: "ड्यूटी डॉक्टर का संपर्क", bloodRequestButton: "इमरजेंसी ब्लड टोकन स्लिप बनाएँ", donorTitle: "स्वैच्छिक रक्तदाता बनें", donorNote: "रजिस्ट्रेशन केवल इसी ब्राउज़र में सेव होगा। रक्तदान से पहले ब्लड बैंक पात्रता जाँचेगा।", donorNameLabel: "नाम", donorAgeLabel: "उम्र", donorGroupLabel: "ब्लड ग्रुप", donorLocalityLabel: "इलाका", donorLastDateLabel: "पिछली बार रक्तदान की तारीख", donorButton: "डोनर रजिस्ट्रेशन इसी ब्राउज़र में सेव करें", helplineTitle: "24/7 राष्ट्रीय इमरजेंसी हेल्पलाइन", helpline104: "स्वास्थ्य और ब्लड हेल्पलाइन", helpline1910: "राष्ट्रीय ब्लड ट्रांसफ्यूजन काउंसिल हेल्पलाइन", helpline108: "आपदा इमरजेंसी", stockAvailable: "स्टॉक उपलब्ध", stockModerate: "मध्यम", stockCritical: "बहुत कम स्टॉक", bloodTokenTitle: "इमरजेंसी ब्लड टोकन स्लिप", bloodTokenCall: "अभी ऑन-ड्यूटी ब्लड बैंक अधिकारी को फ़ोन करें।", donorSaved: "डोनर रजिस्ट्रेशन इसी ब्राउज़र में सेव हुआ। पुष्टि टोकन:", labRequestCreated: "नकली टेस्ट अनुरोध बन गया। इसे जाँच काउंटर के लिए रखें।", labReportDownloaded: "रिपोर्ट का नकली नमूना डाउनलोड हो गया।"
@@ -1556,9 +1603,23 @@
       const labReportCard = document.querySelector("#lab-report-card");
       const bloodStockBody = document.querySelector("#blood-stock-body");
       const teleModeNote = document.querySelector("#tele-mode-note");
+      const exactAgeInput = document.querySelector("#exact-age");
+      const teleModal = document.querySelector("#tele-modal");
+      const teleModalClose = document.querySelector("#tele-modal-close");
+      const joinTeleRoom = document.querySelector("#join-tele-room");
+      const teleMuteButton = document.querySelector("#tele-mute-button");
+      const teleCameraButton = document.querySelector("#tele-camera-button");
+      const teleEndButton = document.querySelector("#tele-end-button");
+      const teleCallStatus = document.querySelector("#tele-call-status");
+      const teleNotes = document.querySelector("#tele-notes");
+      const telePrescriptionPreview = document.querySelector("#tele-prescription-preview");
+      const teleSelfFeed = document.querySelector("#tele-self-feed");
       let activeRecognition = null;
       let speechSilenceTimer = null;
       let labSelectedTest = null;
+      let teleCloseTimer = null;
+      let telePreviousFocus = null;
+      let telePreviousBodyOverflow = "";
 
       const labTests = [
         { name: "Complete Blood Count (CBC)", turnaround: "Same Day", fasting: "Not required", fee: "₹0 to ₹30" },
@@ -1774,16 +1835,56 @@
         });
       });
 
+      const ageBandRanges = Object.freeze({
+        baby: { min: 0, max: 1, placeholder: "0 to 1 year" },
+        child: { min: 2, max: 12, placeholder: "2 to 12 years" },
+        adolescent: { min: 13, max: 17, placeholder: "13 to 17 years" },
+        adult: { min: 18, max: 44, placeholder: "18 to 44 years" },
+        middle: { min: 45, max: 59, placeholder: "45 to 59 years" },
+        older: { min: 60, max: 120, placeholder: "60+ years" },
+      });
+
+      function ageBandForValue(rawValue) {
+        if (String(rawValue).trim() === "") return null;
+        const age = Number(rawValue);
+        if (!Number.isInteger(age) || age < 0 || age > 120) return null;
+        return Object.entries(ageBandRanges).find(([, range]) => age >= range.min && age <= range.max)?.[0] || null;
+      }
+
+      function renderAgeButtons() {
+        document.querySelectorAll("[data-age]").forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.age === state.age)));
+      }
+
+      function syncAgeFromExactValue(rawValue) {
+        state.exactAge = rawValue;
+        state.age = ageBandForValue(rawValue);
+        if (state.complaint) {
+          state.complaint.exact_age = rawValue;
+          state.complaint.age_band = state.age;
+        }
+        renderAgeButtons();
+      }
+
       document.querySelectorAll("[data-age]").forEach((button) => {
         button.addEventListener("click", () => {
           state.age = button.dataset.age;
-          document.querySelectorAll("[data-age]").forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.age === state.age)));
+          const selectedRange = ageBandRanges[state.age];
+          const exactAge = exactAgeInput.value.trim();
+          const exactAgeBand = ageBandForValue(exactAge);
+          if (exactAge && exactAgeBand !== state.age) {
+            exactAgeInput.value = "";
+            state.exactAge = "";
+            if (state.complaint) state.complaint.exact_age = "";
+          }
+          exactAgeInput.placeholder = selectedRange.placeholder;
+          if (state.complaint) state.complaint.age_band = state.age;
+          renderAgeButtons();
         });
       });
 
       document.querySelector("#patient-name").addEventListener("input", (event) => { state.fullName = event.target.value; });
       document.querySelector("#patient-phone").addEventListener("input", (event) => { state.phone = event.target.value; });
-      document.querySelector("#exact-age").addEventListener("input", (event) => { state.exactAge = event.target.value; });
+      exactAgeInput.addEventListener("input", (event) => syncAgeFromExactValue(event.target.value));
       document.querySelectorAll("[data-gender]").forEach((button) => button.addEventListener("click", () => {
         state.gender = button.dataset.gender;
         document.querySelectorAll("[data-gender]").forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.gender === state.gender)));
@@ -2190,7 +2291,7 @@
         const linkField = document.querySelector("#slip-link-field");
         if (state.consultationMode === "tele") {
           mode.replaceChildren(makeTag("Simulated"), document.createTextNode(" Mode: Secure Video Tele-OPD (Room #OPD-702)"));
-          document.querySelector("#slip-link").replaceChildren(makeTag("Simulated"), document.createTextNode(" Link: Join via raahat-nu.vercel.app/tele-opd"));
+          document.querySelector("#slip-link").replaceChildren(makeTag("Simulated"), document.createTextNode(" "), joinTeleRoom);
           linkField.hidden = false;
         } else {
           mode.replaceChildren(makeTag("Simulated"), document.createTextNode(" Mode: In-Person Hospital Visit (Walk-in to OPD Counter)"));
@@ -2200,6 +2301,83 @@
         document.querySelector("#slip-uhid").replaceChildren(makeTag("Simulated"), document.createTextNode(" UHID-MOCK-7281"));
         document.querySelector("#slip-report").textContent = report;
       }
+
+      function renderTelePrescriptionPreview() {
+        const notes = teleNotes.value.trim();
+        const heading = document.createElement("strong");
+        heading.textContent = "Digital prescription drawer";
+        const note = document.createElement("p");
+        note.textContent = notes ? `Consultation notes (Simulated): ${notes}` : "No consultation notes have been entered in this simulation.";
+        const statusLine = document.createElement("p");
+        statusLine.textContent = "Prescription status (Simulated): draft preview only; no medication has been prescribed.";
+        telePrescriptionPreview.replaceChildren(heading, note, statusLine);
+      }
+
+      function setTeleCallStatus(message) {
+        teleCallStatus.replaceChildren(makeTag("Simulated"), document.createTextNode(` ${message}`));
+      }
+
+      function drawTeleSelfFeed() {
+        const context = teleSelfFeed.getContext("2d");
+        if (!context) return;
+        context.fillStyle = "#334155";
+        context.fillRect(0, 0, teleSelfFeed.width, teleSelfFeed.height);
+        context.fillStyle = "#64748b";
+        context.beginPath();
+        context.arc(teleSelfFeed.width / 2, teleSelfFeed.height * 0.38, 52, 0, Math.PI * 2);
+        context.fill();
+        context.fillStyle = "#475569";
+        context.beginPath();
+        context.ellipse(teleSelfFeed.width / 2, teleSelfFeed.height * 0.78, 110, 82, 0, 0, Math.PI * 2);
+        context.fill();
+      }
+
+      function openTeleModal() {
+        if (teleCloseTimer) window.clearTimeout(teleCloseTimer);
+        telePreviousFocus = document.activeElement;
+        telePreviousBodyOverflow = document.body.style.overflow;
+        teleModal.hidden = false;
+        document.body.style.overflow = "hidden";
+        teleMuteButton.setAttribute("aria-pressed", "false");
+        teleMuteButton.textContent = "Mute Mic";
+        teleCameraButton.setAttribute("aria-pressed", "false");
+        setTeleCallStatus("Call connected · microphone and camera are on.");
+        teleNotes.value = "";
+        renderTelePrescriptionPreview();
+        drawTeleSelfFeed();
+        window.requestAnimationFrame(() => teleModal.classList.add("is-open"));
+        teleModalClose.focus();
+      }
+
+      function closeTeleModal() {
+        if (teleModal.hidden) return;
+        teleModal.classList.remove("is-open");
+        if (teleCloseTimer) window.clearTimeout(teleCloseTimer);
+        teleCloseTimer = window.setTimeout(() => {
+          teleModal.hidden = true;
+          document.body.style.overflow = telePreviousBodyOverflow;
+          telePreviousFocus?.focus?.();
+          telePreviousFocus = null;
+        }, 220);
+      }
+
+      joinTeleRoom.addEventListener("click", openTeleModal);
+      teleModalClose.addEventListener("click", closeTeleModal);
+      teleEndButton.addEventListener("click", closeTeleModal);
+      teleModal.addEventListener("click", (event) => { if (event.target === teleModal) closeTeleModal(); });
+      teleMuteButton.addEventListener("click", () => {
+        const muted = teleMuteButton.getAttribute("aria-pressed") !== "true";
+        teleMuteButton.setAttribute("aria-pressed", String(muted));
+        teleMuteButton.textContent = muted ? "Unmute Mic" : "Mute Mic";
+        setTeleCallStatus(`Call connected · microphone is ${muted ? "muted" : "on"}; camera is on.`);
+      });
+      teleCameraButton.addEventListener("click", () => {
+        const cameraOff = teleCameraButton.getAttribute("aria-pressed") !== "true";
+        teleCameraButton.setAttribute("aria-pressed", String(cameraOff));
+        setTeleCallStatus(`Call connected · microphone is ${teleMuteButton.getAttribute("aria-pressed") === "true" ? "muted" : "on"}; camera is ${cameraOff ? "off" : "on"}.`);
+      });
+      teleNotes.addEventListener("input", renderTelePrescriptionPreview);
+      document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !teleModal.hidden) closeTeleModal(); });
 
       function appointmentDates() {
         return Array.from({ length: 7 }, (_, offset) => {
@@ -2235,6 +2413,9 @@
       }
 
       function renderLabCatalog() {
+        labBookingPanel.hidden = !labSelectedTest;
+        labSelectionSummary.replaceChildren();
+        if (labSelectedTest) labSelectionSummary.replaceChildren(makeTag("Observed"), document.createTextNode(` ${labSelectedTest.name}`));
         labCatalog.replaceChildren();
         labTests.forEach((test, index) => {
           const card = document.createElement("article");
@@ -2247,9 +2428,7 @@
           choose.textContent = labSelectedTest?.name === test.name ? "Selected test" : "Choose this test";
           choose.addEventListener("click", () => {
             labSelectedTest = test;
-            labBookingPanel.hidden = false;
             labReportCard.hidden = true;
-            labSelectionSummary.replaceChildren(makeTag("Observed"), document.createTextNode(` ${test.name}`));
             renderLabCatalog();
             labBookingPanel.scrollIntoView({ behavior: "smooth", block: "start" });
           });
@@ -2434,6 +2613,7 @@
           showHonesty();
           return;
         }
+        if (nextView === "lab-tests") renderLabCatalog();
         showLanding(nextView === "home" ? "front-door" : nextView === "comparison" ? "screen-comparison" : nextView === "hospitals" ? "screen-hospitals" : nextView === "faqs" ? "screen-faqs" : viewHash[nextView], nextView);
       }
 
