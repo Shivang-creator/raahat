@@ -2210,7 +2210,6 @@
         for (const [code, dict] of Object.entries(window.VERNACULAR_PACK)) {
           copy[code] = Object.assign({}, copy.en, dict);
         }
-      }, copy.en, dict);
       }
 
       const state = { language: "en", selectedDialect: "en", selectedDialectData: null, screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, fullName: "", phone: "", exactAge: "", gender: null, conditions: [], listening: false, region: null, noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, consultationMode: "in-person", appointmentDate: null, appointmentShift: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
