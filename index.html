@@ -1005,6 +1005,58 @@
       .slip-status-pill.seen { background: var(--accent-soft); color: var(--accent-dark); }
       .live-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: waPulse 1.5s infinite; }
 
+
+      /* 22 Scheduled Indian Languages Expansion */
+      .lang-more-btn { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.75rem; padding: 0.35rem 0.85rem; border: 1.5px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); font-weight: 700; font-size: 0.92rem; cursor: pointer; transition: all 160ms ease; }
+      .lang-more-btn:hover, .lang-more-btn[aria-expanded="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
+      [data-theme="dark"] .lang-more-btn:hover { background: rgba(45, 212, 191, 0.15); color: #2dd4bf; }
+
+      .lang-modal { position: fixed; inset: 0; z-index: 1100; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 1rem; }
+      .lang-modal-card { width: 100%; max-width: 840px; max-height: 88vh; background: var(--paper); border: 2px solid var(--line); border-radius: var(--radius-lg); box-shadow: 0 25px 60px rgba(0,0,0,0.4); display: flex; flex-direction: column; overflow: hidden; }
+      .lang-modal-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid var(--line); background: var(--surface); }
+      .lang-modal-header h2 { margin: 0.25rem 0 0.35rem; font-size: 1.45rem; font-weight: 800; }
+      .lang-modal-note { margin: 0; font-size: 0.9rem; color: var(--muted); }
+      .lang-modal-close { background: transparent; border: 0; font-size: 1.75rem; color: var(--muted); cursor: pointer; line-height: 1; padding: 0.25rem; }
+      .lang-modal-close:hover { color: var(--ink); }
+
+      .lang-search-bar { padding: 1rem 1.5rem 0.5rem; background: var(--paper); }
+      .lang-search-control { width: 100%; min-height: 3rem; padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1.5px solid var(--line); background: var(--background); color: var(--ink); font-size: 1rem; font-weight: 600; outline: none; transition: border-color 150ms; }
+      .lang-search-control:focus { border-color: var(--accent); }
+
+      .lang-region-filter { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.5rem 1.5rem 1rem; border-bottom: 1px solid var(--line); }
+      .lang-region-chip { min-height: 2.25rem; padding: 0.25rem 0.75rem; border-radius: 999px; border: 1px solid var(--line); background: var(--background); color: var(--muted); font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 140ms ease; }
+      .lang-region-chip:hover, .lang-region-chip[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
+      [data-theme="dark"] .lang-region-chip[aria-pressed="true"] { background: #2dd4bf; color: #03231a; }
+
+      .lang-grid { flex: 1; overflow-y: auto; padding: 1.25rem 1.5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 0.85rem; }
+      .lang-card { min-height: 4.5rem; padding: 0.85rem 1rem; border: 1.5px solid var(--line); border-radius: var(--radius-md); background: var(--background); text-align: left; cursor: pointer; transition: all 160ms ease; display: flex; flex-direction: column; justify-content: space-between; }
+      .lang-card:hover, .lang-card.active { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+      .lang-card-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.2rem; }
+      .lang-card-native { font-size: 1.2rem; font-weight: 800; color: var(--ink); }
+      .lang-card-code { font-size: 0.75rem; font-weight: 700; color: var(--accent-dark); background: rgba(45,212,191,0.15); padding: 0.15rem 0.4rem; border-radius: 4px; }
+      .lang-card-name { font-size: 0.88rem; font-weight: 700; color: var(--muted); margin-bottom: 0.25rem; }
+      .lang-card-meta { font-size: 0.78rem; color: var(--muted); }
+
+      /* Step 1 Vernacular Quick Test Ribbon */
+      .vernacular-showcase { margin-top: 1rem; padding: 1rem; background: var(--paper); border: 1.5px solid var(--line); border-radius: var(--radius-md); }
+      .vernacular-showcase-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+      .vernacular-showcase-title { font-size: 0.9rem; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 0.35rem; }
+      .vernacular-chips-scroll { display: flex; gap: 0.6rem; overflow-x: auto; padding-bottom: 0.4rem; scrollbar-width: thin; }
+      .vernacular-chip { flex-shrink: 0; min-height: 2.75rem; padding: 0.45rem 0.85rem; border: 1.5px solid var(--line); border-radius: var(--radius-md); background: var(--background); display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--ink); cursor: pointer; transition: all 150ms ease; }
+      .vernacular-chip:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-1px); }
+      .vernacular-lang-pill { font-weight: 800; font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 999px; background: rgba(45, 212, 191, 0.2); color: var(--accent-dark); }
+      .vernacular-lang-pill.alert { background: rgba(239, 68, 68, 0.15); color: var(--emergency-red); }
+      .vernacular-sample-text { font-weight: 700; }
+      .vernacular-route-hint { color: var(--muted); font-size: 0.75rem; }
+      .vernacular-chip.red-flag-chip { border-color: rgba(239, 68, 68, 0.4); }
+      .vernacular-chip.red-flag-chip:hover { border-color: var(--emergency-red); background: rgba(239, 68, 68, 0.08); }
+
+      /* Audio Readback Button */
+      .audio-readback-wrapper { margin: 1rem 0; }
+      .audio-readback-btn { min-height: 3.25rem; display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.6rem 1.25rem; border-radius: 999px; border: 2px solid var(--accent); background: var(--accent-soft); color: var(--accent-dark); font-size: 1rem; font-weight: 800; cursor: pointer; transition: all 180ms ease; }
+      .audio-readback-btn:hover { background: var(--accent); color: #fff; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(45,212,191,0.3); }
+      .audio-readback-btn.is-speaking { background: var(--marigold); color: #000; border-color: var(--marigold); animation: audioPulse 1.2s infinite; }
+
     </style>
   </head>
   <body>
@@ -1075,6 +1127,9 @@
             <button type="button" data-language="en" aria-pressed="true">English</button>
             <button type="button" data-language="hi" aria-pressed="false">हिंदी</button>
           </div>
+          <button class="lang-more-btn" type="button" id="btn-open-languages" aria-haspopup="dialog" aria-expanded="false" title="Explore all 22 Scheduled Indian Languages">
+            <span aria-hidden="true">🇮🇳</span> <span id="current-lang-badge">22 Languages</span>
+          </button>
           <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Use dark theme" title="Use dark theme"><svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg></button>
           <button class="nav-start" type="button" id="nav-start-triage" data-copy="startTriage">Start Triage</button>
         </div>
@@ -1524,6 +1579,52 @@
             <button class="example-chip" type="button" data-example="fever" data-copy="exampleFever">fever</button>
             <button class="example-chip" type="button" data-example="weakness on one side" data-copy="exampleWeakness">weakness on one side</button>
           </div>
+
+          <!-- Pan-India 22 Languages Vernacular Showcase -->
+          <div class="vernacular-showcase" role="region" aria-label="22 Scheduled Languages Vernacular Testing">
+            <div class="vernacular-showcase-header">
+              <span class="vernacular-showcase-title">🇮🇳 22 Scheduled Indian Languages · 1-Tap Dialect Test:</span>
+              <button type="button" class="btn-link" id="btn-showcase-all-langs" style="background:none;border:none;color:var(--accent);font-weight:700;cursor:pointer;padding:0;">Browse all 22 →</button>
+            </div>
+            <div class="vernacular-chips-scroll" role="group" aria-label="Vernacular Dialect Samples">
+              <button class="vernacular-chip" type="button" data-vernacular-text="நெஞ்சு வலி" data-lang="ta" data-lang-name="Tamil (தமிழ்)">
+                <span class="vernacular-lang-pill">தமிழ்</span> <span class="vernacular-sample-text">நெஞ்சு வலி</span> <small class="vernacular-route-hint">→ Cardiology</small>
+              </button>
+              <button class="vernacular-chip" type="button" data-vernacular-text="বুকে ব্যথা" data-lang="bn" data-lang-name="Bengali (বাংলা)">
+                <span class="vernacular-lang-pill">বাংলা</span> <span class="vernacular-sample-text">বুকে ব্যথা</span> <small class="vernacular-route-hint">→ Cardiology</small>
+              </button>
+              <button class="vernacular-chip" type="button" data-vernacular-text="छातीत दुखणे" data-lang="mr" data-lang-name="Marathi (मराठी)">
+                <span class="vernacular-lang-pill">मराठी</span> <span class="vernacular-sample-text">छातीत दुखणे</span> <small class="vernacular-route-hint">→ Cardiology</small>
+              </button>
+              <button class="vernacular-chip" type="button" data-vernacular-text="ఛాతీ నొప్పి" data-lang="te" data-lang-name="Telugu (తెలుగు)">
+                <span class="vernacular-lang-pill">తెలుగు</span> <span class="vernacular-sample-text">ఛాతీ నొప్పి</span> <small class="vernacular-route-hint">→ Cardiology</small>
+              </button>
+              <button class="vernacular-chip" type="button" data-vernacular-text="ಎದೆ ನೋವು" data-lang="kn" data-lang-name="Kannada (ಕನ್ನಡ)">
+                <span class="vernacular-lang-pill">ಕನ್ನಡ</span> <span class="vernacular-sample-text">ಎದೆ ನೋವು</span> <small class="vernacular-route-hint">→ Cardiology</small>
+              </button>
+              <button class="vernacular-chip" type="button" data-vernacular-text="છાતીમાં દુખાવો" data-lang="gu" data-lang-name="Gujarati (ગુજરાતી)">
+                <span class="vernacular-lang-pill">ગુજરાતી</span> <span class="vernacular-sample-text">છાતીમાં દુખાવો</span> <small class="vernacular-route-hint">→ Cardiology</small>
+              </button>
+              <button class="vernacular-chip" type="button" data-vernacular-text="നെഞ്ചുവേദന" data-lang="ml" data-lang-name="Malayalam (മലയാളം)">
+                <span class="vernacular-lang-pill">മലയാളം</span> <span class="vernacular-sample-text">നെഞ്ചുവേദന</span> <small class="vernacular-route-hint">→ Cardiology</small>
+              </button>
+              <button class="vernacular-chip" type="button" data-vernacular-text="ਛਾਤੀ ਵਿੱਚ ਦਰਦ" data-lang="pa" data-lang-name="Punjabi (ਪੰਜਾਬੀ)">
+                <span class="vernacular-lang-pill">ਪੰਜਾਬੀ</span> <span class="vernacular-sample-text">ਛਾਤੀ ਵਿੱਚ ਦਰਦ</span> <small class="vernacular-route-hint">→ Cardiology</small>
+              </button>
+              <button class="vernacular-chip" type="button" data-vernacular-text="ଛାତିରେ ଯନ୍ତ୍ରଣା" data-lang="or" data-lang-name="Odia (ଓଡ଼ିଆ)">
+                <span class="vernacular-lang-pill">ଓଡ଼ିଆ</span> <span class="vernacular-sample-text">ଛାତିରେ ଯନ୍ତ୍ରଣା</span> <small class="vernacular-route-hint">→ Cardiology</small>
+              </button>
+              <button class="vernacular-chip" type="button" data-vernacular-text="سینے میں درد" data-lang="ur" data-lang-name="Urdu (اردو)">
+                <span class="vernacular-lang-pill">اردو</span> <span class="vernacular-sample-text">سینے میں درد</span> <small class="vernacular-route-hint">→ Cardiology</small>
+              </button>
+              <button class="vernacular-chip red-flag-chip" type="button" data-vernacular-text="ஒரு பக்க பலவீனம்" data-lang="ta" data-lang-name="Tamil (தமிழ்)">
+                <span class="vernacular-lang-pill alert">🚨 Tamil</span> <span class="vernacular-sample-text">ஒரு பக்க பலவீனம்</span> <small class="vernacular-route-hint">→ Emergency (RF-02)</small>
+              </button>
+              <button class="vernacular-chip red-flag-chip" type="button" data-vernacular-text="শ্বাসকষ্ট" data-lang="bn" data-lang-name="Bengali (বাংলা)">
+                <span class="vernacular-lang-pill alert">🚨 Bengali</span> <span class="vernacular-sample-text">শ্বাসকষ্ট</span> <small class="vernacular-route-hint">→ Emergency (RF-07)</small>
+              </button>
+            </div>
+          </div>
         </section>
 
         <div class="actions">
@@ -1764,6 +1865,12 @@
             <h1 id="result-title"><span data-copy="matchedCounter">Matched Counter:</span> <span id="result-department"></span></h1>
             <p class="result-reason"><span id="result-reason"></span></p>
             <p class="rule-line"><span data-copy="routeReference">Route reference:</span> <span class="rule-id" id="result-rule-id"></span></p>
+            <div class="audio-readback-wrapper">
+              <button class="audio-readback-btn" type="button" id="btn-audio-readback" aria-label="Listen to OPD guidance spoken in your mother tongue">
+                <span class="audio-icon" aria-hidden="true">🔊</span>
+                <span class="audio-text" id="audio-readback-text">अपनी भाषा में सुनें · Listen Spoken Aloud</span>
+              </button>
+            </div>
             <a class="quiet-choice" href="#" id="choose-department" data-copy="chooseDepartment">Not right? Choose a department yourself.</a>
           </div>
           <div class="result-screen emergency-result" id="emergency-result" hidden>
@@ -1890,6 +1997,37 @@
             <p class="print-only" data-copy="printFooter">SPECIMEN , NOT A REAL APPOINTMENT · independent prototype · mock data.</p>
           </section>
         </section>
+        </section>
+
+        <!-- 22 Scheduled Indian Languages Modal -->
+        <section class="lang-modal" id="modal-languages" role="dialog" aria-modal="true" aria-labelledby="modal-languages-title" hidden>
+          <div class="lang-modal-card">
+            <div class="lang-modal-header">
+              <div>
+                <p class="eyebrow" style="margin:0;"><span class="tag">Constitutional</span> Eighth Schedule · 8वीं अनुसूची</p>
+                <h2 id="modal-languages-title">22 Scheduled Indian Languages · भारतीय भाषाएं</h2>
+                <p class="lang-modal-note">Choose your native language to speak symptoms, view guidance, and hear audio readback.</p>
+              </div>
+              <button class="lang-modal-close" type="button" id="btn-close-languages" aria-label="Close language selector">×</button>
+            </div>
+            
+            <div class="lang-search-bar">
+              <input type="search" id="lang-search-input" class="lang-search-control" placeholder="🔍 Search language, script, or state (e.g. தமிழ், Telugu, WB, Assam)..." aria-label="Search languages" />
+            </div>
+
+            <div class="lang-region-filter" role="tablist" aria-label="Filter languages by region">
+              <button class="lang-region-chip" type="button" data-region="all" aria-pressed="true">All (22)</button>
+              <button class="lang-region-chip" type="button" data-region="South" aria-pressed="false">South (4)</button>
+              <button class="lang-region-chip" type="button" data-region="North / Central" aria-pressed="false">North / Central (7)</button>
+              <button class="lang-region-chip" type="button" data-region="East" aria-pressed="false">East (4)</button>
+              <button class="lang-region-chip" type="button" data-region="West" aria-pressed="false">West (3)</button>
+              <button class="lang-region-chip" type="button" data-region="North-East" aria-pressed="false">North-East (4)</button>
+            </div>
+
+            <div class="lang-grid" id="lang-grid-container" role="group" aria-label="All 22 Languages">
+              <!-- Rendered dynamically by JavaScript from SCHEDULED_LANGUAGES_22 -->
+            </div>
+          </div>
         </section>
 
         <section class="tele-modal" id="tele-modal" role="dialog" aria-modal="true" aria-labelledby="tele-modal-title" hidden>
@@ -2084,7 +2222,7 @@
         faqSafetyA: "नहीं। राहत प्रशासनिक ट्रायेज है, बीमारी की पहचान या डॉक्टर नहीं। आप नियम लागू होने से पहले व्यवस्थित विवरण देखकर पुष्टि करते हैं; एक रेड फ्लैग इमरजेंसी के लिए काफ़ी है।", faqRedFlagA: "साधारण बुकिंग तुरंत रुक जाती है। नतीजा अभी 24/7 इमरजेंसी जाने को कहता है, नियम संदर्भ दिखाता है और ओपीडी अपॉइंटमेंट जारी नहीं करता।", faqPrivacyA: "कोई सर्वर यह जानकारी सेव नहीं करता। परेशानी और मरीज की जानकारी इस सत्र में इसी ब्राउज़र में रहती है; शरीर के नक्शे वाला रास्ता किसी बाहरी सेवा को कुछ नहीं भेजता। आधार, आभा, यूएचआईडी, ओटीपी या असली स्वास्थ्य रिकॉर्ड न लिखें।", faqWaitA: "इंतज़ार का समय चुने गए स्लॉट, डॉक्टर के सुबह के राउंड और नमूना कतार की गति से नकली रूप में निकाला जाता है। यह इस प्रोटोटाइप का ईमानदार अनुमान है, लाइव अस्पताल कतार नहीं।", faqOrsA: "ORS पहले अस्पताल और विभाग चुनने को कहता है। राहत जहाँ दर्द है वहाँ से जीरो-नॉलेज ट्रायेज, साफ़ नकली कतार संदर्भ और इमरजेंसी सुरक्षा देता है। यह ORS से जुड़ा नहीं है।", faqAbdmA: "अभी नहीं। यह प्रोटोटाइप ABDM, e-Hospital HMIS या किसी सरकारी सिस्टम से नहीं जुड़ा है। भविष्य में जोड़ने के लिए साफ़ सहमति, सुरक्षा जाँच और सार्वजनिक सेवा साझेदारी ज़रूरी होगी।",
         roadmapTitle: "राहत के लिए आगे क्या?", roadmapNote: "इस प्रोटोटाइप को अधिक जुड़े हुए और आसान सार्वजनिक सेवा के दरवाज़े में बदलने का नागरिक रोडमैप।", roadmapAbdmTitle: "ABDM और e-Hospital इंटीग्रेशन", roadmapAbdmNote: "बनाए गए नमूना टोकन को आयुष्मान भारत डिजिटल मिशन (ABDM) और राष्ट्रीय हॉस्पिटल मैनेजमेंट इन्फॉर्मेशन सिस्टम (HMIS) से सीधे जोड़ना।", roadmapIvrTitle: "फीचर फोन के लिए AI वॉइस IVR (104 इंटीग्रेशन)", roadmapIvrNote: "ग्रामीण नागरिक टोल-फ्री नंबर पर 22 क्षेत्रीय बोलियों—भोजपुरी, मैथिली, तमिल और बंगाली सहित—में परेशानी बोलें और SMS से ओपीडी टोकन पाएँ।", roadmapQueueTitle: "अस्पताल की लाइव कतार की तस्वीर", roadmapQueueNote: "वेटिंग हॉल के टोकन काउंटर जोड़कर घर से निकलने से पहले परामर्श का लाइव समय दिखाना।", roadmapLanguagesTitle: "पूरे भारत में स्थानीय भाषाओं का विस्तार", roadmapLanguagesNote: "सभी 22 अनुसूचित भारतीय भाषाओं में मूल आवाज़ और बोली का समर्थन बनाना।"
       });
-      const state = { language: "en", screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, fullName: "", phone: "", exactAge: "", gender: null, conditions: [], listening: false, region: null, noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, consultationMode: "in-person", appointmentDate: null, appointmentShift: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
+      const state = { language: "en", selectedDialect: "en", selectedDialectData: null, screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, fullName: "", phone: "", exactAge: "", gender: null, conditions: [], listening: false, region: null, noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, consultationMode: "in-person", appointmentDate: null, appointmentShift: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
       const text = (key) => copy[state.language][key];
       const themeToggle = document.querySelector("#theme-toggle");
       const triageScreen = document.querySelector("#screen-triage");
@@ -3424,18 +3562,20 @@
         if (!Recognition) { showStatus(text("voiceUnsupported"), true); return; }
         const recognizer = new Recognition();
         activeRecognition = recognizer;
-        recognizer.lang = state.language === "hi" ? "hi-IN" : "en-IN";
+        const targetBcp47 = state.selectedDialectData?.bcp47 || (state.language === "hi" ? "hi-IN" : "en-IN");
+        recognizer.lang = targetBcp47;
         recognizer.interimResults = false;
         recognizer.maxAlternatives = 1;
         state.listening = true;
         voiceButton.setAttribute("aria-pressed", "true");
         voiceButton.setAttribute("aria-label", text("voiceStop"));
         document.querySelector("#voice-label").textContent = text("voiceLabelStop");
-        showStatus(text("voiceListening"));
+        const activeLangLabel = state.selectedDialectData ? `${state.selectedDialectData.nativeName} (${state.selectedDialectData.name})` : (state.language === "hi" ? "हिन्दी" : "English");
+        showStatus(`Listening in ${activeLangLabel} — speak freely in your dialect...`);
         recognizer.onresult = (event) => {
           if (speechSilenceTimer) window.clearTimeout(speechSilenceTimer);
           complaint.value = event.results[0][0].transcript;
-          showStatus(text("voiceDone"));
+          showStatus(`Captured in ${activeLangLabel}: "${complaint.value}"`);
         };
         recognizer.onerror = () => { showStatus(text("voiceUnsupported"), true); resetVoiceButton(); };
         recognizer.onend = () => { if (activeRecognition === recognizer) activeRecognition = null; if (speechSilenceTimer) window.clearTimeout(speechSilenceTimer); speechSilenceTimer = null; resetVoiceButton(); };
@@ -3895,6 +4035,251 @@
         });
       }
 
+      
+      // --- 22 Scheduled Indian Languages Registry & Audio Readback ---
+      const SCHEDULED_LANGUAGES_22 = [
+        { code: "en", bcp47: "en-IN", name: "English", nativeName: "English", script: "Latin", region: "Pan-India", states: "All States & UTs" },
+        { code: "hi", bcp47: "hi-IN", name: "Hindi", nativeName: "हिन्दी", script: "Devanagari", region: "North / Central", states: "Delhi, UP, MP, Bihar, Rajasthan, Haryana" },
+        { code: "bn", bcp47: "bn-IN", name: "Bengali", nativeName: "বাংলা", script: "Bengali", region: "East", states: "West Bengal, Tripura, Assam" },
+        { code: "te", bcp47: "te-IN", name: "Telugu", nativeName: "తెలుగు", script: "Telugu", region: "South", states: "Andhra Pradesh, Telangana" },
+        { code: "mr", bcp47: "mr-IN", name: "Marathi", nativeName: "मराठी", script: "Devanagari", region: "West", states: "Maharashtra, Goa" },
+        { code: "ta", bcp47: "ta-IN", name: "Tamil", nativeName: "தமிழ்", script: "Tamil", region: "South", states: "Tamil Nadu, Puducherry" },
+        { code: "ur", bcp47: "ur-IN", name: "Urdu", nativeName: "اُردُو", script: "Perso-Arabic", region: "North / Central", states: "Delhi, UP, Telangana, J&K, Bihar" },
+        { code: "gu", bcp47: "gu-IN", name: "Gujarati", nativeName: "ગુજરાતી", script: "Gujarati", region: "West", states: "Gujarat, Dadra & Nagar Haveli" },
+        { code: "kn", bcp47: "kn-IN", name: "Kannada", nativeName: "ಕನ್ನಡ", script: "Kannada", region: "South", states: "Karnataka" },
+        { code: "ml", bcp47: "ml-IN", name: "Malayalam", nativeName: "മലയാളം", script: "Malayalam", region: "South", states: "Kerala, Lakshadweep" },
+        { code: "pa", bcp47: "pa-IN", name: "Punjabi", nativeName: "ਪੰਜਾਬੀ", script: "Gurmukhi", region: "North / Central", states: "Punjab, Chandigarh, Delhi, Haryana" },
+        { code: "or", bcp47: "or-IN", name: "Odia", nativeName: "ଓଡ଼ିଆ", script: "Odia", region: "East", states: "Odisha" },
+        { code: "as", bcp47: "as-IN", name: "Assamese", nativeName: "অসমীয়া", script: "Bengali-Assamese", region: "North-East", states: "Assam" },
+        { code: "mai", bcp47: "mai-IN", name: "Maithili", nativeName: "मैथिली", script: "Devanagari", region: "East", states: "Bihar, Jharkhand" },
+        { code: "sa", bcp47: "sa-IN", name: "Sanskrit", nativeName: "संस्कृतम्", script: "Devanagari", region: "North / Central", states: "Uttarakhand, Pan-India" },
+        { code: "ks", bcp47: "ks-IN", name: "Kashmiri", nativeName: "كٲشُر / कॉशुर", script: "Perso-Arabic", region: "North / Central", states: "Jammu & Kashmir" },
+        { code: "ne", bcp47: "ne-IN", name: "Nepali", nativeName: "नेपाली", script: "Devanagari", region: "North-East", states: "Sikkim, West Bengal" },
+        { code: "sd", bcp47: "sd-IN", name: "Sindhi", nativeName: "سنڌي / सिंधी", script: "Perso-Arabic", region: "West", states: "Gujarat, Maharashtra, Rajasthan" },
+        { code: "kok", bcp47: "kok-IN", name: "Konkani", nativeName: "कोंकणी", script: "Devanagari", region: "West", states: "Goa, Maharashtra, Karnataka" },
+        { code: "doi", bcp47: "doi-IN", name: "Dogri", nativeName: "डोगरी", script: "Devanagari", region: "North / Central", states: "Jammu & Kashmir, Himachal Pradesh" },
+        { code: "mni", bcp47: "mni-IN", name: "Manipuri (Meitei)", nativeName: "ꯃৈতৈলোନ୍ / মণিপুরী", script: "Meetei Mayek", region: "North-East", states: "Manipur" },
+        { code: "brx", bcp47: "brx-IN", name: "Bodo", nativeName: "बड़ो", script: "Devanagari", region: "North-East", states: "Assam, Meghalaya" },
+        { code: "sat", bcp47: "sat-IN", name: "Santali", nativeName: "ᱥᱟᱱᱛᱟᱲᱤ / संताली", script: "Ol Chiki", region: "East", states: "Jharkhand, West Bengal, Odisha" },
+      ];
+
+      let isSpeakingAloud = false;
+
+      function speakTextAloud(textToSpeak, langCode = "en-IN") {
+        if (!("speechSynthesis" in window)) {
+          showStatus("Audio readback is not supported in this browser.", true);
+          return;
+        }
+        if (window.speechSynthesis.speaking) {
+          window.speechSynthesis.cancel();
+          if (isSpeakingAloud) {
+            isSpeakingAloud = false;
+            updateSpeechButtons(false);
+            return;
+          }
+        }
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.lang = langCode;
+        utterance.rate = 0.92; // Clear, comfortable tempo for non-literate citizens
+        utterance.pitch = 1.0;
+
+        const voices = window.speechSynthesis.getVoices() || [];
+        const matchingVoice = voices.find((v) => v.lang && (v.lang === langCode || v.lang.startsWith(langCode.slice(0, 2))));
+        if (matchingVoice) utterance.voice = matchingVoice;
+
+        utterance.onstart = () => {
+          isSpeakingAloud = true;
+          updateSpeechButtons(true);
+        };
+        utterance.onend = () => {
+          isSpeakingAloud = false;
+          updateSpeechButtons(false);
+        };
+        utterance.onerror = () => {
+          isSpeakingAloud = false;
+          updateSpeechButtons(false);
+        };
+
+        window.speechSynthesis.speak(utterance);
+      }
+
+      function updateSpeechButtons(speaking) {
+        const readbackBtn = document.querySelector("#btn-audio-readback");
+        const readbackText = document.querySelector("#audio-readback-text");
+        if (readbackBtn) {
+          readbackBtn.classList.toggle("is-speaking", speaking);
+          if (readbackText) readbackText.textContent = speaking ? "⏹ Stop Listening · बोलना रोकें" : "🔊 अपनी भाषा में सुनें · Listen Spoken Aloud";
+        }
+      }
+
+      function speakCounterReadback() {
+        if (!state.routeResult) return;
+        const dept = state.routeResult.department;
+        const lang = state.selectedDialectData?.bcp47 || (state.language === "hi" ? "hi-IN" : "en-IN");
+        const hosp = state.selectedHospital ? state.selectedHospital.name : "AIIMS New Delhi";
+        
+        let spokenMsg = "";
+        if (state.routeResult.urgency === "emergency") {
+          if (lang.startsWith("hi")) {
+            spokenMsg = "आपातकालीन चेतावनी: कृपया तुरंत 24/7 आपातकालीन विभाग यानी इमरजेंसी जाएं। अपॉइंटमेंट का इंतज़ार न करें।";
+          } else if (lang.startsWith("ta")) {
+            spokenMsg = "அவசர எச்சரிக்கை: தயவுசெய்து உடனடியாக அவசர சிகிச்சைப் பிரிவுக்கு செல்லவும். அப்பாயிண்ட்மெண்ட்டிற்கு காத்திருக்க வேண்டாம்.";
+          } else if (lang.startsWith("bn")) {
+            spokenMsg = "জরুরি সতর্কতা: অনুগ্রহ করে অবিলম্বে জরুরি বিভাগে যান। কোনো অ্যাপয়েন্টমেন্টের অপেক্ষা করবেন না।";
+          } else if (lang.startsWith("te")) {
+            spokenMsg = "అత్యవసర హెచ్చరిక: దయచేసి వెంటనే అత్యవసర విభాగానికి వెళ్ళండి. అపాయింట్‌మెంట్ కోసం వేచి ఉండకండి.";
+          } else if (lang.startsWith("mr")) {
+            spokenMsg = "तातडीची चेतावणी: कृपया त्वरित अपघात आणि आणीबाणी विभागात जा. अपॉइंटमेंटची वाट पाहू नका.";
+          } else {
+            spokenMsg = "Emergency alert: Please proceed immediately to the hospital Emergency department. Do not wait for an appointment.";
+          }
+        } else {
+          if (lang.startsWith("hi")) {
+            spokenMsg = `आपका ओपीडी काउंटर: ${dept} विभाग, अस्पताल: ${hosp}। कृपया पिछला पर्चा और आधार कार्ड साथ रखें।`;
+          } else if (lang.startsWith("ta")) {
+            spokenMsg = `உங்கள் ஓபிடி கவுண்டர்: ${dept} பிரிவு, மருத்துவமனை: ${hosp}. பழைய மருத்துவ ஆவணங்களை உடன் கொண்டு வாருங்கள்.`;
+          } else if (lang.startsWith("bn")) {
+            spokenMsg = `আপনার ওপিডি কাউন্টার: ${dept} বিভাগ, হাসপাতাল: ${hosp}। পুরানো প্রেসক্রিপশন সাথে রাখুন।`;
+          } else if (lang.startsWith("te")) {
+            spokenMsg = `మీ ఓపీడీ కౌంటర్: ${dept} విభాగం, ఆసుపత్రి: ${hosp}. దయచేసి పాత వైద్య పత్రాలు తీసుకురండి.`;
+          } else if (lang.startsWith("mr")) {
+            spokenMsg = `तुमचा ओपीडी काउंटर: ${dept} विभाग, रुग्णालय: ${hosp}. कृपया जुनी कागदपत्रे सोबत आणा.`;
+          } else {
+            spokenMsg = `Your matched counter is ${dept} Department at ${hosp}. Please carry your previous medical prescription and identity card.`;
+          }
+        }
+        speakTextAloud(spokenMsg, lang);
+      }
+
+      function wireVernacularExpansion() {
+        const modal = document.querySelector("#modal-languages");
+        const openBtn = document.querySelector("#btn-open-languages");
+        const showcaseBrowseBtn = document.querySelector("#btn-showcase-all-langs");
+        const closeBtn = document.querySelector("#btn-close-languages");
+        const searchInput = document.querySelector("#lang-search-input");
+        const regionChips = document.querySelectorAll(".lang-region-chip");
+        const gridContainer = document.querySelector("#lang-grid-container");
+        const badge = document.querySelector("#current-lang-badge");
+        const vernacularChips = document.querySelectorAll(".vernacular-chip");
+        const audioReadbackBtn = document.querySelector("#btn-audio-readback");
+
+        let activeRegion = "all";
+        let searchQuery = "";
+
+        function openModal() {
+          if (!modal) return;
+          modal.hidden = false;
+          openBtn?.setAttribute("aria-expanded", "true");
+          searchInput?.focus();
+          renderLanguageGrid();
+        }
+
+        function closeModal() {
+          if (!modal) return;
+          modal.hidden = true;
+          openBtn?.setAttribute("aria-expanded", "false");
+        }
+
+        openBtn?.addEventListener("click", openModal);
+        showcaseBrowseBtn?.addEventListener("click", openModal);
+        closeBtn?.addEventListener("click", closeModal);
+        modal?.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+
+        searchInput?.addEventListener("input", (e) => {
+          searchQuery = e.target.value.toLowerCase().trim();
+          renderLanguageGrid();
+        });
+
+        regionChips.forEach((chip) => {
+          chip.addEventListener("click", () => {
+            regionChips.forEach((c) => c.setAttribute("aria-pressed", "false"));
+            chip.setAttribute("aria-pressed", "true");
+            activeRegion = chip.dataset.region;
+            renderLanguageGrid();
+          });
+        });
+
+        function renderLanguageGrid() {
+          if (!gridContainer) return;
+          gridContainer.innerHTML = "";
+
+          const filtered = SCHEDULED_LANGUAGES_22.filter((lang) => {
+            const matchesRegion = activeRegion === "all" || lang.region.includes(activeRegion);
+            const matchesSearch = !searchQuery ||
+              lang.name.toLowerCase().includes(searchQuery) ||
+              lang.nativeName.toLowerCase().includes(searchQuery) ||
+              lang.script.toLowerCase().includes(searchQuery) ||
+              lang.states.toLowerCase().includes(searchQuery);
+            return matchesRegion && matchesSearch;
+          });
+
+          if (filtered.length === 0) {
+            gridContainer.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color: var(--muted); padding: 2rem;">No matching languages found for "${searchQuery}".</p>`;
+            return;
+          }
+
+          filtered.forEach((lang) => {
+            const card = document.createElement("button");
+            card.type = "button";
+            card.className = "lang-card";
+            if (state.selectedDialect === lang.code) card.classList.add("active");
+            card.innerHTML = `
+              <div>
+                <div class="lang-card-top">
+                  <span class="lang-card-native">${lang.nativeName}</span>
+                  <span class="lang-card-code">${lang.bcp47}</span>
+                </div>
+                <div class="lang-card-name">${lang.name} · ${lang.script}</div>
+              </div>
+              <div class="lang-card-meta">📍 ${lang.states}</div>
+            `;
+
+            card.addEventListener("click", () => {
+              state.selectedDialect = lang.code;
+              state.selectedDialectData = lang;
+              if (badge) badge.textContent = `${lang.nativeName} (${lang.name})`;
+              if (lang.code === "hi") {
+                state.language = "hi";
+                renderLanguage();
+              } else if (lang.code === "en") {
+                state.language = "en";
+                renderLanguage();
+              }
+              closeModal();
+              showStatus(`Switched voice & triage dialect to ${lang.nativeName} (${lang.name}). Microphone now listens in ${lang.bcp47}.`);
+            });
+
+            gridContainer.appendChild(card);
+          });
+        }
+
+        // Vernacular 1-tap chips in Step 1
+        vernacularChips.forEach((chip) => {
+          chip.addEventListener("click", () => {
+            const textToFill = chip.dataset.vernacularText;
+            const langCode = chip.dataset.lang;
+            const langName = chip.dataset.langName;
+            if (complaint) {
+              complaint.value = textToFill;
+              complaint.focus();
+            }
+            const foundLang = SCHEDULED_LANGUAGES_22.find((l) => l.code === langCode);
+            if (foundLang) {
+              state.selectedDialect = foundLang.code;
+              state.selectedDialectData = foundLang;
+              if (badge) badge.textContent = `${foundLang.nativeName}`;
+            }
+            showStatus(`Loaded ${langName}: "${textToFill}". Click Continue or Start Triage to evaluate.`);
+          });
+        });
+
+        // Audio readback button
+        audioReadbackBtn?.addEventListener("click", () => {
+          speakCounterReadback();
+        });
+      }
+
+      wireVernacularExpansion();
       wireDoctorPortal();
       wirePrescriptionOCR();
       wireWhatsAppSimulator();

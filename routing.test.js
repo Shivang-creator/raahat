@@ -181,3 +181,87 @@ test("all nine red-flag phrases remain Emergency routes", () => {
     assert.match(result.rule_id, /^RF-/);
   }
 });
+
+test("pan-India vernacular phrases across scheduled languages route accurately without reassurance", () => {
+  const vernacularCases = [
+    // Tamil
+    { phrase: "நெஞ்சு வலி", lang: "ta", department: "Cardiology", region: "chest", kind: "pain" },
+    { phrase: "தலைவலி", lang: "ta", department: "Neurology", region: "head", kind: "pain" },
+    { phrase: "வயிற்று வலி", lang: "ta", department: "Gastroenterology", region: "upper-abdomen", kind: "vomiting" },
+    { phrase: "காய்ச்சல்", lang: "ta", department: "General Medicine", region: "general", kind: "fever" },
+    { phrase: "ஒரு பக்க பலவீனம்", lang: "ta", department: "Emergency", urgency: "emergency", marker: "one-sided-weakness", rule_id: "RF-02" },
+    { phrase: "மூச்சு திணறல்", lang: "ta", department: "Emergency", urgency: "emergency", marker: "difficulty-breathing", rule_id: "RF-07" },
+    { phrase: "நெஞ்சு வலி மூச்சு திணறல்", lang: "ta", department: "Emergency", urgency: "emergency", marker: "breathlessness", rule_id: "RF-01" },
+
+    // Telugu
+    { phrase: "ఛాతీ నొప్పి", lang: "te", department: "Cardiology", region: "chest", kind: "pain" },
+    { phrase: "తలనొప్పి", lang: "te", department: "Neurology", region: "head", kind: "pain" },
+    { phrase: "కడుపు నొప్పి", lang: "te", department: "Gastroenterology", region: "upper-abdomen", kind: "vomiting" },
+    { phrase: "జ్వరం", lang: "te", department: "General Medicine", region: "general", kind: "fever" },
+    { phrase: "ఒక వైపు బలహీనత", lang: "te", department: "Emergency", urgency: "emergency", marker: "one-sided-weakness", rule_id: "RF-02" },
+
+    // Bengali
+    { phrase: "বুকে ব্যথা", lang: "bn", department: "Cardiology", region: "chest", kind: "pain" },
+    { phrase: "মাথা ব্যথা", lang: "bn", department: "Neurology", region: "head", kind: "pain" },
+    { phrase: "পেট ব্যথা", lang: "bn", department: "Gastroenterology", region: "upper-abdomen", kind: "vomiting" },
+    { phrase: "জ্বর", lang: "bn", department: "General Medicine", region: "general", kind: "fever" },
+    { phrase: "শ্বাসকষ্ট", lang: "bn", department: "Emergency", urgency: "emergency", marker: "difficulty-breathing", rule_id: "RF-07" },
+    { phrase: "বুকে ব্যথা শ্বাসকষ্ট", lang: "bn", department: "Emergency", urgency: "emergency", marker: "breathlessness", rule_id: "RF-01" },
+
+    // Marathi
+    { phrase: "छातीत दुखणे", lang: "mr", department: "Cardiology", region: "chest", kind: "pain" },
+    { phrase: "डोकेदुखी", lang: "mr", department: "Neurology", region: "head", kind: "pain" },
+    { phrase: "पोटात दुखणे", lang: "mr", department: "Gastroenterology", region: "upper-abdomen", kind: "vomiting" },
+    { phrase: "ताप", lang: "mr", department: "General Medicine", region: "general", kind: "fever" },
+    { phrase: "एका बाजूला अशक्तपणा", lang: "mr", department: "Emergency", urgency: "emergency", marker: "one-sided-weakness", rule_id: "RF-02" },
+
+    // Kannada
+    { phrase: "ಎದೆ ನೋವು", lang: "kn", department: "Cardiology", region: "chest", kind: "pain" },
+    { phrase: "ತಲೆನೋವು", lang: "kn", department: "Neurology", region: "head", kind: "pain" },
+    { phrase: "ಹೊಟ್ಟೆ ನೋವು", lang: "kn", department: "Gastroenterology", region: "upper-abdomen", kind: "vomiting" },
+    { phrase: "ಜ್ವರ", lang: "kn", department: "General Medicine", region: "general", kind: "fever" },
+    { phrase: "ಉಸಿರಾಟದ ತೊಂದರೆ", lang: "kn", department: "Emergency", urgency: "emergency", marker: "difficulty-breathing", rule_id: "RF-07" },
+
+    // Gujarati
+    { phrase: "છાતીમાં દુખાવો", lang: "gu", department: "Cardiology", region: "chest", kind: "pain" },
+    { phrase: "માથાનો દુખાવો", lang: "gu", department: "Neurology", region: "head", kind: "pain" },
+    { phrase: "પેટમાં દુખાવો", lang: "gu", department: "Gastroenterology", region: "upper-abdomen", kind: "vomiting" },
+    { phrase: "તાવ", lang: "gu", department: "General Medicine", region: "general", kind: "fever" },
+
+    // Malayalam
+    { phrase: "നെഞ്ചുവേദന", lang: "ml", department: "Cardiology", region: "chest", kind: "pain" },
+    { phrase: "തലവേദന", lang: "ml", department: "Neurology", region: "head", kind: "pain" },
+    { phrase: "വയറുവേദന", lang: "ml", department: "Gastroenterology", region: "upper-abdomen", kind: "vomiting" },
+    { phrase: "പനി", lang: "ml", department: "General Medicine", region: "general", kind: "fever" },
+
+    // Punjabi
+    { phrase: "ਛਾਤੀ ਵਿੱਚ ਦਰਦ", lang: "pa", department: "Cardiology", region: "chest", kind: "pain" },
+    { phrase: "ਸਿਰ ਦਰਦ", lang: "pa", department: "Neurology", region: "head", kind: "pain" },
+    { phrase: "ਬੁਖਾਰ", lang: "pa", department: "General Medicine", region: "general", kind: "fever" },
+
+    // Odia
+    { phrase: "ଛାତିରେ ଯନ୍ତ୍ରଣା", lang: "or", department: "Cardiology", region: "chest", kind: "pain" },
+    { phrase: "ମୁଣ୍ଡ ବିନ୍ଧା", lang: "or", department: "Neurology", region: "head", kind: "pain" },
+    { phrase: "ଜ୍ୱର", lang: "or", department: "General Medicine", region: "general", kind: "fever" },
+
+    // Urdu
+    { phrase: "سینے میں درد", lang: "ur", department: "Cardiology", region: "chest", kind: "pain" },
+    { phrase: "سر درد", lang: "ur", department: "Neurology", region: "head", kind: "pain" },
+    { phrase: "پیٹ میں درد", lang: "ur", department: "Gastroenterology", region: "upper-abdomen", kind: "vomiting" },
+    { phrase: "ایک طرف کمزوری", lang: "ur", department: "Emergency", urgency: "emergency", marker: "one-sided-weakness", rule_id: "RF-02" },
+  ];
+
+  for (const tc of vernacularCases) {
+    const complaint = parseFreeTextComplaint(tc.phrase, tc.lang);
+    assert.equal(complaint.parsed, true, `Parsed flag for "${tc.phrase}" (${tc.lang})`);
+    if (tc.region) assert.equal(complaint.region, tc.region, `Region for "${tc.phrase}"`);
+    if (tc.kind) assert.equal(complaint.kind, tc.kind, `Kind for "${tc.phrase}"`);
+    if (tc.marker) assert.ok(complaint.severity_markers.includes(tc.marker), `Marker for "${tc.phrase}"`);
+
+    const result = routeComplaint(complaint);
+    assert.equal(result.department, tc.department, `Department for "${tc.phrase}" (${tc.lang})`);
+    if (tc.urgency) assert.equal(result.urgency, tc.urgency, `Urgency for "${tc.phrase}"`);
+    if (tc.rule_id) assert.equal(result.rule_id, tc.rule_id, `Rule ID for "${tc.phrase}"`);
+  }
+});
+
