@@ -70,27 +70,28 @@
       :focus-visible { outline: 4px solid var(--focus); outline-offset: 3px; }
 
       .app-shell { width: min(100%, 90rem); min-height: 100vh; margin: 0 auto; padding: 0 clamp(1rem, 3vw, 2.5rem) 1.5rem; display: flex; flex-direction: column; }
-      .topline { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 5.5rem; padding: 0.7rem 0; border-bottom: 1px solid rgba(203, 213, 225, 0.78); background: rgba(248, 250, 249, 0.93); backdrop-filter: blur(18px); }
-      .brand-lockup { display: flex; align-items: center; gap: 0.75rem; min-width: 0; color: var(--accent-dark); text-decoration: none; }
-      .brand-mark { flex: 0 0 3.5rem; width: 3.5rem; height: 3.5rem; }
-      .brand-copy { display: grid; gap: 0.1rem; min-width: 0; }
-      .wordmark { color: var(--accent-dark); font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 850; letter-spacing: -0.03em; }
-      .tagline { color: var(--muted); font-size: 0.9rem; line-height: 1.2; }
-      .site-nav { display: none; align-items: center; gap: 0.18rem; }
-      .site-nav a { position: relative; min-height: 3.25rem; display: inline-flex; align-items: center; padding: 0.5rem 0.75rem; border-radius: 0.7rem; color: var(--muted); font-size: 0.89rem; font-weight: 800; text-decoration: none; white-space: nowrap; }
+      
+      /* --- Compact Sleek Topline Header --- */
+      .topline { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 3.75rem; padding: 0.4rem 0; border-bottom: 1px solid rgba(203, 213, 225, 0.78); background: rgba(248, 250, 249, 0.94); backdrop-filter: blur(18px); }
+      [data-theme="dark"] .topline { border-bottom-color: rgba(36, 66, 52, 0.85); background: rgba(14, 25, 20, 0.94); }
+      .brand-lockup { display: flex; align-items: center; gap: 0.65rem; min-width: 0; color: var(--accent-dark); text-decoration: none; flex-shrink: 0; }
+      .brand-mark { flex: 0 0 2.5rem; width: 2.5rem; height: 2.5rem; }
+      .brand-copy { display: grid; gap: 0.05rem; min-width: 0; }
+      .wordmark { color: var(--accent-dark); font-size: clamp(1.05rem, 1.8vw, 1.28rem); font-weight: 850; letter-spacing: -0.02em; line-height: 1.1; }
+      .tagline { color: var(--muted); font-size: 0.78rem; line-height: 1.15; white-space: nowrap; }
+      .site-nav { display: none; align-items: center; gap: 0.2rem; }
+      .site-nav a { position: relative; min-height: 2.25rem; display: inline-flex; align-items: center; padding: 0.35rem 0.65rem; border-radius: 0.55rem; color: var(--muted); font-size: 0.86rem; font-weight: 750; text-decoration: none; white-space: nowrap; transition: background 150ms ease, color 150ms ease; }
       .site-nav a:hover, .site-nav a[aria-current="page"] { background: var(--accent-soft); color: var(--accent-dark); }
-      .site-nav a[aria-current="page"]::after { position: absolute; right: 0.75rem; bottom: 0.18rem; left: 0.75rem; height: 0.2rem; border-radius: 999px; background: var(--accent); content: ""; }
-      .language-toggle { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.25rem; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); }
-      .language-toggle button { min-height: 2.75rem; padding: 0.35rem 0.8rem; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font-size: 0.95rem; font-weight: 700; }
-      .language-toggle button[aria-pressed="true"] { background: var(--accent); color: #fff; }
-      .nav-actions { display: flex; align-items: center; gap: 0.55rem; }
-      .theme-toggle { display: inline-grid; width: 3.5rem; height: 3.5rem; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: var(--radius-full); background: var(--paper); color: var(--ink); transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease; }
-      .theme-toggle:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-1px); }
-      .theme-toggle .icon { width: 1.35rem; height: 1.35rem; }
-      .nav-start { min-height: 3.5rem; padding: 0.55rem 0.9rem; border: 0; border-radius: var(--radius-full); background: var(--accent); color: #fff; font-size: 0.95rem; font-weight: 850; box-shadow: 0 0.45rem 1rem rgba(22, 101, 52, 0.18); }
+      .site-nav a[aria-current="page"]::after { position: absolute; right: 0.65rem; bottom: 0.15rem; left: 0.65rem; height: 0.18rem; border-radius: 999px; background: var(--accent); content: ""; }
+      .nav-actions { display: flex; align-items: center; gap: 0.45rem; flex-shrink: 0; }
+      .nav-profile-btn { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.4rem; padding: 0.35rem 0.75rem; border: 1.5px solid var(--line); border-radius: var(--radius-full); background: var(--paper); color: var(--ink); font-size: 0.86rem; font-weight: 750; cursor: pointer; transition: all 150ms ease; }
+      .nav-profile-btn:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
+      .theme-toggle { display: inline-grid; width: 2.4rem; height: 2.4rem; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: var(--radius-full); background: var(--paper); color: var(--ink); transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease; }
+      .theme-toggle .icon { width: 1.15rem; height: 1.15rem; }
+      .nav-start { min-height: 2.4rem; padding: 0.4rem 0.85rem; border: 0; border-radius: var(--radius-full); background: var(--accent); color: #fff; font-size: 0.88rem; font-weight: 850; box-shadow: 0 0.3rem 0.8rem rgba(22, 101, 52, 0.18); cursor: pointer; }
       .nav-start:hover { background: var(--accent-dark); }
 
-      main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
+main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .eyebrow { margin: 0 0 0.65rem; color: var(--muted); font-size: 1rem; font-weight: 750; letter-spacing: 0.02em; }
       h1 { max-width: 18ch; margin: 0; color: var(--ink); font-size: 3.25rem; font-weight: 780; letter-spacing: -0.03em; line-height: 1.08; }
       .question-note { max-width: 36rem; margin: 1rem 0 0; color: var(--muted); font-size: 1.125rem; line-height: 1.55; }
@@ -871,27 +872,31 @@
       .workspace-privacy { margin: 1rem 0 0; padding: 0.8rem; border: 1px solid #a9c8ba; border-radius: 0.75rem; background: #f5fbf7; color: #183f31; font-size: 0.96rem; line-height: 1.45; }
       .support-label { font-weight: 800; color: var(--ink); }
 
-      @media (min-width: 760px) {
-        .site-nav { display: inline-flex; }
-        .topline { flex-wrap: wrap; }
-        .site-nav { order: 3; width: 100%; overflow-x: auto; justify-content: center; scrollbar-width: none; }
+      @media (min-width: 1024px) {
+        .topline { flex-wrap: nowrap; }
+        .site-nav { display: inline-flex; flex: 1; justify-content: center; margin: 0 0.5rem; overflow-x: auto; scrollbar-width: none; }
         .site-nav::-webkit-scrollbar { display: none; }
         .landing-hero { grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr); }
         .journey-grid, .network-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         .roadmap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .triage-workspace { grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.65fr); align-items: start; }
-        .workspace-side { position: sticky; top: 6rem; }
+        .workspace-side { position: sticky; top: 5rem; }
       }
-      @media (min-width: 1100px) {
-        .landing-hero { gap: 4rem; }
-        .network-grid { gap: 1rem; }
+      @media (max-width: 1023px) and (min-width: 760px) {
+        .topline { flex-wrap: wrap; padding: 0.35rem 0 0.45rem; }
+        .site-nav { display: inline-flex; order: 3; width: 100%; overflow-x: auto; justify-content: flex-start; scrollbar-width: none; }
+        .site-nav::-webkit-scrollbar { display: none; }
+        .landing-hero { grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr); }
+        .journey-grid, .network-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .roadmap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .triage-workspace { grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.65fr); align-items: start; }
+        .workspace-side { position: sticky; top: 5rem; }
       }
       @media (max-width: 759px) {
-        .topline { align-items: center; }
+        .topline { flex-wrap: wrap; padding: 0.35rem 0 0.45rem; align-items: center; }
         .tagline { display: none; }
         .site-nav { display: flex; order: 3; width: 100%; overflow-x: auto; scrollbar-width: none; }
         .site-nav::-webkit-scrollbar { display: none; }
-        .topline { flex-wrap: wrap; }
         .site-nav a { white-space: nowrap; }
         .nav-actions { margin-left: auto; }
         .nav-start { padding-inline: 0.75rem; font-size: 0.88rem; }
@@ -1055,6 +1060,147 @@
       .audio-readback-btn:hover { background: var(--accent); color: #fff; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(45,212,191,0.3); }
       .audio-readback-btn.is-speaking { background: var(--marigold); color: #000; border-color: var(--marigold); animation: audioPulse 1.2s infinite; }
 
+    
+      /* ====================================================
+         CIVIC TECH FOOTER & ATTRIBUTION STYLES
+         ==================================================== */
+      .site-footer { margin-top: 4rem; padding: 3rem 0 2rem; border-top: 2px solid var(--line); background: var(--paper); border-radius: 1.5rem 1.5rem 0 0; }
+      .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+      @media (min-width: 640px) { .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (min-width: 1040px) { .footer-grid { grid-template-columns: 1.3fr 1.1fr 1fr 1.1fr; } }
+      .footer-col { display: flex; flex-direction: column; gap: 1rem; }
+      .footer-brand-lockup { display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; }
+      .footer-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.55; margin: 0; }
+      
+      .hackathon-credential-card { padding: 1rem 1.15rem; border-radius: 1rem; border: 1.5px solid rgba(217, 119, 6, 0.4); background: linear-gradient(135deg, rgba(254, 243, 199, 0.45) 0%, rgba(255, 251, 235, 0.85) 100%); display: flex; flex-direction: column; gap: 0.5rem; }
+      [data-theme="dark"] .hackathon-credential-card { border-color: rgba(217, 119, 6, 0.5); background: linear-gradient(135deg, rgba(69, 39, 14, 0.3) 0%, rgba(26, 46, 36, 0.7) 100%); }
+      .hackathon-badge-header { display: flex; align-items: center; gap: 0.65rem; }
+      .hackathon-spark { font-size: 1.3rem; }
+      .hackathon-eyebrow { font-size: 0.72rem; font-weight: 850; letter-spacing: 0.06em; color: #b45309; text-transform: uppercase; }
+      [data-theme="dark"] .hackathon-eyebrow { color: #f59e0b; }
+      .hackathon-name { font-size: 1.1rem; font-weight: 850; margin: 0; color: var(--ink); line-height: 1.2; }
+      .hackathon-organizers { font-size: 0.88rem; color: var(--muted); margin: 0; }
+      .hackathon-meta-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+      
+      .creator-card { padding: 1.15rem; border-radius: 1rem; border: 1.5px solid var(--line); background: var(--background); display: flex; flex-direction: column; gap: 0.75rem; }
+      .creator-info { display: flex; align-items: center; gap: 0.75rem; }
+      .creator-avatar { width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--accent-soft); display: grid; place-items: center; font-size: 1.3rem; }
+      .creator-name { font-size: 1.1rem; font-weight: 850; color: var(--ink); display: block; line-height: 1.2; }
+      .creator-role { font-size: 0.82rem; color: var(--muted); font-weight: 700; }
+      .creator-bio { font-size: 0.88rem; color: var(--muted); line-height: 1.45; margin: 0; }
+      .creator-social-links { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.25rem; }
+      .social-link { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.4rem 0.75rem; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: 0.84rem; font-weight: 750; text-decoration: none; transition: all 150ms ease; }
+      .social-link:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); transform: translateY(-1px); }
+      .social-icon { width: 0.95rem; height: 0.95rem; }
+      
+      .footer-heading { font-size: 1.05rem; font-weight: 850; color: var(--ink); margin: 0; letter-spacing: -0.01em; }
+      .footer-links-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; }
+      .footer-links-list a { color: var(--muted); text-decoration: none; font-size: 0.92rem; font-weight: 700; transition: color 150ms ease; }
+      .footer-links-list a:hover { color: var(--accent-dark); text-decoration: underline; }
+      
+      .helpline-badges { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+      .helpline-card { display: flex; flex-direction: column; padding: 0.65rem 0.8rem; border-radius: 0.75rem; border: 1px solid var(--line); background: var(--background); text-decoration: none; color: var(--ink); transition: border-color 150ms ease; }
+      .helpline-card:hover { border-color: var(--emergency-red); }
+      .helpline-num { font-size: 1.15rem; font-weight: 850; color: var(--emergency-red); line-height: 1.1; }
+      .helpline-name { font-size: 0.78rem; color: var(--muted); font-weight: 700; margin: 0.15rem 0 0.35rem; }
+      .grievance-box { margin-top: 0.5rem; padding: 0.75rem; border-radius: 0.75rem; background: var(--accent-soft); }
+      .grievance-link { display: inline-block; margin-top: 0.25rem; font-size: 0.88rem; font-weight: 800; color: var(--accent-dark); }
+      
+      .footer-bottom-bar { border-top: 1px solid var(--line); padding-top: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+      .prototype-notice { color: var(--muted); font-size: 0.88rem; margin: 0; }
+      .footer-copy { color: var(--muted); font-size: 0.85rem; margin: 0; font-weight: 700; }
+
+      /* ====================================================
+         CITIZEN PROFILE & HISTORY STYLES (#screen-profile)
+         ==================================================== */
+      .profile-layout { display: flex; flex-direction: column; gap: 2rem; margin-top: 1.5rem; }
+      .active-pass-card { padding: 1.5rem; border-radius: 1.25rem; border: 2.5px solid var(--accent); background: var(--paper); box-shadow: var(--card-shadow); display: flex; flex-direction: column; gap: 1.25rem; }
+      .pass-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem; }
+      .pass-token-badge { font-size: 1.45rem; font-weight: 900; color: var(--accent-dark); letter-spacing: -0.02em; }
+      .pass-status-pill { padding: 0.35rem 0.85rem; border-radius: 999px; font-weight: 800; font-size: 0.88rem; background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+      .pass-status-pill.inside { background: #dcfce7; color: #166534; border-color: #86efac; }
+      .pass-status-pill.seen { background: #e0f2fe; color: #075985; border-color: #7dd3fc; }
+      
+      .pass-body { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+      @media (min-width: 768px) { .pass-body { grid-template-columns: 2fr 1fr; } }
+      .pass-info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+      .pass-field-label { font-size: 0.78rem; font-weight: 800; color: var(--muted); text-transform: uppercase; margin-bottom: 0.15rem; }
+      .pass-field-value { font-size: 1.05rem; font-weight: 750; color: var(--ink); margin: 0; }
+      
+      .queue-live-meter { padding: 1rem; border-radius: 0.85rem; background: var(--accent-soft); border: 1.5px solid rgba(22, 101, 52, 0.2); display: flex; flex-direction: column; gap: 0.5rem; }
+      .meter-title { display: flex; justify-content: space-between; font-weight: 800; font-size: 0.95rem; color: var(--accent-dark); }
+      .meter-bar { height: 0.55rem; width: 100%; border-radius: 999px; background: rgba(22, 101, 52, 0.15); overflow: hidden; }
+      .meter-fill { height: 100%; width: 68%; border-radius: 999px; background: var(--accent); transition: width 300ms ease; }
+      .pass-qr-box { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; border-radius: 0.85rem; border: 1.5px dashed var(--line); background: var(--background); text-align: center; }
+      .pass-actions-bar { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+      
+      .profile-section-title { font-size: 1.35rem; font-weight: 850; color: var(--ink); margin: 1.5rem 0 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+      .history-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+      @media (min-width: 860px) { .history-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+      .history-card { padding: 1.15rem; border-radius: 1rem; border: 1.5px solid var(--line); background: var(--paper); display: flex; flex-direction: column; gap: 0.75rem; transition: transform 150ms ease, border-color 150ms ease; }
+      .history-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+      .history-card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 0.5rem; font-size: 0.85rem; font-weight: 750; color: var(--muted); }
+      .history-dept { font-size: 1.1rem; font-weight: 850; color: var(--ink); margin: 0; }
+      .history-hosp { font-size: 0.9rem; color: var(--muted); font-weight: 700; margin: 0; }
+      .history-complaint { font-size: 0.92rem; color: var(--ink); font-style: italic; background: var(--background); padding: 0.5rem 0.65rem; border-radius: 0.5rem; margin: 0; }
+      .history-meta { font-size: 0.84rem; color: var(--muted); display: flex; flex-direction: column; gap: 0.2rem; }
+      
+      .family-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+      @media (min-width: 768px) { .family-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+      .family-card { padding: 1.15rem; border-radius: 1rem; border: 1.5px solid var(--line); background: var(--paper); display: flex; flex-direction: column; gap: 0.65rem; cursor: pointer; transition: all 150ms ease; }
+      .family-card:hover, .family-card.active { border-color: var(--accent); background: var(--accent-soft); }
+      .family-avatar { width: 3rem; height: 3rem; border-radius: 50%; background: var(--paper); border: 2px solid var(--accent); display: grid; place-items: center; font-size: 1.5rem; margin-bottom: 0.25rem; }
+      .family-name { font-size: 1.15rem; font-weight: 850; color: var(--ink); margin: 0; }
+      .family-meta { font-size: 0.86rem; color: var(--muted); font-weight: 700; }
+      .family-tags { display: flex; gap: 0.35rem; flex-wrap: wrap; margin-top: 0.35rem; }
+
+      /* ====================================================
+         MULTI-ROLE HOSPITAL SUITE STYLES (#screen-doctor)
+         ==================================================== */
+      .hospital-role-tabs { display: flex; gap: 0.45rem; padding: 0.35rem; border-radius: 1rem; border: 1.5px solid var(--line); background: var(--paper); margin: 1.25rem 0; overflow-x: auto; scrollbar-width: none; }
+      .hospital-role-tabs::-webkit-scrollbar { display: none; }
+      .role-tab { flex: 1 1 auto; min-height: 2.85rem; padding: 0.5rem 1rem; border: 0; border-radius: 0.75rem; background: transparent; color: var(--muted); font-size: 0.95rem; font-weight: 800; cursor: pointer; white-space: nowrap; transition: all 150ms ease; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; }
+      .role-tab:hover { background: var(--background); color: var(--ink); }
+      .role-tab.active { background: var(--accent); color: #fff; box-shadow: 0 0.25rem 0.65rem rgba(22, 101, 52, 0.2); }
+      
+      .rx-builder-card { margin-top: 1.25rem; padding: 1.15rem; border-radius: 1rem; border: 1.5px solid var(--line); background: var(--background); }
+      .rx-chips-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0; }
+      .rx-chip { padding: 0.35rem 0.65rem; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: 0.84rem; font-weight: 700; cursor: pointer; transition: all 120ms ease; }
+      .rx-chip:hover { border-color: var(--accent); background: var(--accent-soft); }
+      .rx-chip.added { border-color: var(--accent); background: var(--accent); color: #fff; }
+      
+      /* Registration Counter Terminal */
+      .counter-terminal-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1rem; }
+      @media (min-width: 900px) { .counter-terminal-grid { grid-template-columns: 1.2fr 0.8fr; } }
+      .counter-form-card { padding: 1.5rem; border-radius: 1.25rem; border: 2px solid var(--line); background: var(--paper); }
+      .thermal-slip-card { padding: 1.5rem; border-radius: 1.25rem; border: 2px dashed #94a3b8; background: #fffdfa; color: #1e293b; box-shadow: var(--card-shadow); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+      [data-theme="dark"] .thermal-slip-card { background: #13221b; color: #e2e8f0; border-color: #334e40; }
+      .thermal-header { text-align: center; border-bottom: 2px dashed #94a3b8; padding-bottom: 0.75rem; margin-bottom: 0.85rem; }
+      .thermal-token-num { font-size: 2rem; font-weight: 900; color: #0f172a; margin: 0.35rem 0; letter-spacing: 0.05em; }
+      [data-theme="dark"] .thermal-token-num { color: #5eead4; }
+      .thermal-row { display: flex; justify-content: space-between; font-size: 0.88rem; margin: 0.3rem 0; }
+      
+      /* CMO Dashboard */
+      .cmo-dashboard-grid { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem; }
+      .kpi-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
+      @media (min-width: 900px) { .kpi-row { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+      .kpi-stat-card { padding: 1.15rem; border-radius: 1rem; border: 1.5px solid var(--line); background: var(--paper); display: flex; flex-direction: column; gap: 0.25rem; }
+      .kpi-label { font-size: 0.8rem; font-weight: 800; color: var(--muted); text-transform: uppercase; }
+      .kpi-value { font-size: 1.85rem; font-weight: 900; color: var(--ink); line-height: 1.1; }
+      .kpi-sub { font-size: 0.82rem; font-weight: 750; color: var(--accent); }
+      .kpi-sub.alert { color: var(--emergency-red); }
+      
+      .cmo-panels-row { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+      @media (min-width: 900px) { .cmo-panels-row { grid-template-columns: 1.1fr 0.9fr; } }
+      .cmo-panel { padding: 1.25rem; border-radius: 1rem; border: 1.5px solid var(--line); background: var(--paper); }
+      .load-matrix-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; }
+      .load-matrix-table th, .load-matrix-table td { padding: 0.65rem 0.5rem; text-align: left; font-size: 0.88rem; border-bottom: 1px solid var(--line); }
+      .load-bar-wrap { width: 100%; height: 0.6rem; border-radius: 999px; background: rgba(0,0,0,0.06); overflow: hidden; }
+      [data-theme="dark"] .load-bar-wrap { background: rgba(255,255,255,0.08); }
+      .load-bar-inner { height: 100%; border-radius: 999px; }
+      .red-flag-stream { display: flex; flex-direction: column; gap: 0.65rem; margin-top: 0.75rem; }
+      .stream-item { padding: 0.75rem; border-radius: 0.65rem; border-left: 4px solid var(--emergency-red); background: var(--background); font-size: 0.86rem; }
+
     </style>
   </head>
   <body>
@@ -1107,12 +1253,13 @@
             <path d="M9 42c7-2 13 1 18 7M55 42c-7-2-13 1-18 7" fill="none" stroke="#17634f" stroke-linecap="round" stroke-width="4" />
             <path d="M32 28v12M26 34h12" fill="none" stroke="#fffdf9" stroke-linecap="round" stroke-width="3.5" />
           </svg>
-          <span class="brand-copy"><span class="wordmark">राहत · Raahat</span><span class="tagline">Point at where it hurts. We'll do the rest.</span><span class="tagline tagline-dynamic" data-copy="brandTagline">Point at where it hurts. We'll do the rest.</span></span>
+          <span class="brand-copy"><span class="wordmark">राहत · Raahat</span><span class="tagline tagline-dynamic" data-copy="brandTagline">Point at where it hurts. We'll do the rest.</span></span>
         </a>
         <nav class="site-nav" aria-label="Raahat screens">
           <a href="#screen-home" data-view-link="home" data-copy="homeNav">Home</a>
           <a href="#screen-triage" data-view-link="triage" data-copy="triageNav">OPD Triage</a>
-          <a href="#screen-doctor" data-view-link="doctor" data-copy="doctorNav">Doctor Portal</a>
+          <a href="#screen-profile" data-view-link="profile" data-copy="profileNav">My Profile</a>
+          <a href="#screen-doctor" data-view-link="doctor" data-copy="doctorNav">Hospital Portal</a>
           <a href="#screen-lab-tests" data-view-link="lab-tests" data-copy="labNav">Lab Tests &amp; Scans</a>
           <a href="#screen-blood-bank" data-view-link="blood-bank" data-copy="bloodNav">Blood Bank</a>
           <a href="#screen-comparison" data-view-link="comparison" data-copy="orsLink">ORS vs Raahat</a>
@@ -1128,6 +1275,7 @@
               <span aria-hidden="true">🌐</span> <span id="current-lang-badge">22 Languages ▾</span>
             </button>
           </div>
+          <button class="nav-profile-btn" type="button" data-view-link="profile" aria-label="Patient Profile and Records" title="View Patient Profile & Records"><span aria-hidden="true">👤</span> <span data-copy="profileShort">Profile</span></button>
           <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Use dark theme" title="Use dark theme"><svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg></button>
           <button class="nav-start" type="button" id="nav-start-triage" data-copy="startTriage">Start Triage</button>
         </div>
@@ -1331,126 +1479,587 @@
         </section>
 
         
+        
+        <!-- Citizen Patient Profile & History Screen -->
+        <section class="service-screen view-section" id="screen-profile" data-view="profile" aria-labelledby="profile-title" hidden>
+          <button class="back-button" type="button" data-service-back="home">← Back to services</button>
+          <div class="screen-heading">
+            <p class="eyebrow"><span class="tag">Observed</span> Citizen OPD Portal</p>
+            <div class="section-heading">
+              <h1 id="profile-title" tabindex="-1">My Patient Profile &amp; Consultation Records</h1>
+              <p>Review your active digital OPD appointment passes, live waiting room queue tracking, digitized consultation history, and saved family members.</p>
+            </div>
+          </div>
+
+          <div class="profile-layout">
+            <!-- Active Digital OPD Pass -->
+            <article class="active-pass-card" aria-label="Active OPD Appointment Pass">
+              <div class="pass-header">
+                <div>
+                  <span class="tag">Simulated Live OPD Pass</span>
+                  <div class="pass-token-badge" id="pass-active-token">#OPD-2026-4802</div>
+                </div>
+                <div id="pass-status-pill" class="pass-status-pill inside">
+                  🟢 Currently in Consultation Room
+                </div>
+              </div>
+
+              <div class="pass-body">
+                <div class="pass-info-grid">
+                  <div>
+                    <div class="pass-field-label">Patient Name</div>
+                    <p class="pass-field-value" id="pass-patient-name">Ramesh Kumar (64M)</p>
+                  </div>
+                  <div>
+                    <div class="pass-field-label">Assigned Hospital</div>
+                    <p class="pass-field-value" id="pass-hospital-name">AIIMS New Delhi</p>
+                  </div>
+                  <div>
+                    <div class="pass-field-label">Department &amp; Counter</div>
+                    <p class="pass-field-value" id="pass-counter-name">Cardiology · Counter 4 (Room 104)</p>
+                  </div>
+                  <div>
+                    <div class="pass-field-label">Attending Specialist</div>
+                    <p class="pass-field-value">Dr. S. Mukherjee, MD</p>
+                  </div>
+                </div>
+
+                <div class="queue-live-meter">
+                  <div class="meter-title">
+                    <span>Queue Status</span>
+                    <span id="pass-queue-ahead">2 Ahead · ~14 Mins</span>
+                  </div>
+                  <div class="meter-bar">
+                    <div class="meter-fill" id="pass-meter-fill"></div>
+                  </div>
+                  <small style="color: var(--muted);">Live queue synchronization with Counter 4 display</small>
+                </div>
+              </div>
+
+              <div class="pass-actions-bar">
+                <button class="large-button primary" type="button" id="pass-view-slip-btn">📄 View Official Specimen Slip</button>
+                <button class="large-button" type="button" id="pass-print-btn">🖨️ Print Digital Pass</button>
+              </div>
+            </article>
+
+            <!-- Past Consultation History -->
+            <div>
+              <h3 class="profile-section-title"><span>📋</span> Past Consultation Slips &amp; Clinical History</h3>
+              <div class="history-grid">
+                <article class="history-card">
+                  <div class="history-card-header">
+                    <span>14 Jan 2026</span>
+                    <span class="tag">Completed</span>
+                  </div>
+                  <h4 class="history-dept">Cardiology OPD</h4>
+                  <p class="history-hosp">AIIMS New Delhi · Counter 4</p>
+                  <p class="history-complaint">"Chest tightness and fatigue on climbing stairs"</p>
+                  <div class="history-meta">
+                    <strong>Doctor:</strong> Dr. S. Mukherjee, MD
+                    <strong>Rx:</strong> Atorvastatin 20mg, Metformin 500mg
+                    <strong>Diagnostics:</strong> 12-Lead ECG, Lipid Profile
+                  </div>
+                  <button class="large-button" type="button" data-download-past="aiims-cardio" style="margin-top: auto; font-size: 0.88rem; min-height: 2.4rem; padding: 0.4rem;">📄 Download Visit Slip</button>
+                </article>
+
+                <article class="history-card">
+                  <div class="history-card-header">
+                    <span>28 Nov 2025</span>
+                    <span class="tag">Completed</span>
+                  </div>
+                  <h4 class="history-dept">General Medicine OPD</h4>
+                  <p class="history-hosp">Safdarjung Hospital · Counter 2</p>
+                  <p class="history-complaint">"Viral fever 102°F with severe body ache for 3 days"</p>
+                  <div class="history-meta">
+                    <strong>Doctor:</strong> Dr. Ananya Sen, MD
+                    <strong>Rx:</strong> Paracetamol 650mg TDS, ORS
+                    <strong>Diagnostics:</strong> Dengue NS1 (Negative), CBC
+                  </div>
+                  <button class="large-button" type="button" data-download-past="safdarjung-med" style="margin-top: auto; font-size: 0.88rem; min-height: 2.4rem; padding: 0.4rem;">📄 Download Visit Slip</button>
+                </article>
+
+                <article class="history-card">
+                  <div class="history-card-header">
+                    <span>10 Aug 2025</span>
+                    <span class="tag">Completed</span>
+                  </div>
+                  <h4 class="history-dept">Neurology OPD</h4>
+                  <p class="history-hosp">ABVIMS &amp; Dr. RML · Counter 1</p>
+                  <p class="history-complaint">"Recurrent tension headache and cervical neck stiffness"</p>
+                  <div class="history-meta">
+                    <strong>Doctor:</strong> Dr. V. Sharma, DM Neuro
+                    <strong>Rx:</strong> Naproxen 250mg SOS, Cervical exercises
+                    <strong>Diagnostics:</strong> Cervical Spine X-Ray
+                  </div>
+                  <button class="large-button" type="button" data-download-past="rml-neuro" style="margin-top: auto; font-size: 0.88rem; min-height: 2.4rem; padding: 0.4rem;">📄 Download Visit Slip</button>
+                </article>
+              </div>
+            </div>
+
+            <!-- Saved Family Members Profiles -->
+            <div>
+              <h3 class="profile-section-title"><span>👨‍👩‍👧</span> Saved Family Profiles (1-Tap Triage Booking)</h3>
+              <div class="family-grid">
+                <article class="family-card active" data-family-member="ramesh">
+                  <div class="family-avatar">👴</div>
+                  <h4 class="family-name">Ramesh Kumar</h4>
+                  <p class="family-meta">Self · 64 Years · Male</p>
+                  <div class="family-tags">
+                    <span class="tag">Type-2 Diabetes</span>
+                    <span class="tag">Hypertension</span>
+                    <span class="tag">B+ Blood</span>
+                  </div>
+                  <button class="large-button primary" type="button" style="margin-top: 0.5rem; font-size: 0.88rem; min-height: 2.4rem; padding: 0.4rem;" data-book-family="ramesh">Book Triage for Ramesh →</button>
+                </article>
+
+                <article class="family-card" data-family-member="sunita">
+                  <div class="family-avatar">👵</div>
+                  <h4 class="family-name">Sunita Devi</h4>
+                  <p class="family-meta">Spouse · 60 Years · Female</p>
+                  <div class="family-tags">
+                    <span class="tag">Mild Asthma</span>
+                    <span class="tag">O+ Blood</span>
+                  </div>
+                  <button class="large-button" type="button" style="margin-top: 0.5rem; font-size: 0.88rem; min-height: 2.4rem; padding: 0.4rem;" data-book-family="sunita">Book Triage for Sunita →</button>
+                </article>
+
+                <article class="family-card" data-family-member="aarav">
+                  <div class="family-avatar">👶</div>
+                  <h4 class="family-name">Aarav Verma</h4>
+                  <p class="family-meta">Grandson · 5 Years · Male</p>
+                  <div class="family-tags">
+                    <span class="tag">Paediatric Care</span>
+                    <span class="tag">A+ Blood</span>
+                  </div>
+                  <button class="large-button" type="button" style="margin-top: 0.5rem; font-size: 0.88rem; min-height: 2.4rem; padding: 0.4rem;" data-book-family="aarav">Book Triage for Aarav →</button>
+                </article>
+              </div>
+            </div>
+
+            <!-- Privacy & Storage Vault -->
+            <div class="privacy-vault-box" style="padding: 1.25rem; border-radius: 1rem; border: 1.5px solid var(--line); background: var(--paper); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+              <div>
+                <strong style="display: block; font-size: 1.05rem;">🔒 100% Client-Side Private Storage</strong>
+                <small style="color: var(--muted);">All visit records, family profiles, and passes are stored strictly on your device in browser LocalStorage. No server stores your data.</small>
+              </div>
+              <button class="large-button" type="button" id="btn-clear-profile-data" style="border-color: var(--emergency-red); color: var(--emergency-red); min-height: 2.5rem; font-size: 0.88rem;">🗑️ Reset Session Records</button>
+            </div>
+          </div>
+        </section>
+
+        
         <section class="service-screen view-section" id="screen-doctor" data-view="doctor" aria-labelledby="doctor-title" hidden>
           <button class="back-button" type="button" data-service-back="home">← Back to services</button>
           <div class="screen-heading">
-            <p class="eyebrow"><span class="tag">Simulated</span> Clinical Counter System</p>
+            <p class="eyebrow"><span class="tag">Simulated</span> Hospital Operational &amp; Clinical Suite</p>
             <div class="section-heading">
               <h1 id="doctor-title" tabindex="-1" data-copy="doctorTitle">Hospital OPD Counter &amp; Doctor Portal</h1>
-              <p><span class="tag">Simulated</span> <span data-copy="doctorSubtitle">Live patient queue, 10-second SBAR clinical handover, and verified token verification.</span></p>
+              <p><span class="tag">Simulated</span> <span data-copy="doctorSubtitle">Live patient queue, 10-second SBAR clinical handover, registration counter terminal, and CMO command center.</span></p>
             </div>
           </div>
 
-          <!-- Counter Selector Bar -->
-          <div class="state-filter-bar">
-            <div>
-              <label for="doctor-hospital-select" style="font-weight: 700; font-size: 0.9rem; display: block; margin-bottom: 0.25rem;">
-                <span class="tag">Verified</span> Hospital Counter
-              </label>
-              <select id="doctor-hospital-select" class="select-control" style="min-width: 280px;">
-                <option value="aiims-new-delhi">AIIMS New Delhi · Counter 4 (Cardiology)</option>
-                <option value="safdarjung-new-delhi">Safdarjung Hospital · Counter 2 (General Medicine)</option>
-                <option value="rml-new-delhi">ABVIMS &amp; Dr. RML · Counter 1 (Neurology)</option>
-                <option value="nimhans-bengaluru">NIMHANS Bengaluru · Counter 3 (Neuro-Psychiatry)</option>
-                <option value="pgimer-chandigarh">PGIMER Chandigarh · Counter 5 (Cardiology)</option>
-              </select>
+          <!-- 3-Role Hospital Interface Switcher -->
+          <div class="hospital-role-tabs" role="tablist" aria-label="Hospital Roles">
+            <button type="button" class="role-tab active" role="tab" id="tab-doctor-desk" aria-selected="true" data-role-view="desk">
+              🩺 OPD Doctor Desk
+            </button>
+            <button type="button" class="role-tab" role="tab" id="tab-registration-counter" aria-selected="false" data-role-view="counter">
+              🏷️ OPD Registration &amp; Token Counter
+            </button>
+            <button type="button" class="role-tab" role="tab" id="tab-cmo-dashboard" aria-selected="false" data-role-view="cmo">
+              📊 Hospital Admin / CMO Command Center
+            </button>
+          </div>
+
+          <!-- ROLE 1: OPD DOCTOR DESK -->
+          <div id="role-panel-desk" class="role-panel">
+            <!-- Counter Selector Bar -->
+            <div class="state-filter-bar">
+              <div>
+                <label for="doctor-hospital-select" style="font-weight: 700; font-size: 0.9rem; display: block; margin-bottom: 0.25rem;">
+                  <span class="tag">Verified</span> Hospital Counter
+                </label>
+                <select id="doctor-hospital-select" class="select-control" style="min-width: 280px;">
+                  <option value="aiims-new-delhi">AIIMS New Delhi · Counter 4 (Cardiology)</option>
+                  <option value="safdarjung-new-delhi">Safdarjung Hospital · Counter 2 (General Medicine)</option>
+                  <option value="rml-new-delhi">ABVIMS &amp; Dr. RML · Counter 1 (Neurology)</option>
+                  <option value="nimhans-bengaluru">NIMHANS Bengaluru · Counter 3 (Neuro-Psychiatry)</option>
+                  <option value="pgimer-chandigarh">PGIMER Chandigarh · Counter 5 (Cardiology)</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-weight: 700; font-size: 0.9rem; display: block; margin-bottom: 0.25rem;">
+                  <span class="tag">Simulated</span> Counter Status
+                </label>
+                <span class="queue-badge" style="display: inline-block; padding: 0.5rem 1rem;">🟢 Active Consultation · Dr. S. Mukherjee, MD</span>
+              </div>
             </div>
-            <div>
-              <label style="font-weight: 700; font-size: 0.9rem; display: block; margin-bottom: 0.25rem;">
-                <span class="tag">Simulated</span> Counter Status
-              </label>
-              <span class="queue-badge" style="display: inline-block; padding: 0.5rem 1rem;">🟢 Active Rounds · Dr. S. Mukherjee, MD</span>
+
+            <!-- Doctor Workspace Grid -->
+            <div class="doctor-portal-grid">
+              <!-- Left: OPD Queue List -->
+              <aside class="doctor-sidebar">
+                <div class="doctor-queue-card">
+                  <div class="doctor-queue-header">
+                    <h3 style="margin: 0; font-size: 1.15rem;" data-copy="doctorQueueTitle">Live Token Queue</h3>
+                    <span class="queue-badge" id="doctor-queue-count">4 Waiting</span>
+                  </div>
+                  <ul class="doctor-queue-list" id="doctor-queue-list" role="list">
+                    <!-- Injected dynamically -->
+                  </ul>
+                  <div style="margin-top: 1rem;">
+                    <button class="large-button primary" type="button" id="doctor-call-next" style="width: 100%;" data-copy="doctorCallNext">🔊 Call Next Patient (Bell Chime)</button>
+                  </div>
+                </div>
+              </aside>
+
+              <!-- Right: Active Patient SBAR Clinical Handover & Actions -->
+              <main class="doctor-main">
+                <div class="doctor-sbar-card">
+                  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 0.75rem;">
+                    <div>
+                      <span class="tag">Observed</span>
+                      <span style="font-weight: 800; font-size: 1.25rem; margin-left: 0.5rem;" id="sbar-active-token">Token #OPD-2026-4802</span>
+                    </div>
+                    <div id="sbar-status-tag">
+                      <span class="queue-badge" style="background: var(--marigold-soft); color: var(--ink);">Inside Consultation Room</span>
+                    </div>
+                  </div>
+
+                  <div class="sbar-container">
+                    <!-- S: Situation -->
+                    <div class="sbar-block situation">
+                      <div class="sbar-title" style="color: #2563eb;">
+                        <span>S — Situation</span>
+                        <small style="color: var(--muted); text-transform: none; font-weight: 600;">(Chief complaint &amp; onset)</small>
+                      </div>
+                      <p class="sbar-content" id="sbar-situation">
+                        "Kal raat se seene mein dard aur bhaari-pan mehsoos ho raha hai" · Severe right now · Onset 12 hours ago
+                      </p>
+                    </div>
+
+                    <!-- B: Background -->
+                    <div class="sbar-block background">
+                      <div class="sbar-title" style="color: #7c3aed;">
+                        <span>B — Background</span>
+                        <small style="color: var(--muted); text-transform: none; font-weight: 600;">(Demographics &amp; Digitized Rx)</small>
+                      </div>
+                      <p class="sbar-content" id="sbar-background">
+                        Patient: <strong>Ramesh Kumar (64y, Male)</strong> · Known Type-2 Diabetes &amp; Hypertension (5 yrs) · Current Rx: Metformin 500mg, Telmisartan 40mg.
+                      </p>
+                    </div>
+
+                    <!-- A: Assessment -->
+                    <div class="sbar-block assessment">
+                      <div class="sbar-title" style="color: #d97706;">
+                        <span>A — Assessment</span>
+                        <small style="color: var(--muted); text-transform: none; font-weight: 600;">(Raahat Deterministic Routing)</small>
+                      </div>
+                      <p class="sbar-content" id="sbar-assessment">
+                        Matched Rule: <code>RULE-CARDIO-CHEST-PAIN</code> · Matched Counter: <strong>Cardiology OPD (Counter 4)</strong> · Safety Status: <span style="color: var(--accent); font-weight: 800;">PASSED</span> (No active stroke/loss of consciousness).
+                      </p>
+                    </div>
+
+                    <!-- R: Recommendation -->
+                    <div class="sbar-block recommendation">
+                      <div class="sbar-title" style="color: var(--accent);">
+                        <span>R — Recommendation</span>
+                        <small style="color: var(--muted); text-transform: none; font-weight: 600;">(Recommended Immediate Action)</small>
+                      </div>
+                      <p class="sbar-content" id="sbar-recommendation">
+                        Perform 12-lead ECG immediately. Order Cardiac Troponin-I and Serum Electrolytes. Schedule Echo if ST deviations noted.
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- 1-Click Interactive Prescription & Lab Orders Builder -->
+                  <div class="rx-builder-card">
+                    <span class="tag">Simulated Fast Rx</span>
+                    <strong style="font-size: 0.95rem; margin-left: 0.35rem;">1-Tap Prescription &amp; Lab Orders</strong>
+                    
+                    <div style="margin-top: 0.65rem;">
+                      <span style="font-size: 0.82rem; font-weight: 800; color: var(--muted);">COMMON MEDICATIONS (TAP TO ADD):</span>
+                      <div class="rx-chips-row" id="rx-med-chips">
+                        <button type="button" class="rx-chip" data-rx="Paracetamol 650mg TDS">+ Paracetamol 650mg</button>
+                        <button type="button" class="rx-chip" data-rx="Metformin 500mg BD">+ Metformin 500mg</button>
+                        <button type="button" class="rx-chip" data-rx="Telmisartan 40mg OD">+ Telmisartan 40mg</button>
+                        <button type="button" class="rx-chip" data-rx="Amoxicillin 500mg TDS">+ Amoxicillin 500mg</button>
+                        <button type="button" class="rx-chip" data-rx="ORS Sachets (1L water)">+ ORS Sachets</button>
+                      </div>
+                    </div>
+
+                    <div style="margin-top: 0.5rem;">
+                      <span style="font-size: 0.82rem; font-weight: 800; color: var(--muted);">DIAGNOSTIC ORDERS:</span>
+                      <div class="rx-chips-row" id="rx-lab-chips">
+                        <button type="button" class="rx-chip" data-lab="12-Lead ECG">+ 12-Lead ECG</button>
+                        <button type="button" class="rx-chip" data-lab="Cardiac Troponin-I">+ Cardiac Troponin-I</button>
+                        <button type="button" class="rx-chip" data-lab="Complete Blood Count (CBC)">+ Rapid CBC</button>
+                        <button type="button" class="rx-chip" data-lab="Chest X-Ray PA View">+ Chest X-Ray</button>
+                        <button type="button" class="rx-chip" data-lab="Fasting Blood Glucose">+ Fasting Glucose</button>
+                      </div>
+                    </div>
+
+                    <div id="rx-selected-summary" style="margin-top: 0.65rem; padding: 0.6rem; border-radius: 0.5rem; background: var(--paper); font-size: 0.88rem; display: none;">
+                      <strong>Selected Orders:</strong> <span id="rx-selected-items-text"></span>
+                    </div>
+                  </div>
+
+                  <!-- Doctor Actions -->
+                  <div class="doctor-actions-bar" style="margin-top: 1.25rem;">
+                    <button class="large-button primary" type="button" id="doctor-mark-seen" data-copy="doctorMarkSeen">✅ Complete Consultation &amp; Sign Rx</button>
+                    <button class="large-button" type="button" id="doctor-escalate-emergency" style="border-color: var(--emergency-red); color: var(--emergency-red);" data-copy="doctorEscalateEmergency">🚨 Escalate to 24/7 Emergency</button>
+                    <button class="large-button" type="button" id="doctor-order-tests" data-copy="doctorOrderTests">🔬 Order Hospital Lab Tests</button>
+                  </div>
+                  <p id="doctor-action-feedback" class="status" aria-live="polite" style="margin-top: 0.75rem; font-weight: 700;"></p>
+                </div>
+              </main>
             </div>
           </div>
 
-          <!-- Doctor Workspace Grid -->
-          <div class="doctor-portal-grid">
-            <!-- Left: OPD Queue List -->
-            <aside class="doctor-sidebar">
-              <div class="doctor-queue-card">
-                <div class="doctor-queue-header">
-                  <h3 style="margin: 0; font-size: 1.15rem;" data-copy="doctorQueueTitle">Live Token Queue</h3>
-                  <span class="queue-badge" id="doctor-queue-count">4 Waiting</span>
+          <!-- ROLE 2: OPD REGISTRATION & TOKEN COUNTER TERMINAL -->
+          <div id="role-panel-counter" class="role-panel" hidden>
+            <div class="counter-terminal-grid">
+              <!-- Left: Fast Patient Check-In Form -->
+              <div class="counter-form-card">
+                <div style="border-bottom: 1px solid var(--line); padding-bottom: 0.75rem; margin-bottom: 1.25rem;">
+                  <span class="tag">Simulated Terminal</span>
+                  <h3 style="margin: 0.35rem 0 0.2rem; font-size: 1.35rem;">OPD Registration Desk · Gate 1 Terminal</h3>
+                  <p style="margin: 0; color: var(--muted); font-size: 0.9rem;">Issue live thermal OPD tokens for arriving walk-in patients with automated counter routing.</p>
                 </div>
-                <ul class="doctor-queue-list" id="doctor-queue-list" role="list">
-                  <!-- Injected dynamically -->
-                </ul>
-                <div style="margin-top: 1rem;">
-                  <button class="large-button primary" type="button" id="doctor-call-next" style="width: 100%;" data-copy="doctorCallNext">🔊 Call Next Patient</button>
+
+                <!-- ABHA / UHID Quick Search -->
+                <div style="margin-bottom: 1.25rem; padding: 0.85rem; border-radius: 0.75rem; background: var(--accent-soft);">
+                  <label for="terminal-search-uhid" style="font-weight: 800; font-size: 0.88rem; display: block; margin-bottom: 0.35rem;">Returning Patient Search (UHID / ABHA):</label>
+                  <div style="display: flex; gap: 0.5rem;">
+                    <input id="terminal-search-uhid" placeholder="e.g. UHID-9823471" style="flex: 1; padding: 0.45rem 0.75rem; border: 1.5px solid var(--line); border-radius: 0.5rem; background: var(--paper);" />
+                    <button type="button" id="terminal-search-btn" class="large-button primary" style="min-height: 2.5rem; padding: 0.4rem 0.85rem; font-size: 0.88rem;">Search</button>
+                  </div>
+                  <div style="display: flex; gap: 0.4rem; margin-top: 0.45rem; flex-wrap: wrap;">
+                    <small style="color: var(--muted); font-weight: 700;">Samples:</small>
+                    <button type="button" class="example-chip" style="min-height: 1.8rem; padding: 0.15rem 0.55rem; font-size: 0.78rem;" data-quick-uhid="ramesh">Ramesh Kumar (64M)</button>
+                    <button type="button" class="example-chip" style="min-height: 1.8rem; padding: 0.15rem 0.55rem; font-size: 0.78rem;" data-quick-uhid="sunita">Sunita Devi (60F)</button>
+                  </div>
+                </div>
+
+                <form id="terminal-register-form" class="form-stack">
+                  <div class="form-grid">
+                    <div class="form-field">
+                      <label for="terminal-name"><span class="tag">Observed</span> Patient Full Name</label>
+                      <input id="terminal-name" required value="Gopal Sharma" />
+                    </div>
+                    <div class="form-field">
+                      <label for="terminal-age"><span class="tag">Observed</span> Age (Years)</label>
+                      <input id="terminal-age" type="number" min="1" max="110" required value="48" />
+                    </div>
+                    <div class="form-field">
+                      <label for="terminal-gender"><span class="tag">Observed</span> Gender</label>
+                      <select id="terminal-gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="form-field">
+                      <label for="terminal-category"><span class="tag">Rule</span> Fee Category</label>
+                      <select id="terminal-category">
+                        <option value="General (₹10 Fee)">General OPD (₹10 Fee)</option>
+                        <option value="Ayushman Bharat (Free)">Ayushman Bharat PM-JAY (₹0 Waived)</option>
+                        <option value="Senior Citizen (Free)">Senior Citizen 60+ (₹0 Waived)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="terminal-department"><span class="tag">Rule</span> Route to OPD Counter</label>
+                    <select id="terminal-department">
+                      <option value="Cardiology · Counter 4">Cardiology (Counter 4 · Room 104)</option>
+                      <option value="General Medicine · Counter 2" selected>General Medicine (Counter 2 · Room 102)</option>
+                      <option value="Neurology · Counter 1">Neurology (Counter 1 · Room 101)</option>
+                      <option value="Paediatrics · Counter 3">Paediatrics (Counter 3 · Room 103)</option>
+                      <option value="Orthopaedics · Counter 5">Orthopaedics (Counter 5 · Room 105)</option>
+                    </select>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="terminal-complaint"><span class="tag">Observed</span> Chief Complaint Note</label>
+                    <input id="terminal-complaint" value="Chhati mein jalan aur halka dard 2 din se" />
+                  </div>
+
+                  <button class="large-button primary" type="submit" style="width: 100%; min-height: 3.2rem; font-size: 1.05rem;">
+                    🖨️ Issue Live OPD Token &amp; Dispatch
+                  </button>
+                </form>
+                <p id="terminal-feedback" class="status" aria-live="polite" style="font-weight: 700;"></p>
+              </div>
+
+              <!-- Right: Thermal Token Slip Preview -->
+              <div class="thermal-slip-card" aria-label="Thermal Paper Token Preview">
+                <div class="thermal-header">
+                  <strong>AIIMS NEW DELHI</strong>
+                  <div style="font-size: 0.78rem; letter-spacing: 0.05em;">CENTRAL OPD REGISTRATION</div>
+                  <div class="thermal-token-num" id="thermal-display-token">#OPD-4806</div>
+                  <span class="tag" style="background: #e2e8f0; color: #0f172a;">WALK-IN SPECIMEN</span>
+                </div>
+                <div class="thermal-row">
+                  <span>PATIENT:</span>
+                  <strong id="thermal-display-patient">Gopal Sharma</strong>
+                </div>
+                <div class="thermal-row">
+                  <span>AGE/SEX:</span>
+                  <span id="thermal-display-meta">48Y / Male</span>
+                </div>
+                <div class="thermal-row">
+                  <span>COUNTER:</span>
+                  <strong id="thermal-display-counter">Gen. Medicine (Counter 2)</strong>
+                </div>
+                <div class="thermal-row">
+                  <span>ROOM:</span>
+                  <strong id="thermal-display-room">Room 102, Ground Floor</strong>
+                </div>
+                <div class="thermal-row">
+                  <span>EST. SEEN:</span>
+                  <span>~10:45 AM (18 min wait)</span>
+                </div>
+                <div class="thermal-row">
+                  <span>FEE:</span>
+                  <span id="thermal-display-fee">₹10 PAID (CASH)</span>
+                </div>
+                <div style="border-top: 2px dashed #94a3b8; margin-top: 0.85rem; padding-top: 0.85rem; text-align: center;">
+                  <div style="font-size: 1.8rem; letter-spacing: 0.25rem;">||| | |||| || |||</div>
+                  <small style="display: block; font-size: 0.72rem; margin-top: 0.25rem;">BARCODE FOR COUNTER SCAN</small>
+                </div>
+                <button class="large-button" type="button" id="thermal-print-btn" style="width: 100%; margin-top: 1rem; font-size: 0.88rem; min-height: 2.5rem;">
+                  🖨️ Print Thermal Slip
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ROLE 3: HOSPITAL ADMIN / CMO COMMAND CENTER -->
+          <div id="role-panel-cmo" class="role-panel" hidden>
+            <div class="cmo-dashboard-grid">
+              <!-- KPI Cards Row -->
+              <div class="kpi-row">
+                <article class="kpi-stat-card">
+                  <span class="kpi-label">Today's Footfall</span>
+                  <div class="kpi-value">1,428</div>
+                  <span class="kpi-sub">↑ 8.4% vs yesterday</span>
+                </article>
+                <article class="kpi-stat-card">
+                  <span class="kpi-label">Avg Wait-to-Seen</span>
+                  <div class="kpi-value">13.8m</div>
+                  <span class="kpi-sub">Target &lt;15 min (Optimal)</span>
+                </article>
+                <article class="kpi-stat-card">
+                  <span class="kpi-label">Emergency Red-Flags</span>
+                  <div class="kpi-value" style="color: var(--emergency-red);">2 Cases</div>
+                  <span class="kpi-sub alert">Fast-tracked to Trauma</span>
+                </article>
+                <article class="kpi-stat-card">
+                  <span class="kpi-label">Counter Throughput</span>
+                  <div class="kpi-value">98.2%</div>
+                  <span class="kpi-sub">5/5 Counters Operating</span>
+                </article>
+              </div>
+
+              <!-- Panels: Queue Load Matrix & Emergency Stream -->
+              <div class="cmo-panels-row">
+                <!-- Departmental Queue Load Matrix -->
+                <div class="cmo-panel">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="margin: 0; font-size: 1.15rem;">Departmental Queue Load Matrix</h3>
+                    <span class="queue-badge">Real-time telemetry</span>
+                  </div>
+                  <table class="load-matrix-table">
+                    <thead>
+                      <tr>
+                        <th>Department</th>
+                        <th>Waiting</th>
+                        <th>Est. Wait</th>
+                        <th>Capacity Load</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>Cardiology</strong> (Counter 4)</td>
+                        <td>18</td>
+                        <td>24 min</td>
+                        <td>
+                          <div class="load-bar-wrap"><div class="load-bar-inner" style="width: 92%; background: #d97706;"></div></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><strong>General Medicine</strong> (Counter 2)</td>
+                        <td>24</td>
+                        <td>18 min</td>
+                        <td>
+                          <div class="load-bar-wrap"><div class="load-bar-inner" style="width: 78%; background: var(--accent);"></div></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><strong>Paediatrics</strong> (Counter 3)</td>
+                        <td>12</td>
+                        <td>12 min</td>
+                        <td>
+                          <div class="load-bar-wrap"><div class="load-bar-inner" style="width: 45%; background: var(--accent);"></div></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><strong>Neurology</strong> (Counter 1)</td>
+                        <td>8</td>
+                        <td>15 min</td>
+                        <td>
+                          <div class="load-bar-wrap"><div class="load-bar-inner" style="width: 50%; background: var(--accent);"></div></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><strong>Orthopaedics</strong> (Counter 5)</td>
+                        <td>10</td>
+                        <td>16 min</td>
+                        <td>
+                          <div class="load-bar-wrap"><div class="load-bar-inner" style="width: 60%; background: var(--accent);"></div></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Live Red-Flag Escalation Stream -->
+                <div class="cmo-panel">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="margin: 0; font-size: 1.15rem;">🚨 Live Emergency Escalations</h3>
+                    <span class="queue-badge" style="background: rgba(220, 38, 38, 0.15); color: var(--emergency-red);">Immediate Bay Routing</span>
+                  </div>
+                  <div class="red-flag-stream">
+                    <div class="stream-item">
+                      <strong>10:42 AM · Token #EMG-9021</strong>
+                      <div>Chest tightness + radiating pain to left arm · <em>Dispatched to Resuscitation Bay 1 · Nurse assigned.</em></div>
+                    </div>
+                    <div class="stream-item">
+                      <strong>10:15 AM · Token #EMG-9018</strong>
+                      <div>Sudden unilateral facial drooping · <em>Safdarjung Acute Stroke Unit · CT Angiography ordered.</em></div>
+                    </div>
+                    <div class="stream-item" style="border-left-color: var(--accent); opacity: 0.75;">
+                      <strong>09:30 AM · Token #EMG-9012</strong>
+                      <div>Paediatric high spike convulsion · <em>Stabilized in Emergency Paediatrics.</em></div>
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 1.25rem; border-top: 1px solid var(--line); padding-top: 0.85rem;">
+                    <h4 style="margin: 0 0 0.5rem; font-size: 0.95rem;">Active Duty Specialists</h4>
+                    <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                      <span class="tag">Dr. S. Mukherjee (Cardio)</span>
+                      <span class="tag">Dr. Ananya Sen (Medicine)</span>
+                      <span class="tag">Dr. V. Sharma (Neuro)</span>
+                      <span class="tag">Dr. Priyanka Rao (Paed)</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </aside>
-
-            <!-- Right: Active Patient SBAR Clinical Handover & Actions -->
-            <main class="doctor-main">
-              <div class="doctor-sbar-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 0.75rem;">
-                  <div>
-                    <span class="tag">Observed</span>
-                    <span style="font-weight: 800; font-size: 1.25rem; margin-left: 0.5rem;" id="sbar-active-token">Token #OPD-2026-4802</span>
-                  </div>
-                  <div id="sbar-status-tag">
-                    <span class="queue-badge" style="background: var(--marigold-soft); color: var(--ink);">Inside Consultation Room</span>
-                  </div>
-                </div>
-
-                <div class="sbar-container">
-                  <!-- S: Situation -->
-                  <div class="sbar-block situation">
-                    <div class="sbar-title" style="color: #2563eb;">
-                      <span>S — Situation</span>
-                      <small style="color: var(--muted); text-transform: none; font-weight: 600;">(Chief complaint &amp; onset)</small>
-                    </div>
-                    <p class="sbar-content" id="sbar-situation">
-                      "Kal raat se seene mein dard aur bhaari-pan mehsoos ho raha hai" · Severe right now · Onset 12 hours ago
-                    </p>
-                  </div>
-
-                  <!-- B: Background -->
-                  <div class="sbar-block background">
-                    <div class="sbar-title" style="color: #7c3aed;">
-                      <span>B — Background</span>
-                      <small style="color: var(--muted); text-transform: none; font-weight: 600;">(Demographics &amp; Digitized Rx)</small>
-                    </div>
-                    <p class="sbar-content" id="sbar-background">
-                      Patient: <strong>Ramesh Kumar (64y, Male)</strong> · Known Type-2 Diabetes &amp; Hypertension (5 yrs) · Current Rx: Metformin 500mg, Telmisartan 40mg.
-                    </p>
-                  </div>
-
-                  <!-- A: Assessment -->
-                  <div class="sbar-block assessment">
-                    <div class="sbar-title" style="color: #d97706;">
-                      <span>A — Assessment</span>
-                      <small style="color: var(--muted); text-transform: none; font-weight: 600;">(Raahat Deterministic Routing)</small>
-                    </div>
-                    <p class="sbar-content" id="sbar-assessment">
-                      Matched Rule: <code>RULE-CARDIO-CHEST-PAIN</code> · Matched Counter: <strong>Cardiology OPD (Counter 4)</strong> · Safety Status: <span style="color: var(--accent); font-weight: 800;">PASSED</span> (No active stroke/loss of consciousness).
-                    </p>
-                  </div>
-
-                  <!-- R: Recommendation -->
-                  <div class="sbar-block recommendation">
-                    <div class="sbar-title" style="color: var(--accent);">
-                      <span>R — Recommendation</span>
-                      <small style="color: var(--muted); text-transform: none; font-weight: 600;">(Recommended Immediate Action)</small>
-                    </div>
-                    <p class="sbar-content" id="sbar-recommendation">
-                      Perform 12-lead ECG immediately. Order Cardiac Troponin-I and Serum Electrolytes. Schedule Echo if ST deviations noted.
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Doctor Actions -->
-                <div class="doctor-actions-bar">
-                  <button class="large-button primary" type="button" id="doctor-mark-seen" data-copy="doctorMarkSeen">✅ Mark as Seen &amp; Complete Consultation</button>
-                  <button class="large-button" type="button" id="doctor-escalate-emergency" style="border-color: var(--emergency-red); color: var(--emergency-red);" data-copy="doctorEscalateEmergency">🚨 Escalate to 24/7 Emergency</button>
-                  <button class="large-button" type="button" id="doctor-order-tests" data-copy="doctorOrderTests">🔬 Order Baseline Lab Tests</button>
-                </div>
-                <p id="doctor-action-feedback" class="status" aria-live="polite" style="margin-top: 0.75rem; font-weight: 700;"></p>
-              </div>
-            </main>
+            </div>
           </div>
         </section>
+
 
         <section id="screen-triage" hidden aria-label="Triage journey">
           <nav class="triage-stepper" aria-label="Triage progress">
@@ -2071,16 +2680,127 @@
         </section>
       </main>
 
-      <div class="support">
-        <span class="support-label" data-copy="helplinesLabel">Emergency quick dial:</span>
-        <a href="tel:102"><span class="tag">Verified</span>102</a>
-        <a href="tel:108"><span class="tag">Verified</span>108</a>
-        <a href="tel:1075"><span class="tag">Verified</span>1075</a>
-        <span data-copy="needHelp">Need a person?</span>
-        <a href="https://pgportal.gov.in" target="_blank" rel="noreferrer" data-copy="talkToPerson">Talk to a person</a>
-        <a href="#screen-honesty" id="honesty-link" data-view-link="honesty" data-copy="honestyLink">What is real?</a>
-      </div>
-      <p class="prototype-banner" data-copy="prototype">independent prototype · mock data · not affiliated with any government body.</p>
+      
+      <!-- Civic Tech & Hackathon Attribution Footer -->
+      <footer class="site-footer" aria-label="Raahat footer and verification ledger">
+        <div class="footer-grid">
+          <!-- Col 1: Brand & Hackathon Credential -->
+          <div class="footer-col brand-col">
+            <div class="footer-brand-lockup">
+              <span class="wordmark" style="font-size: 1.4rem;">राहत · Raahat</span>
+              <span class="tag verified-tag">Verified Civic Tech</span>
+            </div>
+            <p class="footer-desc" data-copy="footerDesc">
+              A citizen-first triage front door for Indian government hospitals. Helping citizens reach the right OPD counter through native voice, 22 regional languages, and interactive 3D body mapping without medical jargon.
+            </p>
+
+            <!-- Hackathon Credential Card -->
+            <div class="hackathon-credential-card">
+              <div class="hackathon-badge-header">
+                <span class="hackathon-spark" aria-hidden="true">⚡</span>
+                <div>
+                  <span class="hackathon-eyebrow">NATIONAL HACKATHON BUILD</span>
+                  <h4 class="hackathon-name">Build What Moves India</h4>
+                </div>
+              </div>
+              <p class="hackathon-organizers">Organized by <strong>Varun Mayya × OpenAI</strong> (Feb–Mar 2026)</p>
+              <div class="hackathon-meta-tags">
+                <span class="tag">Healthcare &amp; Civic Equity Track</span>
+                <span class="tag">22 Scheduled Languages</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Col 2: Creator Credentials & Social Links -->
+          <div class="footer-col creator-col">
+            <h4 class="footer-heading">Creator &amp; Engineering</h4>
+            <div class="creator-card">
+              <div class="creator-info">
+                <div class="creator-avatar" aria-hidden="true">👨‍💻</div>
+                <div>
+                  <strong class="creator-name">Shivang</strong>
+                  <span class="creator-role">Lead Architect &amp; Designer</span>
+                </div>
+              </div>
+              <p class="creator-bio">Crafted with precision for digital public infrastructure, accessible healthcare equity, and zero false reassurance safety.</p>
+              <div class="creator-social-links" aria-label="Shivang Social Profiles">
+                <a href="https://github.com/Shivang-creator" target="_blank" rel="noopener noreferrer" class="social-link" title="Shivang on GitHub">
+                  <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  <span>GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/shivang-gupta" target="_blank" rel="noopener noreferrer" class="social-link" title="Shivang on LinkedIn">
+                  <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                  <span>LinkedIn</span>
+                </a>
+                <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-link" title="Shivang on X">
+                  <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  <span>X / Twitter</span>
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" title="Shivang on Instagram">
+                  <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                  <span>Instagram</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Col 3: Portal Links -->
+          <div class="footer-col links-col">
+            <h4 class="footer-heading">Civic Portals &amp; Tools</h4>
+            <ul class="footer-links-list">
+              <li><a href="#screen-triage" data-view-link="triage">🏥 OPD Triage Front Door</a></li>
+              <li><a href="#screen-profile" data-view-link="profile">👤 My Patient Profile &amp; Records</a></li>
+              <li><a href="#screen-doctor" data-view-link="doctor">🩺 Hospital Doctor &amp; Staff Suite</a></li>
+              <li><a href="#screen-lab-tests" data-view-link="lab-tests">🔬 Diagnostic Tests &amp; Scans</a></li>
+              <li><a href="#screen-blood-bank" data-view-link="blood-bank">🩸 24/7 Blood Bank Directory</a></li>
+              <li><a href="#screen-hospitals" data-view-link="hospitals">🏛️ Pan-India Premier Hospitals</a></li>
+              <li><a href="#screen-comparison" data-view-link="comparison">⚖️ ORS vs Raahat Comparison</a></li>
+              <li><a href="#screen-honesty" data-view-link="honesty">📋 Honesty &amp; Verification Ledger</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: 24/7 Helplines & Grievance -->
+          <div class="footer-col helplines-col">
+            <h4 class="footer-heading">Emergency &amp; Grievance</h4>
+            <div class="helpline-badges">
+              <a href="tel:102" class="helpline-card">
+                <span class="helpline-num">102</span>
+                <span class="helpline-name">Ambulance</span>
+                <span class="tag">Verified</span>
+              </a>
+              <a href="tel:108" class="helpline-card">
+                <span class="helpline-num">108</span>
+                <span class="helpline-name">Disaster</span>
+                <span class="tag">Verified</span>
+              </a>
+              <a href="tel:1075" class="helpline-card">
+                <span class="helpline-num">1075</span>
+                <span class="helpline-name">Health Line</span>
+                <span class="tag">Verified</span>
+              </a>
+              <a href="tel:104" class="helpline-card">
+                <span class="helpline-num">104</span>
+                <span class="helpline-name">Blood Helpline</span>
+                <span class="tag">Verified</span>
+              </a>
+            </div>
+            <div class="grievance-box">
+              <span class="support-label" style="font-weight: 800;">Citizen Grievance Redressal:</span>
+              <a href="https://pgportal.gov.in" target="_blank" rel="noopener noreferrer" class="grievance-link">
+                CPGRAMS / PGPortal Official Redressal ↗
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+          <p class="prototype-notice">
+            <span class="tag">Civic Safeguard</span> <strong>Independent Civic Prototype · Mock Data · Not affiliated with National Health Authority, ORS, or any government body.</strong>
+          </p>
+          <p class="footer-copy">© 2026 Raahat · Built for India with open civic principles.</p>
+        </div>
+      </footer>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
@@ -2092,7 +2812,7 @@
 
       const copy = {
         en: {
-          landingKicker: "A calmer front door to public hospitals", landingTitle: "Government Hospital Appointments, Without the Confusion.", landingSubtitle: "ORS asks which department you need. A sick person only knows where it hurts. Tell us what feels wrong in your own words, voice, or tap the interactive 3D body map. We guide you to the right OPD counter with honest queue wait times.", modelDisclosure: "Your words are evaluated securely inside this browser to guide you to the right counter. Nothing is sent to a server.", startTriage: "Start Triage", learnMore: "See how it works", privacyBadge: "100% Client-Side Privacy", noIdBadge: "No Aadhaar/OTP Required to Explore", accessBadge: "Accessible for Non-Literate Citizens", quickStartTitle: "Start with what you know", quickStartNote: "No account. No department guessing. Try a sample or type one sentence.", entryRouteLabel: "How would you like to describe it?", entrySpeak: "Speak", entryType: "Type", entryMap: "Body map", landingPlaceholder: "e.g. chest pain, since this morning", exampleBreathing: "chest pain + breathlessness", continueFromCard: "Continue to read-back", whyLink: "Why Raahat?", orsLink: "ORS vs Raahat", faqLink: "FAQs", whyTitle: "A little more dignity at the counter.", whyNote: "Raahat starts with the citizen's words, not a medical vocabulary test. The person stays in control before anything is routed.", journeyOneTitle: "Describe in your voice or tap the map", journeyOneNote: "Speak, type, or use a flat body map. Every route creates the same reviewable complaint.", journeyTwoTitle: "Verified hospital & honest queue wait", journeyTwoNote: "See public hospital facts, then see simulated token throughput and when people are usually seen.", journeyThreeTitle: "Print specimen slip with citizen rights", journeyThreeNote: "A clearly marked mock slip keeps the next step legible and carries a grievance route.", comparisonTitle: "How Raahat rethinks ORS", comparisonNote: "ORS is a useful appointment system. Raahat addresses the moment before it: when a citizen does not know the right counter.", comparisonQuestion: "The front door question", orsEra: "2015 · NIC digitised counter", raahatEra: "2026 · citizen-first triage", comparisonDepartment: "Finding a department", orsDepartment: "Department guessing", raahatDepartment: "Start with where it hurts, not a department name", comparisonWait: "Knowing the real wait", orsWait: "Slot time without a seen-time estimate", raahatWait: "Estimated seen-time from slot + simulated throughput", comparisonAuth: "Getting started", orsAuth: "Front-door distorted CAPTCHA", raahatAuth: "Late-stage 1-tap Auth , only when making a specimen slip", comparisonAccess: "Describing the problem", orsAccess: "Text Forms", raahatAccess: "2D Visual Body Map + speak + type", networkTitle: "Delhi hospital network live status", networkNote: "Hospital names, addresses and departments are public facts. Availability and token throughput are simulated for this prototype.", faqTitle: "Questions citizens and judges ask", faqNote: "Plain answers about safety, access, privacy and what this prototype can really do.", faqSafetyQ: "Is this triage safe?", faqSafetyA: "Raahat does not diagnose. Code applies a small published rule file after you see and confirm the complaint. When a red flag is present, one flag is enough to route to Emergency.", faqRedFlagQ: "What happens when there is an Emergency red flag?", faqRedFlagA: "The result says to go to Emergency now and not book an appointment. The rule ID is shown, and the nearest simulated emergency-capable hospital in your chosen locality is displayed.", faqAccessQ: "Can someone who cannot read use it?", faqAccessA: "Yes. Complaint entry has three equal routes: speak, type, or tap the labelled 2D body map. Large buttons, keyboard focus and screen-reader labels are built into the flow.", faqPrivacyQ: "What happens to my data?", faqPrivacyA: "This prototype keeps the complaint in the browser for this session and never stores it server-side. Typed words are sent to no service in the body-map route; typed words stay in this browser for this session.", faqWaitQ: "How is the wait time calculated?", faqWaitA: "It is simulated as slot start plus a simulated wait. Hospitals are sorted by estimated seen-time, then travel time, then name. It is not live queue data.", faqOrsQ: "How is Raahat different from ORS?", faqOrsA: "ORS begins by asking you to choose a hospital and department. Raahat helps a citizen structure their own words first, then shows an honest simulated queue view. It does not connect to ORS.", faqAbdmQ: "Will this connect to ABDM?", faqAbdmA: "No. ABDM, Aadhaar, ABHA, UHID, OTP and government systems are outside this prototype. Any future integration would need explicit consent, security review and a real public-service partnership.", qrTitle: "Sample QR container", qrNote: "This pattern is decorative. It does not open a real appointment.", emergencyHospitalTitle: "Nearest Emergency-capable hospital in your chosen locality", emergencyHospitalNote: "Go now. This hospital fact is verified; travel is simulated.",
+          landingKicker: "A calmer front door to public hospitals", landingTitle: "Government Hospital Appointments, Without the Confusion.", landingSubtitle: "ORS asks which department you need. A sick person only knows where it hurts. Tell us what feels wrong in your own words, voice, or tap the interactive 3D body map. We guide you to the right OPD counter with honest queue wait times.", modelDisclosure: "Your words are evaluated securely inside this browser to guide you to the right counter. Nothing is sent to a server.", startTriage: "Start Triage", learnMore: "See how it works", privacyBadge: "100% Client-Side Privacy", noIdBadge: "No Aadhaar/OTP Required to Explore", accessBadge: "Accessible for Non-Literate Citizens", quickStartTitle: "Start with what you know", quickStartNote: "No account. No department guessing. Try a sample or type one sentence.", entryRouteLabel: "How would you like to describe it?", entrySpeak: "Speak", entryType: "Type", entryMap: "Body map", landingPlaceholder: "e.g. chest pain, since this morning", exampleBreathing: "chest pain + breathlessness", continueFromCard: "Continue to read-back", whyLink: "Why Raahat?", orsLink: "ORS vs Raahat", faqLink: "FAQs", profileNav: "My Profile", profileShort: "Profile", footerDesc: "A citizen-first triage front door for Indian government hospitals. Helping citizens reach the right OPD counter through native voice, regional languages, and interactive 3D body mapping.", whyTitle: "A little more dignity at the counter.", whyNote: "Raahat starts with the citizen's words, not a medical vocabulary test. The person stays in control before anything is routed.", journeyOneTitle: "Describe in your voice or tap the map", journeyOneNote: "Speak, type, or use a flat body map. Every route creates the same reviewable complaint.", journeyTwoTitle: "Verified hospital & honest queue wait", journeyTwoNote: "See public hospital facts, then see simulated token throughput and when people are usually seen.", journeyThreeTitle: "Print specimen slip with citizen rights", journeyThreeNote: "A clearly marked mock slip keeps the next step legible and carries a grievance route.", comparisonTitle: "How Raahat rethinks ORS", comparisonNote: "ORS is a useful appointment system. Raahat addresses the moment before it: when a citizen does not know the right counter.", comparisonQuestion: "The front door question", orsEra: "2015 · NIC digitised counter", raahatEra: "2026 · citizen-first triage", comparisonDepartment: "Finding a department", orsDepartment: "Department guessing", raahatDepartment: "Start with where it hurts, not a department name", comparisonWait: "Knowing the real wait", orsWait: "Slot time without a seen-time estimate", raahatWait: "Estimated seen-time from slot + simulated throughput", comparisonAuth: "Getting started", orsAuth: "Front-door distorted CAPTCHA", raahatAuth: "Late-stage 1-tap Auth , only when making a specimen slip", comparisonAccess: "Describing the problem", orsAccess: "Text Forms", raahatAccess: "2D Visual Body Map + speak + type", networkTitle: "Delhi hospital network live status", networkNote: "Hospital names, addresses and departments are public facts. Availability and token throughput are simulated for this prototype.", faqTitle: "Questions citizens and judges ask", faqNote: "Plain answers about safety, access, privacy and what this prototype can really do.", faqSafetyQ: "Is this triage safe?", faqSafetyA: "Raahat does not diagnose. Code applies a small published rule file after you see and confirm the complaint. When a red flag is present, one flag is enough to route to Emergency.", faqRedFlagQ: "What happens when there is an Emergency red flag?", faqRedFlagA: "The result says to go to Emergency now and not book an appointment. The rule ID is shown, and the nearest simulated emergency-capable hospital in your chosen locality is displayed.", faqAccessQ: "Can someone who cannot read use it?", faqAccessA: "Yes. Complaint entry has three equal routes: speak, type, or tap the labelled 2D body map. Large buttons, keyboard focus and screen-reader labels are built into the flow.", faqPrivacyQ: "What happens to my data?", faqPrivacyA: "This prototype keeps the complaint in the browser for this session and never stores it server-side. Typed words are sent to no service in the body-map route; typed words stay in this browser for this session.", faqWaitQ: "How is the wait time calculated?", faqWaitA: "It is simulated as slot start plus a simulated wait. Hospitals are sorted by estimated seen-time, then travel time, then name. It is not live queue data.", faqOrsQ: "How is Raahat different from ORS?", faqOrsA: "ORS begins by asking you to choose a hospital and department. Raahat helps a citizen structure their own words first, then shows an honest simulated queue view. It does not connect to ORS.", faqAbdmQ: "Will this connect to ABDM?", faqAbdmA: "No. ABDM, Aadhaar, ABHA, UHID, OTP and government systems are outside this prototype. Any future integration would need explicit consent, security review and a real public-service partnership.", qrTitle: "Sample QR container", qrNote: "This pattern is decorative. It does not open a real appointment.", emergencyHospitalTitle: "Nearest Emergency-capable hospital in your chosen locality", emergencyHospitalNote: "Go now. This hospital fact is verified; travel is simulated.",
           eyebrow: "A simpler way to reach the right OPD counter", title: "What's wrong?",
           note: "Tell us in your own words. You can speak, type, or point to the body map.",
           bookingFor: "Booking for:", myself: "Myself", someoneElse: "Someone else", whoLabel: "Who is it for?",
@@ -2113,7 +2833,7 @@
           continueHint: "Add a few words, or choose an example, so we can carry on.", someoneHint: "Choose who this is for and an age band.", notChosen: "Not chosen", notAsked: "Not asked", chooseDepartmentScreen: "Choose a department yourself",
         },
         hi: {
-          landingKicker: "सरकारी अस्पताल तक पहुँचने का आसान पहला कदम", landingTitle: "सरकारी अस्पताल की अपॉइंटमेंट, बिना उलझन के।", landingSubtitle: "ORS पूछता है कि आपको कौन सा विभाग चाहिए। बीमार व्यक्ति को बस यह पता होता है कि कहाँ दर्द है। अपनी बात बोलकर, लिखकर या शरीर के नक्शे पर चुनकर बताइए , हम सही ओपीडी काउंटर और ईमानदार इंतज़ार दिखाएँगे।", modelDisclosure: "आपकी बात समझने के लिए यह वाक्य एआई सेवा को भेजा जाता है। अगर आप ऐसा नहीं चाहते तो शरीर का नक्शा चुनें।", startTriage: "ट्रायेज शुरू करें", learnMore: "यह कैसे काम करता है", privacyBadge: "100% जानकारी इसी फ़ोन में", noIdBadge: "देखने के लिए आधार/ओटीपी नहीं", accessBadge: "कम पढ़ने वालों के लिए भी आसान", quickStartTitle: "जो पता है, वहीं से शुरू करें", quickStartNote: "खाता नहीं। विभाग का अनुमान नहीं। नमूना चुनें या एक वाक्य लिखें।", entryRouteLabel: "कैसे बताना चाहेंगे?", entrySpeak: "बोलें", entryType: "लिखें", entryMap: "शरीर का नक्शा", landingPlaceholder: "जैसे: सीने में दर्द, आज सुबह से", exampleBreathing: "सीने में दर्द + साँस में दिक्कत", continueFromCard: "दोबारा पढ़ने के लिए आगे बढ़ें", whyLink: "राहत क्यों?", orsLink: "ORS और राहत", faqLink: "सवाल-जवाब", whyTitle: "काउंटर पर थोड़ा और सम्मान।", whyNote: "राहत मेडिकल शब्दावली की परीक्षा नहीं लेता। आपकी बात से शुरुआत होती है और आगे बढ़ने से पहले आप सब कुछ देख सकते हैं।", journeyOneTitle: "अपनी आवाज़ में बताएँ या नक्शे पर चुनें", journeyOneNote: "बोलें, लिखें या सरल शरीर के नक्शे का इस्तेमाल करें। हर रास्ता एक ही जाँच योग्य विवरण बनाता है।", journeyTwoTitle: "सत्यापित अस्पताल और ईमानदार इंतज़ार", journeyTwoNote: "सार्वजनिक अस्पताल की जानकारी, नकली टोकन की चाल और आम तौर पर दिखने का समय देखें।", journeyThreeTitle: "नागरिक अधिकारों वाली नमूना स्लिप", journeyThreeNote: "साफ़ तौर पर नकली बताई गई स्लिप अगला कदम और शिकायत का रास्ता साथ रखती है।", comparisonTitle: "राहत ORS को नए ढंग से सोचता है", comparisonNote: "ORS अपॉइंटमेंट के लिए उपयोगी है। राहत उस पल को आसान बनाता है जब नागरिक को सही काउंटर पता नहीं होता।", comparisonQuestion: "पहले सवाल का फर्क", orsEra: "2015 · NIC का डिजिटल काउंटर", raahatEra: "2026 · नागरिक पहले", comparisonDepartment: "विभाग ढूँढना", orsDepartment: "विभाग का अनुमान", raahatDepartment: "जीरो-नॉलेज ट्रायेज , जहाँ दर्द है वहाँ से शुरुआत", comparisonWait: "सही इंतज़ार जानना", orsWait: "सिर्फ स्लॉट का समय", raahatWait: "ईमानदार इंतज़ार , स्लॉट + नकली दिखने का समय", comparisonAuth: "शुरुआत करना", orsAuth: "शुरू में टेढ़ा CAPTCHA", raahatAuth: "अंत में एक टैप से पहचान , सिर्फ नमूना स्लिप पर", comparisonAccess: "परेशानी बताना", orsAccess: "टेक्स्ट फ़ॉर्म", raahatAccess: "2D शरीर का नक्शा + बोलना + लिखना", networkTitle: "दिल्ली अस्पताल नेटवर्क की स्थिति", networkNote: "अस्पताल के नाम, पते और विभाग सार्वजनिक तथ्य हैं। उपलब्धता और टोकन की गति इस प्रोटोटाइप की नकली जानकारी है।", faqTitle: "नागरिक और जज के सवाल", faqNote: "सुरक्षा, पहुँच, गोपनीयता और इस प्रोटोटाइप की असली सीमा के साफ़ जवाब।", faqSafetyQ: "क्या यह ट्रायेज सुरक्षित है?", faqSafetyA: "राहत बीमारी का पता नहीं लगाता। आपकी पुष्टि के बाद कोड की छोटी नियम-सूची काम करती है। एक भी रेड फ्लैग होने पर इमरजेंसी का रास्ता चुना जाता है।", faqRedFlagQ: "इमरजेंसी रेड फ्लैग होने पर क्या होता है?", faqRedFlagA: "नतीजा कहता है कि अभी इमरजेंसी जाएँ और अपॉइंटमेंट न लें। नियम आईडी और चुने हुए इलाके का सबसे नज़दीकी नकली इमरजेंसी अस्पताल दिखता है।", faqAccessQ: "क्या बिना पढ़े कोई इसे इस्तेमाल कर सकता है?", faqAccessA: "हाँ। परेशानी बताने के तीन बराबर रास्ते हैं: बोलना, लिखना या नाम वाले 2D शरीर के नक्शे पर टैप करना।", faqPrivacyQ: "मेरी जानकारी का क्या होता है?", faqPrivacyA: "परेशानी इसी ब्राउज़र में इस सत्र तक रहती है और सर्वर पर सेव नहीं होती। शरीर के नक्शे वाले रास्ते में कुछ भी किसी सेवा को नहीं भेजा जाता।", faqWaitQ: "इंतज़ार का समय कैसे निकला है?", faqWaitA: "यह स्लॉट शुरू होने का समय और नकली इंतज़ार जोड़कर निकाला गया है। अस्पताल पहले दिखने के समय, फिर यात्रा और फिर नाम से क्रम में आते हैं। यह लाइव कतार नहीं है।", faqOrsQ: "राहत ORS से कैसे अलग है?", faqOrsA: "ORS आपसे अस्पताल और विभाग चुनने को कहता है। राहत पहले आपकी बात को व्यवस्थित करता है और फिर नकली कतार दिखाता है। यह ORS से जुड़ा नहीं है।", faqAbdmQ: "क्या यह ABDM से जुड़ेगा?", faqAbdmA: "नहीं। ABDM, आधार, ABHA, UHID, OTP और सरकारी सिस्टम इस प्रोटोटाइप के बाहर हैं। भविष्य में जोड़ने के लिए साफ़ सहमति और सुरक्षा जाँच ज़रूरी होगी।", qrTitle: "नमूना QR बॉक्स", qrNote: "यह सजावटी पैटर्न है। इससे असली अपॉइंटमेंट नहीं खुलेगी।", emergencyHospitalTitle: "आपके चुने इलाके का सबसे नज़दीकी इमरजेंसी अस्पताल", emergencyHospitalNote: "अभी जाएँ। अस्पताल की जानकारी सत्यापित है; यात्रा का समय नकली है।",
+          landingKicker: "सरकारी अस्पताल तक पहुँचने का आसान पहला कदम", landingTitle: "सरकारी अस्पताल की अपॉइंटमेंट, बिना उलझन के।", landingSubtitle: "ORS पूछता है कि आपको कौन सा विभाग चाहिए। बीमार व्यक्ति को बस यह पता होता है कि कहाँ दर्द है। अपनी बात बोलकर, लिखकर या शरीर के नक्शे पर चुनकर बताइए , हम सही ओपीडी काउंटर और ईमानदार इंतज़ार दिखाएँगे।", modelDisclosure: "आपकी बात समझने के लिए यह वाक्य एआई सेवा को भेजा जाता है। अगर आप ऐसा नहीं चाहते तो शरीर का नक्शा चुनें।", startTriage: "ट्रायेज शुरू करें", learnMore: "यह कैसे काम करता है", privacyBadge: "100% जानकारी इसी फ़ोन में", noIdBadge: "देखने के लिए आधार/ओटीपी नहीं", accessBadge: "कम पढ़ने वालों के लिए भी आसान", quickStartTitle: "जो पता है, वहीं से शुरू करें", quickStartNote: "खाता नहीं। विभाग का अनुमान नहीं। नमूना चुनें या एक वाक्य लिखें।", entryRouteLabel: "कैसे बताना चाहेंगे?", entrySpeak: "बोलें", entryType: "लिखें", entryMap: "शरीर का नक्शा", landingPlaceholder: "जैसे: सीने में दर्द, आज सुबह से", exampleBreathing: "सीने में दर्द + साँस में दिक्कत", continueFromCard: "दोबारा पढ़ने के लिए आगे बढ़ें", whyLink: "राहत क्यों?", orsLink: "ORS और राहत", faqLink: "सवाल-जवाब", profileNav: "मेरी प्रोफाइल", profileShort: "प्रोफाइल", footerDesc: "भारतीय सरकारी अस्पतालों के लिए नागरिक-प्रथम ट्रायेज फ्रंट डोर। देशी आवाज़, 22 क्षेत्रीय भाषाओं और इंटरैक्टिव 3D बॉडी मैप द्वारा सही काउंटर तक मार्गदर्शन।", whyTitle: "काउंटर पर थोड़ा और सम्मान।", whyNote: "राहत मेडिकल शब्दावली की परीक्षा नहीं लेता। आपकी बात से शुरुआत होती है और आगे बढ़ने से पहले आप सब कुछ देख सकते हैं।", journeyOneTitle: "अपनी आवाज़ में बताएँ या नक्शे पर चुनें", journeyOneNote: "बोलें, लिखें या सरल शरीर के नक्शे का इस्तेमाल करें। हर रास्ता एक ही जाँच योग्य विवरण बनाता है।", journeyTwoTitle: "सत्यापित अस्पताल और ईमानदार इंतज़ार", journeyTwoNote: "सार्वजनिक अस्पताल की जानकारी, नकली टोकन की चाल और आम तौर पर दिखने का समय देखें।", journeyThreeTitle: "नागरिक अधिकारों वाली नमूना स्लिप", journeyThreeNote: "साफ़ तौर पर नकली बताई गई स्लिप अगला कदम और शिकायत का रास्ता साथ रखती है।", comparisonTitle: "राहत ORS को नए ढंग से सोचता है", comparisonNote: "ORS अपॉइंटमेंट के लिए उपयोगी है। राहत उस पल को आसान बनाता है जब नागरिक को सही काउंटर पता नहीं होता।", comparisonQuestion: "पहले सवाल का फर्क", orsEra: "2015 · NIC का डिजिटल काउंटर", raahatEra: "2026 · नागरिक पहले", comparisonDepartment: "विभाग ढूँढना", orsDepartment: "विभाग का अनुमान", raahatDepartment: "जीरो-नॉलेज ट्रायेज , जहाँ दर्द है वहाँ से शुरुआत", comparisonWait: "सही इंतज़ार जानना", orsWait: "सिर्फ स्लॉट का समय", raahatWait: "ईमानदार इंतज़ार , स्लॉट + नकली दिखने का समय", comparisonAuth: "शुरुआत करना", orsAuth: "शुरू में टेढ़ा CAPTCHA", raahatAuth: "अंत में एक टैप से पहचान , सिर्फ नमूना स्लिप पर", comparisonAccess: "परेशानी बताना", orsAccess: "टेक्स्ट फ़ॉर्म", raahatAccess: "2D शरीर का नक्शा + बोलना + लिखना", networkTitle: "दिल्ली अस्पताल नेटवर्क की स्थिति", networkNote: "अस्पताल के नाम, पते और विभाग सार्वजनिक तथ्य हैं। उपलब्धता और टोकन की गति इस प्रोटोटाइप की नकली जानकारी है।", faqTitle: "नागरिक और जज के सवाल", faqNote: "सुरक्षा, पहुँच, गोपनीयता और इस प्रोटोटाइप की असली सीमा के साफ़ जवाब।", faqSafetyQ: "क्या यह ट्रायेज सुरक्षित है?", faqSafetyA: "राहत बीमारी का पता नहीं लगाता। आपकी पुष्टि के बाद कोड की छोटी नियम-सूची काम करती है। एक भी रेड फ्लैग होने पर इमरजेंसी का रास्ता चुना जाता है।", faqRedFlagQ: "इमरजेंसी रेड फ्लैग होने पर क्या होता है?", faqRedFlagA: "नतीजा कहता है कि अभी इमरजेंसी जाएँ और अपॉइंटमेंट न लें। नियम आईडी और चुने हुए इलाके का सबसे नज़दीकी नकली इमरजेंसी अस्पताल दिखता है।", faqAccessQ: "क्या बिना पढ़े कोई इसे इस्तेमाल कर सकता है?", faqAccessA: "हाँ। परेशानी बताने के तीन बराबर रास्ते हैं: बोलना, लिखना या नाम वाले 2D शरीर के नक्शे पर टैप करना।", faqPrivacyQ: "मेरी जानकारी का क्या होता है?", faqPrivacyA: "परेशानी इसी ब्राउज़र में इस सत्र तक रहती है और सर्वर पर सेव नहीं होती। शरीर के नक्शे वाले रास्ते में कुछ भी किसी सेवा को नहीं भेजा जाता।", faqWaitQ: "इंतज़ार का समय कैसे निकला है?", faqWaitA: "यह स्लॉट शुरू होने का समय और नकली इंतज़ार जोड़कर निकाला गया है। अस्पताल पहले दिखने के समय, फिर यात्रा और फिर नाम से क्रम में आते हैं। यह लाइव कतार नहीं है।", faqOrsQ: "राहत ORS से कैसे अलग है?", faqOrsA: "ORS आपसे अस्पताल और विभाग चुनने को कहता है। राहत पहले आपकी बात को व्यवस्थित करता है और फिर नकली कतार दिखाता है। यह ORS से जुड़ा नहीं है।", faqAbdmQ: "क्या यह ABDM से जुड़ेगा?", faqAbdmA: "नहीं। ABDM, आधार, ABHA, UHID, OTP और सरकारी सिस्टम इस प्रोटोटाइप के बाहर हैं। भविष्य में जोड़ने के लिए साफ़ सहमति और सुरक्षा जाँच ज़रूरी होगी।", qrTitle: "नमूना QR बॉक्स", qrNote: "यह सजावटी पैटर्न है। इससे असली अपॉइंटमेंट नहीं खुलेगी।", emergencyHospitalTitle: "आपके चुने इलाके का सबसे नज़दीकी इमरजेंसी अस्पताल", emergencyHospitalNote: "अभी जाएँ। अस्पताल की जानकारी सत्यापित है; यात्रा का समय नकली है।",
           eyebrow: "सही ओपीडी काउंटर तक पहुँचने का आसान तरीका", title: "क्या तकलीफ़ है?",
           note: "अपने शब्दों में बताइए। बोलें, लिखें या शरीर के नक्शे पर चुनें।",
           bookingFor: "किसके लिए बुकिंग है:", myself: "मेरे लिए", someoneElse: "किसी और के लिए", whoLabel: "किसके लिए है?",
@@ -3252,7 +3972,7 @@
         document.querySelector("#donor-status").textContent = `${text("donorSaved")} ${token}`;
       });
 
-      const viewHash = Object.freeze({ home: "screen-home", triage: "screen-triage", "lab-tests": "screen-lab-tests", "blood-bank": "screen-blood-bank", comparison: "screen-comparison", hospitals: "screen-hospitals", faqs: "screen-faqs", honesty: "screen-honesty", doctor: "screen-doctor" });
+      const viewHash = Object.freeze({ home: "screen-home", triage: "screen-triage", profile: "screen-profile", "lab-tests": "screen-lab-tests", "blood-bank": "screen-blood-bank", comparison: "screen-comparison", hospitals: "screen-hospitals", faqs: "screen-faqs", honesty: "screen-honesty", doctor: "screen-doctor" });
 
       function setActiveNav(viewId) {
         document.querySelectorAll("[data-view-link]").forEach((link) => {
@@ -3271,6 +3991,8 @@
       function hideAllScreens() {
         const docScreen = document.querySelector("#screen-doctor");
         if (docScreen) docScreen.hidden = true;
+        const profileScreen = document.querySelector("#screen-profile");
+        if (profileScreen) profileScreen.hidden = true;
         landingScreen.hidden = true;
         triageScreen.hidden = true;
         questionContent.hidden = true;
@@ -3332,6 +4054,16 @@
         }
         if (nextView === "lab-tests") renderLabCatalog();
         if (nextView === "hospitals") renderPanIndiaDirectory();
+        if (nextView === "profile") {
+          hideAllScreens();
+          const profScreen = document.querySelector("#screen-profile");
+          if (profScreen) profScreen.hidden = false;
+          setActiveNav("profile");
+          renderProfilePass();
+          window.scrollTo({ top: 0, behavior: "auto" });
+          document.querySelector("#profile-title")?.focus();
+          return;
+        }
         if (nextView === "doctor") {
           hideAllScreens();
           const docScreen = document.querySelector("#screen-doctor");
@@ -3835,6 +4567,263 @@
         }
       });
 
+      
+      // --- Web Audio Synthesizer Chime (Hospital Calling Bell) ---
+      function playHospitalChime() {
+        try {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (!AudioCtx) return;
+          const ctx = new AudioCtx();
+          const osc1 = ctx.createOscillator();
+          const osc2 = ctx.createOscillator();
+          const gain = ctx.createGain();
+
+          osc1.type = "sine";
+          osc1.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+          osc1.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.28); // A5
+
+          osc2.type = "triangle";
+          osc2.frequency.setValueAtTime(440, ctx.currentTime); // A4
+          osc2.frequency.exponentialRampToValueAtTime(659.25, ctx.currentTime + 0.28); // E5
+
+          gain.gain.setValueAtTime(0.25, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.65);
+
+          osc1.connect(gain);
+          osc2.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc1.start();
+          osc2.start();
+          osc1.stop(ctx.currentTime + 0.65);
+          osc2.stop(ctx.currentTime + 0.65);
+        } catch (e) {
+          console.log("Audio chime error:", e);
+        }
+      }
+
+      // --- Render Active Citizen Profile Pass ---
+      function renderProfilePass() {
+        const tokenEl = document.querySelector("#pass-active-token");
+        const nameEl = document.querySelector("#pass-patient-name");
+        const hospEl = document.querySelector("#pass-hospital-name");
+        const counterEl = document.querySelector("#pass-counter-name");
+        const pillEl = document.querySelector("#pass-status-pill");
+
+        const activePatient = doctorQueueData[activeDoctorQueueIndex] || doctorQueueData[0];
+        if (tokenEl) tokenEl.textContent = state.appointmentId ? `#${state.appointmentId}` : activePatient.token;
+        if (nameEl) nameEl.textContent = state.fullName ? `${state.fullName} (${state.exactAge || "64"}y)` : `${activePatient.patient} (${activePatient.age})`;
+        if (hospEl) hospEl.textContent = state.selectedHospital?.name || "AIIMS New Delhi";
+        if (counterEl) counterEl.textContent = state.routeResult?.department ? `${state.routeResult.department} (Counter 4)` : activePatient.counter;
+
+        if (pillEl) {
+          if (activePatient.status === "Seen") {
+            pillEl.className = "pass-status-pill seen";
+            pillEl.textContent = "✅ Consultation Complete";
+          } else if (activePatient.status.includes("Consultation Room")) {
+            pillEl.className = "pass-status-pill inside";
+            pillEl.textContent = "🟢 Inside Consultation Room";
+          } else {
+            pillEl.className = "pass-status-pill";
+            pillEl.textContent = `🟡 Waiting in Hall (${activePatient.status})`;
+          }
+        }
+      }
+
+      // --- Wire Patient Profile Screen ---
+      function wireProfileScreen() {
+        document.querySelector("#pass-view-slip-btn")?.addEventListener("click", () => {
+          if (state.signedIn) {
+            switchView("triage");
+            showSlip();
+          } else {
+            switchView("triage");
+          }
+        });
+
+        document.querySelector("#pass-print-btn")?.addEventListener("click", () => {
+          window.print();
+        });
+
+        // Past slip downloads
+        document.querySelectorAll("[data-download-past]").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const slipType = btn.dataset.downloadPast;
+            const content = `Raahat Citizen Specimen Slip (Historical Record)\nReference: REF-${slipType.toUpperCase()}-2026\nPatient: Ramesh Kumar (64M)\nHospital: AIIMS New Delhi\nThis is simulated patient history for the Raahat civic prototype.`;
+            const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `raahat-visit-${slipType}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+          });
+        });
+
+        // Family profile quick triage
+        document.querySelectorAll("[data-book-family]").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const member = btn.dataset.bookFamily;
+            if (member === "ramesh") {
+              state.fullName = "Ramesh Kumar";
+              state.exactAge = "64";
+              state.booking = "myself";
+              state.age = "older";
+            } else if (member === "sunita") {
+              state.fullName = "Sunita Devi";
+              state.exactAge = "60";
+              state.booking = "someoneElse";
+              state.who = "parent";
+              state.age = "older";
+            } else if (member === "aarav") {
+              state.fullName = "Aarav Verma";
+              state.exactAge = "5";
+              state.booking = "someoneElse";
+              state.who = "child";
+              state.age = "child";
+            }
+            switchView("triage");
+          });
+        });
+
+        document.querySelector("#btn-clear-profile-data")?.addEventListener("click", () => {
+          if (confirm("Reset local demonstration records?")) {
+            localStorage.removeItem("raahat-token-seen-event");
+            alert("Local session records cleared.");
+            renderProfilePass();
+          }
+        });
+      }
+
+      // --- Wire Multi-Role Hospital Suite Tabs ---
+      function wireHospitalRoleSuite() {
+        const roleTabs = document.querySelectorAll(".role-tab");
+        const rolePanels = {
+          desk: document.querySelector("#role-panel-desk"),
+          counter: document.querySelector("#role-panel-counter"),
+          cmo: document.querySelector("#role-panel-cmo")
+        };
+
+        roleTabs.forEach(tab => {
+          tab.addEventListener("click", () => {
+            const targetRole = tab.dataset.roleView;
+            roleTabs.forEach(t => {
+              t.classList.remove("active");
+              t.setAttribute("aria-selected", "false");
+            });
+            tab.classList.add("active");
+            tab.setAttribute("aria-selected", "true");
+
+            Object.entries(rolePanels).forEach(([role, panel]) => {
+              if (panel) panel.hidden = role !== targetRole;
+            });
+          });
+        });
+
+        // Fast Rx & Lab Orders Chips
+        const selectedRx = new Set();
+        const rxSummaryBox = document.querySelector("#rx-selected-summary");
+        const rxSummaryText = document.querySelector("#rx-selected-items-text");
+
+        function updateRxSummary() {
+          if (!rxSummaryBox || !rxSummaryText) return;
+          if (selectedRx.size === 0) {
+            rxSummaryBox.style.display = "none";
+          } else {
+            rxSummaryBox.style.display = "block";
+            rxSummaryText.textContent = Array.from(selectedRx).join(" · ");
+          }
+        }
+
+        document.querySelectorAll(".rx-chip").forEach(chip => {
+          chip.addEventListener("click", () => {
+            const val = chip.dataset.rx || chip.dataset.lab;
+            if (chip.classList.contains("added")) {
+              chip.classList.remove("added");
+              selectedRx.delete(val);
+            } else {
+              chip.classList.add("added");
+              selectedRx.add(val);
+            }
+            updateRxSummary();
+          });
+        });
+
+        // Registration Counter Terminal Logic
+        const terminalForm = document.querySelector("#terminal-register-form");
+        const terminalFeedback = document.querySelector("#terminal-feedback");
+
+        terminalForm?.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const name = document.querySelector("#terminal-name").value;
+          const age = document.querySelector("#terminal-age").value;
+          const gender = document.querySelector("#terminal-gender").value;
+          const dept = document.querySelector("#terminal-department").value;
+          const cat = document.querySelector("#terminal-category").value;
+          const complaint = document.querySelector("#terminal-complaint").value;
+
+          const newTokenNum = `#OPD-${Math.floor(1000 + Math.random() * 9000)}`;
+
+          // Update thermal slip display
+          document.querySelector("#thermal-display-token").textContent = newTokenNum;
+          document.querySelector("#thermal-display-patient").textContent = name;
+          document.querySelector("#thermal-display-meta").textContent = `${age}Y / ${gender}`;
+          document.querySelector("#thermal-display-counter").textContent = dept;
+          document.querySelector("#thermal-display-fee").textContent = cat.includes("Free") ? "₹0 (WAIVED)" : "₹10 PAID";
+
+          // Add to live doctorQueueData
+          doctorQueueData.push({
+            token: newTokenNum,
+            patient: name,
+            age: `${age}y`,
+            gender: gender,
+            condition: "Registration Desk Walk-In",
+            meds: "None recorded",
+            complaint: complaint,
+            severity: "Standard walk-in",
+            department: dept.split("·")[0].trim(),
+            counter: dept,
+            rule: "RULE-WALKIN-DISPATCH",
+            safety: "PASSED",
+            recommendation: "Initial OPD assessment and vital signs check.",
+            status: "Waiting in Hall"
+          });
+
+          renderDoctorQueue();
+          playHospitalChime();
+
+          if (terminalFeedback) {
+            terminalFeedback.textContent = `✅ Token ${newTokenNum} dispatched for ${name}! Added to live queue.`;
+          }
+        });
+
+        // Quick UHID search samples
+        document.querySelectorAll("[data-quick-uhid]").forEach(chip => {
+          chip.addEventListener("click", () => {
+            const member = chip.dataset.quickUhid;
+            if (member === "ramesh") {
+              document.querySelector("#terminal-name").value = "Ramesh Kumar";
+              document.querySelector("#terminal-age").value = "64";
+              document.querySelector("#terminal-gender").value = "Male";
+              document.querySelector("#terminal-category").value = "Senior Citizen (Free)";
+              document.querySelector("#terminal-department").value = "Cardiology · Counter 4";
+              document.querySelector("#terminal-complaint").value = "Seene mein dard aur thakan";
+            } else if (member === "sunita") {
+              document.querySelector("#terminal-name").value = "Sunita Devi";
+              document.querySelector("#terminal-age").value = "60";
+              document.querySelector("#terminal-gender").value = "Female";
+              document.querySelector("#terminal-category").value = "Senior Citizen (Free)";
+              document.querySelector("#terminal-department").value = "General Medicine · Counter 2";
+              document.querySelector("#terminal-complaint").value = "Saans phoolna aur mausam ka asar";
+            }
+          });
+        });
+
+        document.querySelector("#terminal-print-btn")?.addEventListener("click", () => {
+          window.print();
+        });
+      }
+
       function wireDoctorPortal() {
         const callNextBtn = document.querySelector("#doctor-call-next");
         const markSeenBtn = document.querySelector("#doctor-mark-seen");
@@ -3843,6 +4832,7 @@
         const feedbackEl = document.querySelector("#doctor-action-feedback");
 
         callNextBtn?.addEventListener("click", () => {
+          playHospitalChime();
           const nextIdx = doctorQueueData.findIndex((item, i) => i > activeDoctorQueueIndex && item.status !== "Seen");
           if (nextIdx !== -1) {
             activeDoctorQueueIndex = nextIdx;
@@ -4315,6 +5305,8 @@
       wireVernacularExpansion();
       wireDoctorPortal();
       wirePrescriptionOCR();
+      wireProfileScreen();
+      wireHospitalRoleSuite();
       wireWhatsAppSimulator();
       renderPanIndiaDirectory();
       renderLocalities();
