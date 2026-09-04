@@ -4,9 +4,9 @@
 
 const COLORS = Object.freeze({
   spruce: 0x166534,
-  emerald: 0x22c55e,
+  emerald: 0x1d3d33,
   spruceDark: 0x14532d,
-  emeraldDark: 0x16a34a,
+  emeraldDark: 0x142b24,
   amber: 0xf59e0b,
   white: 0xf8fafc,
 });
@@ -36,9 +36,9 @@ const REGION_LABELS = Object.freeze({
 function themePalette() {
   const dark = document.documentElement?.getAttribute("data-theme") === "dark";
   return {
-    body: dark ? COLORS.emerald : COLORS.spruce,
-    secondary: dark ? COLORS.emeraldDark : COLORS.spruceDark,
-    inner: dark ? 0x34d399 : 0x2b8060,
+    body: dark ? 0x224438 : COLORS.spruce,
+    secondary: dark ? 0x162c25 : COLORS.spruceDark,
+    inner: dark ? 0x2dd4bf : 0x2b8060,
   };
 }
 
