@@ -326,16 +326,30 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .honesty-build { border-color: #a9c8ba; background: #edf8f2; }
       .honesty-back { margin-top: 1.25rem; }
       @media print {
-        @page { size: A4; margin: 16mm; }
-        body { background: #fff; color: #0f172a; font-size: 12pt; }
-        .topline, .support, .prototype-banner, main > :not(#screen-triage), #screen-triage > :not(#appointment-screen), .triage-stepper, .slip-actions { display: none !important; }
-        .app-shell { width: 100%; padding: 0; }
-        main { display: block; padding: 0; }
-        #screen-triage { display: block !important; }
-        #appointment-screen { display: block !important; }
-        #slip-panel { display: block !important; margin: 0; }
+        @page { size: A4; margin: 12mm; }
+        body { background: #fff !important; color: #0f172a !important; font-size: 11pt; }
+        .topline, .site-footer, .support, .prototype-banner, .triage-stepper, .slip-actions, .hospital-role-tabs, .counter-form-card, .doctor-sidebar, .doctor-actions-bar, .rx-builder-card, .history-grid, .family-grid, .privacy-vault-box, #thermal-print-btn, #pass-print-btn, .pass-actions-bar, .whatsapp-float-btn { display: none !important; }
+        .app-shell { width: 100% !important; padding: 0 !important; }
+        main { display: block !important; padding: 0 !important; }
+        
+        /* If printing specimen slip */
+        body:not(.printing-thermal):not(.printing-pass) #screen-triage,
+        body:not(.printing-thermal):not(.printing-pass) #appointment-screen,
+        body:not(.printing-thermal):not(.printing-pass) #slip-panel { display: block !important; }
+
+        /* If printing thermal token from registration counter */
+        body.printing-thermal #screen-doctor,
+        body.printing-thermal #role-panel-counter,
+        body.printing-thermal .thermal-slip-card { display: block !important; width: 80mm !important; margin: 0 auto !important; }
+
+        /* If printing profile pass */
+        body.printing-pass #screen-profile,
+        body.printing-pass .active-pass-card { display: block !important; margin: 0 !important; }
+
         .slip { border: 1px solid #0f172a; box-shadow: none; }
-        .print-only { display: block; }
+        .thermal-slip-card { border: 1px dashed #0f172a; box-shadow: none; }
+        .active-pass-card { border: 1px solid #0f172a; box-shadow: none; }
+        .print-only { display: block !important; }
       }
       .tag { display: inline-flex; align-items: center; min-height: 1.8rem; margin-right: 0.35rem; padding: 0.2rem 0.55rem; border: 1px solid currentColor; border-radius: 999px; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.02em; line-height: 1; vertical-align: middle; }
       .icon { display: inline-block; width: 1.45rem; height: 1.45rem; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; vertical-align: middle; }
@@ -872,9 +886,9 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .workspace-privacy { margin: 1rem 0 0; padding: 0.8rem; border: 1px solid #a9c8ba; border-radius: 0.75rem; background: #f5fbf7; color: #183f31; font-size: 0.96rem; line-height: 1.45; }
       .support-label { font-weight: 800; color: var(--ink); }
 
-      @media (min-width: 1024px) {
+      @media (min-width: 1200px) {
         .topline { flex-wrap: nowrap; }
-        .site-nav { display: inline-flex; flex: 1; justify-content: center; margin: 0 0.5rem; overflow-x: auto; scrollbar-width: none; }
+        .site-nav { display: inline-flex; flex: 1; justify-content: flex-start; margin: 0 0.75rem; overflow-x: auto; scrollbar-width: none; }
         .site-nav::-webkit-scrollbar { display: none; }
         .landing-hero { grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr); }
         .journey-grid, .network-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -882,9 +896,9 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         .triage-workspace { grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.65fr); align-items: start; }
         .workspace-side { position: sticky; top: 5rem; }
       }
-      @media (max-width: 1023px) and (min-width: 760px) {
+      @media (max-width: 1199px) and (min-width: 760px) {
         .topline { flex-wrap: wrap; padding: 0.35rem 0 0.45rem; }
-        .site-nav { display: inline-flex; order: 3; width: 100%; overflow-x: auto; justify-content: flex-start; scrollbar-width: none; }
+        .site-nav { display: inline-flex; order: 3; width: 100%; overflow-x: auto; justify-content: flex-start; scrollbar-width: none; padding: 0.2rem 0; gap: 0.3rem; }
         .site-nav::-webkit-scrollbar { display: none; }
         .landing-hero { grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr); }
         .journey-grid, .network-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -895,11 +909,22 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       @media (max-width: 759px) {
         .topline { flex-wrap: wrap; padding: 0.35rem 0 0.45rem; align-items: center; }
         .tagline { display: none; }
-        .site-nav { display: flex; order: 3; width: 100%; overflow-x: auto; scrollbar-width: none; }
+        .site-nav { display: flex; order: 3; width: 100%; overflow-x: auto; scrollbar-width: none; padding: 0.2rem 0; gap: 0.25rem; }
         .site-nav::-webkit-scrollbar { display: none; }
-        .site-nav a { white-space: nowrap; }
-        .nav-actions { margin-left: auto; }
-        .nav-start { padding-inline: 0.75rem; font-size: 0.88rem; }
+        .site-nav a { white-space: nowrap; font-size: 0.82rem; min-height: 2.1rem; padding: 0.25rem 0.55rem; }
+        .nav-actions { margin-left: auto; gap: 0.3rem; }
+      }
+      @media (max-width: 640px) {
+        .language-bar-group .lang-quick-btn:not(#btn-open-languages) { display: none; }
+        .language-bar-group { padding: 0.15rem; }
+        .lang-quick-btn { min-height: 2.1rem; padding: 0.25rem 0.55rem; font-size: 0.8rem; }
+        .nav-profile-btn { min-height: 2.1rem; padding: 0.25rem 0.55rem; font-size: 0.82rem; }
+        .nav-profile-btn span:not(.profile-icon) { display: none; }
+        .nav-start { padding: 0.3rem 0.65rem; min-height: 2.1rem; font-size: 0.82rem; }
+        .theme-toggle { width: 2.1rem; height: 2.1rem; }
+        .topline { gap: 0.35rem; }
+        .whatsapp-float-btn { padding: 0.5rem; border-radius: 50%; width: 3rem; height: 3rem; justify-content: center; bottom: 1rem; right: 1rem; }
+        .whatsapp-float-btn span { display: none; }
       }
       @media (max-width: 640px) {
         h1 { font-size: 2.45rem; }
@@ -1306,9 +1331,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               <button class="large-button primary hero-primary-action" type="button" id="hero-triage-action" data-copy="startBooking">Start OPD Triage &amp; Book Slot →</button>
               <div class="service-grid" aria-label="Raahat services">
                 <button class="service-card" type="button" data-service-view="triage"><span aria-hidden="true">🏥</span><strong data-copy="opdService">OPD Counter Triage</strong><small data-copy="opdServiceNote">Find the right first counter</small></button>
+                <button class="service-card" type="button" data-service-view="profile"><span aria-hidden="true">👤</span><strong data-copy="serviceProfileTitle">My Patient Profile</strong><small data-copy="serviceProfileDesc">Live OPD pass &amp; visit records</small></button>
+                <button class="service-card" type="button" data-service-view="doctor"><span aria-hidden="true">👨‍⚕️</span><strong data-copy="serviceDoctorTitle">Doctor &amp; Staff Portal</strong><small data-copy="serviceDoctorDesc">Live queue &amp; SBAR handover</small></button>
                 <button class="service-card" type="button" data-service-view="lab-tests"><span aria-hidden="true">🔬</span><strong data-copy="serviceLabTitle">Lab Tests &amp; Scans</strong><small data-copy="serviceLabDesc">e-Hospital rates &amp; slots</small></button>
                 <button class="service-card" type="button" data-service-view="blood-bank"><span aria-hidden="true">🩸</span><strong data-copy="serviceBloodTitle">Blood Bank</strong><small data-copy="serviceBloodDesc">Real-time e-RaktKosh stock</small></button>
-                <button class="service-card" type="button" data-service-view="doctor"><span aria-hidden="true">👨‍⚕️</span><strong data-copy="serviceDoctorTitle">Doctor &amp; Staff Portal</strong><small data-copy="serviceDoctorDesc">Live queue &amp; SBAR handover</small></button>
                 <button class="service-card" type="button" data-service-view="triage" data-teleconsult="true"><span aria-hidden="true">📹</span><strong data-copy="serviceTeleTitle">Tele-Consultation</strong><small data-copy="serviceTeleDesc">AIIMS Tele-OPD booth</small></button>
               </div>
             </section>
@@ -2925,6 +2951,66 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         roadmapTitle: "राहत के लिए आगे क्या?", roadmapNote: "इस प्रोटोटाइप को अधिक जुड़े हुए और आसान सार्वजनिक सेवा के दरवाज़े में बदलने का नागरिक रोडमैप।", roadmapAbdmTitle: "ABDM और e-Hospital इंटीग्रेशन", roadmapAbdmNote: "बनाए गए नमूना टोकन को आयुष्मान भारत डिजिटल मिशन (ABDM) और राष्ट्रीय हॉस्पिटल मैनेजमेंट इन्फॉर्मेशन सिस्टम (HMIS) से सीधे जोड़ना।", roadmapIvrTitle: "फीचर फोन के लिए AI वॉइस IVR (104 इंटीग्रेशन)", roadmapIvrNote: "ग्रामीण नागरिक टोल-फ्री नंबर पर 22 क्षेत्रीय बोलियों—भोजपुरी, मैथिली, तमिल और बंगाली सहित—में परेशानी बोलें और SMS से ओपीडी टोकन पाएँ।", roadmapQueueTitle: "अस्पताल की लाइव कतार की तस्वीर", roadmapQueueNote: "वेटिंग हॉल के टोकन काउंटर जोड़कर घर से निकलने से पहले परामर्श का लाइव समय दिखाना।", roadmapLanguagesTitle: "पूरे भारत में स्थानीय भाषाओं का विस्तार", roadmapLanguagesNote: "सभी 22 अनुसूचित भारतीय भाषाओं में मूल आवाज़ और बोली का समर्थन बनाना।"
       });
       
+      
+      Object.assign(copy.en, {
+  "brandTagline": "Point at where it hurts. We'll do the rest.",
+  "doctorNav": "Hospital Portal",
+  "profileNav": "My Profile",
+  "profileShort": "Profile",
+  "footerDesc": "A citizen-first triage front door for Indian government hospitals. Helping citizens reach the right OPD counter through native voice, 22 regional languages, and interactive 3D body mapping.",
+  "serviceDoctorTitle": "Hospital & Doctor Suite",
+  "serviceDoctorDesc": "Live queue & SBAR handover",
+  "serviceProfileTitle": "My Patient Profile",
+  "serviceProfileDesc": "Live OPD pass & visit records",
+  "serviceLabTitle": "Lab Tests & Scans",
+  "serviceLabDesc": "e-Hospital rates & slots",
+  "serviceBloodTitle": "Blood Bank",
+  "serviceBloodDesc": "Real-time e-RaktKosh stock",
+  "serviceTeleTitle": "Tele-Consultation",
+  "serviceTeleDesc": "AIIMS Tele-OPD booth",
+  "statOrsWait": "Avg. ORS Wait in Wrong Lines",
+  "statRaahatWait": "Avg. Wait with Raahat Triage",
+  "statReferralDrop": "Drop in Wrong Counter Referrals",
+  "statVerifiedDirectory": "Pan-India Verified Directory",
+  "filterByState": "Filter by State / Region:",
+  "doctorTitle": "Hospital OPD Counter & Doctor Portal",
+  "doctorSubtitle": "Live patient queue, 10-second SBAR clinical handover, and verified token verification.",
+  "doctorQueueTitle": "Live Token Queue",
+  "doctorCallNext": "🔊 Call Next Patient",
+  "doctorMarkSeen": "✅ Complete Consultation & Sign Rx",
+  "doctorEscalateEmergency": "🚨 Escalate to 24/7 Emergency",
+  "doctorOrderTests": "🔬 Order Hospital Lab Tests"
+});
+      Object.assign(copy.hi, {
+  "brandTagline": "जहाँ दर्द है वहाँ बताइए। बाकी हम करेंगे।",
+  "doctorNav": "अस्पताल पोर्टल",
+  "profileNav": "मेरी प्रोफाइल",
+  "profileShort": "प्रोफाइल",
+  "footerDesc": "भारतीय सरकारी अस्पतालों के लिए नागरिक-प्रथम ट्रायेज फ्रंट डोर। देशी आवाज़, 22 क्षेत्रीय भाषाओं और इंटरैक्टिव 3D बॉडी मैप द्वारा सही काउंटर तक मार्गदर्शन।",
+  "serviceDoctorTitle": "अस्पताल और डॉक्टर सुइट",
+  "serviceDoctorDesc": "लाइव कतार और SBAR हैंडओवर",
+  "serviceProfileTitle": "मेरी मरीज प्रोफाइल",
+  "serviceProfileDesc": "लाइव ओपीडी पास और इतिहास",
+  "serviceLabTitle": "लैब टेस्ट और स्कैन",
+  "serviceLabDesc": "ई-हॉस्पिटल दरें और स्लॉट",
+  "serviceBloodTitle": "ब्लड बैंक",
+  "serviceBloodDesc": "रियल-टाइम ई-रक्तकोश स्टॉक",
+  "serviceTeleTitle": "टेली-परामर्श",
+  "serviceTeleDesc": "एम्स टेली-ओपीडी बूथ",
+  "statOrsWait": "गलत लाइन में ORS का औसत इंतज़ार",
+  "statRaahatWait": "राहत ट्रायेज के साथ औसत इंतज़ार",
+  "statReferralDrop": "गलत काउंटर रेफरल में कमी",
+  "statVerifiedDirectory": "अखिल भारतीय सत्यापित निर्देशिका",
+  "filterByState": "राज्य / क्षेत्र अनुसार फ़िल्टर करें:",
+  "doctorTitle": "अस्पताल ओपीडी काउंटर और डॉक्टर पोर्टल",
+  "doctorSubtitle": "लाइव मरीज कतार, 10-सेकंड SBAR क्लिनिकल हैंडओवर और सत्यापित टोकन जाँच।",
+  "doctorQueueTitle": "लाइव टोकन कतार",
+  "doctorCallNext": "🔊 अगले मरीज को बुलाएँ",
+  "doctorMarkSeen": "✅ परामर्श पूरा करें और पर्ची साइन करें",
+  "doctorEscalateEmergency": "🚨 24/7 इमरजेंसी में भेजें",
+  "doctorOrderTests": "🔬 अस्पताल लैब टेस्ट ऑर्डर करें"
+});
+
       // Complete 22 Scheduled Indian Languages Vernacular Pack
       if (typeof window !== "undefined" && window.VERNACULAR_PACK) {
         for (const [code, dict] of Object.entries(window.VERNACULAR_PACK)) {
@@ -3989,18 +4075,15 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       }
 
       function hideAllScreens() {
-        const docScreen = document.querySelector("#screen-doctor");
-        if (docScreen) docScreen.hidden = true;
-        const profileScreen = document.querySelector("#screen-profile");
-        if (profileScreen) profileScreen.hidden = true;
+        document.querySelectorAll(".service-screen").forEach((s) => s.hidden = true);
         landingScreen.hidden = true;
         triageScreen.hidden = true;
+        honestyScreen.hidden = true;
         questionContent.hidden = true;
         bodyMapScreen.hidden = true;
         reviewScreen.hidden = true;
         resultScreen.hidden = true;
         appointmentScreen.hidden = true;
-        honestyScreen.hidden = true;
         ordinaryResult.hidden = true;
         emergencyResult.hidden = true;
       }
@@ -4052,8 +4135,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           showHonesty();
           return;
         }
-        if (nextView === "lab-tests") renderLabCatalog();
-        if (nextView === "hospitals") renderPanIndiaDirectory();
         if (nextView === "profile") {
           hideAllScreens();
           const profScreen = document.querySelector("#screen-profile");
@@ -4075,7 +4156,29 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           document.querySelector("#doctor-title")?.focus();
           return;
         }
-        showLanding(nextView === "home" ? "front-door" : nextView === "comparison" ? "screen-comparison" : nextView === "hospitals" ? "screen-hospitals" : nextView === "faqs" ? "screen-faqs" : viewHash[nextView], nextView);
+        if (nextView === "lab-tests") {
+          hideAllScreens();
+          const labScreen = document.querySelector("#screen-lab-tests");
+          if (labScreen) labScreen.hidden = false;
+          setActiveNav("lab-tests");
+          renderLabCatalog();
+          window.scrollTo({ top: 0, behavior: "auto" });
+          document.querySelector("#lab-title")?.focus();
+          return;
+        }
+        if (nextView === "blood-bank") {
+          hideAllScreens();
+          const bloodScreen = document.querySelector("#screen-blood-bank");
+          if (bloodScreen) bloodScreen.hidden = false;
+          setActiveNav("blood-bank");
+          window.scrollTo({ top: 0, behavior: "auto" });
+          document.querySelector("#blood-title")?.focus();
+          return;
+        }
+        if (nextView === "hospitals") {
+          renderPanIndiaDirectory();
+        }
+        showLanding(nextView === "home" ? "front-door" : nextView === "comparison" ? "screen-comparison" : nextView === "hospitals" ? "screen-hospitals" : "screen-faqs", nextView);
       }
 
       function handleHashChange() {
@@ -4569,34 +4672,42 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
       
       // --- Web Audio Synthesizer Chime (Hospital Calling Bell) ---
+      let hospitalAudioCtx = null;
       function playHospitalChime() {
         try {
           const AudioCtx = window.AudioContext || window.webkitAudioContext;
           if (!AudioCtx) return;
-          const ctx = new AudioCtx();
+          if (!hospitalAudioCtx || hospitalAudioCtx.state === "closed") {
+            hospitalAudioCtx = new AudioCtx();
+          }
+          if (hospitalAudioCtx.state === "suspended") {
+            hospitalAudioCtx.resume();
+          }
+          const ctx = hospitalAudioCtx;
+          const now = ctx.currentTime;
           const osc1 = ctx.createOscillator();
           const osc2 = ctx.createOscillator();
           const gain = ctx.createGain();
 
           osc1.type = "sine";
-          osc1.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
-          osc1.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.28); // A5
+          osc1.frequency.setValueAtTime(587.33, now); // D5
+          osc1.frequency.exponentialRampToValueAtTime(880, now + 0.28); // A5
 
           osc2.type = "triangle";
-          osc2.frequency.setValueAtTime(440, ctx.currentTime); // A4
-          osc2.frequency.exponentialRampToValueAtTime(659.25, ctx.currentTime + 0.28); // E5
+          osc2.frequency.setValueAtTime(440, now); // A4
+          osc2.frequency.exponentialRampToValueAtTime(659.25, now + 0.28); // E5
 
-          gain.gain.setValueAtTime(0.25, ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.65);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
 
           osc1.connect(gain);
           osc2.connect(gain);
           gain.connect(ctx.destination);
 
-          osc1.start();
-          osc2.start();
-          osc1.stop(ctx.currentTime + 0.65);
-          osc2.stop(ctx.currentTime + 0.65);
+          osc1.start(now);
+          osc2.start(now);
+          osc1.stop(now + 0.65);
+          osc2.stop(now + 0.65);
         } catch (e) {
           console.log("Audio chime error:", e);
         }
@@ -4642,7 +4753,9 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         });
 
         document.querySelector("#pass-print-btn")?.addEventListener("click", () => {
+          document.body.classList.add("printing-pass");
           window.print();
+          setTimeout(() => document.body.classList.remove("printing-pass"), 1000);
         });
 
         // Past slip downloads
@@ -4682,6 +4795,19 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               state.who = "child";
               state.age = "child";
             }
+
+            // Immediately populate the triage form inputs
+            const nameInput = document.querySelector("#patient-name");
+            if (nameInput) nameInput.value = state.fullName;
+            const exactAgeInput = document.querySelector("#exact-age");
+            if (exactAgeInput) exactAgeInput.value = state.exactAge;
+            document.querySelectorAll(".age-button").forEach(b => {
+              b.setAttribute("aria-pressed", String(b.dataset.age === state.age));
+            });
+            document.querySelectorAll("[data-landing-booking]").forEach(b => {
+              b.setAttribute("aria-pressed", String(b.dataset.landingBooking === state.booking));
+            });
+
             switchView("triage");
           });
         });
@@ -4820,7 +4946,9 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         });
 
         document.querySelector("#terminal-print-btn")?.addEventListener("click", () => {
+          document.body.classList.add("printing-thermal");
           window.print();
+          setTimeout(() => document.body.classList.remove("printing-thermal"), 1000);
         });
       }
 
@@ -4834,18 +4962,22 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         callNextBtn?.addEventListener("click", () => {
           playHospitalChime();
           const nextIdx = doctorQueueData.findIndex((item, i) => i > activeDoctorQueueIndex && item.status !== "Seen");
+          const firstUnseen = doctorQueueData.findIndex(item => item.status !== "Seen");
+          
+          if (nextIdx === -1 && firstUnseen === -1) {
+            if (feedbackEl) feedbackEl.textContent = "✅ All patients in current OPD session have been seen.";
+            return;
+          }
+
           if (nextIdx !== -1) {
             activeDoctorQueueIndex = nextIdx;
-            doctorQueueData[activeDoctorQueueIndex].status = "Inside Consultation Room";
-          } else {
-            const firstUnseen = doctorQueueData.findIndex(item => item.status !== "Seen");
-            if (firstUnseen !== -1) {
-              activeDoctorQueueIndex = firstUnseen;
-              doctorQueueData[activeDoctorQueueIndex].status = "Inside Consultation Room";
-            }
+          } else if (firstUnseen !== -1) {
+            activeDoctorQueueIndex = firstUnseen;
           }
+          doctorQueueData[activeDoctorQueueIndex].status = "Inside Consultation Room";
           renderActiveDoctorSBAR();
           renderDoctorQueue();
+          renderProfilePass();
           if (feedbackEl) feedbackEl.textContent = `🔊 Called ${doctorQueueData[activeDoctorQueueIndex].patient} (${doctorQueueData[activeDoctorQueueIndex].token}) to Consultation Room.`;
         });
 
@@ -5224,6 +5356,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         showcaseBrowseBtn?.addEventListener("click", openModal);
         closeBtn?.addEventListener("click", closeModal);
         modal?.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal && !modal.hidden) closeModal(); });
 
         searchInput?.addEventListener("input", (e) => {
           searchQuery = e.target.value.toLowerCase().trim();
