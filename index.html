@@ -1107,7 +1107,7 @@
             <path d="M9 42c7-2 13 1 18 7M55 42c-7-2-13 1-18 7" fill="none" stroke="#17634f" stroke-linecap="round" stroke-width="4" />
             <path d="M32 28v12M26 34h12" fill="none" stroke="#fffdf9" stroke-linecap="round" stroke-width="3.5" />
           </svg>
-          <span class="brand-copy"><span class="wordmark">राहत · Raahat</span><span class="tagline">Point at where it hurts. We'll do the rest.</span><span class="tagline tagline-hi">जहाँ तकलीफ़ है वहाँ बताइए। बाक़ी हम संभालेंगे।</span></span>
+          <span class="brand-copy"><span class="wordmark">राहत · Raahat</span><span class="tagline">Point at where it hurts. We'll do the rest.</span><span class="tagline tagline-dynamic" data-copy="brandTagline">Point at where it hurts. We'll do the rest.</span></span>
         </a>
         <nav class="site-nav" aria-label="Raahat screens">
           <a href="#screen-home" data-view-link="home" data-copy="homeNav">Home</a>
@@ -1158,10 +1158,10 @@
               <button class="large-button primary hero-primary-action" type="button" id="hero-triage-action" data-copy="startBooking">Start OPD Triage &amp; Book Slot →</button>
               <div class="service-grid" aria-label="Raahat services">
                 <button class="service-card" type="button" data-service-view="triage"><span aria-hidden="true">🏥</span><strong data-copy="opdService">OPD Counter Triage</strong><small data-copy="opdServiceNote">Find the right first counter</small></button>
-                <button class="service-card" type="button" data-service-view="lab-tests"><span aria-hidden="true">🔬</span><strong data-copy="labService">Book Lab &amp; Scan Tests</strong><small data-copy="labServiceNote">See preparation and fees</small></button>
-                <button class="service-card" type="button" data-service-view="blood-bank"><span aria-hidden="true">🩸</span><strong data-copy="bloodService">Blood Bank Inventory</strong><small data-copy="bloodServiceNote">Check mock stock and donors</small></button>
-                <button class="service-card" type="button" data-service-view="doctor"><span aria-hidden="true">👨‍⚕️</span><strong>Doctor &amp; Staff Portal</strong><small>Live queue &amp; SBAR handover</small></button>
-                <button class="service-card" type="button" data-service-view="triage" data-teleconsult="true"><span aria-hidden="true">📹</span><strong data-copy="teleService">Online Video Tele-OPD</strong><small data-copy="teleServiceNote">Start from home</small></button>
+                <button class="service-card" type="button" data-service-view="lab-tests"><span aria-hidden="true">🔬</span><strong data-copy="serviceLabTitle">Lab Tests &amp; Scans</strong><small data-copy="serviceLabDesc">e-Hospital rates &amp; slots</small></button>
+                <button class="service-card" type="button" data-service-view="blood-bank"><span aria-hidden="true">🩸</span><strong data-copy="serviceBloodTitle">Blood Bank</strong><small data-copy="serviceBloodDesc">Real-time e-RaktKosh stock</small></button>
+                <button class="service-card" type="button" data-service-view="doctor"><span aria-hidden="true">👨‍⚕️</span><strong data-copy="serviceDoctorTitle">Doctor &amp; Staff Portal</strong><small data-copy="serviceDoctorDesc">Live queue &amp; SBAR handover</small></button>
+                <button class="service-card" type="button" data-service-view="triage" data-teleconsult="true"><span aria-hidden="true">📹</span><strong data-copy="serviceTeleTitle">Tele-Consultation</strong><small data-copy="serviceTeleDesc">AIIMS Tele-OPD booth</small></button>
               </div>
             </section>
           </section>
@@ -1225,24 +1225,24 @@
           <div class="counterfactual-strip">
             <div class="counterfactual-card">
               <div class="counterfactual-value negative">4.5 hrs</div>
-              <div class="counterfactual-label">Avg. ORS Wait in Wrong Lines</div>
+              <div class="counterfactual-label" data-copy="statOrsWait">Avg. ORS Wait in Wrong Lines</div>
             </div>
             <div class="counterfactual-card">
               <div class="counterfactual-value">28 mins</div>
-              <div class="counterfactual-label">Avg. Wait with Raahat Triage</div>
+              <div class="counterfactual-label" data-copy="statRaahatWait">Avg. Wait with Raahat Triage</div>
             </div>
             <div class="counterfactual-card">
               <div class="counterfactual-value">87%</div>
-              <div class="counterfactual-label">Drop in Wrong Counter Referrals</div>
+              <div class="counterfactual-label" data-copy="statReferralDrop">Drop in Wrong Counter Referrals</div>
             </div>
             <div class="counterfactual-card">
               <div class="counterfactual-value">60+ Institutes</div>
-              <div class="counterfactual-label">Pan-India Verified Directory</div>
+              <div class="counterfactual-label" data-copy="statVerifiedDirectory">Pan-India Verified Directory</div>
             </div>
           </div>
 
           <div class="state-filter-bar">
-            <label for="state-directory-select" style="font-weight: 700;"><span class="tag">Verified</span> Filter by State / Region:</label>
+            <label for="state-directory-select" style="font-weight: 700;"><span class="tag">Verified</span> <span data-copy="filterByState">Filter by State / Region:</span></label>
             <select id="state-directory-select" class="state-filter-select"></select>
             <span id="state-hospital-count" style="font-weight: 700; color: var(--accent); margin-left: auto;"></span>
           </div>
@@ -1336,8 +1336,8 @@
           <div class="screen-heading">
             <p class="eyebrow"><span class="tag">Simulated</span> Clinical Counter System</p>
             <div class="section-heading">
-              <h1 id="doctor-title" tabindex="-1">Hospital OPD Counter &amp; Doctor Portal</h1>
-              <p><span class="tag">Simulated</span> Live patient queue, 10-second SBAR clinical handover, and verified token verification.</p>
+              <h1 id="doctor-title" tabindex="-1" data-copy="doctorTitle">Hospital OPD Counter &amp; Doctor Portal</h1>
+              <p><span class="tag">Simulated</span> <span data-copy="doctorSubtitle">Live patient queue, 10-second SBAR clinical handover, and verified token verification.</span></p>
             </div>
           </div>
 
@@ -1369,16 +1369,14 @@
             <aside class="doctor-sidebar">
               <div class="doctor-queue-card">
                 <div class="doctor-queue-header">
-                  <h3 style="margin: 0; font-size: 1.15rem;">Live Token Queue</h3>
+                  <h3 style="margin: 0; font-size: 1.15rem;" data-copy="doctorQueueTitle">Live Token Queue</h3>
                   <span class="queue-badge" id="doctor-queue-count">4 Waiting</span>
                 </div>
                 <ul class="doctor-queue-list" id="doctor-queue-list" role="list">
                   <!-- Injected dynamically -->
                 </ul>
                 <div style="margin-top: 1rem;">
-                  <button class="large-button primary" type="button" id="doctor-call-next" style="width: 100%;">
-                    🔊 Call Next Patient
-                  </button>
+                  <button class="large-button primary" type="button" id="doctor-call-next" style="width: 100%;" data-copy="doctorCallNext">🔊 Call Next Patient</button>
                 </div>
               </div>
             </aside>
@@ -1444,15 +1442,9 @@
 
                 <!-- Doctor Actions -->
                 <div class="doctor-actions-bar">
-                  <button class="large-button primary" type="button" id="doctor-mark-seen">
-                    ✅ Mark as Seen &amp; Complete Consultation
-                  </button>
-                  <button class="large-button" type="button" id="doctor-escalate-emergency" style="border-color: var(--emergency-red); color: var(--emergency-red);">
-                    🚨 Escalate to 24/7 Emergency
-                  </button>
-                  <button class="large-button" type="button" id="doctor-order-tests">
-                    🔬 Order Baseline Lab Tests
-                  </button>
+                  <button class="large-button primary" type="button" id="doctor-mark-seen" data-copy="doctorMarkSeen">✅ Mark as Seen &amp; Complete Consultation</button>
+                  <button class="large-button" type="button" id="doctor-escalate-emergency" style="border-color: var(--emergency-red); color: var(--emergency-red);" data-copy="doctorEscalateEmergency">🚨 Escalate to 24/7 Emergency</button>
+                  <button class="large-button" type="button" id="doctor-order-tests" data-copy="doctorOrderTests">🔬 Order Baseline Lab Tests</button>
                 </div>
                 <p id="doctor-action-feedback" class="status" aria-live="polite" style="margin-top: 0.75rem; font-weight: 700;"></p>
               </div>
@@ -2092,6 +2084,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
+    <script src="./vernacular-pack.js"></script>
     <script type="module">
       import { parseFreeTextComplaint, routeComplaint } from "./routing.js";
       import { LOCALITIES, HOSPITAL_FACT_CHECKED_ON, hospitalsForDepartment, PAN_INDIA_HOSPITALS, INDIAN_STATES, COUNTERFACTUAL_METRICS, panIndiaHospitalsForDepartment, hospitalsByState } from "./hospital-data.js";
@@ -2212,579 +2205,12 @@
         roadmapTitle: "राहत के लिए आगे क्या?", roadmapNote: "इस प्रोटोटाइप को अधिक जुड़े हुए और आसान सार्वजनिक सेवा के दरवाज़े में बदलने का नागरिक रोडमैप।", roadmapAbdmTitle: "ABDM और e-Hospital इंटीग्रेशन", roadmapAbdmNote: "बनाए गए नमूना टोकन को आयुष्मान भारत डिजिटल मिशन (ABDM) और राष्ट्रीय हॉस्पिटल मैनेजमेंट इन्फॉर्मेशन सिस्टम (HMIS) से सीधे जोड़ना।", roadmapIvrTitle: "फीचर फोन के लिए AI वॉइस IVR (104 इंटीग्रेशन)", roadmapIvrNote: "ग्रामीण नागरिक टोल-फ्री नंबर पर 22 क्षेत्रीय बोलियों—भोजपुरी, मैथिली, तमिल और बंगाली सहित—में परेशानी बोलें और SMS से ओपीडी टोकन पाएँ।", roadmapQueueTitle: "अस्पताल की लाइव कतार की तस्वीर", roadmapQueueNote: "वेटिंग हॉल के टोकन काउंटर जोड़कर घर से निकलने से पहले परामर्श का लाइव समय दिखाना।", roadmapLanguagesTitle: "पूरे भारत में स्थानीय भाषाओं का विस्तार", roadmapLanguagesNote: "सभी 22 अनुसूचित भारतीय भाषाओं में मूल आवाज़ और बोली का समर्थन बनाना।"
       });
       
-      // Additional Vernacular Dictionaries for full page localization
-      const VERNACULAR_PACK = {
-      "ur": {
-            "landingKicker": "سرکاری اسپتال تک رسائی کا آسان اور پرسکون طریقہ",
-            "landingTitle": "سرکاری اسپتال کی او پی ڈی گائیڈنس، بغیر کسی الجھن کے۔",
-            "landingSubtitle": "او آر ایس پوچھتا ہے کہ کون سا شعبہ چاہیے۔ بیمار شخص صرف یہ جانتا ہے کہ تکلیف کہاں ہے۔ اپنی زبان میں بولیں، لکھیں یا تھری ڈی باڈی میپ پر بتائیں۔ ہم آپ کو صحیح او پی ڈی کاؤنٹر تک پہنچائیں گے۔",
-            "modelDisclosure": "آپ کے الفاظ محفوظ طریقے سے اسی براؤزر میں پروسیس ہوتے ہیں۔ کوئی بھی ڈیٹا سرور پر محفوظ نہیں کیا جاتا۔",
-            "startTriage": "ٹرائیج شروع کریں",
-            "learnMore": "طریقہ کار دیکھیں",
-            "privacyBadge": "100% پرائیویسی آپ کے براؤزر میں",
-            "noIdBadge": "معلومات دیکھنے کے لیے آدھار یا او ٹی پی درکار نہیں",
-            "accessBadge": "ان پڑھ اور بزرگ شہریوں کے لیے آسان",
-            "quickStartTitle": "اپنی معلومات سے شروع کریں",
-            "quickStartNote": "نہ اکاؤنٹ، نہ شعبے کا اندازہ۔ ایک جملہ لکھیں یا بولیں۔",
-            "entryRouteLabel": "آپ کیسے بتانا چاہتے ہیں؟",
-            "entrySpeak": "بولیں",
-            "entryType": "لکھیں",
-            "entryMap": "باڈی میپ",
-            "landingPlaceholder": "مثلاً: سینے میں درد، کل رات سے",
-            "exampleBreathing": "سینے میں درد + سانس میں تکلیف",
-            "continueFromCard": "تصدیق کے لیے آگے بڑھیں",
-            "whyLink": "راحت کیوں؟",
-            "orsLink": "او آر ایس اور راحت",
-            "faqLink": "عام سوالات",
-            "homeNav": "ہوم",
-            "triageNav": "او پی ڈی ٹرائیج",
-            "doctorNav": "ڈاکٹر پورٹل",
-            "labNav": "لیب ٹیسٹ اور اسکین",
-            "bloodNav": "بلڈ بینک",
-            "hospitalsLink": "سرکاری اسپتال",
-            "honestyNav": "شفافیت اور سچائی",
-            "startBooking": "او پی ڈی ٹرائیج شروع کریں اور سلاٹ دیکھیں →",
-            "serviceGridKicker": "ایک نظر میں خدمات",
-            "serviceGridTitle": "آج آپ کو کس مدد کی ضرورت ہے؟",
-            "opdService": "او پی ڈی کاؤنٹر ٹرائیج",
-            "opdServiceNote": "پہلا صحیح کاؤنٹر تلاش کریں",
-            "labService": "لیب اور اسکین بک کریں",
-            "labServiceNote": "تیاری اور فیس کی تفصیلات دیکھیں",
-            "bloodService": "بلڈ بینک انوینٹری",
-            "bloodServiceNote": "اسٹاک اور ڈونرز کی تفصیلات",
-            "teleService": "آن لائن ویڈیو ٹیلی او پی ڈی",
-            "teleServiceNote": "گھر بیٹھے مشورہ لیں",
-            "whyTitle": "کاؤنٹر پر عزت اور آسانی۔",
-            "whyNote": "راحت شہری کے اپنے الفاظ سے شروع ہوتی ہے، نہ کہ میڈیکل امتحانات سے۔",
-            "journeyOneTitle": "اپنی آواز میں بولیں یا میپ پر منتخب کریں",
-            "journeyOneNote": "بولیں، ٹائپ کریں یا باڈی میپ کا استعمال کریں۔",
-            "journeyTwoTitle": "تصدیق شدہ اسپتال اور ایماندارانہ انتظار",
-            "journeyTwoNote": "حقیقی سرکاری اسپتالوں کی لائیو قطار اور متوقع وقت دیکھیں۔",
-            "journeyThreeTitle": "شہری حقوق کے ساتھ نمونہ پرچی",
-            "journeyThreeNote": "مکمل تفصیلات اور شکایت درج کرانے کے حق کے ساتھ واضح پرچی۔",
-            "howTitle": "راحت کیسے کام کرتا ہے",
-            "howNote": "تکلیف سے لے کر صحیح او پی ڈی کاؤنٹر تک کا آسان سفر۔",
-            "howOneTitle": "بولیں، لکھیں یا اشارہ کریں",
-            "howOneNote": "کسی بھی زبان میں علامات بیان کریں یا باڈی میپ پر کلک کریں۔",
-            "howTwoTitle": "فوری ٹرائیج اور ایماندارانہ وقت",
-            "howTwoNote": "کوڈ سرکاری کاؤنٹر تجویز کرتا ہے اور قطار کا اصل وقت بتاتا ہے۔",
-            "howThreeTitle": "نمونہ پرچی اور حقوق",
-            "howThreeNote": "ضروری دستاویزات اور پی جی پورٹل کی معلومات کے ساتھ پرچی پرنٹ کریں۔",
-            "roadmapTitle": "راحت کے لیے مستقبل کا لائحہ عمل",
-            "roadmapNote": "اس عوامی سروس کو ملک گیر سطح پر جوڑنے کا منصوبہ۔",
-            "roadmapAbdmTitle": "اے بی ڈی ایم اور ای-ہاسپٹل انضمام",
-            "roadmapAbdmNote": "آیوشمان بھارت ڈیجیٹل مشن کے ساتھ ٹوکن کا براہ راست رابطہ۔",
-            "roadmapIvrTitle": "فیچر فونز کے لیے صوتی آئی وی آر (104)",
-            "roadmapIvrNote": "بغیر انٹرنیٹ کے 104 پر کال کر کے علامات بولیں اور ایس ایم ایس سے ٹوکن پائیں۔",
-            "roadmapQueueTitle": "لائیو کاؤنٹر کیمرہ اور قطار کا جائزہ",
-            "roadmapQueueNote": "گھر سے نکلنے سے پہلے انتظار گاہ کی لائیو صورتحال دیکھیں۔",
-            "roadmapLanguagesTitle": "تمام 22 آئینی زبانوں کی شمولیت",
-            "roadmapLanguagesNote": "بھارت کی تمام 22 قومی زبانوں میں مقامی لہجوں کے ساتھ مکمل سپورٹ۔",
-            "ctaKicker": "آپ کا اگلا قدم",
-            "ctaTitle": "صحیح او پی ڈی کاؤنٹر تلاش کرنے کے لیے تیار ہیں؟",
-            "ctaNote": "ایک جملہ بولیں، لکھیں یا باڈی میپ پر کلک کریں۔ تصدیق کے بعد ہی رہنمائی ملے گی۔",
-            "comparisonTitle": "راحت او آر ایس کو کیسے آسان بناتا ہے",
-            "comparisonNote": "او آر ایس ایک مفید نظام ہے، مگر راحت شہری کی الجھن کو پہلے ہی لمحے ختم کرتا ہے۔",
-            "comparisonQuestion": "پہلا بنیادی فرق",
-            "orsEra": "2015 · این آئی سی کا ڈیجیٹل کاؤنٹر",
-            "raahatEra": "2026 · شہری پہلے، میڈیکل الجھن بعد میں",
-            "comparisonDepartment": "شعبہ منتخب کرنا",
-            "orsDepartment": "طبی شعبے کا خود اندازہ لگانا",
-            "raahatDepartment": "جہاں درد ہے وہاں سے شروعات، ہم کاؤنٹر بتائیں گے",
-            "comparisonWait": "انتظار کا صحیح وقت",
-            "orsWait": "صرف سلاٹ کا وقت، بغیر کسی انتظار کے تخمینے کے",
-            "raahatWait": "ڈاکٹر کے راؤنڈ اور قطار کی رفتار کے مطابق ایماندارانہ تخمینہ",
-            "comparisonAuth": "شروع میں رکاوٹیں",
-            "orsAuth": "شروع میں ٹیڑھا میڑھا کیپچا اور او ٹی پی",
-            "raahatAuth": "صرف نمونہ پرچی کے وقت ایک کلک تصدیق",
-            "comparisonEmergency": "ہنگامی حفاظت",
-            "orsEmergency": "شدید ہنگامی حالت میں بھی عام سلاٹ بک ہو سکتا ہے",
-            "raahatEmergency": "ایک ریڈ فلیگ پر فوری طور پر 24/7 ایمرجنسی وارڈ روانگی",
-            "comparisonAccess": "علامات بیان کرنا",
-            "orsAccess": "انگریزی ٹیکسٹ فارم اور کمپیوٹر پر منحصر",
-            "raahatAccess": "100% موبائل فرینڈلی: باڈی میپ + بولنا + لکھنا",
-            "eyebrow": "صحیح او پی ڈی کاؤنٹر تک پہنچنے کا آسان طریقہ",
-            "title": "کیا تکلیف ہے؟",
-            "note": "اپنے الفاظ میں بتائیں۔ آپ بول سکتے ہیں، لکھ سکتے ہیں یا باڈی میپ پر بتا سکتے ہیں۔",
-            "bookingFor": "کس کے لیے بکنگ ہے:",
-            "myself": "میرے لیے",
-            "someoneElse": "کسی اور کے لیے (دیکھ بھال کرنے والا)",
-            "whoLabel": "یہ کس کے لیے ہے؟",
-            "parent": "والد / والدہ",
-            "child": "میرا بچہ",
-            "someoneElseShort": "کوئی اور",
-            "ageLabel": "عمر کا زمرہ",
-            "baby": "نوزائیدہ بچہ (0 تا 1 سال)",
-            "childAge": "بچہ (2 تا 12 سال)",
-            "adult": "جوان (18 تا 44 سال)",
-            "olderAdult": "بزرگ (60+ سال)",
-            "complaintLabel": "کیا پریشانی ہے؟",
-            "placeholder": "مثلاً: سینے میں درد، کل رات سے",
-            "inputHelp": "آپ کے الفاظ اسی براؤزر میں محفوظ رہتے ہیں۔",
-            "exampleChest": "سینے میں درد",
-            "exampleFever": "بخار",
-            "exampleWeakness": "ایک طرف کمزوری",
-            "continue": "آگے بڑھیں",
-            "bodyMapButton": "باڈی میپ پر دکھائیں",
-            "captured": "آپ کے الفاظ اگلے مرحلے کے لیے تیار ہیں۔ ابھی کچھ بک یا بھیجا نہیں گیا ہے۔",
-            "needHelp": "کسی مددگار سے بات کرنی ہے؟",
-            "backToQuestion": "← واپس",
-            "mapEyebrow": "پڑھنے کی ضرورت نہیں",
-            "mapTitle": "جہاں درد ہے وہاں انگلی رکھیں",
-            "mapNote": "اس حصے کو چھوئیں جہاں تکلیف محسوس ہو رہی ہے۔",
-            "mapWordsLabel": "آپ کے الفاظ:",
-            "browserProcessing": "یہ باڈی میپ مکمل طور پر آپ کے براؤزر میں چلتا ہے۔",
-            "kindTitle": "تکلیف کیسی ہے؟",
-            "kindPain": "درد",
-            "kindFever": "بخار یا تپش",
-            "kindBreathing": "سانس میں دشواری",
-            "kindBleeding": "خون بہنا",
-            "kindInjury": "چوٹ یا موچ",
-            "kindVomiting": "الٹی یا پیٹ کی خرابی",
-            "kindDizziness": "چکر آنا",
-            "kindLow": "کمزوری یا اداسی",
-            "durationLabel": "کب سے ہے؟",
-            "durationNow": "ابھی ابھی",
-            "durationToday": "آج سے",
-            "durationDays": "کچھ دنوں سے",
-            "durationLonger": "کافی عرصے سے",
-            "severityLabel": "کیا ابھی شدت بہت زیادہ ہے؟",
-            "severityNo": "نہیں",
-            "severityYes": "جی ہاں",
-            "reviewEyebrow": "مرحلہ 2 · تفصیلات کی تصدیق",
-            "reviewTitle": "ہم نے یہ سمجھا",
-            "reviewNote": "ان تفصیلات کو دیکھ لیں۔ تصدیق سے پہلے کچھ بھی فائنل نہیں ہوتا۔",
-            "confirm": "تصدیق کریں",
-            "changeSomething": "تبدیلی کریں",
-            "resultEyebrow": "مرحلہ 3 · کہاں جانا ہے",
-            "matchedCounter": "تجویز کردہ او پی ڈی کاؤنٹر:",
-            "routeReference": "قواعدی حوالہ نمبر:",
-            "chooseDepartment": "درست نہیں لگا؟ اپنی مرضی کا شعبہ خود منتخب کریں۔",
-            "emergencyEyebrow": "ہنگامی طبی انتباہ",
-            "emergencyTitle": "فوراً 24/7 ایمرجنسی وارڈ جائیں! عام او پی ڈی کے لیے انتظار نہ کریں۔",
-            "notDiagnosis": "یہ حتمی طبی تشخیص نہیں ہے۔",
-            "deptPaediatrics": "شعبہ امراض اطفال (بچوں کے امراض)",
-            "deptCardiology": "امراض قلب (کارڈیالوجی)",
-            "deptNeurology": "اعصابی امراض (نیورولوجی)",
-            "deptGastroenterology": "معدہ و جگر (گیسٹرو)",
-            "deptOrthopaedics": "ہڈیوں کے امراض (آرتھو)",
-            "deptDermatology": "جلدی امراض (سکن)",
-            "deptDental": "دانتوں کے امراض (ڈینٹل)",
-            "deptGeneralMedicine": "جنرل میڈیسن",
-            "deptChoose": "اپنی مرضی سے شعبہ منتخب کریں",
-            "findHospital": "اسپتال اور دستیاب اوقات دیکھیں",
-            "backToDepartment": "← شعبے کے انتخاب پر واپس جائیں",
-            "bookingTitle": "ایمانداری سے اسپتال اور انتظار کا وقت چنیں",
-            "bookingNote": "ایک واضح نتیجہ: علاقہ چنیں، اسپتال دیکھیں، اور نمونہ پرچی حاصل کریں۔",
-            "whereTitle": "آپ کس علاقے کے اسپتال جانا چاہتے ہیں؟",
-            "whereNote": "اپنا پسندیدہ علاقہ منتخب کریں۔ ہم آپ کی لائیو لوکیشن ٹریک نہیں کرتے۔",
-            "localityLabel": "منتخب کردہ علاقہ",
-            "slipTitle": "آپ کی نمونہ او پی ڈی پرچی",
-            "slipSubtitle": "سرکاری اسپتال او پی ڈی نمونہ پرچی",
-            "slipNote": "یہ پرچی کاؤنٹر پر دکھانے کے لیے ہے۔ یہ ایک پروٹوٹائپ ماک ہے، اصلی بکنگ نہیں۔",
-            "slipPatient": "مریض کا نام",
-            "slipDepartment": "شعبہ",
-            "slipHospital": "اسپتال",
-            "slipSlot": "سلاٹ کا وقت",
-            "slipSeenBy": "معائنے کا متوقع وقت",
-            "slipAppointmentId": "اپائنٹمنٹ آئی ڈی",
-            "patientSaid": "مریض کی بیان کردہ علامات:",
-            "rightsCard": "اگر اس پرچی کو کاؤنٹر پر قبول نہ کیا جائے تو پی جی پورٹل (pgportal.gov.in) پر شکایت درج کرائیں۔",
-            "printSlip": "پرچی پرنٹ کریں",
-            "downloadSlip": "پرچی ڈاؤن لوڈ کریں",
-            "voiceStart": "اپنی تکلیف بولیں",
-            "voiceStop": "سننا بند کریں",
-            "voiceLabel": "بولیں",
-            "voiceLabelStop": "روکیں",
-            "voiceUnsupported": "اس براؤزر میں صوتی ان پٹ دستیاب نہیں ہے۔ لکھیں یا باڈی میپ استعمال کریں۔"
-      },
-      "ta": {
-            "landingKicker": "அரசு மருத்துவமனைகளுக்கு ஒரு எளிய மற்றும் அமைதியான நுழைவு வாசல்",
-            "landingTitle": "அரசு மருத்துவமனை அப்பாயிண்ட்மெண்ட், எந்தக் குழப்பமும் இல்லாமல்.",
-            "landingSubtitle": "ஓஆர்எஸ் எந்தத் துறை வேண்டும் என்று கேட்கிறது. நோயாளிக்கு வலி எங்கே இருக்கிறது என்பது மட்டுமே தெரியும். உங்கள் சொந்த வார்த்தைகளில் பேசவும், தட்டச்சு செய்யவும் அல்லது 3டி உடல் வரைபடத்தில் சுட்டிக்காட்டவும். நேர்மையான காத்திருப்பு நேரத்துடன் சரியான ஓபிடி கவுண்டருக்கு வழிகாட்டுகிறோம்.",
-            "modelDisclosure": "உங்கள் சொற்கள் உங்கள் உலாவியிலேயே பாதுகாப்பாகப் பரிசீலிக்கப்படுகின்றன. எதுவும் சேவையகத்திற்கு அனுப்பப்படுவதில்லை.",
-            "startTriage": "ட்ரையேஜ் தொடங்கவும்",
-            "learnMore": "இது எவ்வாறு செயல்படுகிறது",
-            "privacyBadge": "100% தனிப்பட்ட சாதனப் பாதுகாப்பு",
-            "noIdBadge": "ஆதார் அல்லது ஓடிபி தேவையில்லை",
-            "accessBadge": "படிக்கத் தெரியாதவர்களுக்கும் எளிதானது",
-            "homeNav": "முகப்பு",
-            "triageNav": "ஓபிடி ட்ரையேஜ்",
-            "doctorNav": "மருத்துவர் தளம்",
-            "labNav": "ஆய்வக சோதனைகள்",
-            "bloodNav": "இரத்த வங்கி",
-            "hospitalsLink": "அரசு மருத்துவமனைகள்",
-            "faqLink": "கேள்வி-பதில்கள்",
-            "honestyNav": "நேர்மை",
-            "startBooking": "ஓபிடி ட்ரையேஜ் தொடங்கவும் →",
-            "serviceGridKicker": "சேவைகள் ஒரு பார்வையில்",
-            "serviceGridTitle": "இன்று உங்களுக்கு என்ன உதவி தேவை?",
-            "opdService": "ஓபிடி கவுண்டர் ட்ரையேஜ்",
-            "opdServiceNote": "சரியான முதல் கவுண்டரைக் கண்டறியவும்",
-            "labService": "ஆய்வக பரிசோதனைகள்",
-            "labServiceNote": "முன்னேற்பாடுகள் மற்றும் கட்டணம்",
-            "bloodService": "இரத்த வங்கி இருப்பு",
-            "bloodServiceNote": "இருப்பு விவரங்கள்",
-            "teleService": "ஆன்லைன் வீடியோ டெலி-ஓபிடி",
-            "teleServiceNote": "வீட்டிலிருந்தே ஆலோசிக்கவும்",
-            "whyTitle": "கவுண்டரில் அதிக மரியாதை மற்றும் அமைதி.",
-            "whyNote": "ராஹத் குடிமக்களின் சொந்த சொற்களிலிருந்து தொடங்குகிறது, மருத்துவ அகராதியிலிருந்து அல்ல.",
-            "howTitle": "ராஹத் எவ்வாறு செயல்படுகிறது",
-            "howNote": "வலிக்கும் இடத்திலிருந்து சரியான ஓபிடி கவுண்டருக்கு ஒரு எளிய பயணம்.",
-            "howOneTitle": "பேசுங்கள், தட்டச்சு செய்யுங்கள் அல்லது சுட்டிக்காட்டுங்கள்",
-            "howOneNote": "எந்த மொழியிலும் அறிகுறிகளை விவரிக்கலாம்.",
-            "howTwoTitle": "உடனடி வழிகாட்டல் & நேர்மையான காத்திருப்பு",
-            "howTwoNote": "சரியான அரசு மருத்துவமனை கவுண்டரைக் கண்டறிந்து நேரத்தைக் காட்டுகிறது.",
-            "howThreeTitle": "மாதிரி சீட்டு & குடிமக்கள் உரிமைகள்",
-            "howThreeNote": "மாதிரி சீட்டை அச்சிட்டு எடுத்துச் செல்லுங்கள்.",
-            "complaintLabel": "உங்களுக்கு என்ன பிரச்சனை?",
-            "placeholder": "எ.கா: நெஞ்சு வலி, நேற்று இரவு முதல்",
-            "inputHelp": "உங்கள் சொற்கள் இந்த உலாவியிலேயே இருக்கும்.",
-            "exampleChest": "நெஞ்சு வலி",
-            "exampleFever": "காய்ச்சல்",
-            "exampleWeakness": "ஒரு பக்க பலவீனம்",
-            "continue": "தொடரவும்",
-            "bodyMapButton": "உடல் வரைபடத்தில் சுட்டிக்காட்டவும்",
-            "voiceStart": "உங்கள் பிரச்சனையைப் பேசுங்கள்",
-            "voiceStop": "கேட்பதை நிறுத்துங்கள்",
-            "voiceLabel": "பேசுங்கள்",
-            "voiceLabelStop": "நிறுத்துங்கள்",
-            "reviewTitle": "நாங்கள் புரிந்துகொண்டவை",
-            "confirm": "உறுதிப்படுத்துங்கள்",
-            "changeSomething": "மாற்றவும்",
-            "matchedCounter": "பொருந்திய ஓபிடி கவுண்டர்:",
-            "emergencyTitle": "உடனடியாக 24/7 அவசர சிகிச்சைப் பிரிவுக்குச் செல்லவும்! அப்பாயிண்ட்மெண்ட்டிற்கு காத்திருக்க வேண்டாம்.",
-            "slipTitle": "உங்கள் மாதிரி ஓபிடி சீட்டு",
-            "printSlip": "சீட்டை அச்சிடுங்கள்",
-            "downloadSlip": "பதிவிறக்கவும்",
-            "deptCardiology": "இதயவியல் பிரிவு (Cardiology)",
-            "deptNeurology": "நரம்பியல் பிரிவு (Neurology)",
-            "deptGastroenterology": "இரைப்பையியல் பிரிவு (Gastro)",
-            "deptGeneralMedicine": "பொது மருத்துவம் (General Medicine)",
-            "deptPaediatrics": "குழந்தைகள் நலப் பிரிவு (Paediatrics)"
-      },
-      "bn": {
-            "landingKicker": "সরকারি হাসপাতালে পৌঁছানোর সহজ প্রথম পদক্ষেপ",
-            "landingTitle": "সরকারি হাসপাতালের অ্যাপয়েন্টমেন্ট, কোনো বিভ্রান্তি ছাড়াই।",
-            "landingSubtitle": "ওআরএস জানতে চায় আপনার কোন বিভাগ প্রয়োজন। একজন অসুস্থ মানুষ শুধু জানেন কোথায় কষ্ট। নিজের ভাষায় বলুন, লিখুন অথবা ৩ডি বডি ম্যাপে স্পর্শ করুন। আমরা সঠিক ওপিডি কাউন্টারে পৌঁছে দেব।",
-            "modelDisclosure": "আপনার কথা সুরক্ষিতভাবে আপনার ব্রাউজারেই প্রক্রিয়াকৃত হয়। সার্ভারে কিছুই পাঠানো হয় না।",
-            "startTriage": "ট্রায়াজ শুরু করুন",
-            "learnMore": "পদ্ধতি দেখুন",
-            "privacyBadge": "১০০% গোপনীয়তা আপনার ডিভাইসে",
-            "noIdBadge": "আধার বা ওটিপি ছাড়াই দেখুন",
-            "accessBadge": "নিরক্ষর নাগরিকদের জন্য সম্পূর্ণ সহজ",
-            "homeNav": "হোম",
-            "triageNav": "ওপিডি ট্রায়াজ",
-            "doctorNav": "ডাক্তার পোর্টাল",
-            "labNav": "ল্যাব টেস্ট ও স্ক্যান",
-            "bloodNav": "ব্লাড ব্যাংক",
-            "hospitalsLink": "সরকারি হাসপাতাল",
-            "faqLink": "প্রশ্নোত্তর",
-            "honestyNav": "স্বচ্ছতা ও সততা",
-            "startBooking": "ওপিডি ট্রায়াজ শুরু করুন ও স্লট দেখুন →",
-            "serviceGridKicker": "এক নজরে পরিষেবা",
-            "serviceGridTitle": "আজ আপনার কী সাহায্য প্রয়োজন?",
-            "opdService": "ওপিডি কাউন্টার ট্রায়াজ",
-            "opdServiceNote": "সঠিক প্রথম কাউন্টার খুঁজুন",
-            "labService": "ল্যাব ও স্ক্যান বুকিং",
-            "labServiceNote": "প্রস্তুতি ও ফির বিবরণ",
-            "bloodService": "ব্লাড ব্যাংক স্টক",
-            "bloodServiceNote": "রক্তের প্রাপ্যতা ও তথ্য",
-            "teleService": "অনলাইন ভিডিও টেলি-ওপিডি",
-            "teleServiceNote": "বাড়ি থেকেই পরামর্শ নিন",
-            "complaintLabel": "আপনার কী অসুবিধা হচ্ছে?",
-            "placeholder": "যেমন: বুকে ব্যথা, গতকাল রাত থেকে",
-            "inputHelp": "আপনার কথা ব্রাউজারেই সংরক্ষিত থাকবে।",
-            "exampleChest": "বুকে ব্যথা",
-            "exampleFever": "জ্বর",
-            "exampleWeakness": "এক পাশ দুর্বল",
-            "continue": "এগিয়ে যান",
-            "bodyMapButton": "বডি ম্যাপে দেখান",
-            "voiceStart": "আপনার অসুবিধার কথা বলুন",
-            "voiceStop": "শোনা বন্ধ করুন",
-            "voiceLabel": "বলুন",
-            "voiceLabelStop": "থামুন",
-            "reviewTitle": "আমরা যা বুঝেছি",
-            "confirm": "নিশ্চিত করুন",
-            "changeSomething": "পরিবর্তন করুন",
-            "matchedCounter": "সঠিক ওপিডি কাউন্টার:",
-            "emergencyTitle": "অবিলম্বে ২৪/৭ জরুরি বিভাগে যান! ওপিডি অ্যাপয়েন্টমেন্টের অপেক্ষা করবেন না।",
-            "slipTitle": "আপনার নমুনা ওপিডি স্লিপ",
-            "printSlip": "স্লিপ প্রিন্ট করুন",
-            "downloadSlip": "ডাউনলোড করুন",
-            "deptCardiology": "কার্ডিওলজি বিভাগ (Cardiology)",
-            "deptNeurology": "নিউরোলজি বিভাগ (Neurology)",
-            "deptGastroenterology": "গ্যাস্ট্রোএন্টারোলজি (Gastro)",
-            "deptGeneralMedicine": "জেনারেল মেডিসিন",
-            "deptPaediatrics": "শিশু রোগ বিভাগ (Paediatrics)"
-      },
-      "te": {
-            "landingKicker": "ప్రభుత్వ ఆసుపత్రులకు ప్రశాంతమైన ముఖద్వారం",
-            "landingTitle": "ఎలాంటి గందరగోళం లేకుండా ప్రభుత్వ ఆసుపత్రి అపాయింట్‌మెంట్.",
-            "landingSubtitle": "మీకు ఏ విభాగం కావాలో ఓఆర్‌ఎస్ అడుగుతుంది. కానీ రోగికి ఎక్కడ నొప్పి ఉందో మాత్రమే తెలుసు. మీ స్వంత మాటలలో చెప్పండి, రాయండి లేదా 3డి శరీర పటంపై గుర్తించండి.",
-            "modelDisclosure": "మీ సమాచారం మీ బ్రౌజర్‌లోనే భద్రంగా ఉంటుంది. సర్వర్‌కు ఏదీ పంపబడదు.",
-            "startTriage": "ట్రయేజ్ ప్రారంభించండి",
-            "learnMore": "ఇది ఎలా పనిచేస్తుందో చూడండి",
-            "privacyBadge": "100% గోప్యత మీ ఫోన్‌లోనే",
-            "noIdBadge": "చూడటానికి ఆధార్ లేదా ఓటీపీ అవసరం లేదు",
-            "accessBadge": "చదవడం రాని పౌరులకు కూడా సులభం",
-            "homeNav": "హోమ్",
-            "triageNav": "ఓపీడీ ట్రయేజ్",
-            "doctorNav": "డాక్టర్ పోర్టల్",
-            "labNav": "ల్యాబ్ పరీక్షలు",
-            "bloodNav": "బ్లడ్ బ్యాంక్",
-            "hospitalsLink": "ప్రభుత్వ ఆసుపత్రులు",
-            "faqLink": "ప్రశ్నలు-సమాధానాలు",
-            "honestyNav": "పారదర్శకత",
-            "startBooking": "ఓపీడీ ట్రయేజ్ ప్రారంభించండి →",
-            "complaintLabel": "మీకు ఎలాంటి ఇబ్బంది ఉంది?",
-            "placeholder": "ఉదా: ఛాతీ నొప్పి, నిన్న రాత్రి నుండి",
-            "inputHelp": "మీ మాటలు ఈ బ్రౌజర్‌లోనే ఉంటాయి.",
-            "exampleChest": "ఛాతీ నొప్పి",
-            "exampleFever": "జ్వరం",
-            "exampleWeakness": "ఒక వైపు బలహీనత",
-            "continue": "కొనసాగించండి",
-            "bodyMapButton": "శరీర పటంపై గుర్తించండి",
-            "voiceStart": "మీ సమస్యను చెప్పండి",
-            "voiceStop": "వినడం ఆపండి",
-            "voiceLabel": "చెప్పండి",
-            "voiceLabelStop": "ఆపండి",
-            "reviewTitle": "మేము అర్థం చేసుకున్న వివరాలు",
-            "confirm": "ధృవీకరించండి",
-            "changeSomething": "మార్చండి",
-            "matchedCounter": "తగిన ఓపీడీ కౌంటర్:",
-            "emergencyTitle": "వెంటనే 24/7 అత్యవసర విభాగానికి వెళ్ళండి! అపాయింట్‌మెంట్ కోసం వేచి ఉండకండి.",
-            "slipTitle": "మీ నమూనా ఓపీడీ స్లిప్",
-            "printSlip": "స్లిప్ ప్రింట్ చేయండి",
-            "downloadSlip": "డౌన్‌లోడ్ చేయండి",
-            "deptCardiology": "కార్డియాలజీ విభాగం (Cardiology)",
-            "deptNeurology": "న్యూరాలజీ విభాగం (Neurology)",
-            "deptGastroenterology": "గ్యాస్ట్రోఎంటరాలజీ (Gastro)",
-            "deptGeneralMedicine": "జనరల్ మెడిసిన్",
-            "deptPaediatrics": "పిల్లల వైద్య విభాగం (Paediatrics)"
-      },
-      "mr": {
-            "landingKicker": "सरकारी रुग्णालयांसाठी सुलभ आणि शांत प्रवेशद्वार",
-            "landingTitle": "सरकारी रुग्णालयाची अपॉइंटमेंट, कोणताही गोंधळ न होता.",
-            "landingSubtitle": "ORS विचारते की कोणता विभाग हवा आहे. आजारी व्यक्तीला फक्त कुठे दुखत आहे हे माहित असते. आपल्या स्वतःच्या शब्दांत बोला, लिहा किंवा ३डी शरीर नकाशावर दाखवा. आम्ही योग्य ओपीडी काउंटर दाखवू.",
-            "modelDisclosure": "तुमचे शब्द तुमच्या ब्राउझरमध्ये सुरक्षितपणे प्रक्रिया केले जातात. सर्व्हरवर काहीही पाठवले जात नाही.",
-            "startTriage": "ट्रायेज सुरू करा",
-            "learnMore": "हे कसे कार्य करते",
-            "privacyBadge": "१००% गोपनीयता आपल्या डिव्हाइसवर",
-            "noIdBadge": "पाहण्यासाठी आधार किंवा ओटीपीची गरज नाही",
-            "accessBadge": "निरक्षर नागरिकांसाठीही सुलभ",
-            "homeNav": "मुख्यपृष्ठ",
-            "triageNav": "ओपीडी ट्रायेज",
-            "doctorNav": "डॉक्टर पोर्टल",
-            "labNav": "लॅब चाचण्या",
-            "bloodNav": "ब्लड बँक",
-            "hospitalsLink": "सरकारी रुग्णालये",
-            "faqLink": "प्रश्न-उत्तरे",
-            "honestyNav": "पारदर्शकता",
-            "startBooking": "ओपीडी ट्रायेज सुरू करा →",
-            "complaintLabel": "आपल्याला काय त्रास होत आहे?",
-            "placeholder": "उदा: छातीत दुखणे, काल रात्रीपासून",
-            "inputHelp": "तुमचे शब्द या ब्राउझरमध्येच राहतील.",
-            "exampleChest": "छातीत दुखणे",
-            "exampleFever": "ताप",
-            "exampleWeakness": "एका बाजूला अशक्तपणा",
-            "continue": "पुढे जा",
-            "bodyMapButton": "शरीराच्या नकाशावर दाखवा",
-            "voiceStart": "आपला त्रास बोला",
-            "voiceStop": "ऐकणे थांबवा",
-            "voiceLabel": "बोला",
-            "voiceLabelStop": "थांबवा",
-            "reviewTitle": "आम्हाला समजलेला तपशील",
-            "confirm": "पुष्टी करा",
-            "changeSomething": "बदल करा",
-            "matchedCounter": "योग्य ओपीडी काउंटर:",
-            "emergencyTitle": "त्वरित २४/७ अपघात व आणीबाणी विभागात जा! ओपीडी अपॉइंटमेंटची वाट पाहू नका.",
-            "slipTitle": "आपली नमुना ओपीडी स्लिप",
-            "printSlip": "स्लिप प्रिंट करा",
-            "downloadSlip": "डाउनलोड करा",
-            "deptCardiology": "हृदयरोग विभाग (Cardiology)",
-            "deptNeurology": "मज्जारोग विभाग (Neurology)",
-            "deptGastroenterology": "पोटविकार विभाग (Gastro)",
-            "deptGeneralMedicine": "जनरल मेडिसिन",
-            "deptPaediatrics": "बालरोग विभाग (Paediatrics)"
-      },
-      "gu": {
-            "landingKicker": "સરકારી હોસ્પિટલો માટે સરળ અને શાંત પ્રવેશદ્વાર",
-            "landingTitle": "સરકારી હોસ્પિટલની એપોઇન્ટમેન્ટ, કોઈ મૂંઝવણ વિના.",
-            "landingSubtitle": "ORS પૂછે છે કે તમારે કયો વિભાગ જોઈએ છે. દર્દીને ફક્ત એટલી ખબર હોય છે કે ક્યાં દુખાવો છે. તમારા પોતાના શબ્દોમાં બોલો, લખો અથવા 3D શરીરના નકશા પર દર્શાવો.",
-            "startTriage": "ટ્રાયેજ શરૂ કરો",
-            "learnMore": "આ કેવી રીતે કાર્ય કરે છે",
-            "privacyBadge": "100% ક્લાયન્ટ-સાઇડ ગોપનીયતા",
-            "noIdBadge": "જોવા માટે આધાર કે ઓટીપી જરૂરી નથી",
-            "accessBadge": "ઓછું ભણેલા લોકો માટે પણ સરળ",
-            "homeNav": "હોમ",
-            "triageNav": "ઓપીડી ટ્રાયેજ",
-            "doctorNav": "ડોક્ટર પોર્ટલ",
-            "labNav": "લેબ ટેસ્ટ",
-            "bloodNav": "બ્લડ બેંક",
-            "hospitalsLink": "સરકારી હોસ્પિટલો",
-            "faqLink": "સવાલ-જવાબ",
-            "honestyNav": "પારદર્શિતા",
-            "startBooking": "ઓપીડી ટ્રાયેજ શરૂ કરો →",
-            "complaintLabel": "તમને શું તકલીફ છે?",
-            "placeholder": "દા.ત.: છાતીમાં દુખાવો, ગઈ કાલ રાતથી",
-            "exampleChest": "છાતીમાં દુખાવો",
-            "exampleFever": "તાવ",
-            "continue": "આગળ વધો",
-            "bodyMapButton": "શરીરના નકશા પર દર્શાવો",
-            "confirm": "પુષ્ટિ કરો",
-            "matchedCounter": "સાચું ઓપીડી કાઉન્ટર:",
-            "emergencyTitle": "તરત જ 24/7 ઇમરજન્સી વિભાગમાં જાઓ! એપોઇન્ટમેન્ટની રાહ ન જુઓ.",
-            "deptCardiology": "કાર્ડિયોલોજી (હૃદય રોગ)"
-      },
-      "kn": {
-            "landingKicker": "ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆಗಳಿಗೆ ಸುಲಭ ಪ್ರವೇಶದ್ವಾರ",
-            "landingTitle": "ಯಾವುದೇ ಗೊಂದಲವಿಲ್ಲದೆ ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆಯ ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್.",
-            "landingSubtitle": "ಯಾವ ವಿಭಾಗ ಬೇಕೆಂದು ಒಆರ್‌ಎಸ್ ಕೇಳುತ್ತದೆ. ಆದರೆ ರೋಗಿಗೆ ಎಲ್ಲಿ ನೋವು ಇದೆ ಎಂದು ಮಾತ್ರ ತಿಳಿದಿರುತ್ತದೆ. ನಿಮ್ಮ ಸ್ವಂತ ಭಾಷೆಯಲ್ಲಿ ಮಾತನಾಡಿ, ಟೈಪ್ ಮಾಡಿ ಅಥವಾ 3D ದೇಹದ ನಕ್ಷೆಯಲ್ಲಿ ತೋರಿಸಿ.",
-            "startTriage": "ಟ್ರಯೇಜ್ ಪ್ರಾರಂಭಿಸಿ",
-            "learnMore": "ಇದು ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ",
-            "privacyBadge": "100% ಗೌಪ್ಯತೆ ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನಲ್ಲಿ",
-            "noIdBadge": "ನೋಡಲು ಆಧಾರ್ ಅಥವಾ ಒಟಿಪಿ ಅಗತ್ಯವಿಲ್ಲ",
-            "accessBadge": "ಓದಲು ಬಾರದವರಿಗೂ ಸುಲಭ",
-            "homeNav": "ಮುಖಪುಟ",
-            "triageNav": "ಒಪಿಡಿ ಟ್ರಯೇಜ್",
-            "doctorNav": "ವೈದ್ಯರ ಪೋರ್ಟಲ್",
-            "labNav": "ಲ್ಯಾಬ್ ಪರೀಕ್ಷೆಗಳು",
-            "bloodNav": "ರಕ್ತ ನಿಧಿ",
-            "hospitalsLink": "ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆಗಳು",
-            "faqLink": "ಪ್ರಶ್ನೋತ್ತರ",
-            "honestyNav": "ಪಾರದರ್ಶಕತೆ",
-            "startBooking": "ಒಪಿಡಿ ಟ್ರಯೇಜ್ ಪ್ರಾರಂಭಿಸಿ →",
-            "complaintLabel": "ನಿಮಗೆ ಏನು ತೊಂದರೆಯಾಗಿದೆ?",
-            "placeholder": "ಉದಾ: ಎದೆ ನೋವು, ನಿನ್ನೆ ರಾತ್ರಿಯಿಂದ",
-            "exampleChest": "ಎದೆ ನೋವು",
-            "exampleFever": "ಜ್ವರ",
-            "continue": "ಮುಂದುವರಿಯಿರಿ",
-            "bodyMapButton": "ದೇಹದ ನಕ್ಷೆಯಲ್ಲಿ ತೋರಿಸಿ",
-            "confirm": "ದೃಢೀಕರಿಸಿ",
-            "matchedCounter": "ಸರಿಯಾದ ಒಪಿಡಿ ಕೌಂಟರ್:",
-            "emergencyTitle": "ತಕ್ಷಣವೇ 24/7 ತುರ್ತು ಚಿಕಿತ್ಸಾ ವಿಭಾಗಕ್ಕೆ ಹೋಗಿ! ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್‌ಗಾಗಿ ಕಾಯಬೇಡಿ.",
-            "deptCardiology": "ಕಾರ್ಡಿಯಾಲಜಿ (ಹೃದ್ರೋಗ)"
-      },
-      "ml": {
-            "landingKicker": "സർക്കാർ ആശുപത്രികൾക്കുള്ള ശാന്തമായ വഴികാട്ടി",
-            "landingTitle": "ആശയക്കുഴപ്പമില്ലാതെ സർക്കാർ ആശുപത്രി അപ്പോയിന്റ്മെന്റ്.",
-            "landingSubtitle": "ഏത് വിഭാഗമാണ് ആവശ്യമെന്ന് ഒആർഎസ് ചോദിക്കുന്നു. രോഗിക്ക് എവിടെയാണ് വേദനയെന്ന് മാത്രമേ അറിയൂ. നിങ്ങളുടെ സ്വന്തം വാക്കുകളിൽ സംസാരിക്കുക, ടൈപ്പ് ചെയ്യുക അല്ലെങ്കിൽ 3D ബോഡി മാപ്പിൽ കാണിക്കുക.",
-            "startTriage": "ട്രയേജ് ആരംഭിക്കുക",
-            "learnMore": "ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു",
-            "privacyBadge": "100% സ്വകാര്യത നിങ്ങളുടെ ഫോണിൽ",
-            "noIdBadge": "പരിശോധിക്കാൻ ആധാർ ആവശ്യമില്ല",
-            "accessBadge": "വായന അറിയാത്തവർക്കും എളുപ്പത്തിൽ ഉപയോഗിക്കാം",
-            "homeNav": "ഹോം",
-            "triageNav": "ഒപിഡി ട്രയേജ്",
-            "doctorNav": "ഡോക്ടർ പോർട്ടൽ",
-            "labNav": "ലാബ് പരിശോധനകൾ",
-            "bloodNav": "ബ്ലഡ് ബാങ്ക്",
-            "hospitalsLink": "സർക്കാർ ആശുപത്രികൾ",
-            "faqLink": "ചോദ്യോത്തരങ്ങൾ",
-            "honestyNav": "സുതാര്യത",
-            "startBooking": "ഒപിഡി ട്രയേജ് ആരംഭിക്കുക →",
-            "complaintLabel": "നിങ്ങൾക്ക് എന്താണ് ബുദ്ധിമുട്ട്?",
-            "placeholder": "ഉദാ: നെഞ്ചുവേദന, ഇന്നലെ രാത്രി മുതൽ",
-            "exampleChest": "നെഞ്ചുവേദന",
-            "exampleFever": "പനി",
-            "continue": "തുടരുക",
-            "bodyMapButton": "ബോഡി മാപ്പിൽ കാണിക്കുക",
-            "confirm": "സ്ഥിരീകരിക്കുക",
-            "matchedCounter": "യോജിച്ച ഒപിഡി കൗണ്ടർ:",
-            "emergencyTitle": "ഉടൻ തന്നെ 24/7 അത്യാഹിത വിഭാഗത്തിലേക്ക് പോകുക! കാത്തിരിക്കരുത്.",
-            "deptCardiology": "കാർഡിയോളജി (ഹൃദ്രോഗ വിഭാഗം)"
-      },
-      "pa": {
-            "landingKicker": "ਸਰਕਾਰੀ ਹਸਪਤਾਲਾਂ ਲਈ ਆਸਾਨ ਪ੍ਰਵੇਸ਼ ਦੁਆਰ",
-            "landingTitle": "ਸਰਕਾਰੀ ਹਸਪਤਾਲ ਦੀ ਅਪਾਇੰਟਮੈਂਟ, ਬਿਨਾਂ ਕਿਸੇ ਉਲਝਣ ਦੇ।",
-            "landingSubtitle": "ORS ਪੁੱਛਦਾ ਹੈ ਕਿ ਕਿਹੜਾ ਵਿਭਾਗ ਚਾਹੀਦਾ ਹੈ। ਮਰੀਜ਼ ਨੂੰ ਸਿਰਫ਼ ਇਹ ਪਤਾ ਹੁੰਦਾ ਹੈ ਕਿ ਦਰਦ ਕਿੱਥੇ ਹੈ। ਆਪਣੇ ਸ਼ਬਦਾਂ ਵਿੱਚ ਬੋਲੋ, ਲਿਖੋ ਜਾਂ 3D ਸਰੀਰ ਦੇ ਨਕਸ਼ੇ 'ਤੇ ਦੱਸੋ।",
-            "startTriage": "ਟ੍ਰਾਈਏਜ ਸ਼ੁਰੂ ਕਰੋ",
-            "learnMore": "ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ",
-            "privacyBadge": "100% ਗੋਪਨੀਯਤਾ ਤੁਹਾਡੇ ਫ਼ੋਨ ਵਿੱਚ",
-            "noIdBadge": "ਦੇਖਣ ਲਈ ਆਧਾਰ ਦੀ ਲੋੜ ਨਹੀਂ",
-            "accessBadge": "ਘੱਟ ਪੜ੍ਹੇ-ਲਿਖੇ ਲੋਕਾਂ ਲਈ ਵੀ ਆਸਾਨ",
-            "homeNav": "ਮੁੱਖ ਸਫ਼ਾ",
-            "triageNav": "ਓਪੀਡੀ ਟ੍ਰਾਈਏਜ",
-            "doctorNav": "ਡਾਕਟਰ ਪੋਰਟਲ",
-            "labNav": "ਲੈਬ ਟੈਸਟ",
-            "bloodNav": "ਬਲੱਡ ਬੈਂਕ",
-            "hospitalsLink": "ਸਰਕਾਰੀ ਹਸਪਤਾਲ",
-            "faqLink": "ਸਵਾਲ-ਜਵਾਬ",
-            "honestyNav": "ਇਮਾਨਦਾਰੀ",
-            "startBooking": "ਓਪੀਡੀ ਟ੍ਰਾਈਏਜ ਸ਼ੁਰੂ ਕਰੋ →",
-            "complaintLabel": "ਤੁਹਾਨੂੰ ਕੀ ਤਕਲੀਫ਼ ਹੈ?",
-            "placeholder": "ਜਿਵੇਂ: ਛਾਤੀ ਵਿੱਚ ਦਰਦ, ਕੱਲ੍ਹ ਰਾਤ ਤੋਂ",
-            "exampleChest": "ਛਾਤੀ ਵਿੱਚ ਦਰਦ",
-            "exampleFever": "ਬੁਖਾਰ",
-            "continue": "ਅੱਗੇ ਵਧੋ",
-            "bodyMapButton": "ਸਰੀਰ ਦੇ ਨਕਸ਼ੇ 'ਤੇ ਦੱਸੋ",
-            "confirm": "ਪੁਸ਼ਟੀ ਕਰੋ",
-            "matchedCounter": "ਸਹੀ ਓਪੀਡੀ ਕਾਊਂਟਰ:",
-            "emergencyTitle": "ਤੁਰੰਤ 24/7 ਐਮਰਜੈਂਸੀ ਵਿਭਾਗ ਵਿੱਚ ਜਾਓ! ਅਪਾਇੰਟਮੈਂਟ ਦੀ ਉਡੀਕ ਨਾ ਕਰੋ।",
-            "deptCardiology": "ਕਾਰਡੀਓਲੋਜੀ (ਦਿਲ ਦੇ ਰੋਗ)"
-      },
-      "or": {
-            "landingKicker": "ସରକାରୀ ଡାକ୍ତରଖାନା ପାଇଁ ଏକ ସହଜ ପ୍ରବେଶ ପଥ",
-            "landingTitle": "କୌଣସି ଦ୍ୱନ୍ଦ୍ୱ ବିନା ସରକାରୀ ଡାକ୍ତରଖାନା ଆପଏଣ୍ଟମେଣ୍ଟ।",
-            "landingSubtitle": "ORS ପଚାରେ ଆପଣଙ୍କୁ କେଉଁ ବିଭାଗ ଦରକାର। ରୋଗୀ କେବଳ ଜାଣନ୍ତି କେଉଁଠି କଷ୍ଟ। ନିଜ ଭାଷାରେ କୁହନ୍ତୁ, ଲେଖନ୍ତୁ ବା 3D ବଡି ମ୍ୟାପରେ ଚିହ୍ନଟ କରନ୍ତୁ।",
-            "startTriage": "ଟ୍ରାଇଜ୍ ଆରମ୍ଭ କରନ୍ତୁ",
-            "learnMore": "ଏହା କିପରି କାମ କରେ",
-            "privacyBadge": "୧୦୦% ଗୋପନୀୟତା ଆପଣଙ୍କ ଫୋନରେ",
-            "noIdBadge": "ଦେଖିବା ପାଇଁ ଆଧାର ଦରକାର ନାହିଁ",
-            "accessBadge": "ନିରକ୍ଷର ନାଗରିକଙ୍କ ପାଇଁ ସହଜ",
-            "homeNav": "ମୂଳପୃଷ୍ଠା",
-            "triageNav": "ଓପିଡି ଟ୍ରାଇଜ୍",
-            "doctorNav": "ଡାକ୍ତର ପୋର୍ଟାଲ",
-            "labNav": "ଲ୍ୟାବ୍ ପରୀକ୍ଷା",
-            "bloodNav": "ରକ୍ତ ଭଣ୍ଡାର",
-            "hospitalsLink": "ସରକାରୀ ଡାକ୍ତରଖାନା",
-            "faqLink": "ପ୍ରଶ୍ନୋତ୍ତର",
-            "honestyNav": "ସ୍ୱଚ୍ଛତା",
-            "startBooking": "ଓପିଡି ଟ୍ରାଇଜ୍ ଆରମ୍ଭ କରନ୍ତୁ →",
-            "complaintLabel": "ଆପଣଙ୍କର କ'ଣ ଅସୁବିଧା ଅଛି?",
-            "placeholder": "ଯଥା: ଛାତିରେ ଯନ୍ତ୍ରଣା, ଗତକାଲି ରାତିରୁ",
-            "exampleChest": "ଛାତିରେ ଯନ୍ତ୍ରଣା",
-            "exampleFever": "ଜ୍ୱର",
-            "continue": "ଆଗକୁ ବଢ଼ନ୍ତୁ",
-            "bodyMapButton": "ଶରୀର ମ୍ୟାପରେ ଦେଖାନ୍ତୁ",
-            "confirm": "ନିଶ୍ଚିତ କରନ୍ତୁ",
-            "matchedCounter": "ସଠିକ୍ ଓପିଡି କାଉଣ୍ଟର:",
-            "emergencyTitle": "ତୁରନ୍ତ ୨୪/୭ ଜରୁରୀକାଳୀନ ବିଭାଗକୁ ଯାଆନ୍ତୁ! ଅପେକ୍ଷା କରନ୍ତୁ ନାହିଁ।",
-            "deptCardiology": "ହୃଦରୋଗ ବିଭାଗ (Cardiology)"
-      },
-      "as": {
-            "landingKicker": "চৰকাৰী চিকিৎসালয়ৰ বাবে এক সহজ প্ৰৱেশ দ্বাৰ",
-            "landingTitle": "কোনো বিভ্ৰান্তি নোহোৱাকৈ চৰকাৰী চিকিৎসালয়ৰ এপইণ্টমেণ্ট।",
-            "landingSubtitle": "ওআৰএছ-এ সুধিছে আপোনাক কোনটো বিভাগ লাগে। ৰোগীয়ে কেৱল জানে ক'ত বিষ। নিজৰ ভাষাত কওক, লিখক বা ৩ডি বডি মেপত স্পৰ্শ কৰক।",
-            "startTriage": "ট্ৰায়াজ আৰম্ভ কৰক",
-            "learnMore": "ই কেনেকৈ কাম কৰে",
-            "privacyBadge": "১০০% গোপনীয়তা আপোনাৰ ব্ৰাউজাৰত",
-            "noIdBadge": "চাবলৈ আধাৰৰ প্ৰয়োজন নাই",
-            "accessBadge": "নিৰক্ষৰ নাগৰিকৰ বাবেও সহজগম্য",
-            "homeNav": "গৃহপৃষ্ঠা",
-            "triageNav": "অ'পিডি ট্ৰায়াজ",
-            "doctorNav": "চিকিৎসক পৰ্টেল",
-            "labNav": "লেব পৰীক্ষা",
-            "bloodNav": "ৰক্ত বেংক",
-            "hospitalsLink": "চৰকাৰী চিকিৎসালয়",
-            "faqLink": "সঘনাই সোধা প্ৰশ্ন",
-            "honestyNav": "স্বচ্ছতা",
-            "startBooking": "অ'পিডি ট্ৰায়াজ আৰম্ভ কৰক →",
-            "complaintLabel": "আপোনাৰ কি অসুবিধা হৈছে?",
-            "placeholder": "যেনে: বুকুৰ বিষ, কালি ৰাতিৰ পৰা",
-            "exampleChest": "বুকুৰ বিষ",
-            "exampleFever": "জ্বৰ",
-            "continue": "আগবাঢ়ক",
-            "bodyMapButton": "বডি মেপত দেখুৱাওক",
-            "confirm": "নিশ্চিত কৰক",
-            "matchedCounter": "সঠিক অ'পিডি কাউণ্টাৰ:",
-            "emergencyTitle": "ততালিকে ২৪/৭ জৰুৰীকালীন বিভাগলৈ যাওক! এপইণ্টমেণ্টৰ অপেক্ষা নকৰিব।",
-            "deptCardiology": "হৃদৰোগ বিভাগ (Cardiology)"
-      }
-};
-      for (const [code, dict] of Object.entries(VERNACULAR_PACK)) {
-        copy[code] = Object.assign({}, copy.en, dict);
+      // Complete 22 Scheduled Indian Languages Vernacular Pack
+      if (typeof window !== "undefined" && window.VERNACULAR_PACK) {
+        for (const [code, dict] of Object.entries(window.VERNACULAR_PACK)) {
+          copy[code] = Object.assign({}, copy.en, dict);
+        }
+      }, copy.en, dict);
       }
 
       const state = { language: "en", selectedDialect: "en", selectedDialectData: null, screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, fullName: "", phone: "", exactAge: "", gender: null, conditions: [], listening: false, region: null, noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, consultationMode: "in-person", appointmentDate: null, appointmentShift: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
@@ -3999,7 +3425,7 @@
         emergencyResult.hidden = result.urgency !== "emergency";
         resultScreen.setAttribute("aria-labelledby", result.urgency === "emergency" ? "emergency-title" : "result-title");
         findHospital.hidden = result.urgency === "emergency";
-        const reason = result.reason[state.language];
+        const reason = (result.reason && (result.reason[state.language] || result.reason.hi || result.reason.en)) || "";
         if (result.urgency === "emergency") {
           document.querySelector("#emergency-reason").textContent = reason;
           document.querySelector("#emergency-rule-id").textContent = result.rule_id;
