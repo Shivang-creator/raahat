@@ -1007,35 +1007,34 @@
 
 
       /* 22 Scheduled Indian Languages Expansion */
-      .lang-more-btn { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.75rem; padding: 0.35rem 0.85rem; border: 1.5px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); font-weight: 700; font-size: 0.92rem; cursor: pointer; transition: all 160ms ease; }
-      .lang-more-btn:hover, .lang-more-btn[aria-expanded="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
-      [data-theme="dark"] .lang-more-btn:hover { background: rgba(45, 212, 191, 0.15); color: #2dd4bf; }
+      .language-bar-group { display: inline-flex; align-items: center; gap: 0.2rem; padding: 0.25rem; border: 1.5px solid var(--line); border-radius: 999px; background: var(--paper); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+      .lang-quick-btn { min-height: 2.5rem; padding: 0.35rem 0.85rem; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: all 140ms ease; display: inline-flex; align-items: center; gap: 0.35rem; }
+      .lang-quick-btn:hover { color: var(--ink); background: rgba(45, 212, 191, 0.1); }
+      .lang-quick-btn[aria-pressed="true"] { background: var(--accent); color: #fff; box-shadow: 0 2px 8px rgba(45, 212, 191, 0.35); }
+      [data-theme="dark"] .lang-quick-btn[aria-pressed="true"] { background: #2dd4bf; color: #03231a; font-weight: 850; }
 
-      .lang-modal { position: fixed; inset: 0; z-index: 1100; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 1rem; }
-      .lang-modal-card { width: 100%; max-width: 840px; max-height: 88vh; background: var(--paper); border: 2px solid var(--line); border-radius: var(--radius-lg); box-shadow: 0 25px 60px rgba(0,0,0,0.4); display: flex; flex-direction: column; overflow: hidden; }
-      .lang-modal-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid var(--line); background: var(--surface); }
-      .lang-modal-header h2 { margin: 0.25rem 0 0.35rem; font-size: 1.45rem; font-weight: 800; }
+      .lang-modal { position: fixed; inset: 0; z-index: 1200; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 1rem; }
+      .lang-modal-card { width: 100%; max-width: 840px; max-height: 85vh; background: var(--paper); border: 2px solid var(--line); border-radius: var(--radius-lg); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; overflow: hidden; }
+      .lang-modal-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 1.25rem 1.5rem; border-bottom: 1.5px solid var(--line); background: var(--surface); }
+      .lang-modal-header h2 { margin: 0.25rem 0 0.25rem; font-size: 1.35rem; font-weight: 800; color: var(--ink); }
       .lang-modal-note { margin: 0; font-size: 0.9rem; color: var(--muted); }
-      .lang-modal-close { background: transparent; border: 0; font-size: 1.75rem; color: var(--muted); cursor: pointer; line-height: 1; padding: 0.25rem; }
-      .lang-modal-close:hover { color: var(--ink); }
+      .lang-modal-close { background: transparent; border: 0; font-size: 1.35rem; color: var(--muted); cursor: pointer; padding: 0.25rem 0.5rem; border-radius: 0.5rem; transition: all 120ms ease; }
+      .lang-modal-close:hover { color: var(--ink); background: rgba(255, 255, 255, 0.1); }
 
-      .lang-search-bar { padding: 1rem 1.5rem 0.5rem; background: var(--paper); }
-      .lang-search-control { width: 100%; min-height: 3rem; padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1.5px solid var(--line); background: var(--background); color: var(--ink); font-size: 1rem; font-weight: 600; outline: none; transition: border-color 150ms; }
+      .lang-search-bar { padding: 0.85rem 1.5rem; background: var(--paper); border-bottom: 1px solid var(--line); }
+      .lang-search-control { width: 100%; min-height: 2.85rem; padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1.5px solid var(--line); background: var(--background); color: var(--ink); font-size: 0.98rem; font-weight: 600; outline: none; transition: border-color 150ms; }
       .lang-search-control:focus { border-color: var(--accent); }
 
-      .lang-region-filter { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.5rem 1.5rem 1rem; border-bottom: 1px solid var(--line); }
-      .lang-region-chip { min-height: 2.25rem; padding: 0.25rem 0.75rem; border-radius: 999px; border: 1px solid var(--line); background: var(--background); color: var(--muted); font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 140ms ease; }
-      .lang-region-chip:hover, .lang-region-chip[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
-      [data-theme="dark"] .lang-region-chip[aria-pressed="true"] { background: #2dd4bf; color: #03231a; }
-
-      .lang-grid { flex: 1; overflow-y: auto; padding: 1.25rem 1.5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 0.85rem; }
-      .lang-card { min-height: 4.5rem; padding: 0.85rem 1rem; border: 1.5px solid var(--line); border-radius: var(--radius-md); background: var(--background); text-align: left; cursor: pointer; transition: all 160ms ease; display: flex; flex-direction: column; justify-content: space-between; }
-      .lang-card:hover, .lang-card.active { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-      .lang-card-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.2rem; }
-      .lang-card-native { font-size: 1.2rem; font-weight: 800; color: var(--ink); }
-      .lang-card-code { font-size: 0.75rem; font-weight: 700; color: var(--accent-dark); background: rgba(45,212,191,0.15); padding: 0.15rem 0.4rem; border-radius: 4px; }
-      .lang-card-name { font-size: 0.88rem; font-weight: 700; color: var(--muted); margin-bottom: 0.25rem; }
-      .lang-card-meta { font-size: 0.78rem; color: var(--muted); }
+      .lang-grid { flex: 1; overflow-y: auto; padding: 1.25rem 1.5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; }
+      .lang-card { min-height: 4.25rem; padding: 0.85rem 1rem; border: 1.5px solid var(--line); border-radius: var(--radius-md); background: var(--background); text-align: left; cursor: pointer; transition: all 150ms ease; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+      .lang-card:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+      .lang-card.active { border-color: var(--accent); background: rgba(45, 212, 191, 0.15); box-shadow: 0 0 0 1.5px var(--accent); }
+      .lang-card-main { display: flex; flex-direction: column; gap: 0.15rem; }
+      .lang-card-native { font-size: 1.25rem; font-weight: 850; color: var(--ink); line-height: 1.2; }
+      .lang-card-name { font-size: 0.88rem; font-weight: 600; color: var(--muted); }
+      .lang-card-aside { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; }
+      .lang-card-code { font-size: 0.72rem; font-weight: 700; color: var(--accent-dark); background: rgba(45, 212, 191, 0.18); padding: 0.15rem 0.45rem; border-radius: 999px; letter-spacing: 0.03em; }
+      .lang-check-badge { font-size: 0.72rem; font-weight: 800; color: #22c55e; background: rgba(34, 197, 94, 0.15); padding: 0.1rem 0.4rem; border-radius: 4px; }
 
       /* Step 1 Vernacular Quick Test Ribbon */
       .vernacular-showcase { margin-top: 1rem; padding: 1rem; background: var(--paper); border: 1.5px solid var(--line); border-radius: var(--radius-md); }
@@ -1050,8 +1049,7 @@
       .vernacular-route-hint { color: var(--muted); font-size: 0.75rem; }
       .vernacular-chip.red-flag-chip { border-color: rgba(239, 68, 68, 0.4); }
       .vernacular-chip.red-flag-chip:hover { border-color: var(--emergency-red); background: rgba(239, 68, 68, 0.08); }
-
-      /* Audio Readback Button */
+/* Audio Readback Button */
       .audio-readback-wrapper { margin: 1rem 0; }
       .audio-readback-btn { min-height: 3.25rem; display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.6rem 1.25rem; border-radius: 999px; border: 2px solid var(--accent); background: var(--accent-soft); color: var(--accent-dark); font-size: 1rem; font-weight: 800; cursor: pointer; transition: all 180ms ease; }
       .audio-readback-btn:hover { background: var(--accent); color: #fff; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(45,212,191,0.3); }
@@ -1123,13 +1121,13 @@
           <a href="#screen-honesty" data-view-link="honesty" data-copy="honestyNav">Honesty</a>
         </nav>
         <div class="nav-actions">
-          <div class="language-toggle" role="group" aria-label="Language">
-            <button type="button" data-language="en" aria-pressed="true">English</button>
-            <button type="button" data-language="hi" aria-pressed="false">हिंदी</button>
+          <div class="language-bar-group" role="group" aria-label="Language selection">
+            <button type="button" class="lang-quick-btn" data-language="en" aria-pressed="true">English</button>
+            <button type="button" class="lang-quick-btn" data-language="hi" aria-pressed="false">हिन्दी</button>
+            <button type="button" class="lang-quick-btn" id="btn-open-languages" aria-haspopup="dialog" aria-expanded="false" title="Browse all 22 Scheduled Indian Languages">
+              <span aria-hidden="true">🌐</span> <span id="current-lang-badge">22 Languages ▾</span>
+            </button>
           </div>
-          <button class="lang-more-btn" type="button" id="btn-open-languages" aria-haspopup="dialog" aria-expanded="false" title="Explore all 22 Scheduled Indian Languages">
-            <span aria-hidden="true">🇮🇳</span> <span id="current-lang-badge">22 Languages</span>
-          </button>
           <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Use dark theme" title="Use dark theme"><svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg></button>
           <button class="nav-start" type="button" id="nav-start-triage" data-copy="startTriage">Start Triage</button>
         </div>
@@ -2006,22 +2004,13 @@
               <div>
                 <p class="eyebrow" style="margin:0;"><span class="tag">Constitutional</span> Eighth Schedule · 8वीं अनुसूची</p>
                 <h2 id="modal-languages-title">22 Scheduled Indian Languages · भारतीय भाषाएं</h2>
-                <p class="lang-modal-note">Choose your native language to speak symptoms, view guidance, and hear audio readback.</p>
+                <p class="lang-modal-note">Choose your language to view the interface, speak symptoms, and hear audio guidance.</p>
               </div>
-              <button class="lang-modal-close" type="button" id="btn-close-languages" aria-label="Close language selector">×</button>
+              <button class="lang-modal-close" type="button" id="btn-close-languages" aria-label="Close language selector">✕</button>
             </div>
             
             <div class="lang-search-bar">
-              <input type="search" id="lang-search-input" class="lang-search-control" placeholder="🔍 Search language, script, or state (e.g. தமிழ், Telugu, WB, Assam)..." aria-label="Search languages" />
-            </div>
-
-            <div class="lang-region-filter" role="tablist" aria-label="Filter languages by region">
-              <button class="lang-region-chip" type="button" data-region="all" aria-pressed="true">All (22)</button>
-              <button class="lang-region-chip" type="button" data-region="South" aria-pressed="false">South (4)</button>
-              <button class="lang-region-chip" type="button" data-region="North / Central" aria-pressed="false">North / Central (7)</button>
-              <button class="lang-region-chip" type="button" data-region="East" aria-pressed="false">East (4)</button>
-              <button class="lang-region-chip" type="button" data-region="West" aria-pressed="false">West (3)</button>
-              <button class="lang-region-chip" type="button" data-region="North-East" aria-pressed="false">North-East (4)</button>
+              <input type="search" id="lang-search-input" class="lang-search-control" placeholder="🔍 Search any of the 22 languages (e.g. Urdu, தமிழ், বাংলা, Telugu)..." aria-label="Search languages" />
             </div>
 
             <div class="lang-grid" id="lang-grid-container" role="group" aria-label="All 22 Languages">
@@ -2222,8 +2211,590 @@
         faqSafetyA: "नहीं। राहत प्रशासनिक ट्रायेज है, बीमारी की पहचान या डॉक्टर नहीं। आप नियम लागू होने से पहले व्यवस्थित विवरण देखकर पुष्टि करते हैं; एक रेड फ्लैग इमरजेंसी के लिए काफ़ी है।", faqRedFlagA: "साधारण बुकिंग तुरंत रुक जाती है। नतीजा अभी 24/7 इमरजेंसी जाने को कहता है, नियम संदर्भ दिखाता है और ओपीडी अपॉइंटमेंट जारी नहीं करता।", faqPrivacyA: "कोई सर्वर यह जानकारी सेव नहीं करता। परेशानी और मरीज की जानकारी इस सत्र में इसी ब्राउज़र में रहती है; शरीर के नक्शे वाला रास्ता किसी बाहरी सेवा को कुछ नहीं भेजता। आधार, आभा, यूएचआईडी, ओटीपी या असली स्वास्थ्य रिकॉर्ड न लिखें।", faqWaitA: "इंतज़ार का समय चुने गए स्लॉट, डॉक्टर के सुबह के राउंड और नमूना कतार की गति से नकली रूप में निकाला जाता है। यह इस प्रोटोटाइप का ईमानदार अनुमान है, लाइव अस्पताल कतार नहीं।", faqOrsA: "ORS पहले अस्पताल और विभाग चुनने को कहता है। राहत जहाँ दर्द है वहाँ से जीरो-नॉलेज ट्रायेज, साफ़ नकली कतार संदर्भ और इमरजेंसी सुरक्षा देता है। यह ORS से जुड़ा नहीं है।", faqAbdmA: "अभी नहीं। यह प्रोटोटाइप ABDM, e-Hospital HMIS या किसी सरकारी सिस्टम से नहीं जुड़ा है। भविष्य में जोड़ने के लिए साफ़ सहमति, सुरक्षा जाँच और सार्वजनिक सेवा साझेदारी ज़रूरी होगी।",
         roadmapTitle: "राहत के लिए आगे क्या?", roadmapNote: "इस प्रोटोटाइप को अधिक जुड़े हुए और आसान सार्वजनिक सेवा के दरवाज़े में बदलने का नागरिक रोडमैप।", roadmapAbdmTitle: "ABDM और e-Hospital इंटीग्रेशन", roadmapAbdmNote: "बनाए गए नमूना टोकन को आयुष्मान भारत डिजिटल मिशन (ABDM) और राष्ट्रीय हॉस्पिटल मैनेजमेंट इन्फॉर्मेशन सिस्टम (HMIS) से सीधे जोड़ना।", roadmapIvrTitle: "फीचर फोन के लिए AI वॉइस IVR (104 इंटीग्रेशन)", roadmapIvrNote: "ग्रामीण नागरिक टोल-फ्री नंबर पर 22 क्षेत्रीय बोलियों—भोजपुरी, मैथिली, तमिल और बंगाली सहित—में परेशानी बोलें और SMS से ओपीडी टोकन पाएँ।", roadmapQueueTitle: "अस्पताल की लाइव कतार की तस्वीर", roadmapQueueNote: "वेटिंग हॉल के टोकन काउंटर जोड़कर घर से निकलने से पहले परामर्श का लाइव समय दिखाना।", roadmapLanguagesTitle: "पूरे भारत में स्थानीय भाषाओं का विस्तार", roadmapLanguagesNote: "सभी 22 अनुसूचित भारतीय भाषाओं में मूल आवाज़ और बोली का समर्थन बनाना।"
       });
+      
+      // Additional Vernacular Dictionaries for full page localization
+      const VERNACULAR_PACK = {
+      "ur": {
+            "landingKicker": "سرکاری اسپتال تک رسائی کا آسان اور پرسکون طریقہ",
+            "landingTitle": "سرکاری اسپتال کی او پی ڈی گائیڈنس، بغیر کسی الجھن کے۔",
+            "landingSubtitle": "او آر ایس پوچھتا ہے کہ کون سا شعبہ چاہیے۔ بیمار شخص صرف یہ جانتا ہے کہ تکلیف کہاں ہے۔ اپنی زبان میں بولیں، لکھیں یا تھری ڈی باڈی میپ پر بتائیں۔ ہم آپ کو صحیح او پی ڈی کاؤنٹر تک پہنچائیں گے۔",
+            "modelDisclosure": "آپ کے الفاظ محفوظ طریقے سے اسی براؤزر میں پروسیس ہوتے ہیں۔ کوئی بھی ڈیٹا سرور پر محفوظ نہیں کیا جاتا۔",
+            "startTriage": "ٹرائیج شروع کریں",
+            "learnMore": "طریقہ کار دیکھیں",
+            "privacyBadge": "100% پرائیویسی آپ کے براؤزر میں",
+            "noIdBadge": "معلومات دیکھنے کے لیے آدھار یا او ٹی پی درکار نہیں",
+            "accessBadge": "ان پڑھ اور بزرگ شہریوں کے لیے آسان",
+            "quickStartTitle": "اپنی معلومات سے شروع کریں",
+            "quickStartNote": "نہ اکاؤنٹ، نہ شعبے کا اندازہ۔ ایک جملہ لکھیں یا بولیں۔",
+            "entryRouteLabel": "آپ کیسے بتانا چاہتے ہیں؟",
+            "entrySpeak": "بولیں",
+            "entryType": "لکھیں",
+            "entryMap": "باڈی میپ",
+            "landingPlaceholder": "مثلاً: سینے میں درد، کل رات سے",
+            "exampleBreathing": "سینے میں درد + سانس میں تکلیف",
+            "continueFromCard": "تصدیق کے لیے آگے بڑھیں",
+            "whyLink": "راحت کیوں؟",
+            "orsLink": "او آر ایس اور راحت",
+            "faqLink": "عام سوالات",
+            "homeNav": "ہوم",
+            "triageNav": "او پی ڈی ٹرائیج",
+            "doctorNav": "ڈاکٹر پورٹل",
+            "labNav": "لیب ٹیسٹ اور اسکین",
+            "bloodNav": "بلڈ بینک",
+            "hospitalsLink": "سرکاری اسپتال",
+            "honestyNav": "شفافیت اور سچائی",
+            "startBooking": "او پی ڈی ٹرائیج شروع کریں اور سلاٹ دیکھیں →",
+            "serviceGridKicker": "ایک نظر میں خدمات",
+            "serviceGridTitle": "آج آپ کو کس مدد کی ضرورت ہے؟",
+            "opdService": "او پی ڈی کاؤنٹر ٹرائیج",
+            "opdServiceNote": "پہلا صحیح کاؤنٹر تلاش کریں",
+            "labService": "لیب اور اسکین بک کریں",
+            "labServiceNote": "تیاری اور فیس کی تفصیلات دیکھیں",
+            "bloodService": "بلڈ بینک انوینٹری",
+            "bloodServiceNote": "اسٹاک اور ڈونرز کی تفصیلات",
+            "teleService": "آن لائن ویڈیو ٹیلی او پی ڈی",
+            "teleServiceNote": "گھر بیٹھے مشورہ لیں",
+            "whyTitle": "کاؤنٹر پر عزت اور آسانی۔",
+            "whyNote": "راحت شہری کے اپنے الفاظ سے شروع ہوتی ہے، نہ کہ میڈیکل امتحانات سے۔",
+            "journeyOneTitle": "اپنی آواز میں بولیں یا میپ پر منتخب کریں",
+            "journeyOneNote": "بولیں، ٹائپ کریں یا باڈی میپ کا استعمال کریں۔",
+            "journeyTwoTitle": "تصدیق شدہ اسپتال اور ایماندارانہ انتظار",
+            "journeyTwoNote": "حقیقی سرکاری اسپتالوں کی لائیو قطار اور متوقع وقت دیکھیں۔",
+            "journeyThreeTitle": "شہری حقوق کے ساتھ نمونہ پرچی",
+            "journeyThreeNote": "مکمل تفصیلات اور شکایت درج کرانے کے حق کے ساتھ واضح پرچی۔",
+            "howTitle": "راحت کیسے کام کرتا ہے",
+            "howNote": "تکلیف سے لے کر صحیح او پی ڈی کاؤنٹر تک کا آسان سفر۔",
+            "howOneTitle": "بولیں، لکھیں یا اشارہ کریں",
+            "howOneNote": "کسی بھی زبان میں علامات بیان کریں یا باڈی میپ پر کلک کریں۔",
+            "howTwoTitle": "فوری ٹرائیج اور ایماندارانہ وقت",
+            "howTwoNote": "کوڈ سرکاری کاؤنٹر تجویز کرتا ہے اور قطار کا اصل وقت بتاتا ہے۔",
+            "howThreeTitle": "نمونہ پرچی اور حقوق",
+            "howThreeNote": "ضروری دستاویزات اور پی جی پورٹل کی معلومات کے ساتھ پرچی پرنٹ کریں۔",
+            "roadmapTitle": "راحت کے لیے مستقبل کا لائحہ عمل",
+            "roadmapNote": "اس عوامی سروس کو ملک گیر سطح پر جوڑنے کا منصوبہ۔",
+            "roadmapAbdmTitle": "اے بی ڈی ایم اور ای-ہاسپٹل انضمام",
+            "roadmapAbdmNote": "آیوشمان بھارت ڈیجیٹل مشن کے ساتھ ٹوکن کا براہ راست رابطہ۔",
+            "roadmapIvrTitle": "فیچر فونز کے لیے صوتی آئی وی آر (104)",
+            "roadmapIvrNote": "بغیر انٹرنیٹ کے 104 پر کال کر کے علامات بولیں اور ایس ایم ایس سے ٹوکن پائیں۔",
+            "roadmapQueueTitle": "لائیو کاؤنٹر کیمرہ اور قطار کا جائزہ",
+            "roadmapQueueNote": "گھر سے نکلنے سے پہلے انتظار گاہ کی لائیو صورتحال دیکھیں۔",
+            "roadmapLanguagesTitle": "تمام 22 آئینی زبانوں کی شمولیت",
+            "roadmapLanguagesNote": "بھارت کی تمام 22 قومی زبانوں میں مقامی لہجوں کے ساتھ مکمل سپورٹ۔",
+            "ctaKicker": "آپ کا اگلا قدم",
+            "ctaTitle": "صحیح او پی ڈی کاؤنٹر تلاش کرنے کے لیے تیار ہیں؟",
+            "ctaNote": "ایک جملہ بولیں، لکھیں یا باڈی میپ پر کلک کریں۔ تصدیق کے بعد ہی رہنمائی ملے گی۔",
+            "comparisonTitle": "راحت او آر ایس کو کیسے آسان بناتا ہے",
+            "comparisonNote": "او آر ایس ایک مفید نظام ہے، مگر راحت شہری کی الجھن کو پہلے ہی لمحے ختم کرتا ہے۔",
+            "comparisonQuestion": "پہلا بنیادی فرق",
+            "orsEra": "2015 · این آئی سی کا ڈیجیٹل کاؤنٹر",
+            "raahatEra": "2026 · شہری پہلے، میڈیکل الجھن بعد میں",
+            "comparisonDepartment": "شعبہ منتخب کرنا",
+            "orsDepartment": "طبی شعبے کا خود اندازہ لگانا",
+            "raahatDepartment": "جہاں درد ہے وہاں سے شروعات، ہم کاؤنٹر بتائیں گے",
+            "comparisonWait": "انتظار کا صحیح وقت",
+            "orsWait": "صرف سلاٹ کا وقت، بغیر کسی انتظار کے تخمینے کے",
+            "raahatWait": "ڈاکٹر کے راؤنڈ اور قطار کی رفتار کے مطابق ایماندارانہ تخمینہ",
+            "comparisonAuth": "شروع میں رکاوٹیں",
+            "orsAuth": "شروع میں ٹیڑھا میڑھا کیپچا اور او ٹی پی",
+            "raahatAuth": "صرف نمونہ پرچی کے وقت ایک کلک تصدیق",
+            "comparisonEmergency": "ہنگامی حفاظت",
+            "orsEmergency": "شدید ہنگامی حالت میں بھی عام سلاٹ بک ہو سکتا ہے",
+            "raahatEmergency": "ایک ریڈ فلیگ پر فوری طور پر 24/7 ایمرجنسی وارڈ روانگی",
+            "comparisonAccess": "علامات بیان کرنا",
+            "orsAccess": "انگریزی ٹیکسٹ فارم اور کمپیوٹر پر منحصر",
+            "raahatAccess": "100% موبائل فرینڈلی: باڈی میپ + بولنا + لکھنا",
+            "eyebrow": "صحیح او پی ڈی کاؤنٹر تک پہنچنے کا آسان طریقہ",
+            "title": "کیا تکلیف ہے؟",
+            "note": "اپنے الفاظ میں بتائیں۔ آپ بول سکتے ہیں، لکھ سکتے ہیں یا باڈی میپ پر بتا سکتے ہیں۔",
+            "bookingFor": "کس کے لیے بکنگ ہے:",
+            "myself": "میرے لیے",
+            "someoneElse": "کسی اور کے لیے (دیکھ بھال کرنے والا)",
+            "whoLabel": "یہ کس کے لیے ہے؟",
+            "parent": "والد / والدہ",
+            "child": "میرا بچہ",
+            "someoneElseShort": "کوئی اور",
+            "ageLabel": "عمر کا زمرہ",
+            "baby": "نوزائیدہ بچہ (0 تا 1 سال)",
+            "childAge": "بچہ (2 تا 12 سال)",
+            "adult": "جوان (18 تا 44 سال)",
+            "olderAdult": "بزرگ (60+ سال)",
+            "complaintLabel": "کیا پریشانی ہے؟",
+            "placeholder": "مثلاً: سینے میں درد، کل رات سے",
+            "inputHelp": "آپ کے الفاظ اسی براؤزر میں محفوظ رہتے ہیں۔",
+            "exampleChest": "سینے میں درد",
+            "exampleFever": "بخار",
+            "exampleWeakness": "ایک طرف کمزوری",
+            "continue": "آگے بڑھیں",
+            "bodyMapButton": "باڈی میپ پر دکھائیں",
+            "captured": "آپ کے الفاظ اگلے مرحلے کے لیے تیار ہیں۔ ابھی کچھ بک یا بھیجا نہیں گیا ہے۔",
+            "needHelp": "کسی مددگار سے بات کرنی ہے؟",
+            "backToQuestion": "← واپس",
+            "mapEyebrow": "پڑھنے کی ضرورت نہیں",
+            "mapTitle": "جہاں درد ہے وہاں انگلی رکھیں",
+            "mapNote": "اس حصے کو چھوئیں جہاں تکلیف محسوس ہو رہی ہے۔",
+            "mapWordsLabel": "آپ کے الفاظ:",
+            "browserProcessing": "یہ باڈی میپ مکمل طور پر آپ کے براؤزر میں چلتا ہے۔",
+            "kindTitle": "تکلیف کیسی ہے؟",
+            "kindPain": "درد",
+            "kindFever": "بخار یا تپش",
+            "kindBreathing": "سانس میں دشواری",
+            "kindBleeding": "خون بہنا",
+            "kindInjury": "چوٹ یا موچ",
+            "kindVomiting": "الٹی یا پیٹ کی خرابی",
+            "kindDizziness": "چکر آنا",
+            "kindLow": "کمزوری یا اداسی",
+            "durationLabel": "کب سے ہے؟",
+            "durationNow": "ابھی ابھی",
+            "durationToday": "آج سے",
+            "durationDays": "کچھ دنوں سے",
+            "durationLonger": "کافی عرصے سے",
+            "severityLabel": "کیا ابھی شدت بہت زیادہ ہے؟",
+            "severityNo": "نہیں",
+            "severityYes": "جی ہاں",
+            "reviewEyebrow": "مرحلہ 2 · تفصیلات کی تصدیق",
+            "reviewTitle": "ہم نے یہ سمجھا",
+            "reviewNote": "ان تفصیلات کو دیکھ لیں۔ تصدیق سے پہلے کچھ بھی فائنل نہیں ہوتا۔",
+            "confirm": "تصدیق کریں",
+            "changeSomething": "تبدیلی کریں",
+            "resultEyebrow": "مرحلہ 3 · کہاں جانا ہے",
+            "matchedCounter": "تجویز کردہ او پی ڈی کاؤنٹر:",
+            "routeReference": "قواعدی حوالہ نمبر:",
+            "chooseDepartment": "درست نہیں لگا؟ اپنی مرضی کا شعبہ خود منتخب کریں۔",
+            "emergencyEyebrow": "ہنگامی طبی انتباہ",
+            "emergencyTitle": "فوراً 24/7 ایمرجنسی وارڈ جائیں! عام او پی ڈی کے لیے انتظار نہ کریں۔",
+            "notDiagnosis": "یہ حتمی طبی تشخیص نہیں ہے۔",
+            "deptPaediatrics": "شعبہ امراض اطفال (بچوں کے امراض)",
+            "deptCardiology": "امراض قلب (کارڈیالوجی)",
+            "deptNeurology": "اعصابی امراض (نیورولوجی)",
+            "deptGastroenterology": "معدہ و جگر (گیسٹرو)",
+            "deptOrthopaedics": "ہڈیوں کے امراض (آرتھو)",
+            "deptDermatology": "جلدی امراض (سکن)",
+            "deptDental": "دانتوں کے امراض (ڈینٹل)",
+            "deptGeneralMedicine": "جنرل میڈیسن",
+            "deptChoose": "اپنی مرضی سے شعبہ منتخب کریں",
+            "findHospital": "اسپتال اور دستیاب اوقات دیکھیں",
+            "backToDepartment": "← شعبے کے انتخاب پر واپس جائیں",
+            "bookingTitle": "ایمانداری سے اسپتال اور انتظار کا وقت چنیں",
+            "bookingNote": "ایک واضح نتیجہ: علاقہ چنیں، اسپتال دیکھیں، اور نمونہ پرچی حاصل کریں۔",
+            "whereTitle": "آپ کس علاقے کے اسپتال جانا چاہتے ہیں؟",
+            "whereNote": "اپنا پسندیدہ علاقہ منتخب کریں۔ ہم آپ کی لائیو لوکیشن ٹریک نہیں کرتے۔",
+            "localityLabel": "منتخب کردہ علاقہ",
+            "slipTitle": "آپ کی نمونہ او پی ڈی پرچی",
+            "slipSubtitle": "سرکاری اسپتال او پی ڈی نمونہ پرچی",
+            "slipNote": "یہ پرچی کاؤنٹر پر دکھانے کے لیے ہے۔ یہ ایک پروٹوٹائپ ماک ہے، اصلی بکنگ نہیں۔",
+            "slipPatient": "مریض کا نام",
+            "slipDepartment": "شعبہ",
+            "slipHospital": "اسپتال",
+            "slipSlot": "سلاٹ کا وقت",
+            "slipSeenBy": "معائنے کا متوقع وقت",
+            "slipAppointmentId": "اپائنٹمنٹ آئی ڈی",
+            "patientSaid": "مریض کی بیان کردہ علامات:",
+            "rightsCard": "اگر اس پرچی کو کاؤنٹر پر قبول نہ کیا جائے تو پی جی پورٹل (pgportal.gov.in) پر شکایت درج کرائیں۔",
+            "printSlip": "پرچی پرنٹ کریں",
+            "downloadSlip": "پرچی ڈاؤن لوڈ کریں",
+            "voiceStart": "اپنی تکلیف بولیں",
+            "voiceStop": "سننا بند کریں",
+            "voiceLabel": "بولیں",
+            "voiceLabelStop": "روکیں",
+            "voiceUnsupported": "اس براؤزر میں صوتی ان پٹ دستیاب نہیں ہے۔ لکھیں یا باڈی میپ استعمال کریں۔"
+      },
+      "ta": {
+            "landingKicker": "அரசு மருத்துவமனைகளுக்கு ஒரு எளிய மற்றும் அமைதியான நுழைவு வாசல்",
+            "landingTitle": "அரசு மருத்துவமனை அப்பாயிண்ட்மெண்ட், எந்தக் குழப்பமும் இல்லாமல்.",
+            "landingSubtitle": "ஓஆர்எஸ் எந்தத் துறை வேண்டும் என்று கேட்கிறது. நோயாளிக்கு வலி எங்கே இருக்கிறது என்பது மட்டுமே தெரியும். உங்கள் சொந்த வார்த்தைகளில் பேசவும், தட்டச்சு செய்யவும் அல்லது 3டி உடல் வரைபடத்தில் சுட்டிக்காட்டவும். நேர்மையான காத்திருப்பு நேரத்துடன் சரியான ஓபிடி கவுண்டருக்கு வழிகாட்டுகிறோம்.",
+            "modelDisclosure": "உங்கள் சொற்கள் உங்கள் உலாவியிலேயே பாதுகாப்பாகப் பரிசீலிக்கப்படுகின்றன. எதுவும் சேவையகத்திற்கு அனுப்பப்படுவதில்லை.",
+            "startTriage": "ட்ரையேஜ் தொடங்கவும்",
+            "learnMore": "இது எவ்வாறு செயல்படுகிறது",
+            "privacyBadge": "100% தனிப்பட்ட சாதனப் பாதுகாப்பு",
+            "noIdBadge": "ஆதார் அல்லது ஓடிபி தேவையில்லை",
+            "accessBadge": "படிக்கத் தெரியாதவர்களுக்கும் எளிதானது",
+            "homeNav": "முகப்பு",
+            "triageNav": "ஓபிடி ட்ரையேஜ்",
+            "doctorNav": "மருத்துவர் தளம்",
+            "labNav": "ஆய்வக சோதனைகள்",
+            "bloodNav": "இரத்த வங்கி",
+            "hospitalsLink": "அரசு மருத்துவமனைகள்",
+            "faqLink": "கேள்வி-பதில்கள்",
+            "honestyNav": "நேர்மை",
+            "startBooking": "ஓபிடி ட்ரையேஜ் தொடங்கவும் →",
+            "serviceGridKicker": "சேவைகள் ஒரு பார்வையில்",
+            "serviceGridTitle": "இன்று உங்களுக்கு என்ன உதவி தேவை?",
+            "opdService": "ஓபிடி கவுண்டர் ட்ரையேஜ்",
+            "opdServiceNote": "சரியான முதல் கவுண்டரைக் கண்டறியவும்",
+            "labService": "ஆய்வக பரிசோதனைகள்",
+            "labServiceNote": "முன்னேற்பாடுகள் மற்றும் கட்டணம்",
+            "bloodService": "இரத்த வங்கி இருப்பு",
+            "bloodServiceNote": "இருப்பு விவரங்கள்",
+            "teleService": "ஆன்லைன் வீடியோ டெலி-ஓபிடி",
+            "teleServiceNote": "வீட்டிலிருந்தே ஆலோசிக்கவும்",
+            "whyTitle": "கவுண்டரில் அதிக மரியாதை மற்றும் அமைதி.",
+            "whyNote": "ராஹத் குடிமக்களின் சொந்த சொற்களிலிருந்து தொடங்குகிறது, மருத்துவ அகராதியிலிருந்து அல்ல.",
+            "howTitle": "ராஹத் எவ்வாறு செயல்படுகிறது",
+            "howNote": "வலிக்கும் இடத்திலிருந்து சரியான ஓபிடி கவுண்டருக்கு ஒரு எளிய பயணம்.",
+            "howOneTitle": "பேசுங்கள், தட்டச்சு செய்யுங்கள் அல்லது சுட்டிக்காட்டுங்கள்",
+            "howOneNote": "எந்த மொழியிலும் அறிகுறிகளை விவரிக்கலாம்.",
+            "howTwoTitle": "உடனடி வழிகாட்டல் & நேர்மையான காத்திருப்பு",
+            "howTwoNote": "சரியான அரசு மருத்துவமனை கவுண்டரைக் கண்டறிந்து நேரத்தைக் காட்டுகிறது.",
+            "howThreeTitle": "மாதிரி சீட்டு & குடிமக்கள் உரிமைகள்",
+            "howThreeNote": "மாதிரி சீட்டை அச்சிட்டு எடுத்துச் செல்லுங்கள்.",
+            "complaintLabel": "உங்களுக்கு என்ன பிரச்சனை?",
+            "placeholder": "எ.கா: நெஞ்சு வலி, நேற்று இரவு முதல்",
+            "inputHelp": "உங்கள் சொற்கள் இந்த உலாவியிலேயே இருக்கும்.",
+            "exampleChest": "நெஞ்சு வலி",
+            "exampleFever": "காய்ச்சல்",
+            "exampleWeakness": "ஒரு பக்க பலவீனம்",
+            "continue": "தொடரவும்",
+            "bodyMapButton": "உடல் வரைபடத்தில் சுட்டிக்காட்டவும்",
+            "voiceStart": "உங்கள் பிரச்சனையைப் பேசுங்கள்",
+            "voiceStop": "கேட்பதை நிறுத்துங்கள்",
+            "voiceLabel": "பேசுங்கள்",
+            "voiceLabelStop": "நிறுத்துங்கள்",
+            "reviewTitle": "நாங்கள் புரிந்துகொண்டவை",
+            "confirm": "உறுதிப்படுத்துங்கள்",
+            "changeSomething": "மாற்றவும்",
+            "matchedCounter": "பொருந்திய ஓபிடி கவுண்டர்:",
+            "emergencyTitle": "உடனடியாக 24/7 அவசர சிகிச்சைப் பிரிவுக்குச் செல்லவும்! அப்பாயிண்ட்மெண்ட்டிற்கு காத்திருக்க வேண்டாம்.",
+            "slipTitle": "உங்கள் மாதிரி ஓபிடி சீட்டு",
+            "printSlip": "சீட்டை அச்சிடுங்கள்",
+            "downloadSlip": "பதிவிறக்கவும்",
+            "deptCardiology": "இதயவியல் பிரிவு (Cardiology)",
+            "deptNeurology": "நரம்பியல் பிரிவு (Neurology)",
+            "deptGastroenterology": "இரைப்பையியல் பிரிவு (Gastro)",
+            "deptGeneralMedicine": "பொது மருத்துவம் (General Medicine)",
+            "deptPaediatrics": "குழந்தைகள் நலப் பிரிவு (Paediatrics)"
+      },
+      "bn": {
+            "landingKicker": "সরকারি হাসপাতালে পৌঁছানোর সহজ প্রথম পদক্ষেপ",
+            "landingTitle": "সরকারি হাসপাতালের অ্যাপয়েন্টমেন্ট, কোনো বিভ্রান্তি ছাড়াই।",
+            "landingSubtitle": "ওআরএস জানতে চায় আপনার কোন বিভাগ প্রয়োজন। একজন অসুস্থ মানুষ শুধু জানেন কোথায় কষ্ট। নিজের ভাষায় বলুন, লিখুন অথবা ৩ডি বডি ম্যাপে স্পর্শ করুন। আমরা সঠিক ওপিডি কাউন্টারে পৌঁছে দেব।",
+            "modelDisclosure": "আপনার কথা সুরক্ষিতভাবে আপনার ব্রাউজারেই প্রক্রিয়াকৃত হয়। সার্ভারে কিছুই পাঠানো হয় না।",
+            "startTriage": "ট্রায়াজ শুরু করুন",
+            "learnMore": "পদ্ধতি দেখুন",
+            "privacyBadge": "১০০% গোপনীয়তা আপনার ডিভাইসে",
+            "noIdBadge": "আধার বা ওটিপি ছাড়াই দেখুন",
+            "accessBadge": "নিরক্ষর নাগরিকদের জন্য সম্পূর্ণ সহজ",
+            "homeNav": "হোম",
+            "triageNav": "ওপিডি ট্রায়াজ",
+            "doctorNav": "ডাক্তার পোর্টাল",
+            "labNav": "ল্যাব টেস্ট ও স্ক্যান",
+            "bloodNav": "ব্লাড ব্যাংক",
+            "hospitalsLink": "সরকারি হাসপাতাল",
+            "faqLink": "প্রশ্নোত্তর",
+            "honestyNav": "স্বচ্ছতা ও সততা",
+            "startBooking": "ওপিডি ট্রায়াজ শুরু করুন ও স্লট দেখুন →",
+            "serviceGridKicker": "এক নজরে পরিষেবা",
+            "serviceGridTitle": "আজ আপনার কী সাহায্য প্রয়োজন?",
+            "opdService": "ওপিডি কাউন্টার ট্রায়াজ",
+            "opdServiceNote": "সঠিক প্রথম কাউন্টার খুঁজুন",
+            "labService": "ল্যাব ও স্ক্যান বুকিং",
+            "labServiceNote": "প্রস্তুতি ও ফির বিবরণ",
+            "bloodService": "ব্লাড ব্যাংক স্টক",
+            "bloodServiceNote": "রক্তের প্রাপ্যতা ও তথ্য",
+            "teleService": "অনলাইন ভিডিও টেলি-ওপিডি",
+            "teleServiceNote": "বাড়ি থেকেই পরামর্শ নিন",
+            "complaintLabel": "আপনার কী অসুবিধা হচ্ছে?",
+            "placeholder": "যেমন: বুকে ব্যথা, গতকাল রাত থেকে",
+            "inputHelp": "আপনার কথা ব্রাউজারেই সংরক্ষিত থাকবে।",
+            "exampleChest": "বুকে ব্যথা",
+            "exampleFever": "জ্বর",
+            "exampleWeakness": "এক পাশ দুর্বল",
+            "continue": "এগিয়ে যান",
+            "bodyMapButton": "বডি ম্যাপে দেখান",
+            "voiceStart": "আপনার অসুবিধার কথা বলুন",
+            "voiceStop": "শোনা বন্ধ করুন",
+            "voiceLabel": "বলুন",
+            "voiceLabelStop": "থামুন",
+            "reviewTitle": "আমরা যা বুঝেছি",
+            "confirm": "নিশ্চিত করুন",
+            "changeSomething": "পরিবর্তন করুন",
+            "matchedCounter": "সঠিক ওপিডি কাউন্টার:",
+            "emergencyTitle": "অবিলম্বে ২৪/৭ জরুরি বিভাগে যান! ওপিডি অ্যাপয়েন্টমেন্টের অপেক্ষা করবেন না।",
+            "slipTitle": "আপনার নমুনা ওপিডি স্লিপ",
+            "printSlip": "স্লিপ প্রিন্ট করুন",
+            "downloadSlip": "ডাউনলোড করুন",
+            "deptCardiology": "কার্ডিওলজি বিভাগ (Cardiology)",
+            "deptNeurology": "নিউরোলজি বিভাগ (Neurology)",
+            "deptGastroenterology": "গ্যাস্ট্রোএন্টারোলজি (Gastro)",
+            "deptGeneralMedicine": "জেনারেল মেডিসিন",
+            "deptPaediatrics": "শিশু রোগ বিভাগ (Paediatrics)"
+      },
+      "te": {
+            "landingKicker": "ప్రభుత్వ ఆసుపత్రులకు ప్రశాంతమైన ముఖద్వారం",
+            "landingTitle": "ఎలాంటి గందరగోళం లేకుండా ప్రభుత్వ ఆసుపత్రి అపాయింట్‌మెంట్.",
+            "landingSubtitle": "మీకు ఏ విభాగం కావాలో ఓఆర్‌ఎస్ అడుగుతుంది. కానీ రోగికి ఎక్కడ నొప్పి ఉందో మాత్రమే తెలుసు. మీ స్వంత మాటలలో చెప్పండి, రాయండి లేదా 3డి శరీర పటంపై గుర్తించండి.",
+            "modelDisclosure": "మీ సమాచారం మీ బ్రౌజర్‌లోనే భద్రంగా ఉంటుంది. సర్వర్‌కు ఏదీ పంపబడదు.",
+            "startTriage": "ట్రయేజ్ ప్రారంభించండి",
+            "learnMore": "ఇది ఎలా పనిచేస్తుందో చూడండి",
+            "privacyBadge": "100% గోప్యత మీ ఫోన్‌లోనే",
+            "noIdBadge": "చూడటానికి ఆధార్ లేదా ఓటీపీ అవసరం లేదు",
+            "accessBadge": "చదవడం రాని పౌరులకు కూడా సులభం",
+            "homeNav": "హోమ్",
+            "triageNav": "ఓపీడీ ట్రయేజ్",
+            "doctorNav": "డాక్టర్ పోర్టల్",
+            "labNav": "ల్యాబ్ పరీక్షలు",
+            "bloodNav": "బ్లడ్ బ్యాంక్",
+            "hospitalsLink": "ప్రభుత్వ ఆసుపత్రులు",
+            "faqLink": "ప్రశ్నలు-సమాధానాలు",
+            "honestyNav": "పారదర్శకత",
+            "startBooking": "ఓపీడీ ట్రయేజ్ ప్రారంభించండి →",
+            "complaintLabel": "మీకు ఎలాంటి ఇబ్బంది ఉంది?",
+            "placeholder": "ఉదా: ఛాతీ నొప్పి, నిన్న రాత్రి నుండి",
+            "inputHelp": "మీ మాటలు ఈ బ్రౌజర్‌లోనే ఉంటాయి.",
+            "exampleChest": "ఛాతీ నొప్పి",
+            "exampleFever": "జ్వరం",
+            "exampleWeakness": "ఒక వైపు బలహీనత",
+            "continue": "కొనసాగించండి",
+            "bodyMapButton": "శరీర పటంపై గుర్తించండి",
+            "voiceStart": "మీ సమస్యను చెప్పండి",
+            "voiceStop": "వినడం ఆపండి",
+            "voiceLabel": "చెప్పండి",
+            "voiceLabelStop": "ఆపండి",
+            "reviewTitle": "మేము అర్థం చేసుకున్న వివరాలు",
+            "confirm": "ధృవీకరించండి",
+            "changeSomething": "మార్చండి",
+            "matchedCounter": "తగిన ఓపీడీ కౌంటర్:",
+            "emergencyTitle": "వెంటనే 24/7 అత్యవసర విభాగానికి వెళ్ళండి! అపాయింట్‌మెంట్ కోసం వేచి ఉండకండి.",
+            "slipTitle": "మీ నమూనా ఓపీడీ స్లిప్",
+            "printSlip": "స్లిప్ ప్రింట్ చేయండి",
+            "downloadSlip": "డౌన్‌లోడ్ చేయండి",
+            "deptCardiology": "కార్డియాలజీ విభాగం (Cardiology)",
+            "deptNeurology": "న్యూరాలజీ విభాగం (Neurology)",
+            "deptGastroenterology": "గ్యాస్ట్రోఎంటరాలజీ (Gastro)",
+            "deptGeneralMedicine": "జనరల్ మెడిసిన్",
+            "deptPaediatrics": "పిల్లల వైద్య విభాగం (Paediatrics)"
+      },
+      "mr": {
+            "landingKicker": "सरकारी रुग्णालयांसाठी सुलभ आणि शांत प्रवेशद्वार",
+            "landingTitle": "सरकारी रुग्णालयाची अपॉइंटमेंट, कोणताही गोंधळ न होता.",
+            "landingSubtitle": "ORS विचारते की कोणता विभाग हवा आहे. आजारी व्यक्तीला फक्त कुठे दुखत आहे हे माहित असते. आपल्या स्वतःच्या शब्दांत बोला, लिहा किंवा ३डी शरीर नकाशावर दाखवा. आम्ही योग्य ओपीडी काउंटर दाखवू.",
+            "modelDisclosure": "तुमचे शब्द तुमच्या ब्राउझरमध्ये सुरक्षितपणे प्रक्रिया केले जातात. सर्व्हरवर काहीही पाठवले जात नाही.",
+            "startTriage": "ट्रायेज सुरू करा",
+            "learnMore": "हे कसे कार्य करते",
+            "privacyBadge": "१००% गोपनीयता आपल्या डिव्हाइसवर",
+            "noIdBadge": "पाहण्यासाठी आधार किंवा ओटीपीची गरज नाही",
+            "accessBadge": "निरक्षर नागरिकांसाठीही सुलभ",
+            "homeNav": "मुख्यपृष्ठ",
+            "triageNav": "ओपीडी ट्रायेज",
+            "doctorNav": "डॉक्टर पोर्टल",
+            "labNav": "लॅब चाचण्या",
+            "bloodNav": "ब्लड बँक",
+            "hospitalsLink": "सरकारी रुग्णालये",
+            "faqLink": "प्रश्न-उत्तरे",
+            "honestyNav": "पारदर्शकता",
+            "startBooking": "ओपीडी ट्रायेज सुरू करा →",
+            "complaintLabel": "आपल्याला काय त्रास होत आहे?",
+            "placeholder": "उदा: छातीत दुखणे, काल रात्रीपासून",
+            "inputHelp": "तुमचे शब्द या ब्राउझरमध्येच राहतील.",
+            "exampleChest": "छातीत दुखणे",
+            "exampleFever": "ताप",
+            "exampleWeakness": "एका बाजूला अशक्तपणा",
+            "continue": "पुढे जा",
+            "bodyMapButton": "शरीराच्या नकाशावर दाखवा",
+            "voiceStart": "आपला त्रास बोला",
+            "voiceStop": "ऐकणे थांबवा",
+            "voiceLabel": "बोला",
+            "voiceLabelStop": "थांबवा",
+            "reviewTitle": "आम्हाला समजलेला तपशील",
+            "confirm": "पुष्टी करा",
+            "changeSomething": "बदल करा",
+            "matchedCounter": "योग्य ओपीडी काउंटर:",
+            "emergencyTitle": "त्वरित २४/७ अपघात व आणीबाणी विभागात जा! ओपीडी अपॉइंटमेंटची वाट पाहू नका.",
+            "slipTitle": "आपली नमुना ओपीडी स्लिप",
+            "printSlip": "स्लिप प्रिंट करा",
+            "downloadSlip": "डाउनलोड करा",
+            "deptCardiology": "हृदयरोग विभाग (Cardiology)",
+            "deptNeurology": "मज्जारोग विभाग (Neurology)",
+            "deptGastroenterology": "पोटविकार विभाग (Gastro)",
+            "deptGeneralMedicine": "जनरल मेडिसिन",
+            "deptPaediatrics": "बालरोग विभाग (Paediatrics)"
+      },
+      "gu": {
+            "landingKicker": "સરકારી હોસ્પિટલો માટે સરળ અને શાંત પ્રવેશદ્વાર",
+            "landingTitle": "સરકારી હોસ્પિટલની એપોઇન્ટમેન્ટ, કોઈ મૂંઝવણ વિના.",
+            "landingSubtitle": "ORS પૂછે છે કે તમારે કયો વિભાગ જોઈએ છે. દર્દીને ફક્ત એટલી ખબર હોય છે કે ક્યાં દુખાવો છે. તમારા પોતાના શબ્દોમાં બોલો, લખો અથવા 3D શરીરના નકશા પર દર્શાવો.",
+            "startTriage": "ટ્રાયેજ શરૂ કરો",
+            "learnMore": "આ કેવી રીતે કાર્ય કરે છે",
+            "privacyBadge": "100% ક્લાયન્ટ-સાઇડ ગોપનીયતા",
+            "noIdBadge": "જોવા માટે આધાર કે ઓટીપી જરૂરી નથી",
+            "accessBadge": "ઓછું ભણેલા લોકો માટે પણ સરળ",
+            "homeNav": "હોમ",
+            "triageNav": "ઓપીડી ટ્રાયેજ",
+            "doctorNav": "ડોક્ટર પોર્ટલ",
+            "labNav": "લેબ ટેસ્ટ",
+            "bloodNav": "બ્લડ બેંક",
+            "hospitalsLink": "સરકારી હોસ્પિટલો",
+            "faqLink": "સવાલ-જવાબ",
+            "honestyNav": "પારદર્શિતા",
+            "startBooking": "ઓપીડી ટ્રાયેજ શરૂ કરો →",
+            "complaintLabel": "તમને શું તકલીફ છે?",
+            "placeholder": "દા.ત.: છાતીમાં દુખાવો, ગઈ કાલ રાતથી",
+            "exampleChest": "છાતીમાં દુખાવો",
+            "exampleFever": "તાવ",
+            "continue": "આગળ વધો",
+            "bodyMapButton": "શરીરના નકશા પર દર્શાવો",
+            "confirm": "પુષ્ટિ કરો",
+            "matchedCounter": "સાચું ઓપીડી કાઉન્ટર:",
+            "emergencyTitle": "તરત જ 24/7 ઇમરજન્સી વિભાગમાં જાઓ! એપોઇન્ટમેન્ટની રાહ ન જુઓ.",
+            "deptCardiology": "કાર્ડિયોલોજી (હૃદય રોગ)"
+      },
+      "kn": {
+            "landingKicker": "ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆಗಳಿಗೆ ಸುಲಭ ಪ್ರವೇಶದ್ವಾರ",
+            "landingTitle": "ಯಾವುದೇ ಗೊಂದಲವಿಲ್ಲದೆ ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆಯ ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್.",
+            "landingSubtitle": "ಯಾವ ವಿಭಾಗ ಬೇಕೆಂದು ಒಆರ್‌ಎಸ್ ಕೇಳುತ್ತದೆ. ಆದರೆ ರೋಗಿಗೆ ಎಲ್ಲಿ ನೋವು ಇದೆ ಎಂದು ಮಾತ್ರ ತಿಳಿದಿರುತ್ತದೆ. ನಿಮ್ಮ ಸ್ವಂತ ಭಾಷೆಯಲ್ಲಿ ಮಾತನಾಡಿ, ಟೈಪ್ ಮಾಡಿ ಅಥವಾ 3D ದೇಹದ ನಕ್ಷೆಯಲ್ಲಿ ತೋರಿಸಿ.",
+            "startTriage": "ಟ್ರಯೇಜ್ ಪ್ರಾರಂಭಿಸಿ",
+            "learnMore": "ಇದು ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ",
+            "privacyBadge": "100% ಗೌಪ್ಯತೆ ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನಲ್ಲಿ",
+            "noIdBadge": "ನೋಡಲು ಆಧಾರ್ ಅಥವಾ ಒಟಿಪಿ ಅಗತ್ಯವಿಲ್ಲ",
+            "accessBadge": "ಓದಲು ಬಾರದವರಿಗೂ ಸುಲಭ",
+            "homeNav": "ಮುಖಪುಟ",
+            "triageNav": "ಒಪಿಡಿ ಟ್ರಯೇಜ್",
+            "doctorNav": "ವೈದ್ಯರ ಪೋರ್ಟಲ್",
+            "labNav": "ಲ್ಯಾಬ್ ಪರೀಕ್ಷೆಗಳು",
+            "bloodNav": "ರಕ್ತ ನಿಧಿ",
+            "hospitalsLink": "ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆಗಳು",
+            "faqLink": "ಪ್ರಶ್ನೋತ್ತರ",
+            "honestyNav": "ಪಾರದರ್ಶಕತೆ",
+            "startBooking": "ಒಪಿಡಿ ಟ್ರಯೇಜ್ ಪ್ರಾರಂಭಿಸಿ →",
+            "complaintLabel": "ನಿಮಗೆ ಏನು ತೊಂದರೆಯಾಗಿದೆ?",
+            "placeholder": "ಉದಾ: ಎದೆ ನೋವು, ನಿನ್ನೆ ರಾತ್ರಿಯಿಂದ",
+            "exampleChest": "ಎದೆ ನೋವು",
+            "exampleFever": "ಜ್ವರ",
+            "continue": "ಮುಂದುವರಿಯಿರಿ",
+            "bodyMapButton": "ದೇಹದ ನಕ್ಷೆಯಲ್ಲಿ ತೋರಿಸಿ",
+            "confirm": "ದೃಢೀಕರಿಸಿ",
+            "matchedCounter": "ಸರಿಯಾದ ಒಪಿಡಿ ಕೌಂಟರ್:",
+            "emergencyTitle": "ತಕ್ಷಣವೇ 24/7 ತುರ್ತು ಚಿಕಿತ್ಸಾ ವಿಭಾಗಕ್ಕೆ ಹೋಗಿ! ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್‌ಗಾಗಿ ಕಾಯಬೇಡಿ.",
+            "deptCardiology": "ಕಾರ್ಡಿಯಾಲಜಿ (ಹೃದ್ರೋಗ)"
+      },
+      "ml": {
+            "landingKicker": "സർക്കാർ ആശുപത്രികൾക്കുള്ള ശാന്തമായ വഴികാട്ടി",
+            "landingTitle": "ആശയക്കുഴപ്പമില്ലാതെ സർക്കാർ ആശുപത്രി അപ്പോയിന്റ്മെന്റ്.",
+            "landingSubtitle": "ഏത് വിഭാഗമാണ് ആവശ്യമെന്ന് ഒആർഎസ് ചോദിക്കുന്നു. രോഗിക്ക് എവിടെയാണ് വേദനയെന്ന് മാത്രമേ അറിയൂ. നിങ്ങളുടെ സ്വന്തം വാക്കുകളിൽ സംസാരിക്കുക, ടൈപ്പ് ചെയ്യുക അല്ലെങ്കിൽ 3D ബോഡി മാപ്പിൽ കാണിക്കുക.",
+            "startTriage": "ട്രയേജ് ആരംഭിക്കുക",
+            "learnMore": "ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു",
+            "privacyBadge": "100% സ്വകാര്യത നിങ്ങളുടെ ഫോണിൽ",
+            "noIdBadge": "പരിശോധിക്കാൻ ആധാർ ആവശ്യമില്ല",
+            "accessBadge": "വായന അറിയാത്തവർക്കും എളുപ്പത്തിൽ ഉപയോഗിക്കാം",
+            "homeNav": "ഹോം",
+            "triageNav": "ഒപിഡി ട്രയേജ്",
+            "doctorNav": "ഡോക്ടർ പോർട്ടൽ",
+            "labNav": "ലാബ് പരിശോധനകൾ",
+            "bloodNav": "ബ്ലഡ് ബാങ്ക്",
+            "hospitalsLink": "സർക്കാർ ആശുപത്രികൾ",
+            "faqLink": "ചോദ്യോത്തരങ്ങൾ",
+            "honestyNav": "സുതാര്യത",
+            "startBooking": "ഒപിഡി ട്രയേജ് ആരംഭിക്കുക →",
+            "complaintLabel": "നിങ്ങൾക്ക് എന്താണ് ബുദ്ധിമുട്ട്?",
+            "placeholder": "ഉദാ: നെഞ്ചുവേദന, ഇന്നലെ രാത്രി മുതൽ",
+            "exampleChest": "നെഞ്ചുവേദന",
+            "exampleFever": "പനി",
+            "continue": "തുടരുക",
+            "bodyMapButton": "ബോഡി മാപ്പിൽ കാണിക്കുക",
+            "confirm": "സ്ഥിരീകരിക്കുക",
+            "matchedCounter": "യോജിച്ച ഒപിഡി കൗണ്ടർ:",
+            "emergencyTitle": "ഉടൻ തന്നെ 24/7 അത്യാഹിത വിഭാഗത്തിലേക്ക് പോകുക! കാത്തിരിക്കരുത്.",
+            "deptCardiology": "കാർഡിയോളജി (ഹൃദ്രോഗ വിഭാഗം)"
+      },
+      "pa": {
+            "landingKicker": "ਸਰਕਾਰੀ ਹਸਪਤਾਲਾਂ ਲਈ ਆਸਾਨ ਪ੍ਰਵੇਸ਼ ਦੁਆਰ",
+            "landingTitle": "ਸਰਕਾਰੀ ਹਸਪਤਾਲ ਦੀ ਅਪਾਇੰਟਮੈਂਟ, ਬਿਨਾਂ ਕਿਸੇ ਉਲਝਣ ਦੇ।",
+            "landingSubtitle": "ORS ਪੁੱਛਦਾ ਹੈ ਕਿ ਕਿਹੜਾ ਵਿਭਾਗ ਚਾਹੀਦਾ ਹੈ। ਮਰੀਜ਼ ਨੂੰ ਸਿਰਫ਼ ਇਹ ਪਤਾ ਹੁੰਦਾ ਹੈ ਕਿ ਦਰਦ ਕਿੱਥੇ ਹੈ। ਆਪਣੇ ਸ਼ਬਦਾਂ ਵਿੱਚ ਬੋਲੋ, ਲਿਖੋ ਜਾਂ 3D ਸਰੀਰ ਦੇ ਨਕਸ਼ੇ 'ਤੇ ਦੱਸੋ।",
+            "startTriage": "ਟ੍ਰਾਈਏਜ ਸ਼ੁਰੂ ਕਰੋ",
+            "learnMore": "ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ",
+            "privacyBadge": "100% ਗੋਪਨੀਯਤਾ ਤੁਹਾਡੇ ਫ਼ੋਨ ਵਿੱਚ",
+            "noIdBadge": "ਦੇਖਣ ਲਈ ਆਧਾਰ ਦੀ ਲੋੜ ਨਹੀਂ",
+            "accessBadge": "ਘੱਟ ਪੜ੍ਹੇ-ਲਿਖੇ ਲੋਕਾਂ ਲਈ ਵੀ ਆਸਾਨ",
+            "homeNav": "ਮੁੱਖ ਸਫ਼ਾ",
+            "triageNav": "ਓਪੀਡੀ ਟ੍ਰਾਈਏਜ",
+            "doctorNav": "ਡਾਕਟਰ ਪੋਰਟਲ",
+            "labNav": "ਲੈਬ ਟੈਸਟ",
+            "bloodNav": "ਬਲੱਡ ਬੈਂਕ",
+            "hospitalsLink": "ਸਰਕਾਰੀ ਹਸਪਤਾਲ",
+            "faqLink": "ਸਵਾਲ-ਜਵਾਬ",
+            "honestyNav": "ਇਮਾਨਦਾਰੀ",
+            "startBooking": "ਓਪੀਡੀ ਟ੍ਰਾਈਏਜ ਸ਼ੁਰੂ ਕਰੋ →",
+            "complaintLabel": "ਤੁਹਾਨੂੰ ਕੀ ਤਕਲੀਫ਼ ਹੈ?",
+            "placeholder": "ਜਿਵੇਂ: ਛਾਤੀ ਵਿੱਚ ਦਰਦ, ਕੱਲ੍ਹ ਰਾਤ ਤੋਂ",
+            "exampleChest": "ਛਾਤੀ ਵਿੱਚ ਦਰਦ",
+            "exampleFever": "ਬੁਖਾਰ",
+            "continue": "ਅੱਗੇ ਵਧੋ",
+            "bodyMapButton": "ਸਰੀਰ ਦੇ ਨਕਸ਼ੇ 'ਤੇ ਦੱਸੋ",
+            "confirm": "ਪੁਸ਼ਟੀ ਕਰੋ",
+            "matchedCounter": "ਸਹੀ ਓਪੀਡੀ ਕਾਊਂਟਰ:",
+            "emergencyTitle": "ਤੁਰੰਤ 24/7 ਐਮਰਜੈਂਸੀ ਵਿਭਾਗ ਵਿੱਚ ਜਾਓ! ਅਪਾਇੰਟਮੈਂਟ ਦੀ ਉਡੀਕ ਨਾ ਕਰੋ।",
+            "deptCardiology": "ਕਾਰਡੀਓਲੋਜੀ (ਦਿਲ ਦੇ ਰੋਗ)"
+      },
+      "or": {
+            "landingKicker": "ସରକାରୀ ଡାକ୍ତରଖାନା ପାଇଁ ଏକ ସହଜ ପ୍ରବେଶ ପଥ",
+            "landingTitle": "କୌଣସି ଦ୍ୱନ୍ଦ୍ୱ ବିନା ସରକାରୀ ଡାକ୍ତରଖାନା ଆପଏଣ୍ଟମେଣ୍ଟ।",
+            "landingSubtitle": "ORS ପଚାରେ ଆପଣଙ୍କୁ କେଉଁ ବିଭାଗ ଦରକାର। ରୋଗୀ କେବଳ ଜାଣନ୍ତି କେଉଁଠି କଷ୍ଟ। ନିଜ ଭାଷାରେ କୁହନ୍ତୁ, ଲେଖନ୍ତୁ ବା 3D ବଡି ମ୍ୟାପରେ ଚିହ୍ନଟ କରନ୍ତୁ।",
+            "startTriage": "ଟ୍ରାଇଜ୍ ଆରମ୍ଭ କରନ୍ତୁ",
+            "learnMore": "ଏହା କିପରି କାମ କରେ",
+            "privacyBadge": "୧୦୦% ଗୋପନୀୟତା ଆପଣଙ୍କ ଫୋନରେ",
+            "noIdBadge": "ଦେଖିବା ପାଇଁ ଆଧାର ଦରକାର ନାହିଁ",
+            "accessBadge": "ନିରକ୍ଷର ନାଗରିକଙ୍କ ପାଇଁ ସହଜ",
+            "homeNav": "ମୂଳପୃଷ୍ଠା",
+            "triageNav": "ଓପିଡି ଟ୍ରାଇଜ୍",
+            "doctorNav": "ଡାକ୍ତର ପୋର୍ଟାଲ",
+            "labNav": "ଲ୍ୟାବ୍ ପରୀକ୍ଷା",
+            "bloodNav": "ରକ୍ତ ଭଣ୍ଡାର",
+            "hospitalsLink": "ସରକାରୀ ଡାକ୍ତରଖାନା",
+            "faqLink": "ପ୍ରଶ୍ନୋତ୍ତର",
+            "honestyNav": "ସ୍ୱଚ୍ଛତା",
+            "startBooking": "ଓପିଡି ଟ୍ରାଇଜ୍ ଆରମ୍ଭ କରନ୍ତୁ →",
+            "complaintLabel": "ଆପଣଙ୍କର କ'ଣ ଅସୁବିଧା ଅଛି?",
+            "placeholder": "ଯଥା: ଛାତିରେ ଯନ୍ତ୍ରଣା, ଗତକାଲି ରାତିରୁ",
+            "exampleChest": "ଛାତିରେ ଯନ୍ତ୍ରଣା",
+            "exampleFever": "ଜ୍ୱର",
+            "continue": "ଆଗକୁ ବଢ଼ନ୍ତୁ",
+            "bodyMapButton": "ଶରୀର ମ୍ୟାପରେ ଦେଖାନ୍ତୁ",
+            "confirm": "ନିଶ୍ଚିତ କରନ୍ତୁ",
+            "matchedCounter": "ସଠିକ୍ ଓପିଡି କାଉଣ୍ଟର:",
+            "emergencyTitle": "ତୁରନ୍ତ ୨୪/୭ ଜରୁରୀକାଳୀନ ବିଭାଗକୁ ଯାଆନ୍ତୁ! ଅପେକ୍ଷା କରନ୍ତୁ ନାହିଁ।",
+            "deptCardiology": "ହୃଦରୋଗ ବିଭାଗ (Cardiology)"
+      },
+      "as": {
+            "landingKicker": "চৰকাৰী চিকিৎসালয়ৰ বাবে এক সহজ প্ৰৱেশ দ্বাৰ",
+            "landingTitle": "কোনো বিভ্ৰান্তি নোহোৱাকৈ চৰকাৰী চিকিৎসালয়ৰ এপইণ্টমেণ্ট।",
+            "landingSubtitle": "ওআৰএছ-এ সুধিছে আপোনাক কোনটো বিভাগ লাগে। ৰোগীয়ে কেৱল জানে ক'ত বিষ। নিজৰ ভাষাত কওক, লিখক বা ৩ডি বডি মেপত স্পৰ্শ কৰক।",
+            "startTriage": "ট্ৰায়াজ আৰম্ভ কৰক",
+            "learnMore": "ই কেনেকৈ কাম কৰে",
+            "privacyBadge": "১০০% গোপনীয়তা আপোনাৰ ব্ৰাউজাৰত",
+            "noIdBadge": "চাবলৈ আধাৰৰ প্ৰয়োজন নাই",
+            "accessBadge": "নিৰক্ষৰ নাগৰিকৰ বাবেও সহজগম্য",
+            "homeNav": "গৃহপৃষ্ঠা",
+            "triageNav": "অ'পিডি ট্ৰায়াজ",
+            "doctorNav": "চিকিৎসক পৰ্টেল",
+            "labNav": "লেব পৰীক্ষা",
+            "bloodNav": "ৰক্ত বেংক",
+            "hospitalsLink": "চৰকাৰী চিকিৎসালয়",
+            "faqLink": "সঘনাই সোধা প্ৰশ্ন",
+            "honestyNav": "স্বচ্ছতা",
+            "startBooking": "অ'পিডি ট্ৰায়াজ আৰম্ভ কৰক →",
+            "complaintLabel": "আপোনাৰ কি অসুবিধা হৈছে?",
+            "placeholder": "যেনে: বুকুৰ বিষ, কালি ৰাতিৰ পৰা",
+            "exampleChest": "বুকুৰ বিষ",
+            "exampleFever": "জ্বৰ",
+            "continue": "আগবাঢ়ক",
+            "bodyMapButton": "বডি মেপত দেখুৱাওক",
+            "confirm": "নিশ্চিত কৰক",
+            "matchedCounter": "সঠিক অ'পিডি কাউণ্টাৰ:",
+            "emergencyTitle": "ততালিকে ২৪/৭ জৰুৰীকালীন বিভাগলৈ যাওক! এপইণ্টমেণ্টৰ অপেক্ষা নকৰিব।",
+            "deptCardiology": "হৃদৰোগ বিভাগ (Cardiology)"
+      }
+};
+      for (const [code, dict] of Object.entries(VERNACULAR_PACK)) {
+        copy[code] = Object.assign({}, copy.en, dict);
+      }
+
       const state = { language: "en", selectedDialect: "en", selectedDialectData: null, screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, fullName: "", phone: "", exactAge: "", gender: null, conditions: [], listening: false, region: null, noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, consultationMode: "in-person", appointmentDate: null, appointmentShift: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
-      const text = (key) => copy[state.language][key];
+      const text = (key) => {
+        const lang = state.language || "en";
+        if (copy[lang] && copy[lang][key]) return copy[lang][key];
+        if (lang === "ur" && copy.hi && copy.hi[key]) return copy.hi[key];
+        if (copy.en && copy.en[key]) return copy.en[key];
+        return "";
+      };
       const themeToggle = document.querySelector("#theme-toggle");
       const triageScreen = document.querySelector("#screen-triage");
       const status = document.querySelector("#status");
@@ -2443,13 +3014,40 @@
       }
 
       function renderLanguage() {
-        document.documentElement.lang = state.language === "hi" ? "hi" : "en";
+        const lang = state.language || "en";
+        document.documentElement.lang = lang;
+        if (lang === "ur" || lang === "ks" || lang === "sd") {
+          document.documentElement.dir = "rtl";
+        } else {
+          document.documentElement.dir = "ltr";
+        }
         document.querySelectorAll("[data-copy]").forEach((element) => {
           const key = element.dataset.copy;
-          if (copy[state.language][key]) element.textContent = text(key);
+          const translated = text(key);
+          if (translated) element.textContent = translated;
         });
-        document.querySelectorAll("[data-copy-placeholder]").forEach((element) => { element.placeholder = text(element.dataset.copyPlaceholder); });
-        document.querySelectorAll("[data-language]").forEach((button) => { button.setAttribute("aria-pressed", String(button.dataset.language === state.language)); });
+        document.querySelectorAll("[data-copy-placeholder]").forEach((element) => {
+          const key = element.dataset.copyPlaceholder;
+          const translated = text(key);
+          if (translated) element.placeholder = translated;
+        });
+        document.querySelectorAll("[data-language]").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.language === state.language));
+        });
+
+        const openLangBtn = document.querySelector("#btn-open-languages");
+        const langBadge = document.querySelector("#current-lang-badge");
+        if (openLangBtn && langBadge) {
+          const isSpecial = state.language !== "en" && state.language !== "hi";
+          openLangBtn.setAttribute("aria-pressed", String(isSpecial));
+          if (isSpecial && state.selectedDialectData) {
+            langBadge.textContent = `${state.selectedDialectData.nativeName} (${state.selectedDialectData.name}) ▾`;
+          } else if (state.language === "hi") {
+            langBadge.textContent = "22 भाषाएँ ▾";
+          } else {
+            langBadge.textContent = "22 Languages ▾";
+          }
+        }
         voiceButton.setAttribute("aria-label", state.listening ? text("voiceStop") : text("voiceStart"));
         document.querySelector("#voice-label").textContent = state.listening ? text("voiceLabelStop") : text("voiceLabel");
         renderRegionLabels();
@@ -2495,7 +3093,13 @@
       }
 
       document.querySelectorAll("[data-language]").forEach((button) => {
-        button.addEventListener("click", () => { state.language = button.dataset.language; status.dataset.persistent = ""; renderLanguage(); });
+        button.addEventListener("click", () => {
+          state.language = button.dataset.language;
+          state.selectedDialect = state.language;
+          state.selectedDialectData = SCHEDULED_LANGUAGES_22.find((l) => l.code === state.language) || null;
+          status.dataset.persistent = "";
+          renderLanguage();
+        });
       });
       themeToggle?.addEventListener("click", () => {
         const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
@@ -4038,29 +4642,29 @@
       
       // --- 22 Scheduled Indian Languages Registry & Audio Readback ---
       const SCHEDULED_LANGUAGES_22 = [
-        { code: "en", bcp47: "en-IN", name: "English", nativeName: "English", script: "Latin", region: "Pan-India", states: "All States & UTs" },
-        { code: "hi", bcp47: "hi-IN", name: "Hindi", nativeName: "हिन्दी", script: "Devanagari", region: "North / Central", states: "Delhi, UP, MP, Bihar, Rajasthan, Haryana" },
-        { code: "bn", bcp47: "bn-IN", name: "Bengali", nativeName: "বাংলা", script: "Bengali", region: "East", states: "West Bengal, Tripura, Assam" },
-        { code: "te", bcp47: "te-IN", name: "Telugu", nativeName: "తెలుగు", script: "Telugu", region: "South", states: "Andhra Pradesh, Telangana" },
-        { code: "mr", bcp47: "mr-IN", name: "Marathi", nativeName: "मराठी", script: "Devanagari", region: "West", states: "Maharashtra, Goa" },
-        { code: "ta", bcp47: "ta-IN", name: "Tamil", nativeName: "தமிழ்", script: "Tamil", region: "South", states: "Tamil Nadu, Puducherry" },
-        { code: "ur", bcp47: "ur-IN", name: "Urdu", nativeName: "اُردُو", script: "Perso-Arabic", region: "North / Central", states: "Delhi, UP, Telangana, J&K, Bihar" },
-        { code: "gu", bcp47: "gu-IN", name: "Gujarati", nativeName: "ગુજરાતી", script: "Gujarati", region: "West", states: "Gujarat, Dadra & Nagar Haveli" },
-        { code: "kn", bcp47: "kn-IN", name: "Kannada", nativeName: "ಕನ್ನಡ", script: "Kannada", region: "South", states: "Karnataka" },
-        { code: "ml", bcp47: "ml-IN", name: "Malayalam", nativeName: "മലയാളം", script: "Malayalam", region: "South", states: "Kerala, Lakshadweep" },
-        { code: "pa", bcp47: "pa-IN", name: "Punjabi", nativeName: "ਪੰਜਾਬੀ", script: "Gurmukhi", region: "North / Central", states: "Punjab, Chandigarh, Delhi, Haryana" },
-        { code: "or", bcp47: "or-IN", name: "Odia", nativeName: "ଓଡ଼ିଆ", script: "Odia", region: "East", states: "Odisha" },
-        { code: "as", bcp47: "as-IN", name: "Assamese", nativeName: "অসমীয়া", script: "Bengali-Assamese", region: "North-East", states: "Assam" },
-        { code: "mai", bcp47: "mai-IN", name: "Maithili", nativeName: "मैथिली", script: "Devanagari", region: "East", states: "Bihar, Jharkhand" },
-        { code: "sa", bcp47: "sa-IN", name: "Sanskrit", nativeName: "संस्कृतम्", script: "Devanagari", region: "North / Central", states: "Uttarakhand, Pan-India" },
-        { code: "ks", bcp47: "ks-IN", name: "Kashmiri", nativeName: "كٲشُر / कॉशुर", script: "Perso-Arabic", region: "North / Central", states: "Jammu & Kashmir" },
-        { code: "ne", bcp47: "ne-IN", name: "Nepali", nativeName: "नेपाली", script: "Devanagari", region: "North-East", states: "Sikkim, West Bengal" },
-        { code: "sd", bcp47: "sd-IN", name: "Sindhi", nativeName: "سنڌي / सिंधी", script: "Perso-Arabic", region: "West", states: "Gujarat, Maharashtra, Rajasthan" },
-        { code: "kok", bcp47: "kok-IN", name: "Konkani", nativeName: "कोंकणी", script: "Devanagari", region: "West", states: "Goa, Maharashtra, Karnataka" },
-        { code: "doi", bcp47: "doi-IN", name: "Dogri", nativeName: "डोगरी", script: "Devanagari", region: "North / Central", states: "Jammu & Kashmir, Himachal Pradesh" },
-        { code: "mni", bcp47: "mni-IN", name: "Manipuri (Meitei)", nativeName: "ꯃৈতৈলোନ୍ / মণিপুরী", script: "Meetei Mayek", region: "North-East", states: "Manipur" },
-        { code: "brx", bcp47: "brx-IN", name: "Bodo", nativeName: "बड़ो", script: "Devanagari", region: "North-East", states: "Assam, Meghalaya" },
-        { code: "sat", bcp47: "sat-IN", name: "Santali", nativeName: "ᱥᱟᱱᱛᱟᱲᱤ / संताली", script: "Ol Chiki", region: "East", states: "Jharkhand, West Bengal, Odisha" },
+        { code: "en", bcp47: "en-IN", name: "English", nativeName: "English" },
+        { code: "hi", bcp47: "hi-IN", name: "Hindi", nativeName: "हिन्दी" },
+        { code: "bn", bcp47: "bn-IN", name: "Bengali", nativeName: "বাংলা" },
+        { code: "te", bcp47: "te-IN", name: "Telugu", nativeName: "తెలుగు" },
+        { code: "mr", bcp47: "mr-IN", name: "Marathi", nativeName: "मराठी" },
+        { code: "ta", bcp47: "ta-IN", name: "Tamil", nativeName: "தமிழ்" },
+        { code: "ur", bcp47: "ur-IN", name: "Urdu", nativeName: "اُردُو" },
+        { code: "gu", bcp47: "gu-IN", name: "Gujarati", nativeName: "ગુજરાતી" },
+        { code: "kn", bcp47: "kn-IN", name: "Kannada", nativeName: "ಕನ್ನಡ" },
+        { code: "ml", bcp47: "ml-IN", name: "Malayalam", nativeName: "മലയാളം" },
+        { code: "pa", bcp47: "pa-IN", name: "Punjabi", nativeName: "ਪੰਜਾਬੀ" },
+        { code: "or", bcp47: "or-IN", name: "Odia", nativeName: "ଓଡ଼ିଆ" },
+        { code: "as", bcp47: "as-IN", name: "Assamese", nativeName: "অসমীয়া" },
+        { code: "mai", bcp47: "mai-IN", name: "Maithili", nativeName: "मैथिली" },
+        { code: "sa", bcp47: "sa-IN", name: "Sanskrit", nativeName: "संस्कृतम्" },
+        { code: "ks", bcp47: "ks-IN", name: "Kashmiri", nativeName: "كٲشُر / कॉशुर" },
+        { code: "ne", bcp47: "ne-IN", name: "Nepali", nativeName: "नेपाली" },
+        { code: "sd", bcp47: "sd-IN", name: "Sindhi", nativeName: "سنڌي / सिंधी" },
+        { code: "kok", bcp47: "kok-IN", name: "Konkani", nativeName: "कोंकणी" },
+        { code: "doi", bcp47: "doi-IN", name: "Dogri", nativeName: "डोगरी" },
+        { code: "mni", bcp47: "mni-IN", name: "Manipuri", nativeName: "ꯃৈতৈলোନ୍" },
+        { code: "brx", bcp47: "brx-IN", name: "Bodo", nativeName: "बड़ो" },
+        { code: "sat", bcp47: "sat-IN", name: "Santali", nativeName: "ᱥᱟᱱᱛᱟᱲᱤ" },
       ];
 
       let isSpeakingAloud = false;
@@ -4122,6 +4726,8 @@
         if (state.routeResult.urgency === "emergency") {
           if (lang.startsWith("hi")) {
             spokenMsg = "आपातकालीन चेतावनी: कृपया तुरंत 24/7 आपातकालीन विभाग यानी इमरजेंसी जाएं। अपॉइंटमेंट का इंतज़ार न करें।";
+          } else if (lang.startsWith("ur")) {
+            spokenMsg = "ہنگامی انتباہ: برائے مہربانی فوری طور پر 24/7 ایمرجنسی وارڈ جائیں۔ اپائنٹمنٹ کا انتظار نہ کریں۔";
           } else if (lang.startsWith("ta")) {
             spokenMsg = "அவசர எச்சரிக்கை: தயவுசெய்து உடனடியாக அவசர சிகிச்சைப் பிரிவுக்கு செல்லவும். அப்பாயிண்ட்மெண்ட்டிற்கு காத்திருக்க வேண்டாம்.";
           } else if (lang.startsWith("bn")) {
@@ -4130,12 +4736,22 @@
             spokenMsg = "అత్యవసర హెచ్చరిక: దయచేసి వెంటనే అత్యవసర విభాగానికి వెళ్ళండి. అపాయింట్‌మెంట్ కోసం వేచి ఉండకండి.";
           } else if (lang.startsWith("mr")) {
             spokenMsg = "तातडीची चेतावणी: कृपया त्वरित अपघात आणि आणीबाणी विभागात जा. अपॉइंटमेंटची वाट पाहू नका.";
+          } else if (lang.startsWith("gu")) {
+            spokenMsg = "કટોકટી ચેતવણી: કૃપા કરીને તાત્કાલિક ઇમરજન્સી વિભાગમાં જાઓ. એપોઇન્ટમેન્ટની રાહ ન જુઓ.";
+          } else if (lang.startsWith("pa")) {
+            spokenMsg = "ਐਮਰਜੈਂਸੀ ਚੇਤਾਵਨੀ: ਕਿਰਪਾ ਕਰਕੇ ਤੁਰੰਤ ਹਸਪਤਾਲ ਦੇ ਐਮਰਜੈਂਸੀ ਵਿਭਾਗ ਜਾਓ। ਅਪੌਇੰਟਮੈਂਟ ਦੀ ਉਡੀਕ ਨਾ ਕਰੋ।";
+          } else if (lang.startsWith("kn")) {
+            spokenMsg = "ತುರ್ತು ಎಚ್ಚರಿಕೆ: ದಯವಿಟ್ಟು ತಕ್ಷಣವೇ ತುರ್ತು ಚಿಕಿತ್ಸಾ ವಿಭಾಗಕ್ಕೆ ತೆರಳಿ. ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್‌ಗಾಗಿ ಕಾಯಬೇಡಿ.";
+          } else if (lang.startsWith("ml")) {
+            spokenMsg = "അടിയന്തിര മുന്നറിയിപ്പ്: ദയവായി ഉടൻ തന്നെ അത്യാഹിത വിഭാഗത്തിലേക്ക് പോകുക. അപ്പോയിന്റ്മെന്റിനായി കാത്തിരിക്കരുത്.";
           } else {
             spokenMsg = "Emergency alert: Please proceed immediately to the hospital Emergency department. Do not wait for an appointment.";
           }
         } else {
           if (lang.startsWith("hi")) {
             spokenMsg = `आपका ओपीडी काउंटर: ${dept} विभाग, अस्पताल: ${hosp}। कृपया पिछला पर्चा और आधार कार्ड साथ रखें।`;
+          } else if (lang.startsWith("ur")) {
+            spokenMsg = `آپ کا او پی ڈی کاؤنٹر: شعبہ ${dept}، ہسپتال: ${hosp}۔ برائے مہربانی پرانا نسخہ اور شناختی کارڈ ساتھ لائیں۔`;
           } else if (lang.startsWith("ta")) {
             spokenMsg = `உங்கள் ஓபிடி கவுண்டர்: ${dept} பிரிவு, மருத்துவமனை: ${hosp}. பழைய மருத்துவ ஆவணங்களை உடன் கொண்டு வாருங்கள்.`;
           } else if (lang.startsWith("bn")) {
@@ -4144,6 +4760,14 @@
             spokenMsg = `మీ ఓపీడీ కౌంటర్: ${dept} విభాగం, ఆసుపత్రి: ${hosp}. దయచేసి పాత వైద్య పత్రాలు తీసుకురండి.`;
           } else if (lang.startsWith("mr")) {
             spokenMsg = `तुमचा ओपीडी काउंटर: ${dept} विभाग, रुग्णालय: ${hosp}. कृपया जुनी कागदपत्रे सोबत आणा.`;
+          } else if (lang.startsWith("gu")) {
+            spokenMsg = `તમારું ઓપીડી કાઉન્ટર: ${dept} વિભાગ, હોસ્પિટલ: ${hosp}. કૃપા કરીને જૂની ફાઇલ સાથે લાવો.`;
+          } else if (lang.startsWith("pa")) {
+            spokenMsg = `ਤੁਹਾਡਾ ਓਪੀਡੀ ਕਾਊਂਟਰ: ${dept} ਵਿਭਾਗ, ਹਸਪਤਾਲ: ${hosp}। ਕਿਰਪਾ ਕਰਕੇ ਪੁਰਾਣੀ ਪਰਚੀ ਨਾਲ ਲਿਆਓ।`;
+          } else if (lang.startsWith("kn")) {
+            spokenMsg = `ನಿಮ್ಮ ಒಪಿಡಿ ಕೌಂಟರ್: ${dept} ವಿಭಾಗ, ಆಸ್ಪತ್ರೆ: ${hosp}. ಹಿಂದಿನ ವೈದ್ಯಕೀಯ ದಾಖಲೆಗಳನ್ನು ತನ್ನಿ.`;
+          } else if (lang.startsWith("ml")) {
+            spokenMsg = `നിങ്ങളുടെ ಒಪಿഡി ಕೌಂಟర్: ${dept} വിഭാഗം, ആശുപത്രി: ${hosp}. പഴയ കുറിപ്പടികൾ കൊണ്ടുവരിക.`;
           } else {
             spokenMsg = `Your matched counter is ${dept} Department at ${hosp}. Please carry your previous medical prescription and identity card.`;
           }
@@ -4157,20 +4781,21 @@
         const showcaseBrowseBtn = document.querySelector("#btn-showcase-all-langs");
         const closeBtn = document.querySelector("#btn-close-languages");
         const searchInput = document.querySelector("#lang-search-input");
-        const regionChips = document.querySelectorAll(".lang-region-chip");
         const gridContainer = document.querySelector("#lang-grid-container");
-        const badge = document.querySelector("#current-lang-badge");
         const vernacularChips = document.querySelectorAll(".vernacular-chip");
         const audioReadbackBtn = document.querySelector("#btn-audio-readback");
 
-        let activeRegion = "all";
         let searchQuery = "";
 
         function openModal() {
           if (!modal) return;
           modal.hidden = false;
           openBtn?.setAttribute("aria-expanded", "true");
-          searchInput?.focus();
+          if (searchInput) {
+            searchInput.value = "";
+            searchQuery = "";
+            searchInput.focus();
+          }
           renderLanguageGrid();
         }
 
@@ -4190,27 +4815,15 @@
           renderLanguageGrid();
         });
 
-        regionChips.forEach((chip) => {
-          chip.addEventListener("click", () => {
-            regionChips.forEach((c) => c.setAttribute("aria-pressed", "false"));
-            chip.setAttribute("aria-pressed", "true");
-            activeRegion = chip.dataset.region;
-            renderLanguageGrid();
-          });
-        });
-
         function renderLanguageGrid() {
           if (!gridContainer) return;
           gridContainer.innerHTML = "";
 
           const filtered = SCHEDULED_LANGUAGES_22.filter((lang) => {
-            const matchesRegion = activeRegion === "all" || lang.region.includes(activeRegion);
-            const matchesSearch = !searchQuery ||
+            return !searchQuery ||
               lang.name.toLowerCase().includes(searchQuery) ||
               lang.nativeName.toLowerCase().includes(searchQuery) ||
-              lang.script.toLowerCase().includes(searchQuery) ||
-              lang.states.toLowerCase().includes(searchQuery);
-            return matchesRegion && matchesSearch;
+              lang.code.toLowerCase().includes(searchQuery);
           });
 
           if (filtered.length === 0) {
@@ -4221,32 +4834,26 @@
           filtered.forEach((lang) => {
             const card = document.createElement("button");
             card.type = "button";
-            card.className = "lang-card";
-            if (state.selectedDialect === lang.code) card.classList.add("active");
+            const isActive = state.language === lang.code;
+            card.className = "lang-card" + (isActive ? " active" : "");
             card.innerHTML = `
-              <div>
-                <div class="lang-card-top">
-                  <span class="lang-card-native">${lang.nativeName}</span>
-                  <span class="lang-card-code">${lang.bcp47}</span>
-                </div>
-                <div class="lang-card-name">${lang.name} · ${lang.script}</div>
+              <div class="lang-card-main">
+                <span class="lang-card-native">${lang.nativeName}</span>
+                <span class="lang-card-name">${lang.name}</span>
               </div>
-              <div class="lang-card-meta">📍 ${lang.states}</div>
+              <div class="lang-card-aside">
+                <span class="lang-card-code">${lang.bcp47}</span>
+                ${isActive ? '<span class="lang-check-badge">✓ Active</span>' : ''}
+              </div>
             `;
 
             card.addEventListener("click", () => {
               state.selectedDialect = lang.code;
               state.selectedDialectData = lang;
-              if (badge) badge.textContent = `${lang.nativeName} (${lang.name})`;
-              if (lang.code === "hi") {
-                state.language = "hi";
-                renderLanguage();
-              } else if (lang.code === "en") {
-                state.language = "en";
-                renderLanguage();
-              }
+              state.language = lang.code;
+              renderLanguage();
               closeModal();
-              showStatus(`Switched voice & triage dialect to ${lang.nativeName} (${lang.name}). Microphone now listens in ${lang.bcp47}.`);
+              showStatus(`Switched interface & voice to ${lang.nativeName} (${lang.name}). Microphone now listens in ${lang.bcp47}.`);
             });
 
             gridContainer.appendChild(card);
@@ -4267,9 +4874,10 @@
             if (foundLang) {
               state.selectedDialect = foundLang.code;
               state.selectedDialectData = foundLang;
-              if (badge) badge.textContent = `${foundLang.nativeName}`;
+              state.language = foundLang.code;
+              renderLanguage();
             }
-            showStatus(`Loaded ${langName}: "${textToFill}". Click Continue or Start Triage to evaluate.`);
+            showStatus(`Loaded ${langName}: "${textToFill}". Interface updated.`);
           });
         });
 
