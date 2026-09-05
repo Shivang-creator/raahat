@@ -116,6 +116,7 @@
       .topline .a11y-trigger-btn,
       .topline .theme-toggle,
       .topline .lang-quick-btn,
+      .topline .nav-profile-btn,
       .topline .nav-start {
         min-height: 2.35rem !important;
         height: 2.35rem !important;
@@ -474,23 +475,32 @@
       .theme-toggle .icon { width: 1.15rem; height: 1.15rem; }
 
       .nav-start {
-        min-height: 2.35rem;
-        padding: 0.35rem 0.95rem;
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        border-radius: var(--radius-full);
-        background: linear-gradient(135deg, #166534 0%, #15803d 50%, #047857 100%);
-        color: #ffffff;
-        font-size: 0.86rem;
-        font-weight: 850;
-        box-shadow: 0 4px 14px rgba(22, 101, 52, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        min-height: 2.35rem !important;
+        height: 2.35rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.35rem !important;
+        padding: 0.35rem 0.95rem !important;
+        border: 1px solid rgba(22, 101, 52, 0.4) !important;
+        border-radius: var(--radius-full) !important;
+        background: #15803d !important;
+        color: #ffffff !important;
+        font-size: 0.86rem !important;
+        font-weight: 850 !important;
+        box-shadow: 0 4px 14px rgba(22, 101, 52, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
         cursor: pointer;
         transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
         white-space: nowrap;
         flex-shrink: 0;
       }
       .nav-start:hover {
+        background: #166534 !important;
+        color: #ffffff !important;
         transform: translateY(-1px);
-        box-shadow: 0 6px 18px rgba(22, 101, 52, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        box-shadow: 0 6px 18px rgba(22, 101, 52, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
       }
       .nav-start:active {
         transform: scale(0.98);
@@ -1774,7 +1784,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       @media print {
         @page { size: A4; margin: 12mm; }
         body { background: #fff !important; color: #0f172a !important; font-size: 11pt; }
-        .topline, .site-footer, .support, .prototype-banner, .triage-stepper, .slip-actions, .hospital-role-tabs, .counter-form-card, .doctor-sidebar, .doctor-actions-bar, .rx-builder-card, .history-grid, .family-grid, .privacy-vault-box, #thermal-print-btn, #pass-print-btn, .pass-actions-bar, .whatsapp-float-btn { display: none !important; }
+        .topline, .site-footer, .support, .prototype-banner, .triage-stepper, .slip-actions, .hospital-role-tabs, .counter-form-card, .doctor-sidebar, .doctor-actions-bar, .rx-builder-card, .history-grid, .family-grid, .privacy-vault-box, #thermal-print-btn, #pass-print-btn, .pass-actions-bar, .whatsapp-float-btn, .ivr-float-btn, .whatsapp-modal, .ivr-modal { display: none !important; }
         .app-shell { width: 100% !important; padding: 0 !important; }
         main { display: block !important; padding: 0 !important; }
         
@@ -3517,10 +3527,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         .a11y-trigger-btn { width: 2.15rem; height: 2.15rem; min-height: 2.15rem; padding: 0; justify-content: center; border-radius: 50%; }
         .theme-toggle { width: 2.15rem; height: 2.15rem; }
         .nav-start { padding: 0.3rem 0.65rem; min-height: 2.15rem; font-size: 0.8rem; }
-        .whatsapp-float-btn { padding: 0.5rem; border-radius: 50%; width: 3rem; height: 3rem; justify-content: center; bottom: 1rem; right: 1rem; }
-        .ivr-float-btn { padding: 0.5rem; border-radius: 50%; width: 3rem; height: 3rem; justify-content: center; bottom: 4.5rem; right: 1rem; }
-        .ivr-float-btn span { display: none; }
-        .whatsapp-float-btn span { display: none; }
+        .whatsapp-float-btn { padding: 0.5rem; border-radius: 50%; width: 3.2rem; height: 3.2rem; justify-content: center; bottom: 1rem; right: 1rem; }
+        .ivr-float-btn { padding: 0.5rem; border-radius: 50%; width: 3.2rem; height: 3.2rem; justify-content: center; bottom: 4.8rem; right: 1rem; }
+        .ivr-float-btn span, .ivr-float-btn .ivr-live-tag { display: none !important; }
+        .whatsapp-float-btn span, .whatsapp-float-btn .wa-pulse { display: none !important; }
       }
       @media (max-width: 480px) {
         .nav-profile-btn { width: 2rem; height: 2rem; min-height: 2rem; }
@@ -3595,9 +3605,9 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .ocr-feedback { margin-top: 0.85rem; padding: 0.75rem 1rem; border-radius: var(--radius-md); background: var(--accent-soft); color: var(--accent-dark); font-weight: 700; font-size: 0.95rem; }
 
       /* WhatsApp Civic Gateway & Mobile Simulator */
-      .whatsapp-float-btn { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 99; display: flex; align-items: center; gap: 0.65rem; padding: 0.75rem 1.25rem; border-radius: 999px; background: #25d366; color: #ffffff; border: 0; box-shadow: 0 0.5rem 1.5rem rgba(37, 211, 102, 0.4); font-weight: 800; font-size: 1rem; cursor: pointer; transition: transform 180ms ease, box-shadow 180ms ease; }
+      .whatsapp-float-btn { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 99; display: flex; align-items: center; gap: 0.65rem; padding: 0.75rem 1.25rem; border-radius: 999px; background: #25d366; color: #ffffff; border: 0; box-shadow: 0 0.5rem 1.5rem rgba(37, 211, 102, 0.4); font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: transform 180ms ease, box-shadow 180ms ease; }
       .whatsapp-float-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0.8rem 2rem rgba(37, 211, 102, 0.55); }
-      .whatsapp-float-btn svg { width: 1.6rem; height: 1.6rem; fill: currentColor; }
+      .whatsapp-float-btn svg { width: 1.5rem; height: 1.5rem; fill: currentColor; }
       .wa-pulse { width: 8px; height: 8px; border-radius: 50%; background: #ffffff; animation: waPulse 1.8s infinite; }
       @keyframes waPulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.4); } 100% { opacity: 1; transform: scale(1); } }
 
@@ -3650,9 +3660,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .wa-notify-bubble { border-left: 4px solid #f59e0b !important; background: #fffbeb !important; color: #92400e !important; }
       
       /* Feature Phone 104 IVR Gateway & Simulator */
-      .ivr-float-btn { position: fixed; bottom: 4.75rem; right: 1.5rem; z-index: 99; display: flex; align-items: center; gap: 0.65rem; padding: 0.65rem 1.15rem; border-radius: 999px; background: #1e3a8a; color: #ffffff; border: 0; box-shadow: 0 0.5rem 1.5rem rgba(30, 58, 138, 0.4); font-weight: 800; font-size: 0.92rem; cursor: pointer; transition: transform 180ms ease, box-shadow 180ms ease; }
-      .ivr-float-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0.8rem 2rem rgba(30, 58, 138, 0.55); background: #1d4ed8; }
-      .ivr-live-tag { background: #fbbf24; color: #78350f; font-size: 0.65rem; font-weight: 900; padding: 0.15rem 0.45rem; border-radius: 999px; text-transform: uppercase; }
+      .ivr-float-btn { position: fixed; bottom: 4.85rem; right: 1.5rem; z-index: 99; display: flex; align-items: center; gap: 0.65rem; padding: 0.72rem 1.2rem; border-radius: 999px; background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 0.5rem 1.5rem rgba(30, 58, 138, 0.45); font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: transform 180ms ease, box-shadow 180ms ease; }
+      .ivr-float-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0.8rem 2rem rgba(30, 58, 138, 0.6); background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%); }
+      .ivr-float-btn svg { width: 1.4rem; height: 1.4rem; fill: currentColor; }
+      .ivr-live-tag { background: #fbbf24; color: #78350f; font-size: 0.65rem; font-weight: 900; padding: 0.15rem 0.45rem; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em; }
 
       .ivr-modal { position: fixed; inset: 0; z-index: 1100; background: rgba(0,0,0,0.72); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; padding: 1rem; }
       .ivr-phone-chassis { width: 100%; max-width: 360px; max-height: 94vh; background: #1e293b; border: 8px solid #0f172a; border-radius: 2.2rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6); display: flex; flex-direction: column; overflow: hidden; padding: 1.15rem 0.95rem 0.95rem; color: #fff; }
@@ -4490,7 +4501,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Use dark theme" title="Use dark theme">
             <svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg>
           </button>
-          <button class="nav-start" type="button" id="nav-start-triage" data-copy="startTriage">Start Triage</button>
+          <button class="nav-start" type="button" id="nav-start-triage" aria-label="Start Triage">
+            <svg class="icon-inline" aria-hidden="true" viewBox="0 0 24 24" style="width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <span data-copy="startTriage">Start Triage</span>
+          </button>
         </div>
       </div>
 
@@ -11173,7 +11187,16 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       handleHashChange();
     </script>
   
-    <!-- WhatsApp Floating Trigger Button -->
+    <!-- 104 AI Voice IVR 2G Phone Floating Button -->
+    <button type="button" id="ivr-fab" class="ivr-float-btn" aria-label="Open 104 AI Voice Keypad Simulator" title="Dial 104 Toll-Free Voice IVR (22 Dialects)">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+      </svg>
+      <span>104 Voice IVR</span>
+      <span class="ivr-live-tag">2G Phone</span>
+    </button>
+
+        <!-- WhatsApp Floating Trigger Button -->
     <button type="button" id="whatsapp-fab" class="whatsapp-float-btn" aria-label="Open Raahat on WhatsApp">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.24-1.48-1.39-1.73-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.61c.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.3z"/>
@@ -11228,6 +11251,114 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           </button>
           <button type="submit" class="wa-send-btn" aria-label="Send WhatsApp message"><svg class="icon-inline"><use href="#icon-send"></use></svg></button>
         </form>
+      </div>
+    </div>
+
+    <!-- 104 AI Voice IVR 2G Feature Phone Simulator Modal -->
+    <div class="ivr-modal" id="ivr-modal" role="dialog" aria-modal="true" aria-labelledby="ivr-modal-title" hidden>
+      <div class="ivr-phone-chassis">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+          <span style="font-size: 0.72rem; font-weight: 800; color: #94a3b8; letter-spacing: 0.05em;" id="ivr-modal-title">104 AI VOICE TELEPHONY</span>
+          <button type="button" id="ivr-close-btn" class="wa-close-btn" aria-label="Close IVR Simulator" style="color: #94a3b8; background: transparent; border: 0; cursor: pointer; font-size: 1.1rem; line-height: 1;">✕</button>
+        </div>
+
+        <div class="ivr-earpiece"></div>
+
+        <!-- Nokia / JioPhone LCD Screen -->
+        <div class="ivr-screen" id="ivr-screen">
+          <div class="ivr-screen-top">
+            <span id="ivr-call-status">IDLE (DIAL 104)</span>
+            <span id="ivr-timer">00:00</span>
+          </div>
+
+          <div class="ivr-screen-body" id="ivr-screen-body">
+            <div style="text-align: center; margin-top: 0.85rem;">
+              <div style="font-size: 1.1rem; font-weight: 900; letter-spacing: 1px;">104 HELPLINE</div>
+              <div style="font-size: 0.74rem; margin-top: 0.35rem;">National Health &amp; Triage IVR</div>
+              <div style="font-size: 0.72rem; color: #243824; margin-top: 0.5rem;">Press 📞 Green to Call 104</div>
+            </div>
+          </div>
+
+          <div class="ivr-screen-bottom">
+            <span id="ivr-audio-indicator">🔇 Idle</span>
+            <span>2G VoLTE 📶</span>
+          </div>
+
+          <!-- DLT-Compliant SMS Toast Overlay -->
+          <div class="ivr-sms-toast" id="ivr-sms-toast" hidden>
+            <div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed #ca8a04; padding-bottom: 0.2rem; margin-bottom: 0.3rem;">
+                <span>📩 SMS from RAAHAT-104</span>
+                <span id="ivr-sms-time">10:00</span>
+              </div>
+              <div id="ivr-sms-text" style="font-size: 0.72rem; line-height: 1.3;"></div>
+            </div>
+            <button type="button" id="ivr-sms-dismiss-btn" style="align-self: flex-end; background: #854d0e; color: #fff; border: 0; padding: 0.2rem 0.5rem; border-radius: 0.25rem; font-size: 0.68rem; font-weight: 800; cursor: pointer;">Dismiss</button>
+          </div>
+        </div>
+
+        <!-- 1-Tap Dialect Samples for Instant Testing -->
+        <div style="margin-top: 0.65rem;">
+          <div style="font-size: 0.68rem; font-weight: 800; color: #cbd5e1; margin-bottom: 0.25rem; display: flex; justify-content: space-between;">
+            <span>1-Tap Regional Dialect Prompts:</span>
+            <span style="color: #60a5fa;">22 Languages Ready</span>
+          </div>
+          <div class="ivr-dialect-bar" id="ivr-dialect-bar">
+            <button type="button" class="ivr-dialect-btn" data-ivr-lang="bho" data-ivr-phrase="हमार छाती में बहुते दरद बा आ सांस फूले लागल बा">
+              <span>Bhojpuri (भोजपुरी)</span>
+              <span style="color: #f87171; font-size: 0.68rem;">Chest pain</span>
+            </button>
+            <button type="button" class="ivr-dialect-btn" data-ivr-lang="mai" data-ivr-phrase="हमरा बेटा के काइल से बड्ड तेज बुखार छै १०३ डिग्री">
+              <span>Maithili (मैथिली)</span>
+              <span style="color: #fbbf24; font-size: 0.68rem;">Child fever</span>
+            </button>
+            <button type="button" class="ivr-dialect-btn" data-ivr-lang="ben" data-ivr-phrase="আমার বুকে খুব ব্যথা আর নিঃশ্বাস নিতে কষ্ট হচ্ছে">
+              <span>Bengali (বাংলা)</span>
+              <span style="color: #f87171; font-size: 0.68rem;">Chest distress</span>
+            </button>
+            <button type="button" class="ivr-dialect-btn" data-ivr-lang="tam" data-ivr-phrase="என் குழந்தைக்கு நேற்று முதல் 103 டிகிரி அதிக காய்ச்சல் உள்ளது">
+              <span>Tamil (தமிழ்)</span>
+              <span style="color: #fbbf24; font-size: 0.68rem;">Paediatrics</span>
+            </button>
+            <button type="button" class="ivr-dialect-btn" data-ivr-lang="tel" data-ivr-phrase="మోకాలి నొప్పి మరియు నడవడానికి చాలా ఇబ్బందిగా ఉంది">
+              <span>Telugu (తెలుగు)</span>
+              <span style="color: #34d399; font-size: 0.68rem;">Orthopaedics</span>
+            </button>
+            <button type="button" class="ivr-dialect-btn" data-ivr-lang="hin" data-ivr-phrase="सीने में दर्द और पसीना आ रहा है">
+              <span>Hindi (हिन्दी)</span>
+              <span style="color: #f87171; font-size: 0.68rem;">Cardiology</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 12-Key Physical Keypad -->
+        <div class="ivr-keypad">
+          <button type="button" class="ivr-key call-btn" id="ivr-call-btn" aria-label="Call 104">
+            <span>📞</span>
+            <sub>CALL 104</sub>
+          </button>
+          <button type="button" class="ivr-key mic-key" id="ivr-mic-btn" aria-label="Push to Talk Voice">
+            <span>🎙️</span>
+            <sub>PUSH-TALK</sub>
+          </button>
+          <button type="button" class="ivr-key end-btn" id="ivr-end-btn" aria-label="End Call">
+            <span>📴</span>
+            <sub>END</sub>
+          </button>
+
+          <button type="button" class="ivr-key ivr-digit" data-key="1">1<sub>&nbsp;</sub></button>
+          <button type="button" class="ivr-key ivr-digit" data-key="2">2<sub>ABC</sub></button>
+          <button type="button" class="ivr-key ivr-digit" data-key="3">3<sub>DEF</sub></button>
+          <button type="button" class="ivr-key ivr-digit" data-key="4">4<sub>GHI</sub></button>
+          <button type="button" class="ivr-key ivr-digit" data-key="5">5<sub>JKL</sub></button>
+          <button type="button" class="ivr-key ivr-digit" data-key="6">6<sub>MNO</sub></button>
+          <button type="button" class="ivr-key ivr-digit" data-key="7">7<sub>PQRS</sub></button>
+          <button type="button" class="ivr-key ivr-digit" data-key="8">8<sub>TUV</sub></button>
+          <button type="button" class="ivr-key ivr-digit" data-key="9">9<sub>WXYZ</sub></button>
+          <button type="button" class="ivr-key ivr-digit" data-key="*">*<sub>LANG</sub></button>
+          <button type="button" class="ivr-key ivr-digit" data-key="0">0<sub>OPER</sub></button>
+          <button type="button" class="ivr-key ivr-digit" data-key="#">#<sub>CONFIRM</sub></button>
+        </div>
       </div>
     </div>
 
