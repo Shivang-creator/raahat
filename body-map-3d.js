@@ -54,6 +54,11 @@ export const REGION_LABELS = Object.freeze({
   pelvis: { en: "Pelvis, Groin & Reproductive", hi: "पेल्विस, जननांग व प्रजनन स्वास्थ्य", dept: "Orthopaedics / Surgery" },
 });
 
+// Bilateral anatomical regions that have distinct left and right sides
+export const BILATERAL_REGIONS = Object.freeze([
+  "shoulder", "arm", "hand", "leg", "knee", "foot", "ears", "eyes"
+]);
+
 // Female anatomical zone centers (normalized 1.75m coordinate space)
 export const FEMALE_ZONE_CENTERS = Object.freeze({
   head: [0, 1.635, 0.06],
@@ -284,21 +289,26 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
 
   scene.add(hemisphere, keyLight, fillLight, rimLight);
 
-  // Dynamic 3D Wireframe Highlight Sphere
+  // Dynamic 3D Wireframe Highlight Spheres (supports single side and both sides simultaneously)
   const highlightSphereGeo = new THREE.SphereGeometry(1, 24, 24);
-  const highlightSphereMat = new THREE.MeshBasicMaterial({
-    color: COLORS.accentBlue,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.55,
-    blending: THREE.AdditiveBlending,
-    depthTest: false,
-    depthWrite: false,
-  });
-  const highlightSphere = new THREE.Mesh(highlightSphereGeo, highlightSphereMat);
-  highlightSphere.visible = false;
-  highlightSphere.renderOrder = 999;
-  scene.add(highlightSphere);
+  const createHighlightMesh = () => {
+    const mat = new THREE.MeshBasicMaterial({
+      color: COLORS.accentBlue,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.55,
+      blending: THREE.AdditiveBlending,
+      depthTest: false,
+      depthWrite: false,
+    });
+    const mesh = new THREE.Mesh(highlightSphereGeo, mat);
+    mesh.visible = false;
+    mesh.renderOrder = 999;
+    scene.add(mesh);
+    return mesh;
+  };
+  const highlightSphere1 = createHighlightMesh();
+  const highlightSphere2 = createHighlightMesh();
 
   // Model storage & caching
   const modelGroup = new THREE.Group();
@@ -380,7 +390,9 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
   const tooltip = makeTooltip(stage);
   let currentLanguage = language;
   let hoveredRegion = null;
+  let hoveredSide = "both";
   let selectedRegion = null;
+  let selectedSide = "both";
   let selectedIntensity = 3;
 
   // Touch & Pointer state
@@ -432,10 +444,14 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     modelGroup.worldToLocal(hitPoint);
 
     const region = hitToZone(hitPoint, currentSilhouette);
-    return { region, point: hitPoint };
+    // In local model coordinates:
+    // When looking at front of body:
+    // positive X (+X) is patient's left; negative X (-X) is patient's right
+    const side = Math.abs(hitPoint.x) > 0.025 ? (hitPoint.x > 0 ? "left" : "right") : "both";
+    return { region, side, point: hitPoint };
   };
 
-  const showTooltip = (region, event) => {
+  const showTooltip = (region, side = "both", event) => {
     if (!tooltip) return;
     if (!region) {
       tooltip.hidden = true;
@@ -446,14 +462,33 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     if (!labels) {
       tooltip.textContent = region;
     } else {
-      tooltip.innerHTML = '<div class="tt-region-name">' + labels.en + ' · ' + labels.hi + '</div>' +
+      const isBilateral = BILATERAL_REGIONS.includes(region);
+      let sidePrefixEn = "";
+      let sidePrefixHi = "";
+      if (isBilateral) {
+        if (side === "left") {
+          sidePrefixEn = "Left ";
+          sidePrefixHi = "बायाँ ";
+        } else if (side === "right") {
+          sidePrefixEn = "Right ";
+          sidePrefixHi = "दायाँ ";
+        } else if (side === "both") {
+          sidePrefixEn = "Both Sides: ";
+          sidePrefixHi = "दोनों तरफ: ";
+        }
+      }
+      const sideCta = isBilateral
+        ? ' (' + (side === "both" ? "Both sides" : (side === "left" ? "Left side" : "Right side")) + ')'
+        : '';
+
+      tooltip.innerHTML = '<div class="tt-region-name">' + sidePrefixEn + labels.en + ' · ' + sidePrefixHi + labels.hi + '</div>' +
         '<div class="tt-dept-row"><span class="tt-tag">OPD Counter:</span> <strong>' + labels.dept + '</strong></div>' +
-        '<div class="tt-tap-cta">Tap to select →</div>';
+        '<div class="tt-tap-cta">Tap to select' + sideCta + ' →</div>';
     }
     tooltip.hidden = false;
     if (event && stage) {
       const stageBounds = stage.getBoundingClientRect();
-      const width = Math.min(stageBounds.width - 24, 300);
+      const width = Math.min(stageBounds.width - 24, 320);
       tooltip.style.left = Math.min(stageBounds.width - width - 12, Math.max(12, event.clientX - stageBounds.left + 14)) + "px";
       tooltip.style.top = Math.min(stageBounds.height - 62, Math.max(12, event.clientY - stageBounds.top - 58)) + "px";
     }
@@ -461,24 +496,51 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
 
   function updateVisualState(now = 0) {
     const activeRegion = selectedRegion || hoveredRegion;
+    const activeSide = selectedRegion ? selectedSide : (hoveredSide || selectedSide || "both");
     const intensityConfig = INTENSITY_LEVELS[selectedIntensity] || INTENSITY_LEVELS[3];
 
     if (activeRegion) {
       const center = getZoneCenter(activeRegion, currentSilhouette);
       const radius = ZONE_RADII[activeRegion] || 0.10;
       const targetColor = selectedRegion ? intensityConfig.color : COLORS.accentBlue;
-
-      highlightSphere.position.set(center[0], center[1], center[2]);
-      highlightSphere.scale.setScalar(selectedRegion ? radius * 1.12 : radius);
-      highlightSphere.material.color.setHex(targetColor);
-      highlightSphere.visible = true;
+      const isBilateral = BILATERAL_REGIONS.includes(activeRegion);
+      const absX = Math.abs(center[0]);
 
       const pulse = selectedRegion 
         ? 0.55 + Math.sin(now * 0.006) * 0.20 
         : 0.38 + Math.sin(now * 0.004) * 0.14;
-      highlightSphere.material.opacity = pulse;
+
+      highlightSphere1.scale.setScalar(selectedRegion ? radius * 1.12 : radius);
+      highlightSphere1.material.color.setHex(targetColor);
+      highlightSphere1.material.opacity = pulse;
+
+      highlightSphere2.scale.setScalar(selectedRegion ? radius * 1.12 : radius);
+      highlightSphere2.material.color.setHex(targetColor);
+      highlightSphere2.material.opacity = pulse;
+
+      if (isBilateral) {
+        if (activeSide === "both") {
+          highlightSphere1.position.set(absX, center[1], center[2]);
+          highlightSphere1.visible = true;
+          highlightSphere2.position.set(-absX, center[1], center[2]);
+          highlightSphere2.visible = true;
+        } else if (activeSide === "left") {
+          highlightSphere1.position.set(absX, center[1], center[2]);
+          highlightSphere1.visible = true;
+          highlightSphere2.visible = false;
+        } else if (activeSide === "right") {
+          highlightSphere1.position.set(-absX, center[1], center[2]);
+          highlightSphere1.visible = true;
+          highlightSphere2.visible = false;
+        }
+      } else {
+        highlightSphere1.position.set(0, center[1], center[2]);
+        highlightSphere1.visible = true;
+        highlightSphere2.visible = false;
+      }
     } else {
-      highlightSphere.visible = false;
+      highlightSphere1.visible = false;
+      highlightSphere2.visible = false;
     }
   }
 
@@ -514,10 +576,11 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     }
     const hit = getRegionHit(event);
     hoveredRegion = hit?.region || null;
+    hoveredSide = hit?.side || "both";
     canvas.style.cursor = hoveredRegion ? "pointer" : "grab";
     updateVisualState();
-    showTooltip(hoveredRegion, event);
-    onHover?.(hoveredRegion ? { region: hoveredRegion, labels: REGION_LABELS[hoveredRegion] } : null);
+    showTooltip(hoveredRegion, hoveredSide, event);
+    onHover?.(hoveredRegion ? { region: hoveredRegion, side: hoveredSide, labels: REGION_LABELS[hoveredRegion] } : null);
   };
 
   const pointerUp = (event, allowSelect = true) => {
@@ -529,9 +592,10 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
       const hit = getRegionHit(event);
       if (hit?.region) {
         selectedRegion = hit.region;
+        selectedSide = hit.side || "both";
         updateVisualState();
         if ("vibrate" in navigator) navigator.vibrate?.(18);
-        onSelect?.(selectedRegion);
+        onSelect?.(selectedRegion, selectedSide);
       }
     }
     isPointerDown = false;
@@ -627,9 +691,13 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     targetLookAt.y += (targetLookY - targetLookAt.y) * 0.08;
     camera.lookAt(targetLookAt);
 
-    if (highlightSphere.visible) {
-      highlightSphere.rotation.y += 0.008;
-      highlightSphere.rotation.x += 0.004;
+    if (highlightSphere1.visible) {
+      highlightSphere1.rotation.y += 0.008;
+      highlightSphere1.rotation.x += 0.004;
+    }
+    if (highlightSphere2.visible) {
+      highlightSphere2.rotation.y += 0.008;
+      highlightSphere2.rotation.x += 0.004;
     }
 
     updateVisualState(now);
@@ -639,12 +707,17 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
 
   animationFrame = window.requestAnimationFrame(render);
 
-  function focusRegionCamera(region) {
+  function focusRegionCamera(region, side = "both") {
     isTransitioningView = true;
+    let targetX = 0;
+    if (BILATERAL_REGIONS.includes(region)) {
+      if (side === "left") targetX = 0.06;
+      else if (side === "right") targetX = -0.06;
+    }
     if (["head", "eyes", "ears", "teeth", "face", "neck"].includes(region)) {
       targetRotationY = 0;
       targetRotationX = 0;
-      targetCameraPosition.set(0, 1.55, 1.35);
+      targetCameraPosition.set(targetX, 1.55, 1.35);
       targetLookY = 1.55;
     } else if (["chest", "upper-back"].includes(region)) {
       targetRotationY = region === "upper-back" ? Math.PI : 0;
@@ -659,12 +732,12 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     } else if (["leg", "knee", "foot"].includes(region)) {
       targetRotationY = 0;
       targetRotationX = 0;
-      targetCameraPosition.set(0, 0.40, 1.65);
+      targetCameraPosition.set(targetX, 0.40, 1.65);
       targetLookY = 0.40;
     } else if (["shoulder", "arm", "hand"].includes(region)) {
       targetRotationY = 0;
       targetRotationX = 0;
-      targetCameraPosition.set(0, 1.15, 1.65);
+      targetCameraPosition.set(targetX, 1.15, 1.65);
       targetLookY = 1.15;
     }
   }
@@ -673,12 +746,20 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     available: true,
     setLanguage(nextLanguage) {
       currentLanguage = nextLanguage;
-      if (hoveredRegion) showTooltip(hoveredRegion);
+      if (hoveredRegion) showTooltip(hoveredRegion, hoveredSide);
     },
-    select(region) {
+    select(region, side = "both") {
       selectedRegion = region;
+      selectedSide = side || "both";
       updateVisualState();
-      if (region) focusRegionCamera(region);
+      if (region) focusRegionCamera(region, selectedSide);
+    },
+    setSide(side) {
+      selectedSide = side || "both";
+      updateVisualState();
+    },
+    getSide() {
+      return selectedSide;
     },
     setRegionIntensity(intensity) {
       selectedIntensity = Math.max(1, Math.min(5, parseInt(intensity, 10) || 3));
@@ -732,6 +813,9 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
       canvas.removeEventListener("touchstart", onTouchStart);
       canvas.removeEventListener("touchmove", onTouchMove);
       tooltip?.remove();
+      highlightSphereGeo.dispose();
+      highlightSphere1.material.dispose();
+      highlightSphere2.material.dispose();
       renderer.dispose();
     },
   };

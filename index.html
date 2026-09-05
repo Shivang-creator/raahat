@@ -1446,6 +1446,91 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         color: #0c1611;
       }
 
+      /* Interactive Laterality / Side Selector Bar */
+      .anatomy-side-bar {
+        margin-top: 0.85rem;
+        padding: 0.85rem 1.15rem;
+        border-radius: 1.1rem;
+        background: var(--surface-elevated);
+        border: 1.5px solid var(--line);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+      .side-bar-header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+      .side-bar-title {
+        font-size: 0.88rem;
+        font-weight: 850;
+        color: var(--ink);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+      .side-bar-subtitle {
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+      .side-pills-wrap {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        background: var(--surface-muted);
+        padding: 0.25rem;
+        border-radius: 9999px;
+        border: 1px solid var(--line);
+      }
+      .side-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.42rem 0.95rem;
+        border-radius: 9999px;
+        border: 1.5px solid transparent;
+        background: transparent;
+        color: var(--muted);
+        font-size: 0.84rem;
+        font-weight: 750;
+        cursor: pointer;
+        transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
+        white-space: nowrap;
+      }
+      .side-pill .side-indicator-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--muted);
+        transition: transform 160ms ease, background 160ms ease;
+      }
+      .side-pill:hover {
+        color: var(--ink);
+        background: rgba(0, 0, 0, 0.04);
+      }
+      [data-theme="dark"] .side-pill:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .side-pill.is-active {
+        background: var(--accent);
+        color: #ffffff;
+        border-color: var(--accent);
+        box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
+      }
+      .side-pill.is-active .side-indicator-dot {
+        background: #ffffff;
+        transform: scale(1.25);
+      }
+      [data-theme="dark"] .side-pill.is-active {
+        background: #0ea5e9;
+        color: #ffffff;
+        border-color: #38bdf8;
+      }
+
       /* Clinical Tooltip */
       .three-tooltip {
         position: absolute;
@@ -3915,6 +4000,27 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 <button class="view-control" type="button" data-view="lower" data-copy="lowerView">Lower body</button>
                 <button class="view-control" type="button" data-view="reset" data-copy="resetView">Reset view</button>
               </div>
+              <!-- Interactive Laterality / Side Selector Bar -->
+              <div class="anatomy-side-bar" id="anatomy-side-bar" role="group" aria-label="Body side selection (Left, Both, or Right)">
+                <div class="side-bar-header">
+                  <span class="side-bar-title"><svg class="icon icon-inline" aria-hidden="true"><use href="#icon-pin"></use></svg> <span data-copy="sideSelectorTitle">Side Affected · प्रभावित हिस्सा:</span></span>
+                  <small class="side-bar-subtitle">Select left, right, or both sides (दोनों तरफ) for joints, limbs, eyes &amp; ears</small>
+                </div>
+                <div class="side-pills-wrap">
+                  <button type="button" class="side-pill" data-side="left" title="Left side of body / बायाँ हिस्सा">
+                    <span class="side-indicator-dot"></span>
+                    <span>Left · <span class="side-hi">बायाँ</span></span>
+                  </button>
+                  <button type="button" class="side-pill is-active" data-side="both" title="Both sides of body / दोनों तरफ">
+                    <span class="side-indicator-dot"></span>
+                    <span>Both · <span class="side-hi">दोनों तरफ</span></span>
+                  </button>
+                  <button type="button" class="side-pill" data-side="right" title="Right side of body / दायाँ हिस्सा">
+                    <span class="side-indicator-dot"></span>
+                    <span>Right · <span class="side-hi">दायाँ</span></span>
+                  </button>
+                </div>
+              </div>
               <!-- Direct Body Part Quick Chips for Universal Ease of Use -->
               <div class="anatomy-quick-bar" role="group" aria-label="Direct anatomical body part buttons">
                 <div class="quick-bar-header">
@@ -4031,18 +4137,18 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 <button class="map-region map-region-upper-abdomen" type="button" data-region="upper-abdomen" data-region-copy="regionUpperAbdomen" aria-label="Upper abdomen" aria-pressed="false"><span class="visually-hidden" data-copy="regionUpperAbdomen">Upper abdomen</span></button>
                 <button class="map-region map-region-lower-abdomen" type="button" data-region="lower-abdomen" data-region-copy="regionLowerAbdomen" aria-label="Lower abdomen" aria-pressed="false"><span class="visually-hidden" data-copy="regionLowerAbdomen">Lower abdomen</span></button>
                 <button class="map-region map-region-pelvis" type="button" data-region="pelvis" data-region-copy="regionPelvis" aria-label="Pelvis, Groin &amp; Reproductive" aria-pressed="false"><span class="visually-hidden" data-copy="regionPelvis">Pelvis, Groin &amp; Reproductive</span></button>
-                <button class="map-region map-region-shoulder-left" type="button" data-region="shoulder" data-region-copy="regionShoulder" aria-label="Shoulder joints" aria-pressed="false"><span class="visually-hidden" data-copy="regionShoulder">Shoulder joints</span></button>
-                <button class="map-region map-region-shoulder-right" type="button" data-region="shoulder" data-region-copy="regionShoulder" aria-label="Shoulder joints" aria-pressed="false"><span class="visually-hidden" data-copy="regionShoulder">Shoulder joints</span></button>
-                <button class="map-region map-region-arm-left" type="button" data-region="arm" data-region-copy="regionArm" aria-label="Arm" aria-pressed="false"><span class="visually-hidden" data-copy="regionArm">Arm</span></button>
-                <button class="map-region map-region-arm-right" type="button" data-region="arm" data-region-copy="regionArm" aria-label="Arm" aria-pressed="false"><span class="visually-hidden" data-copy="regionArm">Arm</span></button>
-                <button class="map-region map-region-hand-left" type="button" data-region="hand" data-region-copy="regionHand" aria-label="Hand" aria-pressed="false"><span class="visually-hidden" data-copy="regionHand">Hand</span></button>
-                <button class="map-region map-region-hand-right" type="button" data-region="hand" data-region-copy="regionHand" aria-label="Hand" aria-pressed="false"><span class="visually-hidden" data-copy="regionHand">Hand</span></button>
-                <button class="map-region map-region-leg-left" type="button" data-region="leg" data-region-copy="regionLeg" aria-label="Leg" aria-pressed="false"><span class="visually-hidden" data-copy="regionLeg">Leg</span></button>
-                <button class="map-region map-region-leg-right" type="button" data-region="leg" data-region-copy="regionLeg" aria-label="Leg" aria-pressed="false"><span class="visually-hidden" data-copy="regionLeg">Leg</span></button>
-                <button class="map-region map-region-knee-left" type="button" data-region="knee" data-region-copy="regionKnee" aria-label="Knee joints" aria-pressed="false"><span class="visually-hidden" data-copy="regionKnee">Knee joints</span></button>
-                <button class="map-region map-region-knee-right" type="button" data-region="knee" data-region-copy="regionKnee" aria-label="Knee joints" aria-pressed="false"><span class="visually-hidden" data-copy="regionKnee">Knee joints</span></button>
-                <button class="map-region map-region-foot-left" type="button" data-region="foot" data-region-copy="regionFoot" aria-label="Foot" aria-pressed="false"><span class="visually-hidden" data-copy="regionFoot">Foot</span></button>
-                <button class="map-region map-region-foot-right" type="button" data-region="foot" data-region-copy="regionFoot" aria-label="Foot" aria-pressed="false"><span class="visually-hidden" data-copy="regionFoot">Foot</span></button>
+                <button class="map-region map-region-shoulder-left" type="button" data-region="shoulder" data-side="left" data-region-copy="regionShoulder" aria-label="Left shoulder joint" aria-pressed="false"><span class="visually-hidden" data-copy="regionShoulder">Shoulder joints</span></button>
+                <button class="map-region map-region-shoulder-right" type="button" data-region="shoulder" data-side="right" data-region-copy="regionShoulder" aria-label="Right shoulder joint" aria-pressed="false"><span class="visually-hidden" data-copy="regionShoulder">Shoulder joints</span></button>
+                <button class="map-region map-region-arm-left" type="button" data-region="arm" data-side="left" data-region-copy="regionArm" aria-label="Left arm" aria-pressed="false"><span class="visually-hidden" data-copy="regionArm">Arm</span></button>
+                <button class="map-region map-region-arm-right" type="button" data-region="arm" data-side="right" data-region-copy="regionArm" aria-label="Right arm" aria-pressed="false"><span class="visually-hidden" data-copy="regionArm">Arm</span></button>
+                <button class="map-region map-region-hand-left" type="button" data-region="hand" data-side="left" data-region-copy="regionHand" aria-label="Left hand" aria-pressed="false"><span class="visually-hidden" data-copy="regionHand">Hand</span></button>
+                <button class="map-region map-region-hand-right" type="button" data-region="hand" data-side="right" data-region-copy="regionHand" aria-label="Right hand" aria-pressed="false"><span class="visually-hidden" data-copy="regionHand">Hand</span></button>
+                <button class="map-region map-region-leg-left" type="button" data-region="leg" data-side="left" data-region-copy="regionLeg" aria-label="Left leg" aria-pressed="false"><span class="visually-hidden" data-copy="regionLeg">Leg</span></button>
+                <button class="map-region map-region-leg-right" type="button" data-region="leg" data-side="right" data-region-copy="regionLeg" aria-label="Right leg" aria-pressed="false"><span class="visually-hidden" data-copy="regionLeg">Leg</span></button>
+                <button class="map-region map-region-knee-left" type="button" data-region="knee" data-side="left" data-region-copy="regionKnee" aria-label="Left knee joint" aria-pressed="false"><span class="visually-hidden" data-copy="regionKnee">Knee joints</span></button>
+                <button class="map-region map-region-knee-right" type="button" data-region="knee" data-side="right" data-region-copy="regionKnee" aria-label="Right knee joint" aria-pressed="false"><span class="visually-hidden" data-copy="regionKnee">Knee joints</span></button>
+                <button class="map-region map-region-foot-left" type="button" data-region="foot" data-side="left" data-region-copy="regionFoot" aria-label="Left foot" aria-pressed="false"><span class="visually-hidden" data-copy="regionFoot">Foot</span></button>
+                <button class="map-region map-region-foot-right" type="button" data-region="foot" data-side="right" data-region-copy="regionFoot" aria-label="Right foot" aria-pressed="false"><span class="visually-hidden" data-copy="regionFoot">Foot</span></button>
               </div>
               <p class="map-side-hint" data-copy="figureHint">Tap the part that feels wrong.</p>
             </div>
@@ -4641,7 +4747,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
     <script type="module">
       import { parseFreeTextComplaint, routeComplaint } from "./routing.js";
       import { LOCALITIES, HOSPITAL_FACT_CHECKED_ON, hospitalsForDepartment, PAN_INDIA_HOSPITALS, INDIAN_STATES, COUNTERFACTUAL_METRICS, panIndiaHospitalsForDepartment, hospitalsByState } from "./hospital-data.js";
-      import { createBodyMap3D } from "./body-map-3d.js";
+      import { createBodyMap3D, BILATERAL_REGIONS, REGION_LABELS } from "./body-map-3d.js";
 
       const copy = {
         en: {
@@ -4657,6 +4763,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           backToQuestion: "← Back", mapEyebrow: "No reading needed", mapTitle: "Point to where it hurts",
           mapNote: "Tap the place that feels wrong.", mapWordsLabel: "Your words:", browserProcessing: "This body map stays in your browser. Nothing is sent to a server.", noLocationTitle: "Nothing in one place?", noLocationNote: "Choose this for a whole-body feeling or if you are not sure where it is.", noLocationFever: "Fever", noLocationWeak: "Weak all over", noLocationUnsure: "Not sure", selectionKicker: "Selected place", selectionEmpty: "Point at a place", selectionHint: "The place you point to will appear here.", selectionChosen: "Selected. Now choose the kind of trouble.", selectionNone: "No one place", figureHint: "Tap the part that feels wrong.", backHint: "Tap anywhere on the upper or lower back.", fallbackTitle: "Or choose from a list", fallbackNote: "Use this only if pointing is difficult.", front: "Front", back: "Back",
           regionHead: "Head", regionFace: "Face / jaw", regionNeck: "Neck", regionChest: "Chest", regionUpperAbdomen: "Upper abdomen", regionLowerAbdomen: "Lower abdomen", regionBack: "Back , upper or lower", regionArm: "Arm", regionHand: "Hand", regionLeg: "Leg", regionFoot: "Foot", regionGeneral: "Whole body / general", frontView: "Front view", backView: "Back view", resetView: "Reset view",
+          sideSelectorTitle: "Side Affected · Laterality", sideLeft: "Left Side · बायाँ", sideBoth: "Both Sides · दोनों तरफ", sideRight: "Right Side · दायाँ",
           kindTitle: "What kind of trouble?", kindNote: "Choose the picture that feels closest. You can change it.", kindEmpty: "Choose a kind", kindHint: "Your choice will appear here.", kindChosen: "Selected. Now add the two quick details.", kindPain: "Pain", kindFever: "Fever or heat", kindBreathing: "Breathing", kindBleeding: "Bleeding", kindSwelling: "Swelling", kindRash: "Rash", kindInjury: "Injury", kindVomiting: "Vomiting or stomach", kindDizziness: "Dizziness", kindLow: "Feeling low", followupTitle: "A little more", durationLabel: "How long?", durationNow: "Just now", durationToday: "Today", durationDays: "A few days", durationLonger: "A while", durationUnsure: "Not sure", severityLabel: "Is it severe right now?", severityNo: "No", severityYes: "Yes", severityUnsure: "Not sure", mapContinue: "Continue", mapIncomplete: "Choose a kind, how long, and whether it is severe right now.", mapReady: "Your description is ready to review.", mapReadyNote: "Nothing has been sent, decided, or booked.", reviewMap: "Review this",
           reviewEyebrow: "Screen 2 · Read-back", reviewTitle: "This is what I understood", reviewNote: "Check these details. Nothing is decided until you confirm.", browserProcessingReview: "These details were prepared in this browser from the choices you can see below.", readbackWordsLabel: "Your words:", chipRegion: "Place", chipKind: "Kind of trouble", chipDuration: "How long", chipSeverity: "Severe now", chipWho: "For", chipAge: "Age band", editTitle: "Change a detail", editNote: "Choose a new answer below. Your read-back will update.", unclearLabel: "I did not understand:", confirmNote: "Your answers stay in this browser for this session. Confirm only when they look right.", confirm: "Confirm", changeSomething: "Change something", resultEyebrow: "Screen 3 · Where to go", matchedCounter: "Matched Counter:", routeReference: "Route reference:", chooseDepartment: "Not right? Choose a department yourself.", emergencyEyebrow: "Emergency guidance", emergencyTitle: "Go to the Emergency department now. Do not book an appointment.", notDiagnosis: "This is not a diagnosis.", deptPaediatrics: "Paediatrics", deptCardiology: "Cardiology", deptNeurology: "Neurology", deptGastroenterology: "Gastroenterology", deptOrthopaedics: "Orthopaedics", deptDermatology: "Dermatology", deptDental: "Dental", deptGeneralMedicine: "General Medicine", deptChoose: "Choose a department yourself",
           backToDepartment: "← Back to department", bookingEyebrow: "Your result · choose what happens next", bookingTitle: "Find a hospital, honestly", bookingNote: "This is one clear result: choose a locality, choose a hospital, then decide whether to make a specimen slip.", findHospital: "See hospitals and slots", whereTitle: "Where would you like to go?", whereNote: "Choose a locality. We do not read your device location.", localityLabel: "Your chosen locality", locationChosenNote: "Location is chosen by you, never taken from the phone. Travel figures below are simulated.", sortNote: "Sorted by seen soonest: slot start + simulated wait. Ties use travel time, then hospital name.", verifiedSource: "Hospital name and department", checked: "Checked", distance: "Travel", nextSlot: "Next open slot", seenBy: "Usually seen by", calendarOpens: "Calendar opens", chooseHospital: "Choose this hospital", chosenHospital: "Hospital chosen", chosenHospitalNote: "Now choose the visit type below.", noHospitals: "No verified hospital is listed for this department in this demo locality.", carryTitle: "What to carry", carryNote: "Choose the list that matches this visit.", firstVisit: "First visit", returningVisit: "Returning", firstId: "a photo ID", phoneOtp: "the phone that receives the one-time passcode", returningUhid: "your UHID from an earlier visit", previousSlip: "your previous appointment slip", feeLine: "OPD registration fee", toSignIn: "Continue to sign in", signInTitle: "Sign in to hold this slot", signInNote: "Identity is needed only now, when making the specimen slip. Nothing real is submitted.", credentialsNote: "These demo credentials are printed here so you never have to use a real account.", usernameLabel: "Username", passwordLabel: "Password", usernameInputLabel: "Demo username", passwordInputLabel: "Demo password", humanCheck: "Tap once: I am a person", signInButton: "Sign in and show the slip", humanCheckNeeded: "Tap the human check first.", slipTitle: "Your specimen slip", slipNote: "Keep this for the counter. It is a mock slip, not a booking.", slipPatient: "Patient", slipDepartment: "Department", slipHospital: "Hospital", slipSlot: "Slot", slipSeenBy: "Honest wait", slipAppointmentId: "Appointment ID", slipUhid: "UHID", patientSaid: "Patient reports:", rightsCard: "If you are turned away with this slip , note the appointment ID, raise a grievance at pgportal.gov.in, or file an RTI asking why a valid online appointment was not honoured.", printSlip: "Print slip", downloadSlip: "Download slip", printFooter: "SPECIMEN , NOT A REAL APPOINTMENT · independent prototype · mock data.", signedIn: "Mock sign-in complete. Your specimen slip is below.", credentialsMismatch: "Use the printed demo credentials above.", feeAmount: "₹10",
@@ -4678,6 +4785,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           backToQuestion: "← वापस", mapEyebrow: "पढ़ने की ज़रूरत नहीं", mapTitle: "जहाँ तकलीफ़ है वहाँ चुनें",
           mapNote: "जहाँ परेशानी है वहाँ चुनें।", mapWordsLabel: "आपके शब्द:", browserProcessing: "शरीर का यह नक्शा इसी ब्राउज़र में चलता है। कुछ भी सर्वर पर नहीं भेजा जाता।", noLocationTitle: "एक जगह पर परेशानी नहीं?", noLocationNote: "पूरे शरीर में परेशानी हो या जगह पता न हो तो इसे चुनें।", noLocationFever: "बुखार", noLocationWeak: "पूरे शरीर में कमज़ोरी", noLocationUnsure: "पता नहीं", selectionKicker: "चुनी हुई जगह", selectionEmpty: "किसी जगह पर चुनें", selectionHint: "आप जहाँ चुनेंगे, वह जगह यहाँ दिखेगी।", selectionChosen: "चुन लिया। अब परेशानी की किस्म चुनें।", selectionNone: "कोई एक जगह नहीं", figureHint: "जहाँ परेशानी है वहाँ चुनें।", backHint: "ऊपरी या निचली पीठ पर कहीं भी चुनें।", fallbackTitle: "या सूची में से चुनें", fallbackNote: "अगर नक्शे पर चुनना मुश्किल हो तभी इसका इस्तेमाल करें।", front: "सामने", back: "पीछे",
           regionHead: "सिर", regionFace: "चेहरा / जबड़ा", regionNeck: "गर्दन", regionChest: "सीना", regionUpperAbdomen: "पेट का ऊपरी हिस्सा", regionLowerAbdomen: "पेट का निचला हिस्सा", regionBack: "पीठ , ऊपर या नीचे", regionArm: "बाँह", regionHand: "हाथ", regionLeg: "टाँग", regionFoot: "पैर", regionGeneral: "पूरा शरीर / सामान्य", frontView: "सामने से", backView: "पीछे से", resetView: "दृश्य रीसेट करें",
+          sideSelectorTitle: "प्रभावित हिस्सा / तरफ", sideLeft: "बायाँ हिस्सा", sideBoth: "दोनों तरफ (बायाँ व दायाँ)", sideRight: "दायाँ हिस्सा",
           kindTitle: "परेशानी किस तरह की है?", kindNote: "जो तस्वीर सबसे करीब लगे उसे चुनें। इसे बदल सकते हैं।", kindEmpty: "किस्म चुनें", kindHint: "आपकी पसंद यहाँ दिखेगी।", kindChosen: "चुन लिया। अब दो छोटी बातें बताइए।", kindPain: "दर्द", kindFever: "बुखार या गर्मी", kindBreathing: "साँस", kindBleeding: "खून आना", kindSwelling: "सूजन", kindRash: "दाने", kindInjury: "चोट", kindVomiting: "उल्टी या पेट", kindDizziness: "चक्कर", kindLow: "कमज़ोरी या मन उदास", followupTitle: "थोड़ा और बताइए", durationLabel: "कब से?", durationNow: "अभी", durationToday: "आज", durationDays: "कुछ दिन", durationLonger: "काफ़ी समय", durationUnsure: "पता नहीं", severityLabel: "क्या अभी बहुत तेज़ है?", severityNo: "नहीं", severityYes: "हाँ", severityUnsure: "पता नहीं", mapContinue: "आगे बढ़ें", mapIncomplete: "परेशानी की किस्म, कब से और अभी बहुत तेज़ है या नहीं चुनें।", mapReady: "आपका विवरण देखने के लिए तैयार है।", mapReadyNote: "कुछ भेजा, तय या बुक नहीं हुआ है।", reviewMap: "इसे देखें",
           reviewEyebrow: "स्क्रीन 2 · दोबारा पढ़ें", reviewTitle: "हमने यह समझा", reviewNote: "इन जानकारियों को जाँचें। आपकी पुष्टि से पहले कुछ तय नहीं होगा।", browserProcessingReview: "नीचे दिख रहे आपके जवाबों से यह विवरण इसी ब्राउज़र में तैयार हुआ है।", readbackWordsLabel: "आपके शब्द:", chipRegion: "जगह", chipKind: "परेशानी की किस्म", chipDuration: "कब से", chipSeverity: "अभी बहुत तेज़", chipWho: "किसके लिए", chipAge: "उम्र का समूह", editTitle: "एक जानकारी बदलें", editNote: "नीचे नया जवाब चुनें। दोबारा पढ़ा गया विवरण बदल जाएगा।", unclearLabel: "समझ नहीं आया:", confirmNote: "आपके जवाब इस ब्राउज़र में इसी सत्र तक रहेंगे। सही लगे तभी पुष्टि करें।", confirm: "पुष्टि करें", changeSomething: "कुछ बदलें", resultEyebrow: "स्क्रीन 3 · कहाँ जाएँ", matchedCounter: "मिलान हुआ काउंटर:", routeReference: "रूट संदर्भ:", chooseDepartment: "सही नहीं? विभाग खुद चुनें।", emergencyEyebrow: "इमरजेंसी की सलाह", emergencyTitle: "अभी इमरजेंसी विभाग जाएँ। अपॉइंटमेंट बुक न करें।", notDiagnosis: "यह बीमारी का पता नहीं है।", deptPaediatrics: "बाल रोग विभाग", deptCardiology: "कार्डियोलॉजी", deptNeurology: "न्यूरोलॉजी", deptGastroenterology: "गैस्ट्रोएंटेरोलॉजी", deptOrthopaedics: "ऑर्थोपेडिक्स", deptDermatology: "त्वचा रोग विभाग", deptDental: "डेंटल", deptGeneralMedicine: "जनरल मेडिसिन", deptChoose: "विभाग खुद चुनें",
           backToDepartment: "← विभाग पर वापस जाएँ", bookingEyebrow: "आपका नतीजा · अगला कदम चुनें", bookingTitle: "ईमानदारी से अस्पताल चुनें", bookingNote: "एक ही साफ़ नतीजा: इलाका चुनें, अस्पताल चुनें, फिर नकली स्लिप बनाने का फैसला करें।", findHospital: "अस्पताल और स्लॉट देखें", whereTitle: "आप कहाँ जाना चाहेंगे?", whereNote: "इलाका चुनें। हम आपके फ़ोन की जगह नहीं पढ़ते।", localityLabel: "आपका चुना हुआ इलाका", locationChosenNote: "जगह आपने चुनी है, फ़ोन से नहीं ली गई। नीचे आने-जाने का समय नकली है।", sortNote: "जल्दी दिखने के हिसाब से क्रम: स्लॉट का समय + नकली इंतज़ार। बराबरी पर आने-जाने का समय, फिर अस्पताल का नाम।", verifiedSource: "अस्पताल का नाम और विभाग", checked: "जाँच की तारीख", distance: "यात्रा", nextSlot: "अगला खुला स्लॉट", seenBy: "आमतौर पर दिखेंगे", calendarOpens: "कैलेंडर खुलेगा", chooseHospital: "यह अस्पताल चुनें", chosenHospital: "अस्पताल चुना गया", chosenHospitalNote: "अब नीचे इस यात्रा का प्रकार चुनें।", noHospitals: "इस डेमो इलाके में इस विभाग के लिए कोई सत्यापित अस्पताल सूची में नहीं है।", carryTitle: "क्या साथ ले जाएँ", carryNote: "इस यात्रा के अनुसार सूची चुनें।", firstVisit: "पहली यात्रा", returningVisit: "फिर से आना", firstId: "फोटो पहचान पत्र", phoneOtp: "वह फ़ोन जिस पर वन-टाइम पासकोड आएगा", returningUhid: "पहले का यूएचआईडी", previousSlip: "पहली अपॉइंटमेंट की स्लिप", feeLine: "ओपीडी पंजीकरण शुल्क", toSignIn: "साइन इन करने के लिए आगे बढ़ें", signInTitle: "स्लॉट रखने के लिए साइन इन करें", signInNote: "पहचान की ज़रूरत सिर्फ़ अब है, नकली स्लिप बनाते समय। कुछ असली जमा नहीं होता।", credentialsNote: "डेमो क्रेडेंशियल यहाँ बड़े अक्षरों में हैं; असली खाता इस्तेमाल न करें।", usernameLabel: "यूज़रनेम", passwordLabel: "पासवर्ड", usernameInputLabel: "डेमो यूज़रनेम", passwordInputLabel: "डेमो पासवर्ड", humanCheck: "एक बार चुनें: मैं इंसान हूँ", signInButton: "साइन इन करें और स्लिप दिखाएँ", humanCheckNeeded: "पहले मानव-जाँच चुनें।", slipTitle: "आपकी नकली स्लिप", slipNote: "इसे काउंटर पर दिखाने के लिए रखें। यह नकली स्लिप है, बुकिंग नहीं।", slipPatient: "मरीज़", slipDepartment: "विभाग", slipHospital: "अस्पताल", slipSlot: "स्लॉट", slipSeenBy: "ईमानदार इंतज़ार", slipAppointmentId: "अपॉइंटमेंट आईडी", slipUhid: "यूएचआईडी", patientSaid: "मरीज़ ने बताया:", rightsCard: "अगर इस स्लिप के साथ आपको लौटा दिया जाए , अपॉइंटमेंट आईडी लिखें, pgportal.gov.in पर शिकायत करें, या पूछें कि मान्य ऑनलाइन अपॉइंटमेंट क्यों नहीं माना गया।", printSlip: "स्लिप प्रिंट करें", downloadSlip: "स्लिप डाउनलोड करें", printFooter: "नमूना , असली अपॉइंटमेंट नहीं · स्वतंत्र प्रोटोटाइप · नकली डेटा।", signedIn: "नकली साइन-इन पूरा हुआ। आपकी नकली स्लिप नीचे है।", credentialsMismatch: "ऊपर दिए डेमो क्रेडेंशियल इस्तेमाल करें।", feeAmount: "₹10",
@@ -4825,7 +4933,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         }
       }
 
-      const state = { language: "en", selectedDialect: "en", selectedDialectData: null, screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, fullName: "", phone: "", exactAge: "", gender: null, conditions: [], listening: false, region: null, noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, consultationMode: "in-person", appointmentDate: null, appointmentShift: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
+      const state = { language: "en", selectedDialect: "en", selectedDialectData: null, screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, fullName: "", phone: "", exactAge: "", gender: null, conditions: [], listening: false, region: null, side: "both", noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, consultationMode: "in-person", appointmentDate: null, appointmentShift: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
       const text = (key) => {
         const lang = state.language || "en";
         if (copy[lang] && copy[lang][key]) return copy[lang][key];
@@ -4985,13 +5093,25 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         });
       }
 
+      function getRegionDisplayName(region, side = state.side) {
+        if (!region) return text("selectionNone");
+        const isBilateral = BILATERAL_REGIONS.includes(region);
+        let prefix = "";
+        if (isBilateral) {
+          if (side === "left") prefix = state.language === "hi" ? "बायाँ " : "Left ";
+          else if (side === "right") prefix = state.language === "hi" ? "दायाँ " : "Right ";
+          else if (side === "both") prefix = state.language === "hi" ? "दोनों तरफ: " : "Both: ";
+        }
+        return prefix + text(regionCopyKeys[region]);
+      }
+
       function renderRegionSelection() {
         if (!state.region) {
           selectedRegionName.textContent = state.noLocation ? text("selectionNone") : text("selectionEmpty");
           selectionMessage.textContent = state.noLocation ? text("selectionChosen") : text("selectionHint");
           return;
         }
-        selectedRegionName.textContent = text(regionCopyKeys[state.region]);
+        selectedRegionName.textContent = getRegionDisplayName(state.region, state.side);
         selectionMessage.textContent = text("selectionChosen");
       }
 
@@ -5028,7 +5148,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         }
         workspaceSummary.replaceChildren();
         const strong = document.createElement("strong");
-        strong.textContent = state.region ? text(regionCopyKeys[state.region]) : text("selectionNone");
+        strong.textContent = state.region ? getRegionDisplayName(state.region, state.side) : text("selectionNone");
         const note = document.createElement("span");
         note.textContent = state.kind ? text("kindChosen") : text("workspaceAwaiting");
         workspaceSummary.append(strong, note);
@@ -5280,9 +5400,64 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         document.querySelector("#body-map-button").focus();
       });
 
-      function selectRegion(region, focusKind = true) {
+      function updateSideSelection(side) {
+        state.side = side || "both";
+        document.querySelectorAll(".side-pill").forEach((btn) => {
+          const isActive = btn.dataset.side === state.side;
+          btn.classList.toggle("is-active", isActive);
+          btn.setAttribute("aria-pressed", String(isActive));
+        });
+        bodyMap3d?.setSide?.(state.side);
+        renderRegionBadge();
+        renderRegionSelection();
+        renderWorkspace();
+      }
+
+      function renderRegionBadge() {
+        const somaticBadge = document.querySelector("#somatic-current-region");
+        if (!somaticBadge) return;
+        if (!state.region) {
+          somaticBadge.textContent = "All Regions · संपूर्ण शरीर";
+          return;
+        }
+        const lbl = REGION_LABELS[state.region];
+        if (!lbl) {
+          somaticBadge.textContent = state.region;
+          return;
+        }
+        const isBilateral = BILATERAL_REGIONS.includes(state.region);
+        let prefixEn = "";
+        let prefixHi = "";
+        if (isBilateral) {
+          if (state.side === "left") {
+            prefixEn = "Left ";
+            prefixHi = "बायाँ ";
+          } else if (state.side === "right") {
+            prefixEn = "Right ";
+            prefixHi = "दायाँ ";
+          } else if (state.side === "both") {
+            prefixEn = "Both Sides: ";
+            prefixHi = "दोनों तरफ: ";
+          }
+        }
+        somaticBadge.textContent = `${prefixEn}${lbl.en} · ${prefixHi}${lbl.hi}`;
+      }
+
+      function selectRegion(region, focusKind = true, side = null) {
           state.region = region;
-          bodyMap3d?.select?.(region);
+          if (side) {
+            state.side = side;
+          } else if (!BILATERAL_REGIONS.includes(region)) {
+            state.side = "both";
+          }
+          
+          document.querySelectorAll(".side-pill").forEach((btn) => {
+            const isActive = btn.dataset.side === state.side;
+            btn.classList.toggle("is-active", isActive);
+            btn.setAttribute("aria-pressed", String(isActive));
+          });
+
+          bodyMap3d?.select?.(region, state.side);
           state.noLocation = null;
           document.querySelectorAll("[data-no-location]").forEach((item) => item.setAttribute("aria-pressed", "false"));
           document.querySelectorAll("[data-region]").forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.region === state.region)));
@@ -5292,11 +5467,8 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           mapStatus.textContent = "";
           mapStatus.removeAttribute("role");
           
-          const somaticBadge = document.querySelector("#somatic-current-region");
-          if (somaticBadge) {
-            const lbl = REGION_LABELS[region];
-            somaticBadge.textContent = lbl ? `${lbl.en} · ${lbl.hi}` : (region || "All Regions");
-          }
+          renderRegionBadge();
+
           const somaticPanel = document.querySelector("#somatic-lens-panel");
           if (somaticPanel) {
             somaticPanel.hidden = false;
@@ -5305,7 +5477,16 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           if (focusKind) showKindQuestion();
       }
 
-      document.querySelectorAll("[data-region]").forEach((button) => button.addEventListener("click", () => selectRegion(button.dataset.region)));
+      document.querySelectorAll(".side-pill").forEach((button) => {
+        button.addEventListener("click", () => {
+          updateSideSelection(button.dataset.side);
+        });
+      });
+
+      document.querySelectorAll("[data-region]").forEach((button) => button.addEventListener("click", () => {
+        const side = button.dataset.side || (BILATERAL_REGIONS.includes(button.dataset.region) ? state.side : "both");
+        selectRegion(button.dataset.region, true, side);
+      }));
 
       document.querySelectorAll("[data-no-location]").forEach((button) => {
         button.addEventListener("click", () => {
@@ -5446,6 +5627,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           const extracted = parseFreeTextComplaint(complaint.value.trim(), state.language);
           return {
             ...extracted,
+            side: state.side || "both",
             age_band: extracted.age_band || state.age,
             who_for: extracted.who_for || (state.booking === "myself" ? "self" : state.who),
             patient_name: state.fullName,
@@ -5457,6 +5639,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         }
         return {
           region: state.region,
+          side: state.side || "both",
           kind: state.kind,
           duration: state.duration,
           severity: state.severity,
@@ -5475,7 +5658,18 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       }
 
       function labelFor(field, value) {
-        if (field === "region") return value ? text(regionCopyKeys[value]) : text("selectionNone");
+        if (field === "region") {
+          if (!value) return text("selectionNone");
+          const isBilateral = BILATERAL_REGIONS.includes(value);
+          const side = state.complaint?.side || state.side || "both";
+          let prefix = "";
+          if (isBilateral) {
+            if (side === "left") prefix = state.language === "hi" ? "बायाँ " : "Left ";
+            else if (side === "right") prefix = state.language === "hi" ? "दायाँ " : "Right ";
+            else if (side === "both") prefix = state.language === "hi" ? "दोनों तरफ: " : "Both: ";
+          }
+          return prefix + text(regionCopyKeys[value]);
+        }
         if (field === "kind") return value ? text(kindCopyKeys[value]) : text("notChosen");
         if (field === "duration") return value ? text(durationCopyKeys[value]) : text("notChosen");
         if (field === "severity") return value ? text(severityCopyKeys[value]) : text("notChosen");
@@ -5531,6 +5725,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       function syncComplaintToState() {
         const current = state.complaint;
         state.region = current.region;
+        if (current.side) state.side = current.side;
         state.kind = current.kind;
         state.duration = current.duration;
         state.severity = current.severity;
@@ -5734,8 +5929,32 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         const regLabels = REGION_LABELS[regKey] || { en: regKey || "General", hi: "सामान्य" };
         const sensArr = state.sensations && state.sensations.length > 0 ? state.sensations : [(current.kind || "discomfort")];
         const intLevel = state.intensity || 3;
+        const curSide = current.side || state.side || "both";
+        const isBilateral = BILATERAL_REGIONS.includes(regKey);
+        let sideEn = "";
+        let sideHi = "";
+        let sideEnScript = "";
+        let sideHiScript = "";
+        if (isBilateral) {
+          if (curSide === "left") {
+            sideEn = "Left ";
+            sideHi = "बायाँ ";
+            sideEnScript = "left ";
+            sideHiScript = "बाएँ ";
+          } else if (curSide === "right") {
+            sideEn = "Right ";
+            sideHi = "दायाँ ";
+            sideEnScript = "right ";
+            sideHiScript = "दाएँ ";
+          } else if (curSide === "both") {
+            sideEn = "Both Sides: ";
+            sideHi = "दोनों तरफ: ";
+            sideEnScript = "both ";
+            sideHiScript = "दोनों ";
+          }
+        }
 
-        if (handoverRegion) handoverRegion.textContent = `${regLabels.en} · ${regLabels.hi}`;
+        if (handoverRegion) handoverRegion.textContent = `${sideEn}${regLabels.en} · ${sideHi}${regLabels.hi}`;
         if (handoverSensations) handoverSensations.textContent = sensArr.join(", ").toUpperCase();
         if (handoverIntensity) {
           handoverIntensity.textContent = `Level ${intLevel} / 5 (${INTENSITY_DESCRIPTIONS[intLevel]?.en || "Moderate"})`;
@@ -5743,15 +5962,15 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           handoverIntensity.dataset.level = intLevel;
         }
 
-        const promptHi = `डॉक्टर साहब, मुझे ${regLabels.hi} में ${sensArr.join(", ")} महसूस हो रहा है (तीव्रता ${intLevel}/5)। कृपया जाँच करें।`;
-        const promptEn = `Doctor, I am experiencing ${sensArr.join(", ")} in my ${regLabels.en} (distress level ${intLevel}/5). Please examine.`;
+        const promptHi = `डॉक्टर साहब, मुझे ${sideHiScript}${regLabels.hi} में ${sensArr.join(", ")} महसूस हो रहा है (तीव्रता ${intLevel}/5)। कृपया जाँच करें।`;
+        const promptEn = `Doctor, I am experiencing ${sensArr.join(", ")} in my ${sideEnScript}${regLabels.en} (distress level ${intLevel}/5). Please examine.`;
         if (handoverPromptHi) handoverPromptHi.textContent = `"${promptHi}"`;
         if (handoverPromptEn) handoverPromptEn.textContent = `"${promptEn}"`;
 
         const shareWaBtn = document.querySelector("#share-whatsapp");
         if (shareWaBtn) {
           shareWaBtn.onclick = () => {
-            const waMsg = `🏥 *Raahat Citizen OPD Handover Slip*\n• Hospital: ${hospital.shortName}\n• Counter: ${department}\n• Patient: ${current.patient_name || labelFor("who_for", current.who_for)}\n• Target Area: ${regLabels.en} (${regLabels.hi})\n• Sensations: ${sensArr.join(", ")}\n• Distress Level: ${intLevel}/5\n• Doctor Handover Script: "${promptHi}"\n\n_Independent Prototype · Public OPD Triage_`;
+            const waMsg = `🏥 *Raahat Citizen OPD Handover Slip*\n• Hospital: ${hospital.shortName}\n• Counter: ${department}\n• Patient: ${current.patient_name || labelFor("who_for", current.who_for)}\n• Target Area: ${sideEn}${regLabels.en} (${sideHi}${regLabels.hi})\n• Sensations: ${sensArr.join(", ")}\n• Distress Level: ${intLevel}/5\n• Doctor Handover Script: "${promptHi}"\n\n_Independent Prototype · Public OPD Triage_`;
             window.open(`https://wa.me/?text=${encodeURIComponent(waMsg)}`, "_blank");
           };
         }
@@ -6413,7 +6632,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           canvas: map3dCanvas,
           stage: map3dStage,
           language: state.language,
-          onSelect: (region) => selectRegion(region),
+          onSelect: (region, side) => selectRegion(region, true, side),
           onHover: (hit) => {
             if (hit) workspaceSummary.dataset.hoveredRegion = hit.region;
             else delete workspaceSummary.dataset.hoveredRegion;
