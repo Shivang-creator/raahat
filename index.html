@@ -1056,8 +1056,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         #current-lang-badge { display: none; }
         .lang-quick-btn { width: 2.2rem !important; height: 2.2rem !important; min-height: 2.2rem !important; padding: 0 !important; justify-content: center !important; border-radius: 50% !important; border: 1.5px solid var(--line) !important; background: var(--paper) !important; }
         .nav-start { display: none !important; } /* Hero section right below has the 100% width Start Triage button */
-        .footer-tile { padding: 1.25rem 1rem !important; }
-        .creator-action-btn { width: 100% !important; justify-content: center !important; }
         .form-grid, .catalog-grid, .preparation-grid, .blood-actions-grid, .mode-grid { grid-template-columns: 1fr; }
         .age-grid { grid-template-columns: 1fr; }
         .date-strip { grid-template-columns: repeat(7, 6.5rem); }
@@ -1333,47 +1331,85 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
     
       /* ====================================================
-         SIMPLIFIED CIVIC TECH & HACKATHON FOOTER
+         SIMPLE 2-LINE FOOTER (Civic Tech & Attribution)
          ==================================================== */
-      .site-footer { margin-top: 4rem; padding: 2.5rem clamp(1rem, 3vw, 2.5rem) 2rem; border-top: 2px solid rgba(22, 101, 52, 0.2); border-radius: 1.75rem 1.75rem 0 0; background: linear-gradient(145deg, rgba(238, 248, 242, 0.96) 0%, rgba(248, 250, 249, 0.92) 50%, rgba(236, 245, 252, 0.96) 100%); box-shadow: 0 -4px 24px rgba(15, 23, 42, 0.04); }
-      [data-theme="dark"] .site-footer { border-top-color: rgba(45, 212, 191, 0.25); background: linear-gradient(145deg, rgba(10, 20, 16, 0.98) 0%, rgba(16, 28, 22, 0.94) 50%, rgba(12, 22, 30, 0.98) 100%); box-shadow: 0 -4px 28px rgba(0, 0, 0, 0.4); }
-      
-      .footer-tiles-container { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2rem; }
-      @media (min-width: 840px) { .footer-tiles-container { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-      
-      .footer-tile { padding: 1.5rem 1.75rem; border-radius: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; transition: transform 180ms ease, box-shadow 180ms ease; }
-      .footer-tile:hover { transform: translateY(-2px); }
-      
-      .hackathon-tile { border: 2px solid rgba(217, 119, 6, 0.35); background: linear-gradient(135deg, rgba(254, 243, 199, 0.5) 0%, rgba(255, 251, 235, 0.85) 100%); box-shadow: 0 4px 16px rgba(217, 119, 6, 0.08); }
-      [data-theme="dark"] .hackathon-tile { border-color: rgba(245, 158, 11, 0.4); background: linear-gradient(135deg, rgba(69, 39, 14, 0.35) 0%, rgba(28, 48, 38, 0.75) 100%); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
-      
-      .creator-tile { border: 2px solid rgba(22, 101, 52, 0.3); background: linear-gradient(135deg, rgba(236, 253, 245, 0.5) 0%, rgba(240, 253, 250, 0.85) 100%); box-shadow: 0 4px 16px rgba(22, 101, 52, 0.08); }
-      [data-theme="dark"] .creator-tile { border-color: rgba(45, 212, 191, 0.35); background: linear-gradient(135deg, rgba(16, 44, 34, 0.4) 0%, rgba(20, 36, 48, 0.75) 100%); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
-      
-      .footer-tile-badge { display: flex; align-items: center; gap: 0.5rem; }
-      .badge-text { font-size: 0.76rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
-      .hackathon-tile .badge-text { color: #b45309; }
-      [data-theme="dark"] .hackathon-tile .badge-text { color: #fbbf24; }
-      .creator-tile .badge-text { color: #065f46; }
-      [data-theme="dark"] .creator-tile .badge-text { color: #2dd4bf; }
-      
-      .footer-tile-title { font-size: 1.35rem; font-weight: 900; color: var(--ink); margin: 0; line-height: 1.2; letter-spacing: -0.02em; }
-      .footer-tile-sub { font-size: 0.92rem; color: var(--muted); line-height: 1.5; margin: 0; }
-      .footer-tile-tags { display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 0.25rem; }
-      
-      .creator-links-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
-      .creator-action-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.55rem 1.1rem; border-radius: var(--radius-full); font-size: 0.92rem; font-weight: 800; text-decoration: none; transition: all 180ms ease; }
-      .github-btn { border: 1.5px solid var(--ink); background: var(--ink); color: var(--paper); }
-      .github-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
-      [data-theme="dark"] .github-btn { background: #ffffff; color: #000000; border-color: #ffffff; }
-      
-      .linkedin-btn { border: 1.5px solid #0077b5; background: #0077b5; color: #ffffff; }
-      .linkedin-btn:hover { background: #006097; border-color: #006097; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0, 119, 181, 0.35); }
-      .btn-icon { width: 1.1rem; height: 1.1rem; flex-shrink: 0; }
-      
-      .footer-bottom-notice { border-top: 1px solid var(--line); padding-top: 1.25rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
-      .prototype-notice { color: var(--muted); font-size: 0.88rem; margin: 0; }
-      .footer-copy { color: var(--muted); font-size: 0.85rem; margin: 0; font-weight: 700; }
+      .site-footer {
+        margin-top: 3.5rem;
+        padding: 1.5rem clamp(1rem, 2.5vw, 2rem) 1.75rem;
+        border-top: 1px solid var(--line);
+        background: var(--paper);
+        text-align: center;
+      }
+      [data-theme="dark"] .site-footer {
+        border-top-color: rgba(45, 212, 191, 0.2);
+        background: #0d1713;
+      }
+      .footer-simple-wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.55rem;
+      }
+      .footer-primary-line {
+        margin: 0;
+        font-size: 0.92rem;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        line-height: 1.5;
+      }
+      .footer-primary-line strong {
+        color: var(--accent-dark);
+        font-weight: 800;
+      }
+      [data-theme="dark"] .footer-primary-line strong {
+        color: #2dd4bf;
+      }
+      .footer-dot {
+        color: var(--muted);
+        opacity: 0.6;
+        user-select: none;
+      }
+      .footer-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        color: var(--accent);
+        font-weight: 750;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 150ms ease;
+      }
+      .footer-link:hover {
+        color: var(--accent-dark);
+      }
+      [data-theme="dark"] .footer-link {
+        color: #2dd4bf;
+      }
+      [data-theme="dark"] .footer-link:hover {
+        color: #5eead4;
+      }
+      .footer-link-icon {
+        width: 0.95rem;
+        height: 0.95rem;
+        flex-shrink: 0;
+      }
+      .footer-secondary-line {
+        margin: 0;
+        font-size: 0.82rem;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        line-height: 1.4;
+      }
 
       /* ====================================================
          ACCESSIBILITY CONTROL PANEL STYLES (ORS Style)
@@ -1424,8 +1460,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       html[data-a11y-contrast="high"] .hospital-card,
       html[data-a11y-contrast="high"] .slip,
       html[data-a11y-contrast="high"] .topline,
-      html[data-a11y-contrast="high"] .site-footer,
-      html[data-a11y-contrast="high"] .footer-tile {
+      html[data-a11y-contrast="high"] .site-footer {
         border-width: 2px !important;
         border-color: #ffff00 !important;
       }
@@ -3056,51 +3091,26 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       </main>
 
       
-      <!-- Simplified Civic Tech & Hackathon Attribution Footer -->
+      <!-- Simple Civic Tech & Hackathon Attribution Footer -->
       <footer class="site-footer" aria-label="Raahat hackathon and creator footer">
-        <div class="footer-tiles-container">
-          <!-- Tile 1: National Hackathon Credential -->
-          <div class="footer-tile hackathon-tile">
-            <div class="footer-tile-badge">
-              <span class="sparkle-icon" aria-hidden="true">⚡</span>
-              <span class="badge-text">NATIONAL CIVIC HACKATHON BUILD</span>
-            </div>
-            <h3 class="footer-tile-title">Build What Moves India</h3>
-            <p class="footer-tile-sub">Organized by <strong>Varun Mayya × OpenAI</strong> (Feb–Mar 2026)</p>
-            <div class="footer-tile-tags">
-              <span class="tag">Healthcare &amp; Civic Equity Track</span>
-              <span class="tag">22 Scheduled Indian Languages</span>
-              <span class="tag">Verified Civic Tech</span>
-            </div>
-          </div>
-
-          <!-- Tile 2: Creator Credentials -->
-          <div class="footer-tile creator-tile">
-            <div class="footer-tile-badge">
-              <span class="creator-badge-icon" aria-hidden="true">👨‍💻</span>
-              <span class="badge-text">CREATOR &amp; ARCHITECT</span>
-            </div>
-            <h3 class="footer-tile-title">Shivang</h3>
-            <p class="footer-tile-sub">Engineered with open civic principles, deterministic emergency safety, and accessible public healthcare routing.</p>
-            <div class="creator-links-row" aria-label="Shivang Social Profiles">
-              <a href="https://github.com/Shivang-creator" target="_blank" rel="noopener noreferrer" class="creator-action-btn github-btn" title="Shivang on GitHub">
-                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                <span>GitHub</span>
-              </a>
-              <a href="https://www.linkedin.com/in/shivang-shirodkar-a51902233/" target="_blank" rel="noopener noreferrer" class="creator-action-btn linkedin-btn" title="Shivang on LinkedIn">
-                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                <span>LinkedIn</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Civic Prototype Safeguard Notice (Rule 6) -->
-        <div class="footer-bottom-notice">
-          <p class="prototype-notice">
-            <span class="tag">Civic Safeguard</span> <strong>Independent Civic Prototype · Mock Data · Not affiliated with National Health Authority, ORS, or any government body.</strong>
+        <div class="footer-simple-wrap">
+          <p class="footer-primary-line">
+            <span>Built for <strong>Build What Moves India</strong> Hackathon (Varun Mayya × OpenAI) by <strong>Shivang</strong></span>
+            <span class="footer-dot" aria-hidden="true">·</span>
+            <a href="https://github.com/Shivang-creator" target="_blank" rel="noopener noreferrer" class="footer-link" title="Shivang on GitHub">
+              <svg class="footer-link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <span class="footer-dot" aria-hidden="true">·</span>
+            <a href="https://www.linkedin.com/in/shivang-shirodkar-a51902233/" target="_blank" rel="noopener noreferrer" class="footer-link" title="Shivang on LinkedIn">
+              <svg class="footer-link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              LinkedIn
+            </a>
           </p>
-          <p class="footer-copy">© 2026 Raahat · Built for India with open civic principles.</p>
+          <p class="footer-secondary-line">
+            <span class="tag">Prototype</span>
+            <span>Independent prototype · Mock data · Not affiliated with National Health Authority, ORS, or any government body.</span>
+          </p>
         </div>
       </footer>
 
