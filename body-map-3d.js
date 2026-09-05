@@ -2,14 +2,20 @@
 // This file only reports a citizen-selected region. It never routes,
 // diagnoses, calls a model, or chooses a department.
 
+// Warm, organic human anatomical tones (replacing artificial green robot palette)
 const COLORS = Object.freeze({
-  spruce: 0x166534,
-  emerald: 0x1d3d33,
-  spruceDark: 0x14532d,
-  emeraldDark: 0x142b24,
-  amber: 0xf59e0b,
-  amberLight: 0xfbbf24,
-  white: 0xf8fafc,
+  // Natural human skin / warm alabaster anatomical tones
+  skinLight: 0xebd5c6,       // Warm porcelain / soft skin tone
+  skinContour: 0xdfc0ad,     // Gentle muscular contour tone
+  skinDeep: 0xcfa894,        // Anatomical depth tone
+  heartRose: 0xe11d48,       // Living cardiovascular tone
+  amber: 0xf59e0b,           // Warm clinical interactive amber
+  amberLight: 0xfbbf24,      // Selected glow
+  glowPulse: 0xfef08a,       // Breathing vitality
+  // Dark mode anatomical silhouette
+  darkBody: 0x2c3545,        // Soft slate-obsidian human form
+  darkContour: 0x1e2634,     // Deep contour
+  darkInner: 0x3d4a60,       // Inner anatomical depth
 });
 
 export const REGION_LABELS = Object.freeze({
@@ -37,25 +43,27 @@ export const REGION_LABELS = Object.freeze({
 function themePalette() {
   const dark = document.documentElement?.getAttribute("data-theme") === "dark";
   return {
-    body: dark ? 0x224438 : COLORS.spruce,
-    secondary: dark ? 0x162c25 : COLORS.spruceDark,
-    inner: dark ? 0x2dd4bf : 0x2b8060,
+    body: dark ? COLORS.darkBody : COLORS.skinLight,
+    secondary: dark ? COLORS.darkContour : COLORS.skinContour,
+    inner: dark ? COLORS.darkInner : COLORS.skinDeep,
+    organ: dark ? COLORS.amber : COLORS.heartRose,
   };
 }
 
+// Organic skin/tissue physical material with natural subsurface scattering look
 function makeMaterial(THREE, color, overrides = {}) {
   return new THREE.MeshPhysicalMaterial({
     color,
-    roughness: 0.22,
-    metalness: 0.12,
-    transmission: 0.55,
-    thickness: 1.2,
-    ior: 1.4,
-    clearcoat: 0.65,
-    clearcoatRoughness: 0.15,
+    roughness: 0.38,
+    metalness: 0.04,
+    transmission: 0.16,
+    thickness: 1.6,
+    ior: 1.40,
+    clearcoat: 0.22,
+    clearcoatRoughness: 0.28,
     transparent: true,
-    opacity: 0.88,
-    side: THREE.DoubleSide,
+    opacity: 0.94,
+    side: THREE.FrontSide,
     emissive: 0x000000,
     emissiveIntensity: 0,
     ...overrides,
@@ -64,154 +72,316 @@ function makeMaterial(THREE, color, overrides = {}) {
 
 function addRegion(parent, mesh, region, material, themeRole = "body", priority = 0) {
   mesh.material = material.clone();
-  mesh.material.opacity = 0.85;
   mesh.userData.region = region;
   mesh.userData.themeRole = themeRole;
   mesh.userData.priority = priority;
   mesh.userData.baseColor = mesh.material.color.clone();
-  mesh.userData.baseOpacity = 0.85;
-  mesh.userData.restingOpacity = 0.85;
+  mesh.userData.baseOpacity = mesh.material.opacity;
+  mesh.userData.restingOpacity = mesh.material.opacity;
   parent.add(mesh);
   return mesh;
 }
 
-function addEllipsoid(THREE, parent, region, position, scale, material, themeRole = "body", segments = 24, priority = 0) {
-  const mesh = new THREE.Mesh(new THREE.SphereGeometry(1, segments, Math.max(12, segments - 6)), material);
+function addSculptedEllipsoid(THREE, parent, region, position, scale, material, themeRole = "body", segments = 24, priority = 0, sculptFn = null) {
+  const geometry = new THREE.SphereGeometry(1, segments, Math.max(14, segments - 6));
+  if (sculptFn) {
+    const pos = geometry.attributes.position;
+    const v = new THREE.Vector3();
+    for (let i = 0; i < pos.count; i++) {
+      v.fromBufferAttribute(pos, i);
+      sculptFn(v);
+      pos.setXYZ(i, v.x, v.y, v.z);
+    }
+    geometry.computeVertexNormals();
+  }
+  const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(...position);
   mesh.scale.set(...scale);
   return addRegion(parent, mesh, region, material, themeRole, priority);
 }
 
-function addCapsule(THREE, parent, region, start, end, radius, material, themeRole = "body", priority = 0) {
-  const from = new THREE.Vector3(...start);
-  const to = new THREE.Vector3(...end);
+// Builds an organic contoured human limb (replaces robotic straight capsules)
+function addContouredLimb(THREE, parent, region, fromArr, toArr, rTop, rMid, rBot, material, themeRole = "body", priority = 0, options = {}) {
+  const from = new THREE.Vector3(...fromArr);
+  const to = new THREE.Vector3(...toArr);
   const direction = to.clone().sub(from);
-  const length = Math.max(0.12, direction.length() - radius * 2);
-  const mesh = new THREE.Mesh(new THREE.CapsuleGeometry(radius, length, 8, 18), material);
+  const length = direction.length();
+  
+  // Height segments allow smooth anatomical muscular curves
+  const radialSegments = 20;
+  const heightSegments = 16;
+  const geometry = new THREE.CylinderGeometry(1, 1, length, radialSegments, heightSegments);
+  const pos = geometry.attributes.position;
+  const v = new THREE.Vector3();
+  const halfLen = length / 2;
+
+  const ovalX = options.ovalX || 1.0;
+  const ovalZ = options.ovalZ || 1.0;
+  const curveZ = options.curveZ || 0;
+  const curveX = options.curveX || 0;
+  const bellyT = options.bellyT || 0.40; // Where the muscle belly is thickest (0 to 1)
+
+  for (let i = 0; i < pos.count; i++) {
+    v.fromBufferAttribute(pos, i);
+    // t goes from 0 (top/from) to 1 (bottom/to)
+    const t = (halfLen - v.y) / length;
+    
+    // Calculate smooth contoured radius along the limb length
+    let currentR;
+    if (t < bellyT) {
+      const subT = t / bellyT;
+      currentR = rTop + (rMid - rTop) * Math.sin(subT * (Math.PI / 2));
+    } else {
+      const subT = (t - bellyT) / (1 - bellyT);
+      currentR = rMid - (rMid - rBot) * Math.sin(subT * (Math.PI / 2));
+    }
+
+    // Apply anatomical cross-section (elliptical)
+    v.x *= currentR * ovalX;
+    v.z *= currentR * ovalZ;
+
+    // Apply natural organic curvature (e.g. calf bulge, quadriceps arch)
+    const arch = Math.sin(t * Math.PI);
+    v.z += arch * curveZ;
+    v.x += arch * curveX;
+
+    pos.setXYZ(i, v.x, v.y, v.z);
+  }
+  geometry.computeVertexNormals();
+
+  const mesh = new THREE.Mesh(geometry, material);
   mesh.position.copy(from.clone().add(to).multiplyScalar(0.5));
   mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.normalize());
-  return addRegion(parent, mesh, region, material, themeRole, priority);
-}
-
-function addBand(THREE, parent, region, position, radius, tube, material, themeRole = "body", priority = 0) {
-  const mesh = new THREE.Mesh(new THREE.TorusGeometry(radius, tube, 10, 48), material);
-  mesh.position.set(...position);
-  mesh.rotation.x = Math.PI / 2;
   return addRegion(parent, mesh, region, material, themeRole, priority);
 }
 
 function buildBody(THREE) {
   const palette = themePalette();
   const body = new THREE.Group();
-  const baseMaterial = makeMaterial(THREE, palette.body);
-  const secondaryMaterial = makeMaterial(THREE, palette.secondary);
-  const innerMaterial = makeMaterial(THREE, palette.inner, { opacity: 0.64 });
-  const amberMaterial = makeMaterial(THREE, COLORS.amber, {
-    roughness: 0.18,
-    metalness: 0.08,
-    transmission: 0.3,
-    opacity: 0.85,
+  
+  const skinMaterial = makeMaterial(THREE, palette.body);
+  const contourMaterial = makeMaterial(THREE, palette.secondary);
+  const deepMaterial = makeMaterial(THREE, palette.inner, { opacity: 0.90 });
+  const organMaterial = makeMaterial(THREE, palette.organ, {
+    roughness: 0.28,
+    metalness: 0.05,
+    transmission: 0.25,
+    opacity: 0.90,
+    emissive: palette.organ,
+    emissiveIntensity: 0.28,
+  });
+  const amberAccentMaterial = makeMaterial(THREE, COLORS.amber, {
+    roughness: 0.20,
+    transmission: 0.20,
     emissive: COLORS.amber,
-    emissiveIntensity: 0.38,
+    emissiveIntensity: 0.35,
   });
 
-  // 1. HEAD & CRANIUM
-  addEllipsoid(THREE, body, "head", [0, 3.96, 0], [0.74, 0.86, 0.68], secondaryMaterial, "secondary");
-  addEllipsoid(THREE, body, "head", [0, 4.12, -0.02], [0.60, 0.34, 0.58], innerMaterial, "inner", 20);
+  // ==========================================
+  // 1. HEAD, CRANIUM & BRAIN
+  // ==========================================
+  // Organic cranial vault (broader at parietal back, tapering gently forward)
+  addSculptedEllipsoid(THREE, body, "head", [0, 4.02, -0.04], [0.72, 0.82, 0.80], skinMaterial, "body", 28, 0, (v) => {
+    if (v.y < 0) v.x *= 0.92; // Tapering towards base of skull
+    if (v.z > 0 && v.y > 0) v.y *= 1.04; // Gentle frontal curve
+  });
+  // Inner cerebrum core
+  addSculptedEllipsoid(THREE, body, "head", [0, 4.10, -0.02], [0.58, 0.46, 0.62], deepMaterial, "inner", 20, 0);
 
-  // 2. FACE & SENSORY ORGANS
-  addEllipsoid(THREE, body, "face", [0, 3.76, 0.56], [0.50, 0.44, 0.22], innerMaterial, "inner", 20);
-  for (const side of [-1, 1]) {
-    addEllipsoid(THREE, body, "face", [side * 0.34, 3.55, 0.54], [0.18, 0.16, 0.14], innerMaterial, "inner", 16);
-  }
-  addEllipsoid(THREE, body, "face", [0, 3.38, 0.50], [0.42, 0.24, 0.28], secondaryMaterial, "secondary", 20);
-  // Eyes
-  for (const side of [-1, 1]) {
-    addEllipsoid(THREE, body, "eyes", [side * 0.22, 3.82, 0.74], [0.12, 0.10, 0.08], amberMaterial, "organ", 18, 2);
-  }
-  // Ears
-  for (const side of [-1, 1]) {
-    addEllipsoid(THREE, body, "ears", [side * 0.65, 3.72, 0.03], [0.12, 0.22, 0.14], innerMaterial, "inner", 18, 2);
-  }
-  // Nose & Sinuses (routes to ENT/ears)
-  addEllipsoid(THREE, body, "ears", [0, 3.66, 0.78], [0.11, 0.18, 0.15], amberMaterial, "organ", 16, 2);
-  // Teeth & Mandibular arch
-  addEllipsoid(THREE, body, "teeth", [0, 3.42, 0.73], [0.22, 0.08, 0.08], amberMaterial, "organ", 18, 2);
+  // ==========================================
+  // 2. FACE, JAW, SENSORY ORGANS
+  // ==========================================
+  // Contoured human face tapering down into a smooth, natural jawline and chin
+  addSculptedEllipsoid(THREE, body, "face", [0, 3.52, 0.36], [0.54, 0.52, 0.44], skinMaterial, "body", 28, 1, (v) => {
+    // Sculpt jawline taper towards chin
+    if (v.y < 0) {
+      const taper = (v.y + 1);
+      v.x *= 0.45 + 0.55 * taper;
+      v.z *= 0.70 + 0.30 * taper;
+    }
+    // Subtle cheekbone (zygomatic) fullness
+    if (v.y > 0.1 && v.y < 0.6) {
+      v.x *= 1.08;
+    }
+  });
 
-  // 3. NECK & THROAT
-  addCapsule(THREE, body, "neck", [0, 2.70, 0], [0, 3.28, 0], 0.32, secondaryMaterial, "secondary");
-  addCapsule(THREE, body, "neck", [-0.25, 2.80, 0], [-0.90, 2.52, 0], 0.18, innerMaterial, "inner");
-  addCapsule(THREE, body, "neck", [0.25, 2.80, 0], [0.90, 2.52, 0], 0.18, innerMaterial, "inner");
-  addEllipsoid(THREE, body, "neck", [0, 2.90, 0.30], [0.15, 0.12, 0.10], amberMaterial, "organ", 16, 1);
+  // Eyes (natural human almond orbital contours)
+  for (const side of [-1, 1]) {
+    addSculptedEllipsoid(THREE, body, "eyes", [side * 0.24, 3.82, 0.68], [0.11, 0.08, 0.08], amberAccentMaterial, "organ", 18, 3);
+  }
 
-  // 4. THORAX, CHEST & HEART
-  addEllipsoid(THREE, body, "chest", [0, 2.08, 0], [1.16, 0.95, 0.58], baseMaterial);
-  addEllipsoid(THREE, body, "chest", [-0.48, 2.12, 0.48], [0.52, 0.58, 0.14], innerMaterial, "inner");
-  addEllipsoid(THREE, body, "chest", [0.48, 2.12, 0.48], [0.52, 0.58, 0.14], innerMaterial, "inner");
-  addBand(THREE, body, "chest", [0, 2.30, 0], 0.90, 0.038, innerMaterial, "inner");
-  addBand(THREE, body, "chest", [0, 2.04, 0], 1.00, 0.038, innerMaterial, "inner");
-  addBand(THREE, body, "chest", [0, 1.78, 0], 0.88, 0.038, innerMaterial, "inner");
-  const heartCore = addEllipsoid(THREE, body, "chest", [0.22, 2.04, 0.68], [0.20, 0.25, 0.16], amberMaterial, "organ", 18, 2);
+  // Nose (natural human nasal bridge with gently contoured tip)
+  addSculptedEllipsoid(THREE, body, "ears", [0, 3.65, 0.76], [0.09, 0.16, 0.16], amberAccentMaterial, "organ", 18, 3, (v) => {
+    if (v.y < 0) v.z *= 1.25; // Lobule/tip protrusion
+  });
+
+  // Teeth, lips and dental arch
+  addSculptedEllipsoid(THREE, body, "teeth", [0, 3.38, 0.65], [0.20, 0.07, 0.10], amberAccentMaterial, "organ", 18, 3);
+
+  // Ears (anatomically curved auricular pinnae)
+  for (const side of [-1, 1]) {
+    addSculptedEllipsoid(THREE, body, "ears", [side * 0.64, 3.72, 0.02], [0.08, 0.20, 0.14], contourMaterial, "secondary", 18, 2);
+  }
+
+  // ==========================================
+  // 3. NECK & TRAPEZIUS (Organic Muscular Transition)
+  // ==========================================
+  // Neck flaring outwards into trapezius slope connecting to shoulders
+  addContouredLimb(THREE, body, "neck", [0, 3.28, 0.04], [0, 2.70, 0.02], 0.34, 0.36, 0.54, skinMaterial, "body", 1, {
+    ovalX: 1.12,
+    ovalZ: 1.05,
+    curveZ: 0.03, // Slight natural cervical lordosis
+    bellyT: 0.65,
+  });
+  // Thyroid prominence / Adam's apple
+  addSculptedEllipsoid(THREE, body, "neck", [0, 2.96, 0.34], [0.12, 0.12, 0.09], amberAccentMaterial, "organ", 16, 2);
+
+  // ==========================================
+  // 4. CHEST, THORAX & PULSING CARDIAC CORE
+  // ==========================================
+  // Pectoral / Thoracic mass (broad at clavicles, curving gently over ribs)
+  addSculptedEllipsoid(THREE, body, "chest", [0, 2.14, 0.05], [1.18, 0.62, 0.64], skinMaterial, "body", 28, 0, (v) => {
+    // Pectoral forward fullness
+    if (v.y > 0 && v.z > 0) v.z *= 1.15;
+    // Latissimus dorsi taper
+    if (v.y < 0) v.x *= 0.94;
+  });
+  // Clavicular contour arch
+  addSculptedEllipsoid(THREE, body, "chest", [0, 2.54, 0.28], [0.98, 0.12, 0.22], contourMaterial, "secondary", 24, 0);
+
+  // Living Cardiac Core with sinus rhythm
+  const heartCore = addSculptedEllipsoid(THREE, body, "chest", [0.22, 2.06, 0.52], [0.22, 0.26, 0.18], organMaterial, "organ", 20, 3);
   heartCore.userData.isCardiacCore = true;
 
-  // 5. ABDOMEN & PELVIS
-  addEllipsoid(THREE, body, "upper-abdomen", [0, 1.18, 0.02], [0.92, 0.72, 0.52], baseMaterial);
-  addEllipsoid(THREE, body, "upper-abdomen", [-0.18, 1.22, 0.48], [0.40, 0.32, 0.16], innerMaterial, "inner", 20);
-  addEllipsoid(THREE, body, "upper-abdomen", [0.14, 1.10, 0.52], [0.25, 0.32, 0.15], amberMaterial, "organ", 20, 1);
-  addEllipsoid(THREE, body, "lower-abdomen", [0, 0.36, 0.03], [0.82, 0.64, 0.50], secondaryMaterial, "secondary");
-  addBand(THREE, body, "lower-abdomen", [0, 0.22, 0], 0.66, 0.075, innerMaterial, "inner");
-  addEllipsoid(THREE, body, "lower-abdomen", [0, -0.06, -0.02], [0.84, 0.32, 0.46], secondaryMaterial, "secondary");
-  addEllipsoid(THREE, body, "pelvis", [0, 0.36, 0.48], [0.68, 0.32, 0.18], amberMaterial, "organ", 20, 1);
+  // ==========================================
+  // 5. ABDOMEN & PELVIS (Natural Human Silhouette)
+  // ==========================================
+  // Upper abdomen / Epigastrium (narrows into natural human waistline)
+  addSculptedEllipsoid(THREE, body, "upper-abdomen", [0, 1.34, 0.04], [0.94, 0.44, 0.56], skinMaterial, "body", 26, 0, (v) => {
+    // Waist indent
+    v.x *= 0.92;
+    v.z *= 0.92;
+  });
+  // Upper abdomen internal digestive zone
+  addSculptedEllipsoid(THREE, body, "upper-abdomen", [0.08, 1.36, 0.38], [0.38, 0.26, 0.18], amberAccentMaterial, "organ", 18, 2);
+
+  // Lower abdomen (umbilical region down to pelvic basin)
+  addSculptedEllipsoid(THREE, body, "lower-abdomen", [0, 0.72, 0.02], [0.92, 0.42, 0.54], skinMaterial, "body", 26, 0, (v) => {
+    // Gentle natural pelvic flare towards bottom
+    if (v.y < 0) v.x *= 1.06;
+  });
+
+  // Pelvis, hips & groin (iliac crest curve and natural hip transition)
+  addSculptedEllipsoid(THREE, body, "pelvis", [0, 0.18, 0.0], [1.02, 0.38, 0.58], skinMaterial, "body", 26, 0, (v) => {
+    if (v.y > 0) v.x *= 1.04; // Iliac crest fullness
+    if (v.z < 0) v.z *= 1.12; // Gluteal contour
+  });
+  // Pelvic pubic arch indicator
+  addSculptedEllipsoid(THREE, body, "pelvis", [0, 0.14, 0.44], [0.45, 0.18, 0.16], amberAccentMaterial, "organ", 18, 2);
+
+  // ==========================================
+  // 6. BACK & POSTERIOR SPINE
+  // ==========================================
+  // Upper back & Scapular muscles
+  addSculptedEllipsoid(THREE, body, "upper-back", [0, 2.14, -0.42], [0.98, 0.56, 0.28], contourMaterial, "secondary", 24, 1, (v) => {
+    if (v.z < 0) v.z *= 1.10; // Scapular contour
+  });
+  // Lower back & Lumbar erector spinae
+  addSculptedEllipsoid(THREE, body, "lower-back", [0, 1.20, -0.40], [0.86, 0.48, 0.26], contourMaterial, "secondary", 24, 1, (v) => {
+    // Natural human lumbar lordosis indent
+    v.z *= 0.88;
+  });
+
+  // ==========================================
+  // 7. SHOULDERS, ARMS & HANDS (Natural Relaxed Posture)
+  // ==========================================
+  // Relaxed human anatomical stance (not rigid T-pose): arms angled naturally with subtle elbow flexion
   for (const side of [-1, 1]) {
-    addEllipsoid(THREE, body, "pelvis", [side * 0.64, 0.34, 0.12], [0.22, 0.28, 0.20], innerMaterial, "inner", 18, 1);
+    // Deltoid muscle cap (rounded teardrop sitting naturally over glenohumeral joint)
+    addSculptedEllipsoid(THREE, body, "shoulder", [side * 1.12, 2.44, 0.02], [0.38, 0.44, 0.36], contourMaterial, "secondary", 22, 1);
+
+    // Upper Arm (Biceps & Triceps with anatomical taper to elbow)
+    // Shoulder to elbow: arm hangs naturally, angled slightly outward (~12°) and forward (~5°)
+    const shoulderPt = [side * 1.08, 2.36, 0.02];
+    const elbowPt = [side * 1.44, 1.42, 0.06];
+    addContouredLimb(THREE, body, "arm", shoulderPt, elbowPt, 0.30, 0.32, 0.24, skinMaterial, "body", 0, {
+      ovalX: 1.08,
+      ovalZ: 1.12,
+      curveZ: 0.04,
+      bellyT: 0.42,
+    });
+
+    // Anatomical Elbow transition (seamless olecranon contour, NO robot ball!)
+    addSculptedEllipsoid(THREE, body, "arm", elbowPt, [0.22, 0.22, 0.20], contourMaterial, "secondary", 18, 1);
+
+    // Forearm (classic human teardrop: fuller upper brachioradialis tapering to slender wrist)
+    const wristPt = [side * 1.62, 0.44, 0.16];
+    addContouredLimb(THREE, body, "arm", elbowPt, wristPt, 0.24, 0.25, 0.17, skinMaterial, "body", 0, {
+      ovalX: 1.15,
+      ovalZ: 0.95,
+      curveZ: 0.03,
+      bellyT: 0.32,
+    });
+
+    // Hand & Wrist (natural human resting pose: cupped palm, relaxed thumb, curled fingers)
+    // Wrist
+    addSculptedEllipsoid(THREE, body, "hand", wristPt, [0.18, 0.12, 0.14], contourMaterial, "secondary", 18, 1);
+    // Palm
+    const palmPt = [side * 1.68, 0.22, 0.20];
+    addSculptedEllipsoid(THREE, body, "hand", palmPt, [0.18, 0.22, 0.13], skinMaterial, "body", 20, 1, (v) => {
+      // Gentle cupped palm
+      if (v.z > 0) v.z *= 0.85;
+    });
+    // Thumb & relaxed fingers
+    addSculptedEllipsoid(THREE, body, "hand", [side * 1.58, 0.20, 0.26], [0.08, 0.14, 0.08], skinMaterial, "body", 16, 1);
+    addSculptedEllipsoid(THREE, body, "hand", [side * 1.70, 0.02, 0.22], [0.14, 0.18, 0.10], skinMaterial, "body", 16, 1);
   }
 
-  // 6. BACK & VERTEBRAL COLUMN
-  addEllipsoid(THREE, body, "upper-back", [0, 2.02, -0.52], [0.85, 0.70, 0.16], innerMaterial, "inner", 24);
-  addEllipsoid(THREE, body, "lower-back", [0, 1.08, -0.52], [0.82, 0.56, 0.16], innerMaterial, "inner", 24);
-  for (let index = 0; index < 10; index += 1) {
-    const y = 2.65 - index * 0.24;
-    const region = y > 1.45 ? "upper-back" : "lower-back";
-    addEllipsoid(THREE, body, region, [0, y, -0.68], [0.14, 0.10, 0.09], amberMaterial, "organ", 14, 1);
-  }
-  addCapsule(THREE, body, "lower-back", [0, 2.30, -0.64], [0, 0.48, -0.64], 0.07, amberMaterial, "organ");
-
-  // 7. SHOULDERS & ARMS WITH ARTICULATED ELBOWS & WRISTS
-  addEllipsoid(THREE, body, "shoulder", [-0.58, 2.60, 0], [0.54, 0.24, 0.36], baseMaterial);
-  addEllipsoid(THREE, body, "shoulder", [0.58, 2.60, 0], [0.54, 0.24, 0.36], baseMaterial);
+  // ==========================================
+  // 8. LEGS, KNEES, ANKLES & FEET (Natural Contoured Stance)
+  // ==========================================
   for (const side of [-1, 1]) {
-    // Deltoid
-    addEllipsoid(THREE, body, "shoulder", [side * 1.05, 2.50, 0], [0.36, 0.40, 0.36], secondaryMaterial, "secondary");
-    // Upper Arm
-    addCapsule(THREE, body, "arm", [side * 0.95, 2.40, 0], [side * 1.48, 1.48, 0], 0.24, baseMaterial);
-    // ELBOW JOINT (Amber node)
-    addEllipsoid(THREE, body, "arm", [side * 1.48, 1.48, 0], [0.22, 0.22, 0.18], amberMaterial, "organ", 18, 1);
-    // Forearm
-    addCapsule(THREE, body, "arm", [side * 1.48, 1.48, 0], [side * 1.68, 0.38, 0.04], 0.19, baseMaterial);
-    // WRIST JOINT (Amber node)
-    addEllipsoid(THREE, body, "hand", [side * 1.68, 0.38, 0.04], [0.16, 0.16, 0.14], amberMaterial, "organ", 16, 2);
-    // Hand
-    addCapsule(THREE, body, "hand", [side * 1.68, 0.38, 0.04], [side * 1.70, 0.16, 0.05], 0.11, innerMaterial, "inner");
-    addEllipsoid(THREE, body, "hand", [side * 1.70, 0.06, 0.05], [0.24, 0.34, 0.20], innerMaterial, "inner", 20);
-    addCapsule(THREE, body, "hand", [side * 1.70, 0.02, 0.17], [side * 1.70, -0.12, 0.20], 0.05, amberMaterial, "organ");
+    // Thigh (strong quadriceps curve with anterior fullness and medial taper)
+    const hipPt = [side * 0.50, -0.04, 0.02];
+    const kneePt = [side * 0.54, -1.38, 0.08]; // Slight natural knee forward flexion (~4°)
+    addContouredLimb(THREE, body, "leg", hipPt, kneePt, 0.42, 0.40, 0.28, skinMaterial, "body", 0, {
+      ovalX: 1.05,
+      ovalZ: 1.18, // Anterior quadriceps depth
+      curveZ: 0.06, // Natural thigh anterior arch
+      bellyT: 0.38,
+    });
+
+    // Anatomical Knee joint (patellar prominence in quadriceps tendon, NO robot ball!)
+    addSculptedEllipsoid(THREE, body, "knee", [side * 0.54, -1.38, 0.24], [0.20, 0.24, 0.16], contourMaterial, "secondary", 18, 2, (v) => {
+      if (v.z > 0) v.z *= 1.18; // Patella prominence
+    });
+
+    // Calf & Shin (classic human gastrocnemius curve: muscular upper calf tapering to Achilles tendon)
+    const anklePt = [side * 0.58, -2.70, 0.02];
+    addContouredLimb(THREE, body, "leg", kneePt, anklePt, 0.28, 0.30, 0.18, skinMaterial, "body", 0, {
+      ovalX: 0.95,
+      ovalZ: 1.20,
+      curveZ: -0.05, // Posterior calf bulge
+      bellyT: 0.30,
+    });
+
+    // Ankle joint (medial and lateral malleoli contours)
+    addSculptedEllipsoid(THREE, body, "foot", anklePt, [0.22, 0.16, 0.18], contourMaterial, "secondary", 18, 1);
+
+    // Foot (arched foot with distinct heel/calcaneus and forward toe taper)
+    const heelPt = [side * 0.58, -2.88, -0.08];
+    const forefootPt = [side * 0.60, -2.94, 0.28];
+    // Heel
+    addSculptedEllipsoid(THREE, body, "foot", heelPt, [0.18, 0.16, 0.24], skinMaterial, "body", 18, 1);
+    // Forefoot & Toes (angled slightly outward ~7° natural stance)
+    addSculptedEllipsoid(THREE, body, "foot", forefootPt, [0.22, 0.14, 0.38], skinMaterial, "body", 20, 1, (v) => {
+      // Natural arch on inner side
+      if (side > 0 && v.x < 0) v.y += 0.08;
+      if (side < 0 && v.x > 0) v.y += 0.08;
+    });
   }
 
-  // 8. LEGS, KNEES, ANKLES & FEET
-  for (const side of [-1, 1]) {
-    // Thigh
-    addCapsule(THREE, body, "leg", [side * 0.48, -0.06, 0], [side * 0.56, -1.35, 0], 0.30, baseMaterial);
-    // KNEE JOINT (Patella amber node)
-    addEllipsoid(THREE, body, "knee", [side * 0.56, -1.38, 0.28], [0.24, 0.26, 0.14], amberMaterial, "organ", 18, 2);
-    // Calf & Shin
-    addCapsule(THREE, body, "leg", [side * 0.56, -1.48, 0], [side * 0.65, -2.72, 0.04], 0.24, secondaryMaterial, "secondary");
-    // ANKLE JOINT (Amber node)
-    addEllipsoid(THREE, body, "foot", [side * 0.66, -2.72, 0.03], [0.22, 0.20, 0.20], amberMaterial, "organ", 18, 2);
-    // Foot & Toes
-    addEllipsoid(THREE, body, "foot", [side * 0.73, -2.92, 0.16], [0.32, 0.19, 0.56], innerMaterial, "inner", 20);
-    addCapsule(THREE, body, "foot", [side * 0.73, -2.98, 0.16], [side * 0.73, -3.00, 0.56], 0.05, amberMaterial, "organ");
-  }
-
-  body.rotation.set(0, -0.18, 0);
+  body.rotation.set(0, -0.15, 0);
   body.userData.heartCore = heartCore;
   return body;
 }
@@ -229,7 +399,7 @@ function makeTooltip(stage) {
 
 function applyTheme(body) {
   const palette = themePalette();
-  const roleColors = { body: palette.body, secondary: palette.secondary, inner: palette.inner, organ: COLORS.amber };
+  const roleColors = { body: palette.body, secondary: palette.secondary, inner: palette.inner, organ: palette.organ };
   body.traverse((object) => {
     if (!object.isMesh || !object.userData.region || !object.material?.color) return;
     const color = roleColors[object.userData.themeRole] || palette.body;
@@ -239,7 +409,7 @@ function applyTheme(body) {
 }
 
 function updateVisualState(body, hoveredRegion, selectedRegion, now = 0) {
-  const selectedPulse = 0.7 + Math.sin(now * 0.005) * 0.25;
+  const selectedPulse = 0.65 + Math.sin(now * 0.005) * 0.28;
   body.traverse((object) => {
     if (!object.isMesh || !object.userData.region || !object.material?.color) return;
     const isHovered = object.userData.region === hoveredRegion;
@@ -259,8 +429,8 @@ function updateVisualState(body, hoveredRegion, selectedRegion, now = 0) {
     if (isHovered) {
       object.material.color.setHex(COLORS.amber);
       object.material.emissive?.setHex(COLORS.amber);
-      object.material.emissiveIntensity = 0.52;
-      object.material.opacity = 0.95;
+      object.material.emissiveIntensity = 0.50;
+      object.material.opacity = 0.98;
       return;
     }
 
@@ -298,14 +468,21 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
   const body = buildBody(THREE);
   scene.add(body);
 
-  const hemisphere = new THREE.HemisphereLight(0xf8fafc, 0x355e4b, 2.2);
-  const keyLight = new THREE.DirectionalLight(0xffffff, 2.5);
-  keyLight.position.set(-4, 7, 8);
-  const beacon = new THREE.PointLight(COLORS.amber, 1.8, 12);
-  beacon.position.set(3, 2.5, 5);
-  const heartLight = new THREE.PointLight(COLORS.amber, 1.1, 4.5);
-  heartLight.position.set(0.22, 2.04, 1.05);
-  scene.add(hemisphere, keyLight, beacon, heartLight);
+  // Warm studio lighting that enhances natural human musculature and contours
+  const hemisphere = new THREE.HemisphereLight(0xffedd5, 0x94a3b8, 2.0); // Warm ivory sky, soft cool slate ground
+  const keyLight = new THREE.DirectionalLight(0xfff7ed, 2.4); // Soft warm key light
+  keyLight.position.set(-3.5, 6, 7);
+
+  const fillLight = new THREE.DirectionalLight(0xe0e7ff, 1.2); // Soft cool fill
+  fillLight.position.set(4, -1, 5);
+
+  const rimLight = new THREE.DirectionalLight(0xfde68a, 1.6); // Warm golden rim light highlighting human silhouette
+  rimLight.position.set(0, 4, -7);
+
+  const heartLight = new THREE.PointLight(0xf43f5e, 0.9, 3.5); // Soft inner cardiovascular glow
+  heartLight.position.set(0.22, 2.06, 0.65);
+
+  scene.add(hemisphere, keyLight, fillLight, rimLight, heartLight);
 
   const selectableMeshes = [];
   body.traverse((object) => {
@@ -361,6 +538,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     const intersects = raycaster.intersectObjects(selectableMeshes, false);
     if (!intersects.length) return null;
 
+    // Prioritize specific anatomical organs over surrounding capsules
     intersects.sort((a, b) => (b.object.userData.priority || 0) - (a.object.userData.priority || 0) || a.distance - b.distance);
     return intersects[0]?.object || null;
   };
@@ -480,87 +658,78 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
         event.touches[0].clientX - event.touches[1].clientX,
         event.touches[0].clientY - event.touches[1].clientY
       );
-      const factor = initialPinchDistance / currentDistance;
-      targetCameraPosition.z = Math.max(5.0, Math.min(17.0, initialCameraZ * factor));
+      const ratio = initialPinchDistance / currentDistance;
+      targetCameraPosition.z = Math.max(5.0, Math.min(17.0, initialCameraZ * ratio));
     }
-  };
-  const onTouchEnd = () => {
-    initialPinchDistance = 0;
   };
 
   canvas.addEventListener("pointerdown", pointerDown);
   canvas.addEventListener("pointermove", pointerMove);
   canvas.addEventListener("pointerup", pointerUp);
-  canvas.addEventListener("pointercancel", (event) => pointerUp(event, false));
+  canvas.addEventListener("pointercancel", (e) => pointerUp(e, false));
   canvas.addEventListener("pointerleave", pointerLeave);
   canvas.addEventListener("wheel", onWheel, { passive: false });
   canvas.addEventListener("touchstart", onTouchStart, { passive: true });
   canvas.addEventListener("touchmove", onTouchMove, { passive: false });
-  canvas.addEventListener("touchend", onTouchEnd, { passive: true });
 
-  const render = (now = 0) => {
-    if (!dragging) {
+  const render = (now) => {
+    if (!isPointerDown) {
+      velocityY *= 0.92;
+      velocityX *= 0.92;
       rotationY += velocityY;
       rotationX = Math.max(-Math.PI / 5, Math.min(Math.PI / 5, rotationX + velocityX));
-      velocityY *= 0.90;
-      velocityX *= 0.90;
+      targetRotationY += 0.0018; // Gentle breathing ambient rotation
+      rotationY += (targetRotationY - rotationY) * 0.04;
+      rotationX += (targetRotationX - rotationX) * 0.04;
     }
-    const rotationDelta = ((targetRotationY - rotationY + Math.PI) % (Math.PI * 2)) - Math.PI;
-    if (!dragging && Math.abs(rotationDelta) > 0.001) rotationY += rotationDelta * 0.08;
-    if (!dragging) rotationX += (targetRotationX - rotationX) * 0.08;
-    body.rotation.set(rotationX, rotationY, 0);
 
+    body.rotation.y = rotationY;
+    body.rotation.x = rotationX;
+
+    // Smooth camera interpolation
     camera.position.lerp(targetCameraPosition, 0.08);
     targetLookAt.y += (targetLookY - targetLookAt.y) * 0.08;
-    camera.lookAt(targetLookAt.x, targetLookAt.y, targetLookAt.z);
+    camera.lookAt(targetLookAt);
 
-    heartLight.intensity = 1.1 + Math.sin(now * 0.005) * 0.28;
-    if (body.userData.heartCore?.material) {
-      body.userData.heartCore.material.emissiveIntensity = 0.38 + Math.sin(now * 0.005) * 0.16;
+    // Living cardiac rhythm
+    if (body.userData.heartCore) {
+      const heartBeat = 1.0 + Math.pow(Math.sin(now * 0.0055), 4) * 0.16;
+      body.userData.heartCore.scale.set(0.22 * heartBeat, 0.26 * heartBeat, 0.18 * heartBeat);
     }
+
     updateVisualState(body, hoveredRegion, selectedRegion, now);
     renderer.render(scene, camera);
-    animationFrame = requestAnimationFrame(render);
+    animationFrame = window.requestAnimationFrame(render);
   };
-  applyTheme(body);
-  render();
+
+  animationFrame = window.requestAnimationFrame(render);
 
   function focusRegionCamera(region) {
-    if (["upper-back", "lower-back", "back"].includes(region)) {
-      targetRotationY = Math.PI;
-      targetRotationX = 0;
-      targetCameraPosition.set(0, 1.6, 8.5);
-      targetLookY = 1.6;
-    } else if (["head", "eyes", "ears", "teeth", "face"].includes(region)) {
+    if (["head", "eyes", "ears", "teeth", "face", "neck"].includes(region)) {
       targetRotationY = 0;
       targetRotationX = 0;
-      targetCameraPosition.set(0, 3.7, 6.5);
-      targetLookY = 3.7;
-    } else if (["neck"].includes(region)) {
-      targetRotationY = 0;
+      targetCameraPosition.set(0, 3.4, 6.8);
+      targetLookY = 3.4;
+    } else if (["chest", "upper-back"].includes(region)) {
+      targetRotationY = region === "upper-back" ? Math.PI : 0;
       targetRotationX = 0;
-      targetCameraPosition.set(0, 2.9, 6.8);
-      targetLookY = 2.9;
-    } else if (["chest"].includes(region)) {
-      targetRotationY = 0;
+      targetCameraPosition.set(0, 2.0, 7.8);
+      targetLookY = 2.0;
+    } else if (["upper-abdomen", "lower-abdomen", "lower-back", "pelvis"].includes(region)) {
+      targetRotationY = region === "lower-back" ? Math.PI : 0;
       targetRotationX = 0;
-      targetCameraPosition.set(0, 2.1, 7.2);
-      targetLookY = 2.1;
-    } else if (["upper-abdomen", "lower-abdomen", "pelvis"].includes(region)) {
-      targetRotationY = 0;
-      targetRotationX = 0;
-      targetCameraPosition.set(0, 0.8, 7.8);
+      targetCameraPosition.set(0, 0.8, 8.2);
       targetLookY = 0.8;
-    } else if (["knee", "leg", "foot"].includes(region)) {
+    } else if (["leg", "knee", "foot"].includes(region)) {
       targetRotationY = 0;
       targetRotationX = 0;
-      targetCameraPosition.set(0, -1.5, 8.5);
-      targetLookY = -1.5;
+      targetCameraPosition.set(0, -1.4, 8.5);
+      targetLookY = -1.4;
     } else if (["shoulder", "arm", "hand"].includes(region)) {
       targetRotationY = 0;
       targetRotationX = 0;
-      targetCameraPosition.set(0, 1.5, 8.0);
-      targetLookY = 1.5;
+      targetCameraPosition.set(0, 1.4, 8.2);
+      targetLookY = 1.4;
     }
   }
 
@@ -597,30 +766,24 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
       } else if (view === "zoom-out") {
         targetCameraPosition.z = Math.min(17.0, targetCameraPosition.z + 2.2);
       } else if (view === "reset") {
-        targetRotationY = -0.18;
+        targetRotationY = 0;
         targetRotationX = 0;
         targetCameraPosition.set(0, 0.5, 12);
         targetLookY = 0.5;
       }
-      velocityX = 0;
-      velocityY = 0;
     },
     destroy() {
-      cancelAnimationFrame(animationFrame);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
       resizeObserver.disconnect();
       themeObserver.disconnect();
       canvas.removeEventListener("pointerdown", pointerDown);
       canvas.removeEventListener("pointermove", pointerMove);
       canvas.removeEventListener("pointerup", pointerUp);
+      canvas.removeEventListener("pointerleave", pointerLeave);
       canvas.removeEventListener("wheel", onWheel);
       canvas.removeEventListener("touchstart", onTouchStart);
       canvas.removeEventListener("touchmove", onTouchMove);
-      canvas.removeEventListener("touchend", onTouchEnd);
       tooltip?.remove();
-      body.traverse((object) => {
-        if (object.geometry) object.geometry.dispose();
-        if (object.material?.dispose) object.material.dispose();
-      });
       renderer.dispose();
     },
   };
