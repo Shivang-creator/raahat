@@ -509,15 +509,17 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .subchoices .field-label { margin-bottom: 0.55rem; font-size: 1rem; }
       .subchoices .field-label + .choice-grid { margin-bottom: 1rem; }
 
-      .complaint-box { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.75rem; align-items: stretch; padding: 0.75rem; border: 2px solid var(--line); border-radius: 1rem; background: var(--paper); }
-      .complaint-box:focus-within { border-color: var(--accent); }
-      .complaint-box #body-map-button { grid-column: 1 / -1; }
-      .voice-button { min-width: 5.75rem; min-height: 3.5rem; align-self: start; padding: 0.5rem 0.65rem; border: 0; border-radius: 0.8rem; background: var(--accent-soft); color: var(--accent-dark); font-size: 1rem; font-weight: 750; }
-      .voice-button[aria-pressed="true"] { background: var(--accent); color: #fff; }
-      textarea { width: 100%; min-height: 7rem; resize: vertical; border: 0; background: transparent; color: var(--ink); font-size: 1.125rem; line-height: 1.55; }
-      textarea::placeholder { color: #64736c; opacity: 1; }
+      .complaint-box { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.85rem; align-items: stretch; padding: 1.15rem; border: 1px solid var(--line); border-radius: 1.35rem; background: var(--paper); box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03); transition: all 0.2s ease; }
+      [data-theme="dark"] .complaint-box { background: rgba(17, 24, 39, 0.65); backdrop-filter: blur(12px); border-color: rgba(255, 255, 255, 0.08); box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.5); }
+      .complaint-box:focus-within { border-color: var(--accent); box-shadow: 0 12px 32px -6px rgba(16, 185, 129, 0.2), 0 0 0 1px rgba(16, 185, 129, 0.3); }
+      .complaint-box #body-map-button { grid-column: 1 / -1; border-radius: 1rem; }
+      .voice-button { min-width: 5.75rem; min-height: 3.5rem; align-self: start; padding: 0.5rem 0.65rem; border: 1px solid transparent; border-radius: 1rem; background: var(--accent-soft); color: var(--accent-dark); font-size: 1rem; font-weight: 750; transition: all 0.15s ease; }
+      .voice-button:hover { transform: translateY(-1px); }
+      .voice-button[aria-pressed="true"] { background: var(--accent); color: #fff; box-shadow: 0 0 14px rgba(16, 185, 129, 0.4); }
+      textarea { width: 100%; min-height: 6rem; resize: vertical; border: 0; background: transparent; color: var(--ink); font-size: 1.125rem; line-height: 1.6; padding: 0.25rem; }
+      textarea::placeholder { color: var(--muted); opacity: 0.75; }
       textarea:focus { outline: 0; }
-      .field-help { margin: 0.65rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+      .field-help { margin: 0.75rem 0 0; color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
 
       /* Real-Time Emergency Sentinel Banner */
       .emergency-sentinel-banner { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; padding: 1.15rem 1.25rem; border-radius: var(--radius-lg); background: #fef2f2; border: 2px solid #ef4444; color: #991b1b; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.15); animation: sentinelSlideIn 250ms ease-out; }
@@ -555,7 +557,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .patient-details-drawer[data-collapsed="true"] .drawer-body { display: none; }
 
       .examples { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1rem; }
-      .example-chip { min-height: 3rem; padding: 0.55rem 0.85rem; border-radius: 999px; font-size: 1rem; font-weight: 650; }
+      .example-chip { min-height: 2.6rem; padding: 0.4rem 0.85rem; border-radius: 999px; font-size: 0.9rem; font-weight: 650; background: var(--paper); border: 1px solid var(--line); color: var(--ink); cursor: pointer; transition: all 0.15s ease; }
+      .example-chip:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); transform: translateY(-1px); }
+      [data-theme="dark"] .example-chip { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.08); }
+      [data-theme="dark"] .example-chip:hover { background: rgba(16, 185, 129, 0.12); border-color: var(--accent); color: #d1fae5; }
       .actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.25rem; }
       .large-button { flex: 1 1 12rem; padding: 0.7rem 1rem; }
       .status { min-height: 1.6rem; margin: 1rem 0 0; color: var(--accent-dark); font-size: 1rem; line-height: 1.5; }
@@ -791,7 +796,9 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         .active-pass-card { border: 1px solid #0f172a; box-shadow: none; }
         .print-only { display: block !important; }
       }
-      .tag { display: inline-flex; align-items: center; min-height: 1.8rem; margin-right: 0.35rem; padding: 0.2rem 0.55rem; border: 1px solid currentColor; border-radius: 999px; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.02em; line-height: 1; vertical-align: middle; }
+      .tag { display: inline-flex; align-items: center; gap: 0.25rem; min-height: 1.35rem; margin-right: 0.35rem; padding: 0.12rem 0.5rem; border: 1px solid rgba(16, 185, 129, 0.28); border-radius: 999px; background: rgba(16, 185, 129, 0.08); color: var(--accent); font-size: 0.68rem; font-weight: 750; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1; vertical-align: middle; transition: all 0.2s ease; }
+      [data-theme="dark"] .tag { border-color: rgba(52, 211, 153, 0.25); background: rgba(16, 185, 129, 0.12); color: #6ee7b7; }
+      .tag.alert { border-color: rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.08); color: #f87171; }
       .icon { display: inline-block; width: 1.45rem; height: 1.45rem; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; vertical-align: middle; }
       .icon--small { width: 1.1rem; height: 1.1rem; }
       .icon--large { width: 2rem; height: 2rem; }
@@ -1085,34 +1092,454 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       }
 
       /* Front door: a spacious civic welcome that still hands off to the tested flow. */
-      .landing-screen { display: grid; gap: 4.5rem; }
-      .landing-hero { display: grid; gap: 2rem; align-items: center; padding: clamp(1.5rem, 4vw, 4rem) 0 0; }
-      .hero-copy { max-width: 45rem; }
-      .hero-kicker { display: inline-flex; align-items: center; gap: 0.45rem; margin: 0 0 1rem; color: var(--accent-dark); font-size: 1rem; font-weight: 850; letter-spacing: 0.04em; text-transform: uppercase; }
-      .hero-kicker::before { display: inline-block; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--marigold); content: ""; }
-      .landing-hero h1 { max-width: 14ch; font-size: 4.2rem; line-height: 0.98; }
-      .hero-subtitle { max-width: 43rem; margin: 1.4rem 0 0; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.55; }
-      .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
-      .hero-actions .large-button { flex: 0 1 auto; }
-      .trust-badges { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 1.3rem 0 0; padding: 0; list-style: none; }
-      .trust-badge { display: inline-flex; min-height: 2.8rem; align-items: center; padding: 0.45rem 0.7rem; border: 1px solid #9ec4b3; border-radius: 999px; background: var(--accent-soft); color: var(--accent-dark); font-size: 0.92rem; font-weight: 800; line-height: 1.2; }
-      .hero-card { position: relative; overflow: hidden; padding: clamp(1rem, 3vw, 1.5rem); border: 2px solid var(--accent); border-radius: 1.35rem; background: var(--paper); box-shadow: 0 1.25rem 3rem rgba(23, 99, 79, 0.13); }
-      .hero-card::after { position: absolute; right: -3rem; top: -3rem; width: 9rem; height: 9rem; border-radius: 50%; background: rgba(217, 119, 6, 0.14); content: ""; }
-      .hero-card > * { position: relative; z-index: 1; }
-      .hero-card h2 { max-width: 14ch; margin: 0; color: var(--accent-dark); font-size: clamp(1.55rem, 4vw, 2.1rem); letter-spacing: -0.04em; line-height: 1.05; }
-      .hero-card-note { margin: 0.55rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.45; }
-      .hero-card .field-label { margin-top: 1.25rem; }
-      .hero-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; margin-top: 0.6rem; }
-      .hero-choice { min-height: 3.5rem; padding: 0.55rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 1rem; font-weight: 780; }
-      .hero-choice[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
-      .hero-entry-routes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem; margin-top: 0.65rem; }
-      .entry-route { min-height: 3.5rem; padding: 0.45rem 0.35rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 0.92rem; font-weight: 780; }
-      .entry-route[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
-      .hero-input { width: 100%; min-height: 5.5rem; margin-top: 0.65rem; padding: 0.8rem; border: 2px solid var(--line); border-radius: 0.8rem; background: #fff; color: var(--ink); font-size: 1.05rem; line-height: 1.45; resize: vertical; }
-      .hero-input:focus { border-color: var(--accent); outline: 0; }
-      .hero-examples { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.65rem; }
-      .hero-example { min-height: 2.8rem; padding: 0.4rem 0.7rem; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--accent-dark); font-size: 0.9rem; font-weight: 750; }
-      .hero-card .large-button { width: 100%; margin-top: 0.8rem; }
+      .landing-screen { display: grid; gap: clamp(3rem, 6vw, 5rem); }
+      
+      /* --- Zen Hero Section (Sehat-style Minimalism) --- */
+      .landing-hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 58rem;
+        margin: 0 auto;
+        padding: clamp(2.5rem, 5vw, 4.5rem) 1rem 1.5rem;
+        position: relative;
+      }
+      .landing-hero::before {
+        content: "";
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: min(50rem, 90vw);
+        height: 18rem;
+        background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.12), transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+      }
+      .hero-copy {
+        position: relative;
+        z-index: 1;
+        max-width: 52rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-kicker-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.35rem 0.95rem;
+        border-radius: 999px;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.22);
+        color: var(--accent-dark);
+        font-size: 0.88rem;
+        font-weight: 750;
+        letter-spacing: 0.02em;
+        margin-bottom: 1.25rem;
+      }
+      [data-theme="dark"] .hero-kicker-pill {
+        color: #34d399;
+        background: rgba(16, 185, 129, 0.12);
+        border-color: rgba(52, 211, 153, 0.25);
+      }
+      .hero-kicker-pill .zen-dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: #10b981;
+        box-shadow: 0 0 8px #10b981;
+      }
+      .landing-hero h1 {
+        font-size: clamp(2.3rem, 5.5vw, 3.8rem);
+        font-weight: 850;
+        line-height: 1.1;
+        letter-spacing: -0.035em;
+        color: var(--ink);
+        margin: 0 0 1.1rem;
+        max-width: 22ch;
+      }
+      .hero-gradient-text {
+        background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      [data-theme="dark"] .hero-gradient-text {
+        background: linear-gradient(135deg, #34d399 0%, #6ee7b7 50%, #a7f3d0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero-subtitle {
+        font-size: clamp(1.05rem, 2vw, 1.25rem);
+        line-height: 1.6;
+        color: var(--muted);
+        max-width: 42rem;
+        margin: 0 0 1.8rem;
+      }
+
+      /* Zen Quick-Intake Bar */
+      .zen-search-container {
+        width: 100%;
+        max-width: 46rem;
+        margin: 0.5rem auto 1.25rem;
+        position: relative;
+        z-index: 2;
+      }
+      .zen-search-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.45rem 0.55rem 0.45rem 1.1rem;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.03);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      [data-theme="dark"] .zen-search-bar {
+        background: rgba(17, 24, 39, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      }
+      .zen-search-bar:focus-within {
+        border-color: var(--accent);
+        box-shadow: 0 16px 44px -8px rgba(16, 185, 129, 0.2), 0 0 0 2px rgba(16, 185, 129, 0.35);
+      }
+      .zen-search-icon {
+        display: flex;
+        align-items: center;
+        color: var(--muted);
+        flex-shrink: 0;
+      }
+      .zen-search-icon svg {
+        width: 1.25rem;
+        height: 1.25rem;
+        stroke-width: 2.2;
+      }
+      .zen-search-input {
+        flex: 1;
+        min-width: 0;
+        border: none;
+        background: transparent;
+        color: var(--ink);
+        font-size: 1.05rem;
+        font-weight: 500;
+        padding: 0.5rem 0.25rem;
+        outline: none;
+      }
+      .zen-search-input::placeholder {
+        color: var(--muted);
+        opacity: 0.8;
+      }
+      .zen-tool-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.45rem 0.75rem;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        background: rgba(16, 185, 129, 0.08);
+        color: var(--accent-dark);
+        font-size: 0.86rem;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.15s ease;
+      }
+      [data-theme="dark"] .zen-tool-btn {
+        background: rgba(255, 255, 255, 0.06);
+        color: #d1fae5;
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      .zen-tool-btn:hover {
+        background: rgba(16, 185, 129, 0.16);
+        transform: translateY(-1px);
+      }
+      .zen-tool-btn svg {
+        width: 1rem;
+        height: 1rem;
+        fill: currentColor;
+      }
+      .zen-cta-btn {
+        border-radius: 999px;
+        padding: 0.55rem 1.25rem;
+        font-size: 0.95rem;
+        font-weight: 750;
+        white-space: nowrap;
+        flex-shrink: 0;
+        min-height: 2.85rem;
+      }
+
+      /* Zen Trust Strip */
+      .zen-trust-strip {
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.65rem;
+        margin-top: 1rem;
+        color: var(--muted);
+        font-size: 0.86rem;
+        font-weight: 600;
+      }
+      .zen-trust-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+      .zen-trust-item svg {
+        width: 0.95rem;
+        height: 0.95rem;
+        color: var(--accent);
+      }
+      .zen-trust-dot {
+        opacity: 0.4;
+      }
+
+      /* --- Services Bento Grid --- */
+      .services-bento-section {
+        padding: 1rem 0 2rem;
+      }
+      .section-heading-center {
+        text-align: center;
+        max-width: 38rem;
+        margin: 0 auto 2.2rem;
+      }
+      .section-heading-center h2 {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        margin: 0.35rem 0 0.6rem;
+      }
+      .section-heading-center p {
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.5;
+        margin: 0;
+      }
+      .services-bento-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+      }
+      .bento-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding: 1.6rem;
+        border-radius: 1.35rem;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        cursor: pointer;
+        transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow: hidden;
+        text-decoration: none;
+        font: inherit;
+        color: inherit;
+      }
+      [data-theme="dark"] .bento-card {
+        background: rgba(17, 24, 39, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-color: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.4);
+      }
+      .bento-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--accent);
+        box-shadow: 0 16px 36px -10px rgba(16, 185, 129, 0.18);
+      }
+      .bento-featured {
+        grid-column: span 2;
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, var(--paper) 100%);
+        border-color: rgba(16, 185, 129, 0.25);
+      }
+      [data-theme="dark"] .bento-featured {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(17, 24, 39, 0.7) 100%);
+        border-color: rgba(52, 211, 153, 0.25);
+      }
+      .bento-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 1.1rem;
+      }
+      .bento-icon {
+        width: 2.85rem;
+        height: 2.85rem;
+        display: grid;
+        place-items: center;
+        border-radius: 0.85rem;
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--accent);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+      }
+      .bento-icon svg {
+        width: 1.45rem;
+        height: 1.45rem;
+        fill: currentColor;
+      }
+      .bento-tag {
+        font-size: 0.72rem;
+        font-weight: 750;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        background: rgba(16, 185, 129, 0.12);
+        color: var(--accent);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+      }
+      .bento-tag.tele {
+        background: rgba(59, 130, 246, 0.12);
+        color: #60a5fa;
+        border-color: rgba(59, 130, 246, 0.25);
+      }
+      .bento-content {
+        flex: 1;
+      }
+      .bento-content h3 {
+        font-size: 1.22rem;
+        font-weight: 800;
+        color: var(--ink);
+        margin: 0 0 0.45rem;
+        letter-spacing: -0.02em;
+      }
+      .bento-content p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.5;
+        margin: 0;
+      }
+      .bento-action-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        margin-top: 1.1rem;
+        font-size: 0.88rem;
+        font-weight: 750;
+        color: var(--accent);
+        transition: gap 0.15s ease;
+      }
+      .bento-card:hover .bento-action-link {
+        gap: 0.55rem;
+      }
+
+      /* --- Progressive Highlights Section --- */
+      .landing-highlights-section {
+        padding: 2rem 0;
+      }
+      .highlights-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+      .highlight-bento-card {
+        padding: clamp(1.5rem, 3vw, 2.2rem);
+        border-radius: 1.5rem;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+        display: flex;
+        flex-direction: column;
+        transition: all 0.2s ease;
+      }
+      [data-theme="dark"] .highlight-bento-card {
+        background: rgba(17, 24, 39, 0.6);
+        backdrop-filter: blur(12px);
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      .highlight-card-header {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 0.8rem;
+      }
+      .highlight-bento-card h3 {
+        font-size: 1.45rem;
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        margin: 0 0 0.6rem;
+      }
+      .highlight-bento-card p {
+        color: var(--muted);
+        font-size: 0.96rem;
+        line-height: 1.55;
+        margin: 0 0 1.25rem;
+      }
+      .highlight-features-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+      .highlight-feature {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding: 0.85rem;
+        border-radius: 0.9rem;
+        background: rgba(16, 185, 129, 0.05);
+        border: 1px solid rgba(16, 185, 129, 0.14);
+      }
+      [data-theme="dark"] .highlight-feature {
+        background: rgba(255, 255, 255, 0.03);
+        border-color: rgba(255, 255, 255, 0.06);
+      }
+      .highlight-feature .feature-icon {
+        font-size: 1.3rem;
+      }
+      .highlight-feature strong {
+        font-size: 0.88rem;
+        color: var(--ink);
+        display: block;
+      }
+      .highlight-feature small {
+        font-size: 0.78rem;
+        color: var(--muted);
+        line-height: 1.3;
+      }
+      .counterfactual-mini-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
+      }
+      .mini-stat-card {
+        padding: 0.8rem 0.5rem;
+        text-align: center;
+        border-radius: 0.9rem;
+        background: rgba(16, 185, 129, 0.05);
+        border: 1px solid rgba(16, 185, 129, 0.14);
+      }
+      [data-theme="dark"] .mini-stat-card {
+        background: rgba(255, 255, 255, 0.03);
+        border-color: rgba(255, 255, 255, 0.06);
+      }
+      .mini-stat-num {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 850;
+        color: var(--accent);
+      }
+      .mini-stat-label {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--muted);
+        margin-top: 0.2rem;
+      }
+      .highlight-action-btn {
+        margin-top: auto;
+        width: 100%;
+      }
       .landing-section { scroll-margin-top: 6rem; }
       .section-heading { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem; }
       .section-heading h2 { max-width: 20ch; margin: 0; color: var(--ink); font-size: 2.75rem; letter-spacing: -0.03em; line-height: 1.08; }
@@ -2047,7 +2474,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       @media (min-width: 1280px) {
         .site-nav { display: inline-flex; }
         .tagline { display: block; }
-        .landing-hero { grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr); }
         .journey-grid, .network-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         .roadmap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .triage-workspace { grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.65fr); align-items: start; }
@@ -2057,7 +2483,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         .site-nav { display: inline-flex; }
         .tagline { display: none; }
         .sidebar-toggle-label { display: inline; }
-        .landing-hero { grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.9fr); }
         .journey-grid, .network-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         .roadmap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .triage-workspace { grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.65fr); align-items: start; }
@@ -2070,7 +2495,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         .a11y-trigger-label { display: none; }
         .profile-btn-label { display: none; }
         .nav-profile-btn { padding: 0.3rem 0.4rem; }
-        .landing-hero { grid-template-columns: 1fr; }
+        .highlights-grid { grid-template-columns: 1fr; }
         .journey-grid, .network-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
       @media (max-width: 640px) {
@@ -2115,7 +2540,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       }
       /* Keep citizen-facing copy and ordinary controls above the accessibility floor. */
       p, li, label, summary, th, td, input, select, textarea, button { font-size: 1.0625rem; }
-      .tag, .table-label { font-size: 0.82rem; }
+      .table-label { font-size: 0.82rem; }
       .language-toggle button { min-height: 3.5rem; }
       .example-chip, .hero-example { min-height: 3.5rem; }
 
@@ -3014,64 +3439,144 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
       <main>
         <section class="landing-screen" id="screen-home" aria-labelledby="landing-title">
+          <!-- Zen Hero Section -->
           <section class="landing-hero view-section" id="front-door" data-view="home">
             <div class="hero-copy">
-              <p class="hero-kicker" data-copy="landingKicker">A calmer front door to public hospitals</p>
-              <h1 id="landing-title" data-copy="landingTitle">Government Hospital Appointments, Without the Confusion.</h1>
-              <p class="hero-subtitle" data-copy="landingSubtitle">ORS asks which department you need. A sick person only knows where it hurts. Tell us what feels wrong in your own words, voice, or tap the interactive 3D body map. We guide you to the right OPD counter with honest queue wait times.</p>
-              <p class="model-disclosure"><strong data-copy="processingLabel">Client-side browser processing:</strong> <span data-copy="modelDisclosure">Your words are evaluated securely inside this browser to guide you to the right counter. Nothing is sent to a server.</span></p>
-              <div class="hero-actions">
-                <button class="large-button primary" type="button" id="start-triage" data-view-link="triage" data-copy="startBooking">Start OPD Triage &amp; Book Slot →</button>
-                <a class="back-button" href="#screen-home" data-view-link="home" data-copy="learnMore">See how it works</a>
+              <div class="hero-kicker-pill">
+                <span class="zen-dot"></span>
+                <span data-copy="landingKicker">A calmer front door to public hospitals</span>
               </div>
-              <ul class="trust-badges" aria-label="Trust badges">
-                <li class="trust-badge"><svg class="icon-inline" aria-hidden="true"><use href="#icon-shield-check"></use></svg> <span class="tag">Verified</span><span data-copy="privacyBadge">100% Client-Side Privacy</span></li>
-                <li class="trust-badge"><svg class="icon-inline" aria-hidden="true"><use href="#icon-lock"></use></svg> <span class="tag">Verified</span><span data-copy="noIdBadge">No Aadhaar/OTP Required</span></li>
-                <li class="trust-badge"><svg class="icon-inline" aria-hidden="true"><use href="#icon-a11y"></use></svg> <span class="tag">Verified</span><span data-copy="accessBadge">Voice &amp; 3D Touch Enabled</span></li>
-              </ul>
-            </div>
+              <h1 id="landing-title" data-copy="landingTitle">
+                Government Hospital OPD,<br>
+                <span class="hero-gradient-text">Without the Confusion.</span>
+              </h1>
+              <p class="hero-subtitle" data-copy="landingSubtitle">
+                Tell us what feels wrong in your own words, voice, or interactive 3D body map. We guide you to the right OPD counter with honest queue wait times.
+              </p>
 
-            <section class="hero-card" aria-labelledby="hero-card-title">
-              <p class="screen-kicker" data-copy="serviceGridKicker">Services at a glance</p>
-              <h2 id="hero-card-title" data-copy="serviceGridTitle">Choose the help you need today.</h2>
-              <button class="large-button primary hero-primary-action" type="button" id="hero-triage-action" data-copy="startBooking">Start OPD Triage &amp; Book Slot →</button>
-              <div class="service-grid" aria-label="Raahat services">
-                <button class="service-card" type="button" data-service-view="triage">
-                  <div class="service-card-icon"><svg aria-hidden="true"><use href="#icon-hospital"></use></svg></div>
-                  <strong data-copy="opdService">OPD Counter Triage</strong>
-                  <small data-copy="opdServiceNote">Find the right first counter</small>
-                </button>
-                <button class="service-card" type="button" data-service-view="profile">
-                  <div class="service-card-icon"><svg aria-hidden="true"><use href="#icon-user"></use></svg></div>
-                  <strong data-copy="serviceProfileTitle">My Patient Profile</strong>
-                  <small data-copy="serviceProfileDesc">Live OPD pass &amp; visit records</small>
-                </button>
-                <button class="service-card" type="button" data-service-view="doctor">
-                  <div class="service-card-icon"><svg aria-hidden="true"><use href="#icon-doctor"></use></svg></div>
-                  <strong data-copy="serviceDoctorTitle">Doctor &amp; Staff Portal</strong>
-                  <small data-copy="serviceDoctorDesc">Live queue &amp; SBAR handover</small>
-                </button>
-                <button class="service-card" type="button" data-service-view="lab-tests">
-                  <div class="service-card-icon"><svg aria-hidden="true"><use href="#icon-microscope"></use></svg></div>
-                  <strong data-copy="serviceLabTitle">Lab Tests &amp; Scans</strong>
-                  <small data-copy="serviceLabDesc">e-Hospital rates &amp; slots</small>
-                </button>
-                <button class="service-card" type="button" data-service-view="blood-bank">
-                  <div class="service-card-icon"><svg aria-hidden="true"><use href="#icon-blood"></use></svg></div>
-                  <strong data-copy="serviceBloodTitle">Blood Bank</strong>
-                  <small data-copy="serviceBloodDesc">Real-time e-RaktKosh stock</small>
-                </button>
-                <button class="service-card" type="button" data-service-view="triage" data-teleconsult="true">
-                  <div class="service-card-icon"><svg aria-hidden="true"><use href="#icon-video"></use></svg></div>
-                  <strong data-copy="serviceTeleTitle">Tele-Consultation</strong>
-                  <small data-copy="serviceTeleDesc">AIIMS Tele-OPD booth</small>
-                </button>
+              <!-- Unified Quick Intake Search Bar -->
+              <div class="zen-search-container">
+                <div class="zen-search-bar" role="search" aria-label="Symptom Quick Search">
+                  <div class="zen-search-icon">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg>
+                  </div>
+                  <input type="text" id="hero-quick-input" class="zen-search-input" placeholder="Where does it hurt? e.g. chest pain, child fever..." aria-label="Quick symptom description" autocomplete="off" />
+                  <button type="button" class="zen-tool-btn" id="hero-voice-btn" title="Speak your symptoms" aria-label="Speak symptoms">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-mic"></use></svg>
+                    <span>Speak</span>
+                  </button>
+                  <button type="button" class="zen-tool-btn" id="hero-map-btn" title="Point at 3D Body Map" aria-label="Open 3D Body Map">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-body"></use></svg>
+                    <span>3D Map</span>
+                  </button>
+                  <button class="large-button primary zen-cta-btn" type="button" id="start-triage" data-view-link="triage" data-copy="startBooking">
+                    Find Counter →
+                  </button>
+                </div>
               </div>
-            </section>
+
+              <!-- Quiet Trust & Accessibility Strip -->
+              <div class="zen-trust-strip" aria-label="Privacy and accessibility guarantees">
+                <span class="zen-trust-item"><svg class="icon-inline" aria-hidden="true"><use href="#icon-shield-check"></use></svg> <span class="tag">Verified</span> 100% On-Device Privacy</span>
+                <span class="zen-trust-dot">·</span>
+                <span class="zen-trust-item"><svg class="icon-inline" aria-hidden="true"><use href="#icon-lock"></use></svg> <span class="tag">Verified</span> No Aadhaar/OTP Required</span>
+                <span class="zen-trust-dot">·</span>
+                <span class="zen-trust-item"><svg class="icon-inline" aria-hidden="true"><use href="#icon-globe"></use></svg> <span class="tag">Verified</span> 22 Scheduled Languages</span>
+              </div>
+
+              <!-- Legacy alias for hero-triage-action -->
+              <button type="button" id="hero-triage-action" style="display:none;" aria-hidden="true"></button>
+            </div>
           </section>
 
+          <!-- Modern Services Bento Grid -->
+          <section class="landing-section services-bento-section view-section" data-view="home" aria-labelledby="services-bento-title">
+            <div class="section-heading-center">
+              <span class="screen-kicker" data-copy="serviceGridKicker">Civic Healthcare Hub</span>
+              <h2 id="services-bento-title" data-copy="serviceGridTitle">Services at a Glance</h2>
+              <p class="section-lead-note">Everything you need to navigate public hospitals with confidence.</p>
+            </div>
+
+            <div class="services-bento-grid" aria-label="Raahat services">
+              <!-- Card 1: OPD Counter Triage (Featured) -->
+              <button class="bento-card bento-featured" type="button" data-service-view="triage">
+                <div class="bento-card-top">
+                  <div class="bento-icon"><svg aria-hidden="true"><use href="#icon-hospital"></use></svg></div>
+                  <span class="bento-tag">Primary Service</span>
+                </div>
+                <div class="bento-content">
+                  <h3 data-copy="opdService">OPD Counter Triage</h3>
+                  <p data-copy="opdServiceNote">AI-assisted zero-jargon routing from symptoms to the exact hospital counter. Red-flag emergency safety included.</p>
+                </div>
+                <span class="bento-action-link">Start OPD Triage →</span>
+              </button>
+
+              <!-- Card 2: Patient Profile -->
+              <button class="bento-card" type="button" data-service-view="profile">
+                <div class="bento-card-top">
+                  <div class="bento-icon"><svg aria-hidden="true"><use href="#icon-user"></use></svg></div>
+                </div>
+                <div class="bento-content">
+                  <h3 data-copy="serviceProfileTitle">My Patient Profile</h3>
+                  <p data-copy="serviceProfileDesc">Live OPD digital pass, consultation slips &amp; saved family members.</p>
+                </div>
+                <span class="bento-action-link">View Pass &amp; Records →</span>
+              </button>
+
+              <!-- Card 3: Doctor & Staff Portal -->
+              <button class="bento-card" type="button" data-service-view="doctor">
+                <div class="bento-card-top">
+                  <div class="bento-icon"><svg aria-hidden="true"><use href="#icon-doctor"></use></svg></div>
+                </div>
+                <div class="bento-content">
+                  <h3 data-copy="serviceDoctorTitle">Doctor &amp; Staff Portal</h3>
+                  <p data-copy="serviceDoctorDesc">Real-time waiting room queue tracking &amp; 10-second SBAR clinical handover.</p>
+                </div>
+                <span class="bento-action-link">Open Doctor Portal →</span>
+              </button>
+
+              <!-- Card 4: Lab Tests & Scans -->
+              <button class="bento-card" type="button" data-service-view="lab-tests">
+                <div class="bento-card-top">
+                  <div class="bento-icon"><svg aria-hidden="true"><use href="#icon-microscope"></use></svg></div>
+                </div>
+                <div class="bento-content">
+                  <h3 data-copy="serviceLabTitle">Lab Tests &amp; Scans</h3>
+                  <p data-copy="serviceLabDesc">e-Hospital diagnostic catalog, simulated turnaround times &amp; official CGHS rates.</p>
+                </div>
+                <span class="bento-action-link">Browse Lab Tests →</span>
+              </button>
+
+              <!-- Card 5: Blood Bank -->
+              <button class="bento-card" type="button" data-service-view="blood-bank">
+                <div class="bento-card-top">
+                  <div class="bento-icon"><svg aria-hidden="true"><use href="#icon-blood"></use></svg></div>
+                </div>
+                <div class="bento-content">
+                  <h3 data-copy="serviceBloodTitle">Blood Bank</h3>
+                  <p data-copy="serviceBloodDesc">Pan-India e-RaktKosh real-time blood availability &amp; voluntary donor registry.</p>
+                </div>
+                <span class="bento-action-link">Check Blood Stock →</span>
+              </button>
+
+              <!-- Card 6: Tele-Consultation -->
+              <button class="bento-card" type="button" data-service-view="triage" data-teleconsult="true">
+                <div class="bento-card-top">
+                  <div class="bento-icon"><svg aria-hidden="true"><use href="#icon-video"></use></svg></div>
+                  <span class="bento-tag tele">AIIMS Tele-OPD</span>
+                </div>
+                <div class="bento-content">
+                  <h3 data-copy="serviceTeleTitle">Tele-Consultation</h3>
+                  <p data-copy="serviceTeleDesc">Virtual OPD consultation booth for remote consultations with verified specialists.</p>
+                </div>
+                <span class="bento-action-link">Book Tele-OPD Booth →</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- Visual Triage Pipeline -->
           <section class="landing-section view-section journey-process-section" id="how-it-works" data-view="home" aria-labelledby="how-title">
-            <div class="section-heading">
+            <div class="section-heading-center">
               <span class="screen-kicker">Visual Triage Pipeline</span>
               <h2 id="how-title" data-copy="howTitle">How Raahat Works</h2>
               <p class="section-lead-note" data-copy="howNote">A direct, dignified journey from where it hurts to the right OPD counter.</p>
@@ -3094,11 +3599,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 <div class="step-content">
                   <h3 data-copy="howOneTitle">Describe in Your Words</h3>
                   <p data-copy="howOneNote">Speak, type, or tap the interactive 3D/2D body map in any of 22 Indian languages. No medical vocabulary required.</p>
-                  <ul class="step-feature-bullets">
-                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Speech-to-symptom recognition</li>
-                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Interactive anatomical touch points</li>
-                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> 100% private in-browser parsing</li>
-                  </ul>
                 </div>
               </div>
 
@@ -3122,11 +3622,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 <div class="step-content">
                   <h3 data-copy="howTwoTitle">Deterministic OPD Matching</h3>
                   <p data-copy="howTwoNote">Published code rules route symptoms to the exact hospital OPD specialty. 1 red flag escalates directly to Emergency.</p>
-                  <ul class="step-feature-bullets">
-                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Zero AI diagnosis guesswork</li>
-                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Instant red-flag safety trigger</li>
-                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Transparent verifiable rule IDs</li>
-                  </ul>
                 </div>
               </div>
 
@@ -3150,17 +3645,82 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 <div class="step-content">
                   <h3 data-copy="howThreeTitle">Honest Queue &amp; Specimen Pass</h3>
                   <p data-copy="howThreeNote">See simulated consultation turnaround times, documents to bring, and a printable pass with Citizen Rights protections.</p>
-                  <ul class="step-feature-bullets">
-                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Slot start + estimated wait</li>
-                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Visit preparation checklist</li>
-                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> PGPortal grievance rights on slip</li>
-                  </ul>
                 </div>
               </div>
             </div>
           </section>
 
+          <!-- Progressive Highlights Section on Home -->
+          <section class="landing-section view-section landing-highlights-section" data-view="home" aria-label="System Highlights">
+            <div class="highlights-grid">
+              <!-- Highlight Card 1: ORS vs Raahat -->
+              <div class="highlight-bento-card">
+                <div class="highlight-card-header">
+                  <span class="tag">Verified</span>
+                  <span class="screen-kicker" data-copy="comparisonKicker">A clearer front door</span>
+                </div>
+                <h3>How Raahat Rethinks ORS</h3>
+                <p>ORS digitised appointment booking in 2015. Raahat addresses the moment before it: when a citizen does not know which department to choose.</p>
+                <div class="highlight-features-row">
+                  <div class="highlight-feature">
+                    <span class="feature-icon">🎯</span>
+                    <div>
+                      <strong>Zero Jargon</strong>
+                      <small>Start with where it hurts</small>
+                    </div>
+                  </div>
+                  <div class="highlight-feature">
+                    <span class="feature-icon">⏱️</span>
+                    <div>
+                      <strong>Realistic Waits</strong>
+                      <small>Estimated consultation time</small>
+                    </div>
+                  </div>
+                  <div class="highlight-feature">
+                    <span class="feature-icon">🛡️</span>
+                    <div>
+                      <strong>Red-Flag Guard</strong>
+                      <small>Instant Emergency triage</small>
+                    </div>
+                  </div>
+                </div>
+                <button class="large-button secondary highlight-action-btn" type="button" data-view-link="comparison">
+                  View Full ORS Comparison Table →
+                </button>
+              </div>
 
+              <!-- Highlight Card 2: Pan-India Network -->
+              <div class="highlight-bento-card">
+                <div class="highlight-card-header">
+                  <span class="tag">Verified</span>
+                  <span class="screen-kicker" data-copy="hospitalsKicker">Pan-India Public Directory</span>
+                </div>
+                <h3>60+ Premier Institutes</h3>
+                <p>AIIMS, Safdarjung, PGIMER, NIMHANS, and regional medical colleges across 20+ states with verified locations and departments.</p>
+                <div class="counterfactual-mini-grid">
+                  <div class="mini-stat-card">
+                    <span class="mini-stat-num">28 mins</span>
+                    <span class="mini-stat-label">Avg. Raahat Wait</span>
+                  </div>
+                  <div class="mini-stat-card">
+                    <span class="mini-stat-num">87%</span>
+                    <span class="mini-stat-label">Wrong Line Drop</span>
+                  </div>
+                  <div class="mini-stat-card">
+                    <span class="mini-stat-num">60+</span>
+                    <span class="mini-stat-label">Hospitals</span>
+                  </div>
+                  <div class="mini-stat-card">
+                    <span class="mini-stat-num">20+</span>
+                    <span class="mini-stat-label">States / UTs</span>
+                  </div>
+                </div>
+                <button class="large-button secondary highlight-action-btn" type="button" data-view-link="hospitals">
+                  Explore 60+ Hospital Network Directory →
+                </button>
+              </div>
+            </div>
+          </section>
 
           <section class="landing-section view-section home-cta" data-view="home" aria-labelledby="home-cta-title">
             <div class="home-cta-copy">
@@ -3168,10 +3728,11 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               <h2 id="home-cta-title" data-copy="ctaTitle">Ready to find the right OPD counter?</h2>
               <p data-copy="ctaNote">Start with a sentence, your voice, or a point on the body map. You will see and confirm the read-back before any routing happens.</p>
             </div>
-            <button class="large-button primary" type="button" data-view-link="triage" data-copy="startTriage">Start Triage</button>
+            <button class="large-button primary" type="button" data-view-link="triage" data-copy="startTriage">Start OPD Triage →</button>
           </section>
 
           <section class="landing-section view-section" id="screen-comparison" data-view="comparison" aria-labelledby="comparison-title">
+            <button class="back-button" type="button" data-view-link="home">← Back to home</button>
             <div class="screen-heading"><p class="screen-kicker" data-copy="comparisonKicker">A clearer front door</p><div class="section-heading"><h1 id="comparison-title" data-copy="comparisonTitle">How Raahat rethinks ORS</h1><p data-copy="comparisonNote">ORS is a useful appointment system. Raahat addresses the moment before it: when a citizen does not know the right counter.</p></div></div>
             <div class="comparison-wrap">
               <table class="comparison-table">
@@ -3188,6 +3749,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           </section>
 
           <section class="landing-section view-section" id="screen-hospitals" data-view="hospitals" aria-labelledby="network-title">
+            <button class="back-button" type="button" data-view-link="home">← Back to home</button>
             <div class="screen-heading"><p class="screen-kicker" data-copy="hospitalsKicker">Verified public directory</p><div class="section-heading"><h1 id="network-title" data-copy="networkTitle">Delhi hospital network</h1><p><span class="tag">Verified</span> <span data-copy="networkNote">Hospital names, addresses and departments are public facts. Availability and token throughput are simulated for this prototype.</span></p></div></div>
             
           <div class="counterfactual-strip">
@@ -3226,6 +3788,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           </section>
 
           <section class="landing-section view-section" id="screen-faqs" data-view="faqs" aria-labelledby="faq-title">
+            <button class="back-button" type="button" data-view-link="home">← Back to home</button>
             <div class="screen-heading"><p class="screen-kicker" data-copy="faqKicker">Plain-language answers</p><div class="section-heading"><h1 id="faq-title" data-copy="faqTitle">Questions citizens and judges ask</h1><p data-copy="faqNote">Plain answers about safety, access, privacy and what this prototype can really do.</p></div></div>
             <div class="faq-list">
               <details class="faq-item"><summary data-copy="faqSafetyQ">Is this triage safe?</summary><p data-copy="faqSafetyA">Raahat does not diagnose. Code applies a small published rule file after you see and confirm the complaint. When a red flag is present, one flag is enough to route to Emergency.</p></details>
@@ -5677,7 +6240,52 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         });
       });
 
-      document.querySelector("#hero-triage-action").addEventListener("click", () => switchView("triage"));
+      document.querySelector("#hero-triage-action")?.addEventListener("click", () => switchView("triage"));
+
+      const heroQuickInput = document.querySelector("#hero-quick-input");
+      const heroVoiceBtn = document.querySelector("#hero-voice-btn");
+      const heroMapBtn = document.querySelector("#hero-map-btn");
+      const heroStartBtn = document.querySelector("#start-triage");
+
+      if (heroQuickInput) {
+        heroQuickInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            const val = heroQuickInput.value.trim();
+            switchView("triage");
+            if (val) {
+              complaint.value = val;
+              handleComplaintInput(val);
+            }
+          }
+        });
+      }
+
+      if (heroVoiceBtn) {
+        heroVoiceBtn.addEventListener("click", () => {
+          switchView("triage");
+          setTimeout(() => {
+            if (!state.listening && voiceButton) voiceButton.click();
+          }, 150);
+        });
+      }
+
+      if (heroMapBtn) {
+        heroMapBtn.addEventListener("click", () => {
+          showBodyMap();
+        });
+      }
+
+      if (heroStartBtn) {
+        heroStartBtn.addEventListener("click", () => {
+          const val = heroQuickInput ? heroQuickInput.value.trim() : "";
+          if (val) {
+            complaint.value = val;
+            handleComplaintInput(val);
+          }
+          switchView("triage");
+        });
+      }
       document.querySelectorAll("[data-service-view]").forEach((button) => button.addEventListener("click", () => {
         if (button.dataset.teleconsult === "true") state.consultationMode = "tele";
         switchView(button.dataset.serviceView);
