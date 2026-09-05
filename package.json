@@ -3,6 +3,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test routing.test.js hospital-data.test.js"
+    "test": "node --test routing.test.js hospital-data.test.js whatsapp.test.js"
   }
 }

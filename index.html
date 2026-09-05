@@ -3622,7 +3622,31 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       [data-theme="dark"] .wa-footer { background: #111620; border-top-color: rgba(255, 255, 255, 0.08); }
       .wa-input { flex: 1; min-height: 2.5rem; padding: 0.45rem 0.85rem; border: 0; border-radius: 999px; background: #ffffff; color: var(--ink); font-size: 0.95rem; outline: none; }
       [data-theme="dark"] .wa-input { background: #151c27; color: #e2e8f0; border: 1px solid rgba(255, 255, 255, 0.12); }
-      .wa-send-btn { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #00a884; color: #fff; border: 0; display: grid; place-items: center; cursor: pointer; }
+      .wa-send-btn { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #00a884; color: #fff; border: 0; display: grid; place-items: center; cursor: pointer; flex-shrink: 0; }
+      .wa-icon-btn { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: transparent; color: #54656f; border: 0; display: grid; place-items: center; cursor: pointer; transition: all 120ms; flex-shrink: 0; }
+      [data-theme="dark"] .wa-icon-btn { color: #94a3b8; }
+      .wa-icon-btn:hover { background: rgba(0,0,0,0.06); color: #128c7e; }
+      [data-theme="dark"] .wa-icon-btn:hover { background: rgba(255,255,255,0.1); color: #34d399; }
+      .wa-icon-btn.recording { background: #ef4444; color: #ffffff !important; animation: waPulse 1s infinite; }
+      .wa-action-btns { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.5rem; }
+      .wa-action-btn { background: #ffffff; color: #00a884; border: 1.5px solid #00a884; border-radius: 0.5rem; padding: 0.5rem 0.75rem; font-size: 0.85rem; font-weight: 700; cursor: pointer; text-align: left; transition: all 120ms ease; display: flex; align-items: center; justify-content: space-between; }
+      .wa-action-btn:hover { background: #00a884; color: #ffffff; }
+      .wa-action-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+      [data-theme="dark"] .wa-action-btn { background: #1f2937; color: #34d399; border-color: #059669; }
+      [data-theme="dark"] .wa-action-btn:hover { background: #059669; color: #ffffff; }
+      .wa-voice-bubble { display: flex; align-items: center; gap: 0.65rem; background: rgba(0,0,0,0.04); padding: 0.5rem 0.75rem; border-radius: 0.5rem; margin-top: 0.35rem; }
+      [data-theme="dark"] .wa-voice-bubble { background: rgba(255,255,255,0.06); }
+      .wa-voice-play { width: 2rem; height: 2rem; border-radius: 50%; background: #00a884; color: #fff; border: 0; display: grid; place-items: center; cursor: pointer; flex-shrink: 0; font-size: 0.75rem; }
+      .wa-voice-waveform { display: flex; align-items: center; gap: 2px; flex: 1; height: 1.25rem; }
+      .wa-wave-line { width: 3px; background: #54656f; border-radius: 2px; }
+      [data-theme="dark"] .wa-wave-line { background: #94a3b8; }
+      .wa-pass-card { background: #ffffff; border: 2px solid #25d366; border-radius: 0.75rem; padding: 0.85rem; margin-top: 0.6rem; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+      [data-theme="dark"] .wa-pass-card { background: #16202c; border-color: #059669; color: #e2e8f0; }
+      .wa-pass-qr-mock { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; width: 68px; height: 68px; background: #fff; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px; margin: 0.5rem auto; }
+      .wa-qr-box { background: #0f172a; border-radius: 1px; }
+      .wa-qr-box.white { background: #fff; }
+      .wa-notify-bubble { border-left: 4px solid #f59e0b !important; background: #fffbeb !important; color: #92400e !important; }
+      [data-theme="dark"] .wa-notify-bubble { background: #291e0a !important; color: #fde68a !important; border-left-color: #f59e0b !important; }
 
       /* Counterfactual Strip & Pan-India Filter */
       .counterfactual-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin: 1.25rem 0 2rem; }
@@ -6605,6 +6629,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       import { parseFreeTextComplaint, routeComplaint, checkRealtimeEmergency } from "./routing.js";
       import { LOCALITIES, HOSPITAL_FACT_CHECKED_ON, hospitalsForDepartment, PAN_INDIA_HOSPITALS, INDIAN_STATES, COUNTERFACTUAL_METRICS, panIndiaHospitalsForDepartment, hospitalsByState, haversineDistanceKm, autoSelectNearestHospital, INDIAN_DISTRICTS } from "./hospital-data.js";
       import { createBodyMap3D, BILATERAL_REGIONS, REGION_LABELS } from "./body-map-3d.js";
+      import { createInitialSession, handleWhatsAppMessage } from "./whatsapp-bot.js";
 
       const copy = {
         en: {
@@ -9914,7 +9939,8 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         });
       }
 
-      // --- WhatsApp Civic Gateway Simulator Logic ---
+      
+      // --- WhatsApp Civic Gateway Simulator Logic (Track B) ---
       function wireWhatsAppSimulator() {
         const fab = document.querySelector("#whatsapp-fab");
         const modal = document.querySelector("#whatsapp-modal");
@@ -9922,12 +9948,68 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         const chatBody = document.querySelector("#wa-chat-body");
         const chatForm = document.querySelector("#wa-chat-form");
         const chatInput = document.querySelector("#wa-chat-input");
+        const micBtn = document.querySelector("#wa-mic-btn");
+        const locBtn = document.querySelector("#wa-location-btn");
         const quickPrompts = document.querySelectorAll(".wa-prompt-btn");
 
         if (!fab || !modal) return;
 
+        let session = createInitialSession("+919876543210");
+        let isRecording = false;
+        let mediaRecorder = null;
+        let audioChunks = [];
+        let speechRecognition = null;
+        let speechTranscript = "";
+
+        let hasInitialized = false;
+        function initConversation() {
+          hasInitialized = true;
+          chatBody.innerHTML = "";
+          session = createInitialSession("+919876543210");
+          const initRes = handleWhatsAppMessage(session, { text: "hi" });
+          initRes.replies.forEach((reply) => {
+            if (reply.type === "text") {
+              appendWaMessage(reply.text, false, "Simulated");
+            } else if (reply.type === "buttons") {
+              appendWaMessage(reply.text, false, "Simulated");
+              appendWaActionButtons(reply.buttons, (chosen) => {
+                appendWaMessage(chosen.title, true);
+                dispatchWaMessage({ buttonId: chosen.id, text: chosen.title });
+              });
+            }
+          });
+
+          // Quick symptom shortcuts
+          const promptsDiv = document.createElement("div");
+          promptsDiv.className = "wa-prompts";
+          promptsDiv.style.marginTop = "0.75rem";
+          promptsDiv.innerHTML = `
+            <span style="font-size: 0.78rem; color: #667781; font-weight: 700;">1-Tap Quick Triage Samples:</span>
+            <button type="button" class="wa-prompt-btn" data-wa-prompt="Chest pain with breathlessness">
+              🚨 "Chest pain + breathlessness" (Emergency Red-Flag RF-01)
+            </button>
+            <button type="button" class="wa-prompt-btn" data-wa-prompt="Bachhe ko kal se tez bukhaar 103 degree hai">
+              👶 "Bachhe ko tez bukhaar 103°F" (Paediatrics OPD)
+            </button>
+            <button type="button" class="wa-prompt-btn" data-wa-prompt="Pair mein sujan aur ghutne mein dard hai 3 hafte se">
+              🦵 "Ghutne mein dard aur sujan" (Orthopaedics OPD)
+            </button>
+          `;
+          promptsDiv.querySelectorAll(".wa-prompt-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const prompt = btn.dataset.waPrompt;
+              appendWaMessage(prompt, true);
+              dispatchWaMessage({ text: prompt });
+            });
+          });
+          chatBody.appendChild(promptsDiv);
+        }
+
         fab.addEventListener("click", () => {
           modal.hidden = false;
+          if (!hasInitialized) {
+            initConversation();
+          }
           chatInput?.focus();
         });
 
@@ -9939,51 +10021,295 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           if (e.target === modal) modal.hidden = true;
         });
 
-        function appendWaMessage(text, isUser = false) {
+        function formatWaText(txt) {
+          if (!txt) return "";
+          return txt
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/\*([^*]+)\*/g, "<strong>$1</strong>")
+            .replace(/_([^_]+)_/g, "<em>$1</em>")
+            .replace(/`([^`]+)`/g, "<code>$1</code>")
+            .replace(/\n/g, "<br>");
+        }
+
+        function appendWaMessage(content, isUser = false, tag = "Simulated", extraClass = "") {
           const bubble = document.createElement("div");
-          bubble.className = `wa-bubble ${isUser ? "user" : "bot"}`;
+          bubble.className = `wa-bubble ${isUser ? "user" : "bot"} ${extraClass}`;
           const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-          bubble.innerHTML = `
-            ${!isUser ? '<span class="tag">Simulated</span>' : ""}
-            <p style="margin:0 0 0.25rem;">${text}</p>
-            <div class="wa-bubble-time">${time}</div>
-          `;
+          
+          let html = "";
+          if (!isUser) {
+            html += `<span class="tag">${tag}</span>`;
+          }
+          if (typeof content === "string") {
+            html += `<div style="margin:0 0 0.25rem;">${formatWaText(content)}</div>`;
+          } else if (content instanceof HTMLElement) {
+            bubble.appendChild(content);
+          }
+          html += `<div class="wa-bubble-time">${time} ${isUser ? "✓✓" : ""}</div>`;
+          
+          if (typeof content === "string") {
+            bubble.innerHTML = html;
+          } else {
+            const timeEl = document.createElement("div");
+            timeEl.className = "wa-bubble-time";
+            timeEl.innerHTML = `${time} ${isUser ? "✓✓" : ""}`;
+            bubble.appendChild(timeEl);
+          }
+
           chatBody.appendChild(bubble);
+          chatBody.scrollTop = chatBody.scrollHeight;
+          return bubble;
+        }
+
+        function appendWaActionButtons(buttons, onSelect) {
+          const container = document.createElement("div");
+          container.className = "wa-action-btns";
+
+          buttons.forEach((b) => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "wa-action-btn";
+            btn.innerHTML = `<span>${formatWaText(b.title)}</span> <svg class="icon-inline" style="width:14px;height:14px;fill:currentColor;"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>`;
+            btn.addEventListener("click", () => {
+              container.querySelectorAll("button").forEach(el => el.disabled = true);
+              onSelect(b);
+            });
+            container.appendChild(btn);
+          });
+
+          chatBody.appendChild(container);
           chatBody.scrollTop = chatBody.scrollHeight;
         }
 
-        function handleWaCitizenMessage(userMsg) {
-          if (!userMsg.trim()) return;
-          appendWaMessage(userMsg, true);
+        function appendPassCard(sessionData) {
+          const hosp = sessionData.selectedHospital || { name: "AIIMS New Delhi" };
+          const dept = sessionData.routeResult?.department || "General Medicine";
+          const token = sessionData.token || "#OPD-2026-4802";
 
-          setTimeout(() => {
-            const parsed = parseFreeTextComplaint(userMsg);
-            const routed = routeComplaint(parsed);
+          const card = document.createElement("div");
+          card.className = "wa-pass-card";
+          card.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px dashed #25d366; padding-bottom:0.4rem; margin-bottom:0.5rem;">
+              <span style="font-size:0.75rem; font-weight:800; color:#059669; text-transform:uppercase;">Verified Public OPD Pass</span>
+              <span class="tag">Simulated</span>
+            </div>
+            <div style="font-size:1.15rem; font-weight:850; color:var(--ink); margin-bottom:0.25rem;">${hosp.name}</div>
+            <div style="font-size:0.88rem; color:#059669; font-weight:700;">🩺 ${dept} OPD · Counter 4</div>
+            <div style="font-size:0.85rem; color:var(--muted); margin-top:0.2rem;">Token: <strong>${token}</strong> · Slot: 09:30 AM</div>
 
-            if (routed.urgency === "emergency") {
-              appendWaMessage(`[EMERGENCY] <strong>आपातकालीन चेतावनी (Emergency Alert)</strong><br><br>नियम: <code>${routed.rule_id}</code><br>कृपया तुरंत 24/7 आपातकालीन विभाग (Emergency Ward) जाएँ! OPD की प्रतीक्षा न करें।<br><br>🏥 <strong>निकटतम आपातकालीन अस्पताल:</strong> AIIMS New Delhi / Safdarjung Hospital (24/7 Trauma Counter Gate 2).`);
+            <div class="wa-pass-qr-mock" title="Specimen Barcode">
+              <div class="wa-qr-box"></div><div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box"></div>
+              <div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div>
+              <div class="wa-qr-box"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div><div class="wa-qr-box"></div>
+              <div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div>
+              <div class="wa-qr-box"></div><div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box"></div>
+              <div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div>
+              <div class="wa-qr-box"></div><div class="wa-qr-box"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div><div class="wa-qr-box"></div><div class="wa-qr-box white"></div><div class="wa-qr-box"></div>
+            </div>
+
+            <div style="margin-top:0.5rem; text-align:center;">
+              <button type="button" class="large-button primary" id="wa-view-full-slip-btn" style="width:100%; min-height:2.4rem; padding:0.4rem; font-size:0.85rem;">
+                📄 Open Full Specimen Slip in Raahat
+              </button>
+            </div>
+          `;
+
+          chatBody.appendChild(card);
+          chatBody.scrollTop = chatBody.scrollHeight;
+
+          const viewBtn = card.querySelector("#wa-view-full-slip-btn");
+          viewBtn?.addEventListener("click", () => {
+            modal.hidden = true;
+            if (typeof navigateToSpecimenSlip === "function") {
+              navigateToSpecimenSlip(hosp.name, dept, token);
             } else {
-              appendWaMessage(`[VERIFIED ROUTE] <strong>राहत OPD मार्गदर्शन (Raahat Match):</strong><br><br>विभाग: <strong>${routed.department}</strong><br>नियम: <code>${routed.rule_id}</code><br>अनुशंसित काउंटर: <strong>Counter 4</strong><br>अनुमानित प्रतीक्षा समय: <strong>~25 मिनट</strong><br><br>📱 <strong>आपका व्हाट्सएप टोकन:</strong> #WA-2026-${String(Date.now()).slice(-4)}<br><em>अस्पताल पहुँचकर यह संदेश सीधे काउंटर पर दिखाएँ।</em>`);
+              const navSlip = document.querySelector("#nav-slip") || document.querySelector("a[href=\"#screen-slip\"]");
+              navSlip?.click();
             }
-          }, 450);
+          });
         }
 
+        function dispatchWaMessage(incoming) {
+          const lower = (incoming.text || "").toLowerCase().trim();
+          if (lower === "restart" || lower === "reset" || incoming.buttonId === "cmd_restart") {
+            initConversation();
+            return;
+          }
+          const { replies } = handleWhatsAppMessage(session, incoming);
+
+          setTimeout(() => {
+            replies.forEach((reply) => {
+              if (reply.type === "text") {
+                const isEmergency = session.stage === "EMERGENCY_RED_FLAG";
+                appendWaMessage(reply.text, false, isEmergency ? "Rule" : "Simulated");
+              } else if (reply.type === "buttons") {
+                appendWaMessage(reply.text, false, "Simulated");
+                appendWaActionButtons(reply.buttons, (chosen) => {
+                  appendWaMessage(chosen.title, true);
+                  dispatchWaMessage({ buttonId: chosen.id, text: chosen.title });
+                });
+              }
+            });
+
+            if (session.stage === "PASS") {
+              appendPassCard(session);
+
+              // 4-Second Simulated Live Queue Push Update
+              setTimeout(() => {
+                const hospName = session.selectedHospital?.name || "AIIMS New Delhi";
+                const notifyText = `🔔 *WhatsApp Push Notification · ${hospName}*\n\nOPD Room 104 is moving smoothly. Current token being consulted: #OPD-2026-4798.\n\n📍 *Status Update:* 2 patients ahead of you (Your token: ${session.token}). Estimated entry in ~12 mins. Please be near the Counter 4 waiting bay.`;
+                appendWaMessage(notifyText, false, "Simulated", "wa-notify-bubble");
+              }, 4000);
+            }
+          }, 350);
+        }
+
+        // Voice Note Audio Recording Push-to-Talk
+        if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
+          const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+          speechRecognition = new SpeechRec();
+          speechRecognition.continuous = false;
+          speechRecognition.interimResults = false;
+          speechRecognition.onresult = (evt) => {
+            speechTranscript = evt.results[0][0].transcript;
+          };
+        }
+
+        async function startVoiceRecording() {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            audioChunks = [];
+            speechTranscript = "";
+            mediaRecorder = new MediaRecorder(stream);
+
+            mediaRecorder.ondataavailable = (e) => {
+              if (e.data.size > 0) audioChunks.push(e.data);
+            };
+
+            mediaRecorder.onstop = () => {
+              const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+              const audioUrl = URL.createObjectURL(audioBlob);
+              const spokenText = speechTranscript || (session.language === "en" ? "Chest discomfort since morning" : "सीने में दर्द और भारीपन है");
+
+              // Append user voice bubble
+              const voiceContainer = document.createElement("div");
+              voiceContainer.innerHTML = `
+                <div class="wa-voice-bubble">
+                  <button type="button" class="wa-voice-play">▶</button>
+                  <div class="wa-voice-waveform">
+                    <span class="wa-wave-line" style="height:8px;"></span>
+                    <span class="wa-wave-line" style="height:14px;"></span>
+                    <span class="wa-wave-line" style="height:18px;"></span>
+                    <span class="wa-wave-line" style="height:10px;"></span>
+                    <span class="wa-wave-line" style="height:16px;"></span>
+                    <span class="wa-wave-line" style="height:20px;"></span>
+                    <span class="wa-wave-line" style="height:12px;"></span>
+                    <span class="wa-wave-line" style="height:6px;"></span>
+                  </div>
+                  <span style="font-size:0.75rem; color:#54656f; font-weight:700;">0:03</span>
+                  <audio src="${audioUrl}" class="wa-audio-elem"></audio>
+                </div>
+                <div style="font-size:0.82rem; margin-top:0.35rem; color:var(--ink);">🎤 <em>"${spokenText}"</em></div>
+              `;
+
+              const playBtn = voiceContainer.querySelector(".wa-voice-play");
+              const audioEl = voiceContainer.querySelector(".wa-audio-elem");
+              playBtn?.addEventListener("click", () => {
+                if (audioEl.paused) {
+                  audioEl.play();
+                  playBtn.textContent = "⏸";
+                } else {
+                  audioEl.pause();
+                  playBtn.textContent = "▶";
+                }
+              });
+              audioEl?.addEventListener("ended", () => {
+                playBtn.textContent = "▶";
+              });
+
+              appendWaMessage(voiceContainer, true);
+              dispatchWaMessage({ text: spokenText, transcription: spokenText });
+            };
+
+            mediaRecorder.start();
+            if (speechRecognition) {
+              speechRecognition.lang = session.language === "hi" ? "hi-IN" : "en-IN";
+              try { speechRecognition.start(); } catch (e) {}
+            }
+
+            isRecording = true;
+            micBtn.classList.add("recording");
+            chatInput.placeholder = "Recording... tap mic to send voice note";
+          } catch (err) {
+            console.warn("Microphone access denied or unavailable", err);
+            // Simulated voice note fallback
+            const sampleText = session.language === "en" ? "Chest pain and breathlessness since morning" : "सीने में दर्द और सांस लेने में दिक्कत है";
+            appendWaMessage(`🎤 <em>[Voice Note · 0:04]</em>\n"${sampleText}"`, true);
+            dispatchWaMessage({ text: sampleText, transcription: sampleText });
+          }
+        }
+
+        function stopVoiceRecording() {
+          if (mediaRecorder && mediaRecorder.state !== "inactive") {
+            mediaRecorder.stop();
+          }
+          if (speechRecognition) {
+            try { speechRecognition.stop(); } catch (e) {}
+          }
+          isRecording = false;
+          micBtn.classList.remove("recording");
+          chatInput.placeholder = "Type symptom / \x27STATUS\x27 / \x27HELP\x27...";
+        }
+
+        micBtn?.addEventListener("click", () => {
+          if (!isRecording) {
+            startVoiceRecording();
+          } else {
+            stopVoiceRecording();
+          }
+        });
+
+        // Location sharing button
+        locBtn?.addEventListener("click", () => {
+          if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+              (pos) => {
+                appendWaMessage("📍 <strong>Current Location Shared</strong><br><small>Lat: " + pos.coords.latitude.toFixed(3) + ", Lng: " + pos.coords.longitude.toFixed(3) + "</small>", true);
+                dispatchWaMessage({ location: { latitude: pos.coords.latitude, longitude: pos.coords.longitude } });
+              },
+              () => {
+                appendWaMessage("📍 <strong>Location Pin Shared</strong> (Central Delhi)", true);
+                dispatchWaMessage({ buttonId: "loc_delhi", text: "Central Delhi" });
+              }
+            );
+          } else {
+            appendWaMessage("📍 <strong>Location Pin Shared</strong> (Central Delhi)", true);
+            dispatchWaMessage({ buttonId: "loc_delhi", text: "Central Delhi" });
+          }
+        });
+
+        // Quick prompts
         quickPrompts.forEach((btn) => {
           btn.addEventListener("click", () => {
             const prompt = btn.dataset.waPrompt;
-            handleWaCitizenMessage(prompt);
+            appendWaMessage(prompt, true);
+            dispatchWaMessage({ text: prompt });
           });
         });
 
+        // Form submit
         chatForm?.addEventListener("submit", (e) => {
           e.preventDefault();
-          const val = chatInput.value;
+          const val = chatInput.value.trim();
+          if (!val) return;
           chatInput.value = "";
-          handleWaCitizenMessage(val);
+          appendWaMessage(val, true);
+          dispatchWaMessage({ text: val });
         });
       }
 
-      
       // --- 22 Scheduled Indian Languages Registry & Audio Readback ---
       const SCHEDULED_LANGUAGES_22 = [
         { code: "en", bcp47: "en-IN", name: "English", nativeName: "English" },
@@ -10529,7 +10855,13 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         </div>
 
         <form class="wa-footer" id="wa-chat-form">
-          <input type="text" class="wa-input" id="wa-chat-input" placeholder="Type symptom in Hindi/English..." autocomplete="off" />
+          <button type="button" class="wa-icon-btn" id="wa-location-btn" aria-label="Share Location Pin" title="Share Location Pin">
+            <svg class="icon-inline" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </button>
+          <input type="text" class="wa-input" id="wa-chat-input" placeholder="Type symptom / STATUS / HELP..." autocomplete="off" />
+          <button type="button" class="wa-icon-btn" id="wa-mic-btn" aria-label="Record WhatsApp Voice Note" title="Hold to Talk / Send Voice Note">
+            <svg class="icon-inline" viewBox="0 0 24 24"><path fill="currentColor" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>
+          </button>
           <button type="submit" class="wa-send-btn" aria-label="Send WhatsApp message"><svg class="icon-inline"><use href="#icon-send"></use></svg></button>
         </form>
       </div>
