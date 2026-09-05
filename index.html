@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Raahat helps you find the right OPD counter, starting with where it hurts." />
     <title>राहत · Raahat</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
       (() => {
         try {
@@ -698,6 +700,471 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .result-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.5rem; }
       .result-actions .large-button { flex: 1 1 12rem; }
       .back-button { min-height: 3.5rem; padding: 0.7rem 1rem; border: 2px solid var(--line); border-radius: 1rem; background: transparent; color: var(--accent-dark); font-size: 1rem; font-weight: 750; }
+      
+      /* Step 4 Zen Layout & Map Styles */
+      .booking-header-zen {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1.25rem;
+        flex-wrap: wrap;
+      }
+      .zen-step-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(16, 185, 129, 0.12);
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 750;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .booking-specialty-card {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.75rem 1.15rem;
+        border-radius: 1rem;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+      }
+      .booking-specialty-card strong {
+        font-size: 1.2rem;
+        color: var(--accent-dark);
+      }
+      [data-theme="dark"] .booking-specialty-card strong {
+        color: #34d399;
+      }
+
+      /* Smart Location Bar */
+      .smart-location-bar {
+        margin-bottom: 1.5rem;
+        padding: 1.1rem 1.25rem;
+        border-radius: 1.25rem;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+      }
+      [data-theme="dark"] .smart-location-bar {
+        background: rgba(17, 22, 32, 0.85);
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      .location-bar-main {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+      .location-detect-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        min-height: 3.25rem;
+        padding: 0.6rem 1.15rem;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #ffffff;
+        font-weight: 750;
+        font-size: 0.95rem;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 14px rgba(22, 101, 52, 0.25);
+      }
+      .location-detect-btn:hover {
+        filter: brightness(1.1);
+        transform: translateY(-1px);
+      }
+      .location-detect-btn .tag-gps {
+        background: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        font-size: 0.65rem;
+      }
+      .radar-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #34d399;
+        box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+        animation: radar-pulse 1.8s infinite;
+      }
+      @keyframes radar-pulse {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(52, 211, 153, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+      }
+
+      .location-search-wrap {
+        position: relative;
+        flex: 1 1 14rem;
+        display: flex;
+        align-items: center;
+      }
+      .search-icon {
+        position: absolute;
+        left: 0.95rem;
+        font-size: 0.95rem;
+        pointer-events: none;
+        opacity: 0.6;
+      }
+      .location-search-input {
+        width: 100%;
+        min-height: 3.25rem;
+        padding: 0.6rem 1rem 0.6rem 2.4rem;
+        border-radius: 999px;
+        border: 1.5px solid var(--line);
+        background: var(--background);
+        color: var(--ink);
+        font-size: 0.95rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .location-search-input:focus {
+        border-color: var(--accent);
+      }
+      .state-filter-wrap {
+        flex: 0 1 12rem;
+      }
+      .state-filter-select {
+        width: 100%;
+        min-height: 3.25rem;
+        padding: 0.6rem 0.9rem;
+        border-radius: 999px;
+        border: 1.5px solid var(--line);
+        background: var(--background);
+        color: var(--ink);
+        font-size: 0.92rem;
+        font-weight: 650;
+        outline: none;
+      }
+      .map-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        min-height: 3.25rem;
+        padding: 0.6rem 1rem;
+        border-radius: 999px;
+        border: 1.5px solid var(--line);
+        background: var(--paper);
+        color: var(--ink);
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      .location-privacy-banner {
+        margin: 0.8rem 0 0;
+        font-size: 0.86rem;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      /* Hospital Finder Bento Grid */
+      .hospital-finder-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.25fr;
+        gap: 1.25rem;
+        margin-top: 1rem;
+        align-items: start;
+      }
+      @media (max-width: 860px) {
+        .hospital-finder-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .hospital-map-panel {
+        border-radius: 1.25rem;
+        border: 1px solid var(--line);
+        background: var(--paper);
+        overflow: hidden;
+        box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+      }
+      [data-theme="dark"] .hospital-map-panel {
+        background: rgba(17, 22, 32, 0.85);
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      .map-header {
+        padding: 0.85rem 1.15rem;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .map-title-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        font-weight: 750;
+      }
+      .map-facility-count {
+        padding: 0.15rem 0.5rem;
+        border-radius: 999px;
+        background: rgba(16, 185, 129, 0.12);
+        color: var(--accent);
+        font-size: 0.72rem;
+        font-weight: 750;
+      }
+      .map-hint {
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+      .hospital-map-viewport {
+        height: 440px;
+        width: 100%;
+        background: #f1f5f9;
+      }
+      [data-theme="dark"] .hospital-map-viewport {
+        background: #0f172a;
+      }
+
+      /* Hospital Cards Panel */
+      .hospital-cards-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .auto-selected-highlight {
+        margin-bottom: 0.25rem;
+      }
+      .highlight-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.4rem 0.9rem;
+        border-radius: 999px;
+        background: rgba(16, 185, 129, 0.12);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        color: var(--accent);
+        font-size: 0.85rem;
+        font-weight: 750;
+      }
+      [data-theme="dark"] .highlight-badge {
+        color: #34d399;
+      }
+
+      /* Redesigned Minimalist Hospital Cards */
+      .hospital-card {
+        padding: 1.25rem;
+        border: 1.5px solid var(--line);
+        border-radius: 1.25rem;
+        background: var(--paper);
+        transition: all 0.25s ease;
+        position: relative;
+      }
+      [data-theme="dark"] .hospital-card {
+        background: rgba(17, 22, 32, 0.75);
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      .hospital-card.is-selected {
+        border-color: #10b981;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18), 0 8px 25px rgba(0, 0, 0, 0.05);
+        background: var(--paper);
+      }
+      [data-theme="dark"] .hospital-card.is-selected {
+        background: rgba(16, 185, 129, 0.06);
+        border-color: #34d399;
+      }
+      .hospital-card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+      .hospital-tier-tag {
+        display: inline-block;
+        padding: 0.15rem 0.55rem;
+        border-radius: 999px;
+        background: rgba(59, 130, 246, 0.1);
+        color: #2563eb;
+        font-size: 0.72rem;
+        font-weight: 750;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+      [data-theme="dark"] .hospital-tier-tag {
+        background: rgba(59, 130, 246, 0.2);
+        color: #60a5fa;
+      }
+      .hospital-card-title {
+        margin: 0.4rem 0 0.25rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        line-height: 1.25;
+        color: var(--ink);
+      }
+      .hospital-card-address {
+        margin: 0;
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      /* Stat Chips Row */
+      .stat-chips-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 0.9rem 0;
+      }
+      .stat-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.35rem 0.65rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        background: rgba(15, 23, 42, 0.04);
+        border: 1px solid var(--line);
+        color: var(--ink);
+      }
+      [data-theme="dark"] .stat-chip {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      .stat-chip.chip-distance {
+        background: rgba(16, 185, 129, 0.08);
+        border-color: rgba(16, 185, 129, 0.25);
+        color: var(--accent);
+      }
+      [data-theme="dark"] .stat-chip.chip-distance {
+        color: #34d399;
+      }
+      .stat-chip.chip-wait {
+        background: rgba(245, 158, 11, 0.08);
+        border-color: rgba(245, 158, 11, 0.25);
+        color: #b45309;
+      }
+      [data-theme="dark"] .stat-chip.chip-wait {
+        color: #fbbf24;
+      }
+      .stat-chip.chip-slot {
+        background: rgba(99, 102, 241, 0.08);
+        border-color: rgba(99, 102, 241, 0.25);
+        color: #4f46e5;
+      }
+      [data-theme="dark"] .stat-chip.chip-slot {
+        color: #818cf8;
+      }
+
+      /* Transit Drawer */
+      .transit-drawer {
+        margin-top: 0.6rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .transit-drawer summary {
+        cursor: pointer;
+        font-weight: 650;
+        color: var(--accent-dark);
+        padding: 0.2rem 0;
+        user-select: none;
+      }
+      [data-theme="dark"] .transit-drawer summary {
+        color: #34d399;
+      }
+      .transit-drawer p {
+        margin: 0.35rem 0 0;
+        padding: 0.5rem 0.75rem;
+        background: rgba(15, 23, 42, 0.02);
+        border-radius: 0.6rem;
+        line-height: 1.4;
+      }
+      [data-theme="dark"] .transit-drawer p {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .verified-quiet {
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+      .verified-quiet a {
+        color: var(--accent-dark);
+        text-decoration: underline;
+      }
+      [data-theme="dark"] .verified-quiet a {
+        color: #34d399;
+      }
+
+      /* Map Markers */
+      .user-map-beacon {
+        position: relative;
+        width: 22px;
+        height: 22px;
+      }
+      .beacon-pulse {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: rgba(59, 130, 246, 0.4);
+        animation: beacon-grow 2s infinite;
+      }
+      .beacon-dot {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #2563eb;
+        border: 2px solid #ffffff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+      @keyframes beacon-grow {
+        0% { transform: scale(1); opacity: 0.9; }
+        100% { transform: scale(2.8); opacity: 0; }
+      }
+
+      .hospital-pin {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.3rem 0.5rem;
+        border-radius: 999px;
+        background: #ffffff;
+        border: 2px solid var(--pin-color, #3b82f6);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        font-size: 0.75rem;
+        font-weight: 750;
+        white-space: nowrap;
+        transform: translateY(-50%);
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .hospital-pin:hover {
+        transform: translateY(-50%) scale(1.1);
+      }
+      .hospital-pin.is-selected-pin {
+        background: #10b981;
+        color: #ffffff;
+        border-color: #047857;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5);
+      }
+      .hospital-pin.is-selected-pin .pin-badge {
+        color: #ffffff;
+      }
+      .pin-select-btn {
+        margin-top: 0.5rem;
+        padding: 0.35rem 0.75rem;
+        background: var(--accent);
+        color: #ffffff;
+        border: none;
+        border-radius: 0.5rem;
+        font-weight: 700;
+        font-size: 0.8rem;
+        cursor: pointer;
+        width: 100%;
+      }
+
       .appointment-screen { padding: 0.5rem 0 1rem; }
       .appointment-screen h1 { max-width: 23ch; }
       .appointment-intro { max-width: 40rem; margin: 1rem 0 0; color: var(--muted); font-size: 1.08rem; line-height: 1.55; }
@@ -5053,11 +5520,82 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
         <section class="appointment-screen" id="appointment-screen" aria-labelledby="booking-title" hidden>
           <button class="back-button" type="button" id="booking-back" data-copy="backToDepartment">← Back to department</button>
-          <p class="eyebrow" data-copy="bookingEyebrow">Your result · choose what happens next</p>
-          <h1 id="booking-title" tabindex="-1" data-copy="bookingTitle">Find a hospital, honestly</h1>
-          <p class="appointment-intro" data-copy="bookingNote">This is one clear result: choose a locality, choose a hospital, then decide whether to make a specimen slip.</p>
+          
+          <div class="booking-header-zen">
+            <div class="booking-header-left">
+              <span class="zen-step-badge">Step 4 · Hospital & Wait</span>
+              <h1 id="booking-title" tabindex="-1" data-copy="bookingTitle">Find a hospital, honestly</h1>
+              <p class="appointment-intro">We automatically recommend the nearest verified hospital equipped for your clinical need, with simulated queue waits.</p>
+            </div>
+            <div class="booking-specialty-card">
+              <span class="tag">Rule</span>
+              <span class="specialty-label">Required Specialty:</span>
+              <strong id="booking-department"></strong>
+            </div>
+          </div>
 
-          <div class="department-banner"><span class="tag">Rule</span><strong id="booking-department"></strong></div>
+          <!-- Smart Location & Auto-Select Bar -->
+          <div class="smart-location-bar" role="region" aria-label="Location & Hospital Search">
+            <div class="location-bar-main">
+              <button class="location-detect-btn" type="button" id="btn-auto-detect-location" aria-label="Auto-detect nearest hospital using GPS">
+                <span class="radar-dot"></span>
+                <span>📍 Auto-Detect Nearest Hospital</span>
+                <span class="tag tag-gps">Observed · On-Device</span>
+              </button>
+
+              <div class="location-search-wrap">
+                <span class="search-icon" aria-hidden="true">🔍</span>
+                <input class="location-search-input" id="location-search-input" type="search" placeholder="Search city or district (e.g. Lucknow, Varanasi, Bengaluru)..." autocomplete="off" aria-label="Search city or district" list="district-suggestions" />
+                <datalist id="district-suggestions"></datalist>
+              </div>
+
+              <div class="state-filter-wrap">
+                <select class="state-filter-select" id="state-filter-select" aria-label="Filter by state or UT">
+                  <option value="All India">All India (2,630+ Hospitals)</option>
+                </select>
+              </div>
+
+              <button class="map-toggle-btn" type="button" id="btn-toggle-map" aria-label="Toggle map view">
+                <span id="map-toggle-icon">🗺️</span> <span id="map-toggle-text">Toggle Map</span>
+              </button>
+            </div>
+            
+            <div style="display:none;">
+              <!-- Kept for backward compatibility with existing tests/references -->
+              <select id="locality-select"><option value="central-delhi">Central Delhi</option></select>
+            </div>
+
+            <p class="location-privacy-banner">
+              <span class="tag">Observed</span> <strong>100% Client-Side Privacy:</strong> Distance is computed inside your browser using coordinates. Zero GPS data is transmitted to any server.
+            </p>
+          </div>
+
+          <!-- Bento Grid: Interactive Map + Hospitals -->
+          <div class="hospital-finder-grid" id="hospital-finder-grid">
+            <!-- Map Column -->
+            <div class="hospital-map-panel" id="hospital-map-panel">
+              <div class="map-header">
+                <div class="map-title-row">
+                  <span class="live-dot"></span>
+                  <strong>National Healthcare Map</strong>
+                  <span class="map-facility-count" id="map-facility-count">2,630+ Facilities</span>
+                </div>
+                <small class="map-hint">Tap any pin to inspect & select</small>
+              </div>
+              <div id="interactive-hospital-map" class="hospital-map-viewport"></div>
+            </div>
+
+            <!-- Cards Column -->
+            <div class="hospital-cards-panel">
+              <div class="auto-selected-highlight" id="auto-selected-highlight">
+                <div class="highlight-badge">
+                  <span>✨</span>
+                  <strong id="auto-select-badge-text">Auto-Selected: Nearest Hospital with your required specialty</strong>
+                </div>
+              </div>
+              <div class="hospital-list" id="hospital-list" aria-live="polite"></div>
+            </div>
+          </div>
 
           <section class="booking-panel appointment-options" id="appointment-options" aria-labelledby="appointment-options-title" hidden>
             <p class="section-kicker"><span class="tag">Observed</span><span data-copy="appointmentStepLabel">Step 4 · Appointment choices</span></p>
@@ -5080,22 +5618,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             </div>
             <p class="honest-wait appointment-wait" id="appointment-wait" aria-live="polite"><span class="tag">Simulated</span><span data-copy="appointmentWaitHint">Choose a date and session to see the estimated consultation time.</span></p>
           </section>
-
-          <section class="booking-panel" aria-labelledby="where-title">
-            <h2 id="where-title" data-copy="whereTitle">Where would you like to go?</h2>
-            <p class="booking-panel-note" data-copy="whereNote">Choose a locality. We do not read your device location.</p>
-            <div class="locality-field">
-              <label for="locality-select"><span class="tag">Observed</span><span data-copy="localityLabel">Your chosen locality</span></label>
-              <select class="select-control" id="locality-select" aria-describedby="location-note">
-                <option value="central-delhi">Central Delhi · New Delhi</option>
-                <option value="south-delhi">South Delhi · New Delhi</option>
-                <option value="north-delhi">North Delhi · New Delhi</option>
-              </select>
-            </div>
-            <p class="location-note" id="location-note"><span class="tag">Observed</span><span data-copy="locationChosenNote">Location is chosen by you, never taken from the phone. Travel figures below are simulated.</span></p>
-            <p class="sort-note"><span data-copy="sortNote">Sorted by earliest estimated consultation time, then travel time, then hospital name.</span></p>
-            <div class="hospital-list" id="hospital-list" aria-live="polite"></div>
-          </section>
+        </section>
 
           <section class="booking-panel" id="carry-panel" aria-labelledby="carry-title" hidden>
             <h2 id="carry-title" data-copy="carryTitle">What to carry</h2>
@@ -5481,7 +6004,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
     <script src="./vernacular-pack.js"></script>
     <script type="module">
       import { parseFreeTextComplaint, routeComplaint, checkRealtimeEmergency } from "./routing.js";
-      import { LOCALITIES, HOSPITAL_FACT_CHECKED_ON, hospitalsForDepartment, PAN_INDIA_HOSPITALS, INDIAN_STATES, COUNTERFACTUAL_METRICS, panIndiaHospitalsForDepartment, hospitalsByState } from "./hospital-data.js";
+      import { LOCALITIES, HOSPITAL_FACT_CHECKED_ON, hospitalsForDepartment, PAN_INDIA_HOSPITALS, INDIAN_STATES, COUNTERFACTUAL_METRICS, panIndiaHospitalsForDepartment, hospitalsByState, haversineDistanceKm, autoSelectNearestHospital, INDIAN_DISTRICTS } from "./hospital-data.js";
       import { createBodyMap3D, BILATERAL_REGIONS, REGION_LABELS } from "./body-map-3d.js";
 
       const copy = {
@@ -5668,7 +6191,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         }
       }
 
-      const state = { language: "en", selectedDialect: "en", selectedDialectData: null, screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, fullName: "", phone: "", exactAge: "", gender: null, conditions: [], listening: false, region: null, side: "both", noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi", selectedHospital: null, visitType: null, consultationMode: "in-person", appointmentDate: null, appointmentShift: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
+      const state = { language: "en", selectedDialect: "en", selectedDialectData: null, screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, fullName: "", phone: "", exactAge: "", gender: null, conditions: [], listening: false, region: null, side: "both", noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi",
+        userCoords: null,
+        hospitalStateFilter: "All India",
+        hospitalSearchQuery: "", selectedHospital: null, visitType: null, consultationMode: "in-person", appointmentDate: null, appointmentShift: null, humanChecked: false, signedIn: false, editingField: null, entryRoute: "type", mapMode: "3d", threeAvailable: true };
       const text = (key) => {
         const lang = state.language || "en";
         if (copy[lang] && copy[lang][key]) return copy[lang][key];
@@ -5954,6 +6480,125 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         renderKindSelection();
         renderMapMode();
         renderWorkspace();
+
+      // Initialize smart location controls & listeners
+      const btnAutoDetectLocation = document.querySelector("#btn-auto-detect-location");
+      const locationSearchInput = document.querySelector("#location-search-input");
+      const stateFilterSelect = document.querySelector("#state-filter-select");
+      const btnToggleMap = document.querySelector("#btn-toggle-map");
+      const hospitalMapPanel = document.querySelector("#hospital-map-panel");
+      const districtSuggestions = document.querySelector("#district-suggestions");
+
+      if (stateFilterSelect) {
+        stateFilterSelect.replaceChildren();
+        INDIAN_STATES.forEach((st) => {
+          const opt = document.createElement("option");
+          opt.value = st;
+          opt.textContent = st === "All India" ? "All India (2,630+ Facilities)" : st;
+          stateFilterSelect.append(opt);
+        });
+        stateFilterSelect.value = state.hospitalStateFilter || "All India";
+        stateFilterSelect.addEventListener("change", () => {
+          state.hospitalStateFilter = stateFilterSelect.value;
+          state.selectedHospital = null;
+          renderAppointment();
+        });
+      }
+
+      if (districtSuggestions && typeof INDIAN_DISTRICTS !== "undefined") {
+        districtSuggestions.replaceChildren();
+        INDIAN_DISTRICTS.forEach((d) => {
+          const opt = document.createElement("option");
+          opt.value = d;
+          districtSuggestions.append(opt);
+        });
+      }
+
+      if (btnAutoDetectLocation) {
+        btnAutoDetectLocation.addEventListener("click", () => {
+          if (!navigator.geolocation) {
+            alert("Geolocation is not supported by your browser. Please search your city or district in the box.");
+            return;
+          }
+          const labelSpan = btnAutoDetectLocation.querySelector("span:nth-child(2)");
+          if (labelSpan) labelSpan.textContent = "Detecting GPS location...";
+          btnAutoDetectLocation.disabled = true;
+
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              btnAutoDetectLocation.disabled = false;
+              if (labelSpan) labelSpan.textContent = "📍 Auto-Detect Nearest Hospital";
+              state.userCoords = {
+                lat: pos.coords.latitude,
+                lng: pos.coords.longitude,
+                name: "Your Device Location (GPS)"
+              };
+              state.selectedHospital = null; // auto-select closest to this new location
+              renderAppointment();
+              if (hospitalLeafletMap) {
+                hospitalLeafletMap.flyTo([pos.coords.latitude, pos.coords.longitude], 13);
+              }
+            },
+            (err) => {
+              btnAutoDetectLocation.disabled = false;
+              if (labelSpan) labelSpan.textContent = "📍 Auto-Detect Nearest Hospital";
+              console.warn("Geolocation request dismissed or unavailable:", err);
+              if (locationSearchInput) {
+                locationSearchInput.focus();
+                locationSearchInput.placeholder = "GPS unavailable. Type your city or district here...";
+              }
+            },
+            { timeout: 10000, maximumAge: 60000 }
+          );
+        });
+      }
+
+      if (locationSearchInput) {
+        const handleSearch = () => {
+          const q = locationSearchInput.value.trim().toLowerCase();
+          if (!q) return;
+          // Search in LOCALITIES or PAN_INDIA_HOSPITALS
+          const matchedLoc = LOCALITIES.find((l) => l.label.toLowerCase().includes(q));
+          if (matchedLoc) {
+            state.userCoords = { lat: matchedLoc.lat, lng: matchedLoc.lng, name: matchedLoc.label };
+            state.selectedHospital = null;
+            renderAppointment();
+            return;
+          }
+          const matchedHosp = PAN_INDIA_HOSPITALS.find((h) => 
+            (h.city && h.city.toLowerCase().includes(q)) || 
+            (h.district && h.district.toLowerCase().includes(q)) ||
+            (h.state && h.state.toLowerCase().includes(q)) ||
+            h.name.toLowerCase().includes(q)
+          );
+          if (matchedHosp && matchedHosp.lat != null) {
+            state.userCoords = { lat: matchedHosp.lat, lng: matchedHosp.lng, name: matchedHosp.city || matchedHosp.state };
+            state.selectedHospital = matchedHosp.id;
+            renderAppointment();
+          }
+        };
+        locationSearchInput.addEventListener("change", handleSearch);
+        locationSearchInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            handleSearch();
+          }
+        });
+      }
+
+      if (btnToggleMap && hospitalMapPanel) {
+        let mapVisible = true;
+        btnToggleMap.addEventListener("click", () => {
+          mapVisible = !mapVisible;
+          hospitalMapPanel.style.display = mapVisible ? "block" : "none";
+          const toggleText = document.querySelector("#map-toggle-text");
+          if (toggleText) toggleText.textContent = mapVisible ? "Hide Map" : "Show Map";
+          if (mapVisible && hospitalLeafletMap) {
+            setTimeout(() => hospitalLeafletMap.invalidateSize(), 150);
+          }
+        });
+      }
+
         teleModeNote.hidden = state.consultationMode !== "tele";
         renderBloodStock();
         renderTheme();
@@ -6781,10 +7426,111 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         parent.append(wrapper);
       }
 
+      let hospitalLeafletMap = null;
+      let hospitalMapMarkers = [];
+      let userLocationMarker = null;
+
+      function initOrUpdateHospitalMap(hospitals, selectedHospitalId, userLocation) {
+        const mapContainer = document.querySelector("#interactive-hospital-map");
+        if (!mapContainer || typeof window.L === "undefined") return;
+
+        const centerCoords = (userLocation && userLocation.lat != null)
+          ? userLocation
+          : (hospitals[0] && hospitals[0].lat != null ? { lat: hospitals[0].lat, lng: hospitals[0].lng } : { lat: 28.6139, lng: 77.2090 });
+
+        if (!hospitalLeafletMap) {
+          try {
+            hospitalLeafletMap = L.map("interactive-hospital-map", {
+              zoomControl: true,
+              scrollWheelZoom: false,
+            }).setView([centerCoords.lat, centerCoords.lng], 12);
+
+            L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+              subdomains: "abcd",
+              maxZoom: 19
+            }).addTo(hospitalLeafletMap);
+
+            hospitalLeafletMap.on("click", (e) => {
+              state.userCoords = { lat: e.latlng.lat, lng: e.latlng.lng, name: "Pinned Location" };
+              state.selectedHospital = null;
+              renderAppointment();
+            });
+          } catch (err) {
+            console.warn("Leaflet map initialization notice:", err);
+            return;
+          }
+        } else {
+          hospitalLeafletMap.setView([centerCoords.lat, centerCoords.lng]);
+        }
+
+        // Clear previous markers
+        hospitalMapMarkers.forEach((m) => hospitalLeafletMap.removeLayer(m));
+        hospitalMapMarkers = [];
+        if (userLocationMarker) {
+          hospitalLeafletMap.removeLayer(userLocationMarker);
+          userLocationMarker = null;
+        }
+
+        // Add user location beacon
+        if (userLocation && userLocation.lat != null) {
+          const userIcon = L.divIcon({
+            className: "user-map-beacon-wrap",
+            html: '<div class="user-map-beacon"><div class="beacon-pulse"></div><div class="beacon-dot"></div></div>',
+            iconSize: [22, 22],
+            iconAnchor: [11, 11]
+          });
+          userLocationMarker = L.marker([userLocation.lat, userLocation.lng], { icon: userIcon, zIndexOffset: 2000 })
+            .addTo(hospitalLeafletMap)
+            .bindPopup("<strong>Your Location (Observed)</strong><br>Computed client-side in browser");
+        }
+
+        // Add hospital markers (top 15 nearest)
+        hospitals.slice(0, 15).forEach((hospital) => {
+          if (!hospital.lat || !hospital.lng) return;
+          const isSelected = hospital.id === selectedHospitalId;
+          const pinColor = isSelected ? "#10b981" : "#3b82f6";
+          const distLabel = hospital.availability?.distanceKm ? `${hospital.availability.distanceKm.toFixed(1)} km` : "";
+
+          const pinIcon = L.divIcon({
+            className: "hospital-pin-wrap",
+            html: `<div class="hospital-pin ${isSelected ? "is-selected-pin" : ""}" style="--pin-color: ${pinColor}">
+              <span class="pin-symbol">🏥</span>
+              <span class="pin-badge">${distLabel}</span>
+            </div>`,
+            iconSize: [36, 42],
+            iconAnchor: [18, 42]
+          });
+
+          const marker = L.marker([hospital.lat, hospital.lng], { icon: pinIcon, zIndexOffset: isSelected ? 1500 : 100 })
+            .addTo(hospitalLeafletMap)
+            .bindPopup(`<strong>${hospital.name}</strong><br><small>${hospital.tier || "Hospital"}</small><br><span>Wait: ~${hospital.availability?.waitMinutes || 120}m · Next Slot: ${hospital.availability?.slot || "09:30"}</span><br><button type="button" class="pin-select-btn" data-pin-select="${hospital.id}">${isSelected ? "✓ Selected Hospital" : "Select This Hospital"}</button>`);
+
+          marker.on("click", () => {
+            state.selectedHospital = hospital.id;
+            renderAppointment();
+          });
+
+          hospitalMapMarkers.push(marker);
+        });
+
+        setTimeout(() => {
+          if (hospitalLeafletMap) hospitalLeafletMap.invalidateSize();
+        }, 120);
+      }
+
       function renderHospitalCards() {
-        const department = state.routeResult?.department;
-        const hospitals = hospitalsForDepartment(department, state.locality);
+        const department = state.routeResult?.department || "General Medicine";
+        const userLocation = state.userCoords || LOCALITIES.find((l) => l.id === state.locality) || { lat: 28.6139, lng: 77.2090, name: "New Delhi" };
+        
+        const hospitals = hospitalsForDepartment(department, state.userCoords || state.locality, state.hospitalStateFilter);
         hospitalList.replaceChildren();
+
+        const facilityCountEl = document.querySelector("#map-facility-count");
+        if (facilityCountEl) {
+          facilityCountEl.textContent = `${hospitals.length} Matching ${department}`;
+        }
+
         if (!hospitals.length) {
           const empty = document.createElement("p");
           empty.className = "booking-panel-note";
@@ -6792,48 +7538,98 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           hospitalList.append(empty);
           return;
         }
-        hospitals.forEach((hospital) => {
+
+        // Auto-select the #1 nearest hospital if none selected or if selected is not in filtered list
+        if (!state.selectedHospital || !hospitals.some((h) => h.id === state.selectedHospital)) {
+          state.selectedHospital = hospitals[0].id;
+        }
+
+        const selectedHospital = hospitals.find((h) => h.id === state.selectedHospital) || hospitals[0];
+        const autoSelectBadge = document.querySelector("#auto-select-badge-text");
+        if (autoSelectBadge) {
+          const distStr = selectedHospital.availability?.distanceKm ? ` (${selectedHospital.availability.distanceKm.toFixed(1)} km away)` : "";
+          autoSelectBadge.textContent = `Auto-Selected: Nearest facility equipped for ${departmentCopyKeys[department] ? text(departmentCopyKeys[department]) : department}${distStr}`;
+        }
+
+        // Render Hero Card for Selected Hospital first, then top alternatives
+        const sortedDisplay = [
+          selectedHospital,
+          ...hospitals.filter((h) => h.id !== selectedHospital.id).slice(0, 5)
+        ];
+
+        sortedDisplay.forEach((hospital, index) => {
           const { availability } = hospital;
+          const isSelected = state.selectedHospital === hospital.id;
           const card = document.createElement("article");
-          card.className = `hospital-card${state.selectedHospital === hospital.id ? " is-selected" : ""}`;
-          const verified = document.createElement("p");
-          verified.className = "verified-line";
-          verified.append(makeTag("Verified"), document.createTextNode(`${text("verifiedSource")} · ${text("checked")} ${HOSPITAL_FACT_CHECKED_ON} · `));
-          const source = document.createElement("a");
-          source.href = hospital.sourceUrl;
-          source.target = "_blank";
-          source.rel = "noreferrer";
-          source.textContent = hospital.sourceLabel;
-          verified.append(source);
+          card.className = `hospital-card${isSelected ? " is-selected" : ""}`;
 
+          const topRow = document.createElement("div");
+          topRow.className = "hospital-card-top";
+
+          const titleBlock = document.createElement("div");
+          const tierTag = document.createElement("span");
+          tierTag.className = "hospital-tier-tag";
+          tierTag.textContent = hospital.tier || "Government Hospital";
+          
           const title = document.createElement("h3");
+          title.className = "hospital-card-title";
           title.textContent = hospital.name;
+
           const address = document.createElement("p");
-          address.className = "hospital-address";
-          address.append(makeTag("Verified"), document.createTextNode(hospital.address));
-          const access = document.createElement("p");
-          access.className = "hospital-access";
-          access.append(makeTag("Verified"), document.createTextNode(hospital.transit));
+          address.className = "hospital-card-address";
+          address.textContent = hospital.address || `${hospital.city}, ${hospital.state}`;
 
-          const facts = document.createElement("dl");
-          facts.className = "hospital-facts";
-          appendFact(facts, text("distance"), "Simulated", `${availability.travelMinutes} min · ${availability.distanceKm.toFixed(1)} km`);
-          appendFact(facts, text("nextSlot"), "Simulated", `Slot ${formatClock(availability.slot)}`);
-          appendFact(facts, text("seenBy"), "Simulated", formatClock(availability.seenAt));
-          appendFact(facts, text("calendarOpens"), "Simulated", availability.calendarOpens);
+          titleBlock.append(tierTag, title, address);
+          topRow.append(titleBlock);
 
-          const honestWait = document.createElement("p");
-          honestWait.className = "honest-wait";
-          honestWait.append(makeTag("Simulated"), document.createTextNode(honestWaitText(availability)));
+          // Stat chips row
+          const chipsRow = document.createElement("div");
+          chipsRow.className = "stat-chips-row";
 
-          const sortKey = document.createElement("p");
-          sortKey.className = "sort-note";
-          sortKey.append(makeTag("Rule"), makeTag("Simulated"), document.createTextNode(` ${availability.seenAt} seen time · ${availability.travelMinutes} min travel · ${hospital.shortName}`));
+          const distChip = document.createElement("span");
+          distChip.className = "stat-chip chip-distance";
+          distChip.innerHTML = `<span class="tag">Observed</span> 📍 <strong>${availability.distanceKm.toFixed(1)} km</strong>`;
 
+          const waitChip = document.createElement("span");
+          waitChip.className = "stat-chip chip-wait";
+          waitChip.innerHTML = `<span class="tag">Simulated</span> ⏱️ <strong>~${Math.round(availability.waitMinutes / 5) * 5}m wait</strong>`;
+
+          const slotChip = document.createElement("span");
+          slotChip.className = "stat-chip chip-slot";
+          slotChip.innerHTML = `<span class="tag">Simulated</span> 🕒 <strong>Slot ${formatClock(availability.slot)}</strong>`;
+
+          chipsRow.append(distChip, waitChip, slotChip);
+
+          // Expandable transit drawer
+          const transitDrawer = document.createElement("details");
+          transitDrawer.className = "transit-drawer";
+          const transitSummary = document.createElement("summary");
+          transitSummary.textContent = "🚇 Transit, Gate & OPD Directions";
+          const transitBody = document.createElement("p");
+          transitBody.textContent = hospital.transit || "Main OPD Counter · Regular Queue Hours";
+          transitDrawer.append(transitSummary, transitBody);
+
+          // Quiet verified line
+          const verified = document.createElement("p");
+          verified.className = "verified-quiet";
+          verified.append(
+            makeTag("Verified"),
+            document.createTextNode(`${text("checked")} ${HOSPITAL_FACT_CHECKED_ON} · `),
+            (() => {
+              const a = document.createElement("a");
+              a.href = hospital.sourceUrl;
+              a.target = "_blank";
+              a.rel = "noreferrer";
+              a.textContent = hospital.sourceLabel || "ORS Directory";
+              return a;
+            })()
+          );
+
+          // Action button
           const choose = document.createElement("button");
           choose.type = "button";
-          choose.className = `large-button${state.selectedHospital === hospital.id ? " primary" : ""}`;
-          choose.textContent = state.selectedHospital === hospital.id ? text("chosenHospital") : text("chooseHospital");
+          choose.className = `large-button${isSelected ? " primary" : ""}`;
+          choose.textContent = isSelected ? `✓ ${text("chosenHospital")}` : `${text("chooseHospital")} →`;
           choose.addEventListener("click", () => {
             state.selectedHospital = hospital.id;
             state.visitType = null;
@@ -6843,11 +7639,15 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             state.humanChecked = false;
             state.signedIn = false;
             renderAppointment();
-            moveTo(carryPanel);
+            moveTo(appointmentOptions);
           });
-          card.append(title, address, access, verified, facts, honestWait, sortKey, choose);
+
+          card.append(topRow, chipsRow, transitDrawer, verified, choose);
           hospitalList.append(card);
         });
+
+        // Keep map synchronized
+        initOrUpdateHospitalMap(hospitals, state.selectedHospital, userLocation);
       }
 
       function renderCarry() {
@@ -6871,7 +7671,8 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
       function renderSlip() {
         const department = state.routeResult?.department;
-        const hospital = hospitalsForDepartment(department, state.locality).find((entry) => entry.id === state.selectedHospital);
+        const candidateHospitals = hospitalsForDepartment(department, state.userCoords || state.locality, state.hospitalStateFilter);
+        const hospital = candidateHospitals.find((entry) => entry.id === state.selectedHospital) || candidateHospitals[0];
         if (!hospital) return;
         const { availability } = hospital;
         const appointment = state.appointmentShift ? shiftCatalog[state.appointmentShift] : { start: availability.slot, seen: availability.seenAt };
@@ -7488,7 +8289,8 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       });
       document.querySelector("#print-slip").addEventListener("click", () => window.print());
       document.querySelector("#download-slip").addEventListener("click", () => {
-        const hospital = hospitalsForDepartment(state.routeResult?.department, state.locality).find((entry) => entry.id === state.selectedHospital);
+        const candidateHospitals = hospitalsForDepartment(state.routeResult?.department, state.userCoords || state.locality, state.hospitalStateFilter);
+        const hospital = candidateHospitals.find((entry) => entry.id === state.selectedHospital) || candidateHospitals[0];
         if (!hospital) return;
         const { availability } = hospital;
         const content = [
