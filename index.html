@@ -132,20 +132,22 @@
         width: 100%;
         max-width: 100%;
         min-height: 3.85rem;
-        padding: 0.45rem clamp(0.5rem, 1.5vw, 1rem);
-        border-bottom: 1.5px solid rgba(22, 101, 52, 0.18);
-        border-radius: 0 0 1rem 1rem;
-        background: linear-gradient(135deg, rgba(243, 249, 246, 0.96) 0%, rgba(250, 252, 251, 0.94) 50%, rgba(240, 247, 252, 0.96) 100%);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
-        transition: background 200ms ease, border-color 200ms ease;
+        padding: 0.45rem clamp(0.5rem, 1.5vw, 1.25rem);
+        border-bottom: 1px solid rgba(22, 101, 52, 0.14);
+        border-radius: 0 0 1.25rem 1.25rem;
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(24px) saturate(190%) contrast(95%);
+        -webkit-backdrop-filter: blur(24px) saturate(190%) contrast(95%);
+        box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        transition: background 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
         box-sizing: border-box;
       }
       [data-theme="dark"] .topline {
-        border-bottom-color: rgba(45, 212, 191, 0.22);
-        background: linear-gradient(135deg, rgba(12, 22, 17, 0.96) 0%, rgba(18, 30, 24, 0.94) 50%, rgba(15, 26, 33, 0.96) 100%);
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+        border-bottom-color: rgba(45, 212, 191, 0.16);
+        background: rgba(14, 22, 19, 0.82);
+        backdrop-filter: blur(24px) saturate(190%);
+        -webkit-backdrop-filter: blur(24px) saturate(190%);
+        box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
       }
       .topline-brand-wrap {
         display: flex;
@@ -160,24 +162,36 @@
         gap: 0.35rem;
         min-height: 2.35rem;
         padding: 0.35rem 0.65rem;
-        border: 1.5px solid var(--line);
+        border: 1px solid rgba(0, 0, 0, 0.07);
         border-radius: var(--radius-full);
-        background: var(--paper);
+        background: rgba(0, 0, 0, 0.035);
         color: var(--ink);
         font-size: 0.86rem;
-        font-weight: 800;
+        font-weight: 750;
         cursor: pointer;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
-        box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
         flex-shrink: 0;
       }
       .sidebar-toggle-btn:hover, .sidebar-toggle-btn[aria-expanded="true"] {
-        border-color: var(--accent);
-        background: var(--accent-soft);
+        border-color: rgba(22, 101, 52, 0.25);
+        background: rgba(22, 101, 52, 0.08);
         color: var(--accent-dark);
         transform: translateY(-1px);
+        box-shadow: 0 3px 8px rgba(22, 101, 52, 0.08);
       }
-      .sidebar-toggle-icon { font-size: 1.15rem; line-height: 1; }
+      [data-theme="dark"] .sidebar-toggle-btn {
+        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--ink);
+      }
+      [data-theme="dark"] .sidebar-toggle-btn:hover, [data-theme="dark"] .sidebar-toggle-btn[aria-expanded="true"] {
+        border-color: rgba(45, 212, 191, 0.3);
+        background: rgba(45, 212, 191, 0.12);
+        color: #2dd4bf;
+      }
       .brand-lockup {
         display: flex;
         align-items: center;
@@ -187,7 +201,7 @@
         text-decoration: none;
         flex-shrink: 0;
       }
-      .brand-mark { flex: 0 0 2.25rem; width: 2.25rem; height: 2.25rem; }
+      .brand-mark { flex: 0 0 2.25rem; width: 2.25rem; height: 2.25rem; filter: drop-shadow(0 1px 2px rgba(22, 101, 52, 0.15)); }
       .brand-copy { display: grid; gap: 0.05rem; min-width: 0; }
       .wordmark {
         color: var(--accent-dark);
@@ -207,53 +221,66 @@
         text-overflow: ellipsis;
       }
       
-      /* Desktop Navigation Bar Tiles */
+      /* Apple Liquid Segmented Capsule Navigation */
       .site-nav {
         display: none;
         align-items: center;
-        gap: 0.35rem;
+        gap: 0.25rem;
         margin: 0 auto;
+        padding: 0.25rem 0.35rem;
+        border-radius: 9999px;
+        background: rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         flex-shrink: 0;
         white-space: nowrap;
       }
+      [data-theme="dark"] .site-nav {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.08);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
       .site-nav .nav-tile {
         position: relative;
-        min-height: 2.25rem;
+        min-height: 2.15rem;
         display: inline-flex;
         align-items: center;
-        padding: 0.35rem 0.6rem;
-        border-radius: 0.65rem;
+        padding: 0.38rem 0.95rem;
+        border-radius: 9999px;
         border: 1px solid transparent;
         color: var(--muted);
         font-size: 0.84rem;
-        font-weight: 750;
+        font-weight: 650;
         text-decoration: none;
         white-space: nowrap;
-        transition: all 160ms ease;
+        transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
       }
       .site-nav .nav-tile:hover {
-        background: var(--accent-soft);
-        border-color: rgba(22, 101, 52, 0.15);
+        background: rgba(255, 255, 255, 0.82);
         color: var(--accent-dark);
-        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transform: translateY(-0.5px);
+      }
+      [data-theme="dark"] .site-nav .nav-tile:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
       .site-nav .nav-tile[aria-current="page"] {
-        background: var(--accent-soft);
-        border-color: var(--accent);
+        background: #ffffff;
         color: var(--accent-dark);
-        font-weight: 850;
+        font-weight: 800;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07), 0 0 1px rgba(0, 0, 0, 0.1);
       }
-      .site-nav .nav-tile[aria-current="page"]::after {
-        position: absolute;
-        right: 0.65rem;
-        bottom: 0.15rem;
-        left: 0.65rem;
-        height: 0.18rem;
-        border-radius: 999px;
-        background: var(--accent);
-        content: "";
+      [data-theme="dark"] .site-nav .nav-tile[aria-current="page"] {
+        background: rgba(255, 255, 255, 0.16);
+        color: #2dd4bf;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
       }
       
+      /* Apple Liquid Actions */
       .nav-actions {
         display: flex;
         align-items: center;
@@ -266,60 +293,203 @@
         align-items: center;
         flex-shrink: 0;
       }
+      .lang-quick-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        min-height: 2.35rem;
+        padding: 0.35rem 0.75rem;
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        border-radius: var(--radius-full);
+        background: rgba(0, 0, 0, 0.035);
+        color: var(--ink);
+        font-size: 0.85rem;
+        font-weight: 750;
+        cursor: pointer;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+        flex-shrink: 0;
+      }
+      .lang-quick-btn:hover, .lang-quick-btn[aria-expanded="true"] {
+        border-color: rgba(22, 101, 52, 0.25);
+        background: rgba(22, 101, 52, 0.08);
+        color: var(--accent-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 3px 8px rgba(22, 101, 52, 0.08);
+      }
+      [data-theme="dark"] .lang-quick-btn {
+        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--ink);
+      }
+      [data-theme="dark"] .lang-quick-btn:hover, [data-theme="dark"] .lang-quick-btn[aria-expanded="true"] {
+        border-color: rgba(45, 212, 191, 0.3);
+        background: rgba(45, 212, 191, 0.12);
+        color: #2dd4bf;
+      }
+
       .a11y-trigger-btn {
         display: inline-flex;
         align-items: center;
         gap: 0.35rem;
         min-height: 2.35rem;
         padding: 0.35rem 0.65rem;
-        border: 1.5px solid var(--line);
+        border: 1px solid rgba(0, 0, 0, 0.07);
         border-radius: var(--radius-full);
-        background: var(--paper);
+        background: rgba(0, 0, 0, 0.035);
         color: var(--ink);
-        font-size: 0.86rem;
-        font-weight: 800;
+        font-size: 0.85rem;
+        font-weight: 750;
         cursor: pointer;
-        transition: all 160ms ease;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
         flex-shrink: 0;
       }
       .a11y-trigger-btn:hover, .a11y-trigger-btn[aria-expanded="true"] {
-        border-color: var(--accent);
-        background: var(--accent-soft);
+        border-color: rgba(22, 101, 52, 0.25);
+        background: rgba(22, 101, 52, 0.08);
         color: var(--accent-dark);
         transform: translateY(-1px);
+        box-shadow: 0 3px 8px rgba(22, 101, 52, 0.08);
       }
+      [data-theme="dark"] .a11y-trigger-btn {
+        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--ink);
+      }
+      [data-theme="dark"] .a11y-trigger-btn:hover, [data-theme="dark"] .a11y-trigger-btn[aria-expanded="true"] {
+        border-color: rgba(45, 212, 191, 0.3);
+        background: rgba(45, 212, 191, 0.12);
+        color: #2dd4bf;
+      }
+
+      /* Apple Liquid Patient Profile Pill */
+      .nav-profile-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        min-height: 2.35rem;
+        padding: 0.28rem 0.8rem 0.28rem 0.38rem;
+        border-radius: 9999px;
+        background: rgba(22, 101, 52, 0.07);
+        border: 1px solid rgba(22, 101, 52, 0.18);
+        color: var(--accent-dark);
+        font-size: 0.85rem;
+        font-weight: 750;
+        text-decoration: none;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+        flex-shrink: 0;
+        white-space: nowrap;
+      }
+      .profile-avatar-bubble {
+        display: inline-grid;
+        place-items: center;
+        width: 1.7rem;
+        height: 1.7rem;
+        border-radius: 50%;
+        background: var(--accent);
+        color: #ffffff;
+        box-shadow: 0 1px 3px rgba(22, 101, 52, 0.25);
+        flex-shrink: 0;
+      }
+      .profile-avatar-bubble .icon { width: 0.95rem; height: 0.95rem; }
+      .nav-profile-btn:hover {
+        background: rgba(22, 101, 52, 0.14);
+        border-color: var(--accent);
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(22, 101, 52, 0.12);
+      }
+      .nav-profile-btn[aria-current="page"] {
+        background: var(--accent-dark);
+        border-color: var(--accent-dark);
+        color: #ffffff;
+        box-shadow: 0 2px 10px rgba(22, 101, 52, 0.3);
+      }
+      .nav-profile-btn[aria-current="page"] .profile-avatar-bubble {
+        background: #ffffff;
+        color: var(--accent-dark);
+      }
+      [data-theme="dark"] .nav-profile-btn {
+        background: rgba(45, 212, 191, 0.1);
+        border-color: rgba(45, 212, 191, 0.25);
+        color: #2dd4bf;
+      }
+      [data-theme="dark"] .nav-profile-btn:hover {
+        background: rgba(45, 212, 191, 0.18);
+        border-color: #2dd4bf;
+        box-shadow: 0 3px 12px rgba(45, 212, 191, 0.2);
+      }
+      [data-theme="dark"] .nav-profile-btn .profile-avatar-bubble {
+        background: #2dd4bf;
+        color: #0f1a14;
+      }
+      [data-theme="dark"] .nav-profile-btn[aria-current="page"] {
+        background: #2dd4bf;
+        border-color: #2dd4bf;
+        color: #0c1611;
+      }
+      [data-theme="dark"] .nav-profile-btn[aria-current="page"] .profile-avatar-bubble {
+        background: #0c1611;
+        color: #2dd4bf;
+      }
+
       .theme-toggle {
         display: inline-grid;
         width: 2.35rem;
         height: 2.35rem;
         place-items: center;
         padding: 0;
-        border: 1px solid var(--line);
+        border: 1px solid rgba(0, 0, 0, 0.07);
         border-radius: var(--radius-full);
-        background: var(--paper);
+        background: rgba(0, 0, 0, 0.035);
         color: var(--ink);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
         flex-shrink: 0;
+        cursor: pointer;
+      }
+      .theme-toggle:hover {
+        border-color: rgba(0, 0, 0, 0.14);
+        background: rgba(0, 0, 0, 0.07);
+        transform: translateY(-1px);
+      }
+      [data-theme="dark"] .theme-toggle {
+        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--ink);
+      }
+      [data-theme="dark"] .theme-toggle:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.12);
       }
       .theme-toggle .icon { width: 1.15rem; height: 1.15rem; }
+
       .nav-start {
         min-height: 2.35rem;
-        padding: 0.35rem 0.85rem;
-        border: 0;
+        padding: 0.35rem 0.95rem;
+        border: 1px solid rgba(255, 255, 255, 0.25);
         border-radius: var(--radius-full);
-        background: var(--accent);
-        color: #fff;
+        background: linear-gradient(135deg, #166534 0%, #15803d 50%, #047857 100%);
+        color: #ffffff;
         font-size: 0.86rem;
         font-weight: 850;
-        box-shadow: 0 0.3rem 0.8rem rgba(22, 101, 52, 0.18);
+        box-shadow: 0 4px 14px rgba(22, 101, 52, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.3);
         cursor: pointer;
-        transition: all 150ms ease;
+        transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
         white-space: nowrap;
         flex-shrink: 0;
       }
       .nav-start:hover {
-        background: var(--accent-dark);
         transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(22, 101, 52, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      }
+      .nav-start:active {
+        transform: scale(0.98);
       }
 
 main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
@@ -1145,6 +1315,8 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         .tagline { display: none; }
         .sidebar-toggle-label { display: inline; }
         .a11y-trigger-label { display: none; }
+        .profile-btn-label { display: none; }
+        .nav-profile-btn { padding: 0.3rem 0.4rem; }
         .landing-hero { grid-template-columns: 1fr; }
         .journey-grid, .network-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
@@ -1153,6 +1325,9 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         .tagline { display: none; }
         .sidebar-toggle-label { display: none; }
         .a11y-trigger-label { display: none; }
+        .profile-btn-label { display: none; }
+        .nav-profile-btn { width: 2.15rem; height: 2.15rem; min-height: 2.15rem; padding: 0; justify-content: center; border-radius: 50%; }
+        .profile-avatar-bubble { width: 1.6rem; height: 1.6rem; }
         .topline { padding: 0.35rem 0.5rem; gap: 0.25rem; }
         .topline-brand-wrap { gap: 0.3rem; }
         .sidebar-toggle-btn { width: 2.2rem; height: 2.2rem; min-height: 2.2rem; padding: 0; justify-content: center; border-radius: 50%; }
@@ -1166,6 +1341,11 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         .whatsapp-float-btn { padding: 0.5rem; border-radius: 50%; width: 3rem; height: 3rem; justify-content: center; bottom: 1rem; right: 1rem; }
         .whatsapp-float-btn span { display: none; }
       }
+      @media (max-width: 480px) {
+        .nav-profile-btn { width: 2rem; height: 2rem; min-height: 2rem; }
+        .profile-avatar-bubble { width: 1.5rem; height: 1.5rem; }
+      }
+
       @media (max-width: 380px) {
         .nav-start { display: none; }
       }
@@ -1961,10 +2141,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/></symbol>
       <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/></symbol>
       <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
-      <symbol id="icon-mic" viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="12" rx="4"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></symbol>
-      <symbol id="icon-route" viewBox="0 0 48 48"><path d="M14 39c-5-3-6-10-2-14 3-3 7-4 11-2l4 2c4 2 8 1 10-2 3-4 2-10-2-13"/><path d="M17 8h8M21 4v8M31 12c2-2 4-3 7-3"/><path d="M31 17c3 0 5 2 5 5M36 22h6"/><path d="M8 28h7M11 24v8"/><path d="M27 36c4-2 7-2 11 0"/></symbol>
-      <symbol id="icon-queue" viewBox="0 0 48 48"><circle cx="24" cy="24" r="15"/><path d="M24 15v10l7 4M9 18c2-6 7-10 13-10M16 8H9v7"/><path d="M6 35c5 5 12 7 19 5"/></symbol>
-      <symbol id="icon-slip" viewBox="0 0 48 48"><path d="M13 5h22v38H13z"/><path d="M18 12h12M18 18h12M18 25h7M18 31h12"/><circle cx="32" cy="34" r="7"/><path d="m29 34 2 2 4-5"/></symbol>
+      <symbol id="icon-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></symbol>
+      <symbol id="icon-route" viewBox="0 0 24 24"><circle cx="5" cy="12" r="3"/><circle cx="19" cy="5" r="3"/><circle cx="19" cy="19" r="3"/><path d="M8 12h3a4 4 0 0 0 4-4V7a2 2 0 0 1 2-2h2"/><path d="M8 12h3a4 4 0 0 1 4 4v1a2 2 0 0 0 2 2h2"/></symbol>
+      <symbol id="icon-queue" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 16 14"/></symbol>
+      <symbol id="icon-slip" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
       <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></symbol>
       <symbol id="icon-question" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4.2 1.8c-1.1.9-1.7 1.3-1.7 2.7M12 17h.01"/></symbol>
       <symbol id="icon-pain" viewBox="0 0 24 24"><path d="m12 3 1.8 6.2L20 7l-4.4 5 5 3.2-6.5-.5L12 21l-2.1-6.3-6.5.5 5-3.2L4 7l6.2 2.2Z"/></symbol>
@@ -2054,7 +2234,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         <nav class="site-nav" aria-label="Raahat primary navigation">
           <a href="#screen-home" data-view-link="home" data-copy="homeNav" class="nav-tile">Home</a>
           <a href="#screen-triage" data-view-link="triage" data-copy="triageNav" class="nav-tile">OPD Triage</a>
-          <a href="#screen-profile" data-view-link="profile" data-copy="profileNav" class="nav-tile">My Profile</a>
           <a href="#screen-doctor" data-view-link="doctor" data-copy="doctorNav" class="nav-tile">Doctor Portal</a>
         </nav>
 
@@ -2067,6 +2246,12 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           <button class="a11y-trigger-btn" type="button" id="btn-open-a11y" aria-haspopup="dialog" aria-expanded="false" aria-label="Accessibility options" title="Open Accessibility Options">
             <svg class="icon icon-inline" aria-hidden="true"><use href="#icon-a11y"></use></svg> <span class="a11y-trigger-label">Access</span>
           </button>
+          <a href="#screen-profile" data-view-link="profile" class="nav-profile-btn" id="nav-profile-btn" aria-label="My Patient Profile" title="My Patient Profile &amp; Consultation Records">
+            <span class="profile-avatar-bubble">
+              <svg class="icon icon-inline" aria-hidden="true"><use href="#icon-user"></use></svg>
+            </span>
+            <span class="profile-btn-label" data-copy="profileShort">Profile</span>
+          </a>
           <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Use dark theme" title="Use dark theme">
             <svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg>
           </button>
@@ -2222,15 +2407,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             </div>
           </section>
 
-          <section class="landing-section view-section roadmap-section" id="screen-roadmap" data-view="home" aria-labelledby="roadmap-title">
-            <div class="section-heading"><h2 id="roadmap-title" data-copy="roadmapTitle">What’s next for Raahat</h2><p data-copy="roadmapNote">A civic roadmap for turning a clear prototype into a more connected, accessible public-service front door.</p></div>
-            <div class="roadmap-grid">
-              <article class="roadmap-card"><h3 data-copy="roadmapAbdmTitle">ABDM &amp; e-Hospital integration</h3><p data-copy="roadmapAbdmNote">Link generated specimen tokens directly into the Ayushman Bharat Digital Mission (ABDM) and national Hospital Management Information Systems (HMIS).</p></article>
-              <article class="roadmap-card"><h3 data-copy="roadmapIvrTitle">AI Voice IVR for feature phones (104 integration)</h3><p data-copy="roadmapIvrNote">Let rural citizens dial a toll-free number, speak symptoms in 22 regional dialects—including Bhojpuri, Maithili, Tamil and Bengali—and receive an OPD token by SMS.</p></article>
-              <article class="roadmap-card"><h3 data-copy="roadmapQueueTitle">Real-time hospital queue vision</h3><p data-copy="roadmapQueueNote">Connect waiting-hall token counters to stream live consultation turnaround times before citizens leave home.</p></article>
-              <article class="roadmap-card"><h3 data-copy="roadmapLanguagesTitle">Pan-India vernacular expansion</h3><p data-copy="roadmapLanguagesNote">Build native voice and dialect support across all 22 scheduled Indian languages.</p></article>
-            </div>
-          </section>
+
 
           <section class="landing-section view-section home-cta" data-view="home" aria-labelledby="home-cta-title">
             <div class="home-cta-copy">
