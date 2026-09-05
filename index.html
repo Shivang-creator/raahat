@@ -3518,6 +3518,8 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         .theme-toggle { width: 2.15rem; height: 2.15rem; }
         .nav-start { padding: 0.3rem 0.65rem; min-height: 2.15rem; font-size: 0.8rem; }
         .whatsapp-float-btn { padding: 0.5rem; border-radius: 50%; width: 3rem; height: 3rem; justify-content: center; bottom: 1rem; right: 1rem; }
+        .ivr-float-btn { padding: 0.5rem; border-radius: 50%; width: 3rem; height: 3rem; justify-content: center; bottom: 4.5rem; right: 1rem; }
+        .ivr-float-btn span { display: none; }
         .whatsapp-float-btn span { display: none; }
       }
       @media (max-width: 480px) {
@@ -3646,6 +3648,36 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .wa-qr-box { background: #0f172a; border-radius: 1px; }
       .wa-qr-box.white { background: #fff; }
       .wa-notify-bubble { border-left: 4px solid #f59e0b !important; background: #fffbeb !important; color: #92400e !important; }
+      
+      /* Feature Phone 104 IVR Gateway & Simulator */
+      .ivr-float-btn { position: fixed; bottom: 4.75rem; right: 1.5rem; z-index: 99; display: flex; align-items: center; gap: 0.65rem; padding: 0.65rem 1.15rem; border-radius: 999px; background: #1e3a8a; color: #ffffff; border: 0; box-shadow: 0 0.5rem 1.5rem rgba(30, 58, 138, 0.4); font-weight: 800; font-size: 0.92rem; cursor: pointer; transition: transform 180ms ease, box-shadow 180ms ease; }
+      .ivr-float-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0.8rem 2rem rgba(30, 58, 138, 0.55); background: #1d4ed8; }
+      .ivr-live-tag { background: #fbbf24; color: #78350f; font-size: 0.65rem; font-weight: 900; padding: 0.15rem 0.45rem; border-radius: 999px; text-transform: uppercase; }
+
+      .ivr-modal { position: fixed; inset: 0; z-index: 1100; background: rgba(0,0,0,0.72); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; padding: 1rem; }
+      .ivr-phone-chassis { width: 100%; max-width: 360px; max-height: 94vh; background: #1e293b; border: 8px solid #0f172a; border-radius: 2.2rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6); display: flex; flex-direction: column; overflow: hidden; padding: 1.15rem 0.95rem 0.95rem; color: #fff; }
+      .ivr-earpiece { width: 60px; height: 6px; background: #334155; border-radius: 999px; margin: 0 auto 0.75rem; }
+      .ivr-screen { background: #8ba888; color: #142814; font-family: "Courier New", Courier, monospace; border: 4px solid #475569; border-radius: 0.75rem; padding: 0.65rem; min-height: 180px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.3); display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+      .ivr-screen.emergency { background: #fca5a5 !important; color: #7f1d1d !important; animation: waPulse 1s infinite; }
+      .ivr-screen-top { display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 800; border-bottom: 1px dashed rgba(0,0,0,0.25); padding-bottom: 0.25rem; }
+      .ivr-screen-body { flex: 1; padding: 0.45rem 0; font-size: 0.85rem; font-weight: 700; overflow-y: auto; max-height: 105px; line-height: 1.35; }
+      .ivr-screen-bottom { display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: 800; border-top: 1px dashed rgba(0,0,0,0.25); padding-top: 0.25rem; }
+      
+      .ivr-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; margin-top: 0.85rem; }
+      .ivr-key { min-height: 2.65rem; background: #334155; color: #f8fafc; border: 1.5px solid #475569; border-radius: 0.5rem; font-size: 1.1rem; font-weight: 800; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 90ms ease; user-select: none; box-shadow: 0 3px 0 #1e293b; }
+      .ivr-key:active { transform: translateY(2px); box-shadow: 0 1px 0 #1e293b; background: #475569; }
+      .ivr-key sub { font-size: 0.55rem; font-weight: 600; color: #94a3b8; letter-spacing: 1px; margin-top: -2px; }
+      .ivr-key.call-btn { background: #15803d; border-color: #22c55e; color: #fff; }
+      .ivr-key.call-btn:hover { background: #16a34a; }
+      .ivr-key.end-btn { background: #b91c1c; border-color: #ef4444; color: #fff; }
+      .ivr-key.end-btn:hover { background: #dc2626; }
+      .ivr-key.mic-key.recording { background: #ef4444 !important; animation: waPulse 1s infinite; }
+      
+      .ivr-dialect-bar { display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.5rem; max-height: 100px; overflow-y: auto; padding-right: 0.2rem; }
+      .ivr-dialect-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #e2e8f0; font-size: 0.75rem; font-weight: 700; padding: 0.35rem 0.55rem; border-radius: 0.4rem; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+      .ivr-dialect-btn:hover { background: rgba(59, 130, 246, 0.35); border-color: #60a5fa; }
+      
+      .ivr-sms-toast { position: absolute; inset: 0; background: #fef08a; color: #713f12; padding: 0.65rem; border-radius: 0.6rem; font-family: monospace; font-size: 0.76rem; font-weight: 700; display: flex; flex-direction: column; justify-content: space-between; z-index: 10; border: 2px solid #ca8a04; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
       [data-theme="dark"] .wa-notify-bubble { background: #291e0a !important; color: #fde68a !important; border-left-color: #f59e0b !important; }
 
       /* Counterfactual Strip & Pan-India Filter */
@@ -6630,6 +6662,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       import { LOCALITIES, HOSPITAL_FACT_CHECKED_ON, hospitalsForDepartment, PAN_INDIA_HOSPITALS, INDIAN_STATES, COUNTERFACTUAL_METRICS, panIndiaHospitalsForDepartment, hospitalsByState, haversineDistanceKm, autoSelectNearestHospital, INDIAN_DISTRICTS } from "./hospital-data.js";
       import { createBodyMap3D, BILATERAL_REGIONS, REGION_LABELS } from "./body-map-3d.js";
       import { createInitialSession, handleWhatsAppMessage } from "./whatsapp-bot.js";
+      import { createInitialIvrSession, handleIvrTurn, SUPPORTED_DIALECTS, normalizeDialectPhrasing } from "./ivr-engine.js";
 
       const copy = {
         en: {
@@ -10799,6 +10832,337 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       wireWhatsAppSimulator();
       wireAccessibilitySuite();
       wireSidebarDrawer();
+      wireIvrSimulator();
+
+      // --- Feature Phone 104 AI Voice IVR Simulator Logic ---
+      function wireIvrSimulator() {
+        const fab = document.querySelector("#ivr-fab");
+        const modal = document.querySelector("#ivr-modal");
+        const closeBtn = document.querySelector("#ivr-close-btn");
+        const screen = document.querySelector("#ivr-screen");
+        const screenBody = document.querySelector("#ivr-screen-body");
+        const callStatus = document.querySelector("#ivr-call-status");
+        const timerEl = document.querySelector("#ivr-timer");
+        const audioInd = document.querySelector("#ivr-audio-indicator");
+        const smsToast = document.querySelector("#ivr-sms-toast");
+        const smsText = document.querySelector("#ivr-sms-text");
+        const smsTime = document.querySelector("#ivr-sms-time");
+        const smsDismiss = document.querySelector("#ivr-sms-dismiss-btn");
+        const callBtn = document.querySelector("#ivr-call-btn");
+        const endBtn = document.querySelector("#ivr-end-btn");
+        const micBtn = document.querySelector("#ivr-mic-btn");
+        const digits = document.querySelectorAll(".ivr-digit");
+        const dialectButtons = document.querySelectorAll(".ivr-dialect-btn");
+
+        if (!fab || !modal) return;
+
+        let isInCall = false;
+        let callTimer = null;
+        let callSeconds = 0;
+        let session = null;
+        let isRecording = false;
+        let speechRec = null;
+
+        // ITU-T Standard DTMF Dual-Frequency Pairs
+        const dtmfFreqs = {
+          "1": [697, 1209], "2": [697, 1336], "3": [697, 1477],
+          "4": [770, 1209], "5": [770, 1336], "6": [770, 1477],
+          "7": [852, 1209], "8": [852, 1336], "9": [852, 1477],
+          "*": [941, 1209], "0": [941, 1336], "#": [941, 1477]
+        };
+
+        function playDtmfTone(char) {
+          try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            const ctx = new AudioCtx();
+            const freqs = dtmfFreqs[char] || [440, 480];
+            const osc1 = ctx.createOscillator();
+            const osc2 = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc1.frequency.value = freqs[0];
+            osc2.frequency.value = freqs[1];
+            gain.gain.setValueAtTime(0.12, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.16);
+            osc1.connect(gain);
+            osc2.connect(gain);
+            gain.connect(ctx.destination);
+            osc1.start();
+            osc2.start();
+            osc1.stop(ctx.currentTime + 0.16);
+            osc2.stop(ctx.currentTime + 0.16);
+          } catch (e) {
+            console.warn("DTMF tone error", e);
+          }
+        }
+
+        function playEmergencySiren() {
+          try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            const ctx = new AudioCtx();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.frequency.setValueAtTime(800, ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(1200, ctx.currentTime + 0.3);
+            osc.frequency.linearRampToValueAtTime(800, ctx.currentTime + 0.6);
+            osc.frequency.linearRampToValueAtTime(1200, ctx.currentTime + 0.9);
+            gain.gain.setValueAtTime(0.18, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 1.2);
+          } catch (e) {
+            console.warn("Siren tone error", e);
+          }
+        }
+
+        function playSmsChime() {
+          try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            const ctx = new AudioCtx();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.frequency.setValueAtTime(880, ctx.currentTime);
+            osc.frequency.setValueAtTime(1760, ctx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.15, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.35);
+          } catch (e) {
+            console.warn("SMS chime error", e);
+          }
+        }
+
+        function speakIvrText(text, bcp47 = "hi-IN", onEnd) {
+          if (!("speechSynthesis" in window)) {
+            if (onEnd) onEnd();
+            return;
+          }
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = bcp47;
+          utterance.rate = 0.88; // Slow, respectful tempo for rural callers
+          utterance.pitch = 1.0;
+
+          const voices = window.speechSynthesis.getVoices() || [];
+          const voice = voices.find(v => v.lang === bcp47 || v.lang.startsWith(bcp47.slice(0, 2)));
+          if (voice) utterance.voice = voice;
+
+          utterance.onstart = () => {
+            if (audioInd) audioInd.textContent = "🔊 Speaking...";
+          };
+          utterance.onend = () => {
+            if (audioInd) audioInd.textContent = "👂 Listening...";
+            if (onEnd) onEnd();
+          };
+          utterance.onerror = () => {
+            if (audioInd) audioInd.textContent = "👂 Listening...";
+            if (onEnd) onEnd();
+          };
+
+          window.speechSynthesis.speak(utterance);
+        }
+
+        function startCall() {
+          if (isInCall) return;
+          isInCall = true;
+          callSeconds = 0;
+          session = createInitialIvrSession("+919876543210");
+          screen.classList.remove("emergency");
+          callStatus.textContent = "CONNECTED";
+          callStatus.style.color = "#142814";
+          smsToast.hidden = true;
+
+          // Call timer
+          clearInterval(callTimer);
+          callTimer = setInterval(() => {
+            callSeconds++;
+            const m = String(Math.floor(callSeconds / 60)).padStart(2, "0");
+            const s = String(callSeconds % 60).padStart(2, "0");
+            timerEl.textContent = m + ":" + s;
+          }, 1000);
+
+          // Initial turn
+          const turn = handleIvrTurn(session, {});
+          renderIvrTurn(turn);
+        }
+
+        function endCall() {
+          if (window.speechSynthesis) window.speechSynthesis.cancel();
+          clearInterval(callTimer);
+          isInCall = false;
+          if (isRecording && speechRec) {
+            try { speechRec.stop(); } catch(e){}
+            isRecording = false;
+            micBtn.classList.remove("recording");
+          }
+          screen.classList.remove("emergency");
+          callStatus.textContent = "CALL ENDED";
+          timerEl.textContent = "00:00";
+          audioInd.textContent = "🔇 Idle";
+          screenBody.innerHTML = `
+            <div style="text-align: center; margin-top: 0.85rem;">
+              <div style="font-size: 1.15rem; font-weight: 900; letter-spacing: 1px;">104 HELPLINE</div>
+              <div style="font-size: 0.75rem; margin-top: 0.35rem;">Call Disconnected · कॉल समाप्त</div>
+              <div style="font-size: 0.72rem; color: #243824; margin-top: 0.5rem;">Press 📞 Green to Call 104</div>
+            </div>
+          `;
+        }
+
+        function triggerSmsDelivery(smsTextContent) {
+          playSmsChime();
+          smsText.textContent = smsTextContent;
+          smsTime.textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+          smsToast.hidden = false;
+        }
+
+        function renderIvrTurn(turn) {
+          screenBody.innerHTML = `
+            <div style="margin-bottom: 0.35rem;">
+              <span style="font-size: 0.7rem; font-weight: 800; background: rgba(0,0,0,0.12); padding: 1px 4px; border-radius: 3px;">
+                ${session.isEmergency ? "🚨 EMERGENCY" : "104 IVR"}
+              </span>
+            </div>
+            <div style="font-size: 0.82rem; line-height: 1.35;">${turn.spokenText}</div>
+          `;
+
+          if (turn.audioSiren) {
+            screen.classList.add("emergency");
+            callStatus.textContent = "🚨 108 EMERGENCY";
+            playEmergencySiren();
+          }
+
+          speakIvrText(turn.spokenText, turn.bcp47, () => {
+            if (turn.sms) {
+              triggerSmsDelivery(turn.sms);
+            }
+          });
+        }
+
+        function dispatchIvrInput(inputObj) {
+          if (!isInCall) {
+            startCall();
+            setTimeout(() => {
+              const turn = handleIvrTurn(session, inputObj);
+              renderIvrTurn(turn);
+            }, 300);
+            return;
+          }
+          const turn = handleIvrTurn(session, inputObj);
+          renderIvrTurn(turn);
+        }
+
+        // Web Speech Recognition for Push-to-Talk Mic
+        if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
+          const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+          speechRec = new SpeechRec();
+          speechRec.continuous = false;
+          speechRec.interimResults = false;
+          speechRec.onresult = (e) => {
+            const transcript = e.results[0][0].transcript;
+            isRecording = false;
+            micBtn.classList.remove("recording");
+            dispatchIvrInput({ speech: transcript });
+          };
+          speechRec.onerror = () => {
+            isRecording = false;
+            micBtn.classList.remove("recording");
+          };
+        }
+
+        // Event Listeners
+        fab.addEventListener("click", () => {
+          modal.hidden = false;
+        });
+
+        closeBtn?.addEventListener("click", () => {
+          modal.hidden = true;
+          endCall();
+        });
+
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            modal.hidden = true;
+            endCall();
+          }
+        });
+
+        callBtn?.addEventListener("click", () => {
+          if (!isInCall) {
+            startCall();
+          }
+        });
+
+        endBtn?.addEventListener("click", () => {
+          endCall();
+        });
+
+        micBtn?.addEventListener("click", () => {
+          if (!isInCall) startCall();
+
+          if (!isRecording) {
+            if (speechRec) {
+              try {
+                speechRec.lang = (SUPPORTED_DIALECTS[session?.dialectKey] || SUPPORTED_DIALECTS["1"]).bcp47;
+                speechRec.start();
+                isRecording = true;
+                micBtn.classList.add("recording");
+                audioInd.textContent = "🎙️ Listening to speech...";
+              } catch (e) {
+                console.warn("SpeechRec start error", e);
+              }
+            } else {
+              // Simulated voice fallback
+              const sampleVoice = session?.dialectCode === "bho"
+                ? "हमार छाती में बहुते दरद बा आ सांस फूले लागल बा"
+                : "बच्चे को कल से तेज़ बुखार 103 डिग्री है";
+              dispatchIvrInput({ speech: sampleVoice });
+            }
+          } else {
+            if (speechRec) {
+              try { speechRec.stop(); } catch(e){}
+            }
+            isRecording = false;
+            micBtn.classList.remove("recording");
+          }
+        });
+
+        digits.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const key = btn.dataset.key;
+            playDtmfTone(key);
+            if (isInCall) {
+              dispatchIvrInput({ dtmf: key });
+            }
+          });
+        });
+
+        dialectButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const lang = btn.dataset.ivrLang;
+            const phrase = btn.dataset.ivrPhrase;
+            if (!isInCall) {
+              startCall();
+            }
+            const matchedKey = Object.keys(SUPPORTED_DIALECTS).find(k => SUPPORTED_DIALECTS[k].code === lang) || "1";
+            session.dialectKey = matchedKey;
+            session.dialectCode = lang;
+            session.state = "SYMPTOM_INPUT";
+
+            dispatchIvrInput({ speech: phrase });
+          });
+        });
+
+        smsDismiss?.addEventListener("click", () => {
+          smsToast.hidden = true;
+        });
+      }
+
       renderPanIndiaDirectory();
       renderLocalities();
       renderLabCatalog();
