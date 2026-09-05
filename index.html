@@ -1500,18 +1500,18 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       /* Stage Silhouette Bar */
       .stage-silhouette-bar {
         position: absolute;
-        top: 0.75rem;
+        bottom: 0.75rem;
         left: 0.85rem;
         display: inline-flex;
-        background: rgba(255, 255, 255, 0.90);
-        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(0, 0, 0, 0.10);
         border-radius: 9999px;
-        padding: 0.2rem;
-        gap: 0.2rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        padding: 0.22rem;
+        gap: 0.25rem;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        z-index: 5;
+        z-index: 6;
       }
       [data-theme="dark"] .stage-silhouette-bar {
         background: rgba(18, 30, 24, 0.90);
@@ -1552,6 +1552,32 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
         animation: fadeIn 220ms ease;
       }
+      
+      .somatic-header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-bottom: 0.35rem;
+      }
+      .somatic-selected-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.25rem 0.65rem;
+        border-radius: 9999px;
+        background: rgba(22, 101, 52, 0.10);
+        border: 1px solid rgba(22, 101, 52, 0.25);
+        color: var(--accent-dark);
+        font-size: 0.8rem;
+        font-weight: 850;
+      }
+      [data-theme="dark"] .somatic-selected-badge {
+        background: rgba(45, 212, 191, 0.12);
+        border-color: rgba(45, 212, 191, 0.3);
+        color: #2dd4bf;
+      }
+
       .somatic-header {
         margin-bottom: 0.85rem;
       }
@@ -3860,6 +3886,11 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               <h2 id="triage-3d-title" data-copy="triage3dTitle">Point at a place</h2>
               <p class="workspace-note" data-copy="triage3dNote">Drag to rotate 360°. Tap any body part to select. Nothing is decided here.</p>
               <div class="body-3d-stage" id="body-3d-stage">
+                <div class="stage-silhouette-bar" role="group" aria-label="Human Anatomical Silhouette">
+                  <button type="button" class="silhouette-pill is-active" data-silhouette="neutral" title="Universal Human Silhouette">Universal</button>
+                  <button type="button" class="silhouette-pill" data-silhouette="female" title="Female Anatomical Silhouette">Female</button>
+                  <button type="button" class="silhouette-pill" data-silhouette="male" title="Male Anatomical Silhouette">Male</button>
+                </div>
                 <canvas id="body-3d-canvas" aria-label="Rotatable 3D human body model"></canvas>
                 <div class="stage-floating-hint">
                   <span class="hint-pulse-dot"></span>
@@ -3911,6 +3942,45 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                   <button type="button" class="anatomy-chip" data-region="foot"><span class="chip-dot"></span> Feet &amp; Ankles</button>
                 </div>
               </div>
+                            <!-- Somatic Clinical Lens (Inspired by EmoLens) -->
+              <section class="somatic-lens-panel" id="somatic-lens-panel" aria-labelledby="somatic-lens-title">
+                <div class="somatic-header">
+                  <div class="somatic-header-top">
+                    <span class="tag">Somatic Lens · शारीरिक संवेदना</span>
+                    <span class="somatic-selected-badge" id="somatic-current-region">All Regions · संपूर्ण शरीर</span>
+                  </div>
+                  <h3 id="somatic-lens-title">What does your body feel like? · यह कैसा महसूस हो रहा है?</h3>
+                  <p class="somatic-subtitle">Select physical sensations and distress intensity to guide hospital triage. The 3D body reacts in real time.</p>
+                </div>
+                
+                <div class="somatic-sensation-chips" role="group" aria-label="Physical Somatic Sensations">
+                  <button type="button" class="sensation-chip" data-sensation="burning"><span class="chip-dot"></span> Burning / Heat <small>जलन</small></button>
+                  <button type="button" class="sensation-chip" data-sensation="sharp"><span class="chip-dot"></span> Sharp / Stabbing <small>तेज़ चुभन</small></button>
+                  <button type="button" class="sensation-chip" data-sensation="throbbing"><span class="chip-dot"></span> Throbbing / Pounding <small>धड़कन / टीस</small></button>
+                  <button type="button" class="sensation-chip" data-sensation="pressure"><span class="chip-dot"></span> Heavy / Pressure <small>भारीपन / दबाव</small></button>
+                  <button type="button" class="sensation-chip" data-sensation="dull"><span class="chip-dot"></span> Dull Ache / Constant <small>मीठा दर्द</small></button>
+                  <button type="button" class="sensation-chip" data-sensation="numbness"><span class="chip-dot"></span> Numb / Tingling <small>सुन्न / झनझनाहट</small></button>
+                  <button type="button" class="sensation-chip" data-sensation="stiff"><span class="chip-dot"></span> Stiff / Swollen <small>अकड़न / सूजन</small></button>
+                </div>
+
+                <div class="somatic-intensity-box">
+                  <div class="intensity-label-row">
+                    <span class="intensity-title">Distress &amp; Pain Intensity · दर्द की तीव्रता:</span>
+                    <span class="intensity-badge" id="intensity-badge" data-level="3">Level 3 · Noticeable / Impairing</span>
+                  </div>
+                  <div class="intensity-slider-wrap">
+                    <input type="range" id="intensity-slider" min="1" max="5" value="3" step="1" aria-label="Distress and pain intensity scale 1 to 5" />
+                    <div class="intensity-ticks">
+                      <span class="tick" data-tick="1">1<br><small>Mild</small></span>
+                      <span class="tick" data-tick="2">2<br><small>Moderate</small></span>
+                      <span class="tick is-active" data-tick="3">3<br><small>Noticeable</small></span>
+                      <span class="tick" data-tick="4">4<br><small>Severe</small></span>
+                      <span class="tick" data-tick="5">5<br><small>Critical</small></span>
+                    </div>
+                  </div>
+                  <p class="intensity-feedback" id="intensity-desc">Noticeable discomfort during work or rest. Recommended for outpatient evaluation.</p>
+                </div>
+              </section>
               <div class="workspace-controls">
                 <button class="large-button" type="button" id="toggle-map-mode" aria-pressed="false" data-copy="use2d">Use accessible 2D map</button>
                 <button class="workspace-unsure" type="button" data-no-location="unsure" aria-pressed="false"><span aria-hidden="true">?</span><span data-copy="workspaceUnsure">Not sure where</span></button>
@@ -4240,6 +4310,35 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 <div class="slip-field"><dt data-copy="slipUhid">UHID</dt><dd id="slip-uhid"></dd></div>
               </dl>
               <p class="patient-report"><span class="tag">Observed</span><span data-copy="patientSaid">Patient reports:</span> <span id="slip-report"></span></p>
+              <!-- Bilingual Doctor Communication & Handover Card (Inspired by EmoLens) -->
+              <div class="doctor-handover-card" id="doctor-handover-card">
+                <div class="handover-header">
+                  <div class="handover-badge"><svg class="icon-inline" aria-hidden="true"><use href="#icon-doctor"></use></svg> Doctor Communication Card · डॉक्टर संवाद कार्ड</div>
+                  <span class="tag">Bilingual · द्विभाषी</span>
+                </div>
+                <p class="handover-note">Show this to the doctor or counter staff if you feel anxious, overwhelmed, or non-verbal.</p>
+                
+                <div class="handover-somatic-summary">
+                  <div class="handover-item">
+                    <span class="handover-label">Target Region · प्रभावित अंग</span>
+                    <strong id="handover-region">Chest / छाती</strong>
+                  </div>
+                  <div class="handover-item">
+                    <span class="handover-label">Sensations · शारीरिक संवेदना</span>
+                    <strong id="handover-sensations">Heavy Pressure, Throbbing</strong>
+                  </div>
+                  <div class="handover-item">
+                    <span class="handover-label">Distress Intensity · तीव्रता</span>
+                    <span class="handover-intensity-pill" id="handover-intensity">Level 3 / 5 (Noticeable)</span>
+                  </div>
+                </div>
+
+                <div class="handover-speech-starter">
+                  <span class="speech-quote-icon">“</span>
+                  <p class="speech-prompt-hi" id="handover-prompt-hi">"डॉक्टर साहब, मुझे छाती में भारी दबाव व धड़कन महसूस हो रही है (तीव्रता 3/5)। कृपया जाँच करें।"</p>
+                  <p class="speech-prompt-en" id="handover-prompt-en">"Doctor, I am experiencing heavy pressure, throbbing in my Chest (distress level 3/5). Please examine."</p>
+                </div>
+              </div>
               <p class="rights-card"><span class="tag">Verified</span><span data-copy="rightsCard">If you are turned away with this slip , note the appointment ID, raise a grievance at pgportal.gov.in, or file an RTI asking why a valid online appointment was not honoured.</span></p>
               <div class="qr-wrap"><svg class="barcode-code" viewBox="0 0 64 64" role="img" aria-label="Simulated security barcode"><defs><pattern id="security-grid" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 0h3v3H0zM5 5h3v3H5z" fill="currentColor"/><path d="M5 0h1v3H5zM0 5h1v3H0z" fill="currentColor" opacity=".45"/></pattern></defs><rect width="64" height="64" fill="url(#security-grid)"/><path d="M8 8h16v16H8zM12 12h8v8h-8zM40 8h16v16H40zM44 12h8v8h-8zM8 40h16v16H8zM12 44h8v8h-8zM38 38h5v5h-5zM48 38h8v8h-8zM38 49h5v7h-5zM48 49h8v7h-8z" fill="currentColor"/></svg><p class="qr-copy"><strong><span class="tag">Simulated</span><span data-copy="qrTitle">Sample security pattern</span></strong><span data-copy="qrNote">This pattern is decorative. It does not open a real appointment.</span></p></div>
             </article>
@@ -4945,8 +5044,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         kindStatus.textContent = "";
         followups.hidden = true;
         mapReady.classList.remove("is-visible");
-        const somaticPanel = document.querySelector("#somatic-lens-panel");
-        if (somaticPanel && !state.region) somaticPanel.hidden = true;
+        const somaticBadge = document.querySelector("#somatic-current-region");
+        if (somaticBadge) {
+          somaticBadge.textContent = "All Regions · संपूर्ण शरीर";
+        }
       }
 
       function showKindQuestion(hideLocationPicker = false) {
@@ -5191,6 +5292,11 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           mapStatus.textContent = "";
           mapStatus.removeAttribute("role");
           
+          const somaticBadge = document.querySelector("#somatic-current-region");
+          if (somaticBadge) {
+            const lbl = REGION_LABELS[region];
+            somaticBadge.textContent = lbl ? `${lbl.en} · ${lbl.hi}` : (region || "All Regions");
+          }
           const somaticPanel = document.querySelector("#somatic-lens-panel");
           if (somaticPanel) {
             somaticPanel.hidden = false;

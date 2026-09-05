@@ -2,23 +2,23 @@
 // This file only reports a citizen-selected region. It never routes,
 // diagnoses, calls a model, or chooses a department.
 
-// Warm, organic human anatomical tones (inspired by EmoLens clinical aesthetics)
+// EmoLens-inspired serene alabaster / porcelain medical twin aesthetic
 const COLORS = Object.freeze({
-  // Natural human skin / warm alabaster anatomical tones
-  skinLight: 0xebd5c6,       // Warm porcelain / soft skin tone
-  skinContour: 0xdfc0ad,     // Gentle muscular contour tone
-  skinDeep: 0xcfa894,        // Anatomical depth tone
-  heartRose: 0xe11d48,       // Living cardiovascular tone
-  amber: 0xf59e0b,           // Warm clinical interactive amber
-  amberLight: 0xfbbf24,      // Selected glow
-  glowPulse: 0xfef08a,       // Breathing vitality
-  // Dark mode anatomical silhouette
-  darkBody: 0x2c3545,        // Soft slate-obsidian human form
-  darkContour: 0x1e2634,     // Deep contour
-  darkInner: 0x3d4a60,       // Inner anatomical depth
+  // Natural alabaster / porcelain tones (light theme)
+  skinLight: 0xd9d1c7,        // Smooth warm porcelain
+  skinContour: 0xcdbeaf,      // Subtle anatomical contouring
+  skinDeep: 0xbda999,         // Soft anatomical shadow tone
+  // Obsidian-slate alabaster (dark theme)
+  darkBody: 0x242e3b,         // Calm slate porcelain
+  darkContour: 0x1b232e,      // Deep tone
+  darkInner: 0x2f3c4c,        // Subsurface depth
+  // Interactive accents
+  accentBlue: 0x8ecae6,       // EmoLens signature sky-blue sheen
+  accentPurple: 0xb8a9c9,     // EmoLens soft lavender wireframe
+  amber: 0xf59e0b,            // Interactive hover
 });
 
-// Dynamic Thermal Intensity Colors (Levels 1 to 5)
+// Dynamic Thermal Distress Intensity Levels (1 to 5)
 export const INTENSITY_LEVELS = Object.freeze({
   1: { color: 0x10b981, emissive: 0x059669, label: "Mild / Distracting", hi: "हल्का / ध्यान भटकाने वाला" },
   2: { color: 0x0ea5e9, emissive: 0x0284c7, label: "Moderate / Uncomfortable", hi: "मध्यम / असहज" },
@@ -49,29 +49,71 @@ export const REGION_LABELS = Object.freeze({
   pelvis: { en: "Pelvis / hips / groin", hi: "कूल्हा और पेल्विस", dept: "Orthopaedics" },
 });
 
+// Precise 3D Zone Centers for the EmoLens Dynamic HighlightSphere
+export const ZONE_CENTERS = Object.freeze({
+  head: [0, 4.15, 0.05],
+  eyes: [0, 3.92, 0.62],
+  ears: [0, 3.75, 0.10],
+  teeth: [0, 3.48, 0.58],
+  face: [0, 3.68, 0.52],
+  neck: [0, 3.12, 0.12],
+  chest: [0, 2.32, 0.30],
+  "upper-abdomen": [0, 1.62, 0.28],
+  "lower-abdomen": [0, 0.98, 0.24],
+  pelvis: [0, 0.35, 0.18],
+  "upper-back": [0, 2.32, -0.38],
+  "lower-back": [0, 1.30, -0.34],
+  shoulder: [0.95, 2.52, 0.0],
+  arm: [1.38, 1.58, 0.05],
+  hand: [1.65, 0.22, 0.12],
+  leg: [0.50, -0.72, 0.12],
+  knee: [0.50, -1.42, 0.16],
+  foot: [0.52, -2.85, 0.22],
+});
+
+export const ZONE_RADII = Object.freeze({
+  head: 0.72,
+  eyes: 0.34,
+  ears: 0.36,
+  teeth: 0.32,
+  face: 0.44,
+  neck: 0.40,
+  chest: 0.88,
+  "upper-abdomen": 0.70,
+  "lower-abdomen": 0.68,
+  pelvis: 0.76,
+  "upper-back": 0.82,
+  "lower-back": 0.72,
+  shoulder: 0.46,
+  arm: 0.42,
+  hand: 0.34,
+  leg: 0.55,
+  knee: 0.38,
+  foot: 0.36,
+});
+
 function themePalette() {
   const dark = document.documentElement?.getAttribute("data-theme") === "dark";
   return {
     body: dark ? COLORS.darkBody : COLORS.skinLight,
     secondary: dark ? COLORS.darkContour : COLORS.skinContour,
     inner: dark ? COLORS.darkInner : COLORS.skinDeep,
-    organ: dark ? COLORS.amber : COLORS.heartRose,
   };
 }
 
-// Organic skin/tissue physical material with natural subsurface scattering look
-function makeMaterial(THREE, color, overrides = {}) {
+// EmoLens-inspired Porcelain Physical Material
+function makePorcelainMaterial(THREE, color, overrides = {}) {
   return new THREE.MeshPhysicalMaterial({
     color,
-    roughness: 0.38,
-    metalness: 0.04,
-    transmission: 0.16,
-    thickness: 1.6,
-    ior: 1.40,
-    clearcoat: 0.22,
-    clearcoatRoughness: 0.28,
+    roughness: 0.52,
+    metalness: 0.02,
+    clearcoat: 0.35,
+    clearcoatRoughness: 0.32,
+    sheen: 0.80,
+    sheenRoughness: 0.48,
+    sheenColor: new THREE.Color(COLORS.accentBlue),
     transparent: true,
-    opacity: 0.94,
+    opacity: 0.96,
     side: THREE.FrontSide,
     emissive: 0x000000,
     emissiveIntensity: 0,
@@ -79,7 +121,7 @@ function makeMaterial(THREE, color, overrides = {}) {
   });
 }
 
-function addRegion(parent, mesh, region, material, themeRole = "body", priority = 0) {
+function addRegionMesh(parent, mesh, region, material, themeRole = "body", priority = 0) {
   mesh.material = material.clone();
   mesh.userData.region = region;
   mesh.userData.themeRole = themeRole;
@@ -91,35 +133,17 @@ function addRegion(parent, mesh, region, material, themeRole = "body", priority 
   return mesh;
 }
 
-function addSculptedEllipsoid(THREE, parent, region, position, scale, material, themeRole = "body", segments = 24, priority = 0, sculptFn = null) {
-  const geometry = new THREE.SphereGeometry(1, segments, Math.max(14, segments - 6));
-  if (sculptFn) {
-    const pos = geometry.attributes.position;
-    const v = new THREE.Vector3();
-    for (let i = 0; i < pos.count; i++) {
-      v.fromBufferAttribute(pos, i);
-      sculptFn(v);
-      pos.setXYZ(i, v.x, v.y, v.z);
-    }
-    geometry.computeVertexNormals();
-  }
-  const mesh = new THREE.Mesh(geometry, material);
-  mesh.position.set(...position);
-  mesh.scale.set(...scale);
-  return addRegion(parent, mesh, region, material, themeRole, priority);
-}
-
-// Builds an organic contoured human limb (replaces robotic straight capsules)
-function addContouredLimb(THREE, parent, region, fromArr, toArr, rTop, rMid, rBot, material, themeRole = "body", priority = 0, options = {}) {
+// Generates an organic, contoured anatomical limb or torso segment
+// with smooth cross-sections along the Y-axis
+function createContouredSegment(THREE, fromArr, toArr, rTop, rMid, rBot, options = {}) {
   const from = new THREE.Vector3(...fromArr);
   const to = new THREE.Vector3(...toArr);
   const direction = to.clone().sub(from);
   const length = direction.length();
-  
-  // Height segments allow smooth anatomical muscular curves
-  const radialSegments = 20;
-  const heightSegments = 16;
-  const geometry = new THREE.CylinderGeometry(1, 1, length, radialSegments, heightSegments);
+
+  const radialSegments = options.radialSegments || 28;
+  const heightSegments = options.heightSegments || 20;
+  const geometry = new THREE.CylinderGeometry(1, 1, length, radialSegments, heightSegments, false);
   const pos = geometry.attributes.position;
   const v = new THREE.Vector3();
   const halfLen = length / 2;
@@ -128,248 +152,400 @@ function addContouredLimb(THREE, parent, region, fromArr, toArr, rTop, rMid, rBo
   const ovalZ = options.ovalZ || 1.0;
   const curveZ = options.curveZ || 0;
   const curveX = options.curveX || 0;
-  const bellyT = options.bellyT || 0.40;
+  const bellyT = options.bellyT !== undefined ? options.bellyT : 0.45;
+  const bulgeZFront = options.bulgeZFront || 0;
+  const bulgeZBack = options.bulgeZBack || 0;
 
   for (let i = 0; i < pos.count; i++) {
     v.fromBufferAttribute(pos, i);
-    const t = (halfLen - v.y) / length;
-    
+    const t = (halfLen - v.y) / (length || 1); // 0 at top, 1 at bottom
+
     let currentR;
-    if (t < bellyT) {
-      const subT = t / bellyT;
+    if (t <= bellyT) {
+      const subT = bellyT > 0 ? t / bellyT : 0;
       currentR = rTop + (rMid - rTop) * Math.sin(subT * (Math.PI / 2));
     } else {
-      const subT = (t - bellyT) / (1 - bellyT);
+      const subT = bellyT < 1 ? (t - bellyT) / (1 - bellyT) : 0;
       currentR = rMid - (rMid - rBot) * Math.sin(subT * (Math.PI / 2));
     }
 
     v.x *= currentR * ovalX;
     v.z *= currentR * ovalZ;
 
+    // Arch along axis
     const arch = Math.sin(t * Math.PI);
     v.z += arch * curveZ;
     v.x += arch * curveX;
+
+    // Asymmetrical front/back muscular contours (e.g. chest, buttocks)
+    if (v.z > 0 && bulgeZFront) {
+      v.z += Math.sin(t * Math.PI) * bulgeZFront;
+    } else if (v.z < 0 && bulgeZBack) {
+      v.z -= Math.sin(t * Math.PI) * bulgeZBack;
+    }
 
     pos.setXYZ(i, v.x, v.y, v.z);
   }
   geometry.computeVertexNormals();
 
-  const mesh = new THREE.Mesh(geometry, material);
+  const mesh = new THREE.Mesh(geometry);
   mesh.position.copy(from.clone().add(to).multiplyScalar(0.5));
-  mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.normalize());
-  return addRegion(parent, mesh, region, material, themeRole, priority);
+  if (length > 0.001) {
+    mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.clone().normalize());
+  }
+  return mesh;
+}
+
+// Creates an organic sculpted head with cranial vault, brow, jawline and chin
+function createAnatomicalHead(THREE, material) {
+  const headGroup = new THREE.Group();
+  
+  // 1. Cranium / Brain vault (upper head)
+  const craniumGeo = new THREE.SphereGeometry(1, 32, 24);
+  const cPos = craniumGeo.attributes.position;
+  const cv = new THREE.Vector3();
+  for (let i = 0; i < cPos.count; i++) {
+    cv.fromBufferAttribute(cPos, i);
+    // Slight parietal flare, occipital curve
+    if (cv.y > 0) cv.y *= 1.05;
+    if (cv.z < 0) cv.z *= 1.08;
+    if (cv.y < 0) cv.x *= 0.92;
+    cPos.setXYZ(i, cv.x, cv.y, cv.z);
+  }
+  craniumGeo.computeVertexNormals();
+  const craniumMesh = new THREE.Mesh(craniumGeo, material);
+  craniumMesh.position.set(0, 4.22, 0.0);
+  craniumMesh.scale.set(0.68, 0.72, 0.74);
+  headGroup.add(craniumMesh);
+
+  // 2. Viscerocranium (Face, Cheeks, Jawline tapering down to chin)
+  const faceGeo = new THREE.SphereGeometry(1, 32, 24);
+  const fPos = faceGeo.attributes.position;
+  const fv = new THREE.Vector3();
+  for (let i = 0; i < fPos.count; i++) {
+    fv.fromBufferAttribute(fPos, i);
+    // Tapering into jaw and chin
+    if (fv.y < 0) {
+      const taper = fv.y + 1; // 0 at bottom, 1 at middle
+      fv.x *= 0.52 + 0.48 * taper;
+      fv.z *= 0.65 + 0.35 * taper;
+    }
+    // Cheekbone prominence
+    if (fv.y > 0.05 && fv.y < 0.45 && fv.z > 0) {
+      fv.x *= 1.06;
+      fv.z *= 1.08;
+    }
+    // Brow ridge
+    if (fv.y >= 0.45 && fv.z > 0) {
+      fv.z *= 1.04;
+    }
+    fPos.setXYZ(i, fv.x, fv.y, fv.z);
+  }
+  faceGeo.computeVertexNormals();
+  const faceMesh = new THREE.Mesh(faceGeo, material);
+  faceMesh.position.set(0, 3.76, 0.16);
+  faceMesh.scale.set(0.56, 0.58, 0.52);
+  headGroup.add(faceMesh);
+
+  return { headGroup, craniumMesh, faceMesh };
 }
 
 function buildBody(THREE, silhouette = "neutral") {
   const palette = themePalette();
   const body = new THREE.Group();
   
-  const skinMaterial = makeMaterial(THREE, palette.body);
-  const contourMaterial = makeMaterial(THREE, palette.secondary);
-  const deepMaterial = makeMaterial(THREE, palette.inner, { opacity: 0.90 });
-  const organMaterial = makeMaterial(THREE, palette.organ, {
-    roughness: 0.28,
-    metalness: 0.05,
-    transmission: 0.25,
-    opacity: 0.90,
-    emissive: palette.organ,
-    emissiveIntensity: 0.28,
-  });
-  const amberAccentMaterial = makeMaterial(THREE, COLORS.amber, {
-    roughness: 0.20,
-    transmission: 0.20,
-    emissive: COLORS.amber,
-    emissiveIntensity: 0.35,
-  });
+  const porcelain = makePorcelainMaterial(THREE, palette.body);
+  const contourPorcelain = makePorcelainMaterial(THREE, palette.secondary);
 
   // Silhouette modifiers (procedural morphing)
   const isFemale = silhouette === "female";
   const isMale = silhouette === "male";
   
-  const shoulderSpan = isFemale ? 0.90 : (isMale ? 1.10 : 1.0);
+  const shoulderSpan = isFemale ? 0.88 : (isMale ? 1.12 : 1.0);
   const chestWidth = isFemale ? 0.92 : (isMale ? 1.08 : 1.0);
-  const waistWidth = isFemale ? 0.82 : (isMale ? 0.98 : 0.92);
-  const hipWidth = isFemale ? 1.16 : (isMale ? 0.94 : 1.02);
+  const waistWidth = isFemale ? 0.80 : (isMale ? 0.96 : 0.88);
+  const hipWidth = isFemale ? 1.16 : (isMale ? 0.92 : 1.02);
 
   // ==========================================
-  // 1. HEAD, CRANIUM & BRAIN
+  // 1. HEAD & FACE
   // ==========================================
-  addSculptedEllipsoid(THREE, body, "head", [0, 4.02, -0.04], [0.72, 0.82, 0.80], skinMaterial, "body", 28, 0, (v) => {
-    if (v.y < 0) v.x *= 0.92;
-    if (v.z > 0 && v.y > 0) v.y *= 1.04;
-  });
-  addSculptedEllipsoid(THREE, body, "head", [0, 4.10, -0.02], [0.58, 0.46, 0.62], deepMaterial, "inner", 20, 0);
+  const { headGroup, craniumMesh, faceMesh } = createAnatomicalHead(THREE, porcelain);
+  addRegionMesh(body, craniumMesh, "head", porcelain, "body", 1);
+  addRegionMesh(body, faceMesh, "face", porcelain, "body", 2);
 
-  // ==========================================
-  // 2. FACE, JAW, SENSORY ORGANS
-  // ==========================================
-  addSculptedEllipsoid(THREE, body, "face", [0, 3.52, 0.36], [0.54, 0.52, 0.44], skinMaterial, "body", 28, 1, (v) => {
-    if (v.y < 0) {
-      const taper = (v.y + 1);
-      v.x *= 0.45 + 0.55 * taper;
-      v.z *= 0.70 + 0.30 * taper;
-    }
-    if (v.y > 0.1 && v.y < 0.6) {
-      v.x *= 1.08;
-    }
-  });
-
+  // Invisible anatomical sensory hitboxes (for precise tap selection without visual blobs)
   // Eyes
-  for (const side of [-1, 1]) {
-    addSculptedEllipsoid(THREE, body, "eyes", [side * 0.24, 3.82, 0.68], [0.11, 0.08, 0.08], amberAccentMaterial, "organ", 18, 3);
-  }
-
-  // Nose
-  addSculptedEllipsoid(THREE, body, "ears", [0, 3.65, 0.76], [0.09, 0.16, 0.16], amberAccentMaterial, "organ", 18, 3, (v) => {
-    if (v.y < 0) v.z *= 1.25;
-  });
-
-  // Teeth / Dental
-  addSculptedEllipsoid(THREE, body, "teeth", [0, 3.38, 0.65], [0.20, 0.07, 0.10], amberAccentMaterial, "organ", 18, 3);
+  const eyesHitbox = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.22, 0.30), new THREE.MeshBasicMaterial({ visible: false }));
+  eyesHitbox.position.set(0, 3.92, 0.55);
+  addRegionMesh(body, eyesHitbox, "eyes", porcelain, "body", 5);
 
   // Ears
   for (const side of [-1, 1]) {
-    addSculptedEllipsoid(THREE, body, "ears", [side * 0.64, 3.72, 0.02], [0.08, 0.20, 0.14], contourMaterial, "secondary", 18, 2);
+    const earHitbox = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.38, 0.30), new THREE.MeshBasicMaterial({ visible: false }));
+    earHitbox.position.set(side * 0.68, 3.82, 0.05);
+    addRegionMesh(body, earHitbox, "ears", contourPorcelain, "body", 4);
   }
 
-  // ==========================================
-  // 3. NECK & TRAPEZIUS
-  // ==========================================
-  addContouredLimb(THREE, body, "neck", [0, 3.28, 0.04], [0, 2.70, 0.02], 0.34, 0.36, 0.52 * shoulderSpan, skinMaterial, "body", 1, {
-    ovalX: 1.12,
-    ovalZ: 1.05,
-    curveZ: 0.03,
-    bellyT: 0.65,
-  });
-  // Thyroid gland prominence
-  addSculptedEllipsoid(THREE, body, "neck", [0, 2.96, 0.34], [0.12, 0.12, 0.09], amberAccentMaterial, "organ", 16, 2);
+  // Teeth / Mouth / Jaw
+  const mouthHitbox = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.22, 0.32), new THREE.MeshBasicMaterial({ visible: false }));
+  mouthHitbox.position.set(0, 3.48, 0.50);
+  addRegionMesh(body, mouthHitbox, "teeth", porcelain, "body", 5);
 
   // ==========================================
-  // 4. CHEST, THORAX & PULSING CARDIAC CORE
+  // 2. NECK
   // ==========================================
-  addSculptedEllipsoid(THREE, body, "chest", [0, 2.14, 0.05], [1.18 * chestWidth, 0.62, 0.64], skinMaterial, "body", 28, 0, (v) => {
-    if (v.y > 0 && v.z > 0) v.z *= isFemale ? 1.25 : 1.15;
-    if (v.y < 0) v.x *= 0.94;
-  });
-  addSculptedEllipsoid(THREE, body, "chest", [0, 2.54, 0.28], [0.98 * shoulderSpan, 0.12, 0.22], contourMaterial, "secondary", 24, 0);
-
-  // Female anatomical breast contours if female silhouette
-  if (isFemale) {
-    for (const side of [-1, 1]) {
-      addSculptedEllipsoid(THREE, body, "chest", [side * 0.36, 2.16, 0.52], [0.32, 0.30, 0.22], skinMaterial, "body", 20, 1);
-    }
-  }
-
-  // Cardiac Core with living rhythm
-  const heartCore = addSculptedEllipsoid(THREE, body, "chest", [0.22, 2.06, 0.52], [0.22, 0.26, 0.18], organMaterial, "organ", 20, 3);
-  heartCore.userData.isCardiacCore = true;
-
-  // ==========================================
-  // 5. ABDOMEN & PELVIS
-  // ==========================================
-  // Upper abdomen / Epigastrium (tapers into waist)
-  addSculptedEllipsoid(THREE, body, "upper-abdomen", [0, 1.34, 0.04], [0.94 * waistWidth, 0.44, 0.56], skinMaterial, "body", 26, 0, (v) => {
-    v.x *= 0.92;
-    v.z *= 0.92;
-  });
-  addSculptedEllipsoid(THREE, body, "upper-abdomen", [0.08, 1.36, 0.38], [0.38, 0.26, 0.18], amberAccentMaterial, "organ", 18, 2);
-
-  // Lower abdomen
-  addSculptedEllipsoid(THREE, body, "lower-abdomen", [0, 0.72, 0.02], [0.92 * ((waistWidth + hipWidth) / 2), 0.42, 0.54], skinMaterial, "body", 26, 0, (v) => {
-    if (v.y < 0) v.x *= 1.06;
-  });
-
-  // Pelvis, hips & groin (flares according to silhouette)
-  addSculptedEllipsoid(THREE, body, "pelvis", [0, 0.18, 0.0], [1.02 * hipWidth, 0.38, 0.58], skinMaterial, "body", 26, 0, (v) => {
-    if (v.y > 0) v.x *= 1.04;
-    if (v.z < 0) v.z *= isFemale ? 1.18 : 1.12;
-  });
-  addSculptedEllipsoid(THREE, body, "pelvis", [0, 0.14, 0.44], [0.45, 0.18, 0.16], amberAccentMaterial, "organ", 18, 2);
-
-  // ==========================================
-  // 6. BACK & POSTERIOR SPINE
-  // ==========================================
-  addSculptedEllipsoid(THREE, body, "upper-back", [0, 2.14, -0.42], [0.98 * shoulderSpan, 0.56, 0.28], contourMaterial, "secondary", 24, 1, (v) => {
-    if (v.z < 0) v.z *= 1.10;
-  });
-  addSculptedEllipsoid(THREE, body, "lower-back", [0, 1.20, -0.40], [0.86 * waistWidth, 0.48, 0.26], contourMaterial, "secondary", 24, 1, (v) => {
-    v.z *= isFemale ? 0.84 : 0.88;
-  });
-
-  // ==========================================
-  // 7. SHOULDERS, ARMS & HANDS
-  // ==========================================
-  for (const side of [-1, 1]) {
-    const shoulderX = side * 1.12 * shoulderSpan;
-    addSculptedEllipsoid(THREE, body, "shoulder", [shoulderX, 2.44, 0.02], [0.38, 0.44, 0.36], contourMaterial, "secondary", 22, 1);
-
-    const shoulderPt = [side * 1.08 * shoulderSpan, 2.36, 0.02];
-    const elbowPt = [side * 1.44 * shoulderSpan, 1.42, 0.06];
-    addContouredLimb(THREE, body, "arm", shoulderPt, elbowPt, 0.30, 0.32, 0.24, skinMaterial, "body", 0, {
-      ovalX: 1.08,
-      ovalZ: 1.12,
+  const neckMesh = createContouredSegment(
+    THREE,
+    [0, 3.40, 0.04],
+    [0, 2.70, 0.02],
+    0.32,
+    0.34,
+    0.46 * shoulderSpan,
+    {
+      ovalX: 1.10,
+      ovalZ: 1.08,
       curveZ: 0.04,
-      bellyT: 0.42,
-    });
+      bellyT: 0.55,
+      radialSegments: 26,
+    }
+  );
+  addRegionMesh(body, neckMesh, "neck", porcelain, "body", 2);
 
-    addSculptedEllipsoid(THREE, body, "arm", elbowPt, [0.22, 0.22, 0.20], contourMaterial, "secondary", 18, 1);
+  // ==========================================
+  // 3. TORSO (Seamless Anatomical Continuous Segments)
+  // ==========================================
+  // A. Chest / Thorax (from clavicles Y=2.70 down to ribcage Y=1.95)
+  const chestMesh = createContouredSegment(
+    THREE,
+    [0, 2.70, 0.02],
+    [0, 1.95, 0.04],
+    0.85 * shoulderSpan,
+    1.12 * chestWidth,
+    0.92 * waistWidth,
+    {
+      ovalX: 1.25,
+      ovalZ: 0.72,
+      curveZ: -0.02, // Gentle forward thoracic posture
+      bulgeZFront: isFemale ? 0.32 : 0.14, // Natural pectoral/breast contours
+      bulgeZBack: 0.08,  // Trapezius and rhomboid contour
+      bellyT: 0.40,
+      radialSegments: 32,
+      heightSegments: 24,
+    }
+  );
+  addRegionMesh(body, chestMesh, "chest", porcelain, "body", 1);
 
-    const wristPt = [side * 1.62 * shoulderSpan, 0.44, 0.16];
-    addContouredLimb(THREE, body, "arm", elbowPt, wristPt, 0.24, 0.25, 0.17, skinMaterial, "body", 0, {
+  // Upper back posterior hitbox
+  const upperBackHitbox = new THREE.Mesh(new THREE.BoxGeometry(1.4 * shoulderSpan, 0.75, 0.40), new THREE.MeshBasicMaterial({ visible: false }));
+  upperBackHitbox.position.set(0, 2.32, -0.36);
+  addRegionMesh(body, upperBackHitbox, "upper-back", contourPorcelain, "secondary", 3);
+
+  // B. Upper Abdomen / Stomach (from Y=1.95 to Y=1.25)
+  const upperAbdomenMesh = createContouredSegment(
+    THREE,
+    [0, 1.95, 0.04],
+    [0, 1.25, 0.02],
+    0.92 * waistWidth,
+    0.82 * waistWidth, // Waist indent
+    0.88 * waistWidth,
+    {
+      ovalX: 1.20,
+      ovalZ: 0.70,
+      curveZ: 0.03, // Lumbar lordosis
+      bellyT: 0.50,
+      radialSegments: 30,
+      heightSegments: 20,
+    }
+  );
+  addRegionMesh(body, upperAbdomenMesh, "upper-abdomen", porcelain, "body", 1);
+
+  // C. Lower Abdomen (from Y=1.25 to Y=0.65)
+  const lowerAbdomenMesh = createContouredSegment(
+    THREE,
+    [0, 1.25, 0.02],
+    [0, 0.65, 0.00],
+    0.88 * waistWidth,
+    0.98 * ((waistWidth + hipWidth) / 2),
+    1.08 * hipWidth, // Flares into hips
+    {
+      ovalX: 1.18,
+      ovalZ: 0.72,
+      curveZ: 0.02,
+      bellyT: 0.55,
+      radialSegments: 30,
+      heightSegments: 20,
+    }
+  );
+  addRegionMesh(body, lowerAbdomenMesh, "lower-abdomen", porcelain, "body", 1);
+
+  // Lower back / lumbar hitbox
+  const lowerBackHitbox = new THREE.Mesh(new THREE.BoxGeometry(1.2 * waistWidth, 0.65, 0.38), new THREE.MeshBasicMaterial({ visible: false }));
+  lowerBackHitbox.position.set(0, 1.30, -0.32);
+  addRegionMesh(body, lowerBackHitbox, "lower-back", contourPorcelain, "secondary", 3);
+
+  // D. Pelvis, Hips & Groin (from Y=0.65 down to Y=0.00)
+  const pelvisMesh = createContouredSegment(
+    THREE,
+    [0, 0.65, 0.00],
+    [0, 0.00, -0.02],
+    1.08 * hipWidth,
+    1.12 * hipWidth,
+    0.82 * hipWidth,
+    {
       ovalX: 1.15,
-      ovalZ: 0.95,
-      curveZ: 0.03,
-      bellyT: 0.32,
-    });
+      ovalZ: 0.82,
+      bulgeZBack: isFemale ? 0.28 : 0.18, // Gluteal contour
+      bellyT: 0.40,
+      radialSegments: 30,
+      heightSegments: 20,
+    }
+  );
+  addRegionMesh(body, pelvisMesh, "pelvis", porcelain, "body", 1);
 
-    addSculptedEllipsoid(THREE, body, "hand", wristPt, [0.18, 0.12, 0.14], contourMaterial, "secondary", 18, 1);
-    const palmPt = [side * 1.68 * shoulderSpan, 0.22, 0.20];
-    addSculptedEllipsoid(THREE, body, "hand", palmPt, [0.18, 0.22, 0.13], skinMaterial, "body", 20, 1, (v) => {
-      if (v.z > 0) v.z *= 0.85;
-    });
-    addSculptedEllipsoid(THREE, body, "hand", [side * 1.58 * shoulderSpan, 0.20, 0.26], [0.08, 0.14, 0.08], skinMaterial, "body", 16, 1);
-    addSculptedEllipsoid(THREE, body, "hand", [side * 1.70 * shoulderSpan, 0.02, 0.22], [0.14, 0.18, 0.10], skinMaterial, "body", 16, 1);
+  // ==========================================
+  // 4. SHOULDERS, ARMS & HANDS
+  // ==========================================
+  for (const side of [-1, 1]) {
+    // Deltoid Shoulder Cap
+    const shoulderX = side * 1.12 * shoulderSpan;
+    const deltoidGeo = new THREE.SphereGeometry(1, 24, 20);
+    const deltoidMesh = new THREE.Mesh(deltoidGeo, contourPorcelain);
+    deltoidMesh.position.set(shoulderX, 2.50, 0.0);
+    deltoidMesh.scale.set(0.36, 0.42, 0.34);
+    addRegionMesh(body, deltoidMesh, "shoulder", contourPorcelain, "secondary", 2);
+
+    // Upper Arm (Deltoid to Elbow)
+    const shoulderPt = [side * 1.10 * shoulderSpan, 2.42, 0.0];
+    const elbowPt = [side * 1.46 * shoulderSpan, 1.48, 0.04];
+    const upperArmMesh = createContouredSegment(
+      THREE,
+      shoulderPt,
+      elbowPt,
+      0.28,
+      0.30,
+      0.23,
+      { ovalX: 1.06, ovalZ: 1.12, curveZ: 0.03, bellyT: 0.40 }
+    );
+    addRegionMesh(body, upperArmMesh, "arm", porcelain, "body", 1);
+
+    // Elbow Joint Transition
+    const elbowGeo = new THREE.SphereGeometry(1, 20, 16);
+    const elbowMesh = new THREE.Mesh(elbowGeo, contourPorcelain);
+    elbowMesh.position.set(...elbowPt);
+    elbowMesh.scale.set(0.22, 0.22, 0.20);
+    addRegionMesh(body, elbowMesh, "arm", contourPorcelain, "secondary", 2);
+
+    // Forearm (Elbow to Wrist)
+    const wristPt = [side * 1.66 * shoulderSpan, 0.52, 0.14];
+    const forearmMesh = createContouredSegment(
+      THREE,
+      elbowPt,
+      wristPt,
+      0.23,
+      0.24,
+      0.16,
+      { ovalX: 1.14, ovalZ: 0.94, curveZ: 0.02, bellyT: 0.32 }
+    );
+    addRegionMesh(body, forearmMesh, "arm", porcelain, "body", 1);
+
+    // Wrist
+    const wristGeo = new THREE.SphereGeometry(1, 18, 14);
+    const wristMesh = new THREE.Mesh(wristGeo, contourPorcelain);
+    wristMesh.position.set(...wristPt);
+    wristMesh.scale.set(0.16, 0.12, 0.14);
+    addRegionMesh(body, wristMesh, "hand", contourPorcelain, "secondary", 2);
+
+    // Hand & Relaxed Fingers
+    const palmPt = [side * 1.74 * shoulderSpan, 0.26, 0.18];
+    const handGeo = new THREE.SphereGeometry(1, 20, 16);
+    const hPos = handGeo.attributes.position;
+    const hv = new THREE.Vector3();
+    for (let i = 0; i < hPos.count; i++) {
+      hv.fromBufferAttribute(hPos, i);
+      if (hv.y < 0) hv.y *= 1.35; // Finger taper
+      if (hv.z > 0) hv.z *= 0.75;
+      hPos.setXYZ(i, hv.x, hv.y, hv.z);
+    }
+    handGeo.computeVertexNormals();
+    const handMesh = new THREE.Mesh(handGeo, porcelain);
+    handMesh.position.set(...palmPt);
+    handMesh.scale.set(0.18, 0.28, 0.12);
+    addRegionMesh(body, handMesh, "hand", porcelain, "body", 2);
   }
 
   // ==========================================
-  // 8. LEGS, KNEES, ANKLES & FEET
+  // 5. LEGS, KNEES & FEET
   // ==========================================
   for (const side of [-1, 1]) {
-    const hipX = side * 0.50 * hipWidth;
-    const hipPt = [hipX, -0.04, 0.02];
-    const kneePt = [side * 0.54, -1.38, 0.08];
-    addContouredLimb(THREE, body, "leg", hipPt, kneePt, 0.42, 0.40, 0.28, skinMaterial, "body", 0, {
-      ovalX: 1.05,
-      ovalZ: 1.18,
-      curveZ: 0.06,
-      bellyT: 0.38,
-    });
+    // Thigh (Hip to Knee)
+    const hipPt = [side * 0.48 * hipWidth, -0.02, 0.0];
+    const kneePt = [side * 0.50, -1.40, 0.06];
+    const thighMesh = createContouredSegment(
+      THREE,
+      hipPt,
+      kneePt,
+      0.40,
+      0.38,
+      0.26,
+      {
+        ovalX: 1.05,
+        ovalZ: 1.15,
+        curveZ: 0.05, // Quadriceps forward fullness
+        bellyT: 0.36,
+      }
+    );
+    addRegionMesh(body, thighMesh, "leg", porcelain, "body", 1);
 
-    addSculptedEllipsoid(THREE, body, "knee", [side * 0.54, -1.38, 0.24], [0.20, 0.24, 0.16], contourMaterial, "secondary", 18, 2, (v) => {
-      if (v.z > 0) v.z *= 1.18;
-    });
+    // Knee / Patella
+    const kneeGeo = new THREE.SphereGeometry(1, 22, 18);
+    const kneeMesh = new THREE.Mesh(kneeGeo, contourPorcelain);
+    kneeMesh.position.set(side * 0.50, -1.40, 0.16);
+    kneeMesh.scale.set(0.20, 0.24, 0.18);
+    addRegionMesh(body, kneeMesh, "knee", contourPorcelain, "secondary", 3);
 
-    const anklePt = [side * 0.58, -2.70, 0.02];
-    addContouredLimb(THREE, body, "leg", kneePt, anklePt, 0.28, 0.30, 0.18, skinMaterial, "body", 0, {
-      ovalX: 0.95,
-      ovalZ: 1.20,
-      curveZ: -0.05,
-      bellyT: 0.30,
-    });
+    // Calf / Lower Leg (Knee to Ankle)
+    const anklePt = [side * 0.52, -2.72, 0.02];
+    const calfMesh = createContouredSegment(
+      THREE,
+      kneePt,
+      anklePt,
+      0.26,
+      0.29,
+      0.17,
+      {
+        ovalX: 0.96,
+        ovalZ: 1.18,
+        curveZ: -0.04, // Gastrocnemius posterior fullness
+        bellyT: 0.28,
+      }
+    );
+    addRegionMesh(body, calfMesh, "leg", porcelain, "body", 1);
 
-    addSculptedEllipsoid(THREE, body, "foot", anklePt, [0.22, 0.16, 0.18], contourMaterial, "secondary", 18, 1);
+    // Ankle Joint
+    const ankleGeo = new THREE.SphereGeometry(1, 18, 14);
+    const ankleMesh = new THREE.Mesh(ankleGeo, contourPorcelain);
+    ankleMesh.position.set(...anklePt);
+    ankleMesh.scale.set(0.18, 0.14, 0.16);
+    addRegionMesh(body, ankleMesh, "foot", contourPorcelain, "secondary", 2);
 
-    const heelPt = [side * 0.58, -2.88, -0.08];
-    const forefootPt = [side * 0.60, -2.94, 0.28];
-    addSculptedEllipsoid(THREE, body, "foot", heelPt, [0.18, 0.16, 0.24], skinMaterial, "body", 18, 1);
-    addSculptedEllipsoid(THREE, body, "foot", forefootPt, [0.22, 0.14, 0.38], skinMaterial, "body", 20, 1, (v) => {
-      if (side > 0 && v.x < 0) v.y += 0.08;
-      if (side < 0 && v.x > 0) v.y += 0.08;
-    });
+    // Foot (Heel + Instep + Forefoot)
+    const footGeo = new THREE.CylinderGeometry(0.14, 0.18, 0.55, 18, 12);
+    footGeo.rotateX(Math.PI / 2);
+    const ftPos = footGeo.attributes.position;
+    const ftv = new THREE.Vector3();
+    for (let i = 0; i < ftPos.count; i++) {
+      ftv.fromBufferAttribute(ftPos, i);
+      if (ftv.z > 0) ftv.x *= 1.25; // Wider at toes
+      if (ftv.y < 0) ftv.y *= 0.65; // Flat sole
+      ftPos.setXYZ(i, ftv.x, ftv.y, ftv.z);
+    }
+    footGeo.computeVertexNormals();
+    const footMesh = new THREE.Mesh(footGeo, porcelain);
+    footMesh.position.set(side * 0.52, -2.88, 0.12);
+    addRegionMesh(body, footMesh, "foot", porcelain, "body", 2);
   }
 
   body.rotation.set(0, -0.15, 0);
-  body.userData.heartCore = heartCore;
   return body;
 }
 
@@ -386,19 +562,20 @@ function makeTooltip(stage) {
 
 function applyTheme(body) {
   const palette = themePalette();
-  const roleColors = { body: palette.body, secondary: palette.secondary, inner: palette.inner, organ: palette.organ };
   body.traverse((object) => {
     if (!object.isMesh || !object.userData.region || !object.material?.color) return;
-    const color = roleColors[object.userData.themeRole] || palette.body;
-    object.userData.baseColor.setHex(color);
-    if (!object.userData.isSelected && !object.userData.isHovered) object.material.color.copy(object.userData.baseColor);
+    const roleColor = object.userData.themeRole === "secondary" ? palette.secondary : palette.body;
+    object.userData.baseColor.setHex(roleColor);
+    if (!object.userData.isSelected && !object.userData.isHovered) {
+      object.material.color.copy(object.userData.baseColor);
+    }
   });
 }
 
-function updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensity = 3, now = 0) {
-  const selectedPulse = 0.65 + Math.sin(now * 0.005) * 0.28;
+function updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensity = 3, highlightSphere = null, now = 0) {
   const intensityConfig = INTENSITY_LEVELS[selectedIntensity] || INTENSITY_LEVELS[3];
 
+  // Update Body Meshes
   body.traverse((object) => {
     if (!object.isMesh || !object.userData.region || !object.material?.color) return;
     const isHovered = object.userData.region === hoveredRegion;
@@ -410,7 +587,7 @@ function updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensit
     if (isSelected) {
       object.material.color.setHex(intensityConfig.color);
       object.material.emissive?.setHex(intensityConfig.emissive);
-      object.material.emissiveIntensity = selectedPulse * (selectedIntensity >= 4 ? 1.35 : 1.0);
+      object.material.emissiveIntensity = 0.60;
       object.material.opacity = 1.0;
       return;
     }
@@ -418,7 +595,7 @@ function updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensit
     if (isHovered) {
       object.material.color.setHex(COLORS.amber);
       object.material.emissive?.setHex(COLORS.amber);
-      object.material.emissiveIntensity = 0.50;
+      object.material.emissiveIntensity = 0.45;
       object.material.opacity = 0.98;
       return;
     }
@@ -426,8 +603,31 @@ function updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensit
     object.material.color.copy(object.userData.baseColor);
     object.material.emissive?.setHex(0x000000);
     object.material.emissiveIntensity = 0;
-    object.material.opacity = isDimmed ? 0.32 : object.userData.restingOpacity;
+    object.material.opacity = isDimmed ? 0.38 : object.userData.restingOpacity;
   });
+
+  // Update EmoLens Dynamic Highlight Sphere
+  if (highlightSphere) {
+    const activeRegion = selectedRegion || hoveredRegion;
+    if (activeRegion && ZONE_CENTERS[activeRegion]) {
+      const center = ZONE_CENTERS[activeRegion];
+      const radius = ZONE_RADII[activeRegion] || 0.60;
+      const targetColor = selectedRegion ? intensityConfig.color : COLORS.accentBlue;
+
+      highlightSphere.position.set(...center);
+      highlightSphere.scale.set(radius, radius, radius);
+      highlightSphere.material.color.setHex(targetColor);
+      highlightSphere.visible = true;
+
+      // Gentle pulsing rhythm
+      const pulse = selectedRegion 
+        ? 0.50 + Math.sin(now * 0.006) * 0.20 
+        : 0.35 + Math.sin(now * 0.004) * 0.12;
+      highlightSphere.material.opacity = pulse;
+    } else {
+      highlightSphere.visible = false;
+    }
+  }
 }
 
 export async function createBodyMap3D({ canvas, stage, language = "en", onSelect, onHover, onUnavailable } = {}) {
@@ -459,21 +659,34 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
   let body = buildBody(THREE, currentSilhouette);
   scene.add(body);
 
-  // Warm studio lighting that enhances natural human musculature and contours
-  const hemisphere = new THREE.HemisphereLight(0xffedd5, 0x94a3b8, 2.0);
-  const keyLight = new THREE.DirectionalLight(0xfff7ed, 2.4);
+  // EmoLens-style Dynamic Highlight Sphere
+  const highlightSphereGeo = new THREE.SphereGeometry(1, 24, 20);
+  const highlightSphereMat = new THREE.MeshBasicMaterial({
+    color: COLORS.accentBlue,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.5,
+    blending: THREE.AdditiveBlending,
+    depthTest: false,
+    depthWrite: false,
+  });
+  const highlightSphere = new THREE.Mesh(highlightSphereGeo, highlightSphereMat);
+  highlightSphere.visible = false;
+  highlightSphere.renderOrder = 999;
+  scene.add(highlightSphere);
+
+  // Refined studio lighting
+  const hemisphere = new THREE.HemisphereLight(0xfff7ed, 0x94a3b8, 1.8);
+  const keyLight = new THREE.DirectionalLight(0xfffbeb, 2.2);
   keyLight.position.set(-3.5, 6, 7);
 
-  const fillLight = new THREE.DirectionalLight(0xe0e7ff, 1.2);
+  const fillLight = new THREE.DirectionalLight(0xe0e7ff, 1.3);
   fillLight.position.set(4, -1, 5);
 
-  const rimLight = new THREE.DirectionalLight(0xfde68a, 1.6);
+  const rimLight = new THREE.DirectionalLight(0xdbeafe, 1.6);
   rimLight.position.set(0, 4, -7);
 
-  const heartLight = new THREE.PointLight(0xf43f5e, 0.9, 3.5);
-  heartLight.position.set(0.22, 2.06, 0.65);
-
-  scene.add(hemisphere, keyLight, fillLight, rimLight, heartLight);
+  scene.add(hemisphere, keyLight, fillLight, rimLight);
 
   const selectableMeshes = [];
   const refreshSelectables = () => {
@@ -592,7 +805,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     const hit = getRegionHit(event);
     hoveredRegion = hit?.userData.region || null;
     canvas.style.cursor = hoveredRegion ? "pointer" : "grab";
-    updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensity);
+    updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensity, highlightSphere);
     showTooltip(hoveredRegion, event);
     onHover?.(hoveredRegion ? { region: hoveredRegion, labels: REGION_LABELS[hoveredRegion] } : null);
   };
@@ -606,7 +819,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
       const hit = getRegionHit(event);
       if (hit?.userData.region) {
         selectedRegion = hit.userData.region;
-        updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensity);
+        updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensity, highlightSphere);
         if ("vibrate" in navigator) navigator.vibrate?.(18);
         onSelect?.(selectedRegion);
       }
@@ -620,7 +833,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
   const pointerLeave = () => {
     if (!isPointerDown) {
       hoveredRegion = null;
-      updateVisualState(body, null, selectedRegion, selectedIntensity);
+      updateVisualState(body, null, selectedRegion, selectedIntensity, highlightSphere);
       showTooltip(null);
       onHover?.(null);
     }
@@ -684,15 +897,12 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     targetLookAt.y += (targetLookY - targetLookAt.y) * 0.08;
     camera.lookAt(targetLookAt);
 
-    // Dynamic cardiac rhythm (accelerates at high pain/distress intensity)
-    if (body.userData.heartCore) {
-      const pulseRate = selectedIntensity >= 4 ? 0.009 : 0.0055;
-      const pulseMag = selectedIntensity >= 4 ? 0.24 : 0.16;
-      const heartBeat = 1.0 + Math.pow(Math.sin(now * pulseRate), 4) * pulseMag;
-      body.userData.heartCore.scale.set(0.22 * heartBeat, 0.26 * heartBeat, 0.18 * heartBeat);
+    if (highlightSphere.visible) {
+      highlightSphere.rotation.y += 0.008;
+      highlightSphere.rotation.x += 0.004;
     }
 
-    updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensity, now);
+    updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensity, highlightSphere, now);
     renderer.render(scene, camera);
     animationFrame = window.requestAnimationFrame(render);
   };
@@ -736,12 +946,12 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     },
     select(region) {
       selectedRegion = region;
-      updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensity);
+      updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensity, highlightSphere);
       if (region) focusRegionCamera(region);
     },
     setRegionIntensity(intensity) {
       selectedIntensity = Math.max(1, Math.min(5, parseInt(intensity, 10) || 3));
-      updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensity);
+      updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensity, highlightSphere);
     },
     setSilhouette(newSilhouette) {
       if (!["neutral", "female", "male"].includes(newSilhouette) || newSilhouette === currentSilhouette) return;
@@ -754,7 +964,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
       body.rotation.x = oldRotX;
       scene.add(body);
       refreshSelectables();
-      updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensity);
+      updateVisualState(body, hoveredRegion, selectedRegion, selectedIntensity, highlightSphere);
     },
     getSilhouette() {
       return currentSilhouette;
