@@ -41,7 +41,7 @@ export const REGION_LABELS = Object.freeze({
   neck: { en: "Neck / throat / thyroid", hi: "गर्दन / गला / थायरॉइड", dept: "ENT / General Medicine" },
   chest: { en: "Chest / heart / lungs", hi: "छाती / दिल / फेफड़े", dept: "Cardiology" },
   "upper-abdomen": { en: "Upper abdomen / stomach", hi: "ऊपरी पेट / आमाशय", dept: "Gastroenterology" },
-  "lower-abdomen": { en: "Lower abdomen / pelvis", hi: "निचला पेट / पेल्विस", dept: "Gastroenterology" },
+  "lower-abdomen": { en: "Lower abdomen / bladder", hi: "निचला पेट / मूत्राशय", dept: "Gastroenterology" },
   back: { en: "Back / spine", hi: "पीठ / रीढ़", dept: "Orthopaedics" },
   "upper-back": { en: "Upper back / spine", hi: "ऊपरी पीठ / रीढ़", dept: "Orthopaedics" },
   "lower-back": { en: "Lower back / lumbar", hi: "कमर / निचली पीठ", dept: "Orthopaedics" },
@@ -51,7 +51,7 @@ export const REGION_LABELS = Object.freeze({
   leg: { en: "Legs / thighs / calves", hi: "पैर, जाँघ और पिंडलियाँ", dept: "Orthopaedics" },
   knee: { en: "Knee joints / patella", hi: "घुटने", dept: "Orthopaedics" },
   foot: { en: "Feet / ankles / toes", hi: "पैर, टखने और अँगूठे", dept: "Orthopaedics" },
-  pelvis: { en: "Pelvis / hips / groin", hi: "कूल्हा और पेल्विस", dept: "Orthopaedics" },
+  pelvis: { en: "Pelvis, Groin & Reproductive", hi: "पेल्विस, जननांग व प्रजनन स्वास्थ्य", dept: "Orthopaedics / Surgery" },
 });
 
 // Female anatomical zone centers (normalized 1.75m coordinate space)
@@ -66,12 +66,12 @@ export const FEMALE_ZONE_CENTERS = Object.freeze({
   chest: [0, 1.280, 0.08],
   "upper-abdomen": [0, 1.080, 0.05],
   "lower-abdomen": [0, 0.950, 0.04],
-  pelvis: [0, 0.820, -0.04],
+  pelvis: [0, 0.790, 0.03],
   "upper-back": [0, 1.280, -0.06],
   "lower-back": [0, 1.080, -0.06],
   arm: [0.210, 1.150, 0.00],
   hand: [0.330, 0.830, -0.01],
-  leg: [0.095, 0.680, 0.04],
+  leg: [0.095, 0.640, 0.04],
   knee: [0.085, 0.480, 0.04],
   foot: [0.075, 0.055, 0.05],
 });
@@ -88,12 +88,12 @@ export const MALE_ZONE_CENTERS = Object.freeze({
   chest: [0, 1.300, 0.08],
   "upper-abdomen": [0, 1.080, 0.05],
   "lower-abdomen": [0, 0.950, 0.04],
-  pelvis: [0, 0.820, -0.04],
+  pelvis: [0, 0.790, 0.03],
   "upper-back": [0, 1.235, -0.08],
   "lower-back": [0, 1.080, -0.07],
   arm: [0.250, 1.150, 0.00],
   hand: [0.320, 0.830, 0.00],
-  leg: [0.100, 0.680, 0.05],
+  leg: [0.100, 0.640, 0.05],
   knee: [0.095, 0.480, 0.05],
   foot: [0.100, 0.070, 0.06],
 });
@@ -162,41 +162,41 @@ export function hitToZone(point, silhouette = "neutral") {
     return isRear ? "upper-back" : "chest";
   }
 
-  // 5. Elbows vs Upper Abdomen / Back (Y: 1.08 -> 1.20)
-  if (y >= 1.08 && y < 1.20) {
+  // 5. Upper Abdomen / Stomach vs Middle Back / Arms (Y: 1.04 -> 1.20)
+  if (y >= 1.04 && y < 1.20) {
     if (absX > armX) return "arm";
     return isRear ? "lower-back" : "upper-abdomen";
   }
 
-  // 6. Forearms vs Lower Abdomen / Lumbar (Y: 0.94 -> 1.08)
-  if (y >= 0.94 && y < 1.08) {
+  // 6. Lower Abdomen vs Lumbar / Forearms (Y: 0.88 -> 1.04)
+  if (y >= 0.88 && y < 1.04) {
     if (absX > armX) return "arm";
-    return isRear ? "lower-back" : "upper-abdomen";
+    return isRear ? "lower-back" : "lower-abdomen";
   }
 
-  // 7. Hands vs Lower Abdomen / Pelvis (Y: 0.78 -> 0.94)
+  // 7. Pelvis, Groin & Reproductive vs Hands / Lateral Hips (Y: 0.72 -> 0.88)
   const handX = isFemale ? 0.16 : 0.18;
-  if (y >= 0.78 && y < 0.94) {
+  if (y >= 0.72 && y < 0.88) {
     if (absX > handX) return "hand";
-    return isRear ? "pelvis" : "lower-abdomen";
+    return "pelvis";
   }
 
-  // 8. Thighs (Y: 0.54 -> 0.78)
-  if (y >= 0.54 && y < 0.78) {
+  // 8. Thighs / Upper Legs (Y: 0.52 -> 0.72)
+  if (y >= 0.52 && y < 0.72) {
     return "leg";
   }
 
-  // 9. Knees (Y: 0.42 -> 0.54)
-  if (y >= 0.42 && y < 0.54) {
+  // 9. Knees (Y: 0.42 -> 0.52)
+  if (y >= 0.42 && y < 0.52) {
     return isRear ? "leg" : "knee";
   }
 
-  // 10. Calves & Lower Legs (Y: 0.15 -> 0.42)
-  if (y >= 0.15 && y < 0.42) {
+  // 10. Calves & Lower Legs (Y: 0.14 -> 0.42)
+  if (y >= 0.14 && y < 0.42) {
     return "leg";
   }
 
-  // 11. Feet & Ankles (Y: 0.00 -> 0.15)
+  // 11. Feet & Ankles (Y: 0.00 -> 0.14)
   return "foot";
 }
 
@@ -396,6 +396,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
   let rotationX = 0;
   let targetRotationY = 0;
   let targetRotationX = 0;
+  let isTransitioningView = false;
   let pointerDownTime = 0;
 
   const targetCameraPosition = new THREE.Vector3(0, 0.92, 2.65);
@@ -484,10 +485,13 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
   const pointerDown = (event) => {
     isPointerDown = true;
     dragging = true;
+    isTransitioningView = false;
     startX = event.clientX;
     startY = event.clientY;
     lastX = event.clientX;
     lastY = event.clientY;
+    velocityY = 0;
+    velocityX = 0;
     pointerDownTime = performance.now();
     targetRotationY = rotationY;
     targetRotationX = rotationX;
@@ -498,10 +502,12 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     if (isPointerDown && dragging) {
       const deltaX = event.clientX - lastX;
       const deltaY = event.clientY - lastY;
-      velocityY = deltaX * 0.009;
+      velocityY = deltaX * 0.008;
       velocityX = deltaY * 0.004;
       rotationY += velocityY;
-      rotationX = Math.max(-Math.PI / 6, Math.min(Math.PI / 6, rotationX + velocityX));
+      rotationX = Math.max(-Math.PI / 5, Math.min(Math.PI / 5, rotationX + velocityX));
+      targetRotationY = rotationY;
+      targetRotationX = rotationX;
       lastX = event.clientX;
       lastY = event.clientY;
       return;
@@ -530,6 +536,8 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     }
     isPointerDown = false;
     dragging = false;
+    targetRotationY = rotationY;
+    targetRotationX = rotationX;
     canvas.releasePointerCapture?.(event.pointerId);
     canvas.style.cursor = hoveredRegion ? "pointer" : "grab";
   };
@@ -585,13 +593,31 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
 
   const render = (now) => {
     if (!isPointerDown) {
-      velocityY *= 0.92;
-      velocityX *= 0.92;
-      rotationY += velocityY;
-      rotationX = Math.max(-Math.PI / 6, Math.min(Math.PI / 6, rotationX + velocityX));
-      targetRotationY += 0.0016;
-      rotationY += (targetRotationY - rotationY) * 0.04;
-      rotationX += (targetRotationX - rotationX) * 0.04;
+      if (Math.abs(velocityY) > 0.0001) {
+        rotationY += velocityY;
+        velocityY *= 0.88;
+        targetRotationY = rotationY;
+      } else {
+        velocityY = 0;
+      }
+
+      if (Math.abs(velocityX) > 0.0001) {
+        rotationX = Math.max(-Math.PI / 5, Math.min(Math.PI / 5, rotationX + velocityX));
+        velocityX *= 0.88;
+        targetRotationX = rotationX;
+      } else {
+        velocityX = 0;
+      }
+
+      if (isTransitioningView) {
+        rotationY += (targetRotationY - rotationY) * 0.08;
+        rotationX += (targetRotationX - rotationX) * 0.08;
+        if (Math.abs(targetRotationY - rotationY) < 0.001 && Math.abs(targetRotationX - rotationX) < 0.001) {
+          rotationY = targetRotationY;
+          rotationX = targetRotationX;
+          isTransitioningView = false;
+        }
+      }
     }
 
     modelGroup.rotation.y = rotationY;
@@ -614,6 +640,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
   animationFrame = window.requestAnimationFrame(render);
 
   function focusRegionCamera(region) {
+    isTransitioningView = true;
     if (["head", "eyes", "ears", "teeth", "face", "neck"].includes(region)) {
       targetRotationY = 0;
       targetRotationX = 0;
@@ -627,8 +654,8 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     } else if (["upper-abdomen", "lower-abdomen", "lower-back", "pelvis"].includes(region)) {
       targetRotationY = region === "lower-back" ? Math.PI : 0;
       targetRotationX = 0;
-      targetCameraPosition.set(0, 0.95, 1.55);
-      targetLookY = 0.95;
+      targetCameraPosition.set(0, 0.88, 1.55);
+      targetLookY = 0.88;
     } else if (["leg", "knee", "foot"].includes(region)) {
       targetRotationY = 0;
       targetRotationX = 0;
@@ -665,6 +692,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
       return currentSilhouette;
     },
     setView(view) {
+      isTransitioningView = true;
       if (view === "front") {
         targetRotationY = 0;
         targetRotationX = 0;

@@ -102,6 +102,9 @@ export function parseFreeTextComplaint(input, language = "en") {
   const hasPelvis = hasAny(text, [
     "pelvis", "hip", "hips", "कूल्हा", "कूल्हे", "पेल्विस", "இடுப்பு",
     "నడుము", "কোমর", "कंबर", "ಸೊಂಟ", "કમર", "നടുവ്", "ਕਮਰ", "ଅଣ୍ଟା", "کولہے",
+    "groin", "genital", "genitals", "reproductive", "testicle", "testicles", "scrotum",
+    "penis", "vagina", "vulva", "prostate", "inguinal", "urine", "urinary",
+    "जननांग", "गुप्तांग", "अंडकोष", "मूत्र", "पेशाब", "माहवारी", "प्रजनन", "हर्निया", "hernia",
   ]);
   const hasUpperBack = hasAny(text, [
     "upper back", "ऊपरी पीठ", "மேல் முதுகு", "పై వీపు", "পিঠের উপরিভাগ",
