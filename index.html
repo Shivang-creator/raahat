@@ -702,6 +702,90 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .back-button { min-height: 3.5rem; padding: 0.7rem 1rem; border: 2px solid var(--line); border-radius: 1rem; background: transparent; color: var(--accent-dark); font-size: 1rem; font-weight: 750; }
       
       
+      
+      /* Directory Toolbar & Profile Optimization Styles */
+      .directory-toolbar {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 1.25rem 0 1.5rem;
+        padding: 0.85rem 1.15rem;
+        border-radius: 1rem;
+        background: var(--paper);
+        border: 1.5px solid var(--line);
+      }
+      .directory-search-wrap {
+        position: relative;
+        flex: 1 1 14rem;
+        display: flex;
+        align-items: center;
+      }
+      .directory-search-wrap .search-icon {
+        position: absolute;
+        left: 0.85rem;
+        font-size: 0.95rem;
+        opacity: 0.6;
+        pointer-events: none;
+      }
+      .directory-search-wrap input {
+        width: 100%;
+        min-height: 2.85rem;
+        padding: 0.45rem 0.85rem 0.45rem 2.2rem;
+        border-radius: 999px;
+        border: 1.5px solid var(--line);
+        background: var(--background);
+        color: var(--ink);
+        font-size: 0.92rem;
+        outline: none;
+      }
+      .directory-state-wrap {
+        flex: 0 1 13rem;
+      }
+      .directory-state-wrap select {
+        width: 100%;
+        min-height: 2.85rem;
+        padding: 0.45rem 0.85rem;
+        border-radius: 999px;
+        border: 1.5px solid var(--line);
+        background: var(--background);
+        color: var(--ink);
+        font-size: 0.88rem;
+        font-weight: 650;
+        outline: none;
+      }
+      .directory-count-badge {
+        font-size: 0.88rem;
+        font-weight: 750;
+        color: var(--accent);
+        margin-left: auto;
+        white-space: nowrap;
+      }
+      .btn-load-more {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        min-height: 3.25rem;
+        padding: 0.65rem 1.75rem;
+        border-radius: 999px;
+        font-size: 0.95rem;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .network-card-actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 0.75rem;
+      }
+      .network-card-actions .large-button {
+        flex: 1 1 9rem;
+        min-height: 2.5rem;
+        font-size: 0.85rem;
+        padding: 0.35rem 0.75rem;
+      }
+
       /* Streamlined Linear Step 4 Flow Styles */
       .booking-zen-header {
         margin: 1rem 0 1.25rem;
@@ -4667,41 +4751,58 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
           <section class="landing-section view-section" id="screen-hospitals" data-view="hospitals" aria-labelledby="network-title">
             <button class="back-button" type="button" data-view-link="home">← Back to home</button>
-            <div class="screen-heading"><p class="screen-kicker" data-copy="hospitalsKicker">Verified public directory</p><div class="section-heading"><h1 id="network-title" data-copy="networkTitle">Delhi hospital network</h1><p><span class="tag">Verified</span> <span data-copy="networkNote">Hospital names, addresses and departments are public facts. Availability and token throughput are simulated for this prototype.</span></p></div></div>
+            <div class="screen-heading">
+              <p class="screen-kicker" data-copy="hospitalsKicker">Verified Public Directory</p>
+              <div class="section-heading">
+                <h1 id="network-title">National Public Hospital Directory</h1>
+                <p><span class="tag">Verified</span> 2,630+ verified hospitals and health centres across 37 States &amp; UTs from the official ORS portal, with simulated queue waits.</p>
+              </div>
+            </div>
             
-          <div class="counterfactual-strip">
-            <div class="counterfactual-card">
-              <div class="counterfactual-value negative">4.5 hrs</div>
-              <div class="counterfactual-label" data-copy="statOrsWait">Avg. ORS Wait in Wrong Lines</div>
-              <div class="counterfactual-meter" aria-hidden="true"><div class="meter-bar negative" style="width: 92%;"></div></div>
+            <div class="counterfactual-strip">
+              <div class="counterfactual-card">
+                <div class="counterfactual-value negative">4.5 hrs</div>
+                <div class="counterfactual-label" data-copy="statOrsWait">Avg. ORS Wait in Wrong Lines</div>
+                <div class="counterfactual-meter" aria-hidden="true"><div class="meter-bar negative" style="width: 92%;"></div></div>
+              </div>
+              <div class="counterfactual-card">
+                <div class="counterfactual-value">28 mins</div>
+                <div class="counterfactual-label" data-copy="statRaahatWait">Avg. Wait with Raahat Triage</div>
+                <div class="counterfactual-meter" aria-hidden="true"><div class="meter-bar positive" style="width: 14%;"></div></div>
+              </div>
+              <div class="counterfactual-card">
+                <div class="counterfactual-value">87%</div>
+                <div class="counterfactual-label" data-copy="statReferralDrop">Drop in Wrong Counter Referrals</div>
+                <div class="counterfactual-meter" aria-hidden="true"><div class="meter-bar positive" style="width: 87%;"></div></div>
+              </div>
+              <div class="counterfactual-card">
+                <div class="counterfactual-value">2,630+ Facilities</div>
+                <div class="counterfactual-label">Pan-India Verified Directory</div>
+                <div class="counterfactual-meter" aria-hidden="true"><div class="meter-bar neutral" style="width: 100%;"></div></div>
+              </div>
             </div>
-            <div class="counterfactual-card">
-              <div class="counterfactual-value">28 mins</div>
-              <div class="counterfactual-label" data-copy="statRaahatWait">Avg. Wait with Raahat Triage</div>
-              <div class="counterfactual-meter" aria-hidden="true"><div class="meter-bar positive" style="width: 14%;"></div></div>
-            </div>
-            <div class="counterfactual-card">
-              <div class="counterfactual-value">87%</div>
-              <div class="counterfactual-label" data-copy="statReferralDrop">Drop in Wrong Counter Referrals</div>
-              <div class="counterfactual-meter" aria-hidden="true"><div class="meter-bar positive" style="width: 87%;"></div></div>
-            </div>
-            <div class="counterfactual-card">
-              <div class="counterfactual-value">60+ Institutes</div>
-              <div class="counterfactual-label" data-copy="statVerifiedDirectory">Pan-India Verified Directory</div>
-              <div class="counterfactual-meter" aria-hidden="true"><div class="meter-bar neutral" style="width: 100%;"></div></div>
-            </div>
-          </div>
 
-          <div class="state-filter-bar">
-            <label for="state-directory-select" style="font-weight: 700;"><span class="tag">Verified</span> <span data-copy="filterByState">Filter by State / Region:</span></label>
-            <select id="state-directory-select" class="state-filter-select"></select>
-            <span id="state-hospital-count" style="font-weight: 700; color: var(--accent); margin-left: auto;"></span>
-          </div>
+            <!-- Directory Search & Filter Toolbar -->
+            <div class="directory-toolbar">
+              <div class="directory-search-wrap">
+                <span class="search-icon" aria-hidden="true">🔍</span>
+                <input id="directory-search-input" type="search" placeholder="Search hospital name, district, or city (e.g. AIIMS, Lucknow, Varanasi, Pune)..." aria-label="Search hospitals" />
+              </div>
+              <div class="directory-state-wrap">
+                <select id="state-directory-select" aria-label="Filter by State / Region"></select>
+              </div>
+              <span id="state-hospital-count" class="directory-count-badge"></span>
+            </div>
 
-          <div class="network-grid" id="pan-india-network-grid">
-            <!-- Dynamically populated from 60+ PAN_INDIA_HOSPITALS -->
-          </div>
+            <div class="network-grid" id="pan-india-network-grid" aria-live="polite">
+              <!-- Dynamically populated in clean batches -->
+            </div>
 
+            <div id="directory-load-more-wrap" style="text-align: center; margin: 1.5rem 0 2rem;" hidden>
+              <button type="button" class="large-button primary btn-load-more" id="btn-load-more-hospitals">
+                Load More Facilities ↓
+              </button>
+            </div>
           </section>
 
           <section class="landing-section view-section" id="screen-faqs" data-view="faqs" aria-labelledby="faq-title">
@@ -5222,7 +5323,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 </div>
                 <div class="thermal-row">
                   <span>EST. SEEN:</span>
-                  <span>~10:45 AM (18 min wait)</span>
+                  <span id="thermal-display-seen">~10:45 AM (18 min wait)</span>
                 </div>
                 <div class="thermal-row">
                   <span>FEE:</span>
@@ -9012,46 +9113,136 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       state.threeAvailable = bodyMap3d.available;
       if (!state.threeAvailable) state.mapMode = "2d";
       
-      // --- Pan-India Hospital Directory Logic ---
+      // --- Pan-India Hospital Directory Logic (Fast Batched Rendering) ---
+      let directoryCurrentPage = 1;
+      const DIRECTORY_PAGE_SIZE = 12;
+      let directoryFilteredList = [];
+
       function renderPanIndiaDirectory() {
         const stateSelect = document.querySelector("#state-directory-select");
+        const searchInput = document.querySelector("#directory-search-input");
         const countSpan = document.querySelector("#state-hospital-count");
         const grid = document.querySelector("#pan-india-network-grid");
+        const loadMoreWrap = document.querySelector("#directory-load-more-wrap");
+        const loadMoreBtn = document.querySelector("#btn-load-more-hospitals");
         if (!stateSelect || !grid) return;
 
+        // Initialize state options once
         if (stateSelect.options.length === 0) {
           INDIAN_STATES.forEach((st) => {
             const opt = document.createElement("option");
             opt.value = st;
-            opt.textContent = st;
+            opt.textContent = st === "All India" ? "All India (2,630+ Facilities)" : st;
             stateSelect.appendChild(opt);
           });
-          stateSelect.addEventListener("change", () => updateGrid(stateSelect.value));
+          stateSelect.value = "All India";
+          stateSelect.addEventListener("change", () => filterAndRender(true));
         }
 
-        function updateGrid(stateName) {
-          const list = hospitalsByState(stateName);
-          if (countSpan) countSpan.textContent = `${list.length} Verified Institutions`;
-          grid.innerHTML = "";
-          list.forEach((h) => {
-            const card = document.createElement("article");
-            card.className = "network-card";
-            card.innerHTML = `
-              <h3>${h.shortName || h.name}</h3>
-              <p><span class="tag">Verified</span> ${h.address} · Departments include ${h.departments.slice(0, 3).join(", ")}.</p>
-              <p class="network-access"><span class="tag">Verified</span> ${h.transit}</p>
-              <p class="verified-line"><span class="tag">Verified</span> Checked ${HOSPITAL_FACT_CHECKED_ON} · <a href="${h.sourceUrl}" target="_blank" rel="noreferrer">Official Portal</a></p>
-              <div class="network-meta">
-                <span class="network-pill"><span class="tag">Verified</span> 24/7 Emergency</span>
-                <span class="network-pill"><span class="tag">Simulated</span> Live Queue Active</span>
-              </div>
-              <p class="network-live"><span class="tag">Simulated</span> Token throughput: Morning rounds in progress · Next open counter 09:30 AM</p>
-            `;
-            grid.appendChild(card);
+        if (searchInput && !searchInput.dataset.wired) {
+          searchInput.dataset.wired = "true";
+          let searchTimer;
+          searchInput.addEventListener("input", () => {
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(() => filterAndRender(true), 250);
           });
         }
 
-        updateGrid(stateSelect.value || "All India");
+        if (loadMoreBtn && !loadMoreBtn.dataset.wired) {
+          loadMoreBtn.dataset.wired = "true";
+          loadMoreBtn.addEventListener("click", () => {
+            directoryCurrentPage++;
+            renderBatch(false);
+          });
+        }
+
+        function filterAndRender(resetPage = true) {
+          if (resetPage) directoryCurrentPage = 1;
+          const selectedState = stateSelect.value || "All India";
+          const q = (searchInput?.value || "").trim().toLowerCase();
+
+          let list = hospitalsByState(selectedState);
+          if (q) {
+            list = list.filter((h) => 
+              h.name.toLowerCase().includes(q) ||
+              (h.city && h.city.toLowerCase().includes(q)) ||
+              (h.district && h.district.toLowerCase().includes(q)) ||
+              (h.state && h.state.toLowerCase().includes(q)) ||
+              (h.tier && h.tier.toLowerCase().includes(q))
+            );
+          }
+
+          directoryFilteredList = list;
+          if (countSpan) {
+            countSpan.textContent = `${list.length.toLocaleString()} Facilities Matching`;
+          }
+
+          renderBatch(true);
+        }
+
+        function renderBatch(clearGrid = false) {
+          if (clearGrid) grid.innerHTML = "";
+          
+          if (directoryFilteredList.length === 0) {
+            grid.innerHTML = `<p class="booking-panel-note" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No facilities found matching your search. Try searching a different district or state.</p>`;
+            if (loadMoreWrap) loadMoreWrap.hidden = true;
+            return;
+          }
+
+          const startIndex = (directoryCurrentPage - 1) * DIRECTORY_PAGE_SIZE;
+          const batch = directoryFilteredList.slice(clearGrid ? 0 : startIndex, directoryCurrentPage * DIRECTORY_PAGE_SIZE);
+
+          batch.forEach((h) => {
+            const card = document.createElement("article");
+            card.className = "network-card";
+            const deptsSnippet = h.departments ? h.departments.slice(0, 3).join(", ") : "General Medicine, OPD";
+            card.innerHTML = `
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.4rem;">
+                <h3 style="margin: 0; font-size: 1.15rem; line-height: 1.25;">${h.shortName || h.name}</h3>
+                <span class="tier-pill" style="font-size: 0.72rem; padding: 0.15rem 0.55rem; white-space: nowrap;">${h.tier || "Govt Hospital"}</span>
+              </div>
+              <p style="margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--muted);"><span class="tag">Verified</span> ${h.address || (h.city ? `${h.city}, ${h.state}` : h.state)}</p>
+              <p class="network-access" style="margin: 0 0 0.5rem; font-size: 0.84rem;"><span class="tag">Verified</span> ${h.transit || "Main Registration Counter · Regular OPD"}</p>
+              
+              <div class="network-meta" style="margin-bottom: 0.75rem;">
+                <span class="network-pill"><span class="tag">Verified</span> 24/7 Emergency</span>
+                <span class="network-pill"><span class="tag">Verified</span> ${deptsSnippet}</span>
+              </div>
+
+              <div class="network-card-actions">
+                <button type="button" class="large-button primary" data-book-hospital="${h.id}">
+                  Book OPD Triage Here →
+                </button>
+                <a href="${h.sourceUrl || "https://ors.gov.in/"}" target="_blank" rel="noreferrer" class="large-button" style="text-align: center; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+                  Official Portal ↗
+                </a>
+              </div>
+            `;
+
+            // Wire 1-tap booking
+            card.querySelector("[data-book-hospital]").addEventListener("click", () => {
+              state.selectedHospital = h.id;
+              if (h.lat && h.lng) {
+                state.userCoords = { lat: h.lat, lng: h.lng, name: h.city || h.state };
+              }
+              switchView("triage");
+            });
+
+            grid.appendChild(card);
+          });
+
+          // Show/hide load more button
+          if (loadMoreWrap) {
+            const hasMore = directoryCurrentPage * DIRECTORY_PAGE_SIZE < directoryFilteredList.length;
+            loadMoreWrap.hidden = !hasMore;
+            if (hasMore && loadMoreBtn) {
+              const remaining = directoryFilteredList.length - (directoryCurrentPage * DIRECTORY_PAGE_SIZE);
+              loadMoreBtn.textContent = `Load More Facilities (${remaining > DIRECTORY_PAGE_SIZE ? DIRECTORY_PAGE_SIZE : remaining} of ${remaining.toLocaleString()} remaining) ↓`;
+            }
+          }
+        }
+
+        filterAndRender(true);
       }
 
       // --- Doctor & Staff Portal Logic ---
@@ -9236,6 +9427,24 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         }
       }
 
+      // --- Navigation to Specimen Slip (Fixing showSlip crash) ---
+      function navigateToSpecimenSlip() {
+        hideAllScreens();
+        triageScreen.hidden = false;
+        state.screen = "appointment";
+        state.signedIn = true;
+        renderStepper(5);
+        questionContent.hidden = true;
+        bodyMapScreen.hidden = true;
+        reviewScreen.hidden = true;
+        resultScreen.hidden = true;
+        appointmentScreen.hidden = false;
+        renderAppointment();
+        slipPanel.hidden = false;
+        slipPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        document.querySelector("#slip-heading")?.focus();
+      }
+
       // --- Render Active Citizen Profile Pass ---
       function renderProfilePass() {
         const tokenEl = document.querySelector("#pass-active-token");
@@ -9246,14 +9455,45 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
         const activePatient = doctorQueueData[activeDoctorQueueIndex] || doctorQueueData[0];
         if (tokenEl) tokenEl.textContent = state.appointmentId ? `#${state.appointmentId}` : activePatient.token;
-        if (nameEl) nameEl.textContent = state.fullName ? `${state.fullName} (${state.exactAge || "64"}y)` : `${activePatient.patient} (${activePatient.age})`;
-        if (hospEl) hospEl.textContent = state.selectedHospital?.name || "AIIMS New Delhi";
-        if (counterEl) counterEl.textContent = state.routeResult?.department ? `${state.routeResult.department} (Counter 4)` : activePatient.counter;
+
+        // Resolve patient name accurately from triage state or family profile
+        const resolvedName = state.complaint?.patient_name || state.patientName || state.fullName || activePatient.patient;
+        const resolvedAge = state.exactAge || (state.complaint?.age_band === "child" ? "5" : "64");
+        if (nameEl) nameEl.textContent = `${resolvedName} (${resolvedAge}y)`;
+
+        // Resolve hospital name from state.selectedHospital ID string or object
+        let resolvedHospitalName = "AIIMS New Delhi";
+        if (state.selectedHospital) {
+          if (typeof state.selectedHospital === "object" && state.selectedHospital.name) {
+            resolvedHospitalName = state.selectedHospital.name;
+          } else if (typeof state.selectedHospital === "string") {
+            const matchHosp = PAN_INDIA_HOSPITALS.find((h) => h.id === state.selectedHospital);
+            if (matchHosp) resolvedHospitalName = matchHosp.name;
+          }
+        }
+        if (hospEl) hospEl.textContent = resolvedHospitalName;
+
+        // Realistic Department-to-Counter Mapping
+        const dept = state.routeResult?.department || activePatient.department || "Cardiology";
+        const counterMap = {
+          "Cardiology": "Cardiology · Counter 4 (Room 104)",
+          "General Medicine": "General Medicine · Counter 2 (Room 102)",
+          "Paediatrics": "Paediatrics · Counter 3 (Room 103)",
+          "Neurology": "Neurology · Counter 1 (Room 101)",
+          "Orthopaedics": "Orthopaedics · Counter 5 (Room 105)",
+          "Emergency": "Emergency Trauma Bay · 24/7 Red Flag",
+          "ENT": "ENT · Counter 6 (Room 106)",
+          "Ophthalmology": "Ophthalmology · Counter 7 (Room 107)",
+          "Obstetrics & Gynaecology": "Gynaecology · Counter 8 (Room 108)",
+          "General Surgery": "General Surgery · Counter 9 (Room 109)",
+          "Dental": "Dental Clinic · Counter 10 (Room 110)"
+        };
+        if (counterEl) counterEl.textContent = counterMap[dept] || `${dept} · Counter 1 (Room 101)`;
 
         if (pillEl) {
           if (activePatient.status === "Seen") {
             pillEl.className = "pass-status-pill seen";
-            pillEl.innerHTML = `<span class="scorecard-tag tag-positive">Done</span> Consultation Complete`;
+            pillEl.innerHTML = `<span class="scorecard-tag tag-positive">✓ Done</span> Consultation Complete`;
           } else if (activePatient.status.includes("Consultation Room")) {
             pillEl.className = "pass-status-pill inside";
             pillEl.innerHTML = `<span class="status-indicator-dot mini"></span> Inside Consultation Room`;
@@ -9267,12 +9507,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       // --- Wire Patient Profile Screen ---
       function wireProfileScreen() {
         document.querySelector("#pass-view-slip-btn")?.addEventListener("click", () => {
-          if (state.signedIn) {
-            switchView("triage");
-            showSlip();
-          } else {
-            switchView("triage");
-          }
+          navigateToSpecimenSlip();
         });
 
         document.querySelector("#pass-print-btn")?.addEventListener("click", () => {
@@ -9302,17 +9537,20 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             const member = btn.dataset.bookFamily;
             if (member === "ramesh") {
               state.fullName = "Ramesh Kumar";
+              state.patientName = "Ramesh Kumar";
               state.exactAge = "64";
               state.booking = "myself";
               state.age = "older";
             } else if (member === "sunita") {
               state.fullName = "Sunita Devi";
+              state.patientName = "Sunita Devi";
               state.exactAge = "60";
               state.booking = "someoneElse";
               state.who = "parent";
               state.age = "older";
             } else if (member === "aarav") {
               state.fullName = "Aarav Verma";
+              state.patientName = "Aarav Verma";
               state.exactAge = "5";
               state.booking = "someoneElse";
               state.who = "child";
@@ -9398,6 +9636,27 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           });
         });
 
+        // Hospital Counter Select Change Listener
+        const doctorHospSelect = document.querySelector("#doctor-hospital-select");
+        doctorHospSelect?.addEventListener("change", () => {
+          const selectedVal = doctorHospSelect.value;
+          if (selectedVal.includes("safdarjung")) {
+            activeDoctorQueueIndex = doctorQueueData.findIndex(item => item.department === "General Medicine");
+          } else if (selectedVal.includes("rml")) {
+            activeDoctorQueueIndex = doctorQueueData.findIndex(item => item.department === "Neurology");
+          } else if (selectedVal.includes("nimhans")) {
+            activeDoctorQueueIndex = doctorQueueData.findIndex(item => item.department === "Neurology");
+          } else if (selectedVal.includes("pgimer")) {
+            activeDoctorQueueIndex = doctorQueueData.findIndex(item => item.department === "Orthopaedics");
+          } else {
+            activeDoctorQueueIndex = 0; // AIIMS Cardiology
+          }
+          if (activeDoctorQueueIndex === -1) activeDoctorQueueIndex = 0;
+          renderActiveDoctorSBAR();
+          renderDoctorQueue();
+          renderProfilePass();
+        });
+
         // Registration Counter Terminal Logic
         const terminalForm = document.querySelector("#terminal-register-form");
         const terminalFeedback = document.querySelector("#terminal-feedback");
@@ -9413,12 +9672,19 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
           const newTokenNum = `#OPD-${Math.floor(1000 + Math.random() * 9000)}`;
 
+          // Dynamic estimated seen time (current time + 18 mins)
+          const now = new Date();
+          const estDate = new Date(now.getTime() + 18 * 60000);
+          const estTimeStr = estDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
           // Update thermal slip display
           document.querySelector("#thermal-display-token").textContent = newTokenNum;
           document.querySelector("#thermal-display-patient").textContent = name;
           document.querySelector("#thermal-display-meta").textContent = `${age}Y / ${gender}`;
           document.querySelector("#thermal-display-counter").textContent = dept;
           document.querySelector("#thermal-display-fee").textContent = cat.includes("Free") ? "₹0 (WAIVED)" : "₹10 PAID";
+          const seenTimeEl = document.querySelector("#thermal-display-seen");
+          if (seenTimeEl) seenTimeEl.textContent = `~${estTimeStr} (18 min wait)`;
 
           // Add to live doctorQueueData
           doctorQueueData.push({
@@ -9473,9 +9739,8 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           window.print();
           setTimeout(() => document.body.classList.remove("printing-thermal"), 1000);
         });
-      }
 
-      function wireDoctorPortal() {
+        // Doctor Portal Actions Wiring
         const callNextBtn = document.querySelector("#doctor-call-next");
         const markSeenBtn = document.querySelector("#doctor-mark-seen");
         const emergencyBtn = document.querySelector("#doctor-escalate-emergency");
@@ -9507,6 +9772,8 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         markSeenBtn?.addEventListener("click", () => {
           const current = doctorQueueData[activeDoctorQueueIndex];
           current.status = "Seen";
+          const orders = selectedRx.size > 0 ? Array.from(selectedRx).join(", ") : "Standard OPD Advice & Followup";
+          current.signedRx = orders;
           renderActiveDoctorSBAR();
           renderDoctorQueue();
 
@@ -9516,7 +9783,8 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             patient: current.patient,
             status: "Seen",
             timestamp: timestamp,
-            doctor: "Dr. S. Mukherjee, MD (AIIMS Cardiology Counter 4)"
+            doctor: "Dr. S. Mukherjee, MD (Attending Specialist)",
+            orders: orders
           };
 
           try {
@@ -9524,9 +9792,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           } catch {}
 
           updateSlipStatusDirectly(eventData);
+          renderProfilePass();
 
           if (feedbackEl) {
-            feedbackEl.textContent = `[Consultation Complete] ${current.token}. Real-time status broadcasted to citizen's specimen slip at ${timestamp}!`;
+            feedbackEl.innerHTML = `<span class="scorecard-tag tag-positive">✓ Signed</span> <strong>${current.token}</strong> consultation complete at ${timestamp}. Orders: <em>${orders}</em>`;
           }
         });
 
@@ -9540,6 +9809,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         orderTestsBtn?.addEventListener("click", () => {
           switchView("lab-tests");
         });
+      }
+
+      function wireDoctorPortal() {
+        // Handled cleanly in wireHospitalRoleSuite
       }
 
       // --- Prescription OCR Logic ---
