@@ -89,6 +89,7 @@ test("a flag cannot be cleared by reassuring details", () => {
 test("expanded anatomical regions route to their first counters", () => {
   const expectedDepartments = {
     eyes: "Ophthalmology",
+    nose: "ENT",
     ears: "ENT",
     teeth: "Dental",
     shoulder: "Orthopaedics",
@@ -107,6 +108,7 @@ test("expanded anatomical regions route to their first counters", () => {
 test("expanded region phrases create routeable complaints", () => {
   const cases = [
     ["eye pain", "Ophthalmology", "eyes"],
+    ["nose pain", "ENT", "nose"],
     ["ear pain", "ENT", "ears"],
     ["tooth pain", "Dental", "teeth"],
     ["shoulder pain", "Orthopaedics", "shoulder"],

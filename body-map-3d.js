@@ -10,16 +10,18 @@ if (typeof window !== "undefined") {
   window.THREE = THREE;
 }
 
-// Serene alabaster porcelain anatomical twin aesthetic
+// Signature Raahat Medical Celadon & Sandalwood Porcelain anatomical twin aesthetic
 const COLORS = Object.freeze({
-  skinLight: 0xc8beb5,        // Warm alabaster porcelain
-  skinContour: 0xcdbeaf,      // Subtle anatomical contouring
-  skinDeep: 0xbda999,         // Soft anatomical shadow tone
-  darkBody: 0x242e3b,         // Calm slate porcelain
-  darkContour: 0x1b232e,      // Deep tone
-  darkInner: 0x2f3c4c,        // Subsurface depth
-  accentBlue: 0x8ecae6,       // Signature sky-blue sheen
-  accentPurple: 0xb8a9c9,     // Soft lavender wireframe
+  skinLight: 0xdde5df,        // Serene celadon porcelain tone
+  skinContour: 0xccd8d1,      // Subtle jade-tinted anatomical contouring
+  skinDeep: 0xb6c5be,         // Soft medical depth tone
+  darkBody: 0x13211f,         // Deep obsidian jade porcelain
+  darkContour: 0x0c1715,      // Deep shadow tone
+  darkInner: 0x182d29,        // Deep sub-surface teal
+  accentJade: 0x0d9488,       // Signature Raahat medical jade
+  accentTeal: 0x14b8a6,       // Glowing clinical teal reticle
+  beaconCyan: 0x06b6d4,       // High-visibility sensory beacon cyan
+  beaconAmber: 0xf59e0b,      // Active landmark selection gold
   amber: 0xf59e0b,            // Interactive hover
 });
 
@@ -35,9 +37,10 @@ export const INTENSITY_LEVELS = Object.freeze({
 export const REGION_LABELS = Object.freeze({
   head: { en: "Head / cranium / brain", hi: "सिर / खोपड़ी / मस्तिष्क", dept: "Neurology" },
   eyes: { en: "Eyes / vision", hi: "आँखें / नज़र", dept: "Ophthalmology" },
-  ears: { en: "Ears / nose / throat", hi: "कान, नाक और गला", dept: "ENT" },
+  nose: { en: "Nose / sinuses / breathing", hi: "नाक / साइनस / साँस नली", dept: "ENT" },
+  ears: { en: "Ears / hearing", hi: "कान और सुनना", dept: "ENT" },
   teeth: { en: "Teeth / mouth / jaw", hi: "दाँत और मुँह / जबड़ा", dept: "Dental" },
-  face: { en: "Face / cheeks / sinuses", hi: "चेहरा / गाल / साइनस", dept: "Dental / ENT" },
+  face: { en: "Face / cheeks / sinuses", hi: "चेहरा / गाल / जबड़ा", dept: "Dental / ENT" },
   neck: { en: "Neck / throat / thyroid", hi: "गर्दन / गला / थायरॉइड", dept: "ENT / General Medicine" },
   chest: { en: "Chest / heart / lungs", hi: "छाती / दिल / फेफड़े", dept: "Cardiology" },
   "upper-abdomen": { en: "Upper abdomen / stomach", hi: "ऊपरी पेट / आमाशय", dept: "Gastroenterology" },
@@ -62,11 +65,12 @@ export const BILATERAL_REGIONS = Object.freeze([
 // Female anatomical zone centers (normalized 1.75m coordinate space)
 export const FEMALE_ZONE_CENTERS = Object.freeze({
   head: [0, 1.635, 0.06],
-  eyes: [0, 1.625, 0.08],
+  eyes: [0, 1.628, 0.082],
+  nose: [0, 1.602, 0.088],
   ears: [0.09, 1.605, 0.01],
-  teeth: [0, 1.565, 0.07],
-  face: [0, 1.595, 0.07],
-  neck: [0, 1.495, 0.01],
+  teeth: [0, 1.565, 0.076],
+  face: [0, 1.595, 0.072],
+  neck: [0, 1.495, 0.015],
   shoulder: [0.170, 1.380, 0.02],
   chest: [0, 1.280, 0.08],
   "upper-abdomen": [0, 1.080, 0.05],
@@ -84,10 +88,11 @@ export const FEMALE_ZONE_CENTERS = Object.freeze({
 // Male anatomical zone centers (normalized 1.75m coordinate space)
 export const MALE_ZONE_CENTERS = Object.freeze({
   head: [0, 1.640, 0.06],
-  eyes: [0, 1.630, 0.08],
+  eyes: [0, 1.632, 0.082],
+  nose: [0, 1.606, 0.088],
   ears: [0.10, 1.610, 0.01],
-  teeth: [0, 1.570, 0.07],
-  face: [0, 1.600, 0.07],
+  teeth: [0, 1.570, 0.076],
+  face: [0, 1.600, 0.072],
   neck: [0, 1.494, 0.02],
   shoulder: [0.210, 1.380, 0.02],
   chest: [0, 1.300, 0.08],
@@ -105,9 +110,10 @@ export const MALE_ZONE_CENTERS = Object.freeze({
 
 export const ZONE_RADII = Object.freeze({
   head: 0.095,
-  eyes: 0.055,
+  eyes: 0.050,
+  nose: 0.038,
   ears: 0.055,
-  teeth: 0.048,
+  teeth: 0.045,
   face: 0.068,
   neck: 0.058,
   chest: 0.135,
@@ -139,10 +145,11 @@ export function hitToZone(point, silhouette = "neutral") {
   // 1. Head & Facial Sensory Organs (Y >= 1.54)
   if (y >= 1.54) {
     if (y >= 1.66) return "head";
-    if (absX > 0.075) return "ears";
-    if (z > 0.035) {
-      if (y >= 1.61 && absX < 0.055) return "eyes";
-      if (y <= 1.58 && absX < 0.048) return "teeth";
+    if (absX > 0.072) return "ears";
+    if (z > 0.025) {
+      if (y >= 1.618 && absX < 0.055) return "eyes";
+      if (y >= 1.585 && y < 1.618 && absX < 0.038) return "nose";
+      if (y <= 1.585 && absX < 0.048) return "teeth";
       return "face";
     }
     return isRear ? "head" : "face";
@@ -225,24 +232,33 @@ export function normalizeGLBScene(scene, targetHeight = 1.75) {
   scene.updateMatrixWorld(true);
 }
 
-// Creates the signature porcelain alabaster physical material
+// Creates the signature porcelain celadon physical material
 function createPorcelainMaterial(dark = false) {
   return new THREE.MeshPhysicalMaterial({
     color: new THREE.Color(dark ? COLORS.darkBody : COLORS.skinLight),
-    roughness: 0.55,
-    metalness: 0.02,
-    clearcoat: 0.35,
-    clearcoatRoughness: 0.35,
-    sheen: 0.80,
-    sheenRoughness: 0.50,
-    sheenColor: new THREE.Color(COLORS.accentBlue),
-    emissive: new THREE.Color(dark ? 0x0f172a : 0x1a2a3a),
-    emissiveIntensity: 0.12,
+    roughness: 0.52,
+    metalness: 0.04,
+    clearcoat: 0.42,
+    clearcoatRoughness: 0.28,
+    sheen: 0.85,
+    sheenRoughness: 0.40,
+    sheenColor: new THREE.Color(dark ? 0x2dd4bf : COLORS.accentTeal),
+    emissive: new THREE.Color(dark ? 0x061e1a : 0x132924),
+    emissiveIntensity: 0.14,
     transparent: true,
     opacity: 0.96,
     side: THREE.FrontSide,
   });
 }
+
+// Interactive 3D Anatomical Landmark Beacons for high-clarity sensory & facial organ discovery
+const ANATOMICAL_BEACONS = Object.freeze([
+  { id: "eyes", label: "Eyes", hi: "आँखें", x: 0.038, y: 1.630, z: 0.082, mirror: true, side: "left" },
+  { id: "nose", label: "Nose & Sinuses", hi: "नाक व साइनस", x: 0.000, y: 1.604, z: 0.092, mirror: false, side: "both" },
+  { id: "teeth", label: "Teeth & Jaw", hi: "दाँत व जबड़ा", x: 0.000, y: 1.568, z: 0.078, mirror: false, side: "both" },
+  { id: "ears", label: "Ears & Hearing", hi: "कान", x: 0.095, y: 1.610, z: 0.010, mirror: true, side: "left" },
+  { id: "neck", label: "Throat & Neck", hi: "गला व गर्दन", x: 0.000, y: 1.492, z: 0.030, mirror: false, side: "both" },
+]);
 
 function makeTooltip(stage) {
   if (!stage) return null;
@@ -276,24 +292,26 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
   camera.position.set(0, 0.92, 2.65);
   camera.lookAt(0, 0.88, 0);
 
-  // Lighting suite for realistic anatomical definition
-  const hemisphere = new THREE.HemisphereLight(0xfff7ed, 0x94a3b8, 1.8);
+  // Precision clinical lighting suite for realistic anatomical definition
+  const hemisphere = new THREE.HemisphereLight(0xf0fdfa, 0x94a3b8, 1.85);
   const keyLight = new THREE.DirectionalLight(0xfffbeb, 2.2);
   keyLight.position.set(-2.5, 4.5, 5);
 
-  const fillLight = new THREE.DirectionalLight(0xe0e7ff, 1.3);
+  const fillLight = new THREE.DirectionalLight(0xccfbf1, 1.35);
   fillLight.position.set(3, -1, 4);
 
-  const rimLight = new THREE.DirectionalLight(0xdbeafe, 1.6);
+  const rimLight = new THREE.DirectionalLight(0x99f6e4, 1.7);
   rimLight.position.set(0, 3, -5);
 
   scene.add(hemisphere, keyLight, fillLight, rimLight);
 
-  // Dynamic 3D Wireframe Highlight Spheres (supports single side and both sides simultaneously)
+  // Dual-ring clinical targeting system (spherical volume + equatorial rotating coordinate reticle)
   const highlightSphereGeo = new THREE.SphereGeometry(1, 24, 24);
+  const highlightRingGeo = new THREE.TorusGeometry(1.0, 0.024, 8, 36);
+
   const createHighlightMesh = () => {
     const mat = new THREE.MeshBasicMaterial({
-      color: COLORS.accentBlue,
+      color: COLORS.accentTeal,
       wireframe: true,
       transparent: true,
       opacity: 0.55,
@@ -307,12 +325,91 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     scene.add(mesh);
     return mesh;
   };
+
+  const createHighlightRing = () => {
+    const mat = new THREE.MeshBasicMaterial({
+      color: COLORS.accentJade,
+      transparent: true,
+      opacity: 0.75,
+      depthTest: false,
+      depthWrite: false,
+    });
+    const ring = new THREE.Mesh(highlightRingGeo, mat);
+    ring.visible = false;
+    ring.renderOrder = 1000;
+    scene.add(ring);
+    return ring;
+  };
+
   const highlightSphere1 = createHighlightMesh();
   const highlightSphere2 = createHighlightMesh();
+  const highlightRing1 = createHighlightRing();
+  const highlightRing2 = createHighlightRing();
 
-  // Model storage & caching
+  // Model storage & hierarchical groups
   const modelGroup = new THREE.Group();
+  const bodyMeshGroup = new THREE.Group();
+  const beaconGroup = new THREE.Group();
+  modelGroup.add(bodyMeshGroup, beaconGroup);
   scene.add(modelGroup);
+
+  // Build Interactive 3D Anatomical Landmark Beacons
+  const beaconObjects = [];
+  const beaconHitSpheres = [];
+
+  const beaconDotGeo = new THREE.SphereGeometry(0.007, 12, 12);
+  const beaconRingGeo = new THREE.RingGeometry(0.010, 0.014, 24);
+  const beaconHitGeo = new THREE.SphereGeometry(0.026, 8, 8);
+
+  ANATOMICAL_BEACONS.forEach((b) => {
+    const instances = b.mirror
+      ? [
+          { side: "left", x: b.x, y: b.y, z: b.z },
+          { side: "right", x: -b.x, y: b.y, z: b.z },
+        ]
+      : [{ side: b.side, x: b.x, y: b.y, z: b.z }];
+
+    instances.forEach((inst) => {
+      const node = new THREE.Group();
+      node.position.set(inst.x, inst.y, inst.z);
+
+      const dotMat = new THREE.MeshBasicMaterial({
+        color: COLORS.accentTeal,
+        depthTest: false,
+        depthWrite: false,
+      });
+      const dot = new THREE.Mesh(beaconDotGeo, dotMat);
+      dot.renderOrder = 990;
+
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: COLORS.accentJade,
+        transparent: true,
+        opacity: 0.85,
+        side: THREE.DoubleSide,
+        depthTest: false,
+        depthWrite: false,
+      });
+      const ring = new THREE.Mesh(beaconRingGeo, ringMat);
+      ring.renderOrder = 989;
+
+      const hitSphereMat = new THREE.MeshBasicMaterial({ visible: false });
+      const hitSphere = new THREE.Mesh(beaconHitGeo, hitSphereMat);
+      hitSphere.userData = { isBeacon: true, region: b.id, side: inst.side };
+
+      node.add(dot, ring, hitSphere);
+      beaconGroup.add(node);
+
+      beaconObjects.push({
+        id: b.id,
+        side: inst.side,
+        group: node,
+        dot,
+        ring,
+        hitSphere,
+      });
+      beaconHitSpheres.push(hitSphere);
+    });
+  });
 
   const gltfLoader = new GLTFLoader();
   const cachedModels = { female: null, male: null };
@@ -365,13 +462,13 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
       const modelScene = await loadModel(modelType);
       applyMaterials(modelScene);
 
-      // Clear existing models in group
-      while (modelGroup.children.length > 0) {
-        modelGroup.remove(modelGroup.children[0]);
+      // Clear existing models in body mesh group
+      while (bodyMeshGroup.children.length > 0) {
+        bodyMeshGroup.remove(bodyMeshGroup.children[0]);
       }
-      modelGroup.add(modelScene);
+      bodyMeshGroup.add(modelScene);
 
-      activeMeshes = [];
+      activeMeshes = [...beaconHitSpheres];
       modelScene.traverse((child) => {
         if (child.isMesh) activeMeshes.push(child);
       });
@@ -426,7 +523,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
   resize();
   const resizeObserver = window.ResizeObserver ? new window.ResizeObserver(resize) : { observe() {}, disconnect() {} };
   resizeObserver.observe(canvas);
-  const themeObserver = window.MutationObserver ? new window.MutationObserver(() => applyMaterials(modelGroup)) : { observe() {}, disconnect() {} };
+  const themeObserver = window.MutationObserver ? new window.MutationObserver(() => applyMaterials(bodyMeshGroup)) : { observe() {}, disconnect() {} };
   themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
   const getRegionHit = (event) => {
@@ -439,14 +536,21 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     const intersects = raycaster.intersectObjects(activeMeshes, true);
     if (!intersects.length) return null;
 
+    // Check if the intersected object is an anatomical landmark beacon
+    const beaconHit = intersects.find((hit) => hit.object.userData?.isBeacon);
+    if (beaconHit) {
+      return {
+        region: beaconHit.object.userData.region,
+        side: beaconHit.object.userData.side || "both",
+        point: beaconHit.point.clone(),
+      };
+    }
+
     // Convert world hit point into local model coordinates
     const hitPoint = intersects[0].point.clone();
     modelGroup.worldToLocal(hitPoint);
 
     const region = hitToZone(hitPoint, currentSilhouette);
-    // In local model coordinates:
-    // When looking at front of body:
-    // positive X (+X) is patient's left; negative X (-X) is patient's right
     const side = Math.abs(hitPoint.x) > 0.025 ? (hitPoint.x > 0 ? "left" : "right") : "both";
     return { region, side, point: hitPoint };
   };
@@ -502,7 +606,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     if (activeRegion) {
       const center = getZoneCenter(activeRegion, currentSilhouette);
       const radius = ZONE_RADII[activeRegion] || 0.10;
-      const targetColor = selectedRegion ? intensityConfig.color : COLORS.accentBlue;
+      const targetColor = selectedRegion ? intensityConfig.color : COLORS.accentTeal;
       const isBilateral = BILATERAL_REGIONS.includes(activeRegion);
       const absX = Math.abs(center[0]);
 
@@ -510,38 +614,89 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
         ? 0.55 + Math.sin(now * 0.006) * 0.20 
         : 0.38 + Math.sin(now * 0.004) * 0.14;
 
-      highlightSphere1.scale.setScalar(selectedRegion ? radius * 1.12 : radius);
+      const scale = selectedRegion ? radius * 1.12 : radius;
+      highlightSphere1.scale.setScalar(scale);
       highlightSphere1.material.color.setHex(targetColor);
       highlightSphere1.material.opacity = pulse;
 
-      highlightSphere2.scale.setScalar(selectedRegion ? radius * 1.12 : radius);
+      highlightSphere2.scale.setScalar(scale);
       highlightSphere2.material.color.setHex(targetColor);
       highlightSphere2.material.opacity = pulse;
+
+      highlightRing1.scale.setScalar(scale);
+      highlightRing1.material.color.setHex(targetColor);
+
+      highlightRing2.scale.setScalar(scale);
+      highlightRing2.material.color.setHex(targetColor);
 
       if (isBilateral) {
         if (activeSide === "both") {
           highlightSphere1.position.set(absX, center[1], center[2]);
           highlightSphere1.visible = true;
+          highlightRing1.position.copy(highlightSphere1.position);
+          highlightRing1.visible = true;
+
           highlightSphere2.position.set(-absX, center[1], center[2]);
           highlightSphere2.visible = true;
+          highlightRing2.position.copy(highlightSphere2.position);
+          highlightRing2.visible = true;
         } else if (activeSide === "left") {
           highlightSphere1.position.set(absX, center[1], center[2]);
           highlightSphere1.visible = true;
+          highlightRing1.position.copy(highlightSphere1.position);
+          highlightRing1.visible = true;
+
           highlightSphere2.visible = false;
+          highlightRing2.visible = false;
         } else if (activeSide === "right") {
           highlightSphere1.position.set(-absX, center[1], center[2]);
           highlightSphere1.visible = true;
+          highlightRing1.position.copy(highlightSphere1.position);
+          highlightRing1.visible = true;
+
           highlightSphere2.visible = false;
+          highlightRing2.visible = false;
         }
       } else {
         highlightSphere1.position.set(0, center[1], center[2]);
         highlightSphere1.visible = true;
+        highlightRing1.position.copy(highlightSphere1.position);
+        highlightRing1.visible = true;
+
         highlightSphere2.visible = false;
+        highlightRing2.visible = false;
       }
     } else {
       highlightSphere1.visible = false;
       highlightSphere2.visible = false;
+      highlightRing1.visible = false;
+      highlightRing2.visible = false;
     }
+
+    // Update anatomical landmark beacons glow and feedback
+    const isFrontFacing = Math.cos(modelGroup.rotation.y) > -0.25;
+    beaconObjects.forEach((beacon) => {
+      const isTargeted = activeRegion === beacon.id && (activeSide === "both" || activeSide === beacon.side);
+      const pulse = 1.0 + Math.sin(now * 0.005) * 0.15;
+
+      if (isTargeted) {
+        beacon.dot.material.color.setHex(COLORS.beaconAmber);
+        beacon.ring.material.color.setHex(COLORS.beaconAmber);
+        beacon.ring.scale.setScalar(1.35 * pulse);
+        beacon.dot.scale.setScalar(1.3);
+      } else {
+        beacon.dot.material.color.setHex(COLORS.accentTeal);
+        beacon.ring.material.color.setHex(COLORS.accentJade);
+        beacon.ring.scale.setScalar(pulse);
+        beacon.dot.scale.setScalar(1.0);
+      }
+
+      // Smoothly attenuate beacon visibility when the body is rotated backwards
+      const opacity = isFrontFacing ? 0.90 : 0.20;
+      beacon.dot.material.opacity = opacity;
+      beacon.ring.material.opacity = opacity * 0.85;
+      beacon.ring.lookAt(camera.position);
+    });
   }
 
   const pointerDown = (event) => {
@@ -591,8 +746,17 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     if (allowSelect && isTap) {
       const hit = getRegionHit(event);
       if (hit?.region) {
+        let nextSide = hit.side || "both";
+        const isBilateral = BILATERAL_REGIONS.includes(hit.region);
+        if (isBilateral && selectedRegion === hit.region) {
+          if ((selectedSide === "left" && hit.side === "right") || (selectedSide === "right" && hit.side === "left")) {
+            nextSide = "both";
+          } else if (selectedSide === hit.side) {
+            nextSide = "both";
+          }
+        }
         selectedRegion = hit.region;
-        selectedSide = hit.side || "both";
+        selectedSide = nextSide;
         updateVisualState();
         if ("vibrate" in navigator) navigator.vibrate?.(18);
         onSelect?.(selectedRegion, selectedSide);
@@ -699,6 +863,14 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
       highlightSphere2.rotation.y += 0.008;
       highlightSphere2.rotation.x += 0.004;
     }
+    if (highlightRing1.visible) {
+      highlightRing1.rotation.z += 0.015;
+      highlightRing1.rotation.x += 0.008;
+    }
+    if (highlightRing2.visible) {
+      highlightRing2.rotation.z -= 0.015;
+      highlightRing2.rotation.x -= 0.008;
+    }
 
     updateVisualState(now);
     renderer.render(scene, camera);
@@ -714,11 +886,11 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
       if (side === "left") targetX = 0.06;
       else if (side === "right") targetX = -0.06;
     }
-    if (["head", "eyes", "ears", "teeth", "face", "neck"].includes(region)) {
+    if (["head", "eyes", "nose", "ears", "teeth", "face", "neck"].includes(region)) {
       targetRotationY = 0;
       targetRotationX = 0;
-      targetCameraPosition.set(targetX, 1.55, 1.35);
-      targetLookY = 1.55;
+      targetCameraPosition.set(targetX, 1.58, 1.25);
+      targetLookY = 1.58;
     } else if (["chest", "upper-back"].includes(region)) {
       targetRotationY = region === "upper-back" ? Math.PI : 0;
       targetRotationX = 0;
@@ -757,6 +929,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     setSide(side) {
       selectedSide = side || "both";
       updateVisualState();
+      if (selectedRegion) focusRegionCamera(selectedRegion, selectedSide);
     },
     getSide() {
       return selectedSide;
@@ -784,6 +957,11 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
         targetRotationX = 0;
         targetCameraPosition.set(0, 0.92, 2.65);
         targetLookY = 0.88;
+      } else if (view === "head") {
+        targetRotationY = 0;
+        targetRotationX = 0;
+        targetCameraPosition.set(0, 1.60, 1.15);
+        targetLookY = 1.60;
       } else if (view === "upper") {
         targetCameraPosition.set(0, 1.35, 1.65);
         targetLookY = 1.35;
@@ -814,8 +992,14 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
       canvas.removeEventListener("touchmove", onTouchMove);
       tooltip?.remove();
       highlightSphereGeo.dispose();
+      highlightRingGeo.dispose();
       highlightSphere1.material.dispose();
       highlightSphere2.material.dispose();
+      highlightRing1.material.dispose();
+      highlightRing2.material.dispose();
+      beaconDotGeo.dispose();
+      beaconRingGeo.dispose();
+      beaconHitGeo.dispose();
       renderer.dispose();
     },
   };

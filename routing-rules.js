@@ -25,11 +25,11 @@ export const ROUTING_RULES = Object.freeze({
     },
     {
       id: "R-12",
-      matches: { all: [{ field: "region", equals: "ears" }] },
+      matches: { all: [{ field: "region", in: ["ears", "nose"] }] },
       department: "ENT",
       reason: {
-        en: "Ear or throat concerns start at ENT for an in-person assessment.",
-        hi: "कान या गले की परेशानी के लिए आमने-सामने जाँच हेतु ईएनटी से शुरू करें।",
+        en: "Ear, nose or throat concerns start at ENT for an in-person assessment.",
+        hi: "कान, नाक या गले की परेशानी के लिए आमने-सामने जाँच हेतु ईएनटी से शुरू करें।",
       },
       severity: "routine",
     },

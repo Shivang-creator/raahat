@@ -63,6 +63,10 @@ export function parseFreeTextComplaint(input, language = "en") {
     "આંખ", "આંખો", "ദൃഷ്ടി", "കണ്ണ്", "കണ്ണുകൾ", "ਅੱਖ", "ਅੱਖਾਂ",
     "ଆଖି", "آنکھ", "آنکھیں", "চকু",
   ]);
+  const hasNose = hasAny(text, [
+    "nose", "nasal", "sinus", "sinuses", "नाक", "साइनस", "naak",
+    "மூக்கு", "ముక్కు", "ناک", "নাক", "नाक", "ಮೂಗು", "નાક", "മൂക്ക്", "ਨੱਕ", "ନାକ", "নাকৰ",
+  ]);
   const hasEars = hasAny(text, [
     "ear", "ears", "throat", "कान", "गला", "kaan", "gala",
     "காது", "தொண்டை", "చెవి", "చెవులు", "గొంతు", "কান", "গলা",
@@ -251,6 +255,7 @@ export function parseFreeTextComplaint(input, language = "en") {
   if (hasChest) complaint.region = "chest";
   else if (hasHead) complaint.region = "head";
   else if (hasEyes) complaint.region = "eyes";
+  else if (hasNose) complaint.region = "nose";
   else if (hasEars) complaint.region = "ears";
   else if (hasTeeth) complaint.region = "teeth";
   else if (hasShoulder) complaint.region = "shoulder";
@@ -273,8 +278,8 @@ export function parseFreeTextComplaint(input, language = "en") {
 
   if (hasChest && (hasAny(text, painKeywords) || breathlessness)) complaint.kind = "pain";
   else if (hasHead && hasAny(text, painKeywords)) complaint.kind = "pain";
-  else if ((hasEyes || hasEars || hasTeeth || hasShoulder || hasKnee || hasHand || hasFoot || hasPelvis || hasUpperBack || hasLowerBack)
-    && (hasAny(text, painKeywords) || hasAny(text, ["hurt", "दिक्कत", "problem", "परेशानी", "blur", "itch", "खुजली", "அரிப்பு", "ದುರದ", "തുരികെ"]))) complaint.kind = "pain";
+  else if ((hasEyes || hasNose || hasEars || hasTeeth || hasShoulder || hasKnee || hasHand || hasFoot || hasPelvis || hasUpperBack || hasLowerBack)
+    && (hasAny(text, painKeywords) || hasAny(text, ["hurt", "दिक्कत", "problem", "परेशानी", "blur", "itch", "खुजली", "बहना", "block", "जाम", "बंद", "अरीப்பு", "ದುರದ", "തുരികെ"]))) complaint.kind = "pain";
   else if (hasAbdomen && (hasAny(text, painKeywords) || hasAny(text, [
     "खराब", "ख़राब", "kharab", "kharaab", "upset", "indigestion", "loose motion", "dast", " दस्त", "दस्त",
     "vomit", " उल्टी", "उल्टी", "வாந்தி", "பேதி", "వాంతులు", "విరేచనాలు", "বমি", "পাতলা পায়খানা",
