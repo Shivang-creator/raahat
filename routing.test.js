@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { ROUTING_RULES } from "./routing-rules.js";
-import { parseFreeTextComplaint, routeComplaint } from "./routing.js";
+import { parseFreeTextComplaint, routeComplaint, checkRealtimeEmergency } from "./routing.js";
 
 const baseComplaint = {
   region: "chest",
@@ -266,4 +266,75 @@ test("pan-India vernacular phrases across scheduled languages route accurately w
     if (tc.rule_id) assert.equal(result.rule_id, tc.rule_id, `Rule ID for "${tc.phrase}"`);
   }
 });
+
+test("checkRealtimeEmergency activates immediately across all 9 red-flag markers", () => {
+  const cases = [
+    { input: "chest pain with breathlessness", expectedRule: "RF-01" },
+    { input: "seene mein dard aur pasina aa raha hai", expectedRule: "RF-01" },
+    { input: "weakness on one side", expectedRule: "RF-02" },
+    { input: "ek taraf kamzori lakwa", expectedRule: "RF-02" },
+    { input: "ஒரு பக்க பலவீனம்", expectedRule: "RF-02" },
+    { input: "baby not feeding", expectedRule: "RF-03" },
+    { input: "bachha doodh nahi pee raha", expectedRule: "RF-03" },
+    { input: "heavy bleeding won't stop", expectedRule: "RF-04" },
+    { input: "khoon ruk nahi raha", expectedRule: "RF-04" },
+    { input: "fever with stiff neck", expectedRule: "RF-05" },
+    { input: "gardan akad gayi bukhar mein", expectedRule: "RF-05" },
+    { input: "sudden severe headache", expectedRule: "RF-06" },
+    { input: "achanak bohot tez sar dard", expectedRule: "RF-06" },
+    { input: "difficulty breathing", expectedRule: "RF-07" },
+    { input: "saans lene mein bohot dikkat", expectedRule: "RF-07" },
+    { input: "seizure and fits", expectedRule: "RF-08" },
+    { input: "mirgi ka daura aaya", expectedRule: "RF-08" },
+    { input: "thoughts of self-harm", expectedRule: "RF-09" },
+    { input: "suicide harm myself", expectedRule: "RF-09" },
+  ];
+
+  for (const tc of cases) {
+    const res = checkRealtimeEmergency(tc.input);
+    assert.equal(res.isEmergency, true, `Should detect emergency for: "${tc.input}"`);
+    assert.equal(res.ruleId, tc.expectedRule, `Should match rule ${tc.expectedRule} for: "${tc.input}"`);
+    assert.ok(res.title, "Should have a title");
+    assert.ok(res.advice, "Should have emergency advice");
+  }
+
+  // Non-emergencies should return isEmergency: false
+  assert.equal(checkRealtimeEmergency("mild cough since yesterday").isEmergency, false);
+  assert.equal(checkRealtimeEmergency("tooth pain since 2 days").isEmergency, false);
+  assert.equal(checkRealtimeEmergency("").isEmergency, false);
+  assert.equal(checkRealtimeEmergency(null).isEmergency, false);
+});
+
+test("parseFreeTextComplaint extracts demographic entities without requiring manual form filling", () => {
+  // Case 1: Elderly father with conditions
+  const c1 = parseFreeTextComplaint("My 64 year old father Ramesh has severe chest pain and diabetes");
+  assert.equal(c1.who_for, "parent");
+  assert.equal(c1.patient_name, "Ramesh");
+  assert.equal(c1.exact_age, 64);
+  assert.equal(c1.age_band, "older");
+  assert.equal(c1.gender, "male");
+  assert.ok(c1.conditions.includes("diabetes"));
+  assert.equal(c1.region, "chest");
+  assert.equal(c1.kind, "pain");
+
+  // Case 2: Child fever in Hindi/Hinglish
+  const c2 = parseFreeTextComplaint("bachhe ko 102 bukhar hai 5 saal ka beta Aarav");
+  assert.equal(c2.who_for, "child");
+  assert.equal(c2.exact_age, 5);
+  assert.equal(c2.age_band, "child");
+  assert.equal(c2.patient_name, "Aarav");
+  assert.equal(c2.gender, "male");
+  assert.equal(c2.kind, "fever");
+
+  // Case 3: Young adult female with migraine and hypertension
+  const c3 = parseFreeTextComplaint("Sunita Devi 32 female severe headache and high bp");
+  assert.equal(c3.patient_name, "Sunita Devi");
+  assert.equal(c3.exact_age, 32);
+  assert.equal(c3.age_band, "adult");
+  assert.equal(c3.gender, "female");
+  assert.ok(c3.conditions.includes("hypertension"));
+  assert.equal(c3.region, "head");
+  assert.equal(c3.kind, "pain");
+});
+
 

@@ -518,6 +518,42 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       textarea::placeholder { color: #64736c; opacity: 1; }
       textarea:focus { outline: 0; }
       .field-help { margin: 0.65rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+
+      /* Real-Time Emergency Sentinel Banner */
+      .emergency-sentinel-banner { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; padding: 1.15rem 1.25rem; border-radius: var(--radius-lg); background: #fef2f2; border: 2px solid #ef4444; color: #991b1b; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.15); animation: sentinelSlideIn 250ms ease-out; }
+      [data-theme="dark"] .emergency-sentinel-banner { background: #200d0d; border-color: #f87171; color: #fecaca; box-shadow: 0 4px 14px rgba(248, 113, 113, 0.2); }
+      @keyframes sentinelSlideIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+      .emergency-sentinel-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+      .emergency-sentinel-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 0.95rem; }
+      .sentinel-rule { font-family: var(--font-mono, monospace); font-size: 0.85rem; padding: 0.2rem 0.55rem; border-radius: 999px; background: #fee2e2; color: #b91c1c; font-weight: 800; }
+      [data-theme="dark"] .sentinel-rule { background: #3f1212; color: #fca5a5; }
+      .emergency-sentinel-body strong { display: block; font-size: 1.12rem; margin-bottom: 0.35rem; color: #7f1d1d; }
+      [data-theme="dark"] .emergency-sentinel-body strong { color: #fca5a5; }
+      .emergency-sentinel-body p { margin: 0; font-size: 0.98rem; line-height: 1.45; }
+      .emergency-sentinel-actions { display: flex; gap: 0.75rem; margin-top: 0.25rem; }
+      .emergency-call-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.15rem; border-radius: var(--radius-md); background: #dc2626; color: #ffffff !important; font-weight: 800; text-decoration: none; font-size: 0.95rem; transition: background 150ms ease; }
+      .emergency-call-btn:hover { background: #b91c1c; }
+
+      /* AI Smart Profile Pill Card */
+      .smart-intake-card { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; padding: 0.85rem 1.15rem; border-radius: var(--radius-lg); background: var(--paper); border: 1.5px solid var(--line); box-shadow: var(--card-shadow); }
+      .smart-intake-pill { display: flex; align-items: center; flex-wrap: wrap; gap: 0.65rem; }
+      .smart-pill-tag { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 800; color: var(--muted); }
+      .smart-pill-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+      .smart-chip { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.25rem 0.65rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent-dark); font-size: 0.88rem; font-weight: 700; }
+      .btn-drawer-toggle { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.45rem 0.85rem; border-radius: var(--radius-md); background: transparent; border: 1.5px solid var(--line); color: var(--ink); font-size: 0.88rem; font-weight: 750; cursor: pointer; transition: all 150ms ease; }
+      .btn-drawer-toggle:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+
+      /* Progressive Patient Details Drawer */
+      .patient-details-drawer { margin-top: 1.75rem; border: 1.5px solid var(--line); border-radius: var(--radius-lg); background: var(--paper); overflow: hidden; transition: all 250ms ease; }
+      .drawer-summary-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; background: var(--background); cursor: pointer; user-select: none; }
+      .drawer-summary-bar:hover { background: var(--accent-soft); }
+      .drawer-summary-title { display: flex; align-items: center; gap: 0.6rem; font-weight: 750; font-size: 1.05rem; color: var(--ink); }
+      .drawer-summary-badge { font-size: 0.82rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent-dark); font-weight: 700; }
+      .drawer-chevron { transition: transform 200ms ease; width: 1.25rem; height: 1.25rem; fill: currentColor; color: var(--muted); }
+      .patient-details-drawer[data-collapsed="false"] .drawer-chevron { transform: rotate(180deg); }
+      .drawer-body { padding: 1.25rem; border-top: 1px solid var(--line); }
+      .patient-details-drawer[data-collapsed="true"] .drawer-body { display: none; }
+
       .examples { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1rem; }
       .example-chip { min-height: 3rem; padding: 0.55rem 0.85rem; border-radius: 999px; font-size: 1rem; font-weight: 650; }
       .actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.25rem; }
@@ -3861,109 +3897,55 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         <div id="question-content" hidden>
         <p class="eyebrow" data-copy="eyebrow">A simpler way to reach the right OPD counter</p>
         <h1 data-copy="title">What's wrong?</h1>
-        <p class="question-note" data-copy="note">Tell us in your own words. You can speak, type, or point to the body map.</p>
+        <p class="question-note" data-copy="note">Tell us in your own words. You can speak, type, or point to the body map. AI auto-extracts your details so you don't have to fill bureaucratic forms.</p>
         <p class="service-disclosure" id="tele-mode-note" hidden><span class="tag">Observed</span> <span data-copy="teleModeSelected">Online Video Consultation is selected. We will show the secure mock Tele-OPD details after you choose a hospital and slot.</span></p>
 
-        <section class="patient-details" aria-labelledby="patient-details-title">
-          <p class="section-kicker"><span class="tag">Observed</span><span data-copy="patientDetailsKicker">Step 1 · Patient details</span></p>
-          <h2 id="patient-details-title" data-copy="patientDetailsTitle">Tell us who needs the appointment</h2>
-          <p class="booking-panel-note" data-copy="patientDetailsNote">These details stay in this browser for this session. Please do not enter an Aadhaar, ABHA, UHID, OTP or real health record.</p>
-
-          <!-- Zero-Typing AI Prescription OCR Box -->
-          <div class="ocr-upload-card" id="prescription-ocr-card">
-            <div class="ocr-header">
-              <span class="tag">Simulated</span>
-              <h3 class="ocr-title"><svg class="icon-inline" aria-hidden="true"><use href="#icon-camera"></use></svg> Have an old prescription or OPD card?</h3>
-              <p class="ocr-subtitle">Upload or tap a verified sample below. AI automatically fills patient name, age band, conditions &amp; active medications with zero manual typing.</p>
-            </div>
-            <div class="ocr-actions">
-              <label class="ocr-dropzone" for="prescription-file-input">
-                <input type="file" id="prescription-file-input" accept="image/*,.pdf" hidden />
-                <span class="ocr-upload-btn"><svg class="icon-inline" aria-hidden="true"><use href="#icon-folder"></use></svg> Snap / Upload Prescription</span>
-                <span class="ocr-dropzone-hint">Takes 1 second · 100% Client-Side Privacy</span>
-              </label>
-            </div>
-            <div class="ocr-samples">
-              <span class="ocr-dropzone-hint" style="font-weight: 700;">Or 1-tap test with verified sample clinical records:</span>
-              <div class="ocr-chip-group">
-                <button type="button" class="ocr-sample-chip" data-ocr-sample="elderly-cardio">
-                  <span class="demographic-badge senior"><svg class="avatar-mini"><use href="#avatar-senior"></use></svg> 64M Senior</span> <strong>Ramesh Kumar</strong> · Chest tightness · Diabetic / HTN · Metformin 500mg
-                </button>
-                <button type="button" class="ocr-sample-chip" data-ocr-sample="paediatric-fever">
-                  <span class="demographic-badge child"><svg class="avatar-mini"><use href="#avatar-child"></use></svg> 5M Child</span> <strong>Aarav Verma</strong> · High fever 102°F · Paediatric · Paracetamol syrup
-                </button>
-                <button type="button" class="ocr-sample-chip" data-ocr-sample="young-neuro">
-                  <span class="demographic-badge adult"><svg class="avatar-mini"><use href="#avatar-adult"></use></svg> 32F Adult</span> <strong>Sunita Devi</strong> · Severe migraine / photophobia · Sumatriptan
-                </button>
-              </div>
-            </div>
-            <div class="ocr-feedback" id="ocr-feedback-status" hidden></div>
-          </div>
-
-          <section class="field-group" aria-labelledby="booking-label">
-            <span class="field-label" id="booking-label" data-copy="bookingFor">Booking for:</span>
-            <div class="choice-grid" role="group" aria-labelledby="booking-label">
-              <button class="choice-button" type="button" data-booking="myself" aria-pressed="true" data-copy="myself">Myself</button>
-              <button class="choice-button" type="button" data-booking="someone" aria-pressed="false" data-copy="someoneElse">Someone else (Caregiver)</button>
-            </div>
-
-            <div class="subchoices" data-caregiver hidden>
-              <span class="field-label" data-copy="whoLabel">Who is it for?</span>
-              <div class="choice-grid" role="group" aria-label="Who is it for?">
-                <button class="choice-button" type="button" data-who="parent" aria-pressed="false" data-copy="parent">My parent</button>
-                <button class="choice-button" type="button" data-who="child" aria-pressed="false" data-copy="child">My child</button>
-                <button class="choice-button" type="button" data-who="other" aria-pressed="false" data-copy="someoneElseShort">Someone else</button>
-              </div>
-            </div>
-          </section>
-          <div class="form-grid">
-            <div class="form-field"><label for="patient-name"><span class="tag">Observed</span><span data-copy="patientNameLabel">Full Name of Patient</span></label><input id="patient-name" type="text" autocomplete="off" data-copy-placeholder="patientNamePlaceholder" placeholder="e.g. Ramesh Kumar / Priya Sharma" /></div>
-            <div class="form-field"><label for="patient-phone"><span class="tag">Observed</span><span data-copy="patientPhoneLabel">Phone Number (for SMS token reminder)</span></label><input id="patient-phone" type="tel" inputmode="numeric" autocomplete="off" pattern="[6-9][0-9]{9}" maxlength="10" title="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9" data-copy-placeholder="patientPhonePlaceholder" placeholder="e.g. 9876543210 (10-digit mobile)" /><small class="field-note">10-digit Indian mobile number for SMS token updates</small></div>
-          </div>
-          <div class="field-group compact-field-group">
-            <span class="field-label" id="numeric-age-label"><span class="tag">Observed</span><span data-copy="numericAgeLabel">Age band</span></span>
-            <div class="age-grid" role="group" aria-labelledby="numeric-age-label">
-              <button class="age-button" type="button" data-age="baby" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageBabyNumeric">0 to 1 year (Infant / Baby)</span></button>
-              <button class="age-button" type="button" data-age="child" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageChildNumeric">2 to 12 years (Child / Paediatric)</span></button>
-              <button class="age-button" type="button" data-age="adolescent" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageAdolescent">13 to 17 years (Adolescent / Teen)</span></button>
-              <button class="age-button" type="button" data-age="adult" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageAdultNumeric">18 to 44 years (Young Adult)</span></button>
-              <button class="age-button" type="button" data-age="middle" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageMiddle">45 to 59 years (Middle-Aged Adult)</span></button>
-              <button class="age-button" type="button" data-age="older" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageOlderNumeric">60+ years (Senior Citizen)</span></button>
-            </div>
-            <div class="form-field exact-age-field"><label for="exact-age"><span class="tag">Observed</span><span data-copy="exactAgeLabel">Exact Age (optional)</span></label><input id="exact-age" type="number" min="0" max="120" inputmode="numeric" data-copy-placeholder="exactAgePlaceholder" placeholder="e.g. 42" /></div>
-          </div>
-          <div class="field-group compact-field-group">
-            <span class="field-label" id="gender-label"><span class="tag">Observed</span><span data-copy="genderLabel">Gender selection</span></span>
-            <div class="inline-choices" role="group" aria-labelledby="gender-label">
-              <button class="choice-button" type="button" data-gender="male" aria-pressed="false"><span class="tag">Observed</span><span data-copy="genderMale">Male</span></button>
-              <button class="choice-button" type="button" data-gender="female" aria-pressed="false"><span class="tag">Observed</span><span data-copy="genderFemale">Female</span></button>
-              <button class="choice-button" type="button" data-gender="other" aria-pressed="false"><span class="tag">Observed</span><span data-copy="genderOther">Other</span></button>
-            </div>
-          </div>
-          <div class="field-group compact-field-group">
-            <span class="field-label" id="conditions-label"><span class="tag">Observed</span><span data-copy="conditionsLabel">Pre-existing medical conditions</span></span>
-            <div class="condition-grid" role="group" aria-labelledby="conditions-label">
-              <button class="condition-chip" type="button" data-condition="diabetes" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionDiabetes">Diabetes</span></button>
-              <button class="condition-chip" type="button" data-condition="hypertension" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionHypertension">Hypertension (BP)</span></button>
-              <button class="condition-chip" type="button" data-condition="heart" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionHeart">Heart Condition</span></button>
-              <button class="condition-chip" type="button" data-condition="asthma" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionAsthma">Asthma / Respiratory</span></button>
-              <button class="condition-chip" type="button" data-condition="pregnancy" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionPregnancy">Pregnancy</span></button>
-              <button class="condition-chip" type="button" data-condition="none" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionNone">No pre-existing condition</span></button>
-            </div>
-          </div>
-        </section>
-
+        <!-- Symptom-First Intake (Primary Action Area) -->
         <section class="field-group" aria-labelledby="complaint-label">
           <span class="field-label" id="complaint-label" data-copy="complaintLabel">What is bothering you?</span>
           <div class="complaint-box">
             <button class="voice-button" type="button" id="voice-button" aria-label="Speak your complaint" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#icon-mic"></use></svg> <span id="voice-label">Speak</span></button>
-            <textarea id="complaint" rows="3" aria-labelledby="complaint-label" data-copy-placeholder="placeholder" placeholder="seene mein dard, kal raat se"></textarea>
-            <button class="large-button" type="button" id="body-map-button"><span data-copy="bodyMapButton">Point at the body map</span></button>
+            <textarea id="complaint" rows="3" aria-labelledby="complaint-label" data-copy-placeholder="placeholder" placeholder="e.g. My 64 yr old father Ramesh has chest pain since last night, diabetic"></textarea>
+            <button class="large-button" type="button" id="body-map-button"><span data-copy="bodyMapButton">Point at the 3D body map</span></button>
           </div>
+
+          <!-- Real-Time Emergency Sentinel Banner (Immediate reactive warning) -->
+          <div class="emergency-sentinel-banner" id="emergency-sentinel-banner" hidden role="alert" aria-live="assertive">
+            <div class="emergency-sentinel-header">
+              <div class="emergency-sentinel-badge">
+                <svg class="icon-inline" aria-hidden="true" style="width:1.25rem;height:1.25rem;fill:currentColor;"><use href="#icon-alert-triangle"></use></svg>
+                <span>Immediate Emergency Sentinel</span>
+                <span id="sentinel-rule-id" class="sentinel-rule">RF-01</span>
+              </div>
+              <span class="tag alert">Rule Verified</span>
+            </div>
+            <div class="emergency-sentinel-body">
+              <strong id="sentinel-title">Potential Emergency Detected</strong>
+              <p id="sentinel-advice">Chest pain accompanied by breathing difficulty requires immediate Emergency evaluation. Do not wait for routine OPD.</p>
+            </div>
+            <div class="emergency-sentinel-actions">
+              <a href="tel:102" class="emergency-call-btn"><svg class="icon-inline" aria-hidden="true" style="width:1.1rem;height:1.1rem;fill:currentColor;"><use href="#icon-phone"></use></svg> Call 102 / 108 Emergency Ambulance</a>
+            </div>
+          </div>
+
+          <!-- AI Smart Profile Pill (Real-Time Inferred Demographics) -->
+          <div class="smart-intake-card" id="smart-intake-card" hidden>
+            <div class="smart-intake-pill">
+              <span class="smart-pill-tag"><span class="tag">Generated</span> AI Inferred:</span>
+              <div class="smart-pill-chips" id="smart-pill-chips">
+                <!-- Injected dynamically: e.g. 👤 Ramesh (64M) · 🩺 Diabetic · 📍 Chest Pain -->
+              </div>
+            </div>
+            <button type="button" class="btn-drawer-toggle" id="btn-toggle-drawer" aria-expanded="false" aria-controls="patient-details-drawer">
+              <span id="drawer-toggle-text">Review / Edit Details ✎</span>
+            </button>
+          </div>
+
           <p class="field-help" data-copy="inputHelp">Your words stay in this browser for this session.</p>
           <div class="examples" role="group" aria-label="Examples">
-            <button class="example-chip" type="button" data-example="chest pain" data-copy="exampleChest">chest pain</button>
-            <button class="example-chip" type="button" data-example="fever" data-copy="exampleFever">fever</button>
+            <button class="example-chip" type="button" data-example="My 64 yr old father Ramesh has chest pain since last night, diabetic">👨‍🦳 Father Ramesh (64M): Chest pain, Diabetic</button>
+            <button class="example-chip" type="button" data-example="5-year-old child Aarav has 102 high fever, paediatric">🧒 Child Aarav (5M): High fever</button>
+            <button class="example-chip" type="button" data-example="Sunita Devi 32 female severe migraine and high bp">👩 Sunita Devi (32F): Migraine, BP</button>
             <button class="example-chip" type="button" data-example="weakness on one side" data-copy="exampleWeakness">weakness on one side</button>
           </div>
 
@@ -4002,7 +3984,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 <span class="vernacular-lang-pill">ଓଡ଼ିଆ</span> <span class="vernacular-sample-text">ଛାତିରେ ଯନ୍ତ୍ରଣା</span> <small class="vernacular-route-hint">→ Cardiology</small>
               </button>
               <button class="vernacular-chip" type="button" data-vernacular-text="سینے میں درد" data-lang="ur" data-lang-name="Urdu (اردو)">
-                <span class="vernacular-lang-pill">اردو</span> <span class="vernacular-sample-text">سینے میں درد</span> <small class="vernacular-route-hint">→ Cardiology</small>
+                <span class="vernacular-lang-pill">اردو</span> <span class="vernacular-sample-text">سینے में درد</span> <small class="vernacular-route-hint">→ Cardiology</small>
               </button>
               <button class="vernacular-chip red-flag-chip" type="button" data-vernacular-text="ஒரு பக்க பலவீனம்" data-lang="ta" data-lang-name="Tamil (தமிழ்)">
                 <span class="vernacular-lang-pill alert"><svg class="icon-inline" aria-hidden="true"><use href="#icon-alert-triangle"></use></svg> Tamil</span> <span class="vernacular-sample-text">ஒரு பக்க பலவீனம்</span> <small class="vernacular-route-hint">→ Emergency (RF-02)</small>
@@ -4010,6 +3992,105 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               <button class="vernacular-chip red-flag-chip" type="button" data-vernacular-text="শ্বাসকষ্ট" data-lang="bn" data-lang-name="Bengali (বাংলা)">
                 <span class="vernacular-lang-pill alert"><svg class="icon-inline" aria-hidden="true"><use href="#icon-alert-triangle"></use></svg> Bengali</span> <span class="vernacular-sample-text">শ্বাসকষ্ট</span> <small class="vernacular-route-hint">→ Emergency (RF-07)</small>
               </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Progressive Patient & Caregiver Drawer (Optional manual override) -->
+        <section class="patient-details-drawer" id="patient-details-drawer" data-collapsed="true" aria-labelledby="patient-details-title">
+          <div class="drawer-summary-bar" id="drawer-summary-toggle" role="button" tabindex="0" aria-expanded="false" aria-controls="patient-details-body">
+            <div class="drawer-summary-title">
+              <span class="tag">Observed</span>
+              <span id="patient-details-title" data-copy="patientDetailsTitle">Patient &amp; Appointment Details</span>
+              <span class="drawer-summary-badge" id="drawer-summary-badge">Auto-filled by AI / Optional Manual Edit</span>
+            </div>
+            <svg class="drawer-chevron" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+          </div>
+
+          <div class="drawer-body" id="patient-details-body">
+            <p class="booking-panel-note" data-copy="patientDetailsNote">These details stay in this browser for this session. Please do not enter an Aadhaar, ABHA, UHID, OTP or real health record.</p>
+
+            <!-- Zero-Typing AI Prescription OCR Box -->
+            <div class="ocr-upload-card" id="prescription-ocr-card">
+              <div class="ocr-header">
+                <span class="tag">Simulated</span>
+                <h3 class="ocr-title"><svg class="icon-inline" aria-hidden="true"><use href="#icon-camera"></use></svg> Have an old prescription or OPD card?</h3>
+                <p class="ocr-subtitle">Upload or tap a verified sample below. AI automatically fills patient name, age band, conditions &amp; active medications with zero manual typing.</p>
+              </div>
+              <div class="ocr-actions">
+                <label class="ocr-dropzone" for="prescription-file-input">
+                  <input type="file" id="prescription-file-input" accept="image/*,.pdf" hidden />
+                  <span class="ocr-upload-btn"><svg class="icon-inline" aria-hidden="true"><use href="#icon-folder"></use></svg> Snap / Upload Prescription</span>
+                  <span class="ocr-dropzone-hint">Takes 1 second · 100% Client-Side Privacy</span>
+                </label>
+              </div>
+              <div class="ocr-samples">
+                <span class="ocr-dropzone-hint" style="font-weight: 700;">Or 1-tap test with verified sample clinical records:</span>
+                <div class="ocr-chip-group">
+                  <button type="button" class="ocr-sample-chip" data-ocr-sample="elderly-cardio">
+                    <span class="demographic-badge senior"><svg class="avatar-mini"><use href="#avatar-senior"></use></svg> 64M Senior</span> <strong>Ramesh Kumar</strong> · Chest tightness · Diabetic / HTN · Metformin 500mg
+                  </button>
+                  <button type="button" class="ocr-sample-chip" data-ocr-sample="paediatric-fever">
+                    <span class="demographic-badge child"><svg class="avatar-mini"><use href="#avatar-child"></use></svg> 5M Child</span> <strong>Aarav Verma</strong> · High fever 102°F · Paediatric · Paracetamol syrup
+                  </button>
+                  <button type="button" class="ocr-sample-chip" data-ocr-sample="young-neuro">
+                    <span class="demographic-badge adult"><svg class="avatar-mini"><use href="#avatar-adult"></use></svg> 32F Adult</span> <strong>Sunita Devi</strong> · Severe migraine / photophobia · Sumatriptan
+                  </button>
+                </div>
+              </div>
+              <div class="ocr-feedback" id="ocr-feedback-status" hidden></div>
+            </div>
+
+            <section class="field-group" aria-labelledby="booking-label">
+              <span class="field-label" id="booking-label" data-copy="bookingFor">Booking for:</span>
+              <div class="choice-grid" role="group" aria-labelledby="booking-label">
+                <button class="choice-button" type="button" data-booking="myself" aria-pressed="true" data-copy="myself">Myself</button>
+                <button class="choice-button" type="button" data-booking="someone" aria-pressed="false" data-copy="someoneElse">Someone else (Caregiver)</button>
+              </div>
+
+              <div class="subchoices" data-caregiver hidden>
+                <span class="field-label" data-copy="whoLabel">Who is it for?</span>
+                <div class="choice-grid" role="group" aria-label="Who is it for?">
+                  <button class="choice-button" type="button" data-who="parent" aria-pressed="false" data-copy="parent">My parent</button>
+                  <button class="choice-button" type="button" data-who="child" aria-pressed="false" data-copy="child">My child</button>
+                  <button class="choice-button" type="button" data-who="other" aria-pressed="false" data-copy="someoneElseShort">Someone else</button>
+                </div>
+              </div>
+            </section>
+            <div class="form-grid">
+              <div class="form-field"><label for="patient-name"><span class="tag">Observed</span><span data-copy="patientNameLabel">Full Name of Patient</span></label><input id="patient-name" type="text" autocomplete="off" data-copy-placeholder="patientNamePlaceholder" placeholder="e.g. Ramesh Kumar / Priya Sharma" /></div>
+              <div class="form-field"><label for="patient-phone"><span class="tag">Observed</span><span data-copy="patientPhoneLabel">Phone Number (for SMS token reminder)</span></label><input id="patient-phone" type="tel" inputmode="numeric" autocomplete="off" pattern="[6-9][0-9]{9}" maxlength="10" title="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9" data-copy-placeholder="patientPhonePlaceholder" placeholder="e.g. 9876543210 (10-digit mobile)" /><small class="field-note">10-digit Indian mobile number for SMS token updates</small></div>
+            </div>
+            <div class="field-group compact-field-group">
+              <span class="field-label" id="numeric-age-label"><span class="tag">Observed</span><span data-copy="numericAgeLabel">Age band</span></span>
+              <div class="age-grid" role="group" aria-labelledby="numeric-age-label">
+                <button class="age-button" type="button" data-age="baby" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageBabyNumeric">0 to 1 year (Infant / Baby)</span></button>
+                <button class="age-button" type="button" data-age="child" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageChildNumeric">2 to 12 years (Child / Paediatric)</span></button>
+                <button class="age-button" type="button" data-age="adolescent" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageAdolescent">13 to 17 years (Adolescent / Teen)</span></button>
+                <button class="age-button" type="button" data-age="adult" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageAdultNumeric">18 to 44 years (Young Adult)</span></button>
+                <button class="age-button" type="button" data-age="middle" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageMiddle">45 to 59 years (Middle-Aged Adult)</span></button>
+                <button class="age-button" type="button" data-age="older" aria-pressed="false"><span class="tag">Observed</span><span data-copy="ageOlderNumeric">60+ years (Senior Citizen)</span></button>
+              </div>
+              <div class="form-field exact-age-field"><label for="exact-age"><span class="tag">Observed</span><span data-copy="exactAgeLabel">Exact Age (optional)</span></label><input id="exact-age" type="number" min="0" max="120" inputmode="numeric" data-copy-placeholder="exactAgePlaceholder" placeholder="e.g. 42" /></div>
+            </div>
+            <div class="field-group compact-field-group">
+              <span class="field-label" id="gender-label"><span class="tag">Observed</span><span data-copy="genderLabel">Gender selection</span></span>
+              <div class="inline-choices" role="group" aria-labelledby="gender-label">
+                <button class="choice-button" type="button" data-gender="male" aria-pressed="false"><span class="tag">Observed</span><span data-copy="genderMale">Male</span></button>
+                <button class="choice-button" type="button" data-gender="female" aria-pressed="false"><span class="tag">Observed</span><span data-copy="genderFemale">Female</span></button>
+                <button class="choice-button" type="button" data-gender="other" aria-pressed="false"><span class="tag">Observed</span><span data-copy="genderOther">Other</span></button>
+              </div>
+            </div>
+            <div class="field-group compact-field-group">
+              <span class="field-label" id="conditions-label"><span class="tag">Observed</span><span data-copy="conditionsLabel">Pre-existing medical conditions</span></span>
+              <div class="condition-grid" role="group" aria-labelledby="conditions-label">
+                <button class="condition-chip" type="button" data-condition="diabetes" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionDiabetes">Diabetes</span></button>
+                <button class="condition-chip" type="button" data-condition="hypertension" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionHypertension">Hypertension (BP)</span></button>
+                <button class="condition-chip" type="button" data-condition="heart" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionHeart">Heart Condition</span></button>
+                <button class="condition-chip" type="button" data-condition="asthma" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionAsthma">Asthma / Respiratory</span></button>
+                <button class="condition-chip" type="button" data-condition="pregnancy" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionPregnancy">Pregnancy</span></button>
+                <button class="condition-chip" type="button" data-condition="none" aria-pressed="false"><span class="tag">Observed</span><span data-copy="conditionNone">No pre-existing condition</span></button>
+              </div>
             </div>
           </div>
         </section>
@@ -4836,7 +4917,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
     <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
     <script src="./vernacular-pack.js"></script>
     <script type="module">
-      import { parseFreeTextComplaint, routeComplaint } from "./routing.js";
+      import { parseFreeTextComplaint, routeComplaint, checkRealtimeEmergency } from "./routing.js";
       import { LOCALITIES, HOSPITAL_FACT_CHECKED_ON, hospitalsForDepartment, PAN_INDIA_HOSPITALS, INDIAN_STATES, COUNTERFACTUAL_METRICS, panIndiaHospitalsForDepartment, hospitalsByState } from "./hospital-data.js";
       import { createBodyMap3D, BILATERAL_REGIONS, REGION_LABELS } from "./body-map-3d.js";
 
@@ -5441,8 +5522,159 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         document.querySelectorAll("[data-condition]").forEach((item) => item.setAttribute("aria-pressed", String(state.conditions.includes(item.dataset.condition))));
       }));
 
+      function handleComplaintInput(rawText) {
+        const text = String(rawText || "").trim();
+        const emergencyBanner = document.querySelector("#emergency-sentinel-banner");
+        const smartCard = document.querySelector("#smart-intake-card");
+        const smartChips = document.querySelector("#smart-pill-chips");
+
+        if (!text) {
+          if (emergencyBanner) emergencyBanner.hidden = true;
+          if (smartCard) smartCard.hidden = true;
+          return;
+        }
+
+        // 1. Reactive Emergency Sentinel check
+        const emCheck = checkRealtimeEmergency(text, state.language);
+        if (emergencyBanner) {
+          if (emCheck.isEmergency) {
+            emergencyBanner.hidden = false;
+            const ruleEl = document.querySelector("#sentinel-rule-id");
+            const titleEl = document.querySelector("#sentinel-title");
+            const adviceEl = document.querySelector("#sentinel-advice");
+            if (ruleEl) ruleEl.textContent = emCheck.ruleId;
+            if (titleEl) titleEl.textContent = emCheck.title?.[state.language] || emCheck.title?.en || emCheck.conditionName;
+            if (adviceEl) adviceEl.textContent = emCheck.advice?.[state.language] || emCheck.advice?.en;
+          } else {
+            emergencyBanner.hidden = true;
+          }
+        }
+
+        // 2. Multi-Entity AI Demographic & Clinical Extraction
+        const extracted = parseFreeTextComplaint(text, state.language);
+
+        // Auto-populate patient name
+        if (extracted.patient_name) {
+          state.fullName = extracted.patient_name;
+          const nameInput = document.querySelector("#patient-name");
+          if (nameInput && nameInput.value !== extracted.patient_name) {
+            nameInput.value = extracted.patient_name;
+          }
+        }
+
+        // Auto-populate exact age & age band
+        if (extracted.exact_age) {
+          state.exactAge = extracted.exact_age;
+          const exactInput = document.querySelector("#exact-age");
+          if (exactInput && exactInput.value !== String(extracted.exact_age)) {
+            exactInput.value = extracted.exact_age;
+          }
+          syncAgeFromExactValue(extracted.exact_age);
+        } else if (extracted.age_band) {
+          state.age = extracted.age_band;
+          renderAgeButtons();
+        }
+
+        // Auto-populate gender
+        if (extracted.gender) {
+          state.gender = extracted.gender;
+          document.querySelectorAll("[data-gender]").forEach((btn) => {
+            btn.setAttribute("aria-pressed", String(btn.dataset.gender === state.gender));
+          });
+        }
+
+        // Auto-populate conditions
+        if (extracted.conditions && extracted.conditions.length > 0) {
+          state.conditions = extracted.conditions;
+          document.querySelectorAll("[data-condition]").forEach((btn) => {
+            btn.setAttribute("aria-pressed", String(state.conditions.includes(btn.dataset.condition)));
+          });
+        }
+
+        // Auto-populate caregiver / who-for
+        if (extracted.who_for) {
+          if (extracted.who_for === "self") {
+            state.booking = "myself";
+            state.who = null;
+          } else {
+            state.booking = "someone";
+            state.who = extracted.who_for;
+          }
+          document.querySelectorAll("[data-booking]").forEach((item) => {
+            item.setAttribute("aria-pressed", String(item.dataset.booking === state.booking));
+          });
+          const caregiverBox = document.querySelector("[data-caregiver]");
+          if (caregiverBox) caregiverBox.hidden = state.booking !== "someone";
+          document.querySelectorAll("[data-who]").forEach((item) => {
+            item.setAttribute("aria-pressed", String(item.dataset.who === state.who));
+          });
+        }
+
+        // 3. Render AI Smart Profile Pill
+        if (smartCard && smartChips) {
+          const chips = [];
+          const displayName = state.fullName || (state.booking === "myself" ? "Myself" : (state.who ? `Caregiver (${state.who})` : "Patient"));
+          const genderChar = state.gender === "male" ? "M" : state.gender === "female" ? "F" : "";
+          const ageInfo = state.exactAge ? `${state.exactAge}${genderChar}` : (state.age || "");
+          chips.push(`<span class="smart-chip">👤 ${displayName}${ageInfo ? " · " + ageInfo : ""}</span>`);
+
+          if (state.conditions && state.conditions.length > 0 && !state.conditions.includes("none")) {
+            chips.push(`<span class="smart-chip">🩺 ${state.conditions.join(", ")}</span>`);
+          }
+
+          if (extracted.region) {
+            const sideSuffix = extracted.side && extracted.side !== "both" ? ` (${extracted.side})` : "";
+            chips.push(`<span class="smart-chip">📍 ${extracted.region}${sideSuffix}</span>`);
+          }
+
+          smartChips.innerHTML = chips.join("");
+          smartCard.hidden = false;
+        }
+      }
+
+      function setupPatientDetailsDrawer() {
+        const drawer = document.querySelector("#patient-details-drawer");
+        const toggleBtn = document.querySelector("#btn-toggle-drawer");
+        const summaryBar = document.querySelector("#drawer-summary-toggle");
+
+        function toggleDrawer() {
+          if (!drawer) return;
+          const isCollapsed = drawer.dataset.collapsed === "true";
+          drawer.dataset.collapsed = String(!isCollapsed);
+          if (toggleBtn) {
+            toggleBtn.setAttribute("aria-expanded", String(isCollapsed));
+            const txt = toggleBtn.querySelector("#drawer-toggle-text") || toggleBtn;
+            txt.textContent = isCollapsed ? "Hide Details ▲" : "Review / Edit Details ✎";
+          }
+          if (summaryBar) {
+            summaryBar.setAttribute("aria-expanded", String(isCollapsed));
+          }
+        }
+
+        if (toggleBtn) toggleBtn.addEventListener("click", toggleDrawer);
+        if (summaryBar) {
+          summaryBar.addEventListener("click", toggleDrawer);
+          summaryBar.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              toggleDrawer();
+            }
+          });
+        }
+      }
+      setupPatientDetailsDrawer();
+
+      complaint.addEventListener("input", (e) => handleComplaintInput(e.target.value));
+
       document.querySelectorAll("[data-example]").forEach((button) => {
-        button.addEventListener("click", () => { complaint.value = button.dataset.example; complaint.focus(); sessionNote.classList.remove("is-visible"); status.dataset.persistent = ""; status.textContent = ""; });
+        button.addEventListener("click", () => {
+          complaint.value = button.dataset.example;
+          complaint.focus();
+          sessionNote.classList.remove("is-visible");
+          status.dataset.persistent = "";
+          status.textContent = "";
+          handleComplaintInput(complaint.value);
+        });
       });
 
       document.querySelector("#hero-triage-action").addEventListener("click", () => switchView("triage"));
@@ -6741,6 +6973,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           if (speechSilenceTimer) window.clearTimeout(speechSilenceTimer);
           complaint.value = event.results[0][0].transcript;
           showStatus(`Captured in ${activeLangLabel}: "${complaint.value}"`);
+          handleComplaintInput(complaint.value);
         };
         recognizer.onerror = () => { showStatus(text("voiceUnsupported"), true); resetVoiceButton(); };
         recognizer.onend = () => { if (activeRecognition === recognizer) activeRecognition = null; if (speechSilenceTimer) window.clearTimeout(speechSilenceTimer); speechSilenceTimer = null; resetVoiceButton(); };
@@ -6752,7 +6985,13 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
       document.querySelector("#continue-button").addEventListener("click", () => {
         const missingCaregiver = state.booking === "someone" && (!state.who || !state.age);
-        if (missingCaregiver) { showStatus(text("someoneHint"), true); document.querySelector("[data-caregiver]").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+        if (missingCaregiver) {
+          showStatus(text("someoneHint"), true);
+          const drawer = document.querySelector("#patient-details-drawer");
+          if (drawer) drawer.dataset.collapsed = "false";
+          document.querySelector("[data-caregiver]").scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
         if (!complaint.value.trim()) { showStatus(text("continueHint"), true); complaint.focus(); return; }
         sessionNote.classList.remove("is-visible");
         showReadback(makeComplaint(false));
@@ -7398,6 +7637,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             if (complaint) {
               complaint.value = profile.complaint;
               updateCharCounter();
+              handleComplaintInput(complaint.value);
             }
 
             feedbackEl.innerHTML = `<span class="scorecard-tag tag-positive">Verified</span> <strong>Prescription Digitized Successfully!</strong> Auto-filled Patient Name (${profile.name}), Age (${profile.age}), Conditions &amp; Active Meds (${profile.meds}). Zero manual typing needed.`;
@@ -7727,6 +7967,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               renderLanguage();
             }
             showStatus(`Loaded ${langName}: "${textToFill}". Interface updated.`);
+            handleComplaintInput(complaint.value);
           });
         });
 
