@@ -202,16 +202,19 @@
         font-size: 0.74rem;
         line-height: 1.15;
         white-space: nowrap;
+        max-width: 260px;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       
       /* Desktop Navigation Bar Tiles */
       .site-nav {
         display: none;
         align-items: center;
-        gap: 0.25rem;
+        gap: 0.35rem;
         margin: 0 auto;
-        flex-shrink: 1;
-        min-width: 0;
+        flex-shrink: 0;
+        white-space: nowrap;
       }
       .site-nav .nav-tile {
         position: relative;
@@ -256,6 +259,7 @@
         align-items: center;
         gap: 0.35rem;
         flex-shrink: 0;
+        flex-wrap: nowrap;
       }
       .language-bar-group {
         display: inline-flex;
@@ -1119,7 +1123,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .support-label { font-weight: 800; color: var(--ink); }
 
       /* --- Desktop & Mobile Responsive Optimization --- */
-      @media (min-width: 1200px) {
+      @media (min-width: 1280px) {
         .site-nav { display: inline-flex; }
         .tagline { display: block; }
         .landing-hero { grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr); }
@@ -1128,9 +1132,8 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         .triage-workspace { grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.65fr); align-items: start; }
         .workspace-side { position: sticky; top: 5rem; }
       }
-      @media (max-width: 1199px) and (min-width: 960px) {
+      @media (max-width: 1279px) and (min-width: 1040px) {
         .site-nav { display: inline-flex; }
-        .site-nav .nav-tile:nth-child(n+5) { display: none; } /* Show essential 4 links */
         .tagline { display: none; }
         .sidebar-toggle-label { display: inline; }
         .landing-hero { grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.9fr); }
@@ -1139,10 +1142,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         .triage-workspace { grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.65fr); align-items: start; }
         .workspace-side { position: sticky; top: 5rem; }
       }
-      @media (max-width: 959px) and (min-width: 641px) {
+      @media (max-width: 1039px) and (min-width: 641px) {
         .site-nav { display: none; }
         .tagline { display: none; }
-        .sidebar-toggle-label { display: none; }
+        .sidebar-toggle-label { display: inline; }
         .a11y-trigger-label { display: none; }
         .landing-hero { grid-template-columns: 1fr; }
         .journey-grid, .network-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1634,8 +1637,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           <a href="#screen-triage" data-view-link="triage" data-copy="triageNav" class="nav-tile">OPD Triage</a>
           <a href="#screen-profile" data-view-link="profile" data-copy="profileNav" class="nav-tile">My Profile</a>
           <a href="#screen-doctor" data-view-link="doctor" data-copy="doctorNav" class="nav-tile">Doctor Portal</a>
-          <a href="#screen-lab-tests" data-view-link="lab-tests" data-copy="labNav" class="nav-tile">Lab Tests</a>
-          <a href="#screen-blood-bank" data-view-link="blood-bank" data-copy="bloodNav" class="nav-tile">Blood Bank</a>
         </nav>
 
         <div class="nav-actions">
@@ -3350,12 +3351,12 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         faqSafetyQ: "क्या राहत मेडिकल सलाह या बीमारी की पहचान करता है?", faqSafetyA: "नहीं। राहत केवल प्रशासनिक ट्रायेज है। यह आपकी बात को व्यवस्थित कर ओपीडी काउंटर तक पहुँचाता है; बीमारी की पहचान नहीं करता और यह नहीं कहता कि आप ठीक हैं।", faqRedFlagQ: "नियम से चलने वाले रेड फ्लैग कैसे काम करते हैं?", faqRedFlagA: "रेड फ्लैग एआई से अलग कोड के नियम हैं। एक निशान भी अभी इमरजेंसी भेजने के लिए काफ़ी है और मॉडल फ्लैग हटा नहीं सकता।", faqAccessQ: "क्या बिना पढ़े कोई इस प्लेटफ़ॉर्म का इस्तेमाल कर सकता है?", faqAccessA: "हाँ। परेशानी बताने के तीन बराबर रास्ते हैं: बोलना, लिखना या नाम वाले 3D/2D शरीर के नक्शे पर टैप करना।", faqPrivacyQ: "क्या मेरी निजी स्वास्थ्य जानकारी सर्वर पर सेव होती है?", faqPrivacyA: "नहीं। इस प्रोटोटाइप में परेशानी इसी ब्राउज़र में सत्र तक रहती है और सर्वर पर सेव नहीं होती। शरीर के नक्शे वाला रास्ता एआई सेवा को कुछ नहीं भेजता।", faqWaitQ: "ईमानदार इंतज़ार का समय कैसे निकाला जाता है?", faqWaitA: "यह नकली समय ओपीडी की पुरानी गति और सुबह के डॉक्टर राउंड से बनाया गया है: स्लॉट शुरू होने का समय और अनुमानित इंतज़ार। यह लाइव कतार नहीं है।", faqOrsQ: "राहत सरकारी ORS पोर्टल से कैसे अलग है?", faqOrsA: "ORS पहले अस्पताल और विभाग चुनने को कहता है। राहत पहले आपकी बात को व्यवस्थित करता है और फिर नकली कतार दिखाता है। यह ORS से जुड़ा नहीं है।", faqAbdmQ: "राहत असली सरकारी सिस्टम से कैसे जुड़ सकता है?", faqAbdmA: "यह प्रोटोटाइप सरकारी सिस्टम से नहीं जुड़ा है। भविष्य का प्रोडक्शन गेटवे साफ़ सहमति, सुरक्षा जाँच और सार्वजनिक सेवा साझेदारी के साथ ABDM और e-Hospital HMIS API से जुड़ सकता है।"
       });
       Object.assign(copy.en, {
-        homeNav: "Home", triageNav: "3D Triage Studio", honestyNav: "Honesty", hospitalsLink: "Delhi Hospitals",
+        homeNav: "Home", triageNav: "OPD Triage", honestyNav: "Honesty", hospitalsLink: "Delhi Hospitals",
         comparisonKicker: "A clearer front door", hospitalsKicker: "Verified public directory", faqKicker: "Plain-language answers",
         ctaKicker: "Your next step stays yours", ctaTitle: "Ready to find the right OPD counter?", ctaNote: "Start with a sentence, your voice, or a point on the body map. You will see and confirm the read-back before any routing happens.",
       });
       Object.assign(copy.hi, {
-        homeNav: "होम", triageNav: "3D ट्रायेज स्टूडियो", honestyNav: "ईमानदारी", hospitalsLink: "दिल्ली अस्पताल",
+        homeNav: "होम", triageNav: "ओपीडी ट्रायेज", honestyNav: "ईमानदारी", hospitalsLink: "दिल्ली अस्पताल",
         comparisonKicker: "एक साफ़ शुरुआत", hospitalsKicker: "सत्यापित सार्वजनिक सूची", faqKicker: "सीधे सवालों के जवाब",
         ctaKicker: "अगला कदम आपका है", ctaTitle: "सही ओपीडी काउंटर ढूँढने के लिए तैयार?", ctaNote: "एक वाक्य, अपनी आवाज़ या शरीर के नक्शे पर एक जगह से शुरू करें। किसी भी रास्ते से पहले आप दोबारा पढ़ा गया विवरण देखकर पुष्टि करेंगे।",
       });
