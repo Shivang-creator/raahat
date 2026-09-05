@@ -1496,6 +1496,327 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         text-transform: uppercase;
         letter-spacing: 0.04em;
       }
+      
+      /* Stage Silhouette Bar */
+      .stage-silhouette-bar {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.85rem;
+        display: inline-flex;
+        background: rgba(255, 255, 255, 0.90);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 9999px;
+        padding: 0.2rem;
+        gap: 0.2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        z-index: 5;
+      }
+      [data-theme="dark"] .stage-silhouette-bar {
+        background: rgba(18, 30, 24, 0.90);
+        border-color: rgba(255, 255, 255, 0.12);
+      }
+      .silhouette-pill {
+        border: none;
+        background: transparent;
+        color: var(--muted);
+        font-size: 0.75rem;
+        font-weight: 750;
+        padding: 0.28rem 0.65rem;
+        border-radius: 9999px;
+        cursor: pointer;
+        transition: all 180ms ease;
+      }
+      .silhouette-pill:hover {
+        color: var(--ink);
+      }
+      .silhouette-pill.is-active {
+        background: var(--accent);
+        color: #ffffff;
+        font-weight: 850;
+        box-shadow: 0 2px 8px rgba(22, 101, 52, 0.25);
+      }
+      [data-theme="dark"] .silhouette-pill.is-active {
+        background: #2dd4bf;
+        color: #0c1611;
+      }
+
+      /* Somatic Clinical Lens Panel */
+      .somatic-lens-panel {
+        margin: 1.25rem 0;
+        padding: 1.25rem;
+        border-radius: 1.25rem;
+        background: var(--surface-elevated);
+        border: 1.5px solid var(--line);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        animation: fadeIn 220ms ease;
+      }
+      .somatic-header {
+        margin-bottom: 0.85rem;
+      }
+      .somatic-header h3 {
+        margin: 0.35rem 0 0.2rem;
+        font-size: 1.15rem;
+        font-weight: 850;
+        color: var(--ink);
+      }
+      .somatic-subtitle {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .somatic-sensation-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        margin-bottom: 1.25rem;
+      }
+      .sensation-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.48rem 0.85rem;
+        border-radius: 9999px;
+        background: var(--paper);
+        border: 1.5px solid var(--line);
+        color: var(--ink);
+        font-size: 0.84rem;
+        font-weight: 750;
+        cursor: pointer;
+        transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+        user-select: none;
+      }
+      .sensation-chip small {
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 0.76rem;
+      }
+      .sensation-chip:hover {
+        background: #ffffff;
+        border-color: var(--accent);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(22, 101, 52, 0.12);
+      }
+      .sensation-chip[aria-pressed="true"] {
+        background: var(--accent);
+        border-color: var(--accent-dark);
+        color: #ffffff;
+        font-weight: 850;
+        box-shadow: 0 3px 10px rgba(22, 101, 52, 0.28);
+      }
+      .sensation-chip[aria-pressed="true"] small {
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .sensation-chip[aria-pressed="true"] .chip-dot {
+        background: #ffffff;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+      }
+      
+      .somatic-intensity-box {
+        padding: 1.1rem 1.2rem;
+        border-radius: 1rem;
+        background: var(--paper);
+        border: 1.5px solid var(--line);
+      }
+      .intensity-label-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 0.85rem;
+      }
+      .intensity-title {
+        font-size: 0.92rem;
+        font-weight: 850;
+        color: var(--ink);
+      }
+      .intensity-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.25rem 0.65rem;
+        border-radius: 9999px;
+        font-size: 0.78rem;
+        font-weight: 850;
+        transition: all 200ms ease;
+      }
+      .intensity-badge[data-level="1"] { background: rgba(16, 185, 129, 0.15); color: #047857; border: 1px solid rgba(16, 185, 129, 0.3); }
+      .intensity-badge[data-level="2"] { background: rgba(14, 165, 233, 0.15); color: #0369a1; border: 1px solid rgba(14, 165, 233, 0.3); }
+      .intensity-badge[data-level="3"] { background: rgba(245, 158, 11, 0.15); color: #b45309; border: 1px solid rgba(245, 158, 11, 0.3); }
+      .intensity-badge[data-level="4"] { background: rgba(249, 115, 22, 0.15); color: #c2410c; border: 1px solid rgba(249, 115, 22, 0.3); }
+      .intensity-badge[data-level="5"] { background: rgba(239, 68, 68, 0.15); color: #b91c1c; border: 1px solid rgba(239, 68, 68, 0.3); }
+      
+      .intensity-slider-wrap {
+        position: relative;
+        margin: 0.5rem 0 0.85rem;
+      }
+      .intensity-slider-wrap input[type="range"] {
+        width: 100%;
+        height: 0.55rem;
+        border-radius: 9999px;
+        background: linear-gradient(to right, #10b981 0%, #0ea5e9 25%, #f59e0b 50%, #f97316 75%, #ef4444 100%);
+        outline: none;
+        cursor: pointer;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      .intensity-slider-wrap input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 2.5px solid var(--accent);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: transform 140ms ease;
+      }
+      .intensity-slider-wrap input[type="range"]::-webkit-slider-thumb:hover {
+        transform: scale(1.15);
+      }
+      .intensity-ticks {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.4rem;
+        padding: 0 0.25rem;
+      }
+      .intensity-ticks .tick {
+        font-size: 0.8rem;
+        font-weight: 800;
+        color: var(--muted);
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+      }
+      .intensity-ticks .tick small {
+        font-size: 0.7rem;
+        font-weight: 600;
+      }
+      .intensity-ticks .tick.is-active {
+        color: var(--ink);
+        font-weight: 900;
+      }
+      .intensity-feedback {
+        margin: 0.45rem 0 0;
+        font-size: 0.84rem;
+        color: var(--ink-secondary);
+        line-height: 1.35;
+      }
+
+      /* Doctor Handover Card */
+      .doctor-handover-card {
+        margin: 1.25rem 0;
+        padding: 1.2rem;
+        border-radius: 1.15rem;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1.5px solid rgba(22, 101, 52, 0.25);
+        box-shadow: 0 4px 16px rgba(22, 101, 52, 0.06);
+      }
+      [data-theme="dark"] .doctor-handover-card {
+        background: rgba(18, 30, 24, 0.75);
+        border-color: rgba(45, 212, 191, 0.25);
+      }
+      .handover-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-bottom: 0.45rem;
+      }
+      .handover-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.95rem;
+        font-weight: 850;
+        color: var(--accent-dark);
+      }
+      [data-theme="dark"] .handover-badge {
+        color: #2dd4bf;
+      }
+      .handover-note {
+        margin: 0 0 0.85rem;
+        font-size: 0.84rem;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+      .handover-somatic-summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+        gap: 0.65rem;
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+        border-radius: 0.85rem;
+        background: var(--paper);
+        border: 1px solid var(--line);
+      }
+      .handover-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+      .handover-label {
+        font-size: 0.74rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        font-weight: 750;
+      }
+      .handover-item strong {
+        font-size: 0.88rem;
+        color: var(--ink);
+      }
+      .handover-intensity-pill {
+        display: inline-block;
+        padding: 0.15rem 0.5rem;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        font-weight: 800;
+        width: fit-content;
+      }
+      .handover-speech-starter {
+        position: relative;
+        padding: 0.95rem 1rem 0.95rem 2.25rem;
+        border-radius: 0.85rem;
+        background: rgba(245, 158, 11, 0.08);
+        border-left: 3.5px solid var(--marigold);
+      }
+      .speech-quote-icon {
+        position: absolute;
+        left: 0.75rem;
+        top: 0.5rem;
+        font-size: 1.4rem;
+        color: var(--marigold);
+        line-height: 1;
+      }
+      .speech-prompt-hi {
+        margin: 0 0 0.35rem;
+        font-size: 0.95rem;
+        font-weight: 800;
+        color: var(--ink);
+      }
+      .speech-prompt-en {
+        margin: 0;
+        font-size: 0.86rem;
+        font-style: italic;
+        color: var(--ink-secondary);
+      }
+      .btn-whatsapp-share {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        background: #25d366 !important;
+        color: #ffffff !important;
+        font-weight: 800;
+        border: none !important;
+      }
+      .btn-whatsapp-share:hover {
+        background: #1ebd5a !important;
+        color: #ffffff !important;
+      }
+
       .view-controls { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.55rem; margin-top: 0.8rem; }
       .view-control { min-height: 3.5rem; padding: 0.5rem 0.4rem; border: 2px solid var(--line); border-radius: 0.8rem; background: var(--paper); color: var(--ink); font-size: 0.95rem; font-weight: 800; }
       .view-control:hover { border-color: var(--marigold); }
@@ -3923,6 +4244,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               <div class="qr-wrap"><svg class="barcode-code" viewBox="0 0 64 64" role="img" aria-label="Simulated security barcode"><defs><pattern id="security-grid" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 0h3v3H0zM5 5h3v3H5z" fill="currentColor"/><path d="M5 0h1v3H5zM0 5h1v3H0z" fill="currentColor" opacity=".45"/></pattern></defs><rect width="64" height="64" fill="url(#security-grid)"/><path d="M8 8h16v16H8zM12 12h8v8h-8zM40 8h16v16H40zM44 12h8v8h-8zM8 40h16v16H8zM12 44h8v8h-8zM38 38h5v5h-5zM48 38h8v8h-8zM38 49h5v7h-5zM48 49h8v7h-8z" fill="currentColor"/></svg><p class="qr-copy"><strong><span class="tag">Simulated</span><span data-copy="qrTitle">Sample security pattern</span></strong><span data-copy="qrNote">This pattern is decorative. It does not open a real appointment.</span></p></div>
             </article>
             <div class="slip-actions">
+              <button class="large-button primary btn-whatsapp-share" type="button" id="share-whatsapp"><svg class="icon-inline" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.41 1.56 1.56 2.41 3.62 2.41 5.83 0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.39-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.63c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06s-1.05-.39-2-1.23c-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1 1.6-.1 1.47-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.11-.22-.17-.47-.3z"/></svg> Share via WhatsApp</button>
               <button class="large-button primary" type="button" id="print-slip" data-copy="printSlip">Print slip</button>
               <button class="large-button" type="button" id="download-slip" data-copy="downloadSlip">Download slip</button>
             </div>
@@ -4617,11 +4939,14 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         state.kind = null;
         state.duration = null;
         state.severity = null;
-        document.querySelectorAll("[data-kind], [data-duration], [data-severity]").forEach((item) => item.setAttribute("aria-pressed", "false"));
+        state.sensations = [];
+        document.querySelectorAll("[data-kind], [data-duration], [data-severity], [data-sensation]").forEach((item) => item.setAttribute("aria-pressed", "false"));
         renderKindSelection();
         kindStatus.textContent = "";
         followups.hidden = true;
         mapReady.classList.remove("is-visible");
+        const somaticPanel = document.querySelector("#somatic-lens-panel");
+        if (somaticPanel && !state.region) somaticPanel.hidden = true;
       }
 
       function showKindQuestion(hideLocationPicker = false) {
@@ -4865,6 +5190,12 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           renderWorkspace();
           mapStatus.textContent = "";
           mapStatus.removeAttribute("role");
+          
+          const somaticPanel = document.querySelector("#somatic-lens-panel");
+          if (somaticPanel) {
+            somaticPanel.hidden = false;
+            somaticPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
           if (focusKind) showKindQuestion();
       }
 
@@ -4905,6 +5236,84 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           document.querySelectorAll("[data-duration]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
         });
       });
+
+      
+      // --- Somatic Clinical Lens Interaction (Inspired by EmoLens) ---
+      document.querySelectorAll("[data-silhouette]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const silhouette = btn.dataset.silhouette;
+          state.silhouette = silhouette;
+          document.querySelectorAll("[data-silhouette]").forEach((b) => b.classList.toggle("is-active", b === btn));
+          bodyMap3d?.setSilhouette?.(silhouette);
+        });
+      });
+
+      document.querySelectorAll("[data-sensation]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const isPressed = btn.getAttribute("aria-pressed") === "true";
+          btn.setAttribute("aria-pressed", String(!isPressed));
+          if (!state.sensations) state.sensations = [];
+          const sens = btn.dataset.sensation;
+          if (!isPressed) {
+            if (!state.sensations.includes(sens)) state.sensations.push(sens);
+          } else {
+            state.sensations = state.sensations.filter((s) => s !== sens);
+          }
+          if (!state.kind) {
+            state.kind = "pain";
+            renderKindSelection();
+            document.querySelectorAll("[data-kind]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.kind === "pain")));
+            followups.hidden = false;
+          }
+          renderWorkspace();
+        });
+      });
+
+      const intensitySlider = document.querySelector("#intensity-slider");
+      const intensityBadge = document.querySelector("#intensity-badge");
+      const intensityDesc = document.querySelector("#intensity-desc");
+      const intensityTickElements = document.querySelectorAll(".intensity-ticks .tick");
+
+      const INTENSITY_DESCRIPTIONS = {
+        1: { en: "Level 1 · Mild / Distracting", hi: "स्तर 1 · हल्का / ध्यान भटकाने वाला", descEn: "Mild discomfort, easily manageable. Routine outpatient consultation.", descHi: "हल्की तकलीफ़, सामान्य दिनचर्या में कोई रुकावट नहीं। सामान्य ओपीडी।" },
+        2: { en: "Level 2 · Moderate / Uncomfortable", hi: "स्तर 2 · मध्यम / असहज", descEn: "Noticeable during activities or sleep. Timely doctor assessment recommended.", descHi: "दैनिक काम या नींद में महसूस होता है। समय पर डॉक्टर को दिखाना चाहिए।" },
+        3: { en: "Level 3 · Noticeable / Impairing", hi: "स्तर 3 · स्पष्ट / काम में बाधा", descEn: "Interferes with regular work. Requires formal clinical evaluation.", descHi: "कामकाज में रुकावट आ रही है। अस्पताल में ओपीडी जांच ज़रूरी है।" },
+        4: { en: "Level 4 · Severe / Intense", hi: "स्तर 4 · तीव्र / गंभीर दर्द", descEn: "Severe distress, limits movement or speaking. Priority OPD routing.", descHi: "तेज़ असहजता, चलने या बोलने में तकलीफ़। प्राथमिकता ओपीडी काउंटर।" },
+        5: { en: "Level 5 · Unbearable / Critical", hi: "स्तर 5 · असहनीय / अत्यंत गंभीर", descEn: "Intense, unbearable distress. Halts normal booking → Immediate 24/7 Emergency!", descHi: "असहनीय तकलीफ़। तुरंत इमरजेंसी (आपातकालीन) वार्ड में जाएँ!" },
+      };
+
+      function updateIntensityUI(level) {
+        level = Math.max(1, Math.min(5, parseInt(level, 10) || 3));
+        state.intensity = level;
+        state.severity = level >= 4 ? "yes" : "no";
+        document.querySelectorAll("[data-severity]").forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.severity === state.severity)));
+
+        if (intensitySlider) intensitySlider.value = level;
+        if (intensityBadge) {
+          intensityBadge.dataset.level = level;
+          intensityBadge.textContent = state.language === "hi" ? INTENSITY_DESCRIPTIONS[level].hi : INTENSITY_DESCRIPTIONS[level].en;
+        }
+        if (intensityDesc) {
+          intensityDesc.textContent = state.language === "hi" ? INTENSITY_DESCRIPTIONS[level].descHi : INTENSITY_DESCRIPTIONS[level].descEn;
+        }
+        intensityTickElements.forEach((tick) => {
+          tick.classList.toggle("is-active", parseInt(tick.dataset.tick, 10) === level);
+        });
+
+        // Real-time thermal glow reaction on the 3D body!
+        bodyMap3d?.setRegionIntensity?.(level);
+
+        // Emergency escalation warning if level 5 on chest or head
+        if (level === 5 && (state.region === "chest" || state.region === "head")) {
+          if ("vibrate" in navigator) navigator.vibrate?.([30, 50, 30]);
+        }
+      }
+
+      intensitySlider?.addEventListener("input", (e) => updateIntensityUI(e.target.value));
+      intensityTickElements.forEach((tick) => {
+        tick.addEventListener("click", () => updateIntensityUI(tick.dataset.tick));
+      });
+
 
       document.querySelectorAll("[data-severity]").forEach((button) => {
         button.addEventListener("click", () => {
@@ -5207,6 +5616,40 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         document.querySelector("#slip-appointment-id").replaceChildren(makeTag("Simulated"), document.createTextNode(" APPT-DEMO-4802"));
         document.querySelector("#slip-uhid").replaceChildren(makeTag("Simulated"), document.createTextNode(" UHID-MOCK-7281"));
         document.querySelector("#slip-report").textContent = report;
+
+        // Doctor Communication & Handover Card Population
+        const handoverRegion = document.querySelector("#handover-region");
+        const handoverSensations = document.querySelector("#handover-sensations");
+        const handoverIntensity = document.querySelector("#handover-intensity");
+        const handoverPromptHi = document.querySelector("#handover-prompt-hi");
+        const handoverPromptEn = document.querySelector("#handover-prompt-en");
+
+        const regKey = current.region || state.region;
+        const regLabels = REGION_LABELS[regKey] || { en: regKey || "General", hi: "सामान्य" };
+        const sensArr = state.sensations && state.sensations.length > 0 ? state.sensations : [(current.kind || "discomfort")];
+        const intLevel = state.intensity || 3;
+
+        if (handoverRegion) handoverRegion.textContent = `${regLabels.en} · ${regLabels.hi}`;
+        if (handoverSensations) handoverSensations.textContent = sensArr.join(", ").toUpperCase();
+        if (handoverIntensity) {
+          handoverIntensity.textContent = `Level ${intLevel} / 5 (${INTENSITY_DESCRIPTIONS[intLevel]?.en || "Moderate"})`;
+          handoverIntensity.className = "handover-intensity-pill intensity-badge";
+          handoverIntensity.dataset.level = intLevel;
+        }
+
+        const promptHi = `डॉक्टर साहब, मुझे ${regLabels.hi} में ${sensArr.join(", ")} महसूस हो रहा है (तीव्रता ${intLevel}/5)। कृपया जाँच करें।`;
+        const promptEn = `Doctor, I am experiencing ${sensArr.join(", ")} in my ${regLabels.en} (distress level ${intLevel}/5). Please examine.`;
+        if (handoverPromptHi) handoverPromptHi.textContent = `"${promptHi}"`;
+        if (handoverPromptEn) handoverPromptEn.textContent = `"${promptEn}"`;
+
+        const shareWaBtn = document.querySelector("#share-whatsapp");
+        if (shareWaBtn) {
+          shareWaBtn.onclick = () => {
+            const waMsg = `🏥 *Raahat Citizen OPD Handover Slip*\n• Hospital: ${hospital.shortName}\n• Counter: ${department}\n• Patient: ${current.patient_name || labelFor("who_for", current.who_for)}\n• Target Area: ${regLabels.en} (${regLabels.hi})\n• Sensations: ${sensArr.join(", ")}\n• Distress Level: ${intLevel}/5\n• Doctor Handover Script: "${promptHi}"\n\n_Independent Prototype · Public OPD Triage_`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(waMsg)}`, "_blank");
+          };
+        }
+
       }
 
       function renderTelePrescriptionPreview() {
