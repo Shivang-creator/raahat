@@ -71,25 +71,35 @@
 
       .app-shell { width: min(100%, 90rem); min-height: 100vh; margin: 0 auto; padding: 0 clamp(1rem, 3vw, 2.5rem) 1.5rem; display: flex; flex-direction: column; }
       
-      /* --- Compact Sleek Topline Header --- */
-      .topline { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 3.75rem; padding: 0.4rem 0; border-bottom: 1px solid rgba(203, 213, 225, 0.78); background: rgba(248, 250, 249, 0.94); backdrop-filter: blur(18px); }
-      [data-theme="dark"] .topline { border-bottom-color: rgba(36, 66, 52, 0.85); background: rgba(14, 25, 20, 0.94); }
-      .brand-lockup { display: flex; align-items: center; gap: 0.65rem; min-width: 0; color: var(--accent-dark); text-decoration: none; flex-shrink: 0; }
-      .brand-mark { flex: 0 0 2.5rem; width: 2.5rem; height: 2.5rem; }
+      /* --- Distinct Gradient-Tiled Header --- */
+      .topline { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; gap: 0.65rem; min-height: 3.85rem; padding: 0.45rem 0.85rem; border-bottom: 1.5px solid rgba(22, 101, 52, 0.18); border-radius: 0 0 1rem 1rem; background: linear-gradient(135deg, rgba(243, 249, 246, 0.96) 0%, rgba(250, 252, 251, 0.94) 50%, rgba(240, 247, 252, 0.96) 100%); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05); transition: background 200ms ease, border-color 200ms ease; }
+      [data-theme="dark"] .topline { border-bottom-color: rgba(45, 212, 191, 0.22); background: linear-gradient(135deg, rgba(12, 22, 17, 0.96) 0%, rgba(18, 30, 24, 0.94) 50%, rgba(15, 26, 33, 0.96) 100%); box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35); }
+      .topline-brand-wrap { display: flex; align-items: center; gap: 0.65rem; min-width: 0; flex-shrink: 0; }
+      .sidebar-toggle-btn { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 2.35rem; padding: 0.35rem 0.65rem; border: 1.5px solid var(--line); border-radius: var(--radius-full); background: var(--paper); color: var(--ink); font-size: 0.86rem; font-weight: 800; cursor: pointer; transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+      .sidebar-toggle-btn:hover, .sidebar-toggle-btn[aria-expanded="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); transform: translateY(-1px); }
+      .sidebar-toggle-icon { font-size: 1.15rem; line-height: 1; }
+      .brand-lockup { display: flex; align-items: center; gap: 0.55rem; min-width: 0; color: var(--accent-dark); text-decoration: none; flex-shrink: 0; }
+      .brand-mark { flex: 0 0 2.4rem; width: 2.4rem; height: 2.4rem; }
       .brand-copy { display: grid; gap: 0.05rem; min-width: 0; }
-      .wordmark { color: var(--accent-dark); font-size: clamp(1.05rem, 1.8vw, 1.28rem); font-weight: 850; letter-spacing: -0.02em; line-height: 1.1; }
-      .tagline { color: var(--muted); font-size: 0.78rem; line-height: 1.15; white-space: nowrap; }
-      .site-nav { display: none; align-items: center; gap: 0.2rem; }
-      .site-nav a { position: relative; min-height: 2.25rem; display: inline-flex; align-items: center; padding: 0.35rem 0.65rem; border-radius: 0.55rem; color: var(--muted); font-size: 0.86rem; font-weight: 750; text-decoration: none; white-space: nowrap; transition: background 150ms ease, color 150ms ease; }
-      .site-nav a:hover, .site-nav a[aria-current="page"] { background: var(--accent-soft); color: var(--accent-dark); }
-      .site-nav a[aria-current="page"]::after { position: absolute; right: 0.65rem; bottom: 0.15rem; left: 0.65rem; height: 0.18rem; border-radius: 999px; background: var(--accent); content: ""; }
-      .nav-actions { display: flex; align-items: center; gap: 0.45rem; flex-shrink: 0; }
-      .nav-profile-btn { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.4rem; padding: 0.35rem 0.75rem; border: 1.5px solid var(--line); border-radius: var(--radius-full); background: var(--paper); color: var(--ink); font-size: 0.86rem; font-weight: 750; cursor: pointer; transition: all 150ms ease; }
+      .wordmark { color: var(--accent-dark); font-size: clamp(1.05rem, 1.8vw, 1.25rem); font-weight: 850; letter-spacing: -0.02em; line-height: 1.1; }
+      .tagline { color: var(--muted); font-size: 0.76rem; line-height: 1.15; white-space: nowrap; }
+      
+      /* Desktop Navigation Bar Tiles */
+      .site-nav { display: none; align-items: center; gap: 0.25rem; margin: 0 auto; }
+      .site-nav .nav-tile { position: relative; min-height: 2.3rem; display: inline-flex; align-items: center; padding: 0.35rem 0.65rem; border-radius: 0.65rem; border: 1px solid transparent; color: var(--muted); font-size: 0.86rem; font-weight: 750; text-decoration: none; white-space: nowrap; transition: all 160ms ease; }
+      .site-nav .nav-tile:hover { background: var(--accent-soft); border-color: rgba(22, 101, 52, 0.15); color: var(--accent-dark); transform: translateY(-1px); }
+      .site-nav .nav-tile[aria-current="page"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-dark); font-weight: 850; }
+      .site-nav .nav-tile[aria-current="page"]::after { position: absolute; right: 0.65rem; bottom: 0.15rem; left: 0.65rem; height: 0.18rem; border-radius: 999px; background: var(--accent); content: ""; }
+      
+      .nav-actions { display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
+      .a11y-trigger-btn { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.35rem; padding: 0.35rem 0.65rem; border: 1.5px solid var(--line); border-radius: var(--radius-full); background: var(--paper); color: var(--ink); font-size: 0.86rem; font-weight: 800; cursor: pointer; transition: all 160ms ease; }
+      .a11y-trigger-btn:hover, .a11y-trigger-btn[aria-expanded="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); transform: translateY(-1px); }
+      .nav-profile-btn { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.35rem; padding: 0.35rem 0.7rem; border: 1.5px solid var(--line); border-radius: var(--radius-full); background: var(--paper); color: var(--ink); font-size: 0.86rem; font-weight: 750; cursor: pointer; transition: all 150ms ease; }
       .nav-profile-btn:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
-      .theme-toggle { display: inline-grid; width: 2.4rem; height: 2.4rem; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: var(--radius-full); background: var(--paper); color: var(--ink); transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease; }
+      .theme-toggle { display: inline-grid; width: 2.35rem; height: 2.35rem; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: var(--radius-full); background: var(--paper); color: var(--ink); transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease; }
       .theme-toggle .icon { width: 1.15rem; height: 1.15rem; }
-      .nav-start { min-height: 2.4rem; padding: 0.4rem 0.85rem; border: 0; border-radius: var(--radius-full); background: var(--accent); color: #fff; font-size: 0.88rem; font-weight: 850; box-shadow: 0 0.3rem 0.8rem rgba(22, 101, 52, 0.18); cursor: pointer; }
-      .nav-start:hover { background: var(--accent-dark); }
+      .nav-start { min-height: 2.35rem; padding: 0.35rem 0.85rem; border: 0; border-radius: var(--radius-full); background: var(--accent); color: #fff; font-size: 0.88rem; font-weight: 850; box-shadow: 0 0.3rem 0.8rem rgba(22, 101, 52, 0.18); cursor: pointer; transition: all 150ms ease; }
+      .nav-start:hover { background: var(--accent-dark); transform: translateY(-1px); }
 
 main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .eyebrow { margin: 0 0 0.65rem; color: var(--muted); font-size: 1rem; font-weight: 750; letter-spacing: 0.02em; }
@@ -886,43 +896,41 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .workspace-privacy { margin: 1rem 0 0; padding: 0.8rem; border: 1px solid #a9c8ba; border-radius: 0.75rem; background: #f5fbf7; color: #183f31; font-size: 0.96rem; line-height: 1.45; }
       .support-label { font-weight: 800; color: var(--ink); }
 
-      @media (min-width: 1200px) {
+      /* --- Desktop & Mobile Responsive Optimization --- */
+      @media (min-width: 1080px) {
         .topline { flex-wrap: nowrap; }
-        .site-nav { display: inline-flex; flex: 1; justify-content: flex-start; margin: 0 0.75rem; overflow-x: auto; scrollbar-width: none; }
-        .site-nav::-webkit-scrollbar { display: none; }
+        .site-nav { display: inline-flex; }
         .landing-hero { grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr); }
         .journey-grid, .network-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         .roadmap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .triage-workspace { grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.65fr); align-items: start; }
         .workspace-side { position: sticky; top: 5rem; }
       }
-      @media (max-width: 1199px) and (min-width: 760px) {
-        .topline { flex-wrap: wrap; padding: 0.35rem 0 0.45rem; }
-        .site-nav { display: inline-flex; order: 3; width: 100%; overflow-x: auto; justify-content: flex-start; scrollbar-width: none; padding: 0.2rem 0; gap: 0.3rem; }
-        .site-nav::-webkit-scrollbar { display: none; }
-        .landing-hero { grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr); }
-        .journey-grid, .network-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-        .roadmap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        .triage-workspace { grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.65fr); align-items: start; }
-        .workspace-side { position: sticky; top: 5rem; }
-      }
-      @media (max-width: 759px) {
-        .topline { flex-wrap: wrap; padding: 0.35rem 0 0.45rem; align-items: center; }
+      @media (max-width: 1079px) and (min-width: 768px) {
+        .topline { flex-wrap: nowrap; padding: 0.35rem 0.75rem; }
+        .site-nav { display: none; }
         .tagline { display: none; }
-        .site-nav { display: flex; order: 3; width: 100%; overflow-x: auto; scrollbar-width: none; padding: 0.2rem 0; gap: 0.25rem; }
-        .site-nav::-webkit-scrollbar { display: none; }
-        .site-nav a { white-space: nowrap; font-size: 0.82rem; min-height: 2.1rem; padding: 0.25rem 0.55rem; }
-        .nav-actions { margin-left: auto; gap: 0.3rem; }
+        .landing-hero { grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr); }
+        .journey-grid, .network-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .roadmap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .triage-workspace { grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.65fr); align-items: start; }
+        .workspace-side { position: sticky; top: 5rem; }
       }
-      @media (max-width: 640px) {
+      @media (max-width: 767px) {
+        .topline { flex-wrap: nowrap; padding: 0.35rem 0.65rem; align-items: center; }
+        .tagline { display: none; }
+        .site-nav { display: none; }
+        .sidebar-toggle-label { display: none; }
+        .a11y-trigger-label { display: none; }
+        .profile-btn-label { display: none; }
+        .nav-actions { margin-left: auto; gap: 0.3rem; }
         .language-bar-group .lang-quick-btn:not(#btn-open-languages) { display: none; }
         .language-bar-group { padding: 0.15rem; }
         .lang-quick-btn { min-height: 2.1rem; padding: 0.25rem 0.55rem; font-size: 0.8rem; }
         .nav-profile-btn { min-height: 2.1rem; padding: 0.25rem 0.55rem; font-size: 0.82rem; }
-        .nav-profile-btn span:not(.profile-icon) { display: none; }
+        .a11y-trigger-btn { min-height: 2.1rem; padding: 0.25rem 0.55rem; font-size: 0.82rem; }
         .nav-start { padding: 0.3rem 0.65rem; min-height: 2.1rem; font-size: 0.82rem; }
         .theme-toggle { width: 2.1rem; height: 2.1rem; }
-        .topline { gap: 0.35rem; }
         .whatsapp-float-btn { padding: 0.5rem; border-radius: 50%; width: 3rem; height: 3rem; justify-content: center; bottom: 1rem; right: 1rem; }
         .whatsapp-float-btn span { display: none; }
       }
@@ -1087,53 +1095,149 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
     
       /* ====================================================
-         CIVIC TECH FOOTER & ATTRIBUTION STYLES
+         SIMPLIFIED CIVIC TECH & HACKATHON FOOTER
          ==================================================== */
-      .site-footer { margin-top: 4rem; padding: 3rem 0 2rem; border-top: 2px solid var(--line); background: var(--paper); border-radius: 1.5rem 1.5rem 0 0; }
-      .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
-      @media (min-width: 640px) { .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-      @media (min-width: 1040px) { .footer-grid { grid-template-columns: 1.3fr 1.1fr 1fr 1.1fr; } }
-      .footer-col { display: flex; flex-direction: column; gap: 1rem; }
-      .footer-brand-lockup { display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; }
-      .footer-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.55; margin: 0; }
+      .site-footer { margin-top: 4rem; padding: 2.5rem clamp(1rem, 3vw, 2.5rem) 2rem; border-top: 2px solid rgba(22, 101, 52, 0.2); border-radius: 1.75rem 1.75rem 0 0; background: linear-gradient(145deg, rgba(238, 248, 242, 0.96) 0%, rgba(248, 250, 249, 0.92) 50%, rgba(236, 245, 252, 0.96) 100%); box-shadow: 0 -4px 24px rgba(15, 23, 42, 0.04); }
+      [data-theme="dark"] .site-footer { border-top-color: rgba(45, 212, 191, 0.25); background: linear-gradient(145deg, rgba(10, 20, 16, 0.98) 0%, rgba(16, 28, 22, 0.94) 50%, rgba(12, 22, 30, 0.98) 100%); box-shadow: 0 -4px 28px rgba(0, 0, 0, 0.4); }
       
-      .hackathon-credential-card { padding: 1rem 1.15rem; border-radius: 1rem; border: 1.5px solid rgba(217, 119, 6, 0.4); background: linear-gradient(135deg, rgba(254, 243, 199, 0.45) 0%, rgba(255, 251, 235, 0.85) 100%); display: flex; flex-direction: column; gap: 0.5rem; }
-      [data-theme="dark"] .hackathon-credential-card { border-color: rgba(217, 119, 6, 0.5); background: linear-gradient(135deg, rgba(69, 39, 14, 0.3) 0%, rgba(26, 46, 36, 0.7) 100%); }
-      .hackathon-badge-header { display: flex; align-items: center; gap: 0.65rem; }
-      .hackathon-spark { font-size: 1.3rem; }
-      .hackathon-eyebrow { font-size: 0.72rem; font-weight: 850; letter-spacing: 0.06em; color: #b45309; text-transform: uppercase; }
-      [data-theme="dark"] .hackathon-eyebrow { color: #f59e0b; }
-      .hackathon-name { font-size: 1.1rem; font-weight: 850; margin: 0; color: var(--ink); line-height: 1.2; }
-      .hackathon-organizers { font-size: 0.88rem; color: var(--muted); margin: 0; }
-      .hackathon-meta-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+      .footer-tiles-container { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+      @media (min-width: 840px) { .footer-tiles-container { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
       
-      .creator-card { padding: 1.15rem; border-radius: 1rem; border: 1.5px solid var(--line); background: var(--background); display: flex; flex-direction: column; gap: 0.75rem; }
-      .creator-info { display: flex; align-items: center; gap: 0.75rem; }
-      .creator-avatar { width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--accent-soft); display: grid; place-items: center; font-size: 1.3rem; }
-      .creator-name { font-size: 1.1rem; font-weight: 850; color: var(--ink); display: block; line-height: 1.2; }
-      .creator-role { font-size: 0.82rem; color: var(--muted); font-weight: 700; }
-      .creator-bio { font-size: 0.88rem; color: var(--muted); line-height: 1.45; margin: 0; }
-      .creator-social-links { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.25rem; }
-      .social-link { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.4rem 0.75rem; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: 0.84rem; font-weight: 750; text-decoration: none; transition: all 150ms ease; }
-      .social-link:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); transform: translateY(-1px); }
-      .social-icon { width: 0.95rem; height: 0.95rem; }
+      .footer-tile { padding: 1.5rem 1.75rem; border-radius: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; transition: transform 180ms ease, box-shadow 180ms ease; }
+      .footer-tile:hover { transform: translateY(-2px); }
       
-      .footer-heading { font-size: 1.05rem; font-weight: 850; color: var(--ink); margin: 0; letter-spacing: -0.01em; }
-      .footer-links-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; }
-      .footer-links-list a { color: var(--muted); text-decoration: none; font-size: 0.92rem; font-weight: 700; transition: color 150ms ease; }
-      .footer-links-list a:hover { color: var(--accent-dark); text-decoration: underline; }
+      .hackathon-tile { border: 2px solid rgba(217, 119, 6, 0.35); background: linear-gradient(135deg, rgba(254, 243, 199, 0.5) 0%, rgba(255, 251, 235, 0.85) 100%); box-shadow: 0 4px 16px rgba(217, 119, 6, 0.08); }
+      [data-theme="dark"] .hackathon-tile { border-color: rgba(245, 158, 11, 0.4); background: linear-gradient(135deg, rgba(69, 39, 14, 0.35) 0%, rgba(28, 48, 38, 0.75) 100%); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
       
-      .helpline-badges { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
-      .helpline-card { display: flex; flex-direction: column; padding: 0.65rem 0.8rem; border-radius: 0.75rem; border: 1px solid var(--line); background: var(--background); text-decoration: none; color: var(--ink); transition: border-color 150ms ease; }
-      .helpline-card:hover { border-color: var(--emergency-red); }
-      .helpline-num { font-size: 1.15rem; font-weight: 850; color: var(--emergency-red); line-height: 1.1; }
-      .helpline-name { font-size: 0.78rem; color: var(--muted); font-weight: 700; margin: 0.15rem 0 0.35rem; }
-      .grievance-box { margin-top: 0.5rem; padding: 0.75rem; border-radius: 0.75rem; background: var(--accent-soft); }
-      .grievance-link { display: inline-block; margin-top: 0.25rem; font-size: 0.88rem; font-weight: 800; color: var(--accent-dark); }
+      .creator-tile { border: 2px solid rgba(22, 101, 52, 0.3); background: linear-gradient(135deg, rgba(236, 253, 245, 0.5) 0%, rgba(240, 253, 250, 0.85) 100%); box-shadow: 0 4px 16px rgba(22, 101, 52, 0.08); }
+      [data-theme="dark"] .creator-tile { border-color: rgba(45, 212, 191, 0.35); background: linear-gradient(135deg, rgba(16, 44, 34, 0.4) 0%, rgba(20, 36, 48, 0.75) 100%); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
       
-      .footer-bottom-bar { border-top: 1px solid var(--line); padding-top: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+      .footer-tile-badge { display: flex; align-items: center; gap: 0.5rem; }
+      .badge-text { font-size: 0.76rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+      .hackathon-tile .badge-text { color: #b45309; }
+      [data-theme="dark"] .hackathon-tile .badge-text { color: #fbbf24; }
+      .creator-tile .badge-text { color: #065f46; }
+      [data-theme="dark"] .creator-tile .badge-text { color: #2dd4bf; }
+      
+      .footer-tile-title { font-size: 1.35rem; font-weight: 900; color: var(--ink); margin: 0; line-height: 1.2; letter-spacing: -0.02em; }
+      .footer-tile-sub { font-size: 0.92rem; color: var(--muted); line-height: 1.5; margin: 0; }
+      .footer-tile-tags { display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 0.25rem; }
+      
+      .creator-links-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
+      .creator-action-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.55rem 1.1rem; border-radius: var(--radius-full); font-size: 0.92rem; font-weight: 800; text-decoration: none; transition: all 180ms ease; }
+      .github-btn { border: 1.5px solid var(--ink); background: var(--ink); color: var(--paper); }
+      .github-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+      [data-theme="dark"] .github-btn { background: #ffffff; color: #000000; border-color: #ffffff; }
+      
+      .linkedin-btn { border: 1.5px solid #0077b5; background: #0077b5; color: #ffffff; }
+      .linkedin-btn:hover { background: #006097; border-color: #006097; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0, 119, 181, 0.35); }
+      .btn-icon { width: 1.1rem; height: 1.1rem; flex-shrink: 0; }
+      
+      .footer-bottom-notice { border-top: 1px solid var(--line); padding-top: 1.25rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
       .prototype-notice { color: var(--muted); font-size: 0.88rem; margin: 0; }
       .footer-copy { color: var(--muted); font-size: 0.85rem; margin: 0; font-weight: 700; }
+
+      /* ====================================================
+         ACCESSIBILITY CONTROL PANEL STYLES (ORS Style)
+         ==================================================== */
+      .a11y-backdrop { position: fixed; inset: 0; z-index: 299; background: rgba(15, 23, 42, 0.35); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+      .a11y-panel { position: fixed; top: 4.5rem; right: clamp(1rem, 3vw, 2.5rem); z-index: 300; width: 18.5rem; max-width: calc(100vw - 2rem); padding: 1.25rem; border: 1.5px solid var(--line); border-radius: 1rem; background: var(--paper); color: var(--ink); box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.08); display: flex; flex-direction: column; gap: 0.95rem; animation: a11yFadeIn 180ms ease-out forwards; }
+      @keyframes a11yFadeIn { from { opacity: 0; transform: translateY(-8px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+      [data-theme="dark"] .a11y-panel { box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(45, 212, 191, 0.2); }
+      .a11y-panel-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 0.65rem; }
+      .a11y-title { font-size: 1.05rem; font-weight: 850; color: var(--ink); margin: 0; display: flex; align-items: center; gap: 0.4rem; }
+      .a11y-close-btn { background: transparent; border: 0; color: var(--muted); font-size: 1.15rem; font-weight: 700; cursor: pointer; padding: 0.25rem 0.45rem; border-radius: 0.4rem; line-height: 1; }
+      .a11y-close-btn:hover { background: var(--accent-soft); color: var(--ink); }
+      .a11y-panel-body { display: flex; flex-direction: column; gap: 0.75rem; }
+      .a11y-action-btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; min-height: 2.75rem; padding: 0.6rem 0.85rem; border: 1.5px solid var(--line); border-radius: 0.75rem; background: var(--background); color: var(--ink); font-size: 0.92rem; font-weight: 800; cursor: pointer; transition: all 150ms ease; }
+      .a11y-action-btn:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
+      .a11y-action-btn[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #ffffff; }
+      .a11y-control-group { display: flex; flex-direction: column; gap: 0.4rem; padding: 0.5rem 0; }
+      .a11y-label-row { display: flex; align-items: center; justify-content: space-between; }
+      .a11y-control-label { font-size: 0.9rem; font-weight: 800; color: var(--ink); }
+      .a11y-size-indicator { font-size: 0.82rem; font-weight: 800; color: var(--muted); }
+      .a11y-slider { width: 100%; height: 0.5rem; border-radius: 999px; background: var(--line); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none; }
+      .a11y-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 1.25rem; height: 1.25rem; border-radius: 50%; background: var(--accent); cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.2); border: 2px solid #ffffff; }
+      .a11y-slider::-moz-range-thumb { width: 1.25rem; height: 1.25rem; border-radius: 50%; background: var(--accent); cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.2); border: 2px solid #ffffff; }
+      .a11y-font-buttons { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 0.4rem; }
+      .a11y-font-btn { min-height: 2.35rem; border: 1.5px solid var(--line); border-radius: 0.6rem; background: var(--background); color: var(--ink); font-size: 0.9rem; font-weight: 850; cursor: pointer; transition: all 150ms ease; }
+      .a11y-font-btn:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
+      .a11y-reset-all-btn { margin-top: 0.35rem; width: 100%; min-height: 2.65rem; border: 1.5px solid var(--line); border-radius: 0.75rem; background: var(--paper); color: var(--muted); font-size: 0.9rem; font-weight: 800; cursor: pointer; transition: all 150ms ease; }
+      .a11y-reset-all-btn:hover { border-color: var(--emergency-red); color: var(--emergency-red); background: rgba(239, 68, 68, 0.08); }
+      
+      /* High Contrast mode styles */
+      html[data-a11y-contrast="high"] {
+        --background: #000000 !important;
+        --paper: #0c0c0c !important;
+        --ink: #ffffff !important;
+        --muted: #f0f0f0 !important;
+        --line: #ffff00 !important;
+        --accent: #00e5ff !important;
+        --accent-dark: #38bdf8 !important;
+        --accent-soft: rgba(0, 229, 255, 0.25) !important;
+        --marigold: #ffe600 !important;
+      }
+      html[data-a11y-contrast="high"] button,
+      html[data-a11y-contrast="high"] input,
+      html[data-a11y-contrast="high"] select,
+      html[data-a11y-contrast="high"] textarea,
+      html[data-a11y-contrast="high"] .card,
+      html[data-a11y-contrast="high"] .service-card,
+      html[data-a11y-contrast="high"] .hospital-card,
+      html[data-a11y-contrast="high"] .slip,
+      html[data-a11y-contrast="high"] .topline,
+      html[data-a11y-contrast="high"] .site-footer,
+      html[data-a11y-contrast="high"] .footer-tile {
+        border-width: 2px !important;
+        border-color: #ffff00 !important;
+      }
+      
+      /* Invert colors mode styles */
+      html[data-a11y-invert="true"] {
+        filter: invert(100%) hue-rotate(180deg) saturate(var(--a11y-saturation, 100%)) !important;
+      }
+      html[data-a11y-invert="true"] img,
+      html[data-a11y-invert="true"] video,
+      html[data-a11y-invert="true"] canvas,
+      html[data-a11y-invert="true"] #body-3d-canvas,
+      html[data-a11y-invert="true"] .brand-mark,
+      html[data-a11y-invert="true"] .silhouette-stage {
+        filter: invert(100%) hue-rotate(180deg) !important;
+      }
+      
+      /* Root saturation */
+      html {
+        filter: saturate(var(--a11y-saturation, 100%));
+      }
+
+      /* ====================================================
+         SIDEBAR NAVIGATION DRAWER STYLES
+         ==================================================== */
+      .sidebar-backdrop { position: fixed; inset: 0; z-index: 399; background: rgba(10, 20, 15, 0.6); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); transition: opacity 250ms ease; }
+      .site-sidebar { position: fixed; top: 0; left: 0; bottom: 0; z-index: 400; width: min(88vw, 24rem); background: var(--paper); border-right: 1.5px solid var(--line); box-shadow: 12px 0 36px rgba(0, 0, 0, 0.25); display: flex; flex-direction: column; transform: translateX(-100%); transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; }
+      .site-sidebar.is-open { transform: translateX(0); }
+      [data-theme="dark"] .site-sidebar { background: linear-gradient(180deg, #0c1813 0%, #10211a 100%); border-right-color: rgba(45, 212, 191, 0.2); }
+      .sidebar-header { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.25rem 1rem; border-bottom: 1.5px solid var(--line); background: var(--paper); }
+      [data-theme="dark"] .sidebar-header { background: #0c1813; }
+      .sidebar-brand { display: flex; flex-direction: column; gap: 0.15rem; }
+      .sidebar-logo { font-size: 1.25rem; font-weight: 900; color: var(--accent-dark); letter-spacing: -0.02em; }
+      .sidebar-tagline { font-size: 0.78rem; color: var(--muted); font-weight: 700; }
+      .sidebar-close-btn { width: 2.25rem; height: 2.25rem; border-radius: var(--radius-full); border: 1px solid var(--line); background: var(--background); color: var(--ink); font-size: 1.1rem; display: grid; place-items: center; cursor: pointer; transition: all 150ms ease; }
+      .sidebar-close-btn:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
+      .sidebar-content { flex: 1; padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 1.5rem; }
+      .sidebar-group-title { display: flex; align-items: center; gap: 0.45rem; font-size: 0.8rem; font-weight: 850; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.65rem; }
+      .sidebar-links-grid { display: flex; flex-direction: column; gap: 0.5rem; }
+      .sidebar-nav-card { display: flex; align-items: center; gap: 0.85rem; padding: 0.75rem 0.85rem; border-radius: 0.85rem; border: 1.5px solid transparent; background: var(--background); text-decoration: none; color: var(--ink); transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1); }
+      .sidebar-nav-card:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateX(3px); }
+      .sidebar-nav-card[aria-current="page"] { border-color: var(--accent); background: var(--accent-soft); font-weight: 850; }
+      .nav-card-icon { font-size: 1.35rem; flex-shrink: 0; width: 2rem; height: 2rem; display: grid; place-items: center; }
+      .nav-card-text { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
+      .nav-card-title { font-size: 0.95rem; font-weight: 800; color: var(--ink); line-height: 1.2; }
+      .nav-card-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.3; }
+      .sidebar-footer { position: sticky; bottom: 0; z-index: 2; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; padding: 0.85rem 1.25rem; border-top: 1.5px solid var(--line); background: var(--paper); }
+      [data-theme="dark"] .sidebar-footer { background: #0c1813; }
+      .sidebar-tool-btn { min-height: 2.35rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; padding: 0.4rem; border-radius: 0.65rem; border: 1px solid var(--line); background: var(--background); color: var(--ink); font-size: 0.82rem; font-weight: 800; cursor: pointer; transition: all 150ms ease; }
+      .sidebar-tool-btn:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
 
       /* ====================================================
          CITIZEN PROFILE & HISTORY STYLES (#screen-profile)
@@ -1268,30 +1372,38 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
     </div>
     <div class="app-shell">
       <div class="topline">
-        <a class="brand-lockup" href="#screen-home" id="brand-home" aria-label="Raahat home">
-          <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-labelledby="logo-title logo-desc">
-            <title id="logo-title">Raahat civic relief mark</title>
-            <desc id="logo-desc">A warm sun above a leaf and supportive hands around a medical cross.</desc>
-            <circle cx="47" cy="16" r="9" fill="#d97706" />
-            <path d="M32 54C17 50 10 39 13 25c12 1 22 8 25 20 1 4-1 7-6 9Z" fill="#17634f" />
-            <path d="M27 49c5-9 10-16 18-23" fill="none" stroke="#fffdf9" stroke-linecap="round" stroke-width="2.5" />
-            <path d="M9 42c7-2 13 1 18 7M55 42c-7-2-13 1-18 7" fill="none" stroke="#17634f" stroke-linecap="round" stroke-width="4" />
-            <path d="M32 28v12M26 34h12" fill="none" stroke="#fffdf9" stroke-linecap="round" stroke-width="3.5" />
-          </svg>
-          <span class="brand-copy"><span class="wordmark">राहत · Raahat</span><span class="tagline tagline-dynamic" data-copy="brandTagline">Point at where it hurts. We'll do the rest.</span></span>
-        </a>
-        <nav class="site-nav" aria-label="Raahat screens">
-          <a href="#screen-home" data-view-link="home" data-copy="homeNav">Home</a>
-          <a href="#screen-triage" data-view-link="triage" data-copy="triageNav">OPD Triage</a>
-          <a href="#screen-profile" data-view-link="profile" data-copy="profileNav">My Profile</a>
-          <a href="#screen-doctor" data-view-link="doctor" data-copy="doctorNav">Hospital Portal</a>
-          <a href="#screen-lab-tests" data-view-link="lab-tests" data-copy="labNav">Lab Tests &amp; Scans</a>
-          <a href="#screen-blood-bank" data-view-link="blood-bank" data-copy="bloodNav">Blood Bank</a>
-          <a href="#screen-comparison" data-view-link="comparison" data-copy="orsLink">ORS vs Raahat</a>
-          <a href="#screen-hospitals" data-view-link="hospitals" data-copy="hospitalsLink">Delhi Hospitals</a>
-          <a href="#screen-faqs" data-view-link="faqs" data-copy="faqLink">FAQs</a>
-          <a href="#screen-honesty" data-view-link="honesty" data-copy="honestyNav">Honesty</a>
+        <div class="topline-brand-wrap">
+          <button type="button" class="sidebar-toggle-btn" id="btn-open-sidebar" aria-label="Open Navigation Menu" title="Open Navigation Menu">
+            <span class="sidebar-toggle-icon" aria-hidden="true">☰</span>
+            <span class="sidebar-toggle-label">Menu</span>
+          </button>
+          <a class="brand-lockup" href="#screen-home" id="brand-home" aria-label="Raahat home">
+            <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-labelledby="logo-title logo-desc">
+              <title id="logo-title">Raahat civic relief mark</title>
+              <desc id="logo-desc">A warm sun above a leaf and supportive hands around a medical cross.</desc>
+              <circle cx="47" cy="16" r="9" fill="#d97706" />
+              <path d="M32 54C17 50 10 39 13 25c12 1 22 8 25 20 1 4-1 7-6 9Z" fill="#17634f" />
+              <path d="M27 49c5-9 10-16 18-23" fill="none" stroke="#fffdf9" stroke-linecap="round" stroke-width="2.5" />
+              <path d="M9 42c7-2 13 1 18 7M55 42c-7-2-13 1-18 7" fill="none" stroke="#17634f" stroke-linecap="round" stroke-width="4" />
+              <path d="M32 28v12M26 34h12" fill="none" stroke="#fffdf9" stroke-linecap="round" stroke-width="3.5" />
+            </svg>
+            <span class="brand-copy">
+              <span class="wordmark">राहत · Raahat</span>
+              <span class="tagline tagline-dynamic" data-copy="brandTagline">Point at where it hurts. We'll do the rest.</span>
+            </span>
+          </a>
+        </div>
+
+        <nav class="site-nav" aria-label="Raahat primary navigation">
+          <a href="#screen-home" data-view-link="home" data-copy="homeNav" class="nav-tile">Home</a>
+          <a href="#screen-triage" data-view-link="triage" data-copy="triageNav" class="nav-tile">OPD Triage</a>
+          <a href="#screen-profile" data-view-link="profile" data-copy="profileNav" class="nav-tile">My Profile</a>
+          <a href="#screen-doctor" data-view-link="doctor" data-copy="doctorNav" class="nav-tile">Hospital Portal</a>
+          <a href="#screen-lab-tests" data-view-link="lab-tests" data-copy="labNav" class="nav-tile">Lab Tests</a>
+          <a href="#screen-blood-bank" data-view-link="blood-bank" data-copy="bloodNav" class="nav-tile">Blood Bank</a>
+          <a href="#screen-hospitals" data-view-link="hospitals" data-copy="hospitalsLink" class="nav-tile">Hospitals</a>
         </nav>
+
         <div class="nav-actions">
           <div class="language-bar-group" role="group" aria-label="Language selection">
             <button type="button" class="lang-quick-btn" data-language="en" aria-pressed="true">English</button>
@@ -1300,8 +1412,15 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               <span aria-hidden="true">🌐</span> <span id="current-lang-badge">22 Languages ▾</span>
             </button>
           </div>
-          <button class="nav-profile-btn" type="button" data-view-link="profile" aria-label="Patient Profile and Records" title="View Patient Profile & Records"><span aria-hidden="true">👤</span> <span data-copy="profileShort">Profile</span></button>
-          <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Use dark theme" title="Use dark theme"><svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg></button>
+          <button class="a11y-trigger-btn" type="button" id="btn-open-a11y" aria-haspopup="dialog" aria-expanded="false" aria-label="Accessibility options" title="Open Accessibility Options">
+            <span aria-hidden="true">♿</span> <span class="a11y-trigger-label">Access</span>
+          </button>
+          <button class="nav-profile-btn" type="button" data-view-link="profile" aria-label="Patient Profile and Records" title="View Patient Profile & Records">
+            <span aria-hidden="true">👤</span> <span data-copy="profileShort" class="profile-btn-label">Profile</span>
+          </button>
+          <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Use dark theme" title="Use dark theme">
+            <svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg>
+          </button>
           <button class="nav-start" type="button" id="nav-start-triage" data-copy="startTriage">Start Triage</button>
         </div>
       </div>
@@ -2707,125 +2826,229 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       </main>
 
       
-      <!-- Civic Tech & Hackathon Attribution Footer -->
-      <footer class="site-footer" aria-label="Raahat footer and verification ledger">
-        <div class="footer-grid">
-          <!-- Col 1: Brand & Hackathon Credential -->
-          <div class="footer-col brand-col">
-            <div class="footer-brand-lockup">
-              <span class="wordmark" style="font-size: 1.4rem;">राहत · Raahat</span>
-              <span class="tag verified-tag">Verified Civic Tech</span>
+      <!-- Simplified Civic Tech & Hackathon Attribution Footer -->
+      <footer class="site-footer" aria-label="Raahat hackathon and creator footer">
+        <div class="footer-tiles-container">
+          <!-- Tile 1: National Hackathon Credential -->
+          <div class="footer-tile hackathon-tile">
+            <div class="footer-tile-badge">
+              <span class="sparkle-icon" aria-hidden="true">⚡</span>
+              <span class="badge-text">NATIONAL CIVIC HACKATHON BUILD</span>
             </div>
-            <p class="footer-desc" data-copy="footerDesc">
-              A citizen-first triage front door for Indian government hospitals. Helping citizens reach the right OPD counter through native voice, 22 regional languages, and interactive 3D body mapping without medical jargon.
-            </p>
-
-            <!-- Hackathon Credential Card -->
-            <div class="hackathon-credential-card">
-              <div class="hackathon-badge-header">
-                <span class="hackathon-spark" aria-hidden="true">⚡</span>
-                <div>
-                  <span class="hackathon-eyebrow">NATIONAL HACKATHON BUILD</span>
-                  <h4 class="hackathon-name">Build What Moves India</h4>
-                </div>
-              </div>
-              <p class="hackathon-organizers">Organized by <strong>Varun Mayya × OpenAI</strong> (Feb–Mar 2026)</p>
-              <div class="hackathon-meta-tags">
-                <span class="tag">Healthcare &amp; Civic Equity Track</span>
-                <span class="tag">22 Scheduled Languages</span>
-              </div>
+            <h3 class="footer-tile-title">Build What Moves India</h3>
+            <p class="footer-tile-sub">Organized by <strong>Varun Mayya × OpenAI</strong> (Feb–Mar 2026)</p>
+            <div class="footer-tile-tags">
+              <span class="tag">Healthcare &amp; Civic Equity Track</span>
+              <span class="tag">22 Scheduled Indian Languages</span>
+              <span class="tag">Verified Civic Tech</span>
             </div>
           </div>
 
-          <!-- Col 2: Creator Credentials & Social Links -->
-          <div class="footer-col creator-col">
-            <h4 class="footer-heading">Creator &amp; Engineering</h4>
-            <div class="creator-card">
-              <div class="creator-info">
-                <div class="creator-avatar" aria-hidden="true">👨‍💻</div>
-                <div>
-                  <strong class="creator-name">Shivang</strong>
-                  <span class="creator-role">Lead Architect &amp; Designer</span>
-                </div>
-              </div>
-              <p class="creator-bio">Crafted with precision for digital public infrastructure, accessible healthcare equity, and zero false reassurance safety.</p>
-              <div class="creator-social-links" aria-label="Shivang Social Profiles">
-                <a href="https://github.com/Shivang-creator" target="_blank" rel="noopener noreferrer" class="social-link" title="Shivang on GitHub">
-                  <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                  <span>GitHub</span>
-                </a>
-                <a href="https://www.linkedin.com/in/shivang-gupta" target="_blank" rel="noopener noreferrer" class="social-link" title="Shivang on LinkedIn">
-                  <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                  <span>LinkedIn</span>
-                </a>
-                <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-link" title="Shivang on X">
-                  <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                  <span>X / Twitter</span>
-                </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" title="Shivang on Instagram">
-                  <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                  <span>Instagram</span>
-                </a>
-              </div>
+          <!-- Tile 2: Creator Credentials -->
+          <div class="footer-tile creator-tile">
+            <div class="footer-tile-badge">
+              <span class="creator-badge-icon" aria-hidden="true">👨‍💻</span>
+              <span class="badge-text">CREATOR &amp; ARCHITECT</span>
             </div>
-          </div>
-
-          <!-- Col 3: Portal Links -->
-          <div class="footer-col links-col">
-            <h4 class="footer-heading">Civic Portals &amp; Tools</h4>
-            <ul class="footer-links-list">
-              <li><a href="#screen-triage" data-view-link="triage">🏥 OPD Triage Front Door</a></li>
-              <li><a href="#screen-profile" data-view-link="profile">👤 My Patient Profile &amp; Records</a></li>
-              <li><a href="#screen-doctor" data-view-link="doctor">🩺 Hospital Doctor &amp; Staff Suite</a></li>
-              <li><a href="#screen-lab-tests" data-view-link="lab-tests">🔬 Diagnostic Tests &amp; Scans</a></li>
-              <li><a href="#screen-blood-bank" data-view-link="blood-bank">🩸 24/7 Blood Bank Directory</a></li>
-              <li><a href="#screen-hospitals" data-view-link="hospitals">🏛️ Pan-India Premier Hospitals</a></li>
-              <li><a href="#screen-comparison" data-view-link="comparison">⚖️ ORS vs Raahat Comparison</a></li>
-              <li><a href="#screen-honesty" data-view-link="honesty">📋 Honesty &amp; Verification Ledger</a></li>
-            </ul>
-          </div>
-
-          <!-- Col 4: 24/7 Helplines & Grievance -->
-          <div class="footer-col helplines-col">
-            <h4 class="footer-heading">Emergency &amp; Grievance</h4>
-            <div class="helpline-badges">
-              <a href="tel:102" class="helpline-card">
-                <span class="helpline-num">102</span>
-                <span class="helpline-name">Ambulance</span>
-                <span class="tag">Verified</span>
+            <h3 class="footer-tile-title">Shivang</h3>
+            <p class="footer-tile-sub">Engineered with open civic principles, deterministic emergency safety, and accessible public healthcare routing.</p>
+            <div class="creator-links-row" aria-label="Shivang Social Profiles">
+              <a href="https://github.com/Shivang-creator" target="_blank" rel="noopener noreferrer" class="creator-action-btn github-btn" title="Shivang on GitHub">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                <span>GitHub</span>
               </a>
-              <a href="tel:108" class="helpline-card">
-                <span class="helpline-num">108</span>
-                <span class="helpline-name">Disaster</span>
-                <span class="tag">Verified</span>
-              </a>
-              <a href="tel:1075" class="helpline-card">
-                <span class="helpline-num">1075</span>
-                <span class="helpline-name">Health Line</span>
-                <span class="tag">Verified</span>
-              </a>
-              <a href="tel:104" class="helpline-card">
-                <span class="helpline-num">104</span>
-                <span class="helpline-name">Blood Helpline</span>
-                <span class="tag">Verified</span>
-              </a>
-            </div>
-            <div class="grievance-box">
-              <span class="support-label" style="font-weight: 800;">Citizen Grievance Redressal:</span>
-              <a href="https://pgportal.gov.in" target="_blank" rel="noopener noreferrer" class="grievance-link">
-                CPGRAMS / PGPortal Official Redressal ↗
+              <a href="https://www.linkedin.com/in/shivang-shirodkar-a51902233/" target="_blank" rel="noopener noreferrer" class="creator-action-btn linkedin-btn" title="Shivang on LinkedIn">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <span>LinkedIn</span>
               </a>
             </div>
           </div>
         </div>
 
-        <div class="footer-bottom-bar">
+        <!-- Civic Prototype Safeguard Notice (Rule 6) -->
+        <div class="footer-bottom-notice">
           <p class="prototype-notice">
             <span class="tag">Civic Safeguard</span> <strong>Independent Civic Prototype · Mock Data · Not affiliated with National Health Authority, ORS, or any government body.</strong>
           </p>
           <p class="footer-copy">© 2026 Raahat · Built for India with open civic principles.</p>
         </div>
       </footer>
+
+      <!-- ORS-Style Floating Accessibility Control Panel -->
+      <div class="a11y-backdrop" id="a11y-backdrop" hidden></div>
+      <section class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="true" aria-labelledby="a11y-panel-title" hidden>
+        <div class="a11y-panel-header">
+          <h3 id="a11y-panel-title" class="a11y-title">
+            <span aria-hidden="true">♿</span> Accessibility
+          </h3>
+          <button type="button" class="a11y-close-btn" id="a11y-close-btn" aria-label="Close accessibility panel">✕</button>
+        </div>
+        <div class="a11y-panel-body">
+          <button type="button" class="a11y-action-btn" id="a11y-btn-contrast">
+            <span class="a11y-btn-icon">🌓</span>
+            <span class="a11y-btn-text">Enable High Contrast</span>
+          </button>
+          <button type="button" class="a11y-action-btn" id="a11y-btn-invert">
+            <span class="a11y-btn-icon">🔄</span>
+            <span class="a11y-btn-text">Enable Invert Colors</span>
+          </button>
+          <div class="a11y-control-group">
+            <div class="a11y-label-row">
+              <label for="a11y-range-sat" class="a11y-control-label" id="a11y-sat-readout">Saturation: 100%</label>
+            </div>
+            <input type="range" id="a11y-range-sat" min="0" max="200" value="100" class="a11y-slider" aria-labelledby="a11y-sat-readout" />
+          </div>
+          <div class="a11y-control-group">
+            <div class="a11y-label-row">
+              <span class="a11y-control-label">Text Size:</span>
+              <span class="a11y-size-indicator" id="a11y-size-readout">100%</span>
+            </div>
+            <div class="a11y-font-buttons" role="group" aria-label="Text size adjustments">
+              <button type="button" class="a11y-font-btn" id="a11y-font-dec" title="Decrease font size" aria-label="Decrease font size">A-</button>
+              <button type="button" class="a11y-font-btn" id="a11y-font-reset" title="Reset font size" aria-label="Reset font size">Reset</button>
+              <button type="button" class="a11y-font-btn" id="a11y-font-inc" title="Increase font size" aria-label="Increase font size">A+</button>
+            </div>
+          </div>
+          <button type="button" class="a11y-reset-all-btn" id="a11y-btn-reset-all">Reset All</button>
+        </div>
+      </section>
+
+      <!-- Navigation & Portals Sidebar Drawer -->
+      <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+      <aside class="site-sidebar" id="site-sidebar" role="dialog" aria-modal="true" aria-label="Navigation Menu" hidden>
+        <div class="sidebar-header">
+          <div class="sidebar-brand">
+            <span class="sidebar-logo">राहत · Raahat</span>
+            <span class="sidebar-tagline">OPD Triage &amp; Hospital Suite</span>
+          </div>
+          <button type="button" class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Close navigation menu">✕</button>
+        </div>
+        
+        <div class="sidebar-content">
+          <!-- Group 1: Patient Care & Triage -->
+          <div class="sidebar-group">
+            <div class="sidebar-group-title">
+              <span aria-hidden="true">🏥</span> Citizen Care &amp; Triage
+            </div>
+            <div class="sidebar-links-grid">
+              <a href="#screen-home" class="sidebar-nav-card" data-sidebar-link="home">
+                <span class="nav-card-icon">🏠</span>
+                <div class="nav-card-text">
+                  <strong class="nav-card-title">Home / Front Door</strong>
+                  <small class="nav-card-desc">Citizen OPD front door and overview</small>
+                </div>
+              </a>
+              <a href="#screen-triage" class="sidebar-nav-card" data-sidebar-link="triage">
+                <span class="nav-card-icon">🏥</span>
+                <div class="nav-card-text">
+                  <strong class="nav-card-title">OPD Counter Triage</strong>
+                  <small class="nav-card-desc">3D/2D Body Map, voice &amp; text routing</small>
+                </div>
+              </a>
+              <a href="#screen-profile" class="sidebar-nav-card" data-sidebar-link="profile">
+                <span class="nav-card-icon">👤</span>
+                <div class="nav-card-text">
+                  <strong class="nav-card-title">My Patient Profile</strong>
+                  <small class="nav-card-desc">Live OPD digital pass &amp; consultation history</small>
+                </div>
+              </a>
+              <a href="#screen-lab-tests" class="sidebar-nav-card" data-sidebar-link="lab-tests">
+                <span class="nav-card-icon">🔬</span>
+                <div class="nav-card-text">
+                  <strong class="nav-card-title">Lab Tests &amp; Scans</strong>
+                  <small class="nav-card-desc">Diagnostic test catalog &amp; slot booking</small>
+                </div>
+              </a>
+              <a href="#screen-blood-bank" class="sidebar-nav-card" data-sidebar-link="blood-bank">
+                <span class="nav-card-icon">🩸</span>
+                <div class="nav-card-text">
+                  <strong class="nav-card-title">Blood Bank Directory</strong>
+                  <small class="nav-card-desc">e-RaktKosh 24/7 live stock &amp; rare groups</small>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Group 2: Hospital Staff & Clinical Suite -->
+          <div class="sidebar-group">
+            <div class="sidebar-group-title">
+              <span aria-hidden="true">🩺</span> Hospital Staff &amp; Operations
+            </div>
+            <div class="sidebar-links-grid">
+              <a href="#screen-doctor" class="sidebar-nav-card" data-sidebar-link="doctor">
+                <span class="nav-card-icon">👨‍⚕️</span>
+                <div class="nav-card-text">
+                  <strong class="nav-card-title">OPD Doctor Desk</strong>
+                  <small class="nav-card-desc">Real-time patient queue, chime &amp; SBAR handover</small>
+                </div>
+              </a>
+              <a href="#screen-doctor" class="sidebar-nav-card" data-sidebar-link="doctor" data-role-tab="counter">
+                <span class="nav-card-icon">🎟️</span>
+                <div class="nav-card-text">
+                  <strong class="nav-card-title">Token &amp; Registration Counter</strong>
+                  <small class="nav-card-desc">80mm thermal token receipt printer</small>
+                </div>
+              </a>
+              <a href="#screen-doctor" class="sidebar-nav-card" data-sidebar-link="doctor" data-role-tab="admin">
+                <span class="nav-card-icon">📊</span>
+                <div class="nav-card-text">
+                  <strong class="nav-card-title">CMO &amp; Admin Command</strong>
+                  <small class="nav-card-desc">Live department wait times &amp; queue bottlenecks</small>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Group 3: Civic Verification & Directory -->
+          <div class="sidebar-group">
+            <div class="sidebar-group-title">
+              <span aria-hidden="true">⚖️</span> Public Facts &amp; Verification
+            </div>
+            <div class="sidebar-links-grid">
+              <a href="#screen-hospitals" class="sidebar-nav-card" data-sidebar-link="hospitals">
+                <span class="nav-card-icon">🏛️</span>
+                <div class="nav-card-text">
+                  <strong class="nav-card-title">Pan-India Hospital Directory</strong>
+                  <small class="nav-card-desc">60+ verified premier institutions</small>
+                </div>
+              </a>
+              <a href="#screen-comparison" class="sidebar-nav-card" data-sidebar-link="comparison">
+                <span class="nav-card-icon">⚖️</span>
+                <div class="nav-card-text">
+                  <strong class="nav-card-title">ORS vs Raahat Comparison</strong>
+                  <small class="nav-card-desc">Why front-door triage transforms wait times</small>
+                </div>
+              </a>
+              <a href="#screen-honesty" class="sidebar-nav-card" data-sidebar-link="honesty">
+                <span class="nav-card-icon">📋</span>
+                <div class="nav-card-text">
+                  <strong class="nav-card-title">Honesty &amp; Safeguards Ledger</strong>
+                  <small class="nav-card-desc">Full disclosure of simulated vs verified data</small>
+                </div>
+              </a>
+              <a href="#screen-faqs" class="sidebar-nav-card" data-sidebar-link="faqs">
+                <span class="nav-card-icon">❓</span>
+                <div class="nav-card-text">
+                  <strong class="nav-card-title">Questions Citizens Ask (FAQs)</strong>
+                  <small class="nav-card-desc">Safety, accessibility, and privacy answers</small>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-footer">
+          <button type="button" class="sidebar-tool-btn" id="sidebar-btn-lang">
+            <span aria-hidden="true">🌐</span> 22 Languages
+          </button>
+          <button type="button" class="sidebar-tool-btn" id="sidebar-btn-a11y">
+            <span aria-hidden="true">♿</span> Access
+          </button>
+          <button type="button" class="sidebar-tool-btn" id="sidebar-btn-theme">
+            <span aria-hidden="true">🌓</span> Theme
+          </button>
+        </div>
+      </aside>
 
     </div>
 
@@ -4064,6 +4287,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         document.querySelectorAll("[data-view-link]").forEach((link) => {
           if (!link.matches(".site-nav a")) return;
           const active = link.dataset.viewLink === viewId;
+          link.setAttribute("aria-current", active ? "page" : "false");
+        });
+        document.querySelectorAll("[data-sidebar-link]").forEach((link) => {
+          const active = link.dataset.sidebarLink === viewId;
           link.setAttribute("aria-current", active ? "page" : "false");
         });
       }
@@ -5435,12 +5662,246 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         });
       }
 
+
+      function wireAccessibilitySuite() {
+        const panel = document.querySelector("#a11y-panel");
+        const backdrop = document.querySelector("#a11y-backdrop");
+        const openBtn = document.querySelector("#btn-open-a11y");
+        const sidebarOpenBtn = document.querySelector("#sidebar-btn-a11y");
+        const closeBtn = document.querySelector("#a11y-close-btn");
+        const contrastBtn = document.querySelector("#a11y-btn-contrast");
+        const invertBtn = document.querySelector("#a11y-btn-invert");
+        const satSlider = document.querySelector("#a11y-range-sat");
+        const satReadout = document.querySelector("#a11y-sat-readout");
+        const sizeReadout = document.querySelector("#a11y-size-readout");
+        const fontDecBtn = document.querySelector("#a11y-font-dec");
+        const fontResetBtn = document.querySelector("#a11y-font-reset");
+        const fontIncBtn = document.querySelector("#a11y-font-inc");
+        const resetAllBtn = document.querySelector("#a11y-btn-reset-all");
+
+        const DEFAULT_A11Y = {
+          contrast: false,
+          invert: false,
+          saturation: 100,
+          fontScale: 100
+        };
+
+        let a11yState = { ...DEFAULT_A11Y };
+
+        try {
+          const saved = localStorage.getItem("raahat_a11y_prefs");
+          if (saved) {
+            a11yState = { ...DEFAULT_A11Y, ...JSON.parse(saved) };
+          }
+        } catch (e) {
+          console.warn("Could not read a11y prefs", e);
+        }
+
+        function savePrefs() {
+          try {
+            localStorage.setItem("raahat_a11y_prefs", JSON.stringify(a11yState));
+          } catch (e) {
+            console.warn("Could not save a11y prefs", e);
+          }
+        }
+
+        function applyA11y() {
+          // Contrast
+          if (a11yState.contrast) {
+            document.documentElement.setAttribute("data-a11y-contrast", "high");
+            if (contrastBtn) {
+              contrastBtn.setAttribute("aria-pressed", "true");
+              const textSpan = contrastBtn.querySelector(".a11y-btn-text");
+              if (textSpan) textSpan.textContent = "Disable High Contrast";
+            }
+          } else {
+            document.documentElement.removeAttribute("data-a11y-contrast");
+            if (contrastBtn) {
+              contrastBtn.setAttribute("aria-pressed", "false");
+              const textSpan = contrastBtn.querySelector(".a11y-btn-text");
+              if (textSpan) textSpan.textContent = "Enable High Contrast";
+            }
+          }
+
+          // Invert
+          if (a11yState.invert) {
+            document.documentElement.setAttribute("data-a11y-invert", "true");
+            if (invertBtn) {
+              invertBtn.setAttribute("aria-pressed", "true");
+              const textSpan = invertBtn.querySelector(".a11y-btn-text");
+              if (textSpan) textSpan.textContent = "Disable Invert Colors";
+            }
+          } else {
+            document.documentElement.removeAttribute("data-a11y-invert");
+            if (invertBtn) {
+              invertBtn.setAttribute("aria-pressed", "false");
+              const textSpan = invertBtn.querySelector(".a11y-btn-text");
+              if (textSpan) textSpan.textContent = "Enable Invert Colors";
+            }
+          }
+
+          // Saturation
+          document.documentElement.style.setProperty("--a11y-saturation", a11yState.saturation + "%");
+          if (satSlider) satSlider.value = a11yState.saturation;
+          if (satReadout) satReadout.textContent = "Saturation: " + a11yState.saturation + "%";
+
+          // Font Scale
+          document.documentElement.style.fontSize = a11yState.fontScale + "%";
+          if (sizeReadout) sizeReadout.textContent = a11yState.fontScale + "%";
+
+          savePrefs();
+        }
+
+        function openPanel() {
+          if (!panel) return;
+          panel.hidden = false;
+          if (backdrop) backdrop.hidden = false;
+          openBtn?.setAttribute("aria-expanded", "true");
+        }
+
+        function closePanel() {
+          if (!panel) return;
+          panel.hidden = true;
+          if (backdrop) backdrop.hidden = true;
+          openBtn?.setAttribute("aria-expanded", "false");
+        }
+
+        openBtn?.addEventListener("click", () => {
+          if (panel.hidden) openPanel();
+          else closePanel();
+        });
+        sidebarOpenBtn?.addEventListener("click", () => {
+          if (typeof closeSidebar === "function") closeSidebar();
+          openPanel();
+        });
+        closeBtn?.addEventListener("click", closePanel);
+        backdrop?.addEventListener("click", closePanel);
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && panel && !panel.hidden) {
+            closePanel();
+          }
+        });
+
+        contrastBtn?.addEventListener("click", () => {
+          a11yState.contrast = !a11yState.contrast;
+          applyA11y();
+        });
+
+        invertBtn?.addEventListener("click", () => {
+          a11yState.invert = !a11yState.invert;
+          applyA11y();
+        });
+
+        satSlider?.addEventListener("input", (e) => {
+          a11yState.saturation = parseInt(e.target.value, 10);
+          applyA11y();
+        });
+
+        fontDecBtn?.addEventListener("click", () => {
+          if (a11yState.fontScale > 85) {
+            a11yState.fontScale -= 15;
+            applyA11y();
+          }
+        });
+
+        fontResetBtn?.addEventListener("click", () => {
+          a11yState.fontScale = 100;
+          applyA11y();
+        });
+
+        fontIncBtn?.addEventListener("click", () => {
+          if (a11yState.fontScale < 145) {
+            a11yState.fontScale += 15;
+            applyA11y();
+          }
+        });
+
+        resetAllBtn?.addEventListener("click", () => {
+          a11yState = { ...DEFAULT_A11Y };
+          applyA11y();
+        });
+
+        applyA11y();
+      }
+
+      function wireSidebarDrawer() {
+        const sidebar = document.querySelector("#site-sidebar");
+        const backdrop = document.querySelector("#sidebar-backdrop");
+        const openBtn = document.querySelector("#btn-open-sidebar");
+        const closeBtn = document.querySelector("#sidebar-close-btn");
+        const sidebarLangBtn = document.querySelector("#sidebar-btn-lang");
+        const sidebarThemeBtn = document.querySelector("#sidebar-btn-theme");
+
+        function openSidebar() {
+          if (!sidebar) return;
+          sidebar.hidden = false;
+          requestAnimationFrame(() => {
+            sidebar.classList.add("is-open");
+          });
+          if (backdrop) backdrop.hidden = false;
+          openBtn?.setAttribute("aria-expanded", "true");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeSidebar() {
+          if (!sidebar) return;
+          sidebar.classList.remove("is-open");
+          setTimeout(() => {
+            sidebar.hidden = true;
+            if (backdrop) backdrop.hidden = true;
+          }, 240);
+          openBtn?.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
+        }
+
+        window.closeSidebar = closeSidebar;
+        window.openSidebar = openSidebar;
+
+        openBtn?.addEventListener("click", openSidebar);
+        closeBtn?.addEventListener("click", closeSidebar);
+        backdrop?.addEventListener("click", closeSidebar);
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && sidebar && !sidebar.hidden) {
+            closeSidebar();
+          }
+        });
+
+        // Sidebar internal nav cards
+        document.querySelectorAll("[data-sidebar-link]").forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const targetView = link.dataset.sidebarLink;
+            const roleTab = link.dataset.roleTab;
+            closeSidebar();
+            switchView(targetView);
+            if (roleTab && typeof switchDoctorRole === "function") {
+              setTimeout(() => switchDoctorRole(roleTab), 50);
+            }
+          });
+        });
+
+        sidebarLangBtn?.addEventListener("click", () => {
+          closeSidebar();
+          const openLangBtn = document.querySelector("#btn-open-languages");
+          openLangBtn?.click();
+        });
+
+        sidebarThemeBtn?.addEventListener("click", () => {
+          const themeBtn = document.querySelector("#theme-toggle");
+          themeBtn?.click();
+        });
+      }
+
       wireVernacularExpansion();
       wireDoctorPortal();
       wirePrescriptionOCR();
       wireProfileScreen();
       wireHospitalRoleSuite();
       wireWhatsAppSimulator();
+      wireAccessibilitySuite();
+      wireSidebarDrawer();
       renderPanIndiaDirectory();
       renderLocalities();
       renderLabCatalog();
