@@ -15,12 +15,12 @@ const COLORS = Object.freeze({
   skinLight: 0xdde5df,        // Serene celadon porcelain tone
   skinContour: 0xccd8d1,      // Subtle jade-tinted anatomical contouring
   skinDeep: 0xb6c5be,         // Soft medical depth tone
-  darkBody: 0x13211f,         // Deep obsidian jade porcelain
-  darkContour: 0x0c1715,      // Deep shadow tone
-  darkInner: 0x182d29,        // Deep sub-surface teal
-  accentJade: 0x0d9488,       // Signature Raahat medical jade
-  accentTeal: 0x14b8a6,       // Glowing clinical teal reticle
-  beaconCyan: 0x06b6d4,       // High-visibility sensory beacon cyan
+  darkBody: 0x18202c,         // Deep obsidian slate porcelain (sleek, luxury, neutral)
+  darkContour: 0x0f141d,      // Deep shadow tone
+  darkInner: 0x1c2432,        // Deep sub-surface slate
+  accentJade: 0x10b981,       // Organic healing medical jade (calm, warm emerald)
+  accentTeal: 0x059669,       // Balanced emerald accent
+  beaconCyan: 0x38bdf8,       // High-visibility sensory sapphire
   beaconAmber: 0xf59e0b,      // Active landmark selection gold
   amber: 0xf59e0b,            // Interactive hover
 });
@@ -234,30 +234,47 @@ export function normalizeGLBScene(scene, targetHeight = 1.75) {
 
 // Creates the signature porcelain celadon physical material
 function createPorcelainMaterial(dark = false) {
+  if (dark) {
+    return new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color(0x18202c), // Deep sculpted obsidian slate
+      roughness: 0.46,
+      metalness: 0.08,
+      clearcoat: 0.52,
+      clearcoatRoughness: 0.22,
+      sheen: 0.50,
+      sheenRoughness: 0.32,
+      sheenColor: new THREE.Color(0x94a3b8), // Soft silver-pearl edge highlight (zero cyan/blue)
+      emissive: new THREE.Color(0x0c1118), // Deep rich neutral dark
+      emissiveIntensity: 0.08,
+      transparent: true,
+      opacity: 0.98,
+      side: THREE.FrontSide,
+    });
+  }
   return new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color(dark ? COLORS.darkBody : COLORS.skinLight),
-    roughness: 0.52,
+    color: new THREE.Color(COLORS.skinLight),
+    roughness: 0.50,
     metalness: 0.04,
     clearcoat: 0.42,
-    clearcoatRoughness: 0.28,
-    sheen: 0.85,
-    sheenRoughness: 0.40,
-    sheenColor: new THREE.Color(dark ? 0x2dd4bf : COLORS.accentTeal),
-    emissive: new THREE.Color(dark ? 0x061e1a : 0x132924),
-    emissiveIntensity: 0.14,
+    clearcoatRoughness: 0.26,
+    sheen: 0.70,
+    sheenRoughness: 0.38,
+    sheenColor: new THREE.Color(0xb2dfdb),
+    emissive: new THREE.Color(0x102820),
+    emissiveIntensity: 0.10,
     transparent: true,
-    opacity: 0.96,
+    opacity: 0.98,
     side: THREE.FrontSide,
   });
 }
 
 // Interactive 3D Anatomical Landmark Beacons for high-clarity sensory & facial organ discovery
 const ANATOMICAL_BEACONS = Object.freeze([
-  { id: "eyes", label: "Eyes", hi: "आँखें", x: 0.038, y: 1.630, z: 0.082, mirror: true, side: "left" },
-  { id: "nose", label: "Nose & Sinuses", hi: "नाक व साइनस", x: 0.000, y: 1.604, z: 0.092, mirror: false, side: "both" },
-  { id: "teeth", label: "Teeth & Jaw", hi: "दाँत व जबड़ा", x: 0.000, y: 1.568, z: 0.078, mirror: false, side: "both" },
-  { id: "ears", label: "Ears & Hearing", hi: "कान", x: 0.095, y: 1.610, z: 0.010, mirror: true, side: "left" },
-  { id: "neck", label: "Throat & Neck", hi: "गला व गर्दन", x: 0.000, y: 1.492, z: 0.030, mirror: false, side: "both" },
+  { id: "eyes", label: "Eyes", hi: "आँखें", x: 0.038, y: 1.630, z: 0.082, mirror: true, side: "left", color: 0x38bdf8 },
+  { id: "nose", label: "Nose & Sinuses", hi: "नाक व साइनस", x: 0.000, y: 1.604, z: 0.092, mirror: false, side: "both", color: 0x34d399 },
+  { id: "teeth", label: "Teeth & Jaw", hi: "दाँत व जबड़ा", x: 0.000, y: 1.568, z: 0.078, mirror: false, side: "both", color: 0xfbbf24 },
+  { id: "ears", label: "Ears & Hearing", hi: "कान", x: 0.095, y: 1.610, z: 0.010, mirror: true, side: "left", color: 0xa78bfa },
+  { id: "neck", label: "Throat & Neck", hi: "गला व गर्दन", x: 0.000, y: 1.492, z: 0.030, mirror: false, side: "both", color: 0x10b981 },
 ]);
 
 function makeTooltip(stage) {
@@ -293,17 +310,48 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
   camera.lookAt(0, 0.88, 0);
 
   // Precision clinical lighting suite for realistic anatomical definition
-  const hemisphere = new THREE.HemisphereLight(0xf0fdfa, 0x94a3b8, 1.85);
-  const keyLight = new THREE.DirectionalLight(0xfffbeb, 2.2);
-  keyLight.position.set(-2.5, 4.5, 5);
+  const hemisphere = new THREE.HemisphereLight(0xfffbf5, 0x151c27, 1.4);
+  const keyLight = new THREE.DirectionalLight(0xfff8ee, 2.1);
+  keyLight.position.set(-2.2, 4.2, 4.8);
 
-  const fillLight = new THREE.DirectionalLight(0xccfbf1, 1.35);
-  fillLight.position.set(3, -1, 4);
+  const fillLight = new THREE.DirectionalLight(0xe2e8f0, 0.85);
+  fillLight.position.set(2.8, -0.6, 3.8);
 
-  const rimLight = new THREE.DirectionalLight(0x99f6e4, 1.7);
-  rimLight.position.set(0, 3, -5);
+  const rimLight = new THREE.DirectionalLight(0xfef3c7, 1.15);
+  rimLight.position.set(0, 2.8, -4.8);
 
   scene.add(hemisphere, keyLight, fillLight, rimLight);
+
+  function updateLighting(isDark = false) {
+    if (isDark) {
+      hemisphere.color.setHex(0xfffbf5);
+      hemisphere.groundColor.setHex(0x111823);
+      hemisphere.intensity = 1.35;
+
+      keyLight.color.setHex(0xfff8ee);
+      keyLight.intensity = 2.1;
+
+      fillLight.color.setHex(0xe2e8f0);
+      fillLight.intensity = 0.8;
+
+      rimLight.color.setHex(0xfef3c7);
+      rimLight.intensity = 1.15;
+    } else {
+      hemisphere.color.setHex(0xf8fafc);
+      hemisphere.groundColor.setHex(0xcfd8dc);
+      hemisphere.intensity = 1.6;
+
+      keyLight.color.setHex(0xfffaed);
+      keyLight.intensity = 2.0;
+
+      fillLight.color.setHex(0xf1f5f9);
+      fillLight.intensity = 0.95;
+
+      rimLight.color.setHex(0xfef3c7);
+      rimLight.intensity = 1.1;
+    }
+  }
+  updateLighting(document.documentElement?.getAttribute("data-theme") === "dark");
 
   // Dual-ring clinical targeting system (spherical volume + equatorial rotating coordinate reticle)
   const highlightSphereGeo = new THREE.SphereGeometry(1, 24, 24);
@@ -362,6 +410,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
   const beaconHitGeo = new THREE.SphereGeometry(0.026, 8, 8);
 
   ANATOMICAL_BEACONS.forEach((b) => {
+    const beaconColor = b.color || COLORS.accentJade;
     const instances = b.mirror
       ? [
           { side: "left", x: b.x, y: b.y, z: b.z },
@@ -374,7 +423,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
       node.position.set(inst.x, inst.y, inst.z);
 
       const dotMat = new THREE.MeshBasicMaterial({
-        color: COLORS.accentTeal,
+        color: beaconColor,
         depthTest: false,
         depthWrite: false,
       });
@@ -382,7 +431,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
       dot.renderOrder = 990;
 
       const ringMat = new THREE.MeshBasicMaterial({
-        color: COLORS.accentJade,
+        color: beaconColor,
         transparent: true,
         opacity: 0.85,
         side: THREE.DoubleSide,
@@ -446,6 +495,7 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
 
   function applyMaterials(modelObj) {
     const dark = document.documentElement?.getAttribute("data-theme") === "dark";
+    updateLighting(dark);
     modelObj.traverse((child) => {
       if (child.isMesh) {
         child.material = createPorcelainMaterial(dark);
