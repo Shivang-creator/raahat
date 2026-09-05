@@ -701,6 +701,456 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .result-actions .large-button { flex: 1 1 12rem; }
       .back-button { min-height: 3.5rem; padding: 0.7rem 1rem; border: 2px solid var(--line); border-radius: 1rem; background: transparent; color: var(--accent-dark); font-size: 1rem; font-weight: 750; }
       
+      
+      /* Streamlined Linear Step 4 Flow Styles */
+      .booking-zen-header {
+        margin: 1rem 0 1.25rem;
+      }
+      .booking-zen-title-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-bottom: 0.5rem;
+      }
+      .booking-specialty-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.28);
+        font-size: 0.9rem;
+      }
+      .booking-specialty-pill strong {
+        color: var(--accent-dark);
+        font-weight: 800;
+      }
+      [data-theme="dark"] .booking-specialty-pill strong {
+        color: #34d399;
+      }
+
+      /* Hero Hospital Card */
+      .hospital-hero-card {
+        padding: 1.5rem;
+        border-radius: 1.5rem;
+        background: var(--paper);
+        border: 2px solid rgba(16, 185, 129, 0.35);
+        box-shadow: 0 10px 30px -5px rgba(16, 185, 129, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+        margin-bottom: 1.25rem;
+        position: relative;
+        transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      }
+      [data-theme="dark"] .hospital-hero-card {
+        background: rgba(17, 22, 32, 0.85);
+        border-color: rgba(52, 211, 153, 0.35);
+      }
+      .hero-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-bottom: 0.75rem;
+      }
+      .hero-badge-strip {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .auto-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.28rem 0.8rem;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #ffffff;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+      }
+      .tier-pill {
+        display: inline-block;
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        background: rgba(59, 130, 246, 0.1);
+        color: #2563eb;
+        font-size: 0.78rem;
+        font-weight: 750;
+      }
+      [data-theme="dark"] .tier-pill {
+        background: rgba(59, 130, 246, 0.2);
+        color: #60a5fa;
+      }
+      .btn-change-hospital {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        min-height: 2.75rem;
+        padding: 0.4rem 1rem;
+        border-radius: 999px;
+        border: 1.5px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+        font-size: 0.88rem;
+        font-weight: 750;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-change-hospital:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .hero-hospital-name {
+        margin: 0.2rem 0 0.3rem;
+        font-size: clamp(1.35rem, 4vw, 1.75rem);
+        font-weight: 850;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        color: var(--ink);
+      }
+      .hero-hospital-address {
+        margin: 0 0 1rem;
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      /* Hero Stats Row */
+      .hero-stats-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        margin-bottom: 1rem;
+      }
+      .hero-stat-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.45rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        background: rgba(15, 23, 42, 0.04);
+        border: 1px solid var(--line);
+        color: var(--ink);
+      }
+      [data-theme="dark"] .hero-stat-pill {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      .hero-stat-pill .stat-val {
+        font-weight: 850;
+      }
+      .hero-stat-pill .stat-lbl {
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 0.82rem;
+      }
+      .stat-distance {
+        background: rgba(16, 185, 129, 0.08);
+        border-color: rgba(16, 185, 129, 0.25);
+        color: var(--accent);
+      }
+      [data-theme="dark"] .stat-distance { color: #34d399; }
+      .stat-wait {
+        background: rgba(245, 158, 11, 0.08);
+        border-color: rgba(245, 158, 11, 0.25);
+        color: #b45309;
+      }
+      [data-theme="dark"] .stat-wait { color: #fbbf24; }
+      .stat-slot {
+        background: rgba(99, 102, 241, 0.08);
+        border-color: rgba(99, 102, 241, 0.25);
+        color: #4f46e5;
+      }
+      [data-theme="dark"] .stat-slot { color: #818cf8; }
+
+      .hero-transit-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.65rem 0.95rem;
+        border-radius: 0.85rem;
+        background: rgba(15, 23, 42, 0.03);
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.4;
+        margin-bottom: 0.75rem;
+      }
+      [data-theme="dark"] .hero-transit-bar {
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .hero-verified-line {
+        margin: 0;
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+      .hero-verified-line a {
+        color: var(--accent-dark);
+        font-weight: 700;
+      }
+      [data-theme="dark"] .hero-verified-line a {
+        color: #34d399;
+      }
+
+      /* Collapsible Change Hospital Drawer */
+      .hospital-change-drawer {
+        margin-bottom: 1.5rem;
+        padding: 1.25rem;
+        border-radius: 1.25rem;
+        border: 1.5px dashed var(--line);
+        background: rgba(15, 23, 42, 0.02);
+      }
+      [data-theme="dark"] .hospital-change-drawer {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .drawer-header h3 {
+        margin: 0 0 0.25rem;
+        font-size: 1.15rem;
+        font-weight: 800;
+      }
+      .drawer-header p {
+        margin: 0 0 1rem;
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+      .drawer-controls-row {
+        display: flex;
+        gap: 0.65rem;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .drawer-search-wrap {
+        position: relative;
+        flex: 1 1 12rem;
+        display: flex;
+        align-items: center;
+      }
+      .drawer-search-input {
+        width: 100%;
+        min-height: 3rem;
+        padding: 0.5rem 0.85rem 0.5rem 2.2rem;
+        border-radius: 999px;
+        border: 1.5px solid var(--line);
+        background: var(--paper);
+        color: var(--ink);
+        font-size: 0.9rem;
+        outline: none;
+      }
+      .drawer-state-select {
+        flex: 0 1 10rem;
+        min-height: 3rem;
+        padding: 0.5rem 0.8rem;
+        border-radius: 999px;
+        border: 1.5px solid var(--line);
+        background: var(--paper);
+        color: var(--ink);
+        font-size: 0.88rem;
+        font-weight: 650;
+        outline: none;
+      }
+      .drawer-map-wrap {
+        margin-bottom: 1rem;
+        border-radius: 1rem;
+        overflow: hidden;
+        border: 1px solid var(--line);
+      }
+      .drawer-hospitals-heading {
+        margin-bottom: 0.65rem;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      /* Visit Timing Panel */
+      .visit-timing-panel {
+        padding: 1.5rem;
+        border-radius: 1.5rem;
+        background: var(--paper);
+        border: 1.5px solid var(--line);
+        box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+        margin-bottom: 1.25rem;
+      }
+      [data-theme="dark"] .visit-timing-panel {
+        background: rgba(17, 22, 32, 0.85);
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      .panel-heading {
+        margin: 0 0 1rem;
+        font-size: 1.18rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .shift-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
+      .shift-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding: 1rem 1.15rem;
+        border-radius: 1rem;
+        border: 1.5px solid var(--line);
+        background: var(--background);
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .shift-card:hover {
+        border-color: var(--accent);
+      }
+      .shift-card[aria-pressed="true"] {
+        border-color: var(--accent);
+        background: rgba(16, 185, 129, 0.08);
+        box-shadow: 0 0 0 1.5px var(--accent);
+      }
+      .shift-card strong {
+        font-size: 1rem;
+        font-weight: 800;
+        color: var(--ink);
+      }
+      .shift-card span {
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+      .slot-count-badge {
+        margin-top: 0.25rem;
+        display: inline-block;
+        font-size: 0.78rem;
+        font-weight: 750;
+        color: var(--accent);
+      }
+      [data-theme="dark"] .slot-count-badge {
+        color: #34d399;
+      }
+
+      .date-strip-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 1rem 0;
+        flex-wrap: wrap;
+      }
+      .strip-label {
+        font-size: 0.88rem;
+        font-weight: 750;
+        color: var(--muted);
+      }
+      .date-strip {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .date-button {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0.45rem 0.85rem;
+        border-radius: 0.75rem;
+        border: 1.5px solid var(--line);
+        background: var(--background);
+        color: var(--ink);
+        font-size: 0.82rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .date-button strong {
+        font-size: 0.95rem;
+        font-weight: 800;
+      }
+      .date-button[aria-pressed="true"] {
+        border-color: var(--accent);
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--accent);
+      }
+
+      .visit-meta-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+        margin: 1.25rem 0 0.75rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--line);
+      }
+      .meta-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .meta-label {
+        font-size: 0.85rem;
+        font-weight: 750;
+        color: var(--muted);
+      }
+      .mode-options, .carry-options {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .mode-pill-btn, .carry-option {
+        min-height: 2.8rem;
+        padding: 0.45rem 0.9rem;
+        border-radius: 999px;
+        border: 1.5px solid var(--line);
+        background: var(--background);
+        color: var(--ink);
+        font-size: 0.88rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .mode-pill-btn[aria-pressed="true"], .carry-option[aria-pressed="true"] {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: #ffffff;
+      }
+
+      /* Generate Pass Action Bar */
+      .generate-pass-bar {
+        margin: 1.5rem 0 2rem;
+        text-align: center;
+      }
+      .btn-get-pass {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        width: 100%;
+        max-width: 32rem;
+        min-height: 4rem;
+        padding: 0.85rem 1.75rem;
+        border-radius: 1rem;
+        background: var(--accent);
+        color: #ffffff;
+        font-size: 1.15rem;
+        font-weight: 850;
+        letter-spacing: -0.01em;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(22, 101, 52, 0.32);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .btn-get-pass:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(22, 101, 52, 0.42);
+        filter: brightness(1.08);
+      }
+      .pass-btn-icon {
+        font-size: 1.4rem;
+      }
+      .pass-hint {
+        margin: 0.65rem 0 0;
+        font-size: 0.86rem;
+        color: var(--muted);
+      }
+
       /* Step 4 Zen Layout & Map Styles */
       .booking-header-zen {
         display: flex;
@@ -5521,135 +5971,183 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         <section class="appointment-screen" id="appointment-screen" aria-labelledby="booking-title" hidden>
           <button class="back-button" type="button" id="booking-back" data-copy="backToDepartment">← Back to department</button>
           
-          <div class="booking-header-zen">
-            <div class="booking-header-left">
-              <span class="zen-step-badge">Step 4 · Hospital & Wait</span>
-              <h1 id="booking-title" tabindex="-1" data-copy="bookingTitle">Find a hospital, honestly</h1>
-              <p class="appointment-intro">We automatically recommend the nearest verified hospital equipped for your clinical need, with simulated queue waits.</p>
+          <div class="booking-zen-header">
+            <div class="booking-zen-title-row">
+              <span class="zen-step-badge">Step 4 · Hospital & Slot</span>
+              <div class="booking-specialty-pill">
+                <span class="tag">Rule</span>
+                <span class="specialty-label">Specialty:</span>
+                <strong id="booking-department"></strong>
+              </div>
             </div>
-            <div class="booking-specialty-card">
-              <span class="tag">Rule</span>
-              <span class="specialty-label">Required Specialty:</span>
-              <strong id="booking-department"></strong>
-            </div>
+            <h1 id="booking-title" tabindex="-1" data-copy="bookingTitle">Hospital & OPD Pass</h1>
+            <p class="appointment-intro">We matched your symptoms to the nearest verified facility. Pick a session to generate your specimen OPD pass.</p>
           </div>
 
-          <!-- Smart Location & Auto-Select Bar -->
-          <div class="smart-location-bar" role="region" aria-label="Location & Hospital Search">
-            <div class="location-bar-main">
-              <button class="location-detect-btn" type="button" id="btn-auto-detect-location" aria-label="Auto-detect nearest hospital using GPS">
-                <span class="radar-dot"></span>
-                <span>📍 Auto-Detect Nearest Hospital</span>
-                <span class="tag tag-gps">Observed · On-Device</span>
-              </button>
-
-              <div class="location-search-wrap">
-                <span class="search-icon" aria-hidden="true">🔍</span>
-                <input class="location-search-input" id="location-search-input" type="search" placeholder="Search city or district (e.g. Lucknow, Varanasi, Bengaluru)..." autocomplete="off" aria-label="Search city or district" list="district-suggestions" />
-                <datalist id="district-suggestions"></datalist>
+          <!-- Section 1: Auto-Selected Hospital Hero Card -->
+          <div class="hospital-hero-card" id="hospital-hero-card">
+            <div class="hero-card-header">
+              <div class="hero-badge-strip">
+                <span class="auto-badge">✨ Nearest Facility</span>
+                <span class="tier-pill" id="hero-hospital-tier">Apex & Medical College</span>
               </div>
-
-              <div class="state-filter-wrap">
-                <select class="state-filter-select" id="state-filter-select" aria-label="Filter by state or UT">
-                  <option value="All India">All India (2,630+ Hospitals)</option>
-                </select>
-              </div>
-
-              <button class="map-toggle-btn" type="button" id="btn-toggle-map" aria-label="Toggle map view">
-                <span id="map-toggle-icon">🗺️</span> <span id="map-toggle-text">Toggle Map</span>
+              <button class="btn-change-hospital" type="button" id="btn-toggle-change-hospital" aria-expanded="false" aria-controls="hospital-change-drawer">
+                <span id="btn-change-hospital-text">🔄 Change Hospital / View Map</span>
               </button>
             </div>
-            
-            <div style="display:none;">
-              <!-- Kept for backward compatibility with existing tests/references -->
-              <select id="locality-select"><option value="central-delhi">Central Delhi</option></select>
+
+            <h2 class="hero-hospital-name" id="hero-hospital-name">AIIMS New Delhi</h2>
+            <p class="hero-hospital-address" id="hero-hospital-address">Ansari Nagar, New Delhi, Delhi 110029</p>
+
+            <div class="hero-stats-row">
+              <div class="hero-stat-pill stat-distance">
+                <span class="tag">Observed</span>
+                <span class="stat-icon">📍</span>
+                <span class="stat-val" id="hero-hospital-distance">2.4 km</span>
+                <span class="stat-lbl">away</span>
+              </div>
+              <div class="hero-stat-pill stat-wait">
+                <span class="tag">Simulated</span>
+                <span class="stat-icon">⏱️</span>
+                <span class="stat-val" id="hero-hospital-wait">~25m</span>
+                <span class="stat-lbl">queue wait</span>
+              </div>
+              <div class="hero-stat-pill stat-slot">
+                <span class="tag">Simulated</span>
+                <span class="stat-icon">🕒</span>
+                <span class="stat-val" id="hero-hospital-slot">09:30 AM</span>
+                <span class="stat-lbl">next slot</span>
+              </div>
             </div>
 
-            <p class="location-privacy-banner">
-              <span class="tag">Observed</span> <strong>100% Client-Side Privacy:</strong> Distance is computed inside your browser using coordinates. Zero GPS data is transmitted to any server.
+            <div class="hero-transit-bar" id="hero-hospital-transit">
+              <span class="transit-icon">🚇</span>
+              <span id="hero-transit-text">Metro: AIIMS Metro Gate 2 · 24/7 Emergency Block</span>
+            </div>
+
+            <p class="hero-verified-line">
+              <span class="tag">Verified</span> Checked 27 Aug 2026 · <a href="https://ors.gov.in/" target="_blank" rel="noreferrer" id="hero-source-link">ORS Hospital Directory</a>
             </p>
           </div>
 
-          <!-- Bento Grid: Interactive Map + Hospitals -->
-          <div class="hospital-finder-grid" id="hospital-finder-grid">
-            <!-- Map Column -->
-            <div class="hospital-map-panel" id="hospital-map-panel">
-              <div class="map-header">
-                <div class="map-title-row">
-                  <span class="live-dot"></span>
-                  <strong>National Healthcare Map</strong>
-                  <span class="map-facility-count" id="map-facility-count">2,630+ Facilities</span>
-                </div>
-                <small class="map-hint">Tap any pin to inspect & select</small>
+          <!-- Collapsible: Change Hospital, Search & Map Drawer (Hidden by default, keeps screen clean!) -->
+          <div class="hospital-change-drawer" id="hospital-change-drawer" hidden>
+            <div class="change-drawer-inner">
+              <div class="drawer-header">
+                <h3>Find Alternative Hospital</h3>
+                <p>Search across 2,630+ hospitals in India or tap a pin on the map.</p>
               </div>
-              <div id="interactive-hospital-map" class="hospital-map-viewport"></div>
-            </div>
 
-            <!-- Cards Column -->
-            <div class="hospital-cards-panel">
-              <div class="auto-selected-highlight" id="auto-selected-highlight">
-                <div class="highlight-badge">
-                  <span>✨</span>
-                  <strong id="auto-select-badge-text">Auto-Selected: Nearest Hospital with your required specialty</strong>
+              <div class="drawer-controls-row">
+                <button class="location-detect-btn" type="button" id="btn-auto-detect-location">
+                  <span class="radar-dot"></span>
+                  <span>📍 Use My GPS Location</span>
+                </button>
+
+                <div class="drawer-search-wrap">
+                  <span class="search-icon">🔍</span>
+                  <input class="drawer-search-input" id="location-search-input" type="search" placeholder="Search city or district (e.g. Lucknow, Varanasi, Bengaluru)..." list="district-suggestions" />
+                  <datalist id="district-suggestions"></datalist>
                 </div>
+
+                <select class="drawer-state-select" id="state-filter-select">
+                  <option value="All India">All India (2,630+ Facilities)</option>
+                </select>
+              </div>
+
+              <div class="drawer-map-wrap">
+                <div id="interactive-hospital-map" class="hospital-map-viewport"></div>
+              </div>
+
+              <div class="drawer-hospitals-heading">
+                <strong id="drawer-hospitals-count">Nearby Matching Facilities:</strong>
               </div>
               <div class="hospital-list" id="hospital-list" aria-live="polite"></div>
             </div>
           </div>
 
-          <section class="booking-panel appointment-options" id="appointment-options" aria-labelledby="appointment-options-title" hidden>
-            <p class="section-kicker"><span class="tag">Observed</span><span data-copy="appointmentStepLabel">Step 4 · Appointment choices</span></p>
-            <h2 id="appointment-options-title" data-copy="consultationModeTitle">How would you like to meet the OPD team?</h2>
-            <div class="mode-grid" role="group" aria-labelledby="appointment-options-title">
-              <button class="mode-card" type="button" data-consultation-mode="in-person" aria-pressed="false"><span class="tag">Observed</span><strong data-copy="inPersonMode">In-Person Hospital Visit</strong><span data-copy="inPersonModeNote">Walk-in to OPD Counter</span></button>
-              <button class="mode-card" type="button" data-consultation-mode="tele" aria-pressed="false"><span class="tag">Observed</span><strong data-copy="teleMode">Online Video Consultation</strong><span data-copy="teleModeNote">e-Sanjeevani Tele-OPD from home</span></button>
+          <!-- Section 2: When to Visit (Session & Date) -->
+          <div class="visit-timing-panel">
+            <h2 class="panel-heading">Choose Your Visit Session</h2>
+            
+            <div class="shift-grid" id="shift-grid" role="radiogroup" aria-label="Choose OPD Session">
+              <button class="shift-card" type="button" data-shift="morning" aria-pressed="true">
+                <span class="tag">Simulated</span>
+                <strong>🌅 Morning Session</strong>
+                <span>09:00 AM – 11:00 AM</span>
+                <small class="slot-count-badge">6 slots open</small>
+              </button>
+              <button class="shift-card" type="button" data-shift="midday" aria-pressed="false">
+                <span class="tag">Simulated</span>
+                <strong>☀️ Mid-Day Session</strong>
+                <span>11:30 AM – 01:30 PM</span>
+                <small class="slot-count-badge">14 slots open</small>
+              </button>
+              <button class="shift-card" type="button" data-shift="afternoon" aria-pressed="false">
+                <span class="tag">Simulated</span>
+                <strong>🌇 Afternoon Session</strong>
+                <span>02:30 PM – 04:30 PM</span>
+                <small class="slot-count-badge">8 slots open</small>
+              </button>
             </div>
-            <div class="calendar-block">
-              <span class="field-label" id="date-strip-label"><span class="tag">Simulated</span><span data-copy="dateStripLabel">Choose a date</span></span>
-              <div class="date-strip" id="date-strip" role="group" aria-labelledby="date-strip-label"></div>
+
+            <!-- Compact Date Strip -->
+            <div class="date-strip-row">
+              <span class="strip-label"><span class="tag">Simulated</span> Day:</span>
+              <div class="date-strip" id="date-strip" role="group" aria-label="Available Days"></div>
             </div>
-            <div class="calendar-block">
-              <span class="field-label" id="shift-label"><span class="tag">Simulated</span><span data-copy="shiftLabel">Choose a session</span></span>
-              <div class="shift-grid" id="shift-grid" role="group" aria-labelledby="shift-label">
-                <button class="shift-card" type="button" data-shift="morning" aria-pressed="false"><span class="tag">Simulated</span><strong data-copy="morningShift">Morning Session</strong><span data-copy="morningShiftNote">09:00 AM to 11:00 AM · 6 slots open</span></button>
-                <button class="shift-card" type="button" data-shift="midday" aria-pressed="false"><span class="tag">Simulated</span><strong data-copy="middayShift">Mid-Day Session</strong><span data-copy="middayShiftNote">11:30 AM to 01:30 PM · 14 slots open</span></button>
-                <button class="shift-card" type="button" data-shift="afternoon" aria-pressed="false"><span class="tag">Simulated</span><strong data-copy="afternoonShift">Afternoon Session</strong><span data-copy="afternoonShiftNote">02:30 PM to 04:30 PM · 8 slots open</span></button>
+
+            <!-- Visit Type & Mode in a Clean Row -->
+            <div class="visit-meta-row">
+              <div class="meta-field">
+                <span class="meta-label">Visit Type:</span>
+                <div class="carry-options" role="radiogroup" aria-label="Visit Type">
+                  <button class="carry-option" type="button" data-visit-type="first" aria-pressed="true">First Visit</button>
+                  <button class="carry-option" type="button" data-visit-type="returning" aria-pressed="false">Returning</button>
+                </div>
+              </div>
+
+              <div class="meta-field">
+                <span class="meta-label">Consultation Mode:</span>
+                <div class="mode-options" role="radiogroup" aria-label="Consultation Mode">
+                  <button class="mode-pill-btn" type="button" data-consultation-mode="in-person" aria-pressed="true">In-Person Hospital Visit</button>
+                  <button class="mode-pill-btn" type="button" data-consultation-mode="tele" aria-pressed="false">Online Video (Tele-OPD)</button>
+                </div>
               </div>
             </div>
-            <p class="honest-wait appointment-wait" id="appointment-wait" aria-live="polite"><span class="tag">Simulated</span><span data-copy="appointmentWaitHint">Choose a date and session to see the estimated consultation time.</span></p>
-          </section>
+
+            <p class="honest-wait appointment-wait" id="appointment-wait" aria-live="polite">
+              <span class="tag">Simulated</span> Expected arrival: 09:30 AM · Estimated consultation: 12:15 PM
+            </p>
+          </div>
+
+          <!-- Section 3: One-Tap Primary Action to Get Specimen Pass -->
+          <div class="generate-pass-bar">
+            <button class="large-button primary btn-get-pass" type="button" id="btn-generate-opd-pass">
+              <span class="pass-btn-icon">🎫</span>
+              <span class="pass-btn-text">Generate OPD Specimen Pass ↓</span>
+            </button>
+            <p class="pass-hint">1-tap instant pass with QR pattern, token #, and doctor handover card.</p>
+          </div>
+
+          <!-- Hidden compatibility elements to prevent any script breakage -->
+          <div style="display:none;" aria-hidden="true">
+            <select id="locality-select"><option value="central-delhi">Central Delhi</option></select>
+            <button id="btn-toggle-map"></button>
+            <div id="hospital-map-panel"></div>
+            <section id="appointment-options"></section>
+            <section id="carry-panel"><ul id="carry-list"></ul><p id="fee-line"></p><button id="to-sign-in"></button></section>
+            <section id="sign-in-panel">
+              <input id="demo-username" value="raahat-demo" />
+              <input id="demo-password" value="demo-pass" />
+              <button id="human-check" aria-pressed="true"></button>
+              <button id="sign-in-button"></button>
+              <p id="sign-in-status"></p>
+            </section>
+          </div>
         </section>
 
-          <section class="booking-panel" id="carry-panel" aria-labelledby="carry-title" hidden>
-            <h2 id="carry-title" data-copy="carryTitle">What to carry</h2>
-            <p class="booking-panel-note" data-copy="carryNote">Choose the list that matches this visit.</p>
-            <div class="carry-options" role="group" aria-labelledby="carry-title">
-              <button class="carry-option" type="button" data-visit-type="first" aria-pressed="false" data-copy="firstVisit">First visit</button>
-              <button class="carry-option" type="button" data-visit-type="returning" aria-pressed="false" data-copy="returningVisit">Returning</button>
-            </div>
-            <ul class="carry-list" id="carry-list" hidden></ul>
-            <p class="fee-line" id="fee-line" hidden></p>
-            <button class="large-button primary" type="button" id="to-sign-in" data-copy="toSignIn" hidden>Continue to sign in</button>
-          </section>
-
-          <section class="booking-panel" id="sign-in-panel" aria-labelledby="sign-in-title" hidden>
-            <h2 id="sign-in-title" data-copy="signInTitle">Sign in to hold this slot</h2>
-            <p class="booking-panel-note" data-copy="signInNote">Identity is needed only now, when making the specimen slip. Nothing real is submitted.</p>
-            <div class="sign-in-disclosure"><span class="tag">Simulated</span><span data-copy="credentialsNote">These demo credentials are printed here so you never have to use a real account.</span></div>
-            <div class="credential-card" aria-label="Mock sign-in credentials">
-              <div><span class="tag">Simulated</span><span data-copy="usernameLabel">Username</span><strong class="credential-value">raahat-demo</strong></div>
-              <div><span class="tag">Simulated</span><span data-copy="passwordLabel">Password</span><strong class="credential-value">demo-pass</strong></div>
-            </div>
-            <div class="sign-in-fields">
-              <div class="sign-in-field"><label for="demo-username"><span class="tag">Simulated</span><span data-copy="usernameInputLabel">Demo username</span></label><input class="sign-in-input" id="demo-username" value="raahat-demo" autocomplete="off" /></div>
-              <div class="sign-in-field"><label for="demo-password"><span class="tag">Simulated</span><span data-copy="passwordInputLabel">Demo password</span></label><input class="sign-in-input" id="demo-password" value="demo-pass" type="text" autocomplete="off" /></div>
-            </div>
-            <button class="human-check" type="button" id="human-check" aria-pressed="false"><span data-copy="humanCheck">Tap once: I am a person</span></button>
-            <button class="large-button primary" type="button" id="sign-in-button" data-copy="signInButton" disabled>Sign in and show the slip</button>
-            <p class="status" id="sign-in-status" aria-live="polite"></p>
-          </section>
-
-          <section class="booking-panel" id="slip-panel" aria-labelledby="slip-heading" hidden>
+        <section class="booking-panel" id="slip-panel" aria-labelledby="slip-heading" hidden>
             <h2 id="slip-heading" data-copy="slipTitle">Your specimen slip</h2>
             <p class="booking-panel-note" data-copy="slipNote">Keep this for the counter. It is a mock slip, not a booking.</p>
             <article class="slip" id="slip-card" aria-label="Specimen appointment slip">
@@ -7519,6 +8017,41 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         }, 120);
       }
 
+      
+      function updateHeroHospitalCard(selectedHospital, department) {
+        if (!selectedHospital) return;
+        const heroName = document.querySelector("#hero-hospital-name");
+        const heroTier = document.querySelector("#hero-hospital-tier");
+        const heroAddress = document.querySelector("#hero-hospital-address");
+        const heroDist = document.querySelector("#hero-hospital-distance");
+        const heroWait = document.querySelector("#hero-hospital-wait");
+        const heroSlot = document.querySelector("#hero-hospital-slot");
+        const heroTransit = document.querySelector("#hero-transit-text");
+        const heroLink = document.querySelector("#hero-source-link");
+
+        if (heroName) heroName.textContent = selectedHospital.name;
+        if (heroTier) heroTier.textContent = selectedHospital.tier || "Government Health Centre";
+        if (heroAddress) heroAddress.textContent = selectedHospital.address || (selectedHospital.city ? `${selectedHospital.city}, ${selectedHospital.state || ""}` : "Public Hospital");
+        if (heroDist) {
+          const d = selectedHospital.availability?.distanceKm;
+          heroDist.textContent = d != null ? `${d.toFixed(1)} km` : "2.4 km";
+        }
+        if (heroWait) {
+          const w = selectedHospital.availability?.waitMinutes;
+          heroWait.textContent = w != null ? `~${Math.round(w / 5) * 5}m` : "~25m";
+        }
+        if (heroSlot) {
+          heroSlot.textContent = selectedHospital.availability?.slot ? formatClock(selectedHospital.availability.slot) : "09:30 AM";
+        }
+        if (heroTransit) {
+          heroTransit.textContent = selectedHospital.transit || "Main OPD Registration Counter · Regular Hours";
+        }
+        if (heroLink) {
+          heroLink.href = selectedHospital.sourceUrl || "https://ors.gov.in/";
+          heroLink.textContent = selectedHospital.sourceLabel || "ORS Hospital Directory";
+        }
+      }
+
       function renderHospitalCards() {
         const department = state.routeResult?.department || "General Medicine";
         const userLocation = state.userCoords || LOCALITIES.find((l) => l.id === state.locality) || { lat: 28.6139, lng: 77.2090, name: "New Delhi" };
@@ -7526,9 +8059,9 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         const hospitals = hospitalsForDepartment(department, state.userCoords || state.locality, state.hospitalStateFilter);
         hospitalList.replaceChildren();
 
-        const facilityCountEl = document.querySelector("#map-facility-count");
-        if (facilityCountEl) {
-          facilityCountEl.textContent = `${hospitals.length} Matching ${department}`;
+        const drawerCount = document.querySelector("#drawer-hospitals-count");
+        if (drawerCount) {
+          drawerCount.textContent = `Matching Facilities (${hospitals.length} Found):`;
         }
 
         if (!hospitals.length) {
@@ -7539,25 +8072,19 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           return;
         }
 
-        // Auto-select the #1 nearest hospital if none selected or if selected is not in filtered list
+        // Auto-select #1 nearest facility if none selected or not in list
         if (!state.selectedHospital || !hospitals.some((h) => h.id === state.selectedHospital)) {
           state.selectedHospital = hospitals[0].id;
         }
 
         const selectedHospital = hospitals.find((h) => h.id === state.selectedHospital) || hospitals[0];
-        const autoSelectBadge = document.querySelector("#auto-select-badge-text");
-        if (autoSelectBadge) {
-          const distStr = selectedHospital.availability?.distanceKm ? ` (${selectedHospital.availability.distanceKm.toFixed(1)} km away)` : "";
-          autoSelectBadge.textContent = `Auto-Selected: Nearest facility equipped for ${departmentCopyKeys[department] ? text(departmentCopyKeys[department]) : department}${distStr}`;
-        }
+        
+        // Update the clean Hero Card on top!
+        updateHeroHospitalCard(selectedHospital, department);
 
-        // Render Hero Card for Selected Hospital first, then top alternatives
-        const sortedDisplay = [
-          selectedHospital,
-          ...hospitals.filter((h) => h.id !== selectedHospital.id).slice(0, 5)
-        ];
-
-        sortedDisplay.forEach((hospital, index) => {
+        // Render Alternative Facilities inside the drawer
+        const alternatives = hospitals.slice(0, 10);
+        alternatives.forEach((hospital) => {
           const { availability } = hospital;
           const isSelected = state.selectedHospital === hospital.id;
           const card = document.createElement("article");
@@ -7577,7 +8104,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
           const address = document.createElement("p");
           address.className = "hospital-card-address";
-          address.textContent = hospital.address || `${hospital.city}, ${hospital.state}`;
+          address.textContent = hospital.address || `${hospital.city || ""}, ${hospital.state || ""}`;
 
           titleBlock.append(tierTag, title, address);
           topRow.append(titleBlock);
@@ -7600,15 +8127,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
           chipsRow.append(distChip, waitChip, slotChip);
 
-          // Expandable transit drawer
-          const transitDrawer = document.createElement("details");
-          transitDrawer.className = "transit-drawer";
-          const transitSummary = document.createElement("summary");
-          transitSummary.textContent = "🚇 Transit, Gate & OPD Directions";
-          const transitBody = document.createElement("p");
-          transitBody.textContent = hospital.transit || "Main OPD Counter · Regular Queue Hours";
-          transitDrawer.append(transitSummary, transitBody);
-
           // Quiet verified line
           const verified = document.createElement("p");
           verified.className = "verified-quiet";
@@ -7625,24 +8143,19 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             })()
           );
 
-          // Action button
+          // Action button: Selecting updates hero card and scrolls gently to it without wiping choices
           const choose = document.createElement("button");
           choose.type = "button";
           choose.className = `large-button${isSelected ? " primary" : ""}`;
-          choose.textContent = isSelected ? `✓ ${text("chosenHospital")}` : `${text("chooseHospital")} →`;
+          choose.textContent = isSelected ? `✓ ${text("chosenHospital")}` : `Choose this hospital →`;
           choose.addEventListener("click", () => {
             state.selectedHospital = hospital.id;
-            state.visitType = null;
-            state.appointmentDate = null;
-            state.appointmentShift = null;
-            state.signInOpened = false;
-            state.humanChecked = false;
-            state.signedIn = false;
             renderAppointment();
-            moveTo(appointmentOptions);
+            const hero = document.querySelector("#hospital-hero-card");
+            if (hero) hero.scrollIntoView({ behavior: "smooth", block: "nearest" });
           });
 
-          card.append(topRow, chipsRow, transitDrawer, verified, choose);
+          card.append(topRow, chipsRow, verified, choose);
           hospitalList.append(card);
         });
 
@@ -7850,25 +8363,43 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
       function renderAppointmentOptions() {
         appointmentOptions.hidden = !state.selectedHospital;
-        document.querySelectorAll("[data-consultation-mode]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.consultationMode === state.consultationMode)));
-        dateStrip.replaceChildren();
-        appointmentDates().forEach((date) => {
-          const button = document.createElement("button");
-          button.type = "button";
-          button.className = "date-button";
-          button.dataset.appointmentDate = date.iso;
-          button.setAttribute("aria-pressed", String(date.iso === state.appointmentDate));
-          button.innerHTML = `<span class="tag">Simulated</span>${date.weekday}<strong>${date.label}</strong><small>Sample date</small>`;
-          button.addEventListener("click", () => { state.appointmentDate = date.iso; renderAppointment(); });
-          dateStrip.append(button);
-        });
-        document.querySelectorAll("[data-shift]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.shift === state.appointmentShift)));
-        appointmentWait.replaceChildren(makeTag("Simulated"));
-        if (state.appointmentDate && state.appointmentShift) {
-          const shift = shiftCatalog[state.appointmentShift];
-          const waitText = text("appointmentWaitText").replace("{slot}", formatClock(shift.start)).replace("{seen}", formatClock(shift.seen));
-          appointmentWait.append(document.createTextNode(` ${waitText}`));
-        } else appointmentWait.append(document.createTextNode(` ${text("appointmentWaitHint")}`));
+        document.querySelectorAll("[data-consultation-mode]").forEach((button) => 
+          button.setAttribute("aria-pressed", String(button.dataset.consultationMode === state.consultationMode))
+        );
+        document.querySelectorAll("[data-visit-type]").forEach((button) => 
+          button.setAttribute("aria-pressed", String(button.dataset.visitType === state.visitType))
+        );
+        document.querySelectorAll("[data-shift]").forEach((button) => 
+          button.setAttribute("aria-pressed", String(button.dataset.shift === state.appointmentShift))
+        );
+
+        if (dateStrip) {
+          dateStrip.replaceChildren();
+          appointmentDates().slice(0, 4).forEach((date) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "date-button";
+            button.dataset.appointmentDate = date.iso;
+            button.setAttribute("aria-pressed", String(date.iso === state.appointmentDate));
+            button.innerHTML = `<span class="tag">Simulated</span>${date.weekday} <strong>${date.label}</strong>`;
+            button.addEventListener("click", () => { 
+              state.appointmentDate = date.iso; 
+              renderAppointment(); 
+            });
+            dateStrip.append(button);
+          });
+        }
+
+        if (appointmentWait) {
+          appointmentWait.replaceChildren(makeTag("Simulated"));
+          if (state.appointmentDate && state.appointmentShift) {
+            const shift = shiftCatalog[state.appointmentShift];
+            const waitText = text("appointmentWaitText").replace("{slot}", formatClock(shift.start)).replace("{seen}", formatClock(shift.seen));
+            appointmentWait.append(document.createTextNode(` ${waitText}`));
+          } else {
+            appointmentWait.append(document.createTextNode(` ${text("appointmentWaitHint")}`));
+          }
+        }
       }
 
       function renderLabCatalog() {
@@ -7940,17 +8471,28 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         if (!state.routeResult && state.complaint) state.routeResult = routeComplaint(state.complaint);
         const department = state.routeResult?.department || "General Medicine";
         bookingDepartment.textContent = departmentCopyKeys[department] ? text(departmentCopyKeys[department]) : department;
+        
+        // Ensure standard defaults are set so citizen is never left on empty state
+        if (!state.appointmentShift) state.appointmentShift = "morning";
+        if (!state.visitType) state.visitType = "first";
+        if (!state.consultationMode) state.consultationMode = "in-person";
+        if (!state.appointmentDate) {
+          const dList = appointmentDates();
+          if (dList.length > 0) state.appointmentDate = dList[0].iso;
+        }
+
         localitySelect.value = state.locality;
         renderHospitalCards();
         renderAppointmentOptions();
         carryPanel.hidden = !state.selectedHospital;
         renderCarry();
-        signInPanel.hidden = !state.signInOpened;
-        humanCheck.setAttribute("aria-pressed", String(state.humanChecked));
-        signInButton.disabled = !state.humanChecked;
+        
+        // Specimen pass visibility
         slipPanel.hidden = !state.signedIn;
-        if (state.signedIn) renderStepper(5);
-        if (state.signedIn) renderSlip();
+        if (state.signedIn) {
+          renderStepper(5);
+          renderSlip();
+        }
       }
 
       function renderLocalities() {
@@ -8230,7 +8772,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
       findHospital.addEventListener("click", showAppointment);
       document.querySelectorAll("#honesty-back, #honesty-back-bottom").forEach((button) => button.addEventListener("click", restorePreviousScreen));
-      document.querySelector("#booking-back").addEventListener("click", () => { appointmentScreen.hidden = true; showResult(); });
+      document.querySelector("#booking-back").addEventListener("click", () => { appointmentScreen.hidden = true; slipPanel.hidden = true; showResult(); });
       localitySelect.addEventListener("change", () => {
         state.locality = localitySelect.value;
         state.selectedHospital = null;
@@ -8240,52 +8782,83 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         state.signedIn = false;
         renderAppointment();
       });
+      // Streamlined Step 4 Interactions (Zero screen jumping, smooth top-to-bottom progression)
       document.querySelectorAll("[data-visit-type]").forEach((button) => {
         button.addEventListener("click", () => {
           state.visitType = button.dataset.visitType;
           renderAppointment();
-          moveTo(appointmentOptions);
+          // Keep citizen focused in place without jumping up or down
         });
       });
-      document.querySelectorAll("[data-consultation-mode]").forEach((button) => button.addEventListener("click", () => {
-        state.consultationMode = button.dataset.consultationMode;
-        state.signedIn = false;
-        state.signInOpened = false;
-        renderAppointment();
-      }));
-      document.querySelectorAll("[data-shift]").forEach((button) => button.addEventListener("click", () => {
-        state.appointmentShift = button.dataset.shift;
-        renderAppointment();
-      }));
+
+      document.querySelectorAll("[data-consultation-mode]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.consultationMode = button.dataset.consultationMode;
+          renderAppointment();
+        });
+      });
+
+      document.querySelectorAll("[data-shift]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.appointmentShift = button.dataset.shift;
+          renderAppointment();
+        });
+      });
+
+      // Toggle Hospital Change Drawer & Map
+      const btnToggleChangeHosp = document.querySelector("#btn-toggle-change-hospital");
+      const hospChangeDrawer = document.querySelector("#hospital-change-drawer");
+      const btnChangeHospText = document.querySelector("#btn-change-hospital-text");
+      if (btnToggleChangeHosp && hospChangeDrawer) {
+        btnToggleChangeHosp.addEventListener("click", () => {
+          const isHidden = hospChangeDrawer.hidden;
+          hospChangeDrawer.hidden = !isHidden;
+          btnToggleChangeHosp.setAttribute("aria-expanded", String(isHidden));
+          if (btnChangeHospText) {
+            btnChangeHospText.textContent = isHidden ? "✕ Close Map & Alternatives" : "🔄 Change Hospital / View Map";
+          }
+          if (isHidden) {
+            if (hospitalLeafletMap) {
+              setTimeout(() => {
+                hospitalLeafletMap.invalidateSize();
+              }, 120);
+            }
+            hospChangeDrawer.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
+        });
+      }
+
+      // One-Tap OPD Specimen Pass Generator
+      const btnGenPass = document.querySelector("#btn-generate-opd-pass");
+      if (btnGenPass) {
+        btnGenPass.addEventListener("click", () => {
+          state.humanChecked = true;
+          state.signedIn = true;
+          renderAppointment();
+          renderStepper(5);
+          slipPanel.hidden = false;
+          slipPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+          document.querySelector("#slip-heading")?.focus();
+        });
+      }
+
       toSignIn.addEventListener("click", () => {
         state.signInOpened = true;
         renderAppointment();
-        document.querySelector("#sign-in-title").focus();
       });
+
       humanCheck.addEventListener("click", () => {
         state.humanChecked = !state.humanChecked;
         renderAppointment();
       });
+
       signInButton.addEventListener("click", () => {
-        const username = document.querySelector("#demo-username").value.trim();
-        const password = document.querySelector("#demo-password").value.trim();
-        if (!state.humanChecked) {
-          signInStatus.textContent = text("humanCheckNeeded");
-          signInStatus.setAttribute("role", "alert");
-          return;
-        }
-        if (username !== "raahat-demo" || password !== "demo-pass") {
-          signInStatus.textContent = text("credentialsMismatch");
-          signInStatus.setAttribute("role", "alert");
-          return;
-        }
         state.signedIn = true;
         renderStepper(5);
-        signInStatus.textContent = text("signedIn");
-        signInStatus.removeAttribute("role");
         renderAppointment();
-        moveTo(slipPanel);
-        document.querySelector("#slip-heading").focus();
+        slipPanel.hidden = false;
+        slipPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        document.querySelector("#slip-heading")?.focus();
       });
       document.querySelector("#print-slip").addEventListener("click", () => window.print());
       document.querySelector("#download-slip").addEventListener("click", () => {
