@@ -1271,6 +1271,12 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .counterfactual-value { font-size: 1.85rem; font-weight: 850; color: var(--accent-dark); line-height: 1.1; margin-bottom: 0.25rem; }
       .counterfactual-value.negative { color: var(--emergency-red); }
       .counterfactual-label { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
+      .counterfactual-meter { width: 100%; height: 0.35rem; border-radius: 999px; background: rgba(0, 0, 0, 0.08); margin-top: 0.65rem; overflow: hidden; }
+      [data-theme="dark"] .counterfactual-meter { background: rgba(255, 255, 255, 0.1); }
+      .meter-bar { height: 100%; border-radius: 999px; }
+      .meter-bar.negative { background: var(--emergency-red); }
+      .meter-bar.positive { background: #10b981; }
+      .meter-bar.neutral { background: var(--accent); }
       .state-filter-bar { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin: 1.25rem 0; padding: 1rem; background: var(--paper); border: 1.5px solid var(--line); border-radius: var(--radius-md); }
       .state-filter-select { min-height: 3rem; padding: 0.4rem 1rem; border-radius: var(--radius-md); border: 1.5px solid var(--line); background: var(--background); color: var(--ink); font-weight: 700; }
 
@@ -1603,6 +1609,351 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .red-flag-stream { display: flex; flex-direction: column; gap: 0.65rem; margin-top: 0.75rem; }
       .stream-item { padding: 0.75rem; border-radius: 0.65rem; border-left: 4px solid var(--emergency-red); background: var(--background); font-size: 0.86rem; }
 
+
+      /* ====================================================
+         PROFESSIONAL SVG ICON & VISUAL DIAGRAM SUITE
+         ==================================================== */
+      .icon-inline {
+        width: 1.1em;
+        height: 1.1em;
+        vertical-align: -0.15em;
+        display: inline-block;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+      }
+      .icon-toggle {
+        width: 1.25rem;
+        height: 1.25rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .icon-bullet {
+        width: 0.95rem;
+        height: 0.95rem;
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+      }
+      .alert-red {
+        stroke: var(--emergency-red) !important;
+        color: var(--emergency-red) !important;
+      }
+      .status-indicator-dot {
+        width: 0.65rem;
+        height: 0.65rem;
+        border-radius: 50%;
+        background: #10b981;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+        display: inline-block;
+        animation: pulseStatus 2s infinite;
+      }
+      .status-indicator-dot.mini {
+        width: 0.5rem;
+        height: 0.5rem;
+        box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+      }
+      @keyframes pulseStatus {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.7; transform: scale(0.92); }
+      }
+
+      /* Hero Service Card SVG Badges */
+      .service-card-icon {
+        width: 2.65rem;
+        height: 2.65rem;
+        border-radius: var(--radius-full);
+        background: var(--accent-soft);
+        color: var(--accent);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.35rem;
+        transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+      }
+      .service-card:hover .service-card-icon {
+        transform: scale(1.08);
+        background: var(--accent);
+        color: #ffffff;
+      }
+      [data-theme="dark"] .service-card-icon {
+        background: rgba(45, 212, 191, 0.15);
+        color: #2dd4bf;
+      }
+      [data-theme="dark"] .service-card:hover .service-card-icon {
+        background: #2dd4bf;
+        color: #064e3b;
+      }
+      .service-card-icon svg {
+        width: 1.35rem;
+        height: 1.35rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      /* Visual 3-Step Process Pipeline Diagram */
+      .journey-process-section {
+        margin-top: 2rem;
+      }
+      .process-pipeline-diagram {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        align-items: stretch;
+        margin-top: 1.75rem;
+      }
+      @media (min-width: 960px) {
+        .process-pipeline-diagram {
+          grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+          align-items: center;
+          gap: 0.75rem;
+        }
+      }
+      .pipeline-step-card {
+        position: relative;
+        background: var(--paper);
+        border: 1.5px solid var(--line);
+        border-radius: 1.25rem;
+        padding: 1.75rem 1.35rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+        height: 100%;
+      }
+      .pipeline-step-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+        border-color: var(--accent);
+      }
+      .pipeline-step-card.highlight-step {
+        border-color: rgba(22, 101, 52, 0.35);
+        background: linear-gradient(145deg, rgba(238, 248, 242, 0.6) 0%, var(--paper) 100%);
+      }
+      [data-theme="dark"] .pipeline-step-card.highlight-step {
+        border-color: rgba(45, 212, 191, 0.3);
+        background: linear-gradient(145deg, rgba(16, 44, 34, 0.5) 0%, var(--paper) 100%);
+      }
+      .step-num-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1.25rem;
+        font-size: 1.6rem;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        color: var(--muted);
+        opacity: 0.35;
+        font-family: monospace;
+      }
+      .step-visual-illustration {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+      .illustration-circle {
+        width: 3.25rem;
+        height: 3.25rem;
+        border-radius: 1rem;
+        background: var(--accent-soft);
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 2px 8px rgba(22, 101, 52, 0.08);
+      }
+      [data-theme="dark"] .illustration-circle {
+        background: rgba(45, 212, 191, 0.15);
+        color: #2dd4bf;
+      }
+      .pipeline-icon {
+        width: 1.75rem;
+        height: 1.75rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .step-sub-badges {
+        display: flex;
+        gap: 0.35rem;
+        flex-wrap: wrap;
+      }
+      .sub-badge {
+        font-size: 0.72rem;
+        font-weight: 800;
+        padding: 0.2rem 0.5rem;
+        border-radius: 999px;
+        background: var(--background);
+        border: 1px solid var(--line);
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .sub-badge.code-badge {
+        border-color: rgba(22, 101, 52, 0.25);
+        background: var(--accent-soft);
+        color: var(--accent-dark);
+      }
+      [data-theme="dark"] .sub-badge.code-badge {
+        color: #2dd4bf;
+      }
+      .sub-badge.alert-badge {
+        border-color: rgba(239, 68, 68, 0.3);
+        background: rgba(239, 68, 68, 0.08);
+        color: var(--emergency-red);
+      }
+      .step-content h3 {
+        margin: 0 0 0.4rem;
+        font-size: 1.15rem;
+        font-weight: 850;
+        color: var(--ink);
+      }
+      .step-content p {
+        margin: 0 0 0.85rem;
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+      .step-feature-bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+      .step-feature-bullets li {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .pipeline-connector {
+        display: none;
+      }
+      @media (min-width: 960px) {
+        .pipeline-connector {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--muted);
+          opacity: 0.6;
+        }
+      }
+      .connector-arrow {
+        width: 1.5rem;
+        height: 1.5rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      /* Scorecard comparison tags */
+      .scorecard-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.72rem;
+        font-weight: 850;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 0.15rem 0.45rem;
+        border-radius: 0.4rem;
+        margin-right: 0.4rem;
+        vertical-align: middle;
+      }
+      .scorecard-tag.tag-negative {
+        background: rgba(239, 68, 68, 0.12);
+        color: #b91c1c;
+        border: 1px solid rgba(239, 68, 68, 0.25);
+      }
+      [data-theme="dark"] .scorecard-tag.tag-negative {
+        background: rgba(239, 68, 68, 0.2);
+        color: #f87171;
+      }
+      .scorecard-tag.tag-positive {
+        background: rgba(22, 101, 52, 0.12);
+        color: #15803d;
+        border: 1px solid rgba(22, 101, 52, 0.25);
+      }
+      [data-theme="dark"] .scorecard-tag.tag-positive {
+        background: rgba(45, 212, 191, 0.15);
+        color: #2dd4bf;
+      }
+
+      /* Demographic vector badges in Patient Profile & OCR */
+      .avatar-svg {
+        width: 1.75rem;
+        height: 1.75rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .avatar-mini {
+        width: 1rem;
+        height: 1rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .demographic-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.2rem 0.55rem;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        font-weight: 800;
+        margin-right: 0.35rem;
+      }
+      .demographic-badge.senior {
+        background: rgba(217, 119, 6, 0.12);
+        color: #b45309;
+        border: 1px solid rgba(217, 119, 6, 0.25);
+      }
+      [data-theme="dark"] .demographic-badge.senior {
+        color: #fbbf24;
+      }
+      .demographic-badge.child {
+        background: rgba(14, 165, 233, 0.12);
+        color: #0369a1;
+        border: 1px solid rgba(14, 165, 233, 0.25);
+      }
+      [data-theme="dark"] .demographic-badge.child {
+        color: #38bdf8;
+      }
+      .demographic-badge.adult {
+        background: rgba(22, 101, 52, 0.12);
+        color: #15803d;
+        border: 1px solid rgba(22, 101, 52, 0.25);
+      }
+      [data-theme="dark"] .demographic-badge.adult {
+        color: #2dd4bf;
+      }
+
     </style>
   </head>
   <body>
@@ -1626,6 +1977,39 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       <symbol id="icon-stomach" viewBox="0 0 24 24"><path d="M9 3v6c0 2 1 3 3 3s3 1 3 3v1a5 5 0 0 1-10 0v-3M9 3h4"/></symbol>
       <symbol id="icon-dizzy" viewBox="0 0 24 24"><path d="M4 12h4l2-6 3 12 2-6h5"/></symbol>
       <symbol id="icon-cloud" viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .6-7.9A6 6 0 0 0 6 8.9 4.5 4.5 0 0 0 7 18Z"/></symbol>
+      <symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+      <symbol id="icon-a11y" viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2.5"/><path d="M12 7v7m0 0-3.5 6m3.5-6 3.5 6M6 10h12"/></symbol>
+      <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></symbol>
+      <symbol id="icon-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+      <symbol id="icon-hospital" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 9h6M12 6v6M9 17h2v4H9v-4zm4 0h2v4h-2v-4z"/></symbol>
+      <symbol id="icon-user" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></symbol>
+      <symbol id="icon-doctor" viewBox="0 0 24 24"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></symbol>
+      <symbol id="icon-microscope" viewBox="0 0 24 24"><path d="M6 18h8M3 22h18M14 22a7 7 0 1 0-7-7h1M9 14h2M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2ZM12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></symbol>
+      <symbol id="icon-blood" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0zM9 13h6M12 10v6"/></symbol>
+      <symbol id="icon-video" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></symbol>
+      <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+      <symbol id="icon-printer" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14" rx="1"/></symbol>
+      <symbol id="icon-file-text" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></symbol>
+      <symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+      <symbol id="icon-shield-check" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="icon-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+      <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2M10 11v6M14 11v6"/></symbol>
+      <symbol id="icon-bell" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></symbol>
+      <symbol id="icon-alert-triangle" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3ZM12 9v4M12 17h.01"/></symbol>
+      <symbol id="icon-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></symbol>
+      <symbol id="icon-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol>
+      <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+      <symbol id="icon-tag" viewBox="0 0 24 24"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><circle cx="7" cy="7" r=".5" fill="currentColor"/></symbol>
+      <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M18 17V9M13 17V5M8 17v-3"/></symbol>
+      <symbol id="icon-scale" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1ZM2 16l3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1ZM7 21h10M12 3v18M3 7h18"/></symbol>
+      <symbol id="icon-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20Z" fill="currentColor"/></symbol>
+      <symbol id="icon-rotate" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></symbol>
+      <symbol id="icon-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
+      <symbol id="icon-audio" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol>
+      <symbol id="icon-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+      <symbol id="avatar-senior" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a6 6 0 0 1 12 0v2M9 10h6"/></symbol>
+      <symbol id="avatar-adult" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></symbol>
+      <symbol id="avatar-child" viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.5"/><path d="M7 21v-1.5a5 5 0 0 1 10 0V21"/></symbol>
     </svg>
     <div class="intro-splash" id="intro-splash" aria-label="Raahat loading" aria-live="polite">
       <div class="splash-lockup">
@@ -1647,7 +2031,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       <div class="topline">
         <div class="topline-brand-wrap">
           <button type="button" class="sidebar-toggle-btn" id="btn-open-sidebar" aria-label="Open Navigation Menu" title="Open Navigation Menu">
-            <span class="sidebar-toggle-icon" aria-hidden="true">☰</span>
+            <svg class="icon icon-toggle" aria-hidden="true"><use href="#icon-menu"></use></svg>
             <span class="sidebar-toggle-label">Menu</span>
           </button>
           <a class="brand-lockup" href="#screen-home" id="brand-home" aria-label="Raahat home">
@@ -1677,11 +2061,11 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         <div class="nav-actions">
           <div class="language-bar-group" role="group" aria-label="Language selection">
             <button type="button" class="lang-quick-btn" id="btn-open-languages" aria-haspopup="dialog" aria-expanded="false" title="Browse all 22 Scheduled Indian Languages">
-              <span aria-hidden="true">🌐</span> <span id="current-lang-badge">22 Languages ▾</span>
+              <svg class="icon icon-inline" aria-hidden="true"><use href="#icon-globe"></use></svg> <span id="current-lang-badge">22 Languages ▾</span>
             </button>
           </div>
           <button class="a11y-trigger-btn" type="button" id="btn-open-a11y" aria-haspopup="dialog" aria-expanded="false" aria-label="Accessibility options" title="Open Accessibility Options">
-            <span aria-hidden="true">♿</span> <span class="a11y-trigger-label">Access</span>
+            <svg class="icon icon-inline" aria-hidden="true"><use href="#icon-a11y"></use></svg> <span class="a11y-trigger-label">Access</span>
           </button>
           <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Use dark theme" title="Use dark theme">
             <svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg>
@@ -1703,9 +2087,9 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 <a class="back-button" href="#screen-home" data-view-link="home" data-copy="learnMore">See how it works</a>
               </div>
               <ul class="trust-badges" aria-label="Trust badges">
-                <li class="trust-badge"><span class="tag">Verified</span><span data-copy="privacyBadge">100% Client-Side Privacy</span></li>
-                <li class="trust-badge"><span class="tag">Verified</span><span data-copy="noIdBadge">No Aadhaar/OTP Required to Explore</span></li>
-                <li class="trust-badge"><span class="tag">Verified</span><span data-copy="accessBadge">Accessible for Non-Literate Citizens</span></li>
+                <li class="trust-badge"><svg class="icon-inline" aria-hidden="true"><use href="#icon-shield-check"></use></svg> <span class="tag">Verified</span><span data-copy="privacyBadge">100% Client-Side Privacy</span></li>
+                <li class="trust-badge"><svg class="icon-inline" aria-hidden="true"><use href="#icon-lock"></use></svg> <span class="tag">Verified</span><span data-copy="noIdBadge">No Aadhaar/OTP Required</span></li>
+                <li class="trust-badge"><svg class="icon-inline" aria-hidden="true"><use href="#icon-a11y"></use></svg> <span class="tag">Verified</span><span data-copy="accessBadge">Voice &amp; 3D Touch Enabled</span></li>
               </ul>
             </div>
 
@@ -1714,31 +2098,127 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               <h2 id="hero-card-title" data-copy="serviceGridTitle">Choose the help you need today.</h2>
               <button class="large-button primary hero-primary-action" type="button" id="hero-triage-action" data-copy="startBooking">Start OPD Triage &amp; Book Slot →</button>
               <div class="service-grid" aria-label="Raahat services">
-                <button class="service-card" type="button" data-service-view="triage"><span aria-hidden="true">🏥</span><strong data-copy="opdService">OPD Counter Triage</strong><small data-copy="opdServiceNote">Find the right first counter</small></button>
-                <button class="service-card" type="button" data-service-view="profile"><span aria-hidden="true">👤</span><strong data-copy="serviceProfileTitle">My Patient Profile</strong><small data-copy="serviceProfileDesc">Live OPD pass &amp; visit records</small></button>
-                <button class="service-card" type="button" data-service-view="doctor"><span aria-hidden="true">👨‍⚕️</span><strong data-copy="serviceDoctorTitle">Doctor &amp; Staff Portal</strong><small data-copy="serviceDoctorDesc">Live queue &amp; SBAR handover</small></button>
-                <button class="service-card" type="button" data-service-view="lab-tests"><span aria-hidden="true">🔬</span><strong data-copy="serviceLabTitle">Lab Tests &amp; Scans</strong><small data-copy="serviceLabDesc">e-Hospital rates &amp; slots</small></button>
-                <button class="service-card" type="button" data-service-view="blood-bank"><span aria-hidden="true">🩸</span><strong data-copy="serviceBloodTitle">Blood Bank</strong><small data-copy="serviceBloodDesc">Real-time e-RaktKosh stock</small></button>
-                <button class="service-card" type="button" data-service-view="triage" data-teleconsult="true"><span aria-hidden="true">📹</span><strong data-copy="serviceTeleTitle">Tele-Consultation</strong><small data-copy="serviceTeleDesc">AIIMS Tele-OPD booth</small></button>
+                <button class="service-card" type="button" data-service-view="triage">
+                  <div class="service-card-icon"><svg aria-hidden="true"><use href="#icon-hospital"></use></svg></div>
+                  <strong data-copy="opdService">OPD Counter Triage</strong>
+                  <small data-copy="opdServiceNote">Find the right first counter</small>
+                </button>
+                <button class="service-card" type="button" data-service-view="profile">
+                  <div class="service-card-icon"><svg aria-hidden="true"><use href="#icon-user"></use></svg></div>
+                  <strong data-copy="serviceProfileTitle">My Patient Profile</strong>
+                  <small data-copy="serviceProfileDesc">Live OPD pass &amp; visit records</small>
+                </button>
+                <button class="service-card" type="button" data-service-view="doctor">
+                  <div class="service-card-icon"><svg aria-hidden="true"><use href="#icon-doctor"></use></svg></div>
+                  <strong data-copy="serviceDoctorTitle">Doctor &amp; Staff Portal</strong>
+                  <small data-copy="serviceDoctorDesc">Live queue &amp; SBAR handover</small>
+                </button>
+                <button class="service-card" type="button" data-service-view="lab-tests">
+                  <div class="service-card-icon"><svg aria-hidden="true"><use href="#icon-microscope"></use></svg></div>
+                  <strong data-copy="serviceLabTitle">Lab Tests &amp; Scans</strong>
+                  <small data-copy="serviceLabDesc">e-Hospital rates &amp; slots</small>
+                </button>
+                <button class="service-card" type="button" data-service-view="blood-bank">
+                  <div class="service-card-icon"><svg aria-hidden="true"><use href="#icon-blood"></use></svg></div>
+                  <strong data-copy="serviceBloodTitle">Blood Bank</strong>
+                  <small data-copy="serviceBloodDesc">Real-time e-RaktKosh stock</small>
+                </button>
+                <button class="service-card" type="button" data-service-view="triage" data-teleconsult="true">
+                  <div class="service-card-icon"><svg aria-hidden="true"><use href="#icon-video"></use></svg></div>
+                  <strong data-copy="serviceTeleTitle">Tele-Consultation</strong>
+                  <small data-copy="serviceTeleDesc">AIIMS Tele-OPD booth</small>
+                </button>
               </div>
             </section>
           </section>
 
-          <section class="landing-section view-section" id="why-raahat" data-view="home" aria-labelledby="why-title">
-            <div class="section-heading"><h2 id="why-title" data-copy="whyTitle">A little more dignity at the counter.</h2><p data-copy="whyNote">Raahat starts with the citizen's words, not a medical vocabulary test. The person stays in control before anything is routed.</p></div>
-            <div class="journey-grid">
-              <article class="journey-card"><h3 data-copy="journeyOneTitle">Describe in your voice or tap the map</h3><p data-copy="journeyOneNote">Speak, type, or use a flat body map. Every route creates the same reviewable complaint.</p></article>
-              <article class="journey-card"><h3 data-copy="journeyTwoTitle">Verified hospital & honest queue wait</h3><p data-copy="journeyTwoNote">See public hospital facts, then see simulated token throughput and when people are usually seen.</p></article>
-              <article class="journey-card"><h3 data-copy="journeyThreeTitle">Print specimen slip with citizen rights</h3><p data-copy="journeyThreeNote">A clearly marked mock slip keeps the next step legible and carries a grievance route.</p></article>
+          <section class="landing-section view-section journey-process-section" id="how-it-works" data-view="home" aria-labelledby="how-title">
+            <div class="section-heading">
+              <span class="screen-kicker">Visual Triage Pipeline</span>
+              <h2 id="how-title" data-copy="howTitle">How Raahat Works</h2>
+              <p class="section-lead-note" data-copy="howNote">A direct, dignified journey from where it hurts to the right OPD counter.</p>
             </div>
-          </section>
 
-          <section class="landing-section view-section" id="how-it-works" data-view="home" aria-labelledby="how-title">
-            <div class="section-heading"><h2 id="how-title" data-copy="howTitle">How Raahat works</h2><p data-copy="howNote">A short, visible journey from “where it hurts” to the right OPD counter.</p></div>
-            <div class="journey-grid">
-              <article class="journey-card"><span class="journey-icon" aria-hidden="true"><svg class="icon icon--large"><use href="#icon-route"></use></svg></span><h3 data-copy="howOneTitle">Point, speak, or type</h3><p data-copy="howOneNote">Describe symptoms in any language, or point to a place on the interactive body map.</p></article>
-              <article class="journey-card"><span class="journey-icon" aria-hidden="true"><svg class="icon icon--large"><use href="#icon-queue"></use></svg></span><h3 data-copy="howTwoTitle">Instant triage & honest wait</h3><p data-copy="howTwoNote">Code matches a verified hospital counter and shows simulated queue timing in plain language.</p></article>
-              <article class="journey-card"><span class="journey-icon" aria-hidden="true"><svg class="icon icon--large"><use href="#icon-slip"></use></svg></span><h3 data-copy="howThreeTitle">Specimen slip & citizen rights</h3><p data-copy="howThreeNote">Print a clearly marked mock slip with what to carry and a PGPortal grievance safeguard.</p></article>
+            <div class="process-pipeline-diagram" role="region" aria-label="Raahat 3-step triage workflow diagram">
+              <!-- Step 1 -->
+              <div class="pipeline-step-card">
+                <div class="step-num-badge">01</div>
+                <div class="step-visual-illustration">
+                  <div class="illustration-circle">
+                    <svg class="pipeline-icon"><use href="#icon-mic"></use></svg>
+                  </div>
+                  <div class="step-sub-badges">
+                    <span class="sub-badge">22 Dialects</span>
+                    <span class="sub-badge">3D Map</span>
+                    <span class="sub-badge">Voice</span>
+                  </div>
+                </div>
+                <div class="step-content">
+                  <h3 data-copy="howOneTitle">Describe in Your Words</h3>
+                  <p data-copy="howOneNote">Speak, type, or tap the interactive 3D/2D body map in any of 22 Indian languages. No medical vocabulary required.</p>
+                  <ul class="step-feature-bullets">
+                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Speech-to-symptom recognition</li>
+                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Interactive anatomical touch points</li>
+                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> 100% private in-browser parsing</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Flow Arrow Connector 1 -> 2 -->
+              <div class="pipeline-connector" aria-hidden="true">
+                <svg class="connector-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="pipeline-step-card highlight-step">
+                <div class="step-num-badge">02</div>
+                <div class="step-visual-illustration">
+                  <div class="illustration-circle">
+                    <svg class="pipeline-icon"><use href="#icon-route"></use></svg>
+                  </div>
+                  <div class="step-sub-badges">
+                    <span class="sub-badge code-badge">Deterministic Code</span>
+                    <span class="sub-badge alert-badge">Emergency RF</span>
+                  </div>
+                </div>
+                <div class="step-content">
+                  <h3 data-copy="howTwoTitle">Deterministic OPD Matching</h3>
+                  <p data-copy="howTwoNote">Published code rules route symptoms to the exact hospital OPD specialty. 1 red flag escalates directly to Emergency.</p>
+                  <ul class="step-feature-bullets">
+                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Zero AI diagnosis guesswork</li>
+                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Instant red-flag safety trigger</li>
+                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Transparent verifiable rule IDs</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Flow Arrow Connector 2 -> 3 -->
+              <div class="pipeline-connector" aria-hidden="true">
+                <svg class="connector-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="pipeline-step-card">
+                <div class="step-num-badge">03</div>
+                <div class="step-visual-illustration">
+                  <div class="illustration-circle">
+                    <svg class="pipeline-icon"><use href="#icon-slip"></use></svg>
+                  </div>
+                  <div class="step-sub-badges">
+                    <span class="sub-badge">Real Queue Wait</span>
+                    <span class="sub-badge">Specimen Pass</span>
+                  </div>
+                </div>
+                <div class="step-content">
+                  <h3 data-copy="howThreeTitle">Honest Queue &amp; Specimen Pass</h3>
+                  <p data-copy="howThreeNote">See simulated consultation turnaround times, documents to bring, and a printable pass with Citizen Rights protections.</p>
+                  <ul class="step-feature-bullets">
+                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Slot start + estimated wait</li>
+                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Visit preparation checklist</li>
+                    <li><svg class="icon-bullet" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> PGPortal grievance rights on slip</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -1767,11 +2247,11 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               <table class="comparison-table">
                 <thead><tr><th data-copy="comparisonQuestion">The front door question</th><th>ors.gov.in <span class="table-label" data-copy="orsEra">2015 · NIC digitised counter</span></th><th>Raahat <span class="table-label" data-copy="raahatEra">2026 · citizen-first triage</span></th></tr></thead>
                 <tbody>
-                  <tr><td data-copy="comparisonDepartment">Finding a department</td><td class="ors-cell" data-copy="orsDepartment">Department guessing</td><td class="raahat-cell" data-copy="raahatDepartment">Start with where it hurts; we will show the counter that matches your confirmed details.</td></tr>
-                  <tr><td data-copy="comparisonWait">Knowing the real wait</td><td class="ors-cell" data-copy="orsWait">Slot time only</td><td class="raahat-cell" data-copy="raahatWait">Estimated consultation time, based on the slot and simulated queue throughput.</td></tr>
-                  <tr><td data-copy="comparisonAuth">Getting started</td><td class="ors-cell" data-copy="orsAuth">Front-door distorted CAPTCHA</td><td class="raahat-cell" data-copy="raahatAuth">Late-stage 1-tap Auth , only when making a specimen slip</td></tr>
-                  <tr><td data-copy="comparisonEmergency">Emergency safety</td><td class="ors-cell" data-copy="orsEmergency">Routine booking can hide a critical emergency</td><td class="raahat-cell" data-copy="raahatEmergency">One red flag → 24/7 Emergency now</td></tr>
-                  <tr><td data-copy="comparisonAccess">Accessibility</td><td class="ors-cell" data-copy="orsAccess">Text forms, CAPTCHA and desktop-first barriers</td><td class="raahat-cell" data-copy="raahatAccess">100% mobile-first: 3D/2D map + speak + type</td></tr>
+                  <tr><td data-copy="comparisonDepartment">Finding a department</td><td class="ors-cell"><span class="scorecard-tag tag-negative"><svg class="icon-inline" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> Guesswork</span> <span data-copy="orsDepartment">Department guessing</span></td><td class="raahat-cell"><span class="scorecard-tag tag-positive"><svg class="icon-inline" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Directed</span> <span data-copy="raahatDepartment">Start with where it hurts; we will show the counter that matches your confirmed details.</span></td></tr>
+                  <tr><td data-copy="comparisonWait">Knowing the real wait</td><td class="ors-cell"><span class="scorecard-tag tag-negative"><svg class="icon-inline" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> Unpredictable</span> <span data-copy="orsWait">Slot time only</span></td><td class="raahat-cell"><span class="scorecard-tag tag-positive"><svg class="icon-inline" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Realistic</span> <span data-copy="raahatWait">Estimated consultation time, based on the slot and simulated queue throughput.</span></td></tr>
+                  <tr><td data-copy="comparisonAuth">Getting started</td><td class="ors-cell"><span class="scorecard-tag tag-negative"><svg class="icon-inline" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> High Friction</span> <span data-copy="orsAuth">Front-door distorted CAPTCHA</span></td><td class="raahat-cell"><span class="scorecard-tag tag-positive"><svg class="icon-inline" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Zero Friction</span> <span data-copy="raahatAuth">Late-stage 1-tap Auth , only when making a specimen slip</span></td></tr>
+                  <tr><td data-copy="comparisonEmergency">Emergency safety</td><td class="ors-cell"><span class="scorecard-tag tag-negative"><svg class="icon-inline" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> Safety Risk</span> <span data-copy="orsEmergency">Routine booking can hide a critical emergency</span></td><td class="raahat-cell"><span class="scorecard-tag tag-positive"><svg class="icon-inline" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Safeguarded</span> <span data-copy="raahatEmergency">One red flag → 24/7 Emergency now</span></td></tr>
+                  <tr><td data-copy="comparisonAccess">Accessibility</td><td class="ors-cell"><span class="scorecard-tag tag-negative"><svg class="icon-inline" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> Desktop Barrier</span> <span data-copy="orsAccess">Text forms, CAPTCHA and desktop-first barriers</span></td><td class="raahat-cell"><span class="scorecard-tag tag-positive"><svg class="icon-inline" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Universal</span> <span data-copy="raahatAccess">100% mobile-first: 3D/2D map + speak + type</span></td></tr>
                 </tbody>
               </table>
             </div>
@@ -1784,18 +2264,22 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             <div class="counterfactual-card">
               <div class="counterfactual-value negative">4.5 hrs</div>
               <div class="counterfactual-label" data-copy="statOrsWait">Avg. ORS Wait in Wrong Lines</div>
+              <div class="counterfactual-meter" aria-hidden="true"><div class="meter-bar negative" style="width: 92%;"></div></div>
             </div>
             <div class="counterfactual-card">
               <div class="counterfactual-value">28 mins</div>
               <div class="counterfactual-label" data-copy="statRaahatWait">Avg. Wait with Raahat Triage</div>
+              <div class="counterfactual-meter" aria-hidden="true"><div class="meter-bar positive" style="width: 14%;"></div></div>
             </div>
             <div class="counterfactual-card">
               <div class="counterfactual-value">87%</div>
               <div class="counterfactual-label" data-copy="statReferralDrop">Drop in Wrong Counter Referrals</div>
+              <div class="counterfactual-meter" aria-hidden="true"><div class="meter-bar positive" style="width: 87%;"></div></div>
             </div>
             <div class="counterfactual-card">
               <div class="counterfactual-value">60+ Institutes</div>
               <div class="counterfactual-label" data-copy="statVerifiedDirectory">Pan-India Verified Directory</div>
+              <div class="counterfactual-meter" aria-hidden="true"><div class="meter-bar neutral" style="width: 100%;"></div></div>
             </div>
           </div>
 
@@ -1910,7 +2394,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                   <div class="pass-token-badge" id="pass-active-token">#OPD-2026-4802</div>
                 </div>
                 <div id="pass-status-pill" class="pass-status-pill inside">
-                  🟢 Currently in Consultation Room
+                  <span class="status-indicator-dot mini"></span> Currently in Consultation Room
                 </div>
               </div>
 
@@ -1947,14 +2431,14 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               </div>
 
               <div class="pass-actions-bar">
-                <button class="large-button primary" type="button" id="pass-view-slip-btn">📄 View Official Specimen Slip</button>
-                <button class="large-button" type="button" id="pass-print-btn">🖨️ Print Digital Pass</button>
+                <button class="large-button primary" type="button" id="pass-view-slip-btn"><svg class="icon-inline" aria-hidden="true"><use href="#icon-file-text"></use></svg> View Official Specimen Slip</button>
+                <button class="large-button" type="button" id="pass-print-btn"><svg class="icon-inline" aria-hidden="true"><use href="#icon-printer"></use></svg> Print Digital Pass</button>
               </div>
             </article>
 
             <!-- Past Consultation History -->
             <div>
-              <h3 class="profile-section-title"><span>📋</span> Past Consultation Slips &amp; Clinical History</h3>
+              <h3 class="profile-section-title"><svg class="icon-inline" aria-hidden="true"><use href="#icon-file-text"></use></svg> Past Consultation Slips &amp; Clinical History</h3>
               <div class="history-grid">
                 <article class="history-card">
                   <div class="history-card-header">
@@ -1969,7 +2453,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                     <strong>Rx:</strong> Atorvastatin 20mg, Metformin 500mg
                     <strong>Diagnostics:</strong> 12-Lead ECG, Lipid Profile
                   </div>
-                  <button class="large-button" type="button" data-download-past="aiims-cardio" style="margin-top: auto; font-size: 0.88rem; min-height: 2.4rem; padding: 0.4rem;">📄 Download Visit Slip</button>
+                  <button class="large-button" type="button" data-download-past="aiims-cardio" style="margin-top: auto; font-size: 0.88rem; min-height: 2.4rem; padding: 0.4rem;"><svg class="icon-inline" aria-hidden="true"><use href="#icon-file-text"></use></svg> Download Visit Slip</button>
                 </article>
 
                 <article class="history-card">
@@ -1985,7 +2469,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                     <strong>Rx:</strong> Paracetamol 650mg TDS, ORS
                     <strong>Diagnostics:</strong> Dengue NS1 (Negative), CBC
                   </div>
-                  <button class="large-button" type="button" data-download-past="safdarjung-med" style="margin-top: auto; font-size: 0.88rem; min-height: 2.4rem; padding: 0.4rem;">📄 Download Visit Slip</button>
+                  <button class="large-button" type="button" data-download-past="safdarjung-med" style="margin-top: auto; font-size: 0.88rem; min-height: 2.4rem; padding: 0.4rem;"><svg class="icon-inline" aria-hidden="true"><use href="#icon-file-text"></use></svg> Download Visit Slip</button>
                 </article>
 
                 <article class="history-card">
@@ -2001,17 +2485,17 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                     <strong>Rx:</strong> Naproxen 250mg SOS, Cervical exercises
                     <strong>Diagnostics:</strong> Cervical Spine X-Ray
                   </div>
-                  <button class="large-button" type="button" data-download-past="rml-neuro" style="margin-top: auto; font-size: 0.88rem; min-height: 2.4rem; padding: 0.4rem;">📄 Download Visit Slip</button>
+                  <button class="large-button" type="button" data-download-past="rml-neuro" style="margin-top: auto; font-size: 0.88rem; min-height: 2.4rem; padding: 0.4rem;"><svg class="icon-inline" aria-hidden="true"><use href="#icon-file-text"></use></svg> Download Visit Slip</button>
                 </article>
               </div>
             </div>
 
             <!-- Saved Family Members Profiles -->
             <div>
-              <h3 class="profile-section-title"><span>👨‍👩‍👧</span> Saved Family Profiles (1-Tap Triage Booking)</h3>
+              <h3 class="profile-section-title"><svg class="icon-inline" aria-hidden="true"><use href="#icon-users"></use></svg> Saved Family Profiles (1-Tap Triage Booking)</h3>
               <div class="family-grid">
                 <article class="family-card active" data-family-member="ramesh">
-                  <div class="family-avatar">👴</div>
+                  <div class="family-avatar"><svg class="avatar-svg" aria-hidden="true"><use href="#avatar-senior"></use></svg></div>
                   <h4 class="family-name">Ramesh Kumar</h4>
                   <p class="family-meta">Self · 64 Years · Male</p>
                   <div class="family-tags">
@@ -2023,7 +2507,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 </article>
 
                 <article class="family-card" data-family-member="sunita">
-                  <div class="family-avatar">👵</div>
+                  <div class="family-avatar"><svg class="avatar-svg" aria-hidden="true"><use href="#avatar-senior"></use></svg></div>
                   <h4 class="family-name">Sunita Devi</h4>
                   <p class="family-meta">Spouse · 60 Years · Female</p>
                   <div class="family-tags">
@@ -2034,7 +2518,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 </article>
 
                 <article class="family-card" data-family-member="aarav">
-                  <div class="family-avatar">👶</div>
+                  <div class="family-avatar"><svg class="avatar-svg" aria-hidden="true"><use href="#avatar-child"></use></svg></div>
                   <h4 class="family-name">Aarav Verma</h4>
                   <p class="family-meta">Grandson · 5 Years · Male</p>
                   <div class="family-tags">
@@ -2049,10 +2533,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             <!-- Privacy & Storage Vault -->
             <div class="privacy-vault-box" style="padding: 1.25rem; border-radius: 1rem; border: 1.5px solid var(--line); background: var(--paper); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
               <div>
-                <strong style="display: block; font-size: 1.05rem;">🔒 100% Client-Side Private Storage</strong>
+                <strong style="display: block; font-size: 1.05rem;"><svg class="icon-inline" aria-hidden="true"><use href="#icon-lock"></use></svg> 100% Client-Side Private Storage</strong>
                 <small style="color: var(--muted);">All visit records, family profiles, and passes are stored strictly on your device in browser LocalStorage. No server stores your data.</small>
               </div>
-              <button class="large-button" type="button" id="btn-clear-profile-data" style="border-color: var(--emergency-red); color: var(--emergency-red); min-height: 2.5rem; font-size: 0.88rem;">🗑️ Reset Session Records</button>
+              <button class="large-button" type="button" id="btn-clear-profile-data" style="border-color: var(--emergency-red); color: var(--emergency-red); min-height: 2.5rem; font-size: 0.88rem;"><svg class="icon-inline" aria-hidden="true"><use href="#icon-trash"></use></svg> Reset Session Records</button>
             </div>
           </div>
         </section>
@@ -2074,10 +2558,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               🩺 OPD Doctor Desk
             </button>
             <button type="button" class="role-tab" role="tab" id="tab-registration-counter" aria-selected="false" data-role-view="counter">
-              🏷️ OPD Registration &amp; Token Counter
+              <svg class="icon-inline" aria-hidden="true"><use href="#icon-tag"></use></svg> OPD Registration &amp; Token Counter
             </button>
             <button type="button" class="role-tab" role="tab" id="tab-cmo-dashboard" aria-selected="false" data-role-view="cmo">
-              📊 Hospital Admin / CMO Command Center
+              <svg class="icon-inline" aria-hidden="true"><use href="#icon-chart"></use></svg> Hospital Admin / CMO Command Center
             </button>
           </div>
 
@@ -2101,7 +2585,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 <label style="font-weight: 700; font-size: 0.9rem; display: block; margin-bottom: 0.25rem;">
                   <span class="tag">Simulated</span> Counter Status
                 </label>
-                <span class="queue-badge" style="display: inline-block; padding: 0.5rem 1rem;">🟢 Active Consultation · Dr. S. Mukherjee, MD</span>
+                <span class="queue-badge" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem;"><span class="status-indicator-dot mini"></span> Active Consultation · Dr. S. Mukherjee, MD</span>
               </div>
             </div>
 
@@ -2118,7 +2602,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                     <!-- Injected dynamically -->
                   </ul>
                   <div style="margin-top: 1rem;">
-                    <button class="large-button primary" type="button" id="doctor-call-next" style="width: 100%;" data-copy="doctorCallNext">🔊 Call Next Patient (Bell Chime)</button>
+                    <button class="large-button primary" type="button" id="doctor-call-next" style="width: 100%;" data-copy="doctorCallNext"><svg class="icon-inline" aria-hidden="true"><use href="#icon-bell"></use></svg> Call Next Patient (Bell Chime)</button>
                   </div>
                 </div>
               </aside>
@@ -2216,9 +2700,9 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
                   <!-- Doctor Actions -->
                   <div class="doctor-actions-bar" style="margin-top: 1.25rem;">
-                    <button class="large-button primary" type="button" id="doctor-mark-seen" data-copy="doctorMarkSeen">✅ Complete Consultation &amp; Sign Rx</button>
-                    <button class="large-button" type="button" id="doctor-escalate-emergency" style="border-color: var(--emergency-red); color: var(--emergency-red);" data-copy="doctorEscalateEmergency">🚨 Escalate to 24/7 Emergency</button>
-                    <button class="large-button" type="button" id="doctor-order-tests" data-copy="doctorOrderTests">🔬 Order Hospital Lab Tests</button>
+                    <button class="large-button primary" type="button" id="doctor-mark-seen" data-copy="doctorMarkSeen"><svg class="icon-inline" aria-hidden="true"><use href="#icon-check-circle"></use></svg> Complete Consultation &amp; Sign Rx</button>
+                    <button class="large-button" type="button" id="doctor-escalate-emergency" style="border-color: var(--emergency-red); color: var(--emergency-red);" data-copy="doctorEscalateEmergency"><svg class="icon-inline alert-red" aria-hidden="true"><use href="#icon-alert-triangle"></use></svg> Escalate to 24/7 Emergency</button>
+                    <button class="large-button" type="button" id="doctor-order-tests" data-copy="doctorOrderTests"><svg class="icon-inline" aria-hidden="true"><use href="#icon-microscope"></use></svg> Order Hospital Lab Tests</button>
                   </div>
                   <p id="doctor-action-feedback" class="status" aria-live="polite" style="margin-top: 0.75rem; font-weight: 700;"></p>
                 </div>
@@ -2296,7 +2780,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                   </div>
 
                   <button class="large-button primary" type="submit" style="width: 100%; min-height: 3.2rem; font-size: 1.05rem;">
-                    🖨️ Issue Live OPD Token &amp; Dispatch
+                    <svg class="icon-inline" aria-hidden="true"><use href="#icon-printer"></use></svg> Issue Live OPD Token &amp; Dispatch
                   </button>
                 </form>
                 <p id="terminal-feedback" class="status" aria-live="polite" style="font-weight: 700;"></p>
@@ -2339,7 +2823,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                   <small style="display: block; font-size: 0.72rem; margin-top: 0.25rem;">BARCODE FOR COUNTER SCAN</small>
                 </div>
                 <button class="large-button" type="button" id="thermal-print-btn" style="width: 100%; margin-top: 1rem; font-size: 0.88rem; min-height: 2.5rem;">
-                  🖨️ Print Thermal Slip
+                  <svg class="icon-inline" aria-hidden="true"><use href="#icon-printer"></use></svg> Print Thermal Slip
                 </button>
               </div>
             </div>
@@ -2437,7 +2921,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 <!-- Live Red-Flag Escalation Stream -->
                 <div class="cmo-panel">
                   <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3 style="margin: 0; font-size: 1.15rem;">🚨 Live Emergency Escalations</h3>
+                    <h3 style="margin: 0; font-size: 1.15rem;"><svg class="icon-inline alert-red" aria-hidden="true"><use href="#icon-alert-triangle"></use></svg> Live Emergency Escalations</h3>
                     <span class="queue-badge" style="background: rgba(220, 38, 38, 0.15); color: var(--emergency-red);">Immediate Bay Routing</span>
                   </div>
                   <div class="red-flag-stream">
@@ -2495,13 +2979,13 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           <div class="ocr-upload-card" id="prescription-ocr-card">
             <div class="ocr-header">
               <span class="tag">Simulated</span>
-              <h3 class="ocr-title">📷 Have an old prescription or OPD card?</h3>
+              <h3 class="ocr-title"><svg class="icon-inline" aria-hidden="true"><use href="#icon-camera"></use></svg> Have an old prescription or OPD card?</h3>
               <p class="ocr-subtitle">Upload or tap a verified sample below. AI automatically fills patient name, age band, conditions &amp; active medications with zero manual typing.</p>
             </div>
             <div class="ocr-actions">
               <label class="ocr-dropzone" for="prescription-file-input">
                 <input type="file" id="prescription-file-input" accept="image/*,.pdf" hidden />
-                <span class="ocr-upload-btn">📁 Snap / Upload Prescription</span>
+                <span class="ocr-upload-btn"><svg class="icon-inline" aria-hidden="true"><use href="#icon-folder"></use></svg> Snap / Upload Prescription</span>
                 <span class="ocr-dropzone-hint">Takes 1 second · 100% Client-Side Privacy</span>
               </label>
             </div>
@@ -2509,13 +2993,13 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               <span class="ocr-dropzone-hint" style="font-weight: 700;">Or 1-tap test with verified sample clinical records:</span>
               <div class="ocr-chip-group">
                 <button type="button" class="ocr-sample-chip" data-ocr-sample="elderly-cardio">
-                  <strong>👴 Ramesh Kumar (64M)</strong> · Chest tightness · Diabetic / HTN · Metformin 500mg
+                  <span class="demographic-badge senior"><svg class="avatar-mini"><use href="#avatar-senior"></use></svg> 64M Senior</span> <strong>Ramesh Kumar</strong> · Chest tightness · Diabetic / HTN · Metformin 500mg
                 </button>
                 <button type="button" class="ocr-sample-chip" data-ocr-sample="paediatric-fever">
-                  <strong>👶 Aarav Verma (5M)</strong> · High fever 102°F · Paediatric · Paracetamol syrup
+                  <span class="demographic-badge child"><svg class="avatar-mini"><use href="#avatar-child"></use></svg> 5M Child</span> <strong>Aarav Verma</strong> · High fever 102°F · Paediatric · Paracetamol syrup
                 </button>
                 <button type="button" class="ocr-sample-chip" data-ocr-sample="young-neuro">
-                  <strong>👩 Sunita Devi (32F)</strong> · Severe migraine / photophobia · Sumatriptan
+                  <span class="demographic-badge adult"><svg class="avatar-mini"><use href="#avatar-adult"></use></svg> 32F Adult</span> <strong>Sunita Devi</strong> · Severe migraine / photophobia · Sumatriptan
                 </button>
               </div>
             </div>
@@ -2627,10 +3111,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 <span class="vernacular-lang-pill">اردو</span> <span class="vernacular-sample-text">سینے میں درد</span> <small class="vernacular-route-hint">→ Cardiology</small>
               </button>
               <button class="vernacular-chip red-flag-chip" type="button" data-vernacular-text="ஒரு பக்க பலவீனம்" data-lang="ta" data-lang-name="Tamil (தமிழ்)">
-                <span class="vernacular-lang-pill alert">🚨 Tamil</span> <span class="vernacular-sample-text">ஒரு பக்க பலவீனம்</span> <small class="vernacular-route-hint">→ Emergency (RF-02)</small>
+                <span class="vernacular-lang-pill alert"><svg class="icon-inline" aria-hidden="true"><use href="#icon-alert-triangle"></use></svg> Tamil</span> <span class="vernacular-sample-text">ஒரு பக்க பலவீனம்</span> <small class="vernacular-route-hint">→ Emergency (RF-02)</small>
               </button>
               <button class="vernacular-chip red-flag-chip" type="button" data-vernacular-text="শ্বাসকষ্ট" data-lang="bn" data-lang-name="Bengali (বাংলা)">
-                <span class="vernacular-lang-pill alert">🚨 Bengali</span> <span class="vernacular-sample-text">শ্বাসকষ্ট</span> <small class="vernacular-route-hint">→ Emergency (RF-07)</small>
+                <span class="vernacular-lang-pill alert"><svg class="icon-inline" aria-hidden="true"><use href="#icon-alert-triangle"></use></svg> Bengali</span> <span class="vernacular-sample-text">শ্বাসকষ্ট</span> <small class="vernacular-route-hint">→ Emergency (RF-07)</small>
               </button>
             </div>
           </div>
@@ -2876,7 +3360,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             <p class="rule-line"><span data-copy="routeReference">Route reference:</span> <span class="rule-id" id="result-rule-id"></span></p>
             <div class="audio-readback-wrapper">
               <button class="audio-readback-btn" type="button" id="btn-audio-readback" aria-label="Listen to OPD guidance spoken in your mother tongue">
-                <span class="audio-icon" aria-hidden="true">🔊</span>
+                <span class="audio-icon" aria-hidden="true"><svg class="icon-inline"><use href="#icon-audio"></use></svg></span>
                 <span class="audio-text" id="audio-readback-text">अपनी भाषा में सुनें · Listen Spoken Aloud</span>
               </button>
             </div>
@@ -3017,11 +3501,11 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 <h2 id="modal-languages-title">22 Scheduled Indian Languages · भारतीय भाषाएं</h2>
                 <p class="lang-modal-note">Choose your language to view the interface, speak symptoms, and hear audio guidance.</p>
               </div>
-              <button class="lang-modal-close" type="button" id="btn-close-languages" aria-label="Close language selector">✕</button>
+              <button class="lang-modal-close" type="button" id="btn-close-languages" aria-label="Close language selector"><svg class="icon-inline"><use href="#icon-close"></use></svg></button>
             </div>
             
             <div class="lang-search-bar">
-              <input type="search" id="lang-search-input" class="lang-search-control" placeholder="🔍 Search any of the 22 languages (e.g. Urdu, தமிழ், বাংলা, Telugu)..." aria-label="Search languages" />
+              <input type="search" id="lang-search-input" class="lang-search-control" placeholder="Search any of the 22 languages (e.g. Urdu, தமிழ், বাংলা, Telugu)..." aria-label="Search languages" />
             </div>
 
             <div class="lang-grid" id="lang-grid-container" role="group" aria-label="All 22 Languages">
@@ -3119,17 +3603,17 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       <section class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="true" aria-labelledby="a11y-panel-title" hidden>
         <div class="a11y-panel-header">
           <h3 id="a11y-panel-title" class="a11y-title">
-            <span aria-hidden="true">♿</span> Accessibility
+            <svg class="icon-inline" aria-hidden="true"><use href="#icon-a11y"></use></svg> Accessibility
           </h3>
-          <button type="button" class="a11y-close-btn" id="a11y-close-btn" aria-label="Close accessibility panel">✕</button>
+          <button type="button" class="a11y-close-btn" id="a11y-close-btn" aria-label="Close accessibility panel"><svg class="icon-inline"><use href="#icon-close"></use></svg></button>
         </div>
         <div class="a11y-panel-body">
           <button type="button" class="a11y-action-btn" id="a11y-btn-contrast">
-            <span class="a11y-btn-icon">🌓</span>
+            <span class="a11y-btn-icon"><svg class="icon-inline"><use href="#icon-contrast"></use></svg></span>
             <span class="a11y-btn-text">Enable High Contrast</span>
           </button>
           <button type="button" class="a11y-action-btn" id="a11y-btn-invert">
-            <span class="a11y-btn-icon">🔄</span>
+            <span class="a11y-btn-icon"><svg class="icon-inline"><use href="#icon-rotate"></use></svg></span>
             <span class="a11y-btn-text">Enable Invert Colors</span>
           </button>
           <div class="a11y-control-group">
@@ -3161,46 +3645,46 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             <span class="sidebar-logo">राहत · Raahat</span>
             <span class="sidebar-tagline">OPD Triage &amp; Hospital Suite</span>
           </div>
-          <button type="button" class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Close navigation menu">✕</button>
+          <button type="button" class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Close navigation menu"><svg class="icon-inline"><use href="#icon-close"></use></svg></button>
         </div>
         
         <div class="sidebar-content">
           <!-- Group 1: Patient Care & Triage -->
           <div class="sidebar-group">
             <div class="sidebar-group-title">
-              <span aria-hidden="true">🏥</span> Citizen Care &amp; Triage
+              <svg class="icon-inline" aria-hidden="true"><use href="#icon-hospital"></use></svg> Citizen Care &amp; Triage
             </div>
             <div class="sidebar-links-grid">
               <a href="#screen-home" class="sidebar-nav-card" data-sidebar-link="home">
-                <span class="nav-card-icon">🏠</span>
+                <span class="nav-card-icon"><svg class="icon-inline"><use href="#icon-home"></use></svg></span>
                 <div class="nav-card-text">
                   <strong class="nav-card-title">Home / Front Door</strong>
                   <small class="nav-card-desc">Citizen OPD front door and overview</small>
                 </div>
               </a>
               <a href="#screen-triage" class="sidebar-nav-card" data-sidebar-link="triage">
-                <span class="nav-card-icon">🏥</span>
+                <span class="nav-card-icon"><svg class="icon-inline"><use href="#icon-hospital"></use></svg></span>
                 <div class="nav-card-text">
                   <strong class="nav-card-title">OPD Counter Triage</strong>
                   <small class="nav-card-desc">3D/2D Body Map, voice &amp; text routing</small>
                 </div>
               </a>
               <a href="#screen-profile" class="sidebar-nav-card" data-sidebar-link="profile">
-                <span class="nav-card-icon">👤</span>
+                <span class="nav-card-icon"><svg class="icon-inline"><use href="#icon-user"></use></svg></span>
                 <div class="nav-card-text">
                   <strong class="nav-card-title">My Patient Profile</strong>
                   <small class="nav-card-desc">Live OPD digital pass &amp; consultation history</small>
                 </div>
               </a>
               <a href="#screen-lab-tests" class="sidebar-nav-card" data-sidebar-link="lab-tests">
-                <span class="nav-card-icon">🔬</span>
+                <span class="nav-card-icon"><svg class="icon-inline"><use href="#icon-microscope"></use></svg></span>
                 <div class="nav-card-text">
                   <strong class="nav-card-title">Lab Tests &amp; Scans</strong>
                   <small class="nav-card-desc">Diagnostic test catalog &amp; slot booking</small>
                 </div>
               </a>
               <a href="#screen-blood-bank" class="sidebar-nav-card" data-sidebar-link="blood-bank">
-                <span class="nav-card-icon">🩸</span>
+                <span class="nav-card-icon"><svg class="icon-inline"><use href="#icon-blood"></use></svg></span>
                 <div class="nav-card-text">
                   <strong class="nav-card-title">Blood Bank Directory</strong>
                   <small class="nav-card-desc">e-RaktKosh 24/7 live stock &amp; rare groups</small>
@@ -3212,25 +3696,25 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           <!-- Group 2: Hospital Staff & Clinical Suite -->
           <div class="sidebar-group">
             <div class="sidebar-group-title">
-              <span aria-hidden="true">🩺</span> Hospital Staff &amp; Operations
+              <svg class="icon-inline" aria-hidden="true"><use href="#icon-doctor"></use></svg> Hospital Staff &amp; Operations
             </div>
             <div class="sidebar-links-grid">
               <a href="#screen-doctor" class="sidebar-nav-card" data-sidebar-link="doctor">
-                <span class="nav-card-icon">👨‍⚕️</span>
+                <span class="nav-card-icon"><svg class="icon-inline"><use href="#icon-doctor"></use></svg></span>
                 <div class="nav-card-text">
                   <strong class="nav-card-title">OPD Doctor Desk</strong>
                   <small class="nav-card-desc">Real-time patient queue, chime &amp; SBAR handover</small>
                 </div>
               </a>
               <a href="#screen-doctor" class="sidebar-nav-card" data-sidebar-link="doctor" data-role-tab="counter">
-                <span class="nav-card-icon">🎟️</span>
+                <span class="nav-card-icon"><svg class="icon-inline"><use href="#icon-tag"></use></svg></span>
                 <div class="nav-card-text">
                   <strong class="nav-card-title">Token &amp; Registration Counter</strong>
                   <small class="nav-card-desc">80mm thermal token receipt printer</small>
                 </div>
               </a>
               <a href="#screen-doctor" class="sidebar-nav-card" data-sidebar-link="doctor" data-role-tab="admin">
-                <span class="nav-card-icon">📊</span>
+                <span class="nav-card-icon"><svg class="icon-inline"><use href="#icon-chart"></use></svg></span>
                 <div class="nav-card-text">
                   <strong class="nav-card-title">CMO &amp; Admin Command</strong>
                   <small class="nav-card-desc">Live department wait times &amp; queue bottlenecks</small>
@@ -3242,32 +3726,32 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           <!-- Group 3: Civic Verification & Directory -->
           <div class="sidebar-group">
             <div class="sidebar-group-title">
-              <span aria-hidden="true">⚖️</span> Public Facts &amp; Verification
+              <svg class="icon-inline" aria-hidden="true"><use href="#icon-scale"></use></svg> Public Facts &amp; Verification
             </div>
             <div class="sidebar-links-grid">
               <a href="#screen-hospitals" class="sidebar-nav-card" data-sidebar-link="hospitals">
-                <span class="nav-card-icon">🏛️</span>
+                <span class="nav-card-icon"><svg class="icon-inline"><use href="#icon-hospital"></use></svg></span>
                 <div class="nav-card-text">
                   <strong class="nav-card-title">Pan-India Hospital Directory</strong>
                   <small class="nav-card-desc">60+ verified premier institutions</small>
                 </div>
               </a>
               <a href="#screen-comparison" class="sidebar-nav-card" data-sidebar-link="comparison">
-                <span class="nav-card-icon">⚖️</span>
+                <span class="nav-card-icon"><svg class="icon-inline"><use href="#icon-scale"></use></svg></span>
                 <div class="nav-card-text">
                   <strong class="nav-card-title">ORS vs Raahat Comparison</strong>
                   <small class="nav-card-desc">Why front-door triage transforms wait times</small>
                 </div>
               </a>
               <a href="#screen-honesty" class="sidebar-nav-card" data-sidebar-link="honesty">
-                <span class="nav-card-icon">📋</span>
+                <span class="nav-card-icon"><svg class="icon-inline"><use href="#icon-file-text"></use></svg></span>
                 <div class="nav-card-text">
                   <strong class="nav-card-title">Honesty &amp; Safeguards Ledger</strong>
                   <small class="nav-card-desc">Full disclosure of simulated vs verified data</small>
                 </div>
               </a>
               <a href="#screen-faqs" class="sidebar-nav-card" data-sidebar-link="faqs">
-                <span class="nav-card-icon">❓</span>
+                <span class="nav-card-icon"><svg class="icon-inline"><use href="#icon-question"></use></svg></span>
                 <div class="nav-card-text">
                   <strong class="nav-card-title">Questions Citizens Ask (FAQs)</strong>
                   <small class="nav-card-desc">Safety, accessibility, and privacy answers</small>
@@ -3279,13 +3763,13 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
         <div class="sidebar-footer">
           <button type="button" class="sidebar-tool-btn" id="sidebar-btn-lang">
-            <span aria-hidden="true">🌐</span> 22 Languages
+            <svg class="icon-inline" aria-hidden="true"><use href="#icon-globe"></use></svg> 22 Languages
           </button>
           <button type="button" class="sidebar-tool-btn" id="sidebar-btn-a11y">
-            <span aria-hidden="true">♿</span> Access
+            <svg class="icon-inline" aria-hidden="true"><use href="#icon-a11y"></use></svg> Access
           </button>
           <button type="button" class="sidebar-tool-btn" id="sidebar-btn-theme">
-            <span aria-hidden="true">🌓</span> Theme
+            <svg class="icon-inline" aria-hidden="true"><use href="#icon-contrast"></use></svg> Theme
           </button>
         </div>
       </aside>
@@ -3439,10 +3923,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
   "doctorTitle": "Hospital OPD Counter & Doctor Portal",
   "doctorSubtitle": "Live patient queue, 10-second SBAR clinical handover, and verified token verification.",
   "doctorQueueTitle": "Live Token Queue",
-  "doctorCallNext": "🔊 Call Next Patient",
-  "doctorMarkSeen": "✅ Complete Consultation & Sign Rx",
-  "doctorEscalateEmergency": "🚨 Escalate to 24/7 Emergency",
-  "doctorOrderTests": "🔬 Order Hospital Lab Tests"
+  "doctorCallNext": "Call Next Patient",
+  "doctorMarkSeen": "Complete Consultation & Sign Rx",
+  "doctorEscalateEmergency": "Escalate to 24/7 Emergency",
+  "doctorOrderTests": "Order Hospital Lab Tests"
 });
       Object.assign(copy.hi, {
   "brandTagline": "जहाँ दर्द है वहाँ बताइए। बाकी हम करेंगे।",
@@ -3468,10 +3952,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
   "doctorTitle": "अस्पताल ओपीडी काउंटर और डॉक्टर पोर्टल",
   "doctorSubtitle": "लाइव मरीज कतार, 10-सेकंड SBAR क्लिनिकल हैंडओवर और सत्यापित टोकन जाँच।",
   "doctorQueueTitle": "लाइव टोकन कतार",
-  "doctorCallNext": "🔊 अगले मरीज को बुलाएँ",
-  "doctorMarkSeen": "✅ परामर्श पूरा करें और पर्ची साइन करें",
-  "doctorEscalateEmergency": "🚨 24/7 इमरजेंसी में भेजें",
-  "doctorOrderTests": "🔬 अस्पताल लैब टेस्ट ऑर्डर करें"
+  "doctorCallNext": "अगले मरीज को बुलाएँ",
+  "doctorMarkSeen": "परामर्श पूरा करें और पर्ची साइन करें",
+  "doctorEscalateEmergency": "24/7 इमरजेंसी में भेजें",
+  "doctorOrderTests": "अस्पताल लैब टेस्ट ऑर्डर करें"
 });
 
       // Complete 22 Scheduled Indian Languages Vernacular Pack
@@ -5124,7 +5608,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         const liveStatusText = document.querySelector("#slip-live-status-text");
         if (liveStatusPill && liveStatusText) {
           liveStatusPill.className = "slip-status-pill seen";
-          liveStatusText.innerHTML = `<strong>✅ Seen by Doctor:</strong> ${data.doctor || "Dr. S. Mukherjee"} · Completed at ${data.timestamp || "Just now"}`;
+          liveStatusText.innerHTML = `<span class="scorecard-tag tag-positive"><svg class="icon-inline" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Seen</span> <strong>Doctor:</strong> ${data.doctor || "Dr. S. Mukherjee"} · Completed at ${data.timestamp || "Just now"}`;
         }
       }
 
@@ -5197,13 +5681,13 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         if (pillEl) {
           if (activePatient.status === "Seen") {
             pillEl.className = "pass-status-pill seen";
-            pillEl.textContent = "✅ Consultation Complete";
+            pillEl.innerHTML = `<span class="scorecard-tag tag-positive">Done</span> Consultation Complete`;
           } else if (activePatient.status.includes("Consultation Room")) {
             pillEl.className = "pass-status-pill inside";
-            pillEl.textContent = "🟢 Inside Consultation Room";
+            pillEl.innerHTML = `<span class="status-indicator-dot mini"></span> Inside Consultation Room`;
           } else {
             pillEl.className = "pass-status-pill";
-            pillEl.textContent = `🟡 Waiting in Hall (${activePatient.status})`;
+            pillEl.innerHTML = `<span class="scorecard-tag">Queued</span> Waiting in Hall (${activePatient.status})`;
           }
         }
       }
@@ -5386,7 +5870,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           playHospitalChime();
 
           if (terminalFeedback) {
-            terminalFeedback.textContent = `✅ Token ${newTokenNum} dispatched for ${name}! Added to live queue.`;
+            terminalFeedback.textContent = `[Confirmed] Token ${newTokenNum} dispatched for ${name}! Added to live queue.`;
           }
         });
 
@@ -5432,7 +5916,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           const firstUnseen = doctorQueueData.findIndex(item => item.status !== "Seen");
           
           if (nextIdx === -1 && firstUnseen === -1) {
-            if (feedbackEl) feedbackEl.textContent = "✅ All patients in current OPD session have been seen.";
+            if (feedbackEl) feedbackEl.textContent = "[Complete] All patients in current OPD session have been seen.";
             return;
           }
 
@@ -5445,7 +5929,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           renderActiveDoctorSBAR();
           renderDoctorQueue();
           renderProfilePass();
-          if (feedbackEl) feedbackEl.textContent = `🔊 Called ${doctorQueueData[activeDoctorQueueIndex].patient} (${doctorQueueData[activeDoctorQueueIndex].token}) to Consultation Room.`;
+          if (feedbackEl) feedbackEl.textContent = `[Calling] ${doctorQueueData[activeDoctorQueueIndex].patient} (${doctorQueueData[activeDoctorQueueIndex].token}) to Consultation Room.`;
         });
 
         markSeenBtn?.addEventListener("click", () => {
@@ -5470,14 +5954,14 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           updateSlipStatusDirectly(eventData);
 
           if (feedbackEl) {
-            feedbackEl.textContent = `✅ Consultation complete for ${current.token}. Real-time status broadcasted to citizen's specimen slip at ${timestamp}!`;
+            feedbackEl.textContent = `[Consultation Complete] ${current.token}. Real-time status broadcasted to citizen's specimen slip at ${timestamp}!`;
           }
         });
 
         emergencyBtn?.addEventListener("click", () => {
           const current = doctorQueueData[activeDoctorQueueIndex];
           if (feedbackEl) {
-            feedbackEl.textContent = `🚨 Patient ${current.token} fast-tracked to 24/7 Red Flag Emergency. Stretcher & Triage Nurse dispatched.`;
+            feedbackEl.textContent = `[EMERGENCY] Patient ${current.token} fast-tracked to 24/7 Red Flag Emergency. Stretcher & Triage Nurse dispatched.`;
           }
         });
 
@@ -5525,7 +6009,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         function applyOcrProfile(profile) {
           if (!feedbackEl) return;
           feedbackEl.hidden = false;
-          feedbackEl.textContent = "⚡ Scanning clinical prescription with multi-modal AI parser...";
+          feedbackEl.textContent = "Scanning clinical prescription with multi-modal AI parser...";
 
           setTimeout(() => {
             const nameInput = document.querySelector("#patient-name");
@@ -5566,7 +6050,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               updateCharCounter();
             }
 
-            feedbackEl.innerHTML = `✅ <strong>Prescription Digitized Successfully!</strong> Auto-filled Patient Name (${profile.name}), Age (${profile.age}), Conditions &amp; Active Meds (${profile.meds}). Zero manual typing needed.`;
+            feedbackEl.innerHTML = `<span class="scorecard-tag tag-positive">Verified</span> <strong>Prescription Digitized Successfully!</strong> Auto-filled Patient Name (${profile.name}), Age (${profile.age}), Conditions &amp; Active Meds (${profile.meds}). Zero manual typing needed.`;
           }, 350);
         }
 
@@ -5631,9 +6115,9 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             const routed = routeComplaint(parsed);
 
             if (routed.urgency === "emergency") {
-              appendWaMessage(`🚨 <strong>आपातकालीन चेतावनी (Emergency Alert)</strong><br><br>नियम: <code>${routed.rule_id}</code><br>कृपया तुरंत 24/7 आपातकालीन विभाग (Emergency Ward) जाएँ! OPD की प्रतीक्षा न करें।<br><br>🏥 <strong>निकटतम आपातकालीन अस्पताल:</strong> AIIMS New Delhi / Safdarjung Hospital (24/7 Trauma Counter Gate 2).`);
+              appendWaMessage(`[EMERGENCY] <strong>आपातकालीन चेतावनी (Emergency Alert)</strong><br><br>नियम: <code>${routed.rule_id}</code><br>कृपया तुरंत 24/7 आपातकालीन विभाग (Emergency Ward) जाएँ! OPD की प्रतीक्षा न करें।<br><br>🏥 <strong>निकटतम आपातकालीन अस्पताल:</strong> AIIMS New Delhi / Safdarjung Hospital (24/7 Trauma Counter Gate 2).`);
             } else {
-              appendWaMessage(`✅ <strong>राहत OPD मार्गदर्शन (Raahat Match):</strong><br><br>विभाग: <strong>${routed.department}</strong><br>नियम: <code>${routed.rule_id}</code><br>अनुशंसित काउंटर: <strong>Counter 4</strong><br>अनुमानित प्रतीक्षा समय: <strong>~25 मिनट</strong><br><br>📱 <strong>आपका व्हाट्सएप टोकन:</strong> #WA-2026-${String(Date.now()).slice(-4)}<br><em>अस्पताल पहुँचकर यह संदेश सीधे काउंटर पर दिखाएँ।</em>`);
+              appendWaMessage(`[VERIFIED ROUTE] <strong>राहत OPD मार्गदर्शन (Raahat Match):</strong><br><br>विभाग: <strong>${routed.department}</strong><br>नियम: <code>${routed.rule_id}</code><br>अनुशंसित काउंटर: <strong>Counter 4</strong><br>अनुमानित प्रतीक्षा समय: <strong>~25 मिनट</strong><br><br>📱 <strong>आपका व्हाट्सएप टोकन:</strong> #WA-2026-${String(Date.now()).slice(-4)}<br><em>अस्पताल पहुँचकर यह संदेश सीधे काउंटर पर दिखाएँ।</em>`);
             }
           }, 450);
         }
@@ -5726,7 +6210,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         const readbackText = document.querySelector("#audio-readback-text");
         if (readbackBtn) {
           readbackBtn.classList.toggle("is-speaking", speaking);
-          if (readbackText) readbackText.textContent = speaking ? "⏹ Stop Listening · बोलना रोकें" : "🔊 अपनी भाषा में सुनें · Listen Spoken Aloud";
+          if (readbackText) readbackText.textContent = speaking ? "Stop Audio · बोलना रोकें" : "अपनी भाषा में सुनें · Listen Spoken Aloud";
         }
       }
 
@@ -6169,16 +6653,16 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             <div class="wa-avatar">रा</div>
             <div class="wa-title-wrap">
               <h4 id="wa-modal-title">राहत · Raahat Bot</h4>
-              <small>Verified Public Health Assistant 🟢</small>
+              <small>Verified Public Health Assistant <span class="status-indicator-dot mini"></span></small>
             </div>
           </div>
-          <button type="button" class="wa-close-btn" id="wa-close-btn" aria-label="Close WhatsApp Simulator">✕</button>
+          <button type="button" class="wa-close-btn" id="wa-close-btn" aria-label="Close WhatsApp Simulator"><svg class="icon-inline"><use href="#icon-close"></use></svg></button>
         </div>
 
         <div class="wa-body" id="wa-chat-body">
           <div class="wa-bubble bot">
             <span class="tag">Simulated</span>
-            <p style="margin: 0 0 0.35rem;"><strong>नमस्ते! 🙏 मैं राहत (Raahat) हूँ।</strong></p>
+            <p style="margin: 0 0 0.35rem;"><strong>नमस्ते! मैं राहत (Raahat) हूँ।</strong></p>
             <p style="margin: 0;">सरकारी अस्पताल के सही OPD काउंटर तक पहुँचने के लिए अपनी तकलीफ़ बोलकर या लिखकर बताइए।</p>
             <div class="wa-bubble-time">10:00 AM</div>
           </div>
@@ -6186,20 +6670,20 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           <div class="wa-prompts" id="wa-quick-prompts">
             <span style="font-size: 0.78rem; color: #667781; font-weight: 700;">1-Tap Quick Prompts:</span>
             <button type="button" class="wa-prompt-btn" data-wa-prompt="Seene mein dard aur paseena aa raha hai">
-              👴 "Seene mein dard aur paseena" (Urgent)
+              • "Seene mein dard aur paseena" (Cardiology / Urgent)
             </button>
             <button type="button" class="wa-prompt-btn" data-wa-prompt="Bachhe ko kal se tez bukhaar 103 degree hai">
-              👶 "Bachhe ko tez bukhaar 103°F" (Paediatric)
+              • "Bachhe ko tez bukhaar 103°F" (Paediatrics)
             </button>
             <button type="button" class="wa-prompt-btn" data-wa-prompt="Pair mein sujan aur ghutne mein dard hai">
-              🦵 "Ghutne mein dard aur chalne mein takleef" (Ortho)
+              • "Ghutne mein dard aur chalne mein takleef" (Orthopaedics)
             </button>
           </div>
         </div>
 
         <form class="wa-footer" id="wa-chat-form">
           <input type="text" class="wa-input" id="wa-chat-input" placeholder="Type symptom in Hindi/English..." autocomplete="off" />
-          <button type="submit" class="wa-send-btn" aria-label="Send WhatsApp message">➤</button>
+          <button type="submit" class="wa-send-btn" aria-label="Send WhatsApp message"><svg class="icon-inline"><use href="#icon-send"></use></svg></button>
         </form>
       </div>
     </div>
