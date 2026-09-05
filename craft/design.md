@@ -50,12 +50,12 @@ Pick by how much of the score is Visual Design. Rule 25: the substrate caps the 
 do not bring default-Streamlit energy to a design-judged event.
 
 ## 6. Accessibility is a design decision, made early
-> *EmoLens (IncludAI winner):* a real user said *"I can't tell if that face is angry or disgusted.
+> *Prior hackathon winner:* a real user said *"I can't tell if that face is angry or disgusted.
 > This is making me more anxious"* — so **every emoji was ripped out of the entire app** and
 > replaced with geometric line icons.
 
 Ambiguity is a design bug. Floor for every build: contrast, focus order, reduced-motion toggle,
-font scaling, large tap targets, and no meaning carried by colour alone. EmoLens also refused to
+font scaling, large tap targets, and no meaning carried by colour alone. We also refuse to
 look like "special education software" — *"accessibility and beauty are not opposites."*
 
 ## 7. The 10-second gallery read
