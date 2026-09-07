@@ -39,13 +39,43 @@ export function parseFreeTextComplaint(input, language = "en") {
     "குழந்தை", "கைக்குழந்தை", "பாப்பா", "శిశువు", "పాప", "బాబు", "শিশু", "নবজাতক",
     "বাচ্চা", "बाळ", "अर्भक", "ಮಗು", "ಕೂಸು", "શિશુ", "കുഞ്ഞ്", "ਨਿਆਣਾ", "ଛୁଆ", "شیر خوار", "نوزائیدہ",
   ]);
-  const isChild = isBaby || hasAny(text, [
-    "child", "kid", "बच्चे", "बच्चा", "बच्ची", "சிறுவன்", "சிறுமி", "పిల్లలు", "పిల్లాడు",
+  const isKidWord = (/\bkids?\b/i.test(text) && !text.includes("kidney"));
+  const isChild = isBaby || isKidWord || hasAny(text, [
+    "child", "बच्चे", "बच्चा", "बच्ची", "சிறுவன்", "சிறுமி", "పిల్లలు", "పిల్లాడు",
     "খোকা", "খুকি", "लहान मूल", "ಹುಡುಗ", "બાળક", "കുട്ടി", "ਬੱਚਾ", "ପିଲା", "بچہ",
   ]);
   if (isBaby) complaint.age_band = "baby";
   else if (isChild) complaint.age_band = "child";
   if (isChild) complaint.who_for = "child";
+
+
+  // Expanded Clinical Extractors: Urology, Obs & Gynae, Pulmonology, Psychiatry
+  const isPregnancy = hasAny(text, ["pregnant", "pregnancy", "garbhwati", "garbh", "गर्भवती", "गर्भ", "period pain", "mahwaari", "माहवारी", "delivery", "antenatal", "menses"]);
+  const isUrinary = hasAny(text, ["urine", "urinary", "peshab", "पेशाब", "burning urine", "kidney stone", "pathri", "पथरी", "पेशाब में जलन", "मूत्र"]);
+  const isCough = hasAny(text, ["cough", "khansi", "खांसी", "खोखला", "balgham", "phlegm", "बलगम", "wheezing", "asthma", "दमा"]);
+  const isPsychiatry = hasAny(text, ["anxiety", "depression", "insomnia", "neend nahi", "तनाव", "घबराहट", "उदासी", "नींद न आना", "man me bechaini", "bechaini"]);
+
+  if (isPregnancy) {
+    complaint.kind = "pregnancy";
+    complaint.region = "pelvis-female";
+    complaint.parsed = true;
+    if (hasAny(text, ["bleeding", "blood", "khoon", "खून", "रक्त"])) {
+      complaint.severity_markers.push("pregnancy-bleeding");
+      complaint.severity = "emergency";
+    }
+  } else if (isUrinary) {
+    complaint.kind = "urinary";
+    complaint.region = "urinary";
+    complaint.parsed = true;
+  } else if (isCough) {
+    complaint.kind = "chronic-cough";
+    complaint.region = "chest";
+    complaint.parsed = true;
+  } else if (isPsychiatry) {
+    complaint.kind = "mental-health";
+    complaint.region = "general";
+    complaint.parsed = true;
+  }
 
   const hasChest = hasAny(text, [
     "chest", "सीने", "सीना", "seene", "sine", "छाती", "chhati",
@@ -112,8 +142,8 @@ export function parseFreeTextComplaint(input, language = "en") {
     "pelvis", "hip", "hips", "कूल्हा", "कूल्हे", "पेल्विस", "இடுப்பு",
     "నడుము", "কোমর", "कंबर", "ಸೊಂಟ", "કમર", "നടുവ്", "ਕਮਰ", "ଅଣ୍ଟା", "کولہے",
     "groin", "genital", "genitals", "reproductive", "testicle", "testicles", "scrotum",
-    "penis", "vagina", "vulva", "prostate", "inguinal", "urine", "urinary",
-    "जननांग", "गुप्तांग", "अंडकोष", "मूत्र", "पेशाब", "माहवारी", "प्रजनन", "हर्निया", "hernia",
+    "penis", "vagina", "vulva", "prostate", "inguinal", "hernia", "हर्निया",
+    "जननांग", "गुप्तांग", "अंडकोष", "प्रजनन",
   ]);
   const hasUpperBack = hasAny(text, [
     "upper back", "ऊपरी पीठ", "மேல் முதுகு", "పై వీపు", "পিঠের উপরিভাগ",
@@ -257,8 +287,9 @@ export function parseFreeTextComplaint(input, language = "en") {
   if (seizure) complaint.severity_markers.push("seizure");
   if (selfHarm) complaint.severity_markers.push("self-harm-thoughts");
 
-  if (hasChest) complaint.region = "chest";
-  else if (hasHead) complaint.region = "head";
+  if (!complaint.region) {
+    if (hasChest) complaint.region = "chest";
+    else if (hasHead) complaint.region = "head";
   else if (hasEyes) complaint.region = "eyes";
   else if (hasNose) complaint.region = "nose";
   else if (hasEars) complaint.region = "ears";
@@ -273,6 +304,7 @@ export function parseFreeTextComplaint(input, language = "en") {
   else if (hasLeg) complaint.region = "leg";
   else if (hasAbdomen) complaint.region = "upper-abdomen";
   else if (oneSidedWeakness || oneSidedNumbness || isChild || heavyBleeding || seizure || selfHarm) complaint.region = "general";
+  }
 
   const painKeywords = [
     "pain", "ache", "dard", "दर्द", "discomfort", "भारीपन",
@@ -281,6 +313,7 @@ export function parseFreeTextComplaint(input, language = "en") {
     "വേദന", "അസ്വസ്ഥത", "ਦਰਦ", "ਪੀੜ", "ଯନ୍ତ୍ରଣା", "ବିନ୍ଧା", "درد", "تکلیف", "বিষ",
   ];
 
+  if (!complaint.kind) {
   if (hasChest && (hasAny(text, painKeywords) || breathlessness)) complaint.kind = "pain";
   else if (hasHead && hasAny(text, painKeywords)) complaint.kind = "pain";
   else if ((hasEyes || hasNose || hasEars || hasTeeth || hasShoulder || hasKnee || hasHand || hasFoot || hasPelvis || hasUpperBack || hasLowerBack)
@@ -310,6 +343,7 @@ export function parseFreeTextComplaint(input, language = "en") {
   else if (heavyBleeding) { complaint.region ||= "general"; complaint.kind = "bleeding"; }
   else if (seizure) { complaint.region ||= "general"; complaint.kind = "dizziness"; }
   else if (selfHarm) { complaint.region ||= "general"; complaint.kind = "low"; }
+  }
 
   if (breathlessness && hasChest) complaint.severity_markers.push("breathlessness");
   else if (breathlessness) complaint.severity_markers.push("difficulty-breathing");
@@ -440,6 +474,26 @@ export function checkRealtimeEmergency(input, language = "en") {
   const original = String(input || "").trim();
   const text = cleanText(original);
   if (!text) return { isEmergency: false };
+
+  // RF-10: Pregnancy with Bleeding or severe pain
+  const pregnancyKeywords = ["pregnant", "pregnancy", "garbhwati", "garbh", "पेट में बच्चा", "गर्भवती", "மாதவிடாய்", "గర్భవతి", "অন্তঃসত্ত্বা"];
+  const bleedingKeywords = ["bleeding", "blood", "khoon", "खून", "रक्त", "రక్తం", "রক্ত"];
+  if (hasAny(text, pregnancyKeywords) && hasAny(text, bleedingKeywords)) {
+    return {
+      isEmergency: true,
+      ruleId: "RF-10",
+      conditionName: "Obstetric Hemorrhage / Pregnancy Bleeding",
+      title: {
+        en: "Obstetric Emergency (RF-10)",
+        hi: "गर्भावस्था आपातकाल / रक्तस्राव (RF-10)",
+      },
+      advice: {
+        en: "Bleeding during pregnancy is a life-threatening obstetric emergency. Proceed immediately to 24/7 Emergency or Labour Room.",
+        hi: "गर्भावस्था के दौरान रक्तस्राव एक गंभीर आपातकालीन स्थिति है। तुरंत 24/7 इमरजेंसी या लेबर रूम जाएँ।",
+      },
+      trigger: "Pregnancy with bleeding",
+    };
+  }
 
   // RF-01: Chest pain + (breathlessness or sweating or radiating)
   const hasChest = hasAny(text, [

@@ -337,4 +337,25 @@ test("parseFreeTextComplaint extracts demographic entities without requiring man
   assert.equal(c3.kind, "pain");
 });
 
+test("expanded clinical departments: Obs & Gynae, Urology, Pulmonology, Psychiatry, and RF-10", () => {
+  // 1. Obs & Gynae
+  const gynae = parseFreeTextComplaint("pregnant woman with acute pelvic cramps garbhwati");
+  assert.equal(routeComplaint(gynae).department, "Obstetrics & Gynaecology");
 
+  // 2. Urology
+  const uro = parseFreeTextComplaint("severe burning in urine and kidney stone peshab mein jalan");
+  assert.equal(routeComplaint(uro).department, "Urology");
+
+  // 3. Pulmonology
+  const pulm = parseFreeTextComplaint("chronic cough with phlegm and wheezing since 3 weeks");
+  assert.equal(routeComplaint(pulm).department, "Pulmonology");
+
+  // 4. Psychiatry
+  const psych = parseFreeTextComplaint("severe anxiety and insomnia neend nahi aa rahi hai");
+  assert.equal(routeComplaint(psych).department, "Psychiatry");
+
+  // 5. RF-10: Pregnancy with bleeding -> Emergency
+  const rf10 = checkRealtimeEmergency("pregnant woman severe bleeding garbhwati khoon");
+  assert.equal(rf10.isEmergency, true);
+  assert.equal(rf10.ruleId, "RF-10");
+});

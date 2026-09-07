@@ -64,6 +64,46 @@ export const ROUTING_RULES = Object.freeze({
       severity: "routine",
     },
     {
+      id: "R-16",
+      matches: { any: [{ field: "kind", in: ["pregnancy", "period-pain", "gynaecology", "antenatal"] }, { field: "region", in: ["pelvis-female", "uterus"] }] },
+      department: "Obstetrics & Gynaecology",
+      reason: {
+        en: "Pregnancy, menstrual or female reproductive health concerns start at Obstetrics & Gynaecology.",
+        hi: "गर्भावस्था, माहवारी या महिला स्वास्थ्य संबंधी परेशानी के लिए स्त्री एवं प्रसूति रोग विभाग से शुरू करें।",
+      },
+      severity: "routine",
+    },
+    {
+      id: "R-17",
+      matches: { any: [{ field: "kind", in: ["urinary", "burning-urination", "kidney-stone", "kidney-pain"] }, { field: "region", in: ["urinary", "groin-urinary"] }] },
+      department: "Urology",
+      reason: {
+        en: "Urinary difficulty, burning micturition, or kidney stone pain starts at Urology / Nephrology.",
+        hi: "पेशाब में जलन, रुकावट या गुर्दे/पथरी के दर्द के लिए यूरोलॉजी / नेफ्रोलॉजी विभाग से शुरू करें।",
+      },
+      severity: "routine",
+    },
+    {
+      id: "R-18",
+      matches: { any: [{ field: "kind", in: ["chronic-cough", "asthma-bronchitis", "tuberculosis-screen"] }] },
+      department: "Pulmonology",
+      reason: {
+        en: "Persistent cough, wheezing, or chronic respiratory concerns start at Pulmonology (Chest OPD).",
+        hi: "लगातार खांसी, सांस की तकलीफ या पुरानी सीने की बीमारी के लिए पल्मोनोलॉजी (चेस्ट ओपीडी) से शुरू करें।",
+      },
+      severity: "routine",
+    },
+    {
+      id: "R-19",
+      matches: { any: [{ field: "kind", in: ["mental-health", "insomnia", "anxiety", "depression"] }] },
+      department: "Psychiatry",
+      reason: {
+        en: "Mental well-being, severe anxiety, persistent insomnia or mood concerns start at Psychiatry OPD.",
+        hi: "मानसिक स्वास्थ्य, अनिद्रा, अत्यधिक घबराहट या तनाव के लिए मनोचिकित्सा विभाग से शुरू करें।",
+      },
+      severity: "routine",
+    },
+    {
       id: "R-02",
       matches: { all: [{ field: "kind", equals: "pain" }, { field: "region", equals: "chest" }] },
       department: "Cardiology",
@@ -226,6 +266,13 @@ export const ROUTING_RULES = Object.freeze({
       matches: { all: [{ field: "severity_markers", includes: "self-harm-thoughts" }] },
       department: "Emergency",
       reason: { en: "Thoughts of self-harm need Emergency support now.", hi: "खुद को नुकसान पहुँचाने के विचार आएँ तो अभी इमरजेंसी सहायता लें।" },
+      severity: "emergency",
+    },
+    {
+      id: "RF-10",
+      matches: { any: [{ field: "severity_markers", anyIncludes: ["pregnancy-bleeding", "severe-pelvic-pain-pregnancy"] }] },
+      department: "Emergency",
+      reason: { en: "Bleeding during pregnancy or acute severe pelvic pain requires 24/7 Emergency immediately.", hi: "गर्भावस्था में रक्तस्राव या अचानक असहनीय पेल्विक दर्द होने पर तुरंत 24/7 इमरजेंसी / लेबर रूम जाएँ।" },
       severity: "emergency",
     },
   ],

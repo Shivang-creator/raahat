@@ -12,7 +12,7 @@
         try {
           const savedTheme = localStorage.getItem("raahat-theme");
           const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-          if (savedTheme === "dark" || (!savedTheme && prefersDark)) document.documentElement.dataset.theme = "dark";
+          if (savedTheme === "dark") document.documentElement.dataset.theme = "dark"; else document.documentElement.removeAttribute("data-theme");
         } catch { /* Private browsing can refuse storage; the default theme still works. */ }
       })();
     </script>
@@ -3620,7 +3620,8 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .wa-title-wrap h4 { margin: 0; font-size: 1rem; font-weight: 700; color: #fff; }
       .wa-title-wrap small { font-size: 0.75rem; color: #dcf8c6; }
       .wa-close-btn { background: transparent; border: 0; color: #fff; font-size: 1.5rem; cursor: pointer; padding: 0.25rem; }
-      .wa-body { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+      .wa-body { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; background-color: #efeae2; background-image: radial-gradient(#d6cdc3 1px, transparent 1px), radial-gradient(#d6cdc3 1px, #efeae2 1px); background-size: 20px 20px; background-position: 0 0, 10px 10px; }
+      [data-theme="dark"] .wa-body { background-color: #0b141a; background-image: radial-gradient(#1e2b33 1px, transparent 1px), radial-gradient(#1e2b33 1px, #0b141a 1px); background-size: 20px 20px; background-position: 0 0, 10px 10px; }
       .wa-bubble { max-width: 85%; padding: 0.65rem 0.85rem; border-radius: 0.75rem; font-size: 0.92rem; line-height: 1.4; box-shadow: 0 1px 1px rgba(0,0,0,0.1); position: relative; }
       .wa-bubble.bot { background: #ffffff; color: #111827; align-self: flex-start; border-top-left-radius: 0; }
       [data-theme="dark"] .wa-bubble.bot { background: #151c27; color: #e2e8f0; border: 1px solid rgba(255, 255, 255, 0.08); }
@@ -3665,17 +3666,28 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .ivr-float-btn svg { width: 1.4rem; height: 1.4rem; fill: currentColor; }
       .ivr-live-tag { background: #fbbf24; color: #78350f; font-size: 0.65rem; font-weight: 900; padding: 0.15rem 0.45rem; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em; }
 
+      
+      /* Omnichannel Civic Access Bar on Hero */
+      .omnichannel-strip { margin-top: 1.15rem; display: flex; flex-direction: column; align-items: center; gap: 0.45rem; }
+      .omnichannel-label { font-size: 0.8rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+      .omnichannel-chips { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; width: 100%; max-width: 680px; }
+      .omnichannel-chip { min-height: 2.85rem; padding: 0.45rem 1.1rem; border-radius: 999px; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); font-size: 0.92rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.55rem; cursor: pointer; transition: all 180ms ease; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+      .omnichannel-chip:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+      .omnichannel-chip.wa-chip:hover { border-color: #25d366; background: rgba(37, 211, 102, 0.08); }
+      .omnichannel-chip.ivr-chip:hover { border-color: #3b82f6; background: rgba(59, 130, 246, 0.08); }
+      [data-theme="dark"] .omnichannel-chip { background: #16202c; border-color: #334155; color: #f1f5f9; }
+
       .ivr-modal { position: fixed; inset: 0; z-index: 1100; background: rgba(0,0,0,0.72); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; padding: 1rem; }
-      .ivr-phone-chassis { width: 100%; max-width: 360px; max-height: 94vh; background: #1e293b; border: 8px solid #0f172a; border-radius: 2.2rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6); display: flex; flex-direction: column; overflow: hidden; padding: 1.15rem 0.95rem 0.95rem; color: #fff; }
+      .ivr-phone-chassis { width: 100%; max-width: 350px; max-height: 92vh; background: #1e293b; border: 7px solid #0f172a; border-radius: 2rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6); display: flex; flex-direction: column; overflow-y: auto; padding: 0.85rem 0.85rem 0.75rem; color: #fff; }
       .ivr-earpiece { width: 60px; height: 6px; background: #334155; border-radius: 999px; margin: 0 auto 0.75rem; }
-      .ivr-screen { background: #8ba888; color: #142814; font-family: "Courier New", Courier, monospace; border: 4px solid #475569; border-radius: 0.75rem; padding: 0.65rem; min-height: 180px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.3); display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+      .ivr-screen { background: #8ba888; color: #142814; font-family: "Courier New", Courier, monospace; border: 3px solid #475569; border-radius: 0.65rem; padding: 0.5rem; min-height: 125px; max-height: 135px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.3); display: flex; flex-direction: column; justify-content: space-between; position: relative; flex-shrink: 0; }
       .ivr-screen.emergency { background: #fca5a5 !important; color: #7f1d1d !important; animation: waPulse 1s infinite; }
       .ivr-screen-top { display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 800; border-bottom: 1px dashed rgba(0,0,0,0.25); padding-bottom: 0.25rem; }
-      .ivr-screen-body { flex: 1; padding: 0.45rem 0; font-size: 0.85rem; font-weight: 700; overflow-y: auto; max-height: 105px; line-height: 1.35; }
+      .ivr-screen-body { flex: 1; padding: 0.25rem 0; font-size: 0.8rem; font-weight: 700; overflow-y: auto; max-height: 75px; line-height: 1.3; }
       .ivr-screen-bottom { display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: 800; border-top: 1px dashed rgba(0,0,0,0.25); padding-top: 0.25rem; }
       
-      .ivr-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; margin-top: 0.85rem; }
-      .ivr-key { min-height: 2.65rem; background: #334155; color: #f8fafc; border: 1.5px solid #475569; border-radius: 0.5rem; font-size: 1.1rem; font-weight: 800; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 90ms ease; user-select: none; box-shadow: 0 3px 0 #1e293b; }
+      .ivr-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.3rem; margin-top: 0.5rem; }
+      .ivr-key { min-height: 2.25rem; background: #334155; color: #f8fafc; border: 1.5px solid #475569; border-radius: 0.45rem; font-size: 0.98rem; font-weight: 800; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 90ms ease; user-select: none; box-shadow: 0 2px 0 #1e293b; }
       .ivr-key:active { transform: translateY(2px); box-shadow: 0 1px 0 #1e293b; background: #475569; }
       .ivr-key sub { font-size: 0.55rem; font-weight: 600; color: #94a3b8; letter-spacing: 1px; margin-top: -2px; }
       .ivr-key.call-btn { background: #15803d; border-color: #22c55e; color: #fff; }
@@ -3684,7 +3696,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .ivr-key.end-btn:hover { background: #dc2626; }
       .ivr-key.mic-key.recording { background: #ef4444 !important; animation: waPulse 1s infinite; }
       
-      .ivr-dialect-bar { display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.5rem; max-height: 100px; overflow-y: auto; padding-right: 0.2rem; }
+      .ivr-dialect-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.25rem; margin-top: 0.35rem; max-height: 64px; overflow-y: auto; padding-right: 0.2rem; }
       .ivr-dialect-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #e2e8f0; font-size: 0.75rem; font-weight: 700; padding: 0.35rem 0.55rem; border-radius: 0.4rem; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
       .ivr-dialect-btn:hover { background: rgba(59, 130, 246, 0.35); border-color: #60a5fa; }
       
@@ -4555,6 +4567,21 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 <span class="zen-trust-item"><svg class="icon-inline" aria-hidden="true"><use href="#icon-globe"></use></svg> <span class="tag">Verified</span> 22 Scheduled Languages</span>
               </div>
 
+              <!-- Omnichannel Civic Access (WhatsApp + 104 Feature Phone) -->
+              <div class="omnichannel-strip" role="region" aria-label="Alternative Civic Channels">
+                <span class="omnichannel-label">Prefer WhatsApp or calling from a basic keypad phone? Connect instantly:</span>
+                <div class="omnichannel-chips">
+                  <button type="button" class="omnichannel-chip wa-chip" id="hero-wa-trigger" aria-label="Open WhatsApp OPD Gateway">
+                    <svg class="icon-inline" viewBox="0 0 24 24" style="width: 1.25rem; height: 1.25rem;"><path fill="#25d366" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/></svg>
+                    <span><strong>WhatsApp Bot</strong> (+91 98765 RAAHAT) · 1-Tap Booking</span>
+                  </button>
+                  <button type="button" class="omnichannel-chip ivr-chip" id="hero-ivr-trigger" aria-label="Open 104 AI Voice Keypad Phone">
+                    <svg class="icon-inline" viewBox="0 0 24 24" style="width: 1.2rem; height: 1.2rem;"><path fill="#3b82f6" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    <span><strong>104 Rural Voice IVR</strong> (Free Toll-Free) · 2G Phone</span>
+                  </button>
+                </div>
+              </div>
+
               <!-- Legacy alias for hero-triage-action -->
               <button type="button" id="hero-triage-action" style="display:none;" aria-hidden="true"></button>
             </div>
@@ -4766,8 +4793,8 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                   <span class="tag">Verified</span>
                   <span class="screen-kicker" data-copy="hospitalsKicker">Pan-India Public Directory</span>
                 </div>
-                <h3>60+ Premier Institutes</h3>
-                <p>AIIMS, Safdarjung, PGIMER, NIMHANS, and regional medical colleges across 20+ states with verified locations and departments.</p>
+                <h3>2,630+ Verified Facilities</h3>
+                <p>AIIMS, Safdarjung, District Hospitals, and Community Health Centres across 37 States &amp; UTs from the official ORS directory with haversine auto-routing.</p>
                 <div class="counterfactual-mini-grid">
                   <div class="mini-stat-card">
                     <span class="mini-stat-num">28 mins</span>
@@ -4778,16 +4805,16 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                     <span class="mini-stat-label">Wrong Line Drop</span>
                   </div>
                   <div class="mini-stat-card">
-                    <span class="mini-stat-num">60+</span>
-                    <span class="mini-stat-label">Hospitals</span>
+                    <span class="mini-stat-num">2,630+</span>
+                    <span class="mini-stat-label">Facilities</span>
                   </div>
                   <div class="mini-stat-card">
-                    <span class="mini-stat-num">20+</span>
+                    <span class="mini-stat-num">37</span>
                     <span class="mini-stat-label">States / UTs</span>
                   </div>
                 </div>
                 <button class="large-button secondary highlight-action-btn" type="button" data-view-link="hospitals">
-                  Explore 60+ Hospital Network Directory →
+                  Explore 2,630+ Facility Network Directory →
                 </button>
               </div>
             </div>
@@ -4813,6 +4840,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                   <tr><td data-copy="comparisonWait">Knowing the real wait</td><td class="ors-cell"><span class="scorecard-tag tag-negative"><svg class="icon-inline" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> Unpredictable</span> <span data-copy="orsWait">Slot time only</span></td><td class="raahat-cell"><span class="scorecard-tag tag-positive"><svg class="icon-inline" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Realistic</span> <span data-copy="raahatWait">Estimated consultation time, based on the slot and simulated queue throughput.</span></td></tr>
                   <tr><td data-copy="comparisonAuth">Getting started</td><td class="ors-cell"><span class="scorecard-tag tag-negative"><svg class="icon-inline" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> High Friction</span> <span data-copy="orsAuth">Front-door distorted CAPTCHA</span></td><td class="raahat-cell"><span class="scorecard-tag tag-positive"><svg class="icon-inline" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Zero Friction</span> <span data-copy="raahatAuth">Late-stage 1-tap Auth , only when making a specimen slip</span></td></tr>
                   <tr><td data-copy="comparisonEmergency">Emergency safety</td><td class="ors-cell"><span class="scorecard-tag tag-negative"><svg class="icon-inline" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> Safety Risk</span> <span data-copy="orsEmergency">Routine booking can hide a critical emergency</span></td><td class="raahat-cell"><span class="scorecard-tag tag-positive"><svg class="icon-inline" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Safeguarded</span> <span data-copy="raahatEmergency">One red flag → 24/7 Emergency now</span></td></tr>
+                                    <tr><td data-copy="comparisonIvr">Feature Phones / Rural Dialects</td><td class="ors-cell"><span class="scorecard-tag tag-negative"><svg class="icon-inline" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> Zero Telephony</span> <span>Smartphone/PC &amp; 4G Internet strictly required.</span></td><td class="raahat-cell"><span class="scorecard-tag tag-positive"><svg class="icon-inline" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> 104 AI Voice</span> <span><strong>104 Telephony</strong> works on basic 2G keypad phones in Bhojpuri, Maithili, Tamil, etc. with instant DLT SMS tokens.</span></td></tr>
+                  <tr><td data-copy="comparisonWa">WhatsApp Civic Gateway</td><td class="ors-cell"><span class="scorecard-tag tag-negative"><svg class="icon-inline" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> App Download</span> <span>Requires visiting portal or downloading 45MB app from store.</span></td><td class="raahat-cell"><span class="scorecard-tag tag-positive"><svg class="icon-inline" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Conversational</span> <span><strong>Meta Cloud API Gateway</strong>: Send a voice note or symptom, get instant counter pass &amp; queue alerts in WhatsApp.</span></td></tr>
+                  <tr><td data-copy="comparisonDoctor">Doctor Desk Clinical Handover</td><td class="ors-cell"><span class="scorecard-tag tag-negative"><svg class="icon-inline" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> Blank Slip</span> <span>Doctor gets no triage summary; starts patient intake from scratch.</span></td><td class="raahat-cell"><span class="scorecard-tag tag-positive"><svg class="icon-inline" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> 10s SBAR Sync</span> <span><strong>SBAR Clinical Protocol</strong>: Live queue sync with chief complaint, duration, red flags, and digital Rx builder.</span></td></tr>
+                  <tr><td data-copy="comparisonCoverage">Pan-India Facility Network</td><td class="ors-cell"><span class="scorecard-tag tag-negative"><svg class="icon-inline" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> Manual Dropdowns</span> <span>Users must manually click through thousands of health centres in select menus.</span></td><td class="raahat-cell"><span class="scorecard-tag tag-positive"><svg class="icon-inline" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Haversine Proximity</span> <span><strong>2,630+ Facilities across 37 States &amp; UTs</strong> auto-matched to the nearest equipped OPD counter with travel radius.</span></td></tr>
                   <tr><td data-copy="comparisonAccess">Accessibility</td><td class="ors-cell"><span class="scorecard-tag tag-negative"><svg class="icon-inline" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> Desktop Barrier</span> <span data-copy="orsAccess">Text forms, CAPTCHA and desktop-first barriers</span></td><td class="raahat-cell"><span class="scorecard-tag tag-positive"><svg class="icon-inline" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Universal</span> <span data-copy="raahatAccess">100% mobile-first: 3D/2D map + speak + type</span></td></tr>
                 </tbody>
               </table>
@@ -10405,7 +10436,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         utterance.pitch = 1.0;
 
         const voices = window.speechSynthesis.getVoices() || [];
-        const matchingVoice = voices.find((v) => v.lang && (v.lang === langCode || v.lang.startsWith(langCode.slice(0, 2))));
+        const matchingVoice = selectBestIndianVoice(voices, langCode);
         if (matchingVoice) utterance.voice = matchingVoice;
 
         utterance.onstart = () => {
@@ -10848,6 +10879,23 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       wireSidebarDrawer();
       wireIvrSimulator();
 
+        // Wire Hero Omnichannel Access Chips
+        const heroWaTrigger = document.querySelector("#hero-wa-trigger");
+        const heroIvrTrigger = document.querySelector("#hero-ivr-trigger");
+        const waModal = document.querySelector("#whatsapp-modal");
+        const ivrModal = document.querySelector("#ivr-modal");
+        if (heroWaTrigger && waModal) {
+          heroWaTrigger.addEventListener("click", () => { waModal.hidden = false; });
+        }
+        if (heroIvrTrigger && ivrModal) {
+          heroIvrTrigger.addEventListener("click", () => {
+            ivrModal.hidden = false;
+            const callBtn = document.querySelector("#ivr-call-btn");
+            if (callBtn) callBtn.click();
+          });
+        }
+
+
       // --- Feature Phone 104 AI Voice IVR Simulator Logic ---
       function wireIvrSimulator() {
         const fab = document.querySelector("#ivr-fab");
@@ -10964,7 +11012,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           utterance.pitch = 1.0;
 
           const voices = window.speechSynthesis.getVoices() || [];
-          const voice = voices.find(v => v.lang === bcp47 || v.lang.startsWith(bcp47.slice(0, 2)));
+          const voice = selectBestIndianVoice(voices, bcp47);
           if (voice) utterance.voice = voice;
 
           utterance.onstart = () => {
