@@ -6,32 +6,104 @@ import { parseFreeTextComplaint, routeComplaint, checkRealtimeEmergency } from "
 import { autoSelectNearestHospital, PAN_INDIA_HOSPITALS } from "./hospital-data.js";
 
 export const SUPPORTED_DIALECTS = {
-  "1": { code: "hi", name: "हिन्दी (Hindi)", bcp47: "hi-IN", prompt: "नमस्ते! राष्ट्रीय स्वास्थ्य सेवा 104 में आपका स्वागत है। बीप के बाद अपनी तकलीफ़ बोलें।" },
-  "2": { code: "bho", name: "भोजपुरी (Bhojpuri)", bcp47: "hi-IN", prompt: "प्रणाम! राहत 104 सेवा में राउर स्वागत बा। बीप के बाद बताईं का परेशानी बा?" },
-  "3": { code: "mai", name: "मैथिली (Maithili)", bcp47: "hi-IN", prompt: "प्रणाम! 104 स्वास्थ्य सेवा में अपनेक स्वागत अछि। बीप के बाद अपन कष्ट कहू।" },
-  "4": { code: "bn", name: "বাংলা (Bengali)", bcp47: "bn-IN", prompt: "নমস্কার! 104 স্বাস্থ্য হেল্পলাইনে স্বাগতম। বিপের পর আপনার শারীরিক সমস্যা বলুন।" },
-  "5": { code: "ta", name: "தமிழ் (Tamil)", bcp47: "ta-IN", prompt: "வணக்கம்! 104 சுகாதார உதவி மையத்திற்கு வரவேற்கிறோம். பீப் ஒலிக்குப் பிறகு உங்கள் பிரச்சனையை கூறுங்கள்." },
-  "6": { code: "te", name: "తెలుగు (Telugu)", bcp47: "te-IN", prompt: "నమస్కారం! 104 ఆరోగ్య హెల్ప్‌లైన్‌కు స్వాగతం. బీప్ తర్వాత మీ సమస్యను చెప్పండి." },
-  "7": { code: "mr", name: "मराठी (Marathi)", bcp47: "mr-IN", prompt: "नमस्कार! 104 आरोग्य सेवेत आपले स्वागत आहे. बीप नंतर आपली समस्या सांगा." },
-  "8": { code: "en", name: "English", bcp47: "en-IN", prompt: "Welcome to National Health Helpline 104. Please describe your symptoms after the beep." }
+  "1": { code: "hi", name: "हिन्दी (Hindi)", bcp47: "hi-IN", prompt: "नमस्ते! 104 स्वास्थ्य सेवा। बीप के बाद अपनी तकलीफ़ बोलें, और 1 दबाएँ।" },
+  "2": { code: "en", name: "English", bcp47: "en-IN", prompt: "Welcome to 104 Helpline. Please describe your symptoms after the beep, and press 1." },
+  "3": { code: "bho", name: "भोजपुरी (Bhojpuri)", bcp47: "hi-IN", prompt: "प्रणाम! राहत 104 सेवा। बीप के बाद परेशानी बताईं, आ बोले के बाद 1 दबाईं।" },
+  "4": { code: "mai", name: "मैथिली (Maithili)", bcp47: "hi-IN", prompt: "प्रणाम! 104 स्वास्थ्य सेवा। बीप के बाद अपन कष्ट कहू, आ कहलाक बाद 1 दबाउ।" },
+  "5": { code: "bn", name: "বাংলা (Bengali)", bcp47: "bn-IN", prompt: "নমস্কার! ১০৪ স্বাস্থ্য হেল্পলাইন। বিপের পর সমস্যা বলুন, এবং ১ টিপুন।" },
+  "6": { code: "ta", name: "தமிழ் (Tamil)", bcp47: "ta-IN", prompt: "வணக்கம்! 104 உதவி மையம். பீப் பிறகு பிரச்சனையை கூறி, 1 அழுத்தவும்." },
+  "7": { code: "te", name: "తెలుగు (Telugu)", bcp47: "te-IN", prompt: "నమస్కారం! 104 హెల్ప్‌లైన్. బీప్ తర్వాత సమస్య చెప్పి, 1 నొక్కండి." },
+  "8": { code: "mr", name: "मराठी (Marathi)", bcp47: "mr-IN", prompt: "नमस्कार! 104 आरोग्य सेवा. बीप नंतर समस्या सांगा, आणि 1 दाबा." }
 };
 
 // Dialect colloquialisms normalizer for rural phrasing
 export function normalizeDialectPhrasing(rawText) {
   let txt = String(rawText || "").toLowerCase();
 
-  // Bhojpuri / Maithili normalizations
-  txt = txt.replace(/दरद बा|दरद अछि|पिराता|पीरा बा/g, "dard hai");
-  txt = txt.replace(/सांस फूले लागल बा|सांस फूले लागल|दम फूल रहल बा/g, "saans phool rahi hai breathlessness");
-  txt = txt.replace(/लइका के|बबुआ के|बच्चवा के|छौड़ा के/g, "bachhe ko 5 saal child");
+  // Pain & Ache variants
+  txt = txt.replace(/दरद बा|दरद अछि|पिराता|पीरा बा|दुखता|पीड़ा बा|दुखे लागल/g, "dard hai");
+
+  // Respiratory & Cardiac Emergencies (RF-01, RF-07)
+  txt = txt.replace(/सांस फूले लागल बा|सांस फूले लागल|दम फूल रहल बा|सांस नइखे लेवात|सांस में घुरघुर/g, "saans phool rahi hai breathlessness");
+  txt = txt.replace(/छाती में कस मसोस|छाती में भारीपन|सीने में जकड़न|छाती दबता/g, "chest pain sweating");
+  txt = txt.replace(/पसीना छूट रहल बा|पसीना फेंक रहल बा|खूब पसीना/g, "sweating pasina");
+
+  // Stroke / Neurological Emergency (RF-02)
+  txt = txt.replace(/कमज़ोरी लागल बा|सुन्न हो गइल बा|एक तरफ के अंग सुन्न|लकवा मार दिहलस/g, "ek taraf kamzori weakness on one side");
+  txt = txt.replace(/बोली नइखे फूटत|बोली लटपटा रहल बा|जीभ लड़खड़ा/g, "slurred speech boli ladkhada");
+
+  // Severe Bleeding & Trauma (RF-03, RF-04)
+  txt = txt.replace(/खून गिरता|रुक नइखे|रुक नहि रहल अछि|खून के धार/g, "khoon beh raha hai bleeding won't stop");
+
+  // Pediatric phrasings
+  txt = txt.replace(/लइका के|बबुआ के|बच्चवा के|छौड़ा के|नन्हा बबुआ|धिया-पुता/g, "bachhe ko 5 saal child");
+
+  // Musculoskeletal / Orthopaedics
+  txt = txt.replace(/गोड़ के जोड़|ठेहुना|ठेहुन में|पैर के जोड़/g, "knee ghutna pair leg");
   txt = txt.replace(/गोड़ में|पैरवा में/g, "pair mein leg knee");
-  txt = txt.replace(/माथा में|कपार में|मुरिया में/g, "sar mein head");
-  txt = txt.replace(/कमज़ोरी लागल बा|सुन्न हो गइल बा/g, "ek taraf kamzori weakness on one side");
-  txt = txt.replace(/खून गिरता|रुक नइखे|रुक नहि रहल अछि/g, "khoon beh raha hai bleeding won't stop");
-  txt = txt.replace(/पेशाब में जलन|मूत में जरन/g, "peshab mein jalan burning urine");
-  txt = txt.replace(/छाती में कस मसोस/g, "chest pain sweating");
+  txt = txt.replace(/कमर टूट रहल बा|कमरिया पिराता|कमर के दरद|कमर में पीरा|पीठ में अकड़न/g, "kamar dard lower back pain");
+  txt = txt.replace(/हड्डी टूट गइल|हड्डी चटक गइल|चलल नइखे जात/g, "fracture bone pain orthopaedics");
+
+  // Gastrointestinal / Abdomen
+  txt = txt.replace(/पेट मसोस रहल बा|पेट खराब बा|मरोड़ उठ रहल बा|पेट में मरोड़/g, "pet dard stomach pain");
+  txt = txt.replace(/उल्टी-दस्त|उल्टी दस्त|कै भइल बा|झाड़ा उलटी/g, "loose motion vomiting loose motions dast");
+  txt = txt.replace(/पेट फूलल बा|गैस बन रहल बा|हवा नइखे निकसत/g, "pet gas indigestion");
+
+  // Head & Neurological
+  txt = txt.replace(/माथा में|कपार में|मुरिया में|कपार दरद/g, "sar mein head");
+  txt = txt.replace(/चक्कर आवता|माथा घूमत बा|अन्हरिया आवता/g, "chakkar dizziness");
+
+  // Dental
+  txt = txt.replace(/दांत में कीड़ा|दांत खोढ़र|दाढ़ पिराता|मसूढ़ा फूलल बा|दांतवा में दरद/g, "daant tooth teeth dental pain");
+
+  // Eye / Ophthalmology
+  txt = txt.replace(/आँख से पानी गिरता|आँखी में दरद|धुंधला दिख रहल बा|आँख लाल बा/g, "aankh eye vision");
+
+  // ENT / Ear-Nose-Throat
+  txt = txt.replace(/कान बह रहल बा|कान में पीरा|गला जाम बा|आवाज बैठ गइल बा|घोंटे में दरद/g, "kaan ear gala throat");
+
+  // Dermatology / Skin
+  txt = txt.replace(/लाल-लाल दाना|बदन में खुजली|चमड़ी पर चकत्ते|नोचनी भइल बा/g, "rash skin khujli dana");
+
+  // Urological / Burning micturition
+  txt = txt.replace(/पेशाब में जलन|मूत में जरन|पेशाब रुके लागल/g, "peshab mein jalan burning urine");
+
+  // Pregnancy / Obstetric
+  txt = txt.replace(/पेट में बच्चा बा|गर्भवती बानी|जचगी|महीना चढ़ल बा/g, "pregnant pregnancy garbhwati");
 
   return txt;
+}
+
+// Spoken or DTMF district resolver for Pan-India public hospitals
+export function resolveDistrictFromInput(inputStr, defaultDistrict = "Delhi") {
+  const str = String(inputStr || "").toLowerCase().trim();
+  if (!str) return defaultDistrict;
+
+  // DTMF Zone Shortcuts
+  if (str === "1") return "Delhi";
+  if (str === "2") return "Uttar Pradesh";
+  if (str === "3") return "Bihar";
+  if (str === "4") return "Maharashtra";
+  if (str === "5") return "West Bengal";
+  if (str === "6") return "Tamil Nadu";
+
+  // City / District text match
+  if (/delhi|dilli|दिल्ली|noida|gurgaon|ghaziabad|faridabad/i.test(str)) return "Delhi";
+  if (/lucknow|लखनऊ|kanpur|कानपुर|up|uttar pradesh|उत्तर प्रदेश/i.test(str)) return "Lucknow";
+  if (/varanasi|वाराणसी|banaras|बनारस|kashi|काशी/i.test(str)) return "Varanasi";
+  if (/patna|पटना|bihar|बिहार/i.test(str)) return "Patna";
+  if (/darbhanga|दरभंगा|madhubani|मधुबनी/i.test(str)) return "Darbhanga";
+  if (/gorakhpur|गोरखपुर/i.test(str)) return "Gorakhpur";
+  if (/mumbai|मुंबई|bombay|pune|पुणे|maharashtra|महाराष्ट्र/i.test(str)) return "Mumbai";
+  if (/kolkata|कोलकाता|calcutta|bengal|বাংলা|হাওড়া|howrah/i.test(str)) return "Kolkata";
+  if (/chennai|चेन्नई|madras|tamil nadu|தமிழ்நாடு|coimbatore/i.test(str)) return "Chennai";
+  if (/hyderabad|हैदराबाद|telangana|secunderabad/i.test(str)) return "Hyderabad";
+  if (/bengaluru|bangalore|बेंगलुरु|karnataka/i.test(str)) return "Bengaluru";
+  if (/jaipur|जयपुर|rajasthan/i.test(str)) return "Jaipur";
+  if (/chandigarh|चंडीगढ़|punjab/i.test(str)) return "Chandigarh";
+  if (/bhopal|भोपाल|indore|इंदौर|madhya pradesh/i.test(str)) return "Bhopal";
+
+  return str;
 }
 
 export function formatLocalizedIvrSms(langCode, { token, hospitalName, dept, complaintKind, complaintRegion }) {
@@ -71,7 +143,7 @@ export function formatLocalizedIvrSms(langCode, { token, hospitalName, dept, com
         `நேரம்: இன்று 09:30 AM · கட்டணம்: ₹10\n` +
         `கொண்டு வரவும்: அடையாள அட்டை + இந்த SMS\n` +
         `மருத்துவரிடம் கூறவும்: "${complaintRegion || "உறுப்பு"} ${complaintKind || "பிரச்சனை"}"\n` +
-        `அவசரத்திற்கு 108 அழைக்கவும்.`;
+        `அவசரத்திற்கு 108 அழைக்கவும்।`;
     case "te":
       return `[రాహత్ 104 ఓపీడీ టోకెన్]\n` +
         `టోకెన్: ${token}\n` +
@@ -80,7 +152,7 @@ export function formatLocalizedIvrSms(langCode, { token, hospitalName, dept, com
         `సమయం: ఈరోజు 09:30 AM · రుసుము: ₹10\n` +
         `తీసుకురండి: ఏదైనా గుర్తింపు కార్డు + ఈ SMS\n` +
         `వైద్యుడితో చెప్పండి: "${complaintRegion || "భాగం"} లో ${complaintKind || "సమస్య"}"\n` +
-        `అత్యవసర సమయంలో 108 కాల్ చేయండి.`;
+        `అత్యవసర సమయంలో 108 కాల్ చేయండి।`;
     case "mr":
       return `[राहत 104 ओपीडी टोकन]\n` +
         `टोकन: ${token}\n` +
@@ -89,7 +161,7 @@ export function formatLocalizedIvrSms(langCode, { token, hospitalName, dept, com
         `वेळ: आज 09:30 AM · शुल्क: ₹10\n` +
         `सोबत आणा: ओळखपत्र + हा SMS\n` +
         `डॉक्टरांना सांगा: "${complaintRegion || "अवयव"} ${complaintKind || "त्रास"}"\n` +
-        `आणीबाणीत 108 डायल करा.`;
+        `आणीबाणीत 108 डायल करा।`;
     case "en":
       return `[RAAHAT 104 OPD TOKEN]\n` +
         `Token: ${token}\n` +
@@ -112,7 +184,7 @@ export function formatLocalizedIvrSms(langCode, { token, hospitalName, dept, com
   }
 }
 
-export function createInitialIvrSession(callerNumber = "+919876543210") {
+export function createInitialIvrSession(callerNumber = "+919876543210", defaultDistrict = "Delhi") {
   return {
     callId: "104-" + Math.floor(100000 + Math.random() * 900000),
     caller: callerNumber,
@@ -123,7 +195,7 @@ export function createInitialIvrSession(callerNumber = "+919876543210") {
     normalizedSpeech: "",
     complaint: null,
     routeResult: null,
-    district: "Varanasi",
+    district: defaultDistrict || "Delhi",
     selectedHospital: null,
     token: null,
     smsDispatched: false,
@@ -156,11 +228,11 @@ export function handleIvrTurn(session, input = {}) {
       };
     }
 
-    // Default dialect selection prompt
+    // Default dialect selection prompt (crisp, under 15 seconds)
     return {
       session,
       action: "GATHER_DTMF",
-      spokenText: "नमस्ते! राष्ट्रीय स्वास्थ्य हेल्पलाइन 104 में आपका स्वागत है। हिन्दी के लिए 1 दबाएँ। भोजपुरी खातिर 2 दबाईं। मैथिली लेल 3 दबाउ। বাংলা জন্য 4 টিপুন। தமிழுக்கு 5 அழுத்தவும்। తెలుగు కోసం 6 నొక్కండి। मराठीसाठी 7 दाबा। For English, press 8.",
+      spokenText: "नमस्ते! राष्ट्रीय स्वास्थ्य सेवा 104। हिन्दी के लिए 1 दबाएँ। For English, press 2. भोजपुरी खातिर 3. मैथिली लेल 4. বাংলা 5. தமிழ் 6. తెలుగు 7. मराठीसाठी 8 दाबा।",
       bcp47: "hi-IN",
       sms: null
     };
@@ -168,7 +240,31 @@ export function handleIvrTurn(session, input = {}) {
 
   // State 2: SYMPTOM PROCESSING (RULE 1 & RULE 2)
   if (session.state === "SYMPTOM_INPUT" || session.state === "WELCOME_DIRECT_SPEECH") {
-    const rawSpoken = speech || session.rawSpeech || "";
+    // Check if caller signaled end-of-speech with DTMF 1 or #
+    let rawSpoken = speech || session.rawSpeech || "";
+    if ((dtmf === "1" || dtmf === "#") && !speech && session.rawSpeech) {
+      rawSpoken = session.rawSpeech;
+    }
+
+    // If caller pressed DTMF 1 with empty speech and no prior input, prompt politely
+    if (!rawSpoken && (dtmf === "1" || dtmf === "#" || !dtmf)) {
+      if (session.retryCount === 0 && !rawSpoken) {
+        session.retryCount++;
+        const promptEmpty = session.dialectCode === "en"
+          ? "Please describe your symptoms after the beep, and press 1 when finished."
+          : session.dialectCode === "bho"
+          ? "बीप के बाद आपन परेशानी बोलल जाईं, आ 1 दबाईं।"
+          : "कृपया बीप के बाद अपनी तकलीफ़ बोलें, और 1 दबाएँ।";
+        return {
+          session,
+          action: "GATHER_SPEECH",
+          spokenText: promptEmpty,
+          bcp47: (SUPPORTED_DIALECTS[session.dialectKey] || SUPPORTED_DIALECTS["1"]).bcp47,
+          sms: null
+        };
+      }
+    }
+
     session.rawSpeech = rawSpoken;
     const normalized = normalizeDialectPhrasing(rawSpoken);
     session.normalizedSpeech = normalized;
@@ -177,6 +273,17 @@ export function handleIvrTurn(session, input = {}) {
     const emergencyCheck = checkRealtimeEmergency(normalized);
     const parsed = parseFreeTextComplaint(normalized);
     const routed = routeComplaint(parsed);
+
+    // Ensure deterministic department is NEVER "Choose a department yourself" over telephone IVR
+    if (!routed.department || routed.department === "Choose a department yourself") {
+      routed.department = "General Medicine";
+      routed.urgency = routed.urgency || "routine";
+      routed.rule_id = "R-10";
+      routed.reason = {
+        en: "General Medicine is the primary intake counter for initial clinical evaluation.",
+        hi: "सामान्य चिकित्सा विभाग प्रारंभिक जाँच और परामर्श का मुख्य काउंटर है।"
+      };
+    }
 
     const isEmergency = emergencyCheck.isEmergency || routed.urgency === "immediate" || (routed.redFlags && routed.redFlags.length > 0);
 
@@ -200,21 +307,21 @@ export function handleIvrTurn(session, input = {}) {
       session.smsPayload = emergencySms;
 
       const dialectCfg = SUPPORTED_DIALECTS[session.dialectKey] || SUPPORTED_DIALECTS["1"];
-      const spokenMsg = session.dialectCode === "bho"
-        ? "सावधान! ई बहुत गंभीर आपातकालीन लक्षण बा। कवनो ओपीडी के इंतज़ार मत करीं, तुरंत 24 घंटा खुले वाला इमरजेंसी अस्पताल जाईं। हम राउर कॉल सीधे 108 एम्बुलेंस से जोड़ रहल बानी..."
+      const spokenMsg = session.dialectCode === "en"
+        ? "Emergency Alert! Critical symptoms detected. Do not wait for OPD. Reach nearest Emergency immediately. Patching to 108 Ambulance now."
+        : session.dialectCode === "bho"
+        ? "सावधान! ई आपातकालीन लक्षण बा। ओपीडी के इंतज़ार मत करीं, तुरंत 24 घंटा इमरजेंसी अस्पताल जाईं। 108 एम्बुलेंस से जोड़ल जा रहल बा..."
         : session.dialectCode === "mai"
-        ? "सावधान! ई अति गंभीर आपातकालीन लक्षण अछि। तुरंत नजदीकी इमरजेंसी वार्ड जाउ। अहाँक फोन 108 एम्बुलेंस सं जोड़ल जा रहल अछि..."
+        ? "सावधान! ई अति गंभीर लक्षण अछि। तुरंत नजदीकी इमरजेंसी वार्ड जाउ। फोन 108 एम्बुलेंस सं जोड़ल जा रहल अछि..."
         : session.dialectCode === "bn"
-        ? "সতর্কতা! এটি একটি অত্যন্ত জরুরি শারীরিক অবস্থা। অবিলম্বে জরুরি ট্রমা সেন্টারে যান। আপনার কলটি 108 অ্যাম্বুলেন্সে সংযুক্ত করা হচ্ছে..."
+        ? "সতর্কতা! জরুরি অবস্থা। অবিলম্বে জরুরি ট্রমা সেন্টারে যান। ১০৮ অ্যাম্বুলেন্সে সংযুক্ত করা হচ্ছে..."
         : session.dialectCode === "ta"
-        ? "எச்சரிக்கை! இது அவசர சிகிச்சை தேவைப்படும் நிலை. உடனடியாக அவசர பிரிவிற்கு செல்லவும். உங்கள் அழைப்பு 108 ஆம்புலன்ஸுடன் இணைக்கப்படுகிறது..."
+        ? "எச்சரிக்கை! அவசர நிலை. உடனடியாக அவசர பிரிவிற்கு செல்லவும். 108 ஆம்புலன்ஸ் இணைக்கப்படுகிறது..."
         : session.dialectCode === "te"
-        ? "హెచ్చరిక! ఇది అత్యవసర పరిస్థితి. దయచేసి వెంటనే 24/7 ఎమర్జెన్సీ విభాగానికి వెళ్ళండి. మీ కాల్ 108 అంబులెన్స్‌కు కనెక్ట్ చేయబడుతోంది..."
+        ? "హెచ్చరిక! అత్యవసర పరిస్థితి. వెంటనే ఎమర్జెన్సీ విభాగానికి వెళ్ళండి. 108 అంబులెన్స్‌కు కనెక్ట్ చేయబడుతోంది..."
         : session.dialectCode === "mr"
-        ? "सावधान! हे अत्यंत गंभीर आणीबाणीचे लक्षण आहे. ओपीडीची वाट पाहू नका, त्वरित 24 तास सुरू असलेल्या इमर्जन्सी वॉर्डमध्ये जा. तुमचा कॉल 108 रुग्णवाहिकेला जोडला जात आहे..."
-        : session.dialectCode === "en"
-        ? "Emergency Alert! Detected critical red-flag symptoms. Do not wait for routine OPD. Please proceed immediately to 24/7 Emergency. Patching your call to 108 Ambulance now."
-        : "चेतावनी! यह अति गंभीर आपातकालीन लक्षण है। नियमित ओपीडी की प्रतीक्षा न करें, तुरंत 24 घंटे खुले रहने वाले इमरजेंसी वार्ड जाएँ। आपकी कॉल सीधे 108 एम्बुलेंस से जोड़ी जा रही है...";
+        ? "सावधान! आणीबाणीचे लक्षण आहे. त्वरित इमर्जन्सी वॉर्डमध्ये जा. कॉल 108 रुग्णवाहिकेला जोडला जात आहे..."
+        : "चेतावनी! यह आपातकालीन लक्षण है। नियमित ओपीडी की प्रतीक्षा न करें, तुरंत नजदीकी 24 घंटे इमरजेंसी जाएँ। कॉल 108 एम्बुलेंस से जोड़ी जा रही है...";
 
       return {
         session,
@@ -234,21 +341,21 @@ export function handleIvrTurn(session, input = {}) {
     if (isVague && session.retryCount === 0) {
       session.state = "CLARIFY_INPUT";
       session.retryCount++;
-      const clarifyPrompt = session.dialectCode === "bho"
-        ? "ई दरद पेट में बा, छाती में बा, कि जोड़ में? बताईं कवन अंग में परेशानी बा?"
+      const clarifyPrompt = session.dialectCode === "en"
+        ? "Is this pain in stomach, chest, or joints? Speak body part and press 1."
+        : session.dialectCode === "bho"
+        ? "ई दरद पेट में बा, छाती में, कि जोड़ में? अंग के नाम बताईं आ 1 दबाईं।"
         : session.dialectCode === "mai"
-        ? "ई दर्द पेट मे अछि, छाती मे, वा गाठि मे? अंगक नाम कहू।"
+        ? "ई दर्द पेट मे अछि, छाती मे, वा गाठि मे? अंगक नाम कहू आ 1 दबाउ।"
         : session.dialectCode === "bn"
-        ? "এই ব্যথা পেটে, বুকে নাকি গাঁটে? দয়া করে শরীরের অঙ্গের নাম বলুন।"
+        ? "এই ব্যথা পেটে, বুকে নাকি গাঁটে? অঙ্গের নাম বলুন এবং ১ টিপুন।"
         : session.dialectCode === "ta"
-        ? "இந்த வலி வயிற்றில் உள்ளதா, நெஞ்சில் உள்ளதா அல்லது மூட்டுகளில் உள்ளதா? உறுப்பின் பெயரை கூறவும்."
+        ? "வலி வயிற்றில், நெஞ்சில் அல்லது மூட்டுகளிலா? உறுப்பின் பெயரை கூறி 1 அழுத்தவும்."
         : session.dialectCode === "te"
-        ? "ఈ నొప్పి కడుపులో ఉందా, ఛాతీలో ఉందా లేక కీళ్లలో ఉందా? శరీర భాగాన్ని చెప్పండి."
+        ? "నొప్పి కడుపులో, ఛాతీలో లేదా కీళ్లలోనా? భాగాన్ని చెప్పి 1 నొక్కండి."
         : session.dialectCode === "mr"
-        ? "हे दुखणे पोटात आहे, छातीत आहे की सांध्यामध्ये? अवयवाचे नाव सांगा."
-        : session.dialectCode === "en"
-        ? "Is this pain in your stomach, chest, or joints? Please specify which body area hurts."
-        : "क्या यह दर्द पेट में है, छाती में, या जोड़ों में? कृपया अंग का नाम बताएं।";
+        ? "हे दुखणे पोटात, छातीत की सांध्यात आहे? अवयव सांगा व 1 दाबा."
+        : "यह दर्द पेट में है, छाती में, या जोड़ों में? कृपया अंग का नाम बोलें और 1 दबाएँ।";
 
       return {
         session,
@@ -264,21 +371,21 @@ export function handleIvrTurn(session, input = {}) {
     session.routeResult = routed;
     session.state = "DISTRICT_INPUT";
 
-    const promptDistrict = session.dialectCode === "bho"
-      ? `राउर बात समझ आ गइल बा। विभाग ${routed.department} मिली। अब आपन जिला के नाम बताईं, जइसे वाराणसी, पटना, या गोरखपुर।`
+    const promptDistrict = session.dialectCode === "en"
+      ? `Department: ${routed.department}. Speak your district or city, or press 1 for Delhi, 2 for UP, 3 for Bihar, 4 for Mumbai.`
+      : session.dialectCode === "bho"
+      ? `विभाग: ${routed.department}। आपन जिला या शहर के नाम बताईं, या दिल्ली खातिर 1, यूपी खातिर 2, बिहार खातिर 3 दबाईं।`
       : session.dialectCode === "mai"
-      ? `अहाँक कष्ट समझ में आबि गेल अछि। ${routed.department} विभाग मे जांच हेतै। अपन जिलाक नाम कहू, जेना दरभंगा, पटना, वा मधुबनी।`
+      ? `विभाग: ${routed.department}। अपन जिला वा शहरक नाम कहू, वा दिल्ली लेल 1, यूपी लेल 2, बिहार लेल 3 दबाउ।`
       : session.dialectCode === "bn"
-      ? `আপনার সমস্যা রেকর্ড করা হয়েছে। বিভাগ: ${routed.department}। এবার আপনার জেলার নাম বলুন, যেমন কলকাতা, হাওড়া, বা বর্ধমান।`
+      ? `বিভাগ: ${routed.department}। জেলার নাম বলুন, বা দিল্লির জন্য ১, বাংলার জন্য ৫ টিপুন।`
       : session.dialectCode === "ta"
-      ? `உங்கள் பிரச்சனை பதிவு செய்யப்பட்டது. துறை: ${routed.department}. உங்கள் மாவட்டத்தின் பெயரை கூறவும், உதாரணமாக சென்னை அல்லது மதுரை.`
+      ? `துறை: ${routed.department}. மாவட்டத்தின் பெயரை கூறவும், அல்லது சென்னைக்கு 6 அழுத்தவும்.`
       : session.dialectCode === "te"
-      ? `మీ సమస్య నమోదైంది. విభాగం: ${routed.department}. మీ జిల్లా పేరు చెప్పండి, ఉదాహరణకు వారణాసి లేదా హైదరాబాద్.`
+      ? `విభాగం: ${routed.department}. జిల్లా పేరు చెప్పండి, లేదా హైదరాబాద్ కోసం 1 నొక్కండి.`
       : session.dialectCode === "mr"
-      ? `आपली तक्रार नोंदवली आहे. योग्य विभाग: ${routed.department}. कृपया आपल्या जिल्ह्याचे नाव सांगा, जसे पुणे किंवा मुंबई.`
-      : session.dialectCode === "en"
-      ? `Complaint understood. Recommended department is ${routed.department}. Please speak your district name, for example Varanasi, Lucknow, or Delhi.`
-      : `आपकी परेशानी दर्ज कर ली गई है। इसके लिए सही विभाग ${routed.department} है। कृपया अपने जिले का नाम बोलें, जैसे वाराणसी, लखनऊ, या पटना।`;
+      ? `विभाग: ${routed.department}. जिल्ह्याचे नाव सांगा, किंवा मुंबईसाठी 4 दाबा.`
+      : `विभाग: ${routed.department}। अपने जिले या शहर का नाम बोलें, या दिल्ली के लिए 1, यूपी के लिए 2, बिहार के लिए 3 दबाएँ।`;
 
     return {
       session,
@@ -291,7 +398,10 @@ export function handleIvrTurn(session, input = {}) {
 
   // State 2b: CLARIFY_INPUT
   if (session.state === "CLARIFY_INPUT") {
-    const rawClarify = speech || "";
+    let rawClarify = speech || "";
+    if ((dtmf === "1" || dtmf === "#") && !speech && session.rawSpeech) {
+      rawClarify = "";
+    }
     const combinedSpeech = (session.rawSpeech + " " + rawClarify).trim();
     session.rawSpeech = combinedSpeech;
     const normalized = normalizeDialectPhrasing(combinedSpeech);
@@ -299,15 +409,23 @@ export function handleIvrTurn(session, input = {}) {
 
     const parsed = parseFreeTextComplaint(normalized);
     const routed = routeComplaint(parsed);
+
+    // Department Fallback Guard
+    if (!routed.department || routed.department === "Choose a department yourself") {
+      routed.department = "General Medicine";
+      routed.urgency = routed.urgency || "routine";
+      routed.rule_id = "R-10";
+    }
+
     session.complaint = parsed;
     session.routeResult = routed;
     session.state = "DISTRICT_INPUT";
 
-    const promptDistrict = session.dialectCode === "bho"
-      ? `धन्यवाद। विभाग ${routed.department} मिली। अब आपन जिला के नाम बताईं।`
-      : session.dialectCode === "en"
-      ? `Thank you. Recommended department is ${routed.department}. Please speak your district name.`
-      : `धन्यवाद। इसके लिए सही विभाग ${routed.department} है। कृपया अपने जिले का नाम बोलें।`;
+    const promptDistrict = session.dialectCode === "en"
+      ? `Department: ${routed.department}. Speak your district, or press 1 for Delhi, 2 for UP, 3 for Bihar.`
+      : session.dialectCode === "bho"
+      ? `विभाग: ${routed.department} मिली। आपन जिला या शहर के नाम बताईं।`
+      : `विभाग: ${routed.department}। अपने जिले या शहर का नाम बोलें, या 1 दबाएँ।`;
 
     return {
       session,
@@ -320,36 +438,53 @@ export function handleIvrTurn(session, input = {}) {
 
   // State 3: DISTRICT GATHERING & TRANSITION TO CONFIRMATION
   if (session.state === "DISTRICT_INPUT") {
-    const rawDist = districtInput || speech || session.district || "Varanasi";
-    session.district = rawDist;
+    const rawInput = districtInput || dtmf || speech || session.district;
+    const resolvedDist = resolveDistrictFromInput(rawInput, session.district || "Delhi");
+    session.district = resolvedDist;
 
     const dept = session.routeResult?.department || "General Medicine";
+
+    // 1. Search PAN_INDIA_HOSPITALS for matching district, city, or state
     let matchedHosp = PAN_INDIA_HOSPITALS.find((h) => 
-      h.district && h.district.toLowerCase().includes(rawDist.toLowerCase())
+      (h.departments && h.departments.includes(dept)) &&
+      ((h.district && h.district.toLowerCase().includes(resolvedDist.toLowerCase())) ||
+       (h.city && h.city.toLowerCase().includes(resolvedDist.toLowerCase())) ||
+       (h.state && h.state.toLowerCase().includes(resolvedDist.toLowerCase())))
     );
 
+    // 2. If no hospital with this specialty in specific district, search whole state
     if (!matchedHosp) {
-      matchedHosp = autoSelectNearestHospital(dept, { lat: 25.3176, lng: 82.9739 }, "Uttar Pradesh");
+      matchedHosp = PAN_INDIA_HOSPITALS.find((h) => 
+        (h.departments && h.departments.includes(dept)) &&
+        (h.state && h.state.toLowerCase().includes(resolvedDist.toLowerCase()))
+      );
+    }
+
+    // 3. If still not matched, fallback to premier apex hospital (AIIMS New Delhi / Safdarjung for Delhi benchmark)
+    if (!matchedHosp) {
+      matchedHosp = autoSelectNearestHospital(dept, { lat: 28.5672, lng: 77.2100 }, "Delhi")
+        || PAN_INDIA_HOSPITALS.find((h) => h.departments && h.departments.includes(dept))
+        || PAN_INDIA_HOSPITALS[0];
     }
 
     session.selectedHospital = matchedHosp;
     session.state = "CONFIRM_APPOINTMENT";
 
-    const confirmPrompt = session.dialectCode === "bho"
-      ? `राउर ओपीडी पर्ची ${dept} विभाग, ${matchedHosp.name} खातिर तैयार बा। पक्का करे खातिर 1 दबाईं, शिकायत बदले खातिर 2 दबाईं।`
+    const confirmPrompt = session.dialectCode === "en"
+      ? `${dept} at ${matchedHosp.name}. Press 1 to confirm, 2 to change.`
+      : session.dialectCode === "bho"
+      ? `${dept} विभाग, ${matchedHosp.name}। पक्का करे खातिर 1 दबाईं, बदले खातिर 2 दबाईं।`
       : session.dialectCode === "mai"
-      ? `अहाँक पर्ची ${dept} विभाग, ${matchedHosp.name} लेल तैयार अछि। पुष्टि लेल 1 दबाउ, वा बदलब लेल 2 दबाउ।`
+      ? `${dept} विभाग, ${matchedHosp.name}। पुष्टि लेल 1 दबाउ, बदलब लेल 2 दबाउ।`
       : session.dialectCode === "bn"
-      ? `আপনার ওপিডি স্লিপ ${dept} বিভাগ, ${matchedHosp.name}-এ প্রস্তুত। নিশ্চিত করতে 1 টিপুন, বদলাতে 2 টিপুন।`
+      ? `${dept} বিভাগ, ${matchedHosp.name}। নিশ্চিত করতে ১, বদলাতে ২ টিপুন।`
       : session.dialectCode === "ta"
-      ? `உங்கள் ஓபிடி டோக்கன் ${dept} பிரிவு, ${matchedHosp.name} க்கு தயாராக உள்ளது. உறுதிப்படுத்த 1 அழுத்தவும், மாற்ற 2 அழுத்தவும்.`
+      ? `${dept} பிரிவு, ${matchedHosp.name}. உறுதிப்படுத்த 1, மாற்ற 2 அழுத்தவும்.`
       : session.dialectCode === "te"
-      ? `మీ ఓపీడీ స్లిప్ ${dept} విభాగం, ${matchedHosp.name} కోసం సిద్ధంగా ఉంది. నిర్ధారించడానికి 1 నొక్కండి, మార్చడానికి 2 నొక్కండి.`
+      ? `${dept} విభాగం, ${matchedHosp.name}. నిర్ధారించడానికి 1, మార్చడానికి 2 నొక్కండి.`
       : session.dialectCode === "mr"
-      ? `आपली ओपीडी पावती ${dept} विभाग, ${matchedHosp.name} साठी तयार आहे. खात्री करण्यासाठी 1 दाबा, बदलण्यासाठी 2 दाबा.`
-      : session.dialectCode === "en"
-      ? `Your OPD slip is prepared for ${dept}, ${matchedHosp.name}. Press 1 to confirm, or press 2 to change your complaint.`
-      : `आपकी ओपीडी पर्ची ${dept} विभाग, ${matchedHosp.name} के लिए तैयार है। पुष्टि के लिए 1 दबाएँ, या शिकायत बदलने के लिए 2 दबाएँ।`;
+      ? `${dept} विभाग, ${matchedHosp.name}. खात्रीसाठी 1, बदलण्यासाठी 2 दाबा.`
+      : `${dept} विभाग, ${matchedHosp.name}। पक्का करने के लिए 1 दबाएँ, बदलने के लिए 2 दबाएँ।`;
 
     return {
       session,
@@ -373,21 +508,21 @@ export function handleIvrTurn(session, input = {}) {
       session.routeResult = null;
       session.retryCount = 0;
 
-      const rejectPrompt = session.dialectCode === "bho"
-        ? "शिकायत रद्द कइल गइल। कृपया बीप के बाद आपन परेशानी फेर से बताईं।"
+      const rejectPrompt = session.dialectCode === "en"
+        ? "Complaint cleared. Describe symptoms after beep, and press 1."
+        : session.dialectCode === "bho"
+        ? "शिकायत रद्द भइल। बीप के बाद परेशानी फेर से बताईं, आ 1 दबाईं।"
         : session.dialectCode === "mai"
-        ? "शिकायत रद्द भेल। कृपया बीप के बाद अपन कष्ट पुनः कहू।"
+        ? "शिकायत रद्द भेल। बीप के बाद अपन कष्ट पुनः कहू, आ 1 दबाउ।"
         : session.dialectCode === "bn"
-        ? "পূর্ববর্তী বিবরণ বাতিল করা হয়েছে। বিপের পর আবার আপনার সমস্যা বলুন।"
+        ? "বিবরণ বাতিল করা হয়েছে। বিপের পর আবার বলুন, এবং ১ টিপুন।"
         : session.dialectCode === "ta"
-        ? "முந்தைய விவரம் ரத்து செய்யப்பட்டது. மீண்டும் உங்கள் பிரச்சனையை கூறுங்கள்."
+        ? "விவரம் ரத்து செய்யப்பட்டது. மீண்டும் கூறி 1 அழுத்தவும்."
         : session.dialectCode === "te"
-        ? "రద్దు చేయబడింది. దయచేసి బీప్ తర్వాత మీ సమస్యను మళ్ళీ చెప్పండి."
+        ? "రద్దు చేయబడింది. సమస్యను మళ్ళీ చెప్పి 1 నొక్కండి."
         : session.dialectCode === "mr"
-        ? "तक्रार रद्द केली. कृपया बीप नंतर आपले लक्षण पुन्हा सांगा."
-        : session.dialectCode === "en"
-        ? "Complaint cleared. Please describe your symptoms again after the beep."
-        : "शिकायत रद्द की गई। कृपया बीप के बाद अपनी सही तकलीफ़ दोबारा बोलें।";
+        ? "तक्रार रद्द केली. लक्षण पुन्हा सांगा आणि 1 दाबा."
+        : "शिकायत रद्द की गई। बीप के बाद अपनी तकलीफ़ दोबारा बोलें, और 1 दबाएँ।";
 
       return {
         session,
@@ -417,21 +552,21 @@ export function handleIvrTurn(session, input = {}) {
     session.smsDispatched = true;
     session.smsPayload = localizedSms;
 
-    const spokenConfirmation = session.dialectCode === "bho"
-      ? `राउर ओपीडी पर्ची पक्की हो गइल बा। टोकन नंबर ${session.token} बा। अस्पताल: ${hosp.name}, काउंटर 4। ई जानकारी राउर मोबाइल पर SMS से भेज दिहल गइल बा। धन्यवाद।`
+    const spokenConfirmation = session.dialectCode === "en"
+      ? `Token ${session.token} confirmed for ${hosp.name}, Counter 4. SMS sent. Thank you for calling 104.`
+      : session.dialectCode === "bho"
+      ? `टोकन ${session.token} पक्का भइल। अस्पताल: ${hosp.name}, काउंटर 4। SMS भेज दिहल गइल बा। धन्यवाद।`
       : session.dialectCode === "mai"
-      ? `अहाँक ओपीडी टोकन ${session.token} पक्का भेल। अस्पताल: ${hosp.name}, काउंटर 4। सब जानकारी SMS द्वारा पठा देल गेल अछि। धन्यवाद।`
+      ? `टोकन ${session.token} पक्का भेल। अस्पताल: ${hosp.name}, काउंटर 4। SMS पठा देल गेल अछि। धन्यवाद।`
       : session.dialectCode === "bn"
-      ? `আপনার ওপিডি টোকেন ${session.token} নিশ্চিত হয়েছে। হাসপাতাল: ${hosp.name}। বিস্তারিত SMS মারফত পাঠানো হয়েছে। ধন্যবাদ।`
+      ? `টোকেন ${session.token} নিশ্চিত হয়েছে। হাসপাতাল: ${hosp.name}, কাউন্টার ৪। SMS পাঠানো হয়েছে। ধন্যবাদ।`
       : session.dialectCode === "ta"
-      ? `உங்கள் ஓபிடி டோக்கன் ${session.token} உறுதி செய்யப்பட்டது. மருத்துவமனை: ${hosp.name}. தகவல் SMS மூலம் அனுப்பப்பட்டது. நன்றி.`
+      ? `டோக்கன் ${session.token} உறுதி செய்யப்பட்டது. மருத்துவமனை: ${hosp.name}, கவுண்டர் 4. SMS அனுப்பப்பட்டது. நன்றி.`
       : session.dialectCode === "te"
-      ? `మీ ఓపీడీ టోకెన్ ${session.token} నిర్ధారించబడింది. ఆసుపత్రి: ${hosp.name}. వివరాలు SMS ద్వారా పంపబడ్డాయి. ధన్యవాదాలు.`
+      ? `టోకెన్ ${session.token} నిర్ధారించబడింది. ఆసుపత్రి: ${hosp.name}, కౌంటర్ 4. SMS పంపబడింది. ధన్యవాదాలు.`
       : session.dialectCode === "mr"
-      ? `आपली ओपीडी पावती ${session.token} निश्चित झाली आहे. रुग्णालय: ${hosp.name}. माहिती SMS द्वारे पाठवली आहे. धन्यवाद.`
-      : session.dialectCode === "en"
-      ? `Your OPD token ${session.token} is confirmed for ${hosp.name} at Counter 4. Details sent via SMS in your language. Thank you for calling 104.`
-      : `आपकी ओपीडी पर्ची पक्की हो गई है। टोकन नंबर है ${session.token}। अस्पताल: ${hosp.name}, काउंटर 4। सारी जानकारी आपके फोन पर SMS द्वारा भेज दी गई है। 104 पर कॉल करने के लिए धन्यवाद।`;
+      ? `पावती ${session.token} निश्चित झाली. रुग्णालय: ${hosp.name}, काउंटर 4. SMS पाठवला आहे. धन्यवाद.`
+      : `टोकन नंबर ${session.token} पक्का हुआ। अस्पताल: ${hosp.name}, काउंटर 4। SMS भेज दिया गया है। 104 पर कॉल करने के लिए धन्यवाद।`;
 
     return {
       session,

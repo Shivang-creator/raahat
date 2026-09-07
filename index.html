@@ -10523,15 +10523,38 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         const target = (langCode || "hi-IN").toLowerCase().replace("_", "-");
         const prefix = target.split("-")[0];
 
-        // 1. Exact BCP-47 match (e.g. "hi-in", "bn-in", "ta-in")
-        let match = voices.find(v => (v.lang || "").toLowerCase().replace("_", "-") === target);
+        // Preferred authentic Indian voice names across macOS, Windows, Android, ChromeOS
+        const PREFERRED_INDIAN_VOICE_NAMES = [
+          "lekha", "rishi", "veena", "neerja", "kajal",
+          "google हिन्दी", "google english (india)", "google বাংলা", "google தமிழ்", "google తెలుగు", "google मराठी",
+          "microsoft ravi", "microsoft heera", "microsoft hemant", "microsoft kalpana"
+        ];
+
+        // 1. Preferred Indian Voice Name match for this language
+        let match = voices.find(v => {
+          const vName = (v.name || "").toLowerCase();
+          const vLang = (v.lang || "").toLowerCase().replace("_", "-");
+          const isPreferred = PREFERRED_INDIAN_VOICE_NAMES.some(pn => vName.includes(pn));
+          return isPreferred && (vLang === target || vLang.startsWith(prefix) || (prefix === "hi" && (vLang.includes("hi") || vName.includes("hindi"))) || (prefix === "en" && (vLang.includes("en-in") || vName.includes("india"))));
+        });
         if (match) return match;
 
-        // 2. Language prefix match (e.g. "hi", "bn", "ta", "mr")
+        // 2. Exact BCP-47 match with India locale (e.g. "hi-in", "en-in", "bn-in", "ta-in")
+        match = voices.find(v => (v.lang || "").toLowerCase().replace("_", "-") === target);
+        if (match) return match;
+
+        // 3. Language prefix match with India locale (e.g. "hi", "bn", "ta", "mr" with -in)
+        match = voices.find(v => {
+          const l = (v.lang || "").toLowerCase().replace("_", "-");
+          return l.startsWith(prefix) && l.includes("-in");
+        });
+        if (match) return match;
+
+        // 4. Any voice starting with language prefix
         match = voices.find(v => (v.lang || "").toLowerCase().startsWith(prefix));
         if (match) return match;
 
-        // 3. Indian English or India-locale voice fallback
+        // 5. Indian English or India-locale voice fallback
         match = voices.find(v => {
           const l = (v.lang || "").toLowerCase();
           const n = (v.name || "").toLowerCase();
@@ -10539,7 +10562,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         });
         if (match) return match;
 
-        // 4. Default voice or first available
+        // 6. Default voice or first available
         return voices.find(v => v.default) || voices[0] || null;
       }
 
@@ -11182,12 +11205,37 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           }
         }
 
+        function playTelecomEarcon() {
+          try {
+            const ctx = getIvrAudioContext();
+            if (!ctx) return;
+            const osc1 = ctx.createOscillator();
+            const osc2 = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc1.type = "sine";
+            osc2.type = "sine";
+            osc1.frequency.setValueAtTime(523.25, ctx.currentTime);
+            osc2.frequency.setValueAtTime(659.25, ctx.currentTime);
+            gain.gain.setValueAtTime(0.06, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.16);
+            osc1.connect(gain);
+            osc2.connect(gain);
+            gain.connect(ctx.destination);
+            osc1.start();
+            osc2.start();
+            osc1.stop(ctx.currentTime + 0.16);
+            osc2.stop(ctx.currentTime + 0.16);
+          } catch (e) {}
+        }
+
         let lastSpokenIvrText = "";
         let lastSpokenIvrBcp47 = "hi-IN";
 
         function speakIvrText(text, bcp47 = "hi-IN", onEnd) {
           lastSpokenIvrText = text;
           lastSpokenIvrBcp47 = bcp47;
+
+          playTelecomEarcon();
 
           if (!("speechSynthesis" in window)) {
             if (audioInd) audioInd.textContent = "🔇 Audio N/A";
@@ -11209,8 +11257,8 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               window.speechSynthesis.resume();
               const utterance = new SpeechSynthesisUtterance(text);
               utterance.lang = bcp47;
-              utterance.rate = 0.88; // Slow, respectful tempo for rural callers
-              utterance.pitch = 1.0;
+              utterance.rate = 0.90; // Natural, respectful tempo for telecom IVR
+              utterance.pitch = 1.02; // Warm, friendly Indian operator tone
 
               const voices = window.speechSynthesis.getVoices() || [];
               const voice = selectBestIndianVoice(voices, bcp47);
@@ -11248,7 +11296,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           isInCall = true;
           callSeconds = 0;
           getIvrAudioContext();
-          session = createInitialIvrSession("+919876543210");
+          const activeDist = (state.hospitalStateFilter && state.hospitalStateFilter !== "All India")
+            ? state.hospitalStateFilter
+            : (state.locality && state.locality.includes("delhi") ? "Delhi" : "Delhi");
+          session = createInitialIvrSession("+919876543210", activeDist);
           screen.classList.remove("emergency");
           callStatus.textContent = "CONNECTED";
           callStatus.style.color = "#142814";
@@ -11413,6 +11464,11 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             const key = btn.dataset.key;
             playDtmfTone(key);
             if (isInCall) {
+              if (isRecording && speechRec) {
+                try { speechRec.stop(); } catch(e){}
+                isRecording = false;
+                micBtn.classList.remove("recording");
+              }
               dispatchIvrInput({ dtmf: key });
             }
           });
@@ -11574,29 +11630,37 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             <span style="color: #60a5fa;">22 Languages Ready</span>
           </div>
           <div class="ivr-dialect-bar" id="ivr-dialect-bar">
-            <button type="button" class="ivr-dialect-btn" data-ivr-lang="bho" data-ivr-phrase="हमार छाती में बहुते दरद बा आ सांस फूले लागल बा">
-              <span>Bhojpuri (भोजपुरी)</span>
-              <span style="color: #f87171; font-size: 0.68rem;">Chest pain</span>
+            <button type="button" class="ivr-dialect-btn" data-ivr-lang="hi" data-ivr-phrase="सीने में बहुत तेज दर्द और पसीना आ रहा है">
+              <span>1. हिन्दी (Hindi)</span>
+              <span style="color: #f87171; font-size: 0.68rem;">Chest pain (RF-01)</span>
             </button>
-            <button type="button" class="ivr-dialect-btn" data-ivr-lang="mai" data-ivr-phrase="हमरा बेटा के काइल से बड्ड तेज बुखार छै १०३ डिग्री">
-              <span>Maithili (मैथिली)</span>
-              <span style="color: #fbbf24; font-size: 0.68rem;">Child fever</span>
-            </button>
-            <button type="button" class="ivr-dialect-btn" data-ivr-lang="ben" data-ivr-phrase="আমার বুকে খুব ব্যথা আর নিঃশ্বাস নিতে কষ্ট হচ্ছে">
-              <span>Bengali (বাংলা)</span>
-              <span style="color: #f87171; font-size: 0.68rem;">Chest distress</span>
-            </button>
-            <button type="button" class="ivr-dialect-btn" data-ivr-lang="tam" data-ivr-phrase="என் குழந்தைக்கு நேற்று முதல் 103 டிகிரி அதிக காய்ச்சல் உள்ளது">
-              <span>Tamil (தமிழ்)</span>
-              <span style="color: #fbbf24; font-size: 0.68rem;">Paediatrics</span>
-            </button>
-            <button type="button" class="ivr-dialect-btn" data-ivr-lang="tel" data-ivr-phrase="మోకాలి నొప్పి మరియు నడవడానికి చాలా ఇబ్బందిగా ఉంది">
-              <span>Telugu (తెలుగు)</span>
+            <button type="button" class="ivr-dialect-btn" data-ivr-lang="en" data-ivr-phrase="Severe joint pain in right knee and difficulty walking">
+              <span>2. English</span>
               <span style="color: #34d399; font-size: 0.68rem;">Orthopaedics</span>
             </button>
-            <button type="button" class="ivr-dialect-btn" data-ivr-lang="hin" data-ivr-phrase="सीने में दर्द और पसीना आ रहा है">
-              <span>Hindi (हिन्दी)</span>
-              <span style="color: #f87171; font-size: 0.68rem;">Cardiology</span>
+            <button type="button" class="ivr-dialect-btn" data-ivr-lang="bho" data-ivr-phrase="हमार छाती में बहुते दरद बा आ सांस फूले लागल बा">
+              <span>3. Bhojpuri (भोजपुरी)</span>
+              <span style="color: #f87171; font-size: 0.68rem;">Chest distress</span>
+            </button>
+            <button type="button" class="ivr-dialect-btn" data-ivr-lang="mai" data-ivr-phrase="बबुआ के काल्हि सं खूब तेज बुखार १०३ डिग्री अछि">
+              <span>4. Maithili (मैथिली)</span>
+              <span style="color: #fbbf24; font-size: 0.68rem;">Child fever</span>
+            </button>
+            <button type="button" class="ivr-dialect-btn" data-ivr-lang="bn" data-ivr-phrase="আমার বুকে খুব ব্যথা আর নিঃশ্বাস নিতে কষ্ট হচ্ছে">
+              <span>5. Bengali (বাংলা)</span>
+              <span style="color: #f87171; font-size: 0.68rem;">Chest pain</span>
+            </button>
+            <button type="button" class="ivr-dialect-btn" data-ivr-lang="ta" data-ivr-phrase="என் குழந்தைக்கு நேற்று முதல் 103 டிகிரி அதிக காய்ச்சல் உள்ளது">
+              <span>6. Tamil (தமிழ்)</span>
+              <span style="color: #fbbf24; font-size: 0.68rem;">Paediatrics</span>
+            </button>
+            <button type="button" class="ivr-dialect-btn" data-ivr-lang="te" data-ivr-phrase="మోకాలి నొప్పి మరియు నడవడానికి చాలా ఇబ్బందిగా ఉంది">
+              <span>7. Telugu (తెలుగు)</span>
+              <span style="color: #34d399; font-size: 0.68rem;">Orthopaedics</span>
+            </button>
+            <button type="button" class="ivr-dialect-btn" data-ivr-lang="mr" data-ivr-phrase="पोटात खूप दुखत आहे आणि मळमळ उलट्या होत आहेत">
+              <span>8. Marathi (मराठी)</span>
+              <span style="color: #60a5fa; font-size: 0.68rem;">Gastroenterology</span>
             </button>
           </div>
         </div>
