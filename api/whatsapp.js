@@ -3,9 +3,35 @@
 // Strictly routes through deterministic logic (Rule 1 & Rule 2)
 
 import { handleWhatsAppMessage, createInitialSession } from "../whatsapp-bot.js";
+import { transcribeAudioBuffer } from "./transcribe.js";
 
 // In-memory session store for serverless runs
 const sessions = new Map();
+
+async function transcribeWhatsAppAudio(mediaId) {
+  const token = process.env.WHATSAPP_API_TOKEN;
+  if (!mediaId || !token) return "";
+
+  try {
+    const metadataResponse = await fetch(`https://graph.facebook.com/v20.0/${encodeURIComponent(mediaId)}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!metadataResponse.ok) throw new Error(`WhatsApp media metadata failed with ${metadataResponse.status}`);
+    const metadata = await metadataResponse.json();
+    if (!metadata?.url) throw new Error("WhatsApp media URL missing");
+
+    const mediaResponse = await fetch(metadata.url, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!mediaResponse.ok) throw new Error(`WhatsApp media download failed with ${mediaResponse.status}`);
+    const audioBuffer = Buffer.from(await mediaResponse.arrayBuffer());
+    const result = await transcribeAudioBuffer(audioBuffer, metadata.mime_type || "audio/ogg");
+    return result.success ? result.text : "";
+  } catch (error) {
+    console.error("WhatsApp voice transcription unavailable:", error?.message || error);
+    return "";
+  }
+}
 
 export default async function handler(req, res) {
   // GET: Meta Webhook Verification Handshake
@@ -63,7 +89,10 @@ export default async function handler(req, res) {
                 address: msg.location?.address
               };
             } else if (msg.type === "audio" || msg.type === "voice") {
-              incoming.text = "[Voice Note Received]";
+              const transcription = await transcribeWhatsAppAudio(msg.audio?.id || msg.voice?.id);
+              incoming.transcription = transcription;
+              incoming.sourceTag = transcription ? "Generated" : "Observed";
+              incoming.text = transcription || "[Voice Note Received]";
             }
 
             // Retrieve or initialize session

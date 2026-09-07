@@ -4700,9 +4700,14 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           <!-- Zen Hero Section -->
           <section class="landing-hero view-section" id="front-door" data-view="home">
             <div class="hero-copy">
-              <div class="hero-kicker-pill">
-                <span class="zen-dot"></span>
-                <span data-copy="landingKicker">A calmer front door to public hospitals</span>
+              <div style="display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center;">
+                <div class="hero-kicker-pill">
+                  <span class="zen-dot"></span>
+                  <span data-copy="landingKicker">A calmer front door to public hospitals</span>
+                </div>
+                <div class="hero-ai-badge" style="display:inline-flex; align-items:center; gap:0.35rem; padding:0.25rem 0.65rem; border-radius:999px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); color:var(--accent-dark); font-size:0.78rem; font-weight:800; letter-spacing:0.02em;">
+                  <span>⚡</span> Powered by OpenAI GPT-4o-mini &amp; Whisper-1
+                </div>
               </div>
               <h1 id="landing-title" data-copy="landingTitle">
                 Government Hospital OPD,<br>
@@ -5755,6 +5760,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         <p class="eyebrow" data-copy="eyebrow">A simpler way to reach the right OPD counter</p>
         <h1 data-copy="title">What's wrong?</h1>
         <p class="question-note" data-copy="note">Tell us in your own words. You can speak, type, or point to the body map. AI auto-extracts your details so you don't have to fill bureaucratic forms.</p>
+        <p class="model-disclosure"><span class="tag">Rule</span> <span data-copy="modelDisclosure">To read this in your own words we send this sentence to an AI service. Tap the body map instead if you would rather not.</span></p>
         <p class="service-disclosure" id="tele-mode-note" hidden><span class="tag">Observed</span> <span data-copy="teleModeSelected">Online Video Consultation is selected. We will show the secure mock Tele-OPD details after you choose a hospital and slot.</span></p>
 
         <!-- Symptom-First Intake (Primary Action Area) -->
@@ -6667,6 +6673,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               <li class="build-item"><span class="tag">Rule</span><strong data-copy="buildRoutingTitle">JavaScript + routing-rules.js</strong> · <span data-copy="buildRouting">structured complaint to department and urgency, with the rule ID shown.</span></li>
               <li class="build-item"><span class="tag">Simulated</span><strong data-copy="buildHospitalTitle">hospital-data.js</strong> · <span data-copy="buildHospital">verified hospital names and mock slots, waits, travel figures and identifiers.</span></li>
               <li class="build-item"><span class="tag">Generated</span><strong data-copy="buildCodexTitle">Codex</strong> · <span data-copy="buildCodex">wrote the application code, tests and verification pass.</span></li>
+              <li class="build-item"><span class="tag">Generated</span><strong>AI Models</strong> · <span>Powered by OpenAI GPT-4o-mini (structured symptom entity extraction) &amp; Whisper-1 (voice note transcription).</span></li>
             </ul>
           </section>
           <button class="back-button honesty-back" type="button" id="honesty-back-bottom" data-copy="honestyBack">← Back</button>
@@ -6969,6 +6976,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         slipSubtitle: "सरकारी अस्पताल ओपीडी की नमूना स्लिप", slipTokenLabel: "नमूना टोकन", slipTimeSummary: "अपॉइंटमेंट का समय:", slipAddress: "अस्पताल का पता", slipToken: "टोकन", slipSeenBy: "अनुमानित दिखने का समय", rightsCard: "अगर अस्पताल का पंजीकरण काउंटर इस मान्य ऑनलाइन टोकन को मानने से इनकार करे: अपनी अपॉइंटमेंट आईडी लिखें, pgportal.gov.in पर शिकायत करें या सिटिज़न्स चार्टर का हवाला दें।", qrTitle: "नमूना सुरक्षा पैटर्न", themeDark: "डार्क थीम चुनें", themeLight: "लाइट थीम चुनें",
         stepPatient: "मरीज़", stepPatientHi: "किसके लिए?", stepBody: "शरीर का नक्शा", stepBodyHi: "जगह चुनें", stepCounter: "मिलान हुआ काउंटर", stepCounterHi: "कहाँ जाएँ?", stepHospital: "अस्पताल और इंतज़ार", stepHospitalHi: "ईमानदारी से चुनें", stepSlip: "नमूना स्लिप", stepSlipHi: "अपनी प्रति रखें", upperView: "ऊपरी हिस्सा", lowerView: "निचला हिस्सा",
       });
+      Object.assign(copy.en, { modelDisclosure: "To read this in your own words we send this sentence to an AI service. Tap the body map instead if you would rather not." });
+      Object.assign(copy.hi, { modelDisclosure: "आपकी बात पढ़ने के लिए यह वाक्य AI सेवा को भेजा जाता है। अगर आप ऐसा नहीं चाहते तो शरीर का नक्शा चुनें।" });
+      Object.assign(copy.en, { modelBoundary: "Typed or spoken complaint text is sent to an AI service only after this disclosure. The body-map route sends nothing to that service; routing remains deterministic code." });
+      Object.assign(copy.hi, { modelBoundary: "लिखी या बोली गई परेशानी इस सूचना के बाद ही AI सेवा को भेजी जाती है। शरीर के नक्शे वाला रास्ता उस सेवा को कुछ नहीं भेजता; रास्ता कोड के नियम तय करते हैं।" });
       Object.assign(copy.en, {
         labNav: "Lab Tests & Scans", bloodNav: "Blood Bank", backToServices: "← Back to services", startBooking: "Start OPD Triage & Book Slot →", serviceGridKicker: "Services at a glance", serviceGridTitle: "Choose the help you need today.", opdService: "OPD Counter Triage", opdServiceNote: "Find the right first counter", labService: "Book Lab & Scan Tests", labServiceNote: "See preparation and fees", bloodService: "Blood Bank Inventory", bloodServiceNote: "Check mock stock and donors", teleService: "Online Video Tele-OPD", teleServiceNote: "Start from home",
         patientDetailsKicker: "Step 1 · Patient details", patientDetailsTitle: "Tell us who needs the appointment", patientDetailsNote: "These details stay in this browser for this session. Please do not enter an Aadhaar, ABHA, UHID, OTP or real health record.", patientNameLabel: "Full Name of Patient", patientNamePlaceholder: "Enter the patient's name", patientPhoneLabel: "Phone Number (for SMS token reminder)", patientPhonePlaceholder: "Optional demo number", numericAgeLabel: "Age band", ageBabyNumeric: "0 to 1 year (Infant / Baby)", ageChildNumeric: "2 to 12 years (Child / Paediatric)", ageAdolescent: "13 to 17 years (Adolescent / Teen)", ageAdultNumeric: "18 to 44 years (Young Adult)", ageMiddle: "45 to 59 years (Middle-Aged Adult)", ageOlderNumeric: "60+ years (Senior Citizen)", exactAgeLabel: "Exact Age (optional)", exactAgePlaceholder: "e.g. 42", genderLabel: "Gender selection", genderMale: "Male", genderFemale: "Female", genderOther: "Other", conditionsLabel: "Pre-existing medical conditions", conditionDiabetes: "Diabetes", conditionHypertension: "Hypertension (BP)", conditionHeart: "Heart Condition", conditionAsthma: "Asthma / Respiratory", conditionPregnancy: "Pregnancy", conditionNone: "No pre-existing condition",
@@ -7067,6 +7078,12 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           copy[code] = Object.assign({}, copy.en, dict);
         }
       }
+      for (const code of Object.keys(copy)) {
+        if (code !== "hi" && code !== "en") {
+          copy[code].modelDisclosure = copy.en.modelDisclosure;
+          copy[code].modelBoundary = copy.en.modelBoundary;
+        }
+      }
 
       const state = { language: "en", selectedDialect: "en", selectedDialectData: null, screen: "landing", previousScreen: "landing", booking: "myself", who: null, age: null, fullName: "", phone: "", exactAge: "", gender: null, conditions: [], listening: false, region: null, side: "both", noLocation: null, kind: null, duration: null, severity: null, complaint: null, routeResult: null, locality: "central-delhi",
         userCoords: null,
@@ -7157,10 +7174,138 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       const teleSelfFeed = document.querySelector("#tele-self-feed");
       let activeRecognition = null;
       let speechSilenceTimer = null;
+      let triageAudioCapture = null;
       let labSelectedTest = null;
       let teleCloseTimer = null;
       let telePreviousFocus = null;
       let telePreviousBodyOverflow = "";
+
+      const COMPLAINT_FIELDS = ["region", "kind", "duration", "severity", "age_band"];
+
+      function blobToBase64(blob) {
+        return blob.arrayBuffer().then((arrayBuffer) => {
+          const bytes = new Uint8Array(arrayBuffer);
+          let binary = "";
+          const chunkSize = 0x8000;
+          for (let index = 0; index < bytes.length; index += chunkSize) {
+            binary += String.fromCharCode(...bytes.subarray(index, index + chunkSize));
+          }
+          return btoa(binary);
+        });
+      }
+
+      async function transcribeBrowserAudio(blob, language = state.language) {
+        if (!blob || !blob.size) return "";
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 2500);
+        try {
+          const response = await fetch("/api/transcribe", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            signal: controller.signal,
+            body: JSON.stringify({ audio: await blobToBase64(blob), mimeType: blob.type || "audio/webm", language })
+          });
+          const payload = await response.json();
+          return payload?.success && typeof payload.text === "string" ? payload.text.trim() : "";
+        } catch {
+          return "";
+        } finally {
+          window.clearTimeout(timeout);
+        }
+      }
+
+      function normalizeModelComplaint(value) {
+        const result = { ...value };
+        const aliases = {
+          eye: "eyes", eyes: "eyes", abdomen: "upper-abdomen", stomach: "upper-abdomen",
+          elderly: "older", senior: "older", infant: "baby", mild: "no", moderate: "no", severe: "yes"
+        };
+        if (typeof result.region === "string") result.region = aliases[result.region.toLowerCase()] || result.region;
+        if (typeof result.age_band === "string") result.age_band = aliases[result.age_band.toLowerCase()] || result.age_band;
+        if (typeof result.severity === "string") result.severity = aliases[result.severity.toLowerCase()] || result.severity;
+        if (typeof result.kind === "string") {
+          const kind = result.kind.toLowerCase();
+          if (kind.includes("pain") || kind.includes("ache")) result.kind = "pain";
+          else if (kind.includes("fever")) result.kind = "fever";
+          else if (kind.includes("cough") || kind.includes("breath")) result.kind = "breathing";
+          else if (kind.includes("swell")) result.kind = "swelling";
+          else if (kind.includes("rash") || kind.includes("itch")) result.kind = "rash";
+          else if (kind.includes("vomit") || kind.includes("stomach")) result.kind = "vomiting";
+          else if (kind.includes("dizz")) result.kind = "dizziness";
+          else if (kind.includes("bleed")) result.kind = "bleeding";
+          else if (kind.includes("injur") || kind.includes("hurt")) result.kind = "injury";
+        }
+        return result;
+      }
+
+      async function extractComplaintWithFallback(rawText) {
+        const fallback = makeComplaint(false);
+        const textValue = String(rawText || "").trim();
+        if (!textValue) return fallback;
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 2500);
+        try {
+          const response = await fetch("/api/extract-complaint", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            signal: controller.signal,
+            body: JSON.stringify({ text: textValue, language: state.selectedDialect || state.language })
+          });
+          const payload = await response.json();
+          if (!response.ok || !payload?.success || !payload.complaint) return fallback;
+          const extracted = normalizeModelComplaint(payload.complaint);
+          const valueTags = Object.fromEntries(COMPLAINT_FIELDS.map((field) => [field, extracted[field] ? "Generated" : "Rule"]));
+          return makeComplaint(false, {
+            ...fallback,
+            ...extracted,
+            unclear: extracted.unclear?.length ? extracted.unclear : fallback.unclear,
+            parsed: true,
+            value_tags: valueTags,
+            source_tag: "Generated"
+          });
+        } catch {
+          return fallback;
+        } finally {
+          window.clearTimeout(timeout);
+        }
+      }
+
+      async function beginTriageAudioCapture() {
+        if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) return;
+        const capture = { chunks: [], recorder: null, stream: null };
+        triageAudioCapture = capture;
+        try {
+          capture.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          if (triageAudioCapture !== capture) return;
+          capture.recorder = new MediaRecorder(capture.stream);
+          capture.recorder.ondataavailable = (event) => { if (event.data.size) capture.chunks.push(event.data); };
+          capture.recorder.start();
+        } catch {
+          capture.stream?.getTracks().forEach((track) => track.stop());
+          if (triageAudioCapture === capture) triageAudioCapture = null;
+        }
+      }
+
+      async function finishTriageAudioCapture() {
+        const capture = triageAudioCapture;
+        triageAudioCapture = null;
+        if (!capture) return null;
+        capture.stream?.getTracks().forEach((track) => track.stop());
+        if (!capture.recorder || capture.recorder.state === "inactive") return null;
+        return new Promise((resolve) => {
+          capture.recorder.onstop = () => resolve(new Blob(capture.chunks, { type: capture.recorder.mimeType || "audio/webm" }));
+          capture.recorder.stop();
+        });
+      }
+
+      function discardTriageAudioCapture() {
+        const capture = triageAudioCapture;
+        triageAudioCapture = null;
+        capture?.stream?.getTracks().forEach((track) => track.stop());
+        if (capture?.recorder && capture.recorder.state !== "inactive") {
+          try { capture.recorder.stop(); } catch {}
+        }
+      }
 
       const labTests = [
         { name: "Complete Blood Count (CBC)", turnaround: "Same Day", fasting: "Not required", fee: "₹0 to ₹30" },
@@ -8127,9 +8272,9 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         element.replaceChildren(tag, document.createTextNode(` ${value}`));
       }
 
-      function makeComplaint(fromMap = false) {
+      function makeComplaint(fromMap = false, parsedComplaint = null) {
         if (!fromMap) {
-          const extracted = parseFreeTextComplaint(complaint.value.trim(), state.language);
+          const extracted = parsedComplaint || parseFreeTextComplaint(complaint.value.trim(), state.language);
           return {
             ...extracted,
             side: state.side || "both",
@@ -8140,6 +8285,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             exact_age: state.exactAge,
             gender: state.gender,
             conditions: [...state.conditions],
+            value_tags: extracted.value_tags || Object.fromEntries(COMPLAINT_FIELDS.map((field) => [field, extracted[field] ? "Rule" : "Observed"])),
           };
         }
         return {
@@ -8173,25 +8319,29 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             else if (side === "right") prefix = state.language === "hi" ? "दायाँ " : "Right ";
             else if (side === "both") prefix = state.language === "hi" ? "दोनों तरफ: " : "Both: ";
           }
-          return prefix + text(regionCopyKeys[value]);
+          return prefix + (text(regionCopyKeys[value]) || value);
         }
-        if (field === "kind") return value ? text(kindCopyKeys[value]) : text("notChosen");
-        if (field === "duration") return value ? text(durationCopyKeys[value]) : text("notChosen");
-        if (field === "severity") return value ? text(severityCopyKeys[value]) : text("notChosen");
-        if (field === "who_for") return value ? text(whoCopyKeys[value]) : text("notChosen");
-        if (field === "age_band") return value ? text(ageCopyKeys[value]) : text("notAsked");
+        if (field === "kind") return value ? (text(kindCopyKeys[value]) || value) : text("notChosen");
+        if (field === "duration") return value ? (text(durationCopyKeys[value]) || value) : text("notChosen");
+        if (field === "severity") return value ? (text(severityCopyKeys[value]) || value) : text("notChosen");
+        if (field === "who_for") return value ? (text(whoCopyKeys[value]) || value) : text("notChosen");
+        if (field === "age_band") return value ? (text(ageCopyKeys[value]) || value) : text("notAsked");
         return text("notChosen");
       }
 
       function renderReadback() {
         const current = state.complaint;
         if (!current) return;
-        document.querySelector("#chip-region").textContent = labelFor("region", current.region);
-        document.querySelector("#chip-kind").textContent = labelFor("kind", current.kind);
-        document.querySelector("#chip-duration").textContent = labelFor("duration", current.duration);
-        document.querySelector("#chip-severity").textContent = labelFor("severity", current.severity);
-        document.querySelector("#chip-who").textContent = labelFor("who_for", current.who_for);
-        document.querySelector("#chip-age").textContent = labelFor("age_band", current.age_band);
+        const renderChipValue = (id, field) => {
+          const element = document.querySelector(id);
+          element.replaceChildren(makeTag(current.value_tags?.[field] || "Rule"), document.createTextNode(` ${labelFor(field, current[field])}`));
+        };
+        renderChipValue("#chip-region", "region");
+        renderChipValue("#chip-kind", "kind");
+        renderChipValue("#chip-duration", "duration");
+        renderChipValue("#chip-severity", "severity");
+        renderChipValue("#chip-who", "who_for");
+        renderChipValue("#chip-age", "age_band");
         const rawWords = current.unclear?.[0] || complaint.value.trim();
         readbackWords.hidden = !rawWords;
         readbackWordsValue.textContent = rawWords;
@@ -9298,6 +9448,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       function abortSpeechRecognition() {
         if (speechSilenceTimer) window.clearTimeout(speechSilenceTimer);
         speechSilenceTimer = null;
+        discardTriageAudioCapture();
         if (activeRecognition) {
           try { activeRecognition.abort(); } catch { /* Recognition may already have ended. */ }
           activeRecognition = null;
@@ -9319,6 +9470,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         if (state.listening) { stopSpeechRecognition(); return; }
         const Recognition = speechRecognition();
         if (!Recognition) { showStatus(text("voiceUnsupported"), true); return; }
+        void beginTriageAudioCapture();
         const recognizer = new Recognition();
         activeRecognition = recognizer;
         const targetBcp47 = state.selectedDialectData?.bcp47 || (state.language === "hi" ? "hi-IN" : "en-IN");
@@ -9338,14 +9490,26 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           handleComplaintInput(complaint.value);
         };
         recognizer.onerror = () => { showStatus(text("voiceUnsupported"), true); resetVoiceButton(); };
-        recognizer.onend = () => { if (activeRecognition === recognizer) activeRecognition = null; if (speechSilenceTimer) window.clearTimeout(speechSilenceTimer); speechSilenceTimer = null; resetVoiceButton(); };
+        recognizer.onend = async () => {
+          if (activeRecognition === recognizer) activeRecognition = null;
+          if (speechSilenceTimer) window.clearTimeout(speechSilenceTimer);
+          speechSilenceTimer = null;
+          resetVoiceButton();
+          const audioBlob = await finishTriageAudioCapture();
+          const transcription = await transcribeBrowserAudio(audioBlob, targetBcp47);
+          if (transcription) {
+            complaint.value = transcription;
+            showStatus(`AI transcription captured: "${transcription}"`);
+            handleComplaintInput(transcription);
+          }
+        };
         try {
           recognizer.start();
           speechSilenceTimer = window.setTimeout(() => { showStatus(text("voiceSilence"), true); abortSpeechRecognition(); }, 7000);
         } catch { resetVoiceButton(); showStatus(text("voiceUnsupported"), true); }
       });
 
-      document.querySelector("#continue-button").addEventListener("click", () => {
+      document.querySelector("#continue-button").addEventListener("click", async () => {
         const missingCaregiver = state.booking === "someone" && (!state.who || !state.age);
         if (missingCaregiver) {
           showStatus(text("someoneHint"), true);
@@ -9356,7 +9520,12 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         }
         if (!complaint.value.trim()) { showStatus(text("continueHint"), true); complaint.focus(); return; }
         sessionNote.classList.remove("is-visible");
-        showReadback(makeComplaint(false));
+        const continueButton = document.querySelector("#continue-button");
+        continueButton.disabled = true;
+        showStatus("Reading your words…");
+        const extractedComplaint = await extractComplaintWithFallback(complaint.value.trim());
+        continueButton.disabled = false;
+        showReadback(extractedComplaint);
       });
 
       const introSplash = document.querySelector("#intro-splash");
@@ -10210,6 +10379,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         let session = createInitialSession("+919876543210");
         let isRecording = false;
         let mediaRecorder = null;
+        let mediaStream = null;
         let audioChunks = [];
         let speechRecognition = null;
         let speechTranscript = "";
@@ -10490,19 +10660,22 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
         async function startVoiceRecording() {
           try {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
             audioChunks = [];
             speechTranscript = "";
-            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder = new MediaRecorder(mediaStream);
 
             mediaRecorder.ondataavailable = (e) => {
               if (e.data.size > 0) audioChunks.push(e.data);
             };
 
-            mediaRecorder.onstop = () => {
+            mediaRecorder.onstop = async () => {
               const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
               const audioUrl = URL.createObjectURL(audioBlob);
-              const spokenText = speechTranscript || (session.language === "en" ? "Chest discomfort since morning" : "सीने में दर्द और भारीपन है");
+              const whisperText = await transcribeBrowserAudio(audioBlob, session.language);
+              const spokenText = whisperText || speechTranscript || (session.language === "en" ? "Chest discomfort since morning" : "सीने में दर्द और भारीपन है");
+              mediaStream?.getTracks().forEach((track) => track.stop());
+              mediaStream = null;
 
               // Append user voice bubble
               const voiceContainer = document.createElement("div");
@@ -10541,7 +10714,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               });
 
               appendWaMessage(voiceContainer, true);
-              dispatchWaMessage({ text: spokenText, transcription: spokenText });
+              dispatchWaMessage({ text: spokenText, transcription: spokenText, sourceTag: whisperText ? "Generated" : "Observed" });
             };
 
             mediaRecorder.start();
@@ -11244,6 +11417,9 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         let session = null;
         let isRecording = false;
         let speechRec = null;
+        let ivrMediaRecorder = null;
+        let ivrMediaStream = null;
+        let ivrAudioChunks = [];
 
         // ITU-T Standard DTMF Dual-Frequency Pairs
         const dtmfFreqs = {
@@ -11420,6 +11596,33 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           }, 45);
         }
 
+        async function startIvrMediaCapture() {
+          if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) return;
+          try {
+            ivrMediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            ivrAudioChunks = [];
+            ivrMediaRecorder = new MediaRecorder(ivrMediaStream);
+            ivrMediaRecorder.ondataavailable = (event) => { if (event.data.size) ivrAudioChunks.push(event.data); };
+            ivrMediaRecorder.start();
+          } catch {
+            ivrMediaStream?.getTracks().forEach((track) => track.stop());
+            ivrMediaStream = null;
+            ivrMediaRecorder = null;
+          }
+        }
+
+        async function stopIvrMediaCapture() {
+          const recorder = ivrMediaRecorder;
+          ivrMediaRecorder = null;
+          ivrMediaStream?.getTracks().forEach((track) => track.stop());
+          ivrMediaStream = null;
+          if (!recorder || recorder.state === "inactive") return null;
+          return new Promise((resolve) => {
+            recorder.onstop = () => resolve(new Blob(ivrAudioChunks, { type: recorder.mimeType || "audio/webm" }));
+            try { recorder.stop(); } catch { resolve(null); }
+          });
+        }
+
         function startCall() {
           if (isInCall) return;
           isInCall = true;
@@ -11457,6 +11660,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             isRecording = false;
             micBtn.classList.remove("recording");
           }
+          void stopIvrMediaCapture();
           screen.classList.remove("emergency");
           callStatus.textContent = "CALL ENDED";
           timerEl.textContent = "00:00";
@@ -11519,11 +11723,14 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           speechRec = new SpeechRec();
           speechRec.continuous = false;
           speechRec.interimResults = false;
-          speechRec.onresult = (e) => {
+          speechRec.onresult = async (e) => {
             const transcript = e.results[0][0].transcript;
             isRecording = false;
             micBtn.classList.remove("recording");
-            dispatchIvrInput({ speech: transcript });
+            const bcp47 = (SUPPORTED_DIALECTS[session?.dialectKey] || SUPPORTED_DIALECTS["1"]).bcp47;
+            const audioBlob = await stopIvrMediaCapture();
+            const whisperText = await transcribeBrowserAudio(audioBlob, bcp47);
+            dispatchIvrInput({ speech: whisperText || transcript });
           };
           speechRec.onerror = () => {
             isRecording = false;
@@ -11564,6 +11771,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           if (!isRecording) {
             if (speechRec) {
               try {
+                void startIvrMediaCapture();
                 speechRec.lang = (SUPPORTED_DIALECTS[session?.dialectKey] || SUPPORTED_DIALECTS["1"]).bcp47;
                 speechRec.start();
                 isRecording = true;
@@ -11672,7 +11880,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
                 <h4 id="wa-modal-title" style="margin:0;font-size:0.96rem;font-weight:700;color:#fff;">राहत · Raahat OPD</h4>
                 <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:#25d366;" aria-label="Official Verified Business"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
               </div>
-              <small class="wa-status-text"><span class="wa-online-dot"></span> online · Govt OPD Gateway</small>
+              <small class="wa-status-text"><span class="wa-online-dot"></span> online · Powered by GPT-4o-mini &amp; Whisper-1</small>
             </div>
           </div>
           <div class="wa-header-actions">
@@ -11740,8 +11948,9 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           <div class="ivr-screen-body" id="ivr-screen-body">
             <div style="text-align: center; margin-top: 0.85rem;">
               <div style="font-size: 1.1rem; font-weight: 900; letter-spacing: 1px;">104 HELPLINE</div>
-              <div style="font-size: 0.74rem; margin-top: 0.35rem;">National Health &amp; Triage IVR</div>
-              <div style="font-size: 0.72rem; color: #243824; margin-top: 0.5rem;">Press 📞 Green to Call 104</div>
+              <div style="font-size: 0.74rem; margin-top: 0.25rem;">National Health &amp; Triage IVR</div>
+              <div style="font-size: 0.68rem; color: #1e3a1e; font-weight: 800; margin-top: 0.25rem;">⚡ Whisper-1 &amp; GPT-4o-mini</div>
+              <div style="font-size: 0.72rem; color: #243824; margin-top: 0.35rem;">Press 📞 Green to Call 104</div>
             </div>
           </div>
 
