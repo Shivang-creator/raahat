@@ -3731,61 +3731,104 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .ocr-sample-chip:hover { border-color: var(--accent); background: var(--accent-soft); }
       .ocr-feedback { margin-top: 0.85rem; padding: 0.75rem 1rem; border-radius: var(--radius-md); background: var(--accent-soft); color: var(--accent-dark); font-weight: 700; font-size: 0.95rem; }
 
-      /* WhatsApp Civic Gateway & Mobile Simulator */
+      /* WhatsApp Civic Gateway & Mobile Simulator (Authentic WhatsApp Look & Feel) */
       .whatsapp-float-btn { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 99; display: flex; align-items: center; gap: 0.65rem; padding: 0.75rem 1.25rem; border-radius: 999px; background: #25d366; color: #ffffff; border: 0; box-shadow: 0 0.5rem 1.5rem rgba(37, 211, 102, 0.4); font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: transform 180ms ease, box-shadow 180ms ease; }
       .whatsapp-float-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0.8rem 2rem rgba(37, 211, 102, 0.55); }
       .whatsapp-float-btn svg { width: 1.5rem; height: 1.5rem; fill: currentColor; }
       .wa-pulse { width: 8px; height: 8px; border-radius: 50%; background: #ffffff; animation: waPulse 1.8s infinite; }
       @keyframes waPulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.4); } 100% { opacity: 1; transform: scale(1); } }
 
-      .whatsapp-modal { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 1rem; }
-      .whatsapp-phone-frame { width: 100%; max-width: 420px; height: 90vh; max-height: 720px; background: #efeae2; border-radius: 2rem; border: 8px solid #1f2937; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow: hidden; position: relative; }
-      [data-theme="dark"] .whatsapp-phone-frame { background: #0f141d; border-color: #1c2534; }
-      .wa-header { background: #075e54; color: #ffffff; padding: 0.85rem 1rem; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-      .wa-header-info { display: flex; align-items: center; gap: 0.75rem; }
-      .wa-avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #128c7e; display: grid; place-items: center; font-weight: 800; font-size: 1.1rem; color: #fff; }
-      .wa-title-wrap h4 { margin: 0; font-size: 1rem; font-weight: 700; color: #fff; }
-      .wa-title-wrap small { font-size: 0.75rem; color: #dcf8c6; }
-      .wa-close-btn { background: transparent; border: 0; color: #fff; font-size: 1.5rem; cursor: pointer; padding: 0.25rem; }
-      .wa-body { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; background-color: #efeae2; background-image: radial-gradient(#d6cdc3 1px, transparent 1px), radial-gradient(#d6cdc3 1px, #efeae2 1px); background-size: 20px 20px; background-position: 0 0, 10px 10px; }
-      [data-theme="dark"] .wa-body { background-color: #0b141a; background-image: radial-gradient(#1e2b33 1px, transparent 1px), radial-gradient(#1e2b33 1px, #0b141a 1px); background-size: 20px 20px; background-position: 0 0, 10px 10px; }
-      .wa-bubble { max-width: 85%; padding: 0.65rem 0.85rem; border-radius: 0.75rem; font-size: 0.92rem; line-height: 1.4; box-shadow: 0 1px 1px rgba(0,0,0,0.1); position: relative; }
-      .wa-bubble.bot { background: #ffffff; color: #111827; align-self: flex-start; border-top-left-radius: 0; }
-      [data-theme="dark"] .wa-bubble.bot { background: #151c27; color: #e2e8f0; border: 1px solid rgba(255, 255, 255, 0.08); }
-      .wa-bubble.user { background: #d9fdd3; color: #111827; align-self: flex-end; border-top-right-radius: 0; }
-      [data-theme="dark"] .wa-bubble.user { background: #065f46; color: #f0fdf4; border: 1px solid rgba(52, 211, 153, 0.25); }
-      .wa-bubble-time { font-size: 0.7rem; color: #667781; text-align: right; margin-top: 0.25rem; }
-      .wa-prompts { display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.5rem; }
-      .wa-prompt-btn { background: #e7f8e8; border: 1px solid #25d366; color: #075e54; font-size: 0.82rem; font-weight: 700; padding: 0.4rem 0.65rem; border-radius: 0.5rem; text-align: left; cursor: pointer; }
+      .whatsapp-modal { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.72); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; padding: 1rem; }
+      .whatsapp-phone-frame { width: 100%; max-width: 425px; height: 90vh; max-height: 730px; background: #efeae2; border-radius: 2.2rem; border: 9px solid #1f2937; box-shadow: 0 25px 60px -10px rgba(0,0,0,0.6); display: flex; flex-direction: column; overflow: hidden; position: relative; }
+      [data-theme="dark"] .whatsapp-phone-frame { background: #0c1317; border-color: #1c2534; box-shadow: 0 25px 60px -10px rgba(0,0,0,0.85); }
+      
+      /* Official WhatsApp Header */
+      .wa-header { background: #008069; color: #ffffff; padding: 0.7rem 0.9rem; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.15); z-index: 2; }
+      [data-theme="dark"] .wa-header { background: #202c33; color: #e9edef; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+      .wa-header-info { display: flex; align-items: center; gap: 0.65rem; }
+      .wa-avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #25d366; display: grid; place-items: center; font-weight: 800; font-size: 1.15rem; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2); flex-shrink: 0; }
+      .wa-title-wrap h4 { margin: 0; font-size: 0.96rem; font-weight: 700; color: #fff; line-height: 1.2; display: flex; align-items: center; gap: 0.35rem; }
+      [data-theme="dark"] .wa-title-wrap h4 { color: #e9edef; }
+      .wa-status-text { font-size: 0.72rem; color: #dcf8c6; display: flex; align-items: center; gap: 0.3rem; margin-top: 0.1rem; }
+      [data-theme="dark"] .wa-status-text { color: #8696a0; }
+      .wa-online-dot { width: 6px; height: 6px; border-radius: 50%; background: #25d366; display: inline-block; }
+      .wa-header-actions { display: flex; align-items: center; gap: 0.45rem; }
+      .wa-header-icon-btn { background: transparent; border: 0; color: #fff; font-size: 1.05rem; cursor: pointer; padding: 0.3rem 0.45rem; border-radius: 50%; display: grid; place-items: center; transition: background 120ms ease; }
+      .wa-header-icon-btn:hover { background: rgba(255,255,255,0.15); }
+      .wa-close-btn { background: transparent; border: 0; color: #fff; font-size: 1.25rem; cursor: pointer; padding: 0.2rem 0.45rem; border-radius: 0.4rem; transition: background 120ms ease; line-height: 1; }
+      .wa-close-btn:hover { background: rgba(255,255,255,0.2); }
+      [data-theme="dark"] .wa-close-btn { color: #e9edef; }
+
+      /* WhatsApp Chat Body Wallpaper */
+      .wa-body { flex: 1; overflow-y: auto; padding: 0.85rem; display: flex; flex-direction: column; gap: 0.65rem; background-color: #efeae2; background-image: radial-gradient(#d6cdc3 1.1px, transparent 1.1px), radial-gradient(#d6cdc3 1.1px, #efeae2 1.1px); background-size: 22px 22px; background-position: 0 0, 11px 11px; }
+      [data-theme="dark"] .wa-body { background-color: #0b141a; background-image: radial-gradient(#1e2b33 1.1px, transparent 1.1px), radial-gradient(#1e2b33 1.1px, #0b141a 1.1px); background-size: 22px 22px; background-position: 0 0, 11px 11px; }
+      
+      /* Speech Bubbles with Tail Notches */
+      .wa-bubble { max-width: 84%; padding: 0.55rem 0.75rem 0.4rem; border-radius: 7.5px; font-size: 0.88rem; line-height: 1.38; box-shadow: 0 1px 0.5px rgba(11,20,26,0.13); position: relative; word-wrap: break-word; }
+      .wa-bubble.bot { background: #ffffff; color: #111b21; align-self: flex-start; border-top-left-radius: 0; }
+      .wa-bubble.bot::before { content: ""; position: absolute; top: 0; left: -6px; width: 0; height: 0; border-top: 7px solid #ffffff; border-left: 7px solid transparent; }
+      [data-theme="dark"] .wa-bubble.bot { background: #202c33; color: #e9edef; border: 0; }
+      [data-theme="dark"] .wa-bubble.bot::before { border-top-color: #202c33; }
+      
+      .wa-bubble.user { background: #d9fdd3; color: #111b21; align-self: flex-end; border-top-right-radius: 0; }
+      .wa-bubble.user::after { content: ""; position: absolute; top: 0; right: -6px; width: 0; height: 0; border-top: 7px solid #d9fdd3; border-right: 7px solid transparent; }
+      [data-theme="dark"] .wa-bubble.user { background: #005c4b; color: #e9edef; border: 0; }
+      [data-theme="dark"] .wa-bubble.user::after { border-top-color: #005c4b; }
+
+      .wa-bubble-time { font-size: 0.68rem; color: #667781; text-align: right; margin-top: 0.2rem; display: flex; align-items: center; justify-content: flex-end; gap: 0.25rem; }
+      [data-theme="dark"] .wa-bubble-time { color: #8696a0; }
+      .wa-double-tick { color: #53bdeb; font-weight: 800; font-size: 0.76rem; letter-spacing: -1.5px; margin-left: 2px; }
+
+      /* Discreet AGENTS.md Rule 4 Label */
+      .wa-bubble .tag { font-size: 0.65rem; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 800; text-transform: uppercase; margin-bottom: 0.35rem; display: inline-block; letter-spacing: 0.04em; background: rgba(0,0,0,0.06); color: #4b5563; }
+      [data-theme="dark"] .wa-bubble .tag { background: rgba(255,255,255,0.08); color: #94a3b8; }
+
+      /* WhatsApp Business Interactive Action Buttons */
+      .wa-action-btns { display: flex; flex-direction: column; gap: 0.32rem; margin-top: 0.45rem; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 0.4rem; }
+      [data-theme="dark"] .wa-action-btns { border-top-color: rgba(255,255,255,0.08); }
+      .wa-action-btn { background: #ffffff; color: #00a884; border: 1px solid #e9edef; border-radius: 8px; padding: 0.55rem 0.85rem; font-size: 0.86rem; font-weight: 700; cursor: pointer; text-align: center; transition: all 120ms ease; display: flex; align-items: center; justify-content: center; gap: 0.45rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+      .wa-action-btn:hover { background: #f0fdf4; border-color: #25d366; color: #008069; }
+      .wa-action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+      [data-theme="dark"] .wa-action-btn { background: #202c33; color: #00a884; border-color: #2a3942; }
+      [data-theme="dark"] .wa-action-btn:hover { background: #2a3942; color: #25d366; }
+
+      /* Quick Prompts Chip Bar */
+      .wa-prompts { display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.4rem; }
+      .wa-prompt-btn { background: #f0fdf4; border: 1px solid #86efac; color: #166534; font-size: 0.82rem; font-weight: 700; padding: 0.45rem 0.75rem; border-radius: 0.6rem; text-align: left; cursor: pointer; transition: all 120ms ease; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+      .wa-prompt-btn:hover { background: #dcfce7; border-color: #22c55e; }
       [data-theme="dark"] .wa-prompt-btn { background: rgba(16, 185, 129, 0.12); color: #34d399; border-color: rgba(16, 185, 129, 0.3); }
-      .wa-footer { padding: 0.65rem 0.75rem; background: #f0f2f5; display: flex; gap: 0.5rem; align-items: center; border-top: 1px solid #e2e8f0; flex-shrink: 0; }
-      [data-theme="dark"] .wa-footer { background: #111620; border-top-color: rgba(255, 255, 255, 0.08); }
-      .wa-input { flex: 1; min-height: 2.5rem; padding: 0.45rem 0.85rem; border: 0; border-radius: 999px; background: #ffffff; color: var(--ink); font-size: 0.95rem; outline: none; }
-      [data-theme="dark"] .wa-input { background: #151c27; color: #e2e8f0; border: 1px solid rgba(255, 255, 255, 0.12); }
-      .wa-send-btn { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #00a884; color: #fff; border: 0; display: grid; place-items: center; cursor: pointer; flex-shrink: 0; }
-      .wa-icon-btn { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: transparent; color: #54656f; border: 0; display: grid; place-items: center; cursor: pointer; transition: all 120ms; flex-shrink: 0; }
-      [data-theme="dark"] .wa-icon-btn { color: #94a3b8; }
-      .wa-icon-btn:hover { background: rgba(0,0,0,0.06); color: #128c7e; }
-      [data-theme="dark"] .wa-icon-btn:hover { background: rgba(255,255,255,0.1); color: #34d399; }
-      .wa-icon-btn.recording { background: #ef4444; color: #ffffff !important; animation: waPulse 1s infinite; }
-      .wa-action-btns { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.5rem; }
-      .wa-action-btn { background: #ffffff; color: #00a884; border: 1.5px solid #00a884; border-radius: 0.5rem; padding: 0.5rem 0.75rem; font-size: 0.85rem; font-weight: 700; cursor: pointer; text-align: left; transition: all 120ms ease; display: flex; align-items: center; justify-content: space-between; }
-      .wa-action-btn:hover { background: #00a884; color: #ffffff; }
-      .wa-action-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-      [data-theme="dark"] .wa-action-btn { background: #1f2937; color: #34d399; border-color: #059669; }
-      [data-theme="dark"] .wa-action-btn:hover { background: #059669; color: #ffffff; }
-      .wa-voice-bubble { display: flex; align-items: center; gap: 0.65rem; background: rgba(0,0,0,0.04); padding: 0.5rem 0.75rem; border-radius: 0.5rem; margin-top: 0.35rem; }
+      [data-theme="dark"] .wa-prompt-btn:hover { background: rgba(16, 185, 129, 0.2); }
+
+      /* WhatsApp Voice Note Player */
+      .wa-voice-bubble { display: flex; align-items: center; gap: 0.75rem; background: rgba(0,0,0,0.04); padding: 0.5rem 0.75rem; border-radius: 0.6rem; margin-top: 0.25rem; }
       [data-theme="dark"] .wa-voice-bubble { background: rgba(255,255,255,0.06); }
-      .wa-voice-play { width: 2rem; height: 2rem; border-radius: 50%; background: #00a884; color: #fff; border: 0; display: grid; place-items: center; cursor: pointer; flex-shrink: 0; font-size: 0.75rem; }
-      .wa-voice-waveform { display: flex; align-items: center; gap: 2px; flex: 1; height: 1.25rem; }
+      .wa-voice-play { width: 2.2rem; height: 2.2rem; border-radius: 50%; background: #00a884; color: #fff; border: 0; display: grid; place-items: center; cursor: pointer; flex-shrink: 0; font-size: 0.85rem; transition: transform 120ms ease; }
+      .wa-voice-play:hover { transform: scale(1.06); background: #008069; }
+      .wa-voice-waveform { display: flex; align-items: center; gap: 2.5px; flex: 1; height: 1.35rem; }
       .wa-wave-line { width: 3px; background: #54656f; border-radius: 2px; }
-      [data-theme="dark"] .wa-wave-line { background: #94a3b8; }
-      .wa-pass-card { background: #ffffff; border: 2px solid #25d366; border-radius: 0.75rem; padding: 0.85rem; margin-top: 0.6rem; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
-      [data-theme="dark"] .wa-pass-card { background: #16202c; border-color: #059669; color: #e2e8f0; }
-      .wa-pass-qr-mock { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; width: 68px; height: 68px; background: #fff; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px; margin: 0.5rem auto; }
+      [data-theme="dark"] .wa-wave-line { background: #8696a0; }
+
+      /* WhatsApp Verified OPD Pass Card */
+      .wa-pass-card { background: #ffffff; border: 1.5px solid #25d366; border-radius: 0.85rem; padding: 0.95rem; margin-top: 0.5rem; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+      [data-theme="dark"] .wa-pass-card { background: #1f2c34; border-color: #059669; color: #e9edef; }
+      .wa-pass-qr-mock { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; width: 72px; height: 72px; background: #fff; padding: 4px; border: 1px solid #cbd5e1; border-radius: 6px; margin: 0.6rem auto; }
       .wa-qr-box { background: #0f172a; border-radius: 1px; }
       .wa-qr-box.white { background: #fff; }
       .wa-notify-bubble { border-left: 4px solid #f59e0b !important; background: #fffbeb !important; color: #92400e !important; }
+      [data-theme="dark"] .wa-notify-bubble { background: #291e0a !important; color: #fde68a !important; border-left-color: #f59e0b !important; }
+
+      /* WhatsApp Footer & Pill Input Bar */
+      .wa-footer { padding: 0.55rem 0.75rem; background: #f0f2f5; display: flex; gap: 0.45rem; align-items: center; border-top: 1px solid #e2e8f0; flex-shrink: 0; }
+      [data-theme="dark"] .wa-footer { background: #202c33; border-top-color: rgba(255, 255, 255, 0.08); }
+      .wa-input { flex: 1; min-height: 2.6rem; padding: 0.5rem 0.95rem; border: 0; border-radius: 24px; background: #ffffff; color: #111b21; font-size: 0.93rem; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+      [data-theme="dark"] .wa-input { background: #2a3942; color: #e9edef; box-shadow: none; }
+      .wa-send-btn { width: 2.6rem; height: 2.6rem; border-radius: 50%; background: #00a884; color: #fff; border: 0; display: grid; place-items: center; cursor: pointer; flex-shrink: 0; transition: transform 120ms ease; }
+      .wa-send-btn:hover { transform: scale(1.05); background: #008069; }
+      .wa-icon-btn { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: transparent; color: #54656f; border: 0; display: grid; place-items: center; cursor: pointer; transition: all 120ms ease; flex-shrink: 0; }
+      [data-theme="dark"] .wa-icon-btn { color: #8696a0; }
+      .wa-icon-btn:hover { background: rgba(0,0,0,0.06); color: #008069; }
+      [data-theme="dark"] .wa-icon-btn:hover { background: rgba(255,255,255,0.08); color: #25d366; }
+      .wa-icon-btn.recording { background: #ef4444; color: #ffffff !important; animation: waPulse 1s infinite; }
       
       /* Feature Phone 104 IVR Gateway & Simulator */
       .ivr-float-btn { position: fixed; bottom: 4.85rem; right: 1.5rem; z-index: 99; display: flex; align-items: center; gap: 0.65rem; padding: 0.72rem 1.2rem; border-radius: 999px; background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 0.5rem 1.5rem rgba(30, 58, 138, 0.45); font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: transform 180ms ease, box-shadow 180ms ease; }
@@ -3807,7 +3850,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .ivr-modal { position: fixed; inset: 0; z-index: 1100; background: rgba(0,0,0,0.72); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; padding: 1rem; }
       .ivr-phone-chassis { width: 100%; max-width: 350px; max-height: 92vh; background: #1e293b; border: 7px solid #0f172a; border-radius: 2rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6); display: flex; flex-direction: column; overflow-y: auto; padding: 0.85rem 0.85rem 0.75rem; color: #fff; }
       .ivr-earpiece { width: 60px; height: 6px; background: #334155; border-radius: 999px; margin: 0 auto 0.75rem; }
-      .ivr-screen { background: #8ba888; color: #142814; font-family: "Courier New", Courier, monospace; border: 3px solid #475569; border-radius: 0.65rem; padding: 0.5rem; min-height: 125px; max-height: 135px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.3); display: flex; flex-direction: column; justify-content: space-between; position: relative; flex-shrink: 0; }
+      .ivr-screen { background: #8ba888; color: #142814; font-family: "Courier New", Courier, monospace; border: 3px solid #475569; border-radius: 0.65rem; padding: 0.5rem; min-height: 165px; max-height: 185px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.3); display: flex; flex-direction: column; justify-content: space-between; position: relative; flex-shrink: 0; overflow: hidden; }
       .ivr-screen.emergency { background: #fca5a5 !important; color: #7f1d1d !important; animation: waPulse 1s infinite; }
       .ivr-screen-top { display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 800; border-bottom: 1px dashed rgba(0,0,0,0.25); padding-bottom: 0.25rem; }
       .ivr-screen-body { flex: 1; padding: 0.25rem 0; font-size: 0.8rem; font-weight: 700; overflow-y: auto; max-height: 75px; line-height: 1.3; }
@@ -3827,7 +3870,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       .ivr-dialect-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #e2e8f0; font-size: 0.75rem; font-weight: 700; padding: 0.35rem 0.55rem; border-radius: 0.4rem; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
       .ivr-dialect-btn:hover { background: rgba(59, 130, 246, 0.35); border-color: #60a5fa; }
       
-      .ivr-sms-toast { position: absolute; inset: 0; background: #fef08a; color: #713f12; padding: 0.65rem; border-radius: 0.6rem; font-family: monospace; font-size: 0.76rem; font-weight: 700; display: flex; flex-direction: column; justify-content: space-between; z-index: 10; border: 2px solid #ca8a04; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+      .ivr-sms-toast { position: absolute; inset: 0; background: #fef08a; color: #713f12; padding: 0.5rem 0.65rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.73rem; font-weight: 700; display: flex; flex-direction: column; justify-content: space-between; z-index: 10; border: 2px solid #ca8a04; box-shadow: 0 8px 20px rgba(0,0,0,0.4); max-height: 100%; box-sizing: border-box; overflow: hidden; }
+      #ivr-sms-text { max-height: 110px; overflow-y: auto; overflow-x: hidden; word-break: break-word; white-space: pre-line; line-height: 1.35; font-size: 0.72rem; padding-right: 4px; }
+      #ivr-sms-dismiss-btn { align-self: flex-end; background: #854d0e; color: #fff; border: 0; padding: 0.22rem 0.6rem; border-radius: 0.3rem; font-size: 0.7rem; font-weight: 800; cursor: pointer; transition: background 120ms ease; }
+      #ivr-sms-dismiss-btn:hover { background: #a16207; }
       [data-theme="dark"] .wa-notify-bubble { background: #291e0a !important; color: #fde68a !important; border-left-color: #f59e0b !important; }
 
       /* Counterfactual Strip & Pan-India Filter */
@@ -10168,6 +10214,58 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         let speechRecognition = null;
         let speechTranscript = "";
 
+        // Web Audio Synthesized WhatsApp Sound Effects
+        function playWaSendSound() {
+          try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            const ctx = new AudioCtx();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(440, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(750, ctx.currentTime + 0.07);
+            gain.gain.setValueAtTime(0.14, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.07);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.08);
+          } catch (e) {}
+        }
+
+        function playWaReceiveSound() {
+          try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            const ctx = new AudioCtx();
+            const now = ctx.currentTime;
+            const osc1 = ctx.createOscillator();
+            const osc2 = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc1.type = "sine";
+            osc2.type = "sine";
+            osc1.frequency.setValueAtTime(587.33, now);
+            osc2.frequency.setValueAtTime(880, now + 0.06);
+            gain.gain.setValueAtTime(0.12, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.22);
+            osc1.connect(gain);
+            osc2.connect(gain);
+            gain.connect(ctx.destination);
+            osc1.start(now);
+            osc1.stop(now + 0.06);
+            osc2.start(now + 0.06);
+            osc2.stop(now + 0.22);
+          } catch (e) {}
+        }
+
+        const headerCallBtn = document.querySelector("#wa-header-call-btn");
+        headerCallBtn?.addEventListener("click", () => {
+          modal.hidden = true;
+          const ivrFab = document.querySelector("#ivr-fab");
+          ivrFab?.click();
+        });
+
         let hasInitialized = false;
         function initConversation() {
           hasInitialized = true;
@@ -10245,6 +10343,12 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           bubble.className = `wa-bubble ${isUser ? "user" : "bot"} ${extraClass}`;
           const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
           
+          if (isUser) {
+            playWaSendSound();
+          } else {
+            playWaReceiveSound();
+          }
+
           let html = "";
           if (!isUser) {
             html += `<span class="tag">${tag}</span>`;
@@ -10254,14 +10358,14 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           } else if (content instanceof HTMLElement) {
             bubble.appendChild(content);
           }
-          html += `<div class="wa-bubble-time">${time} ${isUser ? "✓✓" : ""}</div>`;
+          html += `<div class="wa-bubble-time">${time} ${isUser ? '<span class="wa-double-tick">✓✓</span>' : ''}</div>`;
           
           if (typeof content === "string") {
             bubble.innerHTML = html;
           } else {
             const timeEl = document.createElement("div");
             timeEl.className = "wa-bubble-time";
-            timeEl.innerHTML = `${time} ${isUser ? "✓✓" : ""}`;
+            timeEl.innerHTML = `${time} ${isUser ? '<span class="wa-double-tick">✓✓</span>' : ''}`;
             bubble.appendChild(timeEl);
           }
 
@@ -10517,53 +10621,78 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         });
       }
 
-      // --- Indian Voice Selector & Audio Pre-loader ---
+      // --- Strictly Female Indian Voice Selector & Audio Pre-loader ---
       function selectBestIndianVoice(voices, langCode = "hi-IN") {
         if (!voices || !voices.length) return null;
         const target = (langCode || "hi-IN").toLowerCase().replace("_", "-");
         const prefix = target.split("-")[0];
 
-        // Preferred authentic Indian voice names across macOS, Windows, Android, ChromeOS
-        const PREFERRED_INDIAN_VOICE_NAMES = [
-          "lekha", "rishi", "veena", "neerja", "kajal",
-          "google हिन्दी", "google english (india)", "google বাংলা", "google தமிழ்", "google తెలుగు", "google मराठी",
-          "microsoft ravi", "microsoft heera", "microsoft hemant", "microsoft kalpana"
+        // Explicit ban on all male voices across macOS, Windows, Android, iOS, Linux
+        const MALE_VOICE_EXCLUSIONS = [
+          "rishi", "ravi", "hemant", "david", "mark", "george", "pradeep",
+          "ajay", "male", "guy", "karthik", "mohan", "anil", "amit",
+          "suresh", "ramesh", "raj", "vikram", "microsoft ravi", "microsoft hemant",
+          "daniel", "oliver", "alex", "fred", "thomas"
         ];
 
-        // 1. Preferred Indian Voice Name match for this language
-        let match = voices.find(v => {
+        // Preferred authentic Indian female voice names
+        const PREFERRED_FEMALE_INDIAN_VOICES = [
+          "lekha", "veena", "neerja", "kajal", "heera", "kalpana", "swara",
+          "aditi", "anjali", "priya", "shruti", "geeta", "pooja", "female",
+          "google हिन्दी", "google english (india)", "google বাংলা", "google தமிழ்",
+          "google తెలుగు", "google मराठी", "microsoft heera", "microsoft kalpana",
+          "zira", "samantha", "karen", "victoria", "fiona"
+        ];
+
+        // Strictly filter out all male voices
+        const femaleOrNeutralVoices = voices.filter(v => {
+          const vName = (v.name || "").toLowerCase();
+          return !MALE_VOICE_EXCLUSIONS.some(m => vName.includes(m));
+        });
+
+        const pool = femaleOrNeutralVoices.length > 0 ? femaleOrNeutralVoices : voices;
+
+        // 1. Preferred Female Indian Voice Name match for this language
+        let match = pool.find(v => {
           const vName = (v.name || "").toLowerCase();
           const vLang = (v.lang || "").toLowerCase().replace("_", "-");
-          const isPreferred = PREFERRED_INDIAN_VOICE_NAMES.some(pn => vName.includes(pn));
+          const isPreferred = PREFERRED_FEMALE_INDIAN_VOICES.some(pn => vName.includes(pn));
           return isPreferred && (vLang === target || vLang.startsWith(prefix) || (prefix === "hi" && (vLang.includes("hi") || vName.includes("hindi"))) || (prefix === "en" && (vLang.includes("en-in") || vName.includes("india"))));
         });
         if (match) return match;
 
-        // 2. Exact BCP-47 match with India locale (e.g. "hi-in", "en-in", "bn-in", "ta-in")
-        match = voices.find(v => (v.lang || "").toLowerCase().replace("_", "-") === target);
+        // 2. Any preferred female Indian voice even if lang differs slightly
+        match = pool.find(v => {
+          const vName = (v.name || "").toLowerCase();
+          return PREFERRED_FEMALE_INDIAN_VOICES.some(pn => vName.includes(pn));
+        });
         if (match) return match;
 
-        // 3. Language prefix match with India locale (e.g. "hi", "bn", "ta", "mr" with -in)
-        match = voices.find(v => {
+        // 3. Exact BCP-47 match with India locale in female pool
+        match = pool.find(v => (v.lang || "").toLowerCase().replace("_", "-") === target);
+        if (match) return match;
+
+        // 4. Language prefix match with India locale in female pool
+        match = pool.find(v => {
           const l = (v.lang || "").toLowerCase().replace("_", "-");
           return l.startsWith(prefix) && l.includes("-in");
         });
         if (match) return match;
 
-        // 4. Any voice starting with language prefix
-        match = voices.find(v => (v.lang || "").toLowerCase().startsWith(prefix));
+        // 5. Any voice starting with language prefix in female pool
+        match = pool.find(v => (v.lang || "").toLowerCase().startsWith(prefix));
         if (match) return match;
 
-        // 5. Indian English or India-locale voice fallback
-        match = voices.find(v => {
+        // 6. Indian English or India-locale voice in female pool
+        match = pool.find(v => {
           const l = (v.lang || "").toLowerCase();
           const n = (v.name || "").toLowerCase();
           return l.includes("-in") || n.includes("india") || n.includes("hindi");
         });
         if (match) return match;
 
-        // 6. Default voice or first available
-        return voices.find(v => v.default) || voices[0] || null;
+        // 7. First available in female pool
+        return pool.find(v => v.default) || pool[0] || voices[0] || null;
       }
 
       if ("speechSynthesis" in window) {
@@ -10620,7 +10749,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         const utterance = new SpeechSynthesisUtterance(textToSpeak);
         utterance.lang = langCode;
         utterance.rate = 0.92; // Clear, comfortable tempo for non-literate citizens
-        utterance.pitch = 1.0;
+        utterance.pitch = 1.08; // Warm, friendly female tone
 
         const voices = window.speechSynthesis.getVoices() || [];
         const matchingVoice = selectBestIndianVoice(voices, langCode);
@@ -11258,7 +11387,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               const utterance = new SpeechSynthesisUtterance(text);
               utterance.lang = bcp47;
               utterance.rate = 0.90; // Natural, respectful tempo for telecom IVR
-              utterance.pitch = 1.02; // Warm, friendly Indian operator tone
+              utterance.pitch = 1.08; // Warm, friendly female Indian operator tone
 
               const voices = window.speechSynthesis.getVoices() || [];
               const voice = selectBestIndianVoice(voices, bcp47);
@@ -11535,33 +11664,43 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       <div class="whatsapp-phone-frame">
         <div class="wa-header">
           <div class="wa-header-info">
-            <div class="wa-avatar">रा</div>
+            <div class="wa-avatar" title="Official WhatsApp Verified Business Account">
+              <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:#ffffff;"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+            </div>
             <div class="wa-title-wrap">
-              <h4 id="wa-modal-title">राहत · Raahat Bot</h4>
-              <small>Verified Public Health Assistant <span class="status-indicator-dot mini"></span></small>
+              <div style="display:flex;align-items:center;gap:4px;">
+                <h4 id="wa-modal-title" style="margin:0;font-size:0.96rem;font-weight:700;color:#fff;">राहत · Raahat OPD</h4>
+                <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:#25d366;" aria-label="Official Verified Business"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              </div>
+              <small class="wa-status-text"><span class="wa-online-dot"></span> online · Govt OPD Gateway</small>
             </div>
           </div>
-          <button type="button" class="wa-close-btn" id="wa-close-btn" aria-label="Close WhatsApp Simulator"><svg class="icon-inline"><use href="#icon-close"></use></svg></button>
+          <div class="wa-header-actions">
+            <button type="button" class="wa-header-icon-btn" id="wa-header-call-btn" aria-label="Call 104 IVR" title="Switch to 104 AI Voice Phone">
+              <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#fff;"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            </button>
+            <button type="button" class="wa-close-btn" id="wa-close-btn" aria-label="Close WhatsApp Simulator">✕</button>
+          </div>
         </div>
 
         <div class="wa-body" id="wa-chat-body">
           <div class="wa-bubble bot">
             <span class="tag">Simulated</span>
             <p style="margin: 0 0 0.35rem;"><strong>नमस्ते! मैं राहत (Raahat) हूँ।</strong></p>
-            <p style="margin: 0;">सरकारी अस्पताल के सही OPD काउंटर तक पहुँचने के लिए अपनी तकलीफ़ बोलकर या लिखकर बताइए।</p>
+            <p style="margin: 0;">सरकारी अस्पताल के सही OPD काउंटर तक पहुँचने के लिए अपनी तकलीफ़ बोलकर (वॉइस नोट 🎤) या लिखकर बताइए।</p>
             <div class="wa-bubble-time">10:00 AM</div>
           </div>
 
           <div class="wa-prompts" id="wa-quick-prompts">
-            <span style="font-size: 0.78rem; color: #667781; font-weight: 700;">1-Tap Quick Prompts:</span>
+            <span style="font-size: 0.76rem; color: #667781; font-weight: 700;">1-Tap Quick Triage Prompts:</span>
             <button type="button" class="wa-prompt-btn" data-wa-prompt="Seene mein dard aur paseena aa raha hai">
-              • "Seene mein dard aur paseena" (Cardiology / Urgent)
+              🚨 "Seene mein dard aur paseena" (Emergency RF-01)
             </button>
             <button type="button" class="wa-prompt-btn" data-wa-prompt="Bachhe ko kal se tez bukhaar 103 degree hai">
-              • "Bachhe ko tez bukhaar 103°F" (Paediatrics)
+              👶 "Bachhe ko tez bukhaar 103°F" (Paediatrics OPD)
             </button>
-            <button type="button" class="wa-prompt-btn" data-wa-prompt="Pair mein sujan aur ghutne mein dard hai">
-              • "Ghutne mein dard aur chalne mein takleef" (Orthopaedics)
+            <button type="button" class="wa-prompt-btn" data-wa-prompt="Ghutne mein sujan aur chalne mein dard hai">
+              🦵 "Ghutne mein dard aur sujan" (Orthopaedics OPD)
             </button>
           </div>
         </div>
@@ -11570,11 +11709,13 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           <button type="button" class="wa-icon-btn" id="wa-location-btn" aria-label="Share Location Pin" title="Share Location Pin">
             <svg class="icon-inline" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
           </button>
-          <input type="text" class="wa-input" id="wa-chat-input" placeholder="Type symptom / STATUS / HELP..." autocomplete="off" />
+          <input type="text" class="wa-input" id="wa-chat-input" placeholder="Type symptom / 'STATUS' / 'HELP'..." autocomplete="off" />
           <button type="button" class="wa-icon-btn" id="wa-mic-btn" aria-label="Record WhatsApp Voice Note" title="Hold to Talk / Send Voice Note">
             <svg class="icon-inline" viewBox="0 0 24 24"><path fill="currentColor" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>
           </button>
-          <button type="submit" class="wa-send-btn" aria-label="Send WhatsApp message"><svg class="icon-inline"><use href="#icon-send"></use></svg></button>
+          <button type="submit" class="wa-send-btn" aria-label="Send WhatsApp message">
+            <svg class="icon-inline" viewBox="0 0 24 24" style="width:18px;height:18px;fill:#fff;"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
         </form>
       </div>
     </div>

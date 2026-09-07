@@ -2,6 +2,7 @@
 // Shared across Meta Cloud API webhook (/api/whatsapp.js) and In-App WhatsApp Canvas
 
 import { parseFreeTextComplaint, routeComplaint, checkRealtimeEmergency } from "./routing.js";
+import { normalizeDialectPhrasing } from "./ivr-engine.js";
 import { hospitalsForDepartment, autoSelectNearestHospital, PAN_INDIA_HOSPITALS } from "./hospital-data.js";
 
 // Session stages: "INIT" -> "LANGUAGE" -> "COMPLAINT" -> "CONFIRM" -> "LOCATION" -> "SESSION" -> "PASS"
@@ -135,11 +136,23 @@ export function handleWhatsAppMessage(session, incomingMsg) {
   if (session.stage === "COMPLAINT") {
     const rawText = incomingMsg.transcription || text;
     session.rawComplaint = rawText;
+    const normalized = normalizeDialectPhrasing(rawText);
 
-    // Parse structured complaint
-    const parsed = parseFreeTextComplaint(rawText);
+    // Parse structured complaint with dialect normalizer
+    const parsed = parseFreeTextComplaint(normalized);
     const routed = routeComplaint(parsed);
-    const emergencyCheck = checkRealtimeEmergency(rawText);
+    const emergencyCheck = checkRealtimeEmergency(normalized);
+
+    // Clinical Safety Fallback: Never output unguided department
+    if (!routed.department || routed.department === "Choose a department yourself") {
+      routed.department = "General Medicine";
+      routed.urgency = routed.urgency || "routine";
+      routed.rule_id = "R-10";
+      routed.reason = {
+        en: "General Medicine is the primary intake counter for clinical evaluation.",
+        hi: "सामान्य चिकित्सा विभाग प्रारंभिक जाँच और परामर्श का मुख्य काउंटर है।"
+      };
+    }
 
     // RULE 2: Deterministic Red Flag Safety Interception (One red flag is enough)
     const isImmediate = emergencyCheck.isEmergency || routed.urgency === "immediate" || (routed.redFlags && routed.redFlags.length > 0);
@@ -239,16 +252,32 @@ export function handleWhatsAppMessage(session, incomingMsg) {
 
   // --- Step 3: Location / Hospital Matching ---
   if (session.stage === "LOCATION") {
-    let coords = { lat: 28.6139, lng: 77.2090, name: "New Delhi" };
+    let coords = { lat: 28.5672, lng: 77.2100, name: "AIIMS New Delhi" };
+    let preferredState = "All India";
 
     if (location && location.latitude && location.longitude) {
       coords = { lat: location.latitude, lng: location.longitude, name: "Your Pin" };
-    } else if (buttonId === "loc_lucknow" || lower.includes("lucknow")) {
-      coords = { lat: 26.8467, lng: 80.9462, name: "Lucknow" };
-    } else if (buttonId === "loc_bengaluru" || lower.includes("bengaluru") || lower.includes("bangalore")) {
+    } else if (buttonId === "loc_lucknow" || lower.includes("lucknow") || lower.includes("uttar pradesh") || lower.includes("up") || lower.includes("varanasi") || lower.includes("kanpur") || lower.includes("gorakhpur")) {
+      coords = { lat: 26.8467, lng: 80.9462, name: "Lucknow / UP" };
+      preferredState = "Uttar Pradesh";
+    } else if (buttonId === "loc_patna" || lower.includes("patna") || lower.includes("bihar") || lower.includes("darbhanga") || lower.includes("gaya") || lower.includes("muzaffarpur")) {
+      coords = { lat: 25.5941, lng: 85.1376, name: "Patna / Bihar" };
+      preferredState = "Bihar";
+    } else if (buttonId === "loc_mumbai" || lower.includes("mumbai") || lower.includes("pune") || lower.includes("maharashtra") || lower.includes("nagpur")) {
+      coords = { lat: 19.0760, lng: 72.8777, name: "Mumbai" };
+      preferredState = "Maharashtra";
+    } else if (buttonId === "loc_bengaluru" || lower.includes("bengaluru") || lower.includes("bangalore") || lower.includes("karnataka") || lower.includes("mysore")) {
       coords = { lat: 12.9716, lng: 77.5946, name: "Bengaluru" };
-    } else if (buttonId === "loc_delhi" || lower.includes("delhi")) {
-      coords = { lat: 28.6139, lng: 77.2090, name: "New Delhi" };
+      preferredState = "Karnataka";
+    } else if (buttonId === "loc_kolkata" || lower.includes("kolkata") || lower.includes("calcutta") || lower.includes("bengal") || lower.includes("howrah")) {
+      coords = { lat: 22.5726, lng: 88.3639, name: "Kolkata" };
+      preferredState = "West Bengal";
+    } else if (buttonId === "loc_chennai" || lower.includes("chennai") || lower.includes("madras") || lower.includes("tamil nadu") || lower.includes("coimbatore")) {
+      coords = { lat: 13.0827, lng: 80.2707, name: "Chennai" };
+      preferredState = "Tamil Nadu";
+    } else if (buttonId === "loc_delhi" || lower.includes("delhi") || lower.includes("noida") || lower.includes("gurgaon") || lower.includes("faridabad")) {
+      coords = { lat: 28.5672, lng: 77.2100, name: "New Delhi" };
+      preferredState = "Delhi";
     } else if (text) {
       const match = PAN_INDIA_HOSPITALS.find((h) => 
         (h.city && h.city.toLowerCase().includes(lower)) || 
@@ -256,13 +285,19 @@ export function handleWhatsAppMessage(session, incomingMsg) {
         (h.state && h.state.toLowerCase().includes(lower))
       );
       if (match && match.lat && match.lng) {
-        coords = { lat: match.lat, lng: match.lng, name: match.city || match.state };
+        coords = { lat: match.lat, lng: match.lng, name: match.city || match.district || match.state };
+        preferredState = match.state || "All India";
       }
     }
 
     session.userLocation = coords;
     const dept = session.routeResult?.department || "General Medicine";
-    const matchedHosp = autoSelectNearestHospital(dept, coords, "All India");
+    let matchedHosp = autoSelectNearestHospital(dept, coords, preferredState);
+    if (!matchedHosp) {
+      matchedHosp = autoSelectNearestHospital(dept, coords, "All India")
+        || PAN_INDIA_HOSPITALS.find((h) => h.departments && h.departments.includes(dept))
+        || PAN_INDIA_HOSPITALS[0];
+    }
     session.selectedHospital = matchedHosp;
     session.stage = "SESSION";
 

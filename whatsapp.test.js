@@ -95,3 +95,34 @@ test("WhatsApp: Global keywords STATUS, BLOOD, LAB, HELP respond accurately", ()
   const helpRes = handleWhatsAppMessage(session, { text: "HELP" });
   assert.ok(helpRes.replies[0].text.includes("108"));
 });
+test("WhatsApp: Dialect complaint correctly normalizes and routes to Orthopaedics/Paediatrics", () => {
+  const session = createInitialSession("+919876543210");
+  session.stage = "COMPLAINT";
+  session.language = "hi";
+
+  // Dialect phrasing: "कमर टूट रहल बा"
+  const res = handleWhatsAppMessage(session, { text: "कमर टूट रहल बा 2 हफ्ता से" });
+  assert.equal(session.stage, "CONFIRM");
+  assert.equal(session.routeResult.department, "Orthopaedics");
+});
+
+test("WhatsApp: Expanded pan-India city matching resolves nearest state hospital", () => {
+  const session = createInitialSession("+919876543210");
+  session.stage = "LOCATION";
+  session.routeResult = { department: "Cardiology" };
+
+  // User types "Mumbai"
+  const resMumbai = handleWhatsAppMessage(session, { text: "Mumbai" });
+  assert.equal(session.stage, "SESSION");
+  assert.ok(session.selectedHospital);
+  assert.ok(session.selectedHospital.state === "Maharashtra" || session.selectedHospital.city === "Mumbai");
+
+  // User types "Patna"
+  const sessionPatna = createInitialSession("+919876543210");
+  sessionPatna.stage = "LOCATION";
+  sessionPatna.routeResult = { department: "General Medicine" };
+  const resPatna = handleWhatsAppMessage(sessionPatna, { text: "Patna" });
+  assert.equal(sessionPatna.stage, "SESSION");
+  assert.ok(sessionPatna.selectedHospital);
+  assert.ok(sessionPatna.selectedHospital.state === "Bihar" || sessionPatna.selectedHospital.district === "Patna");
+});
