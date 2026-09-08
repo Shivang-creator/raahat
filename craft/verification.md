@@ -58,7 +58,7 @@ Every serious defect that night passed inspection and failed the moment somethin
 
 ## 1. Fixture-shaped defects — the most dangerous class
 A value that looks like evidence but was authored, not measured.
-- A page's footer read `GENERATED — Written by gemini-3.6-flash` while `data/explanations.js`
+- A page's footer read `GENERATED — Written by gpt-4o-mini` while `data/explanations.js`
   was publicly served with `// PLACEHOLDER. Not yet generated.` as its first line. **No model had
   ever been called in that build.**
 - A kill-switch panel computed `buildLedgerHash(report, clean)` **twice with identical arguments**

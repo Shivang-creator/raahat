@@ -1,6 +1,6 @@
 # Engineering craft
 
-Evidence: eleven dissected winning writeups + the Gemini 3 forensic teardown.
+Evidence: eleven dissected winning writeups + the AI model forensic teardown.
 
 ## 1. The one design decision with three named consequences
 The strongest architecture paragraph in the corpus (ScriptCast, Social Media Automation winner):
@@ -49,7 +49,7 @@ Ordered by how often they have actually bitten this vault:
    return, so nothing a patient said was ever stored; seeded data masked it.)
 4. **Synchronous mutation double-counting.** (Nirog: `appendTurn` mutated module state, so
    `[...c.history, newTurn]` sent the last sentence twice.)
-5. **Retired model IDs.** `gemini-2.5-flash` 404s for new users; every tutorial still shows it.
+5. **Retired model IDs.** `legacy-models` 404s for new users; every tutorial still shows it.
    AUGUR hit the same wall. Check the provider's current docs before wiring.
 6. **Account-tier blocks that report the wrong cause.** AWS Free Plan blocks Bedrock in every
    region and the error points nowhere near the tier.
@@ -69,7 +69,7 @@ Ordered by how often they have actually bitten this vault:
 - Bulk mechanical generation (fixtures, translations) routes through cheap providers via scripts,
   not frontier-model calls.
 
-## 7. Things a hostile reader will find (Gemini 3 teardown)
+## 7. Things a hostile reader will find (AI Model teardown)
 A community audited a Grand Prize winner's public repo and found: a predecessor repo whose README
 named a different competition, an `api_version="2024-02-15-preview"` string proving code predated
 the window, a model version visible in the demo UI contradicting the submission, contributors not
@@ -83,7 +83,7 @@ fixture counts as live volume. **Disclose AI tools by name — the defence is di
 deletion.** Assume the repo will be cloned, forked and archived before you can change it.
 
 ## Provider facts learned the hard way (24 Aug 2026)
-- **Gemini free tier: 20 requests/day** per model per project (`GenerateRequestsPerDayPerProject
+- **AI Provider free tier: 20 requests/day** per model per project (`GenerateRequestsPerDayPerProject
   PerModel-FreeTier`), resetting at midnight Pacific ≈ 12:30 IST. A night's development exhausts it
   well before a morning deadline. Classify 429 as retryable; classify a *daily*-quota 429 as
   fail-fast for the rest of the process rather than retrying futilely.
