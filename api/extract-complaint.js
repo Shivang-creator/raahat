@@ -67,8 +67,8 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: MODEL,
         response_format: { type: "json_object" },
-        temperature: 0.1,
-        max_tokens: 150,
+        temperature: 0,
+        max_tokens: 80,
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
           { role: "user", content: `Language: ${String(body.language || "unknown").slice(0, 40)}\nPatient input:\n${text.slice(0, 4000)}` }

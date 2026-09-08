@@ -4864,11 +4864,14 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         <div class="nav-actions">
           <div class="language-bar-group" role="group" aria-label="Language selection">
             <button type="button" class="lang-quick-btn" id="btn-open-languages" aria-haspopup="dialog" aria-expanded="false" title="Browse all 22 Scheduled Indian Languages">
-              <svg class="icon icon-inline" aria-hidden="true"><use href="#icon-globe"></use></svg> <span id="current-lang-badge">22 Languages ▾</span>
+              <svg class="icon icon-inline" aria-hidden="true"><use href="#icon-globe"></use></svg> <span id="current-lang-badge">22 Langs ▾</span>
             </button>
           </div>
           <button class="a11y-trigger-btn" type="button" id="btn-open-a11y" aria-haspopup="dialog" aria-expanded="false" aria-label="Accessibility options" title="Open Accessibility Options">
             <svg class="icon icon-inline" aria-hidden="true"><use href="#icon-a11y"></use></svg> <span class="a11y-trigger-label">Access</span>
+          </button>
+          <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Toggle dark theme" title="Toggle dark theme">
+            <svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg>
           </button>
           <a href="#screen-profile" data-view-link="profile" class="nav-profile-btn" id="nav-profile-btn" aria-label="My Patient Profile" title="My Patient Profile &amp; Consultation Records">
             <span class="profile-avatar-bubble">
@@ -4876,9 +4879,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             </span>
             <span class="profile-btn-label" data-copy="profileShort">Profile</span>
           </a>
-          <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Use dark theme" title="Use dark theme">
-            <svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg>
-          </button>
           <button class="nav-start" type="button" id="nav-start-triage" aria-label="Start Triage">
             <svg class="icon-inline" aria-hidden="true" viewBox="0 0 24 24" style="width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             <span data-copy="startTriage">Start Triage</span>
@@ -4891,13 +4891,13 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           <!-- Zen Hero Section -->
           <section class="landing-hero view-section" id="front-door" data-view="home">
             <div class="hero-copy">
-              <div style="display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center;">
+              <div class="hero-kicker-cluster">
                 <div class="hero-kicker-pill">
                   <span class="zen-dot"></span>
                   <span data-copy="landingKicker">A calmer front door to public hospitals</span>
                 </div>
-                <div class="hero-ai-badge" style="display:inline-flex; align-items:center; gap:0.35rem; padding:0.25rem 0.65rem; border-radius:999px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); color:var(--accent-dark); font-size:0.78rem; font-weight:800; letter-spacing:0.02em;">
-                  <span>⚡</span> Powered by OpenAI GPT-4o-mini &amp; Whisper-1
+                <div class="hero-ai-badge">
+                  <span class="badge-bolt">⚡</span> Powered by OpenAI GPT-4o-mini &amp; Whisper-1
                 </div>
               </div>
               <h1 id="landing-title" data-copy="landingTitle">
