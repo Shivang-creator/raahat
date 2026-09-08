@@ -28,7 +28,7 @@ Nearly **40% are turned away at the registration window** because they stood in 
 
 ## 2. Omnichannel Civic Access: Meeting Citizens Where They Are
 
-Following mentor guidance to *"never force rural citizens to download a 45MB app or navigate a complex portal"*, Raahat brings public hospital triage to 3 unified citizen channels:
+Following guidance from our mentor Tejas Tholpadi to *"implement on WhatsApp, because that's where most of India actually is"*, Raahat brings public hospital triage to 3 unified citizen channels:
 
 ```
                           [ Citizen Entrypoints ]
