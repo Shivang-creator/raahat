@@ -184,7 +184,7 @@ export function formatLocalizedIvrSms(langCode, { token, hospitalName, dept, com
   }
 }
 
-export function createInitialIvrSession(callerNumber = "+919876543210", defaultDistrict = "Delhi") {
+export function createInitialIvrSession(callerNumber = "IVR-DEMO-CALLER", defaultDistrict = "Delhi") {
   return {
     callId: "104-" + Math.floor(100000 + Math.random() * 900000),
     caller: callerNumber,

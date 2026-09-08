@@ -7,7 +7,7 @@ import { hospitalsForDepartment, autoSelectNearestHospital, PAN_INDIA_HOSPITALS 
 
 // Session stages: "INIT" -> "LANGUAGE" -> "COMPLAINT" -> "CONFIRM" -> "LOCATION" -> "SESSION" -> "PASS"
 
-export function createInitialSession(phoneNumber = "user_default") {
+export function createInitialSession(phoneNumber = "session-only") {
   return {
     phone: phoneNumber,
     stage: "INIT",

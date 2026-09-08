@@ -4,9 +4,24 @@
 
 import { handleWhatsAppMessage, createInitialSession } from "../whatsapp-bot.js";
 import { transcribeAudioBuffer } from "./transcribe.js";
+import { createHash } from "node:crypto";
 
 // In-memory session store for serverless runs
 const sessions = new Map();
+
+function sessionKeyForSender(sender) {
+  return createHash("sha256").update(String(sender || "")).digest("hex");
+}
+
+async function readJsonBody(req) {
+  if (req.body && typeof req.body === "object") return req.body;
+  if (typeof req.body === "string") return JSON.parse(req.body);
+  if (!req[Symbol.asyncIterator]) return {};
+  const chunks = [];
+  for await (const chunk of req) chunks.push(Buffer.from(chunk));
+  const raw = Buffer.concat(chunks).toString("utf8");
+  return raw ? JSON.parse(raw) : {};
+}
 
 async function transcribeWhatsAppAudio(mediaId) {
   const token = process.env.WHATSAPP_API_TOKEN;
@@ -41,9 +56,9 @@ export default async function handler(req, res) {
     const token = query["hub.verify_token"];
     const challenge = query["hub.challenge"];
 
-    const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || "raahat_secure_webhook_2026";
+    const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN;
 
-    if (mode === "subscribe" && token === VERIFY_TOKEN) {
+    if (mode === "subscribe" && VERIFY_TOKEN && token === VERIFY_TOKEN) {
       return res.status(200).send(challenge);
     }
     return res.status(403).json({ error: "Verification token mismatch" });
@@ -52,7 +67,7 @@ export default async function handler(req, res) {
   // POST: Incoming message from Meta WhatsApp Cloud API
   if (req.method === "POST") {
     try {
-      const body = req.body;
+      const body = await readJsonBody(req);
 
       if (!body || body.object !== "whatsapp_business_account") {
         return res.status(404).json({ error: "Not a WhatsApp API event" });
@@ -65,7 +80,9 @@ export default async function handler(req, res) {
           const value = change.value || {};
           const messages = value.messages || [];
           for (const msg of messages) {
-            const from = msg.from; // Phone number e.g. "919876543210"
+            const from = String(msg.from || "").trim();
+            if (!from) continue;
+            const sessionKey = sessionKeyForSender(from);
             let incoming = { text: "", buttonId: "", location: null };
 
             if (msg.type === "text") {
@@ -96,14 +113,14 @@ export default async function handler(req, res) {
             }
 
             // Retrieve or initialize session
-            if (!sessions.has(from)) {
-              sessions.set(from, createInitialSession(from));
+            if (!sessions.has(sessionKey)) {
+              sessions.set(sessionKey, createInitialSession());
             }
-            const session = sessions.get(from);
+            const session = sessions.get(sessionKey);
 
             // Run shared state machine
             const { replies } = handleWhatsAppMessage(session, incoming);
-            sessions.set(from, session);
+            sessions.set(sessionKey, session);
 
             // Send outbound messages back to citizen via Meta Graph API
             await sendMetaWhatsAppMessages(from, replies);
@@ -127,7 +144,7 @@ export async function sendMetaWhatsAppMessages(to, replies) {
 
   if (!token || !phoneNumberId) {
     // Graceful fallback / simulation mode if env vars are not set
-    console.log("[Simulated WhatsApp Outbound] to=" + to + " replies=" + JSON.stringify(replies, null, 2));
+    console.log("[Simulated WhatsApp Outbound] message prepared");
     return;
   }
 

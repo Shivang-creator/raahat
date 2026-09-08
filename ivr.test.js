@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { createInitialIvrSession, handleIvrTurn, normalizeDialectPhrasing, formatLocalizedIvrSms, resolveDistrictFromInput } from "./ivr-engine.js";
 
 test("IVR: Initial welcome prompt gathers DTMF dialect with Hindi first and English second", () => {
-  const session = createInitialIvrSession("+919876543210");
+  const session = createInitialIvrSession("DEMO-CALLER");
   assert.equal(session.state, "WELCOME");
 
   const turn1 = handleIvrTurn(session, {});
@@ -17,7 +17,7 @@ test("IVR: Initial welcome prompt gathers DTMF dialect with Hindi first and Engl
 });
 
 test("IVR: Pressing 2 selects English and prompts for symptoms with Press 1 instruction", () => {
-  const session = createInitialIvrSession("+919876543210");
+  const session = createInitialIvrSession("DEMO-CALLER");
   const turn2 = handleIvrTurn(session, { dtmf: "2" });
   assert.equal(session.dialectCode, "en");
   assert.equal(session.state, "SYMPTOM_INPUT");
@@ -27,7 +27,7 @@ test("IVR: Pressing 2 selects English and prompts for symptoms with Press 1 inst
 });
 
 test("IVR: Pressing 3 selects Bhojpuri dialect", () => {
-  const session = createInitialIvrSession("+919876543210");
+  const session = createInitialIvrSession("DEMO-CALLER");
   const turn3 = handleIvrTurn(session, { dtmf: "3" });
   assert.equal(session.dialectCode, "bho");
   assert.equal(session.state, "SYMPTOM_INPUT");
@@ -37,7 +37,7 @@ test("IVR: Pressing 3 selects Bhojpuri dialect", () => {
 });
 
 test("IVR: Dialect Red-Flag in Bhojpuri triggers immediate 108 transfer (AGENTS.md Rule 2)", () => {
-  const session = createInitialIvrSession("+919876543210");
+  const session = createInitialIvrSession("DEMO-CALLER");
   session.state = "SYMPTOM_INPUT";
   session.dialectCode = "bho";
   session.dialectKey = "3";
@@ -55,7 +55,7 @@ test("IVR: Dialect Red-Flag in Bhojpuri triggers immediate 108 transfer (AGENTS.
 });
 
 test("IVR: Multi-turn flow with confirmation and localized Maithili SMS", () => {
-  const session = createInitialIvrSession("+919876543210");
+  const session = createInitialIvrSession("DEMO-CALLER");
   session.state = "SYMPTOM_INPUT";
   session.dialectCode = "mai";
   session.dialectKey = "4";
@@ -85,7 +85,7 @@ test("IVR: Multi-turn flow with confirmation and localized Maithili SMS", () => 
 });
 
 test("IVR: Rejection at confirmation step (Press 2) resets complaint and gathers new input", () => {
-  const session = createInitialIvrSession("+919876543210");
+  const session = createInitialIvrSession("DEMO-CALLER");
   session.state = "CONFIRM_APPOINTMENT";
   session.dialectCode = "hi";
   session.dialectKey = "1";
@@ -101,7 +101,7 @@ test("IVR: Rejection at confirmation step (Press 2) resets complaint and gathers
 });
 
 test("IVR: Vague symptom asks clarifying question before routing", () => {
-  const session = createInitialIvrSession("+919876543210");
+  const session = createInitialIvrSession("DEMO-CALLER");
   session.state = "SYMPTOM_INPUT";
   session.dialectCode = "hi";
   session.dialectKey = "1";
@@ -118,7 +118,7 @@ test("IVR: Vague symptom asks clarifying question before routing", () => {
 });
 
 test("IVR: DTMF 1 signals end of speech turn and processes input immediately", () => {
-  const session = createInitialIvrSession("+919876543210");
+  const session = createInitialIvrSession("DEMO-CALLER");
   session.state = "SYMPTOM_INPUT";
   session.dialectCode = "hi";
   session.dialectKey = "1";
@@ -131,7 +131,7 @@ test("IVR: DTMF 1 signals end of speech turn and processes input immediately", (
 });
 
 test("IVR: Non-specific symptom safely falls back to General Medicine and never 'Choose a department yourself'", () => {
-  const session = createInitialIvrSession("+919876543210");
+  const session = createInitialIvrSession("DEMO-CALLER");
   session.state = "SYMPTOM_INPUT";
   session.dialectCode = "hi";
   session.dialectKey = "1";
@@ -162,13 +162,13 @@ test("IVR: Pan-India district and DTMF zone resolution works across states", () 
   assert.equal(resolveDistrictFromInput("Lucknow"), "Lucknow");
 
   // Multi-state routing in IVR session
-  const sessionDelhi = createInitialIvrSession("+919876543210", "Delhi");
+  const sessionDelhi = createInitialIvrSession("DEMO-CALLER", "Delhi");
   sessionDelhi.state = "DISTRICT_INPUT";
   sessionDelhi.routeResult = { department: "Cardiology" };
   const turnDelhi = handleIvrTurn(sessionDelhi, { district: "Delhi" });
   assert.ok(sessionDelhi.selectedHospital.name.includes("AIIMS") || sessionDelhi.selectedHospital.name.includes("Safdarjung"));
 
-  const sessionPatna = createInitialIvrSession("+919876543210", "Patna");
+  const sessionPatna = createInitialIvrSession("DEMO-CALLER", "Patna");
   sessionPatna.state = "DISTRICT_INPUT";
   sessionPatna.routeResult = { department: "General Medicine" };
   const turnPatna = handleIvrTurn(sessionPatna, { district: "Patna" });

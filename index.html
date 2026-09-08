@@ -2150,6 +2150,42 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         letter-spacing: 0.02em;
         margin-bottom: 1.25rem;
       }
+      .hero-kicker-cluster {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        justify-content: center;
+        gap: 0.65rem;
+        width: 100%;
+        margin-bottom: 1.25rem;
+      }
+      .hero-kicker-cluster .hero-kicker-pill,
+      .hero-kicker-cluster .hero-ai-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        min-height: 2rem;
+        height: 2rem;
+        margin-bottom: 0;
+        line-height: 1.2;
+      }
+      .hero-ai-badge {
+        gap: 0.35rem;
+        padding: 0.35rem 0.95rem;
+        border: 1px solid rgba(59, 130, 246, 0.24);
+        border-radius: 999px;
+        background: rgba(59, 130, 246, 0.08);
+        color: #1d4ed8;
+        font-size: 0.82rem;
+        font-weight: 750;
+        white-space: nowrap;
+      }
+      [data-theme="dark"] .hero-ai-badge {
+        border-color: rgba(96, 165, 250, 0.3);
+        background: rgba(59, 130, 246, 0.14);
+        color: #93c5fd;
+      }
       [data-theme="dark"] .hero-kicker-pill {
         color: #34d399;
         background: rgba(16, 185, 129, 0.12);
@@ -3575,6 +3611,18 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           text-align: center;
           margin-bottom: 0.85rem;
         }
+        .hero-kicker-cluster .hero-kicker-pill,
+        .hero-kicker-cluster .hero-ai-badge {
+          width: 100%;
+          height: 2rem;
+          min-height: 2rem;
+          padding: 0.2rem 0.6rem;
+          white-space: normal;
+          text-align: center;
+          line-height: 1.05;
+          overflow: hidden;
+        }
+        .hero-ai-badge { font-size: 0.78rem; }
         h1 { font-size: 2.1rem; }
         .landing-hero h1 {
           font-size: clamp(1.65rem, 6.8vw, 2.2rem);
@@ -5393,16 +5441,16 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               <h2 id="emergency-blood-title" data-copy="emergencyBloodTitle">Emergency blood request</h2>
               <p class="booking-panel-note" data-copy="emergencyBloodNote">Use this mock slip to organise a call with the on-duty blood bank officer. It is not a reservation.</p>
               <form id="emergency-blood-form" class="form-stack">
-                <div class="form-grid"><div class="form-field"><label for="blood-patient"><span class="tag">Observed</span><span data-copy="bloodPatientLabel">Patient Name</span></label><input id="blood-patient" required /></div><div class="form-field"><label for="blood-ward"><span class="tag">Observed</span><span data-copy="bloodWardLabel">Hospital Ward / ICU bed number</span></label><input id="blood-ward" required /></div><div class="form-field"><label for="blood-group"><span class="tag">Observed</span><span data-copy="bloodGroupLabel">Blood Group needed</span></label><select id="blood-group" required><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div><div class="form-field"><label for="blood-units"><span class="tag">Observed</span><span data-copy="bloodUnitsLabel">Units required</span></label><input id="blood-units" type="number" min="1" max="20" value="1" required /></div></div>
+                <div class="form-grid"><div class="form-field"><label for="blood-patient"><span class="tag">Simulated</span><span data-copy="bloodPatientLabel">Patient label</span></label><input id="blood-patient" value="Demo patient · SIMULATED" readonly /></div><div class="form-field"><label for="blood-ward"><span class="tag">Simulated</span><span data-copy="bloodWardLabel">Hospital ward / ICU label</span></label><input id="blood-ward" value="Demo ward · SIMULATED" readonly /></div><div class="form-field"><label for="blood-group"><span class="tag">Observed</span><span data-copy="bloodGroupLabel">Blood Group needed</span></label><select id="blood-group" required><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div><div class="form-field"><label for="blood-units"><span class="tag">Observed</span><span data-copy="bloodUnitsLabel">Units required</span></label><input id="blood-units" type="number" min="1" max="20" value="1" required /></div></div>
                 <div class="form-field"><label for="blood-component"><span class="tag">Observed</span><span data-copy="bloodComponentLabel">Component</span></label><select id="blood-component"><option>Whole Blood</option><option>Packed Red Blood Cells (PRBC)</option><option>Platelets (RDP/SDP)</option><option>Fresh Frozen Plasma (FFP)</option></select></div>
-                <div class="form-grid"><div class="form-field"><label for="doctor-name"><span class="tag">Observed</span><span data-copy="doctorNameLabel">Attending Doctor Name</span></label><input id="doctor-name" required /></div><div class="form-field"><label for="doctor-contact"><span class="tag">Observed</span><span data-copy="doctorContactLabel">Attending Doctor Contact</span></label><input id="doctor-contact" type="tel" pattern="[6-9][0-9]{9}" maxlength="10" title="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9" required /><small class="field-note">10-digit Indian mobile number for SMS token updates</small></div></div>
+                <div class="form-field"><span class="field-label"><span class="tag">Simulated</span><span data-copy="doctorNameLabel">Attending doctor</span></span><small class="field-note">No doctor name or contact is collected. This blood request is a simulated slip only.</small></div>
                 <button class="large-button primary" type="submit" data-copy="bloodRequestButton">Generate emergency blood token slip</button>
               </form>
               <article class="blood-token-slip" id="blood-token-slip" hidden aria-live="polite"></article>
             </section>
             <section class="booking-panel" aria-labelledby="donor-title">
               <h2 id="donor-title" data-copy="donorTitle">Register as a voluntary donor</h2>
-              <p class="booking-panel-note" data-copy="donorNote">Registration is saved only in this browser. A blood bank must confirm eligibility before donation.</p>
+              <p class="booking-panel-note" data-copy="donorNote">This mock registration stays in browser memory for this session and is not saved. A blood bank must confirm eligibility before donation.</p>
               <form id="donor-form" class="form-stack"><div class="form-grid"><div class="form-field"><label for="donor-name"><span class="tag">Observed</span><span data-copy="donorNameLabel">Name</span></label><input id="donor-name" required /></div><div class="form-field"><label for="donor-age"><span class="tag">Observed</span><span data-copy="donorAgeLabel">Age</span></label><input id="donor-age" type="number" min="18" max="65" required /></div><div class="form-field"><label for="donor-group"><span class="tag">Observed</span><span data-copy="donorGroupLabel">Blood Group</span></label><select id="donor-group"><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div><div class="form-field"><label for="donor-locality"><span class="tag">Observed</span><span data-copy="donorLocalityLabel">Locality</span></label><select id="donor-locality"><option>Central Delhi</option><option>South Delhi</option><option>North Delhi</option></select></div></div><div class="form-field"><label for="donor-last-date"><span class="tag">Observed</span><span data-copy="donorLastDateLabel">Last Donation Date</span></label><input id="donor-last-date" type="date" /></div><button class="large-button primary" type="submit" data-copy="donorButton">Save donor registration locally</button></form><p class="status" id="donor-status" aria-live="polite"></p>
             </section>
           </div>
@@ -5571,7 +5619,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             <div class="privacy-vault-box" style="padding: 1.25rem; border-radius: 1rem; border: 1.5px solid var(--line); background: var(--paper); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
               <div>
                 <strong style="display: block; font-size: 1.05rem;"><svg class="icon-inline" aria-hidden="true"><use href="#icon-lock"></use></svg> 100% Client-Side Private Storage</strong>
-                <small style="color: var(--muted);">All visit records, family profiles, and passes are stored strictly on your device in browser LocalStorage. No server stores your data.</small>
+                <small style="color: var(--muted);">Demo records are held only in browser memory for this session. No health record, phone number, or server-side copy is saved.</small>
               </div>
               <button class="large-button" type="button" id="btn-clear-profile-data" style="border-color: var(--emergency-red); color: var(--emergency-red); min-height: 2.5rem; font-size: 0.88rem;"><svg class="icon-inline" aria-hidden="true"><use href="#icon-trash"></use></svg> Reset Session Records</button>
             </div>
@@ -6167,7 +6215,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             </section>
             <div class="form-grid">
               <div class="form-field"><label for="patient-name"><span class="tag">Observed</span><span data-copy="patientNameLabel">Full Name of Patient</span></label><input id="patient-name" type="text" autocomplete="off" data-copy-placeholder="patientNamePlaceholder" placeholder="e.g. Ramesh Kumar / Priya Sharma" /></div>
-              <div class="form-field"><label for="patient-phone"><span class="tag">Observed</span><span data-copy="patientPhoneLabel">Phone Number (for SMS token reminder)</span></label><input id="patient-phone" type="tel" inputmode="numeric" autocomplete="off" pattern="[6-9][0-9]{9}" maxlength="10" title="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9" data-copy-placeholder="patientPhonePlaceholder" placeholder="e.g. 9876543210 (10-digit mobile)" /><small class="field-note">10-digit Indian mobile number for SMS token updates</small></div>
+              <div class="form-field"><span class="field-label"><span class="tag">Simulated</span><span data-copy="patientPhoneLabel">SMS contact</span></span><small class="field-note" data-copy="patientPhonePlaceholder">No phone number is collected. Any reminder shown in this prototype is simulated in this browser.</small></div>
             </div>
             <div class="field-group compact-field-group">
               <span class="field-label" id="numeric-age-label"><span class="tag">Observed</span><span data-copy="numericAgeLabel">Age band</span></span>
@@ -7129,12 +7177,11 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
     <script src="./vernacular-pack.js"></script>
     <script type="module">
       import { parseFreeTextComplaint, routeComplaint, checkRealtimeEmergency } from "./routing.js";
       import { LOCALITIES, HOSPITAL_FACT_CHECKED_ON, hospitalsForDepartment, PAN_INDIA_HOSPITALS, INDIAN_STATES, COUNTERFACTUAL_METRICS, panIndiaHospitalsForDepartment, hospitalsByState, haversineDistanceKm, autoSelectNearestHospital, INDIAN_DISTRICTS } from "./hospital-data.js";
-      import { createBodyMap3D, BILATERAL_REGIONS, REGION_LABELS } from "./body-map-3d.js";
+      import { createBodyMap3D, BILATERAL_REGIONS, REGION_LABELS } from "./body-map-3d.js?v=20260908";
       import { createInitialSession, handleWhatsAppMessage } from "./whatsapp-bot.js";
       import { createInitialIvrSession, handleIvrTurn, SUPPORTED_DIALECTS, normalizeDialectPhrasing } from "./ivr-engine.js";
 
@@ -7229,22 +7276,22 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       Object.assign(copy.hi, { modelBoundary: "लिखी या बोली गई परेशानी इस सूचना के बाद ही AI सेवा को भेजी जाती है। शरीर के नक्शे वाला रास्ता उस सेवा को कुछ नहीं भेजता; रास्ता कोड के नियम तय करते हैं।" });
       Object.assign(copy.en, {
         labNav: "Lab Tests & Scans", bloodNav: "Blood Bank", backToServices: "← Back to services", startBooking: "Start OPD Triage & Book Slot →", serviceGridKicker: "Services at a glance", serviceGridTitle: "Choose the help you need today.", opdService: "OPD Counter Triage", opdServiceNote: "Find the right first counter", labService: "Book Lab & Scan Tests", labServiceNote: "See preparation and fees", bloodService: "Blood Bank Inventory", bloodServiceNote: "Check mock stock and donors", teleService: "Online Video Tele-OPD", teleServiceNote: "Start from home",
-        patientDetailsKicker: "Step 1 · Patient details", patientDetailsTitle: "Tell us who needs the appointment", patientDetailsNote: "These details stay in this browser for this session. Please do not enter an Aadhaar, ABHA, UHID, OTP or real health record.", patientNameLabel: "Full Name of Patient", patientNamePlaceholder: "Enter the patient's name", patientPhoneLabel: "Phone Number (for SMS token reminder)", patientPhonePlaceholder: "Optional demo number", numericAgeLabel: "Age band", ageBabyNumeric: "0 to 1 year (Infant / Baby)", ageChildNumeric: "2 to 12 years (Child / Paediatric)", ageAdolescent: "13 to 17 years (Adolescent / Teen)", ageAdultNumeric: "18 to 44 years (Young Adult)", ageMiddle: "45 to 59 years (Middle-Aged Adult)", ageOlderNumeric: "60+ years (Senior Citizen)", exactAgeLabel: "Exact Age (optional)", exactAgePlaceholder: "e.g. 42", genderLabel: "Gender selection", genderMale: "Male", genderFemale: "Female", genderOther: "Other", conditionsLabel: "Pre-existing medical conditions", conditionDiabetes: "Diabetes", conditionHypertension: "Hypertension (BP)", conditionHeart: "Heart Condition", conditionAsthma: "Asthma / Respiratory", conditionPregnancy: "Pregnancy", conditionNone: "No pre-existing condition",
+        patientDetailsKicker: "Step 1 · Patient details", patientDetailsTitle: "Tell us who needs the appointment", patientDetailsNote: "These details stay in this browser for this session. Please do not enter an Aadhaar, ABHA, UHID, OTP or real health record.", patientNameLabel: "Full Name of Patient", patientNamePlaceholder: "Enter the patient's name", patientPhoneLabel: "SMS contact", patientPhonePlaceholder: "No phone number is collected. Any reminder shown is simulated in this browser.", numericAgeLabel: "Age band", ageBabyNumeric: "0 to 1 year (Infant / Baby)", ageChildNumeric: "2 to 12 years (Child / Paediatric)", ageAdolescent: "13 to 17 years (Adolescent / Teen)", ageAdultNumeric: "18 to 44 years (Young Adult)", ageMiddle: "45 to 59 years (Middle-Aged Adult)", ageOlderNumeric: "60+ years (Senior Citizen)", exactAgeLabel: "Exact Age (optional)", exactAgePlaceholder: "e.g. 42", genderLabel: "Gender selection", genderMale: "Male", genderFemale: "Female", genderOther: "Other", conditionsLabel: "Pre-existing medical conditions", conditionDiabetes: "Diabetes", conditionHypertension: "Hypertension (BP)", conditionHeart: "Heart Condition", conditionAsthma: "Asthma / Respiratory", conditionPregnancy: "Pregnancy", conditionNone: "No pre-existing condition",
         appointmentStepLabel: "Step 4 · Appointment choices", consultationModeTitle: "How would you like to meet the OPD team?", teleModeSelected: "Online Video Consultation is selected. We will show the secure mock Tele-OPD details after you choose a hospital and slot.", inPersonMode: "In-Person Hospital Visit", inPersonModeNote: "Walk-in to OPD Counter", teleMode: "Online Video Consultation", teleModeNote: "e-Sanjeevani Tele-OPD from home", dateStripLabel: "Choose a date", shiftLabel: "Choose a session", morningShift: "Morning Session", morningShiftNote: "09:00 AM to 11:00 AM · 6 slots open", middayShift: "Mid-Day Session", middayShiftNote: "11:30 AM to 01:30 PM · 14 slots open", afternoonShift: "Afternoon Session", afternoonShiftNote: "02:30 PM to 04:30 PM · 8 slots open", appointmentWaitHint: "Choose a date and session to see the estimated consultation time.", appointmentWaitText: "Slot {slot} · Estimated doctor consultation {seen}", slipMode: "Mode", slipLink: "Tele-OPD link", voiceSilence: "No words were captured. Listening has stopped.",
         labEyebrow: "Diagnostic services", labTitle: "Book lab tests and scans", labIntro: "Choose a test, a public hospital diagnostic centre, and a simulated slot. Fees and availability are mock data for this prototype.", labMockNote: "No test is booked, no payment is taken, and no health record is created.", labBookingTitle: "Prepare a test request", labSelectionNote: "Your selections stay in this browser until you create a mock request.", labHospitalLabel: "Choose hospital lab", labDateLabel: "Select date", labTimeLabel: "Select time slot", beforeTestTitle: "Before test", beforeFasting: "Fasting: 10 to 12 hours overnight for sugar and lipid profiles. Plain water is permitted.", beforeMedication: "Medication: take regular BP medicines with water unless a doctor has instructed otherwise.", beforeScans: "Scans and MRI: wear loose cotton clothing without metal zippers or jewelry. Arrive with a full bladder for abdominal ultrasound.", afterTestTitle: "After test", afterSnack: "Have a light snack immediately after a blood draw.", afterReports: "Digital test reports are linked to your profile within 4 to 24 hours.", paymentTitle: "How would you pay?", paymentFree: "Free under Ayushman Bharat / PM-JAY / BPL Card", paymentCounter: "Pay Nominal Govt Fee at Hospital Counter (Cash/Card)", paymentUpi: "Instant Online Mock Payment (UPI / QR)", labBookButton: "Create mock test request", reportTitle: "Digital health record preview", reportReady: "Report Status: Ready for Download", reportDoctor: "Doctor sign-off shown for this mock preview.", downloadReport: "Download report preview",
-        bloodEyebrow: "Delhi blood network", bloodTitle: "Blood bank stock and donor help", bloodIntro: "Check the sample stock monitor, create an emergency request slip, or offer to donate locally. Call the blood bank before travelling.", bloodMockNote: "Stock counts, request tokens and donor confirmation tokens are mock data. This page does not reserve blood.", stockTitle: "Live Delhi hospital blood stock monitor", stockNote: "Sample availability, checked for this demo.", bloodBankColumn: "Blood bank", emergencyBloodTitle: "Emergency blood request", emergencyBloodNote: "Use this mock slip to organise a call with the on-duty blood bank officer. It is not a reservation.", bloodPatientLabel: "Patient Name", bloodWardLabel: "Hospital Ward / ICU bed number", bloodGroupLabel: "Blood Group needed", bloodUnitsLabel: "Units required", bloodComponentLabel: "Component", doctorNameLabel: "Attending Doctor Name", doctorContactLabel: "Attending Doctor Contact", bloodRequestButton: "Generate emergency blood token slip", donorTitle: "Register as a voluntary donor", donorNote: "Registration is saved only in this browser. A blood bank must confirm eligibility before donation.", donorNameLabel: "Name", donorAgeLabel: "Age", donorGroupLabel: "Blood Group", donorLocalityLabel: "Locality", donorLastDateLabel: "Last Donation Date", donorButton: "Save donor registration locally", helplineTitle: "24/7 national emergency helplines", helpline104: "Health & Blood Helpline", helpline1910: "National Blood Transfusion Council Helpline", helpline108: "Disaster Emergency",
+        bloodEyebrow: "Delhi blood network", bloodTitle: "Blood bank stock and donor help", bloodIntro: "Check the sample stock monitor, create an emergency request slip, or offer to donate locally. Call the blood bank before travelling.", bloodMockNote: "Stock counts, request tokens and donor confirmation tokens are mock data. This page does not reserve blood.", stockTitle: "Live Delhi hospital blood stock monitor", stockNote: "Sample availability, checked for this demo.", bloodBankColumn: "Blood bank", emergencyBloodTitle: "Emergency blood request", emergencyBloodNote: "Use this mock slip to organise a call with the on-duty blood bank officer. It is not a reservation.", bloodPatientLabel: "Patient Name", bloodWardLabel: "Hospital Ward / ICU bed number", bloodGroupLabel: "Blood Group needed", bloodUnitsLabel: "Units required", bloodComponentLabel: "Component", doctorNameLabel: "Attending Doctor Name", doctorContactLabel: "Attending Doctor Contact", bloodRequestButton: "Generate emergency blood token slip", donorTitle: "Register as a voluntary donor", donorNote: "This mock registration stays in browser memory for this session and is not saved. A blood bank must confirm eligibility before donation.", donorNameLabel: "Name", donorAgeLabel: "Age", donorGroupLabel: "Blood Group", donorLocalityLabel: "Locality", donorLastDateLabel: "Last Donation Date", donorButton: "Save donor registration locally", helplineTitle: "24/7 national emergency helplines", helpline104: "Health & Blood Helpline", helpline1910: "National Blood Transfusion Council Helpline", helpline108: "Disaster Emergency",
         stockAvailable: "Stock Available", stockModerate: "Moderate", stockCritical: "Critical / Low Stock", bloodTokenTitle: "Emergency Blood Token Slip", bloodTokenCall: "Call the on-duty blood bank officer now.", donorSaved: "Donor registration saved locally. Confirmation token:", labRequestCreated: "Mock test request created. Keep this confirmation for the diagnostic counter.", labReportDownloaded: "A mock report preview has been downloaded."
       });
       Object.assign(copy.hi, {
         labNav: "लैब टेस्ट और स्कैन", bloodNav: "ब्लड बैंक", backToServices: "← सेवाओं पर वापस", startBooking: "ओपीडी ट्रायेज और स्लॉट बुक करें →", serviceGridKicker: "सेवाएँ एक नज़र में", serviceGridTitle: "आज आपको किस मदद की ज़रूरत है?", opdService: "ओपीडी काउंटर ट्रायेज", opdServiceNote: "पहला सही काउंटर खोजें", labService: "लैब और स्कैन बुक करें", labServiceNote: "तैयारी और शुल्क देखें", bloodService: "ब्लड बैंक सूची", bloodServiceNote: "नकली स्टॉक और डोनर देखें", teleService: "ऑनलाइन वीडियो टेली-ओपीडी", teleServiceNote: "घर से शुरू करें",
-        patientDetailsKicker: "चरण 1 · मरीज़ की जानकारी", patientDetailsTitle: "बताइए अपॉइंटमेंट किसके लिए है", patientDetailsNote: "यह जानकारी इस सत्र में इसी ब्राउज़र में रहेगी। आधार, आभा, यूएचआईडी, ओटीपी या असली स्वास्थ्य रिकॉर्ड न लिखें।", patientNameLabel: "मरीज़ का पूरा नाम", patientNamePlaceholder: "मरीज़ का नाम लिखें", patientPhoneLabel: "फ़ोन नंबर (एसएमएस टोकन याद दिलाने के लिए)", patientPhonePlaceholder: "वैकल्पिक नकली नंबर", numericAgeLabel: "उम्र का वर्ग", ageBabyNumeric: "0 से 1 साल (शिशु)", ageChildNumeric: "2 से 12 साल (बच्चा)", ageAdolescent: "13 से 17 साल (किशोर)", ageAdultNumeric: "18 से 44 साल (युवा वयस्क)", ageMiddle: "45 से 59 साल (मध्यम उम्र)", ageOlderNumeric: "60 साल से अधिक (वरिष्ठ नागरिक)", exactAgeLabel: "सटीक उम्र (वैकल्पिक)", exactAgePlaceholder: "जैसे 42", genderLabel: "लिंग चुनें", genderMale: "पुरुष", genderFemale: "महिला", genderOther: "अन्य", conditionsLabel: "पहले से मौजूद स्वास्थ्य स्थिति", conditionDiabetes: "मधुमेह", conditionHypertension: "हाई ब्लड प्रेशर", conditionHeart: "हृदय की स्थिति", conditionAsthma: "अस्थमा / साँस", conditionPregnancy: "गर्भावस्था", conditionNone: "कोई पहले की स्थिति नहीं",
+        patientDetailsKicker: "चरण 1 · मरीज़ की जानकारी", patientDetailsTitle: "बताइए अपॉइंटमेंट किसके लिए है", patientDetailsNote: "यह जानकारी इस सत्र में इसी ब्राउज़र में रहेगी। आधार, आभा, यूएचआईडी, ओटीपी या असली स्वास्थ्य रिकॉर्ड न लिखें।", patientNameLabel: "मरीज़ का पूरा नाम", patientNamePlaceholder: "मरीज़ का नाम लिखें", patientPhoneLabel: "एसएमएस संपर्क", patientPhonePlaceholder: "कोई फ़ोन नंबर नहीं लिया जाता। यहाँ दिखने वाली याददिहानी इसी ब्राउज़र में नकली है।", numericAgeLabel: "उम्र का वर्ग", ageBabyNumeric: "0 से 1 साल (शिशु)", ageChildNumeric: "2 से 12 साल (बच्चा)", ageAdolescent: "13 से 17 साल (किशोर)", ageAdultNumeric: "18 से 44 साल (युवा वयस्क)", ageMiddle: "45 से 59 साल (मध्यम उम्र)", ageOlderNumeric: "60 साल से अधिक (वरिष्ठ नागरिक)", exactAgeLabel: "सटीक उम्र (वैकल्पिक)", exactAgePlaceholder: "जैसे 42", genderLabel: "लिंग चुनें", genderMale: "पुरुष", genderFemale: "महिला", genderOther: "अन्य", conditionsLabel: "पहले से मौजूद स्वास्थ्य स्थिति", conditionDiabetes: "मधुमेह", conditionHypertension: "हाई ब्लड प्रेशर", conditionHeart: "हृदय की स्थिति", conditionAsthma: "अस्थमा / साँस", conditionPregnancy: "गर्भावस्था", conditionNone: "कोई पहले की स्थिति नहीं",
         appointmentStepLabel: "चरण 4 · अपॉइंटमेंट विकल्प", consultationModeTitle: "ओपीडी टीम से कैसे मिलना चाहेंगे?", teleModeSelected: "ऑनलाइन वीडियो सलाह चुनी गई है। अस्पताल और स्लॉट चुनने के बाद सुरक्षित नकली टेली-ओपीडी जानकारी दिखेगी।", inPersonMode: "अस्पताल में आमने-सामने", inPersonModeNote: "ओपीडी काउंटर पर जाएँ", teleMode: "ऑनलाइन वीडियो सलाह", teleModeNote: "घर से ई-संजीवनी टेली-ओपीडी", dateStripLabel: "तारीख चुनें", shiftLabel: "सत्र चुनें", morningShift: "सुबह का सत्र", morningShiftNote: "सुबह 09:00 से 11:00 · 6 स्लॉट खुले", middayShift: "दोपहर का सत्र", middayShiftNote: "11:30 से 01:30 · 14 स्लॉट खुले", afternoonShift: "शाम से पहले का सत्र", afternoonShiftNote: "02:30 से 04:30 · 8 स्लॉट खुले", appointmentWaitHint: "अनुमानित समय देखने के लिए तारीख और सत्र चुनें।", appointmentWaitText: "स्लॉट {slot} · डॉक्टर से मिलने का अनुमानित समय {seen}", slipMode: "तरीका", slipLink: "टेली-ओपीडी लिंक", voiceSilence: "कोई शब्द नहीं मिले। सुनना बंद हो गया है।",
         labEyebrow: "जाँच सेवाएँ", labTitle: "लैब टेस्ट और स्कैन बुक करें", labIntro: "टेस्ट, सार्वजनिक अस्पताल की जाँच जगह और नकली स्लॉट चुनें। शुल्क और उपलब्धता इस प्रोटोटाइप की नकली जानकारी है।", labMockNote: "कोई टेस्ट बुक नहीं होता, भुगतान नहीं लिया जाता और स्वास्थ्य रिकॉर्ड नहीं बनता।", labBookingTitle: "टेस्ट का अनुरोध तैयार करें", labSelectionNote: "नकली अनुरोध बनाने तक आपकी पसंद इसी ब्राउज़र में रहेगी।", labHospitalLabel: "अस्पताल की लैब चुनें", labDateLabel: "तारीख चुनें", labTimeLabel: "समय चुनें", beforeTestTitle: "टेस्ट से पहले", beforeFasting: "शुगर और लिपिड प्रोफ़ाइल के लिए रात में 10 से 12 घंटे खाली पेट रहें। सादा पानी पी सकते हैं।", beforeMedication: "डॉक्टर ने अलग न कहा हो तो नियमित बीपी की दवा पानी के साथ लें।", beforeScans: "स्कैन और एमआरआई में ढीले सूती कपड़े पहनें। पेट के अल्ट्रासाउंड के लिए मूत्राशय भरा रखें।", afterTestTitle: "टेस्ट के बाद", afterSnack: "खून लेने के बाद हल्का नाश्ता करें।", afterReports: "डिजिटल रिपोर्ट 4 से 24 घंटे में प्रोफ़ाइल पर जुड़ती है।", paymentTitle: "भुगतान कैसे करेंगे?", paymentFree: "आयुष्मान भारत / पीएम-जय / बीपीएल कार्ड में मुफ्त", paymentCounter: "अस्पताल काउंटर पर मामूली सरकारी शुल्क (नकद/कार्ड)", paymentUpi: "तुरंत ऑनलाइन नकली भुगतान (यूपीआई / क्यूआर)", labBookButton: "नकली टेस्ट अनुरोध बनाएँ", reportTitle: "डिजिटल स्वास्थ्य रिकॉर्ड का नमूना", reportReady: "रिपोर्ट स्थिति: डाउनलोड के लिए तैयार", reportDoctor: "इस नकली नमूने में सत्यापित डॉक्टर की स्वीकृति दिखाई गई है।", downloadReport: "रिपोर्ट का नमूना डाउनलोड करें",
         bloodEyebrow: "दिल्ली ब्लड नेटवर्क", bloodTitle: "ब्लड बैंक स्टॉक और डोनर सहायता", bloodIntro: "नमूना स्टॉक देखें, इमरजेंसी अनुरोध की स्लिप बनाएँ या स्थानीय रक्तदाता बनें। जाने से पहले ब्लड बैंक को फ़ोन करें।", bloodMockNote: "स्टॉक, अनुरोध टोकन और डोनर टोकन नकली हैं। यह पेज खून रिज़र्व नहीं करता।", stockTitle: "दिल्ली अस्पताल ब्लड स्टॉक मॉनिटर", stockNote: "इस डेमो के लिए जाँची गई नमूना उपलब्धता।", bloodBankColumn: "ब्लड बैंक", emergencyBloodTitle: "इमरजेंसी ब्लड अनुरोध", emergencyBloodNote: "ऑन-ड्यूटी ब्लड बैंक अधिकारी से बात करने के लिए यह नकली स्लिप बनाएँ। यह रिज़र्वेशन नहीं है।", bloodPatientLabel: "मरीज़ का नाम", bloodWardLabel: "अस्पताल वार्ड / आईसीयू बेड नंबर", bloodGroupLabel: "चाहिए ब्लड ग्रुप", bloodUnitsLabel: "कितनी यूनिट", bloodComponentLabel: "घटक", doctorNameLabel: "ड्यूटी डॉक्टर का नाम", doctorContactLabel: "ड्यूटी डॉक्टर का संपर्क", bloodRequestButton: "इमरजेंसी ब्लड टोकन स्लिप बनाएँ", donorTitle: "स्वैच्छिक रक्तदाता बनें", donorNote: "रजिस्ट्रेशन केवल इसी ब्राउज़र में सेव होगा। रक्तदान से पहले ब्लड बैंक पात्रता जाँचेगा।", donorNameLabel: "नाम", donorAgeLabel: "उम्र", donorGroupLabel: "ब्लड ग्रुप", donorLocalityLabel: "इलाका", donorLastDateLabel: "पिछली बार रक्तदान की तारीख", donorButton: "डोनर रजिस्ट्रेशन इसी ब्राउज़र में सेव करें", helplineTitle: "24/7 राष्ट्रीय इमरजेंसी हेल्पलाइन", helpline104: "स्वास्थ्य और ब्लड हेल्पलाइन", helpline1910: "राष्ट्रीय ब्लड ट्रांसफ्यूजन काउंसिल हेल्पलाइन", helpline108: "आपदा इमरजेंसी", stockAvailable: "स्टॉक उपलब्ध", stockModerate: "मध्यम", stockCritical: "बहुत कम स्टॉक", bloodTokenTitle: "इमरजेंसी ब्लड टोकन स्लिप", bloodTokenCall: "अभी ऑन-ड्यूटी ब्लड बैंक अधिकारी को फ़ोन करें।", donorSaved: "डोनर रजिस्ट्रेशन इसी ब्राउज़र में सेव हुआ। पुष्टि टोकन:", labRequestCreated: "नकली टेस्ट अनुरोध बन गया। इसे जाँच काउंटर के लिए रखें।", labReportDownloaded: "रिपोर्ट का नकली नमूना डाउनलोड हो गया।"
       });
       Object.assign(copy.en, {
         someoneElse: "Someone else (Caregiver)", whoLabel: "Caregiver relationship", parent: "My Parent", child: "My Child",
-        patientNamePlaceholder: "e.g. Ramesh Kumar / Priya Sharma", patientPhonePlaceholder: "e.g. 9876543210 (10-digit mobile)",
+        patientNamePlaceholder: "e.g. Ramesh Kumar / Priya Sharma", patientPhonePlaceholder: "No phone number is collected. Any reminder shown is simulated in this browser.",
         regionEyes: "Eyes / vision", regionNose: "Nose / sinuses / breathing", regionEars: "Ears / hearing", regionTeeth: "Teeth / mouth / jaw", regionShoulder: "Shoulder joints", regionKnee: "Knee joints", regionHand: "Hands & wrists", regionFoot: "Feet & ankles", regionPelvis: "Pelvis, Groin & Reproductive", regionUpperBack: "Upper back & spine", regionLowerBack: "Lower back & lumbar", headView: "Head & Face", deptENT: "ENT", deptOphthalmology: "Ophthalmology",
         comparisonDepartment: "Department selection", orsDepartment: "Forces patients to guess a medical specialty before seeing open slots.", raahatDepartment: "Zero-Knowledge Triage starts with where it hurts, then shows the matching counter.", comparisonWait: "Queue transparency", orsWait: "Phantom morning slot times with zero wait context.", raahatWait: "Honest Queue Wait calculated around doctor morning rounds.", comparisonAuth: "Front-door access", orsAuth: "Blocks citizens with distorted CAPTCHAs and OTPs upfront.", raahatAuth: "Friction-free symptom discovery; 1-tap verification only when making a specimen slip.", comparisonEmergency: "Emergency safety", orsEmergency: "Allows routine booking for acute stroke or cardiac cases.", raahatEmergency: "Halts routine booking on Red Flags and escalates to 24/7 Emergency.", comparisonAccess: "Non-literate accessibility", orsAccess: "Requires desktop 1920×1080 resolution and text literacy.", raahatAccess: "100% mobile-first with a visual 3D/2D body map and spoken voice intake.",
         faqSafetyA: "No. Raahat is administrative triage, not a diagnosis or a doctor. You see and confirm the structured complaint before code applies the published rules; one Red Flag is enough to send you to Emergency.", faqRedFlagA: "Routine booking stops immediately. The result tells you to go to a 24/7 Emergency department now, shows the rule reference, and does not issue an OPD appointment.", faqPrivacyA: "No server stores this data. The complaint and patient details stay in this browser for this session; the body-map route sends nothing to an outside service. Do not enter Aadhaar, ABHA, UHID, OTPs or real health records.", faqWaitA: "The wait is simulated from the selected slot, doctor morning-round timing and sample queue throughput. It is an honest estimate for this prototype, not live hospital queue data.", faqOrsA: "ORS asks patients to choose a hospital and department first. Raahat offers Zero-Knowledge Triage from where it hurts, transparent simulated queue context, and emergency safeguards. It does not connect to ORS.", faqAbdmA: "Not today. This prototype does not connect to ABDM, e-Hospital HMIS or any government system. A future integration would require explicit consent, security review and a public-service partnership.",
@@ -7252,7 +7299,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       });
       Object.assign(copy.hi, {
         someoneElse: "किसी और के लिए (केयरगिवर)", whoLabel: "देखभाल करने वाले का रिश्ता", parent: "मेरे माता-पिता", child: "मेरा बच्चा",
-        patientNamePlaceholder: "उदा. रमेश कुमार / प्रिया शर्मा", patientPhonePlaceholder: "उदा. 9876543210 (10 अंकों का मोबाइल)",
+        patientNamePlaceholder: "उदा. रमेश कुमार / प्रिया शर्मा", patientPhonePlaceholder: "कोई फ़ोन नंबर नहीं लिया जाता। यहाँ दिखने वाली याददिहानी इसी ब्राउज़र में नकली है।",
         regionEyes: "आँखें / नज़र", regionNose: "नाक / साइनस / साँस नली", regionEars: "कान और गला", regionTeeth: "दाँत और मुँह / जबड़ा", regionShoulder: "कंधे", regionKnee: "घुटने", regionHand: "हाथ और कलाई", regionFoot: "पैर और टखने", regionPelvis: "पेल्विस, जननांग व प्रजनन स्वास्थ्य", regionUpperBack: "ऊपरी पीठ / रीढ़", regionLowerBack: "कमर / निचली पीठ", headView: "सिर व चेहरा", deptENT: "ईएनटी", deptOphthalmology: "नेत्र रोग",
         comparisonDepartment: "विभाग चुनना", orsDepartment: "खुले स्लॉट देखने से पहले मरीज को मेडिकल विभाग का अनुमान लगाना पड़ता है।", raahatDepartment: "जीरो-नॉलेज ट्रायेज जहाँ दर्द है वहाँ से शुरू होकर सही काउंटर दिखाता है।", comparisonWait: "कतार की पारदर्शिता", orsWait: "सुबह के नकली स्लॉट समय, बिना इंतज़ार के संदर्भ के।", raahatWait: "डॉक्टर के सुबह के राउंड के आधार पर ईमानदार कतार इंतज़ार।", comparisonAuth: "पहुँच की शुरुआत", orsAuth: "शुरुआत में टेढ़े CAPTCHA और OTP से नागरिक रुक जाते हैं।", raahatAuth: "परेशानी खोजने में कोई रुकावट नहीं; सिर्फ नमूना स्लिप बनाते समय एक-टैप पहचान।", comparisonEmergency: "इमरजेंसी सुरक्षा", orsEmergency: "तेज़ स्ट्रोक या हृदय की परेशानी में भी साधारण स्लॉट बुक हो सकता है।", raahatEmergency: "रेड फ्लैग पर साधारण बुकिंग तुरंत रोककर 24/7 इमरजेंसी तक पहुँचाता है।", comparisonAccess: "कम पढ़ने वालों की पहुँच", orsAccess: "1920×1080 डेस्कटॉप और टेक्स्ट पढ़ने की ज़रूरत।", raahatAccess: "100% मोबाइल-फर्स्ट: दृश्य 3D/2D शरीर का नक्शा और आवाज़ में जानकारी।",
         faqSafetyA: "नहीं। राहत प्रशासनिक ट्रायेज है, बीमारी की पहचान या डॉक्टर नहीं। आप नियम लागू होने से पहले व्यवस्थित विवरण देखकर पुष्टि करते हैं; एक रेड फ्लैग इमरजेंसी के लिए काफ़ी है।", faqRedFlagA: "साधारण बुकिंग तुरंत रुक जाती है। नतीजा अभी 24/7 इमरजेंसी जाने को कहता है, नियम संदर्भ दिखाता है और ओपीडी अपॉइंटमेंट जारी नहीं करता।", faqPrivacyA: "कोई सर्वर यह जानकारी सेव नहीं करता। परेशानी और मरीज की जानकारी इस सत्र में इसी ब्राउज़र में रहती है; शरीर के नक्शे वाला रास्ता किसी बाहरी सेवा को कुछ नहीं भेजता। आधार, आभा, यूएचआईडी, ओटीपी या असली स्वास्थ्य रिकॉर्ड न लिखें।", faqWaitA: "इंतज़ार का समय चुने गए स्लॉट, डॉक्टर के सुबह के राउंड और नमूना कतार की गति से नकली रूप में निकाला जाता है। यह इस प्रोटोटाइप का ईमानदार अनुमान है, लाइव अस्पताल कतार नहीं।", faqOrsA: "ORS पहले अस्पताल और विभाग चुनने को कहता है। राहत जहाँ दर्द है वहाँ से जीरो-नॉलेज ट्रायेज, साफ़ नकली कतार संदर्भ और इमरजेंसी सुरक्षा देता है। यह ORS से जुड़ा नहीं है।", faqAbdmA: "अभी नहीं। यह प्रोटोटाइप ABDM, e-Hospital HMIS या किसी सरकारी सिस्टम से नहीं जुड़ा है। भविष्य में जोड़ने के लिए साफ़ सहमति, सुरक्षा जाँच और सार्वजनिक सेवा साझेदारी ज़रूरी होगी।",
@@ -7985,7 +8032,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
       });
 
       document.querySelector("#patient-name").addEventListener("input", (event) => { state.fullName = event.target.value; });
-      document.querySelector("#patient-phone").addEventListener("input", (event) => { state.phone = event.target.value; });
       exactAgeInput.addEventListener("input", (event) => syncAgeFromExactValue(event.target.value));
       document.querySelectorAll("[data-gender]").forEach((button) => button.addEventListener("click", () => {
         state.gender = button.dataset.gender;
@@ -8602,7 +8648,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           patientReadback.append(line);
         };
         readbackLine(text("patientNameLabel"), current.patient_name);
-        readbackLine(text("patientPhoneLabel"), current.phone);
         readbackLine(text("exactAgeLabel"), current.exact_age);
         readbackLine(text("genderLabel"), current.gender ? text(genderCopyKeys[current.gender]) : "");
         const conditionText = current.conditions?.length ? current.conditions.map((condition) => text(conditionCopyKeys[condition])).join(", ") : "";
@@ -8949,7 +8994,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           return;
         }
         const items = state.visitType === "first"
-          ? [text("firstId"), text("phoneOtp")]
+          ? [text("firstId")]
           : [text("returningUhid"), text("previousSlip")];
         items.forEach((item) => { const li = document.createElement("li"); li.textContent = item; carryList.append(li); });
         carryList.hidden = false;
@@ -9310,7 +9355,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         event.preventDefault();
         const donor = { name: document.querySelector("#donor-name").value, age: document.querySelector("#donor-age").value, group: document.querySelector("#donor-group").value, locality: document.querySelector("#donor-locality").value, lastDonation: document.querySelector("#donor-last-date").value };
         const token = `DONOR-DEMO-${String(Date.now()).slice(-4)}`;
-        try { localStorage.setItem("raahat-donor-registration", JSON.stringify({ donor, token })); } catch { /* Local storage can be unavailable in private browsing. */ }
         document.querySelector("#donor-status").textContent = `${text("donorSaved")} ${token}`;
       });
 
@@ -10071,15 +10115,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         }
       }
 
-      window.addEventListener("storage", (e) => {
-        if (e.key === "raahat-token-seen-event" && e.newValue) {
-          try {
-            const data = JSON.parse(e.newValue);
-            updateSlipStatusDirectly(data);
-          } catch {}
-        }
-      });
-
       
       // --- Web Audio Synthesizer Chime (Hospital Calling Bell) ---
       let hospitalAudioCtx = null;
@@ -10270,9 +10305,8 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         });
 
         document.querySelector("#btn-clear-profile-data")?.addEventListener("click", () => {
-          if (confirm("Reset local demonstration records?")) {
-            localStorage.removeItem("raahat-token-seen-event");
-            alert("Local session records cleared.");
+          if (confirm("Reset this session's demonstration view?")) {
+            alert("No personal or health record was saved.");
             renderProfilePass();
           }
         });
@@ -10483,10 +10517,6 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
             orders: orders
           };
 
-          try {
-            localStorage.setItem("raahat-token-seen-event", JSON.stringify(eventData));
-          } catch {}
-
           updateSlipStatusDirectly(eventData);
           renderProfilePass();
 
@@ -10625,7 +10655,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
 
         if (!fab || !modal) return;
 
-        let session = createInitialSession("+919876543210");
+        let session = createInitialSession("DEMO-CALLER");
         let isRecording = false;
         let mediaRecorder = null;
         let mediaStream = null;
@@ -10689,7 +10719,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
         function initConversation() {
           hasInitialized = true;
           chatBody.innerHTML = "";
-          session = createInitialSession("+919876543210");
+          session = createInitialSession("DEMO-CALLER");
           const initRes = handleWhatsAppMessage(session, { text: "hi" });
           initRes.replies.forEach((reply) => {
             if (reply.type === "text") {
@@ -11681,18 +11711,18 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               age_band: "adult",
               who_for: "self",
               patient_name: "Ram Prasad",
-              phone: "9876543210",
+              phone: "",
               exact_age: 52,
               gender: "male",
               conditions: ["hypertension"],
-              severity_markers: ["chest_pain_sweat"],
+              severity_markers: ["sweating"],
               parsed: true,
               unclear: [],
               language: state.language || "hi",
-              value_tags: { region: "Observed", kind: "Observed", duration: "Observed", severity: "Observed", age_band: "Observed" }
+              value_tags: { region: "Simulated", kind: "Simulated", duration: "Simulated", severity: "Simulated", age_band: "Simulated" }
             };
-            showResult();
-            window.location.hash = "#screen-triage";
+            history.replaceState(null, "", "#screen-triage");
+            showReadback(state.complaint);
             window.scrollTo({ top: 0, behavior: "smooth" });
           });
         }
@@ -11738,7 +11768,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               age_band: "child",
               who_for: "child",
               patient_name: "Aarav Kumar",
-              phone: "9812345678",
+              phone: "",
               exact_age: 3,
               gender: "male",
               conditions: [],
@@ -11746,10 +11776,10 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
               parsed: true,
               unclear: [],
               language: state.language || "hi",
-              value_tags: { region: "Rule", kind: "Rule", duration: "Rule", severity: "Rule", age_band: "Observed" }
+              value_tags: { region: "Simulated", kind: "Simulated", duration: "Simulated", severity: "Simulated", age_band: "Simulated" }
             };
-            showAppointment();
-            window.location.hash = "#screen-triage";
+            history.replaceState(null, "", "#screen-triage");
+            showReadback(state.complaint);
             window.scrollTo({ top: 0, behavior: "smooth" });
           });
         }
@@ -11997,7 +12027,7 @@ main { flex: 1; display: flex; flex-direction: column; padding: 2.4rem 0 3rem; }
           const activeDist = (state.hospitalStateFilter && state.hospitalStateFilter !== "All India")
             ? state.hospitalStateFilter
             : (state.locality && state.locality.includes("delhi") ? "Delhi" : "Delhi");
-          session = createInitialIvrSession("+919876543210", activeDist);
+          session = createInitialIvrSession("DEMO-CALLER", activeDist);
           screen.classList.remove("emergency");
           callStatus.textContent = "CONNECTED";
           callStatus.style.color = "#142814";

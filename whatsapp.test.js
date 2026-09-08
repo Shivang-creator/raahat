@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { createInitialSession, handleWhatsAppMessage } from "./whatsapp-bot.js";
 
 test("WhatsApp: initial greeting and language selection", () => {
-  const session = createInitialSession("+919876543210");
+  const session = createInitialSession("DEMO-CALLER");
   assert.equal(session.stage, "INIT");
 
   const res = handleWhatsAppMessage(session, { text: "hi" });
@@ -21,7 +21,7 @@ test("WhatsApp: initial greeting and language selection", () => {
 });
 
 test("WhatsApp: Red Flag triggers emergency escalation immediately (AGENTS.md Rule 2)", () => {
-  const session = createInitialSession("+919876543210");
+  const session = createInitialSession("DEMO-CALLER");
   session.stage = "COMPLAINT";
   session.language = "en";
 
@@ -33,7 +33,7 @@ test("WhatsApp: Red Flag triggers emergency escalation immediately (AGENTS.md Ru
 });
 
 test("WhatsApp: Normal complaint routes to department and asks citizen confirmation (AGENTS.md Rule 5)", () => {
-  const session = createInitialSession("+919876543210");
+  const session = createInitialSession("DEMO-CALLER");
   session.stage = "COMPLAINT";
   session.language = "en";
 
@@ -52,7 +52,7 @@ test("WhatsApp: Normal complaint routes to department and asks citizen confirmat
 });
 
 test("WhatsApp: Location sharing matches nearest facility and allows shift booking", () => {
-  const session = createInitialSession("+919876543210");
+  const session = createInitialSession("DEMO-CALLER");
   session.stage = "LOCATION";
   session.language = "en";
   session.routeResult = { department: "Cardiology", urgency: "routine", carryList: ["Aadhaar"] };
@@ -76,7 +76,7 @@ test("WhatsApp: Location sharing matches nearest facility and allows shift booki
 });
 
 test("WhatsApp: Global keywords STATUS, BLOOD, LAB, HELP respond accurately", () => {
-  const session = createInitialSession("+919876543210");
+  const session = createInitialSession("DEMO-CALLER");
 
   // STATUS
   const statusRes = handleWhatsAppMessage(session, { text: "STATUS" });
@@ -96,7 +96,7 @@ test("WhatsApp: Global keywords STATUS, BLOOD, LAB, HELP respond accurately", ()
   assert.ok(helpRes.replies[0].text.includes("108"));
 });
 test("WhatsApp: Dialect complaint correctly normalizes and routes to Orthopaedics/Paediatrics", () => {
-  const session = createInitialSession("+919876543210");
+  const session = createInitialSession("DEMO-CALLER");
   session.stage = "COMPLAINT";
   session.language = "hi";
 
@@ -107,7 +107,7 @@ test("WhatsApp: Dialect complaint correctly normalizes and routes to Orthopaedic
 });
 
 test("WhatsApp: Expanded pan-India city matching resolves nearest state hospital", () => {
-  const session = createInitialSession("+919876543210");
+  const session = createInitialSession("DEMO-CALLER");
   session.stage = "LOCATION";
   session.routeResult = { department: "Cardiology" };
 
@@ -118,7 +118,7 @@ test("WhatsApp: Expanded pan-India city matching resolves nearest state hospital
   assert.ok(session.selectedHospital.state === "Maharashtra" || session.selectedHospital.city === "Mumbai");
 
   // User types "Patna"
-  const sessionPatna = createInitialSession("+919876543210");
+  const sessionPatna = createInitialSession("DEMO-CALLER");
   sessionPatna.stage = "LOCATION";
   sessionPatna.routeResult = { department: "General Medicine" };
   const resPatna = handleWhatsAppMessage(sessionPatna, { text: "Patna" });

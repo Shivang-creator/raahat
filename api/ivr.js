@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   const method = req.method;
   const params = method === "GET" ? req.query : req.body || {};
 
-  const caller = params.From || params.caller || "+919876543210";
+  const caller = String(params.From || params.caller || "IVR-DEMO-CALLER");
   const callId = params.CallSid || params.call_id || "IVR-LOCAL";
   const dtmf = params.Digits || params.dtmf || "";
   const speech = params.SpeechResult || params.speech || "";
@@ -55,7 +55,7 @@ export default async function handler(req, res) {
   } else if (result.action === "CALL_COMPLETE") {
     twiml += `  <Say language="${result.bcp47}">${escapeXml(result.spokenText)}</Say>\n`;
     if (result.sms) {
-      twiml += `  <Sms to="${caller}">${escapeXml(result.sms)}</Sms>\n`;
+      twiml += `  <Sms to="${escapeXml(caller)}">${escapeXml(result.sms)}</Sms>\n`;
     }
     twiml += `  <Hangup/>\n`;
   } else {

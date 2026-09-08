@@ -505,6 +505,15 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
     });
   }
 
+  // Keep interaction state initialized before the first model load. The
+  // loader calls updateVisualState once it resolves asynchronously.
+  let currentLanguage = language;
+  let hoveredRegion = null;
+  let hoveredSide = "both";
+  let selectedRegion = null;
+  let selectedSide = "both";
+  let selectedIntensity = 3;
+
   async function setSilhouetteModel(silhouette) {
     currentSilhouette = silhouette;
     const modelType = silhouette === "male" ? "male" : "female";
@@ -535,12 +544,6 @@ export async function createBodyMap3D({ canvas, stage, language = "en", onSelect
   const raycaster = new THREE.Raycaster();
   const pointer = new THREE.Vector2();
   const tooltip = makeTooltip(stage);
-  let currentLanguage = language;
-  let hoveredRegion = null;
-  let hoveredSide = "both";
-  let selectedRegion = null;
-  let selectedSide = "both";
-  let selectedIntensity = 3;
 
   // Touch & Pointer state
   let isPointerDown = false;

@@ -177,7 +177,7 @@ For production deployments, the following environment variables can be configure
 - `OPENAI_API_KEY`: For Whisper-1 speech-to-text and lightweight complaint parsing.
 - `WHATSAPP_API_TOKEN`: Meta WhatsApp Cloud API system user access token.
 - `WHATSAPP_PHONE_NUMBER_ID`: Sender WhatsApp Business Account phone ID.
-- `WHATSAPP_VERIFY_TOKEN`: Webhook handshake verification secret (default: `raahat_secure_webhook_2026`).
+- `WHATSAPP_VERIFY_TOKEN`: Webhook handshake verification secret (no default; configure it only through the environment).
 
 ### 3. Edge Cases & Continuous Improvement
 - Expand `normalizeDialectPhrasing` in `ivr-engine.js` for additional regional variations (e.g., Punjabi, Odia, Assamese).
